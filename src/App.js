@@ -55,7 +55,7 @@ class App extends Component {
         open: true
       }
     });
-    };
+  };
 
   /**
    * Sets the `open` state of a snackbar to `false`. A direct response to the snackbar's `onClose` event.
@@ -68,7 +68,7 @@ class App extends Component {
       snackbar: {
         message: clearMessage ? '' : snackbar.message,
         open: false
-  }
+      }
     });
   };
 
