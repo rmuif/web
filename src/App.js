@@ -76,6 +76,12 @@ class App extends Component {
    * Stub implementation for a sign in function.
    */
   signIn = () => {
+    if (this.state.isSignedIn) {
+      this.openSnackbar('Already signed in');
+      
+      return;
+    }
+
     this.openSnackbar('Signed in');
   };
 
@@ -83,7 +89,15 @@ class App extends Component {
    * Stub implementation for a sign out function.
    */
   signOut = () => {
+    if (!this.state.isSignedIn) {
+      this.openSnackbar('Not signed in');
+
+      return;
+    }
+
+    firebase.auth().signOut().then(() => {
     this.openSnackbar('Signed out');
+    });
   };
 
   render() {
