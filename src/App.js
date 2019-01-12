@@ -104,7 +104,7 @@ class App extends Component {
     }
 
     firebase.auth().signOut().then(() => {
-    this.openSnackbar('Signed out');
+      this.openSnackbar('Signed out');
     });
   };
 
