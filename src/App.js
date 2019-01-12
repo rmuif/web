@@ -114,7 +114,7 @@ class App extends Component {
           </Toolbar>
         </AppBar>
 
-        <Snackbar autoHideDuration={3000} message={snackbar.message} onClose={this.closeSnackbar} open={snackbar.open} />
+        <Snackbar autoHideDuration={4000} message={snackbar.message} onClose={this.closeSnackbar} open={snackbar.open} />
       </MuiThemeProvider>
     );
   }
