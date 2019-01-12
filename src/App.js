@@ -13,12 +13,12 @@ import Snackbar from '@material-ui/core/Snackbar';
 
 // Initialize Firebase
 const config = {
-  apiKey: "AIzaSyAEzRh4F9_nWywuwyneSs4LZ8lIOXU6-zc",
-  authDomain: "dicksword-6d797.firebaseapp.com",
-  databaseURL: "https://dicksword-6d797.firebaseio.com",
-  projectId: "dicksword-6d797",
-  storageBucket: "dicksword-6d797.appspot.com",
-  messagingSenderId: "1038433381048"
+  apiKey: '',
+  authDomain: '',
+  databaseURL: '',
+  projectId: '',
+  storageBucket: '',
+  messagingSenderId: ''
 };
 
 firebase.initializeApp(config);
