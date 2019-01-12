@@ -36,8 +36,11 @@ class App extends Component {
     super(props);
 
     this.state = {
+      isSigningIn: false,
       isSignedIn: false,
+
       user: null,
+      
       snackbar: {
         message: '',
         open: false
@@ -82,16 +85,28 @@ class App extends Component {
       return;
     }
 
-    const provider = new firebase.auth.GoogleAuthProvider();
+    this.setState({
+      isSigningIn: true
+    }, () => {
+      const provider = new firebase.auth.GoogleAuthProvider();
 
-    firebase.auth().signInWithPopup(provider).then((userCredential) => {
-      const user = userCredential.user;
-      const displayName = user.displayName;
-      const emailAddress = user.email;
-
-      this.openSnackbar('Signed in as ' + (displayName || emailAddress));
-    }).catch((error) => {
-      this.openSnackbar(error.message);
+      firebase.auth().signInWithPopup(provider).then((userCredential) => {
+        this.setState({
+          isSigningIn: false
+        }, () => {
+          const user = userCredential.user;
+          const displayName = user.displayName;
+          const emailAddress = user.email;
+    
+          this.openSnackbar('Signed in as ' + (displayName || emailAddress));
+        });
+      }).catch((error) => {
+        this.setState({
+          isSigningIn: false
+        }, () => {
+          this.openSnackbar(error.message);
+        });
+      });
     });
   };
 
@@ -113,7 +128,7 @@ class App extends Component {
   };
 
   render() {
-    const { isSignedIn, snackbar } = this.state;
+    const { isSigningIn, isSignedIn, snackbar } = this.state;
 
     return (
       <MuiThemeProvider theme={theme}>
@@ -121,7 +136,7 @@ class App extends Component {
           <Toolbar variant="regular">
             <Typography style={{ flexGrow: 1 }} color="inherit" variant="h6">{title}</Typography>
 
-            {!isSignedIn && <Button color="secondary" variant="contained" onClick={this.signIn}>Sign in</Button>}
+            {!isSignedIn && <Button color="secondary" disabled={isSigningIn} variant="contained" onClick={this.signIn}>Sign in</Button>}
             {isSignedIn && <Button color="secondary" variant="contained" onClick={this.signOut}>Sign out</Button>}
           </Toolbar>
         </AppBar>
