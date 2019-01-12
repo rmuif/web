@@ -9,6 +9,7 @@ import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
+import Snackbar from '@material-ui/core/Snackbar';
 
 // Initialize Firebase
 const config = {
@@ -36,12 +37,57 @@ class App extends Component {
 
     this.state = {
       isSignedIn: false,
-      user: null
+      user: null,
+      snackbar: {
+        message: '',
+        open: false
+      }
     };
   }
 
+  /**
+   * Opens a snackbar. Snackbars provide brief messages about app processes through a message.
+   */
+  openSnackbar = (message) => {
+    this.setState({
+      snackbar: {
+        message,
+        open: true
+      }
+    });
+    };
+
+  /**
+   * Sets the `open` state of a snackbar to `false`. A direct response to the snackbar's `onClose` event.
+   * @param clearState Whether or not to clear the message of the snackbar.
+   */
+  closeSnackbar = (clearMessage = false) => {
+    const { snackbar } = this.state;
+
+    this.setState({
+      snackbar: {
+        message: clearMessage ? '' : snackbar.message,
+        open: false
+  }
+    });
+  };
+
+  /**
+   * Stub implementation for a sign in function.
+   */
+  signIn = () => {
+    this.openSnackbar('Signed in');
+  };
+
+  /**
+   * Stub implementation for a sign out function.
+   */
+  signOut = () => {
+    this.openSnackbar('Signed out');
+  };
+
   render() {
-    const { isSignedIn } = this.state;
+    const { isSignedIn, snackbar } = this.state;
 
     return (
       <MuiThemeProvider theme={theme}>
@@ -49,10 +95,12 @@ class App extends Component {
           <Toolbar variant="regular">
             <Typography style={{ flexGrow: 1 }} color="inherit" variant="h6">{title}</Typography>
 
-            {!isSignedIn && <Button color="secondary" variant="contained">Sign in</Button>}
-            {isSignedIn && <Button color="secondary" variant="contained">Sign out</Button>}
+            {!isSignedIn && <Button color="secondary" variant="contained" onClick={this.signIn}>Sign in</Button>}
+            {isSignedIn && <Button color="secondary" variant="contained" onClick={this.signOut}>Sign out</Button>}
           </Toolbar>
         </AppBar>
+
+        <Snackbar autoHideDuration={3000} message={snackbar.message} onClose={this.closeSnackbar} open={snackbar.open} />
       </MuiThemeProvider>
     );
   }
