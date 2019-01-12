@@ -1,26 +1,32 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
-import './App.css';
+
+import { createMuiTheme, MuiThemeProvider } from '@material-ui/core/styles';
+
+import AppBar from '@material-ui/core/AppBar';
+import Toolbar from '@material-ui/core/Toolbar';
+import Typography from '@material-ui/core/Typography';
+import Button from '@material-ui/core/Button';
+
+const title = 'React + Material-UI + Firebase';
+
+const theme = createMuiTheme({
+  typography: {
+    useNextVariants: true
+  }
+});
 
 class App extends Component {
   render() {
     return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-        </header>
-      </div>
+      <MuiThemeProvider theme={theme}>
+        <AppBar color="primary" position="static">
+          <Toolbar variant="regular">
+            <Typography style={{ flexGrow: 1 }} color="inherit" variant="h6">{title}</Typography>
+
+            <Button color="secondary" variant="contained">Sign in</Button>
+          </Toolbar>
+        </AppBar>
+      </MuiThemeProvider>
     );
   }
 }
