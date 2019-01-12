@@ -90,6 +90,8 @@ class App extends Component {
       const emailAddress = user.email;
 
       this.openSnackbar('Signed in as ' + (displayName || emailAddress));
+    }).catch((error) => {
+      this.openSnackbar(error.message);
     });
   };
 
@@ -105,6 +107,8 @@ class App extends Component {
 
     firebase.auth().signOut().then(() => {
       this.openSnackbar('Signed out');
+    }).catch((error) => {
+      this.openSnackbar(error.message);
     });
   };
 
