@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 
 import firebase from 'firebase/app';
+import 'firebase/auth';
 
 import { createMuiTheme, MuiThemeProvider } from '@material-ui/core/styles';
 
@@ -30,18 +31,43 @@ const theme = createMuiTheme({
 });
 
 class App extends Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      isSignedIn: false,
+      user: null
+    };
+  }
+
   render() {
+    const { isSignedIn } = this.state;
+
     return (
       <MuiThemeProvider theme={theme}>
         <AppBar color="primary" position="static">
           <Toolbar variant="regular">
             <Typography style={{ flexGrow: 1 }} color="inherit" variant="h6">{title}</Typography>
 
-            <Button color="secondary" variant="contained">Sign in</Button>
+            {!isSignedIn && <Button color="secondary" variant="contained">Sign in</Button>}
+            {isSignedIn && <Button color="secondary" variant="contained">Sign out</Button>}
           </Toolbar>
         </AppBar>
       </MuiThemeProvider>
     );
+  }
+
+  componentDidMount() {
+    this.removeAuthObserver = firebase.auth().onAuthStateChanged((user) => {
+      this.setState({
+        isSignedIn: !!user,
+        user
+      });
+    });
+  }
+
+  componentWillUnmount() {
+    this.removeAuthObserver();
   }
 }
 
