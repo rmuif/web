@@ -82,7 +82,15 @@ class App extends Component {
       return;
     }
 
-    this.openSnackbar('Signed in');
+    const provider = new firebase.auth.GoogleAuthProvider();
+
+    firebase.auth().signInWithPopup(provider).then((userCredential) => {
+      const user = userCredential.user;
+      const displayName = user.displayName;
+      const emailAddress = user.email;
+
+      this.openSnackbar('Signed in as ' + (displayName || emailAddress));
+    });
   };
 
   /**
