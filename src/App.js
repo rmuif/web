@@ -13,12 +13,12 @@ import Snackbar from '@material-ui/core/Snackbar';
 
 // Initialize Firebase
 const config = {
-  apiKey: '',
-  authDomain: '',
-  databaseURL: '',
-  projectId: '',
-  storageBucket: '',
-  messagingSenderId: ''
+  apiKey: "AIzaSyAEzRh4F9_nWywuwyneSs4LZ8lIOXU6-zc",
+  authDomain: "dicksword-6d797.firebaseapp.com",
+  databaseURL: "https://dicksword-6d797.firebaseio.com",
+  projectId: "dicksword-6d797",
+  storageBucket: "dicksword-6d797.appspot.com",
+  messagingSenderId: "1038433381048"
 };
 
 firebase.initializeApp(config);
@@ -39,8 +39,10 @@ class App extends Component {
       isSigningIn: false,
       isSignedIn: false,
 
+      isSigningOut: false,
+
       user: null,
-      
+
       snackbar: {
         message: '',
         open: false
@@ -120,10 +122,22 @@ class App extends Component {
       return;
     }
 
-    firebase.auth().signOut().then(() => {
-      this.openSnackbar('Signed out');
-    }).catch((error) => {
-      this.openSnackbar(error.message);
+    this.setState({
+      isSigningOut: true
+    }, () => {
+      firebase.auth().signOut().then(() => {
+        this.setState({
+          isSigningOut: false
+        }, () => {
+          this.openSnackbar('Signed out');
+        });
+      }).catch((error) => {
+        this.setState({
+          isSigningOut: false
+        }, () => {
+          this.openSnackbar(error.message);
+        });
+      });
     });
   };
 
