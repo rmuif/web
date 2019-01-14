@@ -20,7 +20,7 @@ class SignOutDialog extends Component {
     const { onClose } = this.props;
 
     return (
-      <Dialog open={open}>
+      <Dialog open={open} onClose={onClose}>
         <DialogTitle>
           Sign out?
         </DialogTitle>
