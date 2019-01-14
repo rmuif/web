@@ -11,6 +11,8 @@ import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
 import Snackbar from '@material-ui/core/Snackbar';
 
+import SignOutDialog from './dialogs/SignOutDialog';
+
 // Initialize Firebase
 const config = {
   apiKey: '',
@@ -43,12 +45,36 @@ class App extends Component {
 
       user: null,
 
+      signOutDialog: {
+        open: false
+      },
+
       snackbar: {
         message: '',
         open: false
       }
     };
   }
+
+  showSignOutDialog = () => {
+    this.setState({
+      signOutDialog: {
+        open: true
+      }
+    });
+  };
+
+  closeSignOutDialog = (callback) => {
+    this.setState({
+      signOutDialog: {
+        open: false
+      }
+    }, () => {
+      if (callback && typeof callback === 'function') {
+        callback();
+      }
+    });
+  };
 
   /**
    * Opens a snackbar. Snackbars provide brief messages about app processes through a message.
@@ -129,20 +155,24 @@ class App extends Component {
         this.setState({
           isSigningOut: false
         }, () => {
-          this.openSnackbar('Signed out');
+          this.closeSignOutDialog(() => {
+            this.openSnackbar('Signed out');
+          });
         });
       }).catch((error) => {
         this.setState({
           isSigningOut: false
         }, () => {
-          this.openSnackbar(error.message);
+          this.closeSignOutDialog(() => {
+            this.openSnackbar(error.message);
+          });
         });
       });
     });
   };
 
   render() {
-    const { isSigningIn, isSignedIn, snackbar } = this.state;
+    const { isSigningIn, isSignedIn, signOutDialog, snackbar } = this.state;
 
     return (
       <MuiThemeProvider theme={theme}>
@@ -151,9 +181,11 @@ class App extends Component {
             <Typography style={{ flexGrow: 1 }} color="inherit" variant="h6">{title}</Typography>
 
             {!isSignedIn && <Button color="secondary" disabled={isSigningIn} variant="contained" onClick={this.signIn}>Sign in</Button>}
-            {isSignedIn && <Button color="secondary" variant="contained" onClick={this.signOut}>Sign out</Button>}
+            {isSignedIn && <Button color="secondary" variant="contained" onClick={this.showSignOutDialog}>Sign out</Button>}
           </Toolbar>
         </AppBar>
+
+        <SignOutDialog open={signOutDialog.open} signOut={this.signOut} onClose={this.closeSignOutDialog} />
 
         <Snackbar autoHideDuration={4000} message={snackbar.message} onClose={this.closeSnackbar} open={snackbar.open} />
       </MuiThemeProvider>
