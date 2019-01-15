@@ -27,7 +27,7 @@ class SignOutDialog extends Component {
 
         <DialogContent>
           <DialogContentText>
-            While signed out you are unable to manage your profile and conduct other activities that require you to be signed in. Are you sure you want to sign out?
+            While signed out you are unable to manage your profile and conduct other activities that require you to be signed in.
           </DialogContentText>
         </DialogContent>
 
