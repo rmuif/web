@@ -11,6 +11,7 @@ import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
 import Snackbar from '@material-ui/core/Snackbar';
 
+import SignInDialog from './dialogs/SignInDialog';
 import SignOutDialog from './dialogs/SignOutDialog';
 
 // Initialize Firebase
@@ -45,6 +46,10 @@ class App extends Component {
 
       user: null,
 
+      signInDialog: {
+        open: false
+      },
+
       signOutDialog: {
         open: false
       },
@@ -55,6 +60,26 @@ class App extends Component {
       }
     };
   }
+
+  showSignInDialog = () => {
+    this.setState({
+      signInDialog: {
+        open: true
+      }
+    });
+  };
+
+  closeSignInDialog = (callback) => {
+    this.setState({
+      signInDialog: {
+        open: false
+      }
+    }, () => {
+      if (callback && typeof callback === 'function') {
+        callback();
+      }
+    });
+  };
 
   showSignOutDialog = () => {
     this.setState({
@@ -106,7 +131,7 @@ class App extends Component {
   /**
    * Stub implementation for a sign in function.
    */
-  signIn = () => {
+  signIn = (emailAddress, password) => {
     if (this.state.isSignedIn) {
       this.openSnackbar('Already signed in');
       
@@ -116,17 +141,37 @@ class App extends Component {
     this.setState({
       isSigningIn: true
     }, () => {
-      const provider = new firebase.auth.GoogleAuthProvider();
+      // const provider = new firebase.auth.GoogleAuthProvider();
 
-      firebase.auth().signInWithPopup(provider).then((userCredential) => {
+      // firebase.auth().signInWithPopup(provider).then((userCredential) => {
+      //   this.setState({
+      //     isSigningIn: false
+      //   }, () => {
+      //     const user = userCredential.user;
+      //     const displayName = user.displayName;
+      //     const emailAddress = user.email;
+    
+      //     this.openSnackbar('Signed in as ' + (displayName || emailAddress));
+      //   });
+      // }).catch((error) => {
+      //   this.setState({
+      //     isSigningIn: false
+      //   }, () => {
+      //     this.openSnackbar(error.message);
+      //   });
+      // });
+
+      firebase.auth().signInWithEmailAndPassword(emailAddress, password).then((userCredential) => {
         this.setState({
           isSigningIn: false
         }, () => {
+          this.closeSignInDialog(() => {
           const user = userCredential.user;
           const displayName = user.displayName;
           const emailAddress = user.email;
     
           this.openSnackbar('Signed in as ' + (displayName || emailAddress));
+        });
         });
       }).catch((error) => {
         this.setState({
@@ -172,7 +217,7 @@ class App extends Component {
   };
 
   render() {
-    const { isSigningIn, isSignedIn, signOutDialog, snackbar } = this.state;
+    const { isSigningIn, isSignedIn, signInDialog, signOutDialog, snackbar } = this.state;
 
     return (
       <MuiThemeProvider theme={theme}>
@@ -180,11 +225,12 @@ class App extends Component {
           <Toolbar variant="regular">
             <Typography style={{ flexGrow: 1 }} color="inherit" variant="h6">{title}</Typography>
 
-            {!isSignedIn && <Button color="secondary" disabled={isSigningIn} variant="contained" onClick={this.signIn}>Sign in</Button>}
+            {!isSignedIn && <Button color="secondary" disabled={isSigningIn} variant="contained" onClick={this.showSignInDialog}>Sign in</Button>}
             {isSignedIn && <Button color="secondary" variant="contained" onClick={this.showSignOutDialog}>Sign out</Button>}
           </Toolbar>
         </AppBar>
 
+        <SignInDialog open={signInDialog.open} isSigningIn={isSigningIn} signIn={this.signIn} onClose={this.closeSignInDialog} />
         <SignOutDialog open={signOutDialog.open} signOut={this.signOut} onClose={this.closeSignOutDialog} />
 
         <Snackbar autoHideDuration={4000} message={snackbar.message} onClose={this.closeSnackbar} open={snackbar.open} />
