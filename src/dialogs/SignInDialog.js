@@ -29,14 +29,18 @@ class SignInDialog extends Component {
     const constraints = {
       emailAddress: {
         email: true,
-        presence: true
+        presence: {
+          allowEmpty: false
+        }
       },
       
       password: {
         length: {
           minimum: 6
         },
-        presence: true
+        presence: {
+          allowEmpty: false
+        }
       }
     };
 
