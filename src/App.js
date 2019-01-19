@@ -3,6 +3,8 @@ import React, { Component } from 'react';
 import firebase from 'firebase/app';
 import 'firebase/auth';
 
+import readingTime from 'reading-time';
+
 import { createMuiTheme, MuiThemeProvider } from '@material-ui/core/styles';
 
 import AppBar from '@material-ui/core/AppBar';
@@ -60,6 +62,7 @@ class App extends Component {
       },
 
       snackbar: {
+        autoHideDuration: 0,
         message: '',
         open: false
       }
@@ -132,6 +135,7 @@ class App extends Component {
   openSnackbar = (message) => {
     this.setState({
       snackbar: {
+        autoHideDuration: readingTime(message).time * 2,
         message,
         open: true
       }
@@ -263,7 +267,7 @@ class App extends Component {
         <ResetPasswordDialog open={resetPasswordDialog.open} resetPassword={this.resetPassword} onClose={this.closeResetPasswordDialog} />
         <SignOutDialog open={signOutDialog.open} signOut={this.signOut} onClose={this.closeSignOutDialog} />
 
-        <Snackbar autoHideDuration={4000} message={snackbar.message} onClose={this.closeSnackbar} open={snackbar.open} />
+        <Snackbar autoHideDuration={snackbar.autoHideDuration} message={snackbar.message} onClose={this.closeSnackbar} open={snackbar.open} />
       </MuiThemeProvider>
     );
   }
