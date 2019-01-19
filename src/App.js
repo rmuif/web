@@ -12,6 +12,7 @@ import Button from '@material-ui/core/Button';
 import Snackbar from '@material-ui/core/Snackbar';
 
 import SignInDialog from './dialogs/SignInDialog';
+import ResetPasswordDialog from './dialogs/ResetPasswordDialog';
 import SignOutDialog from './dialogs/SignOutDialog';
 
 // Initialize Firebase
@@ -50,6 +51,10 @@ class App extends Component {
         open: false
       },
 
+      resetPasswordDialog: {
+        open: false
+      },
+
       signOutDialog: {
         open: false
       },
@@ -72,6 +77,26 @@ class App extends Component {
   closeSignInDialog = (callback) => {
     this.setState({
       signInDialog: {
+        open: false
+      }
+    }, () => {
+      if (callback && typeof callback === 'function') {
+        callback();
+      }
+    });
+  };
+
+  showResetPasswordDialog = () => {
+    this.setState({
+      resetPasswordDialog: {
+        open: true
+      }
+    });
+  };
+
+  closeResetPasswordDialog = (callback) => {
+    this.setState({
+      resetPasswordDialog: {
         open: false
       }
     }, () => {
@@ -128,9 +153,6 @@ class App extends Component {
     });
   };
 
-  /**
-   * Stub implementation for a sign in function.
-   */
   signIn = (emailAddress, password) => {
     if (this.state.isSignedIn) {
       this.openSnackbar('Already signed in');
@@ -183,9 +205,16 @@ class App extends Component {
     });
   };
 
-  /**
-   * Stub implementation for a sign out function.
-   */
+  resetPassword = (emailAddress) => {
+    firebase.auth().sendPasswordResetEmail(emailAddress).then(() => {
+      this.closeResetPasswordDialog(() => {
+        this.openSnackbar('Password reset email sent');
+      });
+    }).catch((error) => {
+      this.openSnackbar(error.message);
+    });
+  };
+
   signOut = () => {
     if (!this.state.isSignedIn) {
       this.openSnackbar('Not signed in');
@@ -217,7 +246,7 @@ class App extends Component {
   };
 
   render() {
-    const { isSigningIn, isSignedIn, signInDialog, signOutDialog, snackbar } = this.state;
+    const { isSigningIn, isSignedIn, signInDialog, resetPasswordDialog, signOutDialog, snackbar } = this.state;
 
     return (
       <MuiThemeProvider theme={theme}>
@@ -230,7 +259,8 @@ class App extends Component {
           </Toolbar>
         </AppBar>
 
-        <SignInDialog open={signInDialog.open} isSigningIn={isSigningIn} signIn={this.signIn} onClose={this.closeSignInDialog} />
+        <SignInDialog open={signInDialog.open} isSigningIn={isSigningIn} signIn={this.signIn} onClose={this.closeSignInDialog} onResetPasswordClick={this.showResetPasswordDialog} />
+        <ResetPasswordDialog open={resetPasswordDialog.open} resetPassword={this.resetPassword} onClose={this.closeResetPasswordDialog} />
         <SignOutDialog open={signOutDialog.open} signOut={this.signOut} onClose={this.closeSignOutDialog} />
 
         <Snackbar autoHideDuration={4000} message={snackbar.message} onClose={this.closeSnackbar} open={snackbar.open} />

@@ -33,7 +33,7 @@ class SignOutDialog extends Component {
 
         <DialogActions>
           <Button color="primary" onClick={onClose}>Cancel</Button>
-          <Button color="primary" onClick={signOut}>Sign out</Button>
+          <Button color="primary" onClick={signOut}>Sign Out</Button>
         </DialogActions>
       </Dialog>
     );

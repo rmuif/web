@@ -13,40 +13,30 @@ import Button from '@material-ui/core/Button';
 
 const initialState = {
   emailAddress: '',
-  password: '',
 
   errors: null
 };
 
-class SignInDialog extends Component {
+class ResetPasswordDialog extends Component {
   constructor(props) {
     super(props);
 
     this.state = initialState;
   }
 
-  signIn = () => {
+  resetPassword = () => {
     const constraints = {
       emailAddress: {
         email: true,
         presence: {
           allowEmpty: false
         }
-      },
-      
-      password: {
-        length: {
-          minimum: 6
-        },
-        presence: {
-          allowEmpty: false
-        }
       }
     };
 
-    const { emailAddress, password } = this.state;
+    const { emailAddress } = this.state;
     
-    const errors = validate({ emailAddress, password }, constraints);
+    const errors = validate({ emailAddress }, constraints);
 
     if (errors) {
       this.setState({ errors });
@@ -54,7 +44,7 @@ class SignInDialog extends Component {
       this.setState({
         errors: null
       }, () => {
-        this.props.signIn(emailAddress, password);
+        this.props.resetPassword(emailAddress);
       });
     }
   };
@@ -71,7 +61,9 @@ class SignInDialog extends Component {
     }
 
     if (key === 'Enter') {
-      this.signIn();
+      event.preventDefault();
+
+      this.resetPassword();
     }
   };
 
@@ -81,34 +73,28 @@ class SignInDialog extends Component {
     this.setState({ emailAddress });
   };
 
-  handlePasswordChange = (event) => {
-    const password = event.target.value;
-
-    this.setState({ password });
-  };
-
-  handleSignInClick = () => {
-    this.signIn();
+  handleResetPasswordClick = () => {
+    this.resetPassword();
   };
 
   render() {
     // Properties
-    const { open, isSigningIn } = this.props;
+    const { open } = this.props;
 
     // Events
-    const { onClose, onResetPasswordClick } = this.props;
+    const { onClose } = this.props;
 
-    const { emailAddress, password, errors } = this.state;
+    const { emailAddress, errors } = this.state;
 
     return (
       <Dialog open={open} onClose={onClose} onExited={this.handleExited} onKeyPress={this.handleKeyPress}>
         <DialogTitle>
-          Sign in to your account
+          Reset your password
         </DialogTitle>
 
         <DialogContent>
           <DialogContentText>
-            While signed in you can manage your account.
+            An e-mail will be sent to your e-mail address containing instructions on how to reset your password.
           </DialogContentText>
 
           <div>
@@ -126,30 +112,17 @@ class SignInDialog extends Component {
                 type="email"
                 value={emailAddress}
               />
-
-              <TextField
-                autoComplete="password"
-                error={(errors && errors.password) ? true : false}
-                fullWidth margin="normal"
-                helperText={(errors && errors.password) ? errors.password[0] : ''}
-                onChange={this.handlePasswordChange}
-                placeholder="Password"
-                required
-                type="password"
-                value={password}
-              />
             </form>
           </div>
         </DialogContent>
 
         <DialogActions>
           <Button color="primary" onClick={onClose}>Cancel</Button>
-          <Button color="primary" onClick={onResetPasswordClick}>Reset Password</Button>
-          <Button color="primary" disabled={isSigningIn} onClick={this.handleSignInClick}>Sign In</Button>
+          <Button color="primary" onClick={this.handleResetPasswordClick}>Reset Password</Button>
         </DialogActions>
       </Dialog>
     );
   }
 }
 
-export default SignInDialog;
+export default ResetPasswordDialog;
