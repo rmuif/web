@@ -91,11 +91,8 @@ class SignInDialog extends Component {
     // Properties
     const { open, isSigningIn } = this.props;
 
-    // Methods
-    const { resetPassword } = this.props;
-
     // Events
-    const { onClose } = this.props;
+    const { onClose, onResetPasswordClick } = this.props;
 
     const { emailAddress, password, errors } = this.state;
 
@@ -121,7 +118,8 @@ class SignInDialog extends Component {
                 margin="normal"
                 onChange={this.handleEmailAddressChange}
                 placeholder="E-mail address"
-                required type="email"
+                required
+                type="email"
                 value={emailAddress}
               />
 
@@ -132,7 +130,8 @@ class SignInDialog extends Component {
                 helperText={(errors && errors.password) ? errors.password[0] : ''}
                 onChange={this.handlePasswordChange}
                 placeholder="Password"
-                required type="password"
+                required
+                type="password"
                 value={password}
               />
             </form>
@@ -141,8 +140,8 @@ class SignInDialog extends Component {
 
         <DialogActions>
           <Button color="primary" onClick={onClose}>Cancel</Button>
-          <Button color="primary" onClick={resetPassword}>Reset Password</Button>
-          <Button color="primary" disabled={isSigningIn} onClick={this.handleSignInClick}>Sign in</Button>
+          <Button color="primary" onClick={onResetPasswordClick}>Reset Password</Button>
+          <Button color="primary" disabled={isSigningIn} onClick={this.handleSignInClick}>Sign In</Button>
         </DialogActions>
       </Dialog>
     );
