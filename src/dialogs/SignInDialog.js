@@ -108,7 +108,8 @@ class SignInDialog extends Component {
 
         <DialogContent>
           <DialogContentText>
-            While signed in you can manage your account.
+            Some features might be unavailable until you sign in.
+            While you're signed in you can manage your account.
           </DialogContentText>
 
           <div>
