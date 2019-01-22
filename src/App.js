@@ -5,7 +5,7 @@ import 'firebase/auth';
 
 import readingTime from 'reading-time';
 
-import { createMuiTheme, MuiThemeProvider } from '@material-ui/core/styles';
+import { createMuiTheme, withStyles, MuiThemeProvider } from '@material-ui/core/styles';
 
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
@@ -13,6 +13,7 @@ import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
 import Snackbar from '@material-ui/core/Snackbar';
 
+import SignUpDialog from './dialogs/SignUpDialog';
 import SignInDialog from './dialogs/SignInDialog';
 import ResetPasswordDialog from './dialogs/ResetPasswordDialog';
 import SignOutDialog from './dialogs/SignOutDialog';
@@ -37,17 +38,28 @@ const theme = createMuiTheme({
   }
 });
 
+const styles = (theme) => ({
+  signUpButton: {
+    marginRight: theme.spacing.unit
+  }
+});
+
 class App extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
+      isSigningUp: false,
       isSigningIn: false,
       isSignedIn: false,
 
       isSigningOut: false,
 
       user: null,
+
+      signUpDialog: {
+        open: false
+      },
 
       signInDialog: {
         open: false
@@ -68,6 +80,26 @@ class App extends Component {
       }
     };
   }
+
+  showSignUpDialog = () => {
+    this.setState({
+      signUpDialog: {
+        open: true
+      }
+    });
+  };
+
+  closeSignUpDialog = (callback) => {
+    this.setState({
+      signUpDialog: {
+        open: false
+      }
+    }, () => {
+      if (callback && typeof callback === 'function') {
+        callback();
+      }
+    });
+  };
 
   showSignInDialog = () => {
     this.setState({
@@ -154,6 +186,37 @@ class App extends Component {
         message: clearMessage ? '' : snackbar.message,
         open: false
       }
+    });
+  };
+
+  signUp = (emailAddress, password) => {
+    if (this.state.isSignedIn) {
+      this.openSnackbar('Already signed in');
+      
+      return;
+    }
+
+    this.setState({
+      isSigningUp: true
+    }, () => {
+      firebase.auth().createUserWithEmailAndPassword(emailAddress, password).then((userCredential) => {
+        this.setState({
+          isSigningUp: false
+        }, () => {
+          this.closeSignUpDialog(() => {
+          const user = userCredential.user;
+          const emailAddress = user.email;
+    
+          this.openSnackbar('Signed up as ' + emailAddress);
+        });
+        });
+      }).catch((error) => {
+        this.setState({
+          isSigningUp: false
+        }, () => {
+          this.openSnackbar(error.message);
+        });
+      });
     });
   };
 
@@ -250,7 +313,8 @@ class App extends Component {
   };
 
   render() {
-    const { isSigningIn, isSignedIn, signInDialog, resetPasswordDialog, signOutDialog, snackbar } = this.state;
+    const { classes } = this.props;
+    const { isSigningUp, isSigningIn, isSignedIn, signUpDialog, signInDialog, resetPasswordDialog, signOutDialog, snackbar } = this.state;
 
     return (
       <MuiThemeProvider theme={theme}>
@@ -258,11 +322,18 @@ class App extends Component {
           <Toolbar variant="regular">
             <Typography style={{ flexGrow: 1 }} color="inherit" variant="h6">{title}</Typography>
 
-            {!isSignedIn && <Button color="secondary" disabled={isSigningIn} variant="contained" onClick={this.showSignInDialog}>Sign in</Button>}
+            {!isSignedIn &&
+              <div>
+                <Button className={classes.signUpButton} color="secondary" disabled={isSigningUp || isSigningIn} variant="contained" onClick={this.showSignUpDialog}>Sign up</Button>
+                <Button color="secondary" disabled={isSigningUp || isSigningIn} variant="contained" onClick={this.showSignInDialog}>Sign in</Button>
+              </div>
+            }
+
             {isSignedIn && <Button color="secondary" variant="contained" onClick={this.showSignOutDialog}>Sign out</Button>}
           </Toolbar>
         </AppBar>
 
+        <SignUpDialog open={signUpDialog.open} isSigningUp={isSigningUp} signUp={this.signUp} onClose={this.closeSignUpDialog} />
         <SignInDialog open={signInDialog.open} isSigningIn={isSigningIn} signIn={this.signIn} onClose={this.closeSignInDialog} onResetPasswordClick={this.showResetPasswordDialog} />
         <ResetPasswordDialog open={resetPasswordDialog.open} resetPassword={this.resetPassword} onClose={this.closeResetPasswordDialog} />
         <SignOutDialog open={signOutDialog.open} signOut={this.signOut} onClose={this.closeSignOutDialog} />
@@ -286,4 +357,4 @@ class App extends Component {
   }
 }
 
-export default App;
+export default withStyles(styles)(App);
