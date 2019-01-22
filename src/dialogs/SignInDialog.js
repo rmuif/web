@@ -129,10 +129,11 @@ class SignInDialog extends Component {
               />
 
               <TextField
-                autoComplete="password"
+                autoComplete="current-password"
                 error={(errors && errors.password) ? true : false}
-                fullWidth margin="normal"
+                fullWidth
                 helperText={(errors && errors.password) ? errors.password[0] : ''}
+                margin="normal"
                 onChange={this.handlePasswordChange}
                 placeholder="Password"
                 required
