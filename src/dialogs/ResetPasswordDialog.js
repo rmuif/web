@@ -79,7 +79,7 @@ class ResetPasswordDialog extends Component {
 
   render() {
     // Properties
-    const { open } = this.props;
+    const { open, isResettingPassword } = this.props;
 
     // Events
     const { onClose } = this.props;
@@ -118,7 +118,7 @@ class ResetPasswordDialog extends Component {
 
         <DialogActions>
           <Button color="primary" onClick={onClose}>Cancel</Button>
-          <Button color="primary" onClick={this.handleResetPasswordClick}>Reset Password</Button>
+          <Button color="primary" disabled={isResettingPassword} onClick={this.handleResetPasswordClick}>Reset Password</Button>
         </DialogActions>
       </Dialog>
     );

@@ -51,6 +51,7 @@ class App extends Component {
     this.state = {
       isSigningUp: false,
       isSigningIn: false,
+      isResettingPassword: false,
       isSignedIn: false,
 
       isSigningOut: false,
@@ -273,12 +274,24 @@ class App extends Component {
   };
 
   resetPassword = (emailAddress) => {
-    firebase.auth().sendPasswordResetEmail(emailAddress).then(() => {
-      this.closeResetPasswordDialog(() => {
-        this.openSnackbar('Password reset email sent');
+    this.setState({
+      isResettingPassword: true
+    }, () => {
+      firebase.auth().sendPasswordResetEmail(emailAddress).then(() => {
+        this.setState({
+          isResettingPassword: false
+        }, () => {
+          this.closeResetPasswordDialog(() => {
+            this.openSnackbar('Password reset email sent');
+          });
+        });
+      }).catch((error) => {
+        this.setState({
+          isResettingPassword: false
+        }, () => {
+          this.openSnackbar(error.message);
+        });
       });
-    }).catch((error) => {
-      this.openSnackbar(error.message);
     });
   };
 
@@ -314,7 +327,7 @@ class App extends Component {
 
   render() {
     const { classes } = this.props;
-    const { isSigningUp, isSigningIn, isSignedIn, signUpDialog, signInDialog, resetPasswordDialog, signOutDialog, snackbar } = this.state;
+    const { isSigningUp, isSigningIn, isResettingPassword, isSignedIn, signUpDialog, signInDialog, resetPasswordDialog, signOutDialog, snackbar } = this.state;
 
     return (
       <MuiThemeProvider theme={theme}>
@@ -324,8 +337,8 @@ class App extends Component {
 
             {!isSignedIn &&
               <div>
-                <Button className={classes.signUpButton} color="secondary" disabled={isSigningUp || isSigningIn} variant="contained" onClick={this.showSignUpDialog}>Sign up</Button>
-                <Button color="secondary" disabled={isSigningUp || isSigningIn} variant="contained" onClick={this.showSignInDialog}>Sign in</Button>
+                <Button className={classes.signUpButton} color="secondary" disabled={isSigningUp || isSigningIn || isResettingPassword} variant="contained" onClick={this.showSignUpDialog}>Sign up</Button>
+                <Button color="secondary" disabled={isSigningUp || isSigningIn || isResettingPassword} variant="contained" onClick={this.showSignInDialog}>Sign in</Button>
               </div>
             }
 
@@ -335,7 +348,7 @@ class App extends Component {
 
         <SignUpDialog open={signUpDialog.open} isSigningUp={isSigningUp} signUp={this.signUp} onClose={this.closeSignUpDialog} />
         <SignInDialog open={signInDialog.open} isSigningIn={isSigningIn} signIn={this.signIn} onClose={this.closeSignInDialog} onResetPasswordClick={this.showResetPasswordDialog} />
-        <ResetPasswordDialog open={resetPasswordDialog.open} resetPassword={this.resetPassword} onClose={this.closeResetPasswordDialog} />
+        <ResetPasswordDialog open={resetPasswordDialog.open} isResettingPassword={isResettingPassword} resetPassword={this.resetPassword} onClose={this.closeResetPasswordDialog} />
         <SignOutDialog open={signOutDialog.open} signOut={this.signOut} onClose={this.closeSignOutDialog} />
 
         <Snackbar autoHideDuration={snackbar.autoHideDuration} message={snackbar.message} onClose={this.closeSnackbar} open={snackbar.open} />
