@@ -18,7 +18,6 @@ import SignInDialog from './dialogs/SignInDialog';
 import ResetPasswordDialog from './dialogs/ResetPasswordDialog';
 import SignOutDialog from './dialogs/SignOutDialog';
 
-// Initialize Firebase
 const config = {
   apiKey: '',
   authDomain: '',
