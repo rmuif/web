@@ -192,7 +192,7 @@ class App extends Component {
 
   signUp = (emailAddress, password) => {
     if (this.state.isSignedIn) {
-      this.openSnackbar('Already signed in');
+      this.openSnackbar('Signed in users can\'t sign up');
       
       return;
     }
@@ -223,7 +223,7 @@ class App extends Component {
 
   signIn = (emailAddress, password) => {
     if (this.state.isSignedIn) {
-      this.openSnackbar('Already signed in');
+      this.openSnackbar('Signed in users can\'t sign in again');
       
       return;
     }
@@ -231,26 +231,6 @@ class App extends Component {
     this.setState({
       isSigningIn: true
     }, () => {
-      // const provider = new firebase.auth.GoogleAuthProvider();
-
-      // firebase.auth().signInWithPopup(provider).then((userCredential) => {
-      //   this.setState({
-      //     isSigningIn: false
-      //   }, () => {
-      //     const user = userCredential.user;
-      //     const displayName = user.displayName;
-      //     const emailAddress = user.email;
-    
-      //     this.openSnackbar('Signed in as ' + (displayName || emailAddress));
-      //   });
-      // }).catch((error) => {
-      //   this.setState({
-      //     isSigningIn: false
-      //   }, () => {
-      //     this.openSnackbar(error.message);
-      //   });
-      // });
-
       firebase.auth().signInWithEmailAndPassword(emailAddress, password).then((userCredential) => {
         this.setState({
           isSigningIn: false
@@ -274,6 +254,12 @@ class App extends Component {
   };
 
   resetPassword = (emailAddress) => {
+    if (this.state.isSignedIn) {
+      this.openSnackbar('Signed in users can\'t reset their password');
+
+      return;
+    }
+
     this.setState({
       isResettingPassword: true
     }, () => {
@@ -337,8 +323,8 @@ class App extends Component {
 
             {!isSignedIn &&
               <div>
-                <Button className={classes.signUpButton} color="secondary" disabled={isSigningUp || isSigningIn || isResettingPassword} variant="contained" onClick={this.showSignUpDialog}>Sign up</Button>
-                <Button color="secondary" disabled={isSigningUp || isSigningIn || isResettingPassword} variant="contained" onClick={this.showSignInDialog}>Sign in</Button>
+                <Button className={classes.signUpButton} color="secondary" disabled={isSigningUp} variant="contained" onClick={this.showSignUpDialog}>Sign up</Button>
+                <Button color="secondary" disabled={isSigningIn} variant="contained" onClick={this.showSignInDialog}>Sign in</Button>
               </div>
             }
 
