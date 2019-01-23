@@ -9,6 +9,18 @@ import DialogActions from '@material-ui/core/DialogActions';
 import Button from '@material-ui/core/Button';
 
 class SignOutDialog extends Component {
+  handleKeyPress = (event) => {
+    const key = event.key;
+
+    if (event.altKey || event.ctrlKey || event.metaKey || event.shiftKey) {
+      return;
+    }
+
+    if (key === 'Enter') {
+      this.props.signOut();
+    }
+  };
+
   render() {
     // Properties
     const { open } = this.props;
@@ -20,7 +32,7 @@ class SignOutDialog extends Component {
     const { onClose } = this.props;
 
     return (
-      <Dialog open={open} onClose={onClose}>
+      <Dialog open={open} onClose={onClose} onKeyPress={this.handleKeyPress}>
         <DialogTitle>
           Sign out?
         </DialogTitle>
