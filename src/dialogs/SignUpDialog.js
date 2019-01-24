@@ -175,7 +175,7 @@ class SignUpDialog extends Component {
 
         <DialogActions>
           <Button color="primary" onClick={onClose}>Cancel</Button>
-          <Button color="primary" disabled={isSigningUp} onClick={this.handleSignUpClick}>Sign Up</Button>
+          <Button color="primary" disabled={isSigningUp} variant="contained" onClick={this.handleSignUpClick}>Sign Up</Button>
         </DialogActions>
       </Dialog>
     );
