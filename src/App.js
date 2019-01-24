@@ -19,17 +19,19 @@ import ResetPasswordDialog from './dialogs/ResetPasswordDialog';
 import SignOutDialog from './dialogs/SignOutDialog';
 
 const config = {
-  apiKey: '',
-  authDomain: '',
-  databaseURL: '',
-  projectId: '',
-  storageBucket: '',
-  messagingSenderId: ''
+  apiKey: "AIzaSyBAKkiSSRdG1mx3hrOSKf_5FvxZAUDYsyw",
+  authDomain: "internal-portal-6485c.firebaseapp.com",
+  databaseURL: "https://internal-portal-6485c.firebaseio.com",
+  projectId: "internal-portal-6485c",
+  storageBucket: "internal-portal-6485c.appspot.com",
+  messagingSenderId: "743930964080"
 };
 
 firebase.initializeApp(config);
 
-const title = 'React + Material-UI + Firebase';
+const settings = {
+  title: 'React + Material-UI + Firebase'
+};
 
 const theme = createMuiTheme({
   typography: {
@@ -318,7 +320,7 @@ class App extends Component {
       <MuiThemeProvider theme={theme}>
         <AppBar color="primary" position="static">
           <Toolbar variant="regular">
-            <Typography style={{ flexGrow: 1 }} color="inherit" variant="h6">{title}</Typography>
+            <Typography style={{ flexGrow: 1 }} color="inherit" variant="h6">{settings.title}</Typography>
 
             {!isSignedIn &&
               <div>
