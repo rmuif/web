@@ -19,12 +19,12 @@ import ResetPasswordDialog from './dialogs/ResetPasswordDialog';
 import SignOutDialog from './dialogs/SignOutDialog';
 
 const config = {
-  apiKey: "AIzaSyBAKkiSSRdG1mx3hrOSKf_5FvxZAUDYsyw",
-  authDomain: "internal-portal-6485c.firebaseapp.com",
-  databaseURL: "https://internal-portal-6485c.firebaseio.com",
-  projectId: "internal-portal-6485c",
-  storageBucket: "internal-portal-6485c.appspot.com",
-  messagingSenderId: "743930964080"
+  apiKey: '',
+  authDomain: '',
+  databaseURL: '',
+  projectId: '',
+  storageBucket: '',
+  messagingSenderId: ''
 };
 
 firebase.initializeApp(config);
