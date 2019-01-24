@@ -324,12 +324,12 @@ class App extends Component {
 
             {!isSignedIn &&
               <div>
-                <Button className={classes.signUpButton} color="secondary" disabled={isSigningUp} variant="contained" onClick={this.showSignUpDialog}>Sign up</Button>
-                <Button color="secondary" disabled={isSigningIn} variant="contained" onClick={this.showSignInDialog}>Sign in</Button>
+                <Button className={classes.signUpButton} color="secondary" disabled={isSigningUp} variant="contained" onClick={this.showSignUpDialog}>Sign Up</Button>
+                <Button color="secondary" disabled={isSigningIn} variant="contained" onClick={this.showSignInDialog}>Sign In</Button>
               </div>
             }
 
-            {isSignedIn && <Button color="secondary" variant="contained" onClick={this.showSignOutDialog}>Sign out</Button>}
+            {isSignedIn && <Button color="secondary" variant="contained" onClick={this.showSignOutDialog}>Sign Out</Button>}
           </Toolbar>
         </AppBar>
 
