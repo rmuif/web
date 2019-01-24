@@ -23,7 +23,7 @@ class SignOutDialog extends Component {
 
   render() {
     // Properties
-    const { open } = this.props;
+    const { open, isSigningOut } = this.props;
 
     // Methods
     const { signOut } = this.props;
@@ -45,7 +45,7 @@ class SignOutDialog extends Component {
 
         <DialogActions>
           <Button color="primary" onClick={onClose}>Cancel</Button>
-          <Button color="primary" variant="contained" onClick={signOut}>Sign Out</Button>
+          <Button color="primary" disabled={isSigningOut} variant="contained" onClick={signOut}>Sign Out</Button>
         </DialogActions>
       </Dialog>
     );

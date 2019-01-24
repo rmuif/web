@@ -54,7 +54,6 @@ class App extends Component {
       isSigningIn: false,
       isResettingPassword: false,
       isSignedIn: false,
-
       isSigningOut: false,
 
       user: null,
@@ -314,7 +313,7 @@ class App extends Component {
 
   render() {
     const { classes } = this.props;
-    const { isSigningUp, isSigningIn, isResettingPassword, isSignedIn, signUpDialog, signInDialog, resetPasswordDialog, signOutDialog, snackbar } = this.state;
+    const { isSigningUp, isSigningIn, isResettingPassword, isSignedIn, isSigningOut, signUpDialog, signInDialog, resetPasswordDialog, signOutDialog, snackbar } = this.state;
 
     return (
       <MuiThemeProvider theme={theme}>
@@ -336,7 +335,7 @@ class App extends Component {
         <SignUpDialog open={signUpDialog.open} isSigningUp={isSigningUp} signUp={this.signUp} onClose={this.closeSignUpDialog} />
         <SignInDialog open={signInDialog.open} isSigningIn={isSigningIn} signIn={this.signIn} onClose={this.closeSignInDialog} onResetPasswordClick={this.showResetPasswordDialog} />
         <ResetPasswordDialog open={resetPasswordDialog.open} isResettingPassword={isResettingPassword} resetPassword={this.resetPassword} onClose={this.closeResetPasswordDialog} />
-        <SignOutDialog open={signOutDialog.open} signOut={this.signOut} onClose={this.closeSignOutDialog} />
+        <SignOutDialog open={signOutDialog.open} isSigningOut={isSigningOut} signOut={this.signOut} onClose={this.closeSignOutDialog} />
 
         <Snackbar autoHideDuration={snackbar.autoHideDuration} message={snackbar.message} onClose={this.closeSnackbar} open={snackbar.open} />
       </MuiThemeProvider>
