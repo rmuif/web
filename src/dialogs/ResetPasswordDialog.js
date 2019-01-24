@@ -118,7 +118,7 @@ class ResetPasswordDialog extends Component {
 
         <DialogActions>
           <Button color="primary" onClick={onClose}>Cancel</Button>
-          <Button color="primary" disabled={isResettingPassword} variant="contained" onClick={this.handleResetPasswordClick}>Reset Password</Button>
+          <Button color="primary" disabled={!emailAddress || isResettingPassword} variant="contained" onClick={this.handleResetPasswordClick}>Reset Password</Button>
         </DialogActions>
       </Dialog>
     );
