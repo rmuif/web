@@ -5,18 +5,16 @@ import 'firebase/auth';
 
 import readingTime from 'reading-time';
 
-import { createMuiTheme, withStyles, MuiThemeProvider } from '@material-ui/core/styles';
+import { createMuiTheme, MuiThemeProvider } from '@material-ui/core/styles';
 
-import AppBar from '@material-ui/core/AppBar';
-import Toolbar from '@material-ui/core/Toolbar';
-import Typography from '@material-ui/core/Typography';
-import Button from '@material-ui/core/Button';
 import Snackbar from '@material-ui/core/Snackbar';
 
 import SignUpDialog from './dialogs/SignUpDialog';
 import SignInDialog from './dialogs/SignInDialog';
 import ResetPasswordDialog from './dialogs/ResetPasswordDialog';
 import SignOutDialog from './dialogs/SignOutDialog';
+
+import Bar from './layout/Bar';
 
 const config = {
   apiKey: '',
@@ -36,12 +34,6 @@ const settings = {
 const theme = createMuiTheme({
   typography: {
     useNextVariants: true
-  }
-});
-
-const styles = (theme) => ({
-  signUpButton: {
-    marginRight: theme.spacing.unit
   }
 });
 
@@ -312,25 +304,11 @@ class App extends Component {
   };
 
   render() {
-    const { classes } = this.props;
     const { isSigningUp, isSigningIn, isResettingPassword, isSignedIn, isSigningOut, signUpDialog, signInDialog, resetPasswordDialog, signOutDialog, snackbar } = this.state;
 
     return (
       <MuiThemeProvider theme={theme}>
-        <AppBar color="primary" position="static">
-          <Toolbar variant="regular">
-            <Typography style={{ flexGrow: 1 }} color="inherit" variant="h6">{settings.title}</Typography>
-
-            {!isSignedIn &&
-              <div>
-                <Button className={classes.signUpButton} color="secondary" disabled={isSigningUp} variant="contained" onClick={this.showSignUpDialog}>Sign Up</Button>
-                <Button color="secondary" disabled={isSigningIn} variant="contained" onClick={this.showSignInDialog}>Sign In</Button>
-              </div>
-            }
-
-            {isSignedIn && <Button color="secondary" variant="contained" onClick={this.showSignOutDialog}>Sign Out</Button>}
-          </Toolbar>
-        </AppBar>
+        <Bar title={settings.title} isSignedIn={isSignedIn} isSigningUp={isSigningUp} isSigningIn={isSigningIn} onSignUpClick={this.showSignUpDialog} onSignInClick={this.showSignInDialog} onSignOutClick={this.showSignOutDialog} />
 
         <SignUpDialog open={signUpDialog.open} isSigningUp={isSigningUp} signUp={this.signUp} onClose={this.closeSignUpDialog} />
         <SignInDialog open={signInDialog.open} isSigningIn={isSigningIn} signIn={this.signIn} onClose={this.closeSignInDialog} onResetPasswordClick={this.showResetPasswordDialog} />
@@ -356,4 +334,4 @@ class App extends Component {
   }
 }
 
-export default withStyles(styles)(App);
+export default App;
