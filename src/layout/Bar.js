@@ -53,7 +53,12 @@ class Bar extends Component {
   };
 
   render() {
-    const { classes, title, isSignedIn, isSigningUp, isSigningIn, onSignUpClick, onSignInClick } = this.props;
+    // Properties
+    const { classes, title, isSignedIn, isSigningUp, isSigningIn } = this.props;
+
+    // Events
+    const { onSignUpClick, onSignInClick } = this.props;
+
     const { menu } = this.state;
 
     return (
