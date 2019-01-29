@@ -304,11 +304,11 @@ class App extends Component {
   };
 
   render() {
-    const { isSigningUp, isSigningIn, isResettingPassword, isSignedIn, isSigningOut, user, signUpDialog, signInDialog, resetPasswordDialog, signOutDialog, snackbar } = this.state;
+    const { isSigningUp, isSigningIn, isResettingPassword, isSignedIn, isSigningOut, signUpDialog, signInDialog, resetPasswordDialog, signOutDialog, snackbar } = this.state;
 
     return (
       <MuiThemeProvider theme={theme}>
-        <Bar title={settings.title} isSignedIn={isSignedIn} isSigningUp={isSigningUp} isSigningIn={isSigningIn} user={user} onSignUpClick={this.showSignUpDialog} onSignInClick={this.showSignInDialog} onSignOutClick={this.showSignOutDialog} />
+        <Bar title={settings.title} isSignedIn={isSignedIn} isSigningUp={isSigningUp} isSigningIn={isSigningIn} onSignUpClick={this.showSignUpDialog} onSignInClick={this.showSignInDialog} onSignOutClick={this.showSignOutDialog} />
 
         <SignUpDialog open={signUpDialog.open} isSigningUp={isSigningUp} signUp={this.signUp} onClose={this.closeSignUpDialog} />
         <SignInDialog open={signInDialog.open} isSigningIn={isSigningIn} signIn={this.signIn} onClose={this.closeSignInDialog} onResetPasswordClick={this.showResetPasswordDialog} />
