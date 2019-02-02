@@ -17,12 +17,12 @@ import SignOutDialog from './dialogs/SignOutDialog';
 import Bar from './layout/Bar';
 
 const config = {
-  apiKey: '',
-  authDomain: '',
-  databaseURL: '',
-  projectId: '',
-  storageBucket: '',
-  messagingSenderId: ''
+  apiKey: 'AIzaSyDYZOrZVpXkPQD6J31mb9t2eIIxmGEJK-Q',
+  authDomain: 'react-material-ui-firebase.firebaseapp.com',
+  databaseURL: 'https://react-material-ui-firebase.firebaseio.com',
+  projectId: 'react-material-ui-firebase',
+  storageBucket: 'react-material-ui-firebase.appspot.com',
+  messagingSenderId: '552659850812'
 };
 
 firebase.initializeApp(config);
