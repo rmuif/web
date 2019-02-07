@@ -42,6 +42,8 @@ class App extends Component {
     super(props);
 
     this.state = {
+      isAuthReady: false,
+
       isSigningUp: false,
       isSigningIn: false,
       isResettingPassword: false,
@@ -305,7 +307,7 @@ class App extends Component {
 
   render() {
     // Properties
-    const { isSigningUp, isSigningIn, isResettingPassword, isSignedIn, isSigningOut } = this.state;
+    const { isAuthReady, isSigningUp, isSigningIn, isResettingPassword, isSignedIn, isSigningOut } = this.state;
 
     // Dialogs
     const { signUpDialog, signInDialog, resetPasswordDialog, signOutDialog } = this.state;
@@ -314,7 +316,7 @@ class App extends Component {
 
     return (
       <MuiThemeProvider theme={theme}>
-        <Bar title={settings.title} isSignedIn={isSignedIn} isSigningUp={isSigningUp} isSigningIn={isSigningIn} onSignUpClick={this.showSignUpDialog} onSignInClick={this.showSignInDialog} onSignOutClick={this.showSignOutDialog} />
+        <Bar title={settings.title} isAuthReady={isAuthReady} isSignedIn={isSignedIn} isSigningUp={isSigningUp} isSigningIn={isSigningIn} onSignUpClick={this.showSignUpDialog} onSignInClick={this.showSignInDialog} onSignOutClick={this.showSignOutDialog} />
 
         <SignUpDialog open={signUpDialog.open} isSigningUp={isSigningUp} signUp={this.signUp} onClose={this.closeSignUpDialog} />
         <SignInDialog open={signInDialog.open} isSigningIn={isSigningIn} signIn={this.signIn} onClose={this.closeSignInDialog} onResetPasswordClick={this.showResetPasswordDialog} />
@@ -329,6 +331,7 @@ class App extends Component {
   componentDidMount() {
     this.removeAuthObserver = firebase.auth().onAuthStateChanged((user) => {
       this.setState({
+        isAuthReady: true,
         isSignedIn: !!user,
         user
       });
