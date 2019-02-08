@@ -54,7 +54,7 @@ class Bar extends Component {
 
   render() {
     // Properties
-    const { classes, title, isAuthReady, isSignedIn, isSigningUp, isSigningIn } = this.props;
+    const { classes, title, isSignedIn, isSigningUp, isSigningIn } = this.props;
 
     // Events
     const { onSignUpClick, onSignInClick } = this.props;
@@ -65,27 +65,23 @@ class Bar extends Component {
       <AppBar color="primary" position="static">
         <Toolbar variant="regular">
           <Typography style={{ flexGrow: 1 }} color="inherit" variant="h6">{title}</Typography>
-
-          {isAuthReady &&
+          
+          {!isSignedIn &&
             <div>
-              {!isSignedIn &&
-                <div>
-                  <Button className={classes.signUpButton} color="secondary" disabled={isSigningUp} variant="contained" onClick={onSignUpClick}>Sign Up</Button>
-                  <Button color="secondary" disabled={isSigningIn} variant="contained" onClick={onSignInClick}>Sign In</Button>
-                </div>
-              }
-    
-              {isSignedIn &&
-                <div>
-                  <IconButton color="inherit" onClick={this.openMenu}>
-                    <PersonIcon />
-                  </IconButton>
-    
-                  <Menu anchorEl={menu.anchorEl} open={Boolean(menu.anchorEl)} onClose={this.closeMenu}>
-                    <MenuItem onClick={this.handleSignOutClick}>Sign out</MenuItem>
-                  </Menu>
-                </div>
-              }
+              <Button className={classes.signUpButton} color="secondary" disabled={isSigningUp} variant="contained" onClick={onSignUpClick}>Sign Up</Button>
+              <Button color="secondary" disabled={isSigningIn} variant="contained" onClick={onSignInClick}>Sign In</Button>
+            </div>
+          }
+
+          {isSignedIn &&
+            <div>
+              <IconButton color="inherit" onClick={this.openMenu}>
+                <PersonIcon />
+              </IconButton>
+
+              <Menu anchorEl={menu.anchorEl} open={Boolean(menu.anchorEl)} onClose={this.closeMenu}>
+                <MenuItem onClick={this.handleSignOutClick}>Sign out</MenuItem>
+              </Menu>
             </div>
           }
         </Toolbar>
