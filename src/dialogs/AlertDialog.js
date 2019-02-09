@@ -44,16 +44,20 @@ class AlertDialog extends Component {
 
     return (
       <Dialog open={open} onClose={onClose} onKeyPress={this.handleKeyPress}>
-        <DialogTitle>{title}</DialogTitle>
+        {title && <DialogTitle>{title}</DialogTitle>}
 
-        <DialogContent>
-          <DialogContentText>{contentText}</DialogContentText>
-        </DialogContent>
+        {contentText &&
+          <DialogContent>
+            <DialogContentText>{contentText}</DialogContentText>
+          </DialogContent>
+        }
 
-        <DialogActions>
-          <Button color="primary" onClick={onCancelClick}>{cancelText}</Button>
-          <Button color="primary" variant="contained" onClick={onOkClick}>{okText}</Button>
-        </DialogActions>
+        {(onCancelClick || onOkClick) &&
+          <DialogActions>
+            {onCancelClick && <Button color="primary" onClick={onCancelClick}>{cancelText}</Button>}
+            {onOkClick && <Button color="primary" variant="contained" onClick={onOkClick}>{okText}</Button>}
+          </DialogActions>
+        }
       </Dialog>
     );
   }
