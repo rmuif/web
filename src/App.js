@@ -5,16 +5,20 @@ import 'firebase/auth';
 
 import readingTime from 'reading-time';
 
-import { createMuiTheme, MuiThemeProvider } from '@material-ui/core/styles';
+import { createMuiTheme, withStyles, MuiThemeProvider } from '@material-ui/core/styles';
 
 import Snackbar from '@material-ui/core/Snackbar';
+
+import PersonOutlineIcon from '@material-ui/icons/PersonOutline';
+import PersonIcon from '@material-ui/icons/Person';
+
+import Bar from './layout/Bar';
+import EmptyState from './layout/EmptyState';
 
 import SignUpDialog from './dialogs/SignUpDialog';
 import SignInDialog from './dialogs/SignInDialog';
 import ResetPasswordDialog from './dialogs/ResetPasswordDialog';
 import SignOutDialog from './dialogs/SignOutDialog';
-
-import Bar from './layout/Bar';
 
 const config = {
   apiKey: 'AIzaSyDYZOrZVpXkPQD6J31mb9t2eIIxmGEJK-Q',
@@ -34,6 +38,12 @@ const settings = {
 const theme = createMuiTheme({
   typography: {
     useNextVariants: true
+  }
+});
+
+const styles = theme => ({
+  emptyStateIcon: {
+    fontSize: `${theme.spacing.unit * 12}px`
   }
 });
 
@@ -306,6 +316,8 @@ class App extends Component {
   };
 
   render() {
+    const { classes } = this.props;
+
     // Properties
     const { isAuthReady, isSigningUp, isSigningIn, isResettingPassword, isSignedIn, isSigningOut } = this.state;
 
@@ -314,9 +326,21 @@ class App extends Component {
 
     const { snackbar } = this.state;
 
+    if (!isAuthReady) {
+      return null;
+    }
+
     return (
       <MuiThemeProvider theme={theme}>
-        <Bar title={settings.title} isAuthReady={isAuthReady} isSignedIn={isSignedIn} isSigningUp={isSigningUp} isSigningIn={isSigningIn} onSignUpClick={this.showSignUpDialog} onSignInClick={this.showSignInDialog} onSignOutClick={this.showSignOutDialog} />
+        <Bar title={settings.title} isSignedIn={isSignedIn} isSigningUp={isSigningUp} isSigningIn={isSigningIn} onSignUpClick={this.showSignUpDialog} onSignInClick={this.showSignInDialog} onSignOutClick={this.showSignOutDialog} />
+
+        {isSignedIn &&
+          <EmptyState icon={<PersonIcon className={classes.emptyStateIcon} color="action" />} text="You are signed in." />
+        }
+
+        {!isSignedIn &&
+          <EmptyState icon={<PersonOutlineIcon className={classes.emptyStateIcon} color="action" />} text="You are not signed in." />
+        }
 
         <SignUpDialog open={signUpDialog.open} isSigningUp={isSigningUp} signUp={this.signUp} onClose={this.closeSignUpDialog} />
         <SignInDialog open={signInDialog.open} isSigningIn={isSigningIn} signIn={this.signIn} onClose={this.closeSignInDialog} onResetPasswordClick={this.showResetPasswordDialog} />
@@ -343,4 +367,4 @@ class App extends Component {
   }
 }
 
-export default App;
+export default withStyles(styles)(App);
