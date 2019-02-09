@@ -30,7 +30,7 @@ class AlertDialog extends Component {
     const { open } = this.props;
 
     // Custom
-    const { title, contentText, cancelText, okText } = this.props;
+    const { title, contentText, cancelText, okText, highlightOkButton } = this.props;
 
     /**
      * Events
@@ -54,8 +54,17 @@ class AlertDialog extends Component {
 
         {(onCancelClick || onOkClick) &&
           <DialogActions>
-            {onCancelClick && <Button color="primary" onClick={onCancelClick}>{cancelText}</Button>}
-            {onOkClick && <Button color="primary" variant="contained" onClick={onOkClick}>{okText}</Button>}
+            {onCancelClick &&
+              <Button color="primary" onClick={onCancelClick}>
+                {cancelText || 'Cancel'}
+              </Button>
+            }
+
+            {onOkClick &&
+              <Button color="primary" variant={highlightOkButton && 'contained'} onClick={onOkClick}>
+                {okText || 'OK'}
+              </Button>
+            }
           </DialogActions>
         }
       </Dialog>
