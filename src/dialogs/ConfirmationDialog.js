@@ -8,7 +8,7 @@ import DialogActions from '@material-ui/core/DialogActions';
 
 import Button from '@material-ui/core/Button';
 
-class AlertDialog extends Component {
+class ConfirmationDialog extends Component {
   handleKeyPress = (event) => {
     const key = event.key;
 
@@ -72,4 +72,4 @@ class AlertDialog extends Component {
   }
 }
 
-export default AlertDialog;
+export default ConfirmationDialog;
