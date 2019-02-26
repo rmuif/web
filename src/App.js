@@ -18,6 +18,7 @@ import EmptyState from './layout/EmptyState';
 import SignUpDialog from './dialogs/SignUpDialog';
 import SignInDialog from './dialogs/SignInDialog';
 import ResetPasswordDialog from './dialogs/ResetPasswordDialog';
+import SettingsDialog from './dialogs/SettingsDialog';
 import SignOutDialog from './dialogs/SignOutDialog';
 
 const config = {
@@ -71,6 +72,10 @@ class App extends Component {
       },
 
       resetPasswordDialog: {
+        open: false
+      },
+
+      settingsDialog: {
         open: false
       },
 
@@ -137,6 +142,26 @@ class App extends Component {
   closeResetPasswordDialog = (callback) => {
     this.setState({
       resetPasswordDialog: {
+        open: false
+      }
+    }, () => {
+      if (callback && typeof callback === 'function') {
+        callback();
+      }
+    });
+  };
+
+  showSettingsDialog = () => {
+    this.setState({
+      settingsDialog: {
+        open: true
+      }
+    });
+  };
+
+  closeSettingsDialog = (callback) => {
+    this.setState({
+      settingsDialog: {
         open: false
       }
     }, () => {
@@ -322,7 +347,7 @@ class App extends Component {
     const { isAuthReady, isSigningUp, isSigningIn, isResettingPassword, isSignedIn, isSigningOut } = this.state;
 
     // Dialogs
-    const { signUpDialog, signInDialog, resetPasswordDialog, signOutDialog } = this.state;
+    const { signUpDialog, signInDialog, resetPasswordDialog, settingsDialog, signOutDialog } = this.state;
 
     const { snackbar } = this.state;
 
@@ -332,7 +357,19 @@ class App extends Component {
 
     return (
       <MuiThemeProvider theme={theme}>
-        <Bar title={settings.title} isSignedIn={isSignedIn} isSigningUp={isSigningUp} isSigningIn={isSigningIn} onSignUpClick={this.showSignUpDialog} onSignInClick={this.showSignInDialog} onSignOutClick={this.showSignOutDialog} />
+        <Bar
+          title={settings.title}
+
+          isSignedIn={isSignedIn}
+          isSigningUp={isSigningUp}
+          isSigningIn={isSigningIn}
+
+          onSignUpClick={this.showSignUpDialog}
+          onSignInClick={this.showSignInDialog}
+
+          onSettingsClick={this.showSettingsDialog}
+          onSignOutClick={this.showSignOutDialog}
+        />
 
         {isSignedIn &&
           <EmptyState icon={<PersonIcon className={classes.emptyStateIcon} color="action" />} text="You are signed in." />
@@ -345,6 +382,7 @@ class App extends Component {
         <SignUpDialog open={signUpDialog.open} isSigningUp={isSigningUp} signUp={this.signUp} onClose={this.closeSignUpDialog} />
         <SignInDialog open={signInDialog.open} isSigningIn={isSigningIn} signIn={this.signIn} onClose={this.closeSignInDialog} onResetPasswordClick={this.showResetPasswordDialog} />
         <ResetPasswordDialog open={resetPasswordDialog.open} isResettingPassword={isResettingPassword} resetPassword={this.resetPassword} onClose={this.closeResetPasswordDialog} />
+        <SettingsDialog open={settingsDialog.open} onClose={this.closeSettingsDialog} />
         <SignOutDialog open={signOutDialog.open} isSigningOut={isSigningOut} signOut={this.signOut} onClose={this.closeSignOutDialog} />
 
         <Snackbar autoHideDuration={snackbar.autoHideDuration} message={snackbar.message} onClose={this.closeSnackbar} open={snackbar.open} />
