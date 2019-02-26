@@ -47,6 +47,11 @@ class Bar extends Component {
     });
   };
 
+  handleSettingsClick = () => {
+    this.closeMenu();
+    this.props.onSettingsClick();
+  };
+
   handleSignOutClick = () => {
     this.closeMenu();
     this.props.onSignOutClick();
@@ -80,6 +85,7 @@ class Bar extends Component {
               </IconButton>
 
               <Menu anchorEl={menu.anchorEl} open={Boolean(menu.anchorEl)} onClose={this.closeMenu}>
+                <MenuItem onClick={this.handleSettingsClick}>Settings</MenuItem>
                 <MenuItem onClick={this.handleSignOutClick}>Sign out</MenuItem>
               </Menu>
             </div>
