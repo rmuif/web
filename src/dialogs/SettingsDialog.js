@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 
+import { withStyles } from '@material-ui/core/styles';
+
 import Dialog from '@material-ui/core/Dialog';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import DialogContent from '@material-ui/core/DialogContent';
@@ -47,12 +49,18 @@ class SettingsDialog extends Component {
 
     const { selectedTab } = this.state;
 
+    const DynamicTab = withStyles({
+      label: {
+        color: type === 'light' ? '#000000' : '#ffffff'
+      }
+    })(Tab);
+
     return (
       <Dialog open={open} onClose={onClose} onKeyPress={this.handleKeyPress}>
         <DialogTitle>Settings</DialogTitle>
 
         <Tabs onChange={this.changeTab} value={selectedTab} variant="fullWidth">
-          <Tab label="Appearance" />
+          <DynamicTab label="Appearance" />
         </Tabs>
 
         <DialogContent>
