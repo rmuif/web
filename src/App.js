@@ -5,6 +5,26 @@ import 'firebase/auth';
 
 import readingTime from 'reading-time';
 
+import red from '@material-ui/core/colors/red';
+import pink from '@material-ui/core/colors/pink';
+import purple from '@material-ui/core/colors/purple';
+import deepPurple from '@material-ui/core/colors/deepPurple';
+import indigo from '@material-ui/core/colors/indigo';
+import blue from '@material-ui/core/colors/blue';
+import lightBlue from '@material-ui/core/colors/lightBlue';
+import cyan from '@material-ui/core/colors/cyan';
+import teal from '@material-ui/core/colors/teal';
+import green from '@material-ui/core/colors/green';
+import lightGreen from '@material-ui/core/colors/lightGreen';
+import lime from '@material-ui/core/colors/lime';
+import yellow from '@material-ui/core/colors/yellow';
+import amber from '@material-ui/core/colors/amber';
+import orange from '@material-ui/core/colors/orange';
+import deepOrange from '@material-ui/core/colors/deepOrange';
+import brown from '@material-ui/core/colors/brown';
+import gray from '@material-ui/core/colors/grey';
+import blueGray from '@material-ui/core/colors/blueGrey';
+
 import { createMuiTheme, withStyles, MuiThemeProvider } from '@material-ui/core/styles';
 
 import Snackbar from '@material-ui/core/Snackbar';
@@ -32,11 +52,110 @@ const config = {
 
 firebase.initializeApp(config);
 
-const settings = {
-  title: 'React + Material-UI + Firebase'
-};
+const colors = [
+  {
+    id: 'red',
+    name: 'Red',
+    import: red
+  },
+  {
+    id: 'pink',
+    name: 'Pink',
+    import: pink
+  },
+  {
+    id: 'purple',
+    name: 'Purple',
+    import: purple
+  },
+  {
+    id: 'deep-purple',
+    name: 'Deep Purple',
+    import: deepPurple
+  },
+  {
+    id: 'indigo',
+    name: 'Indigo',
+    import: indigo
+  },
+  {
+    id: 'blue',
+    name: 'Blue',
+    import: blue
+  },
+  {
+    id: 'light-blue',
+    name: 'Light Blue',
+    import: lightBlue
+  },
+  {
+    id: 'cyan',
+    name: 'Cyan',
+    import: cyan
+  },
+  {
+    id: 'teal',
+    name: 'Teal',
+    import: teal
+  },
+  {
+    id: 'green',
+    name: 'Green',
+    import: green
+  },
+  {
+    id: 'light-green',
+    name: 'Light Green',
+    import: lightGreen
+  },
+  {
+    id: 'lime',
+    name: 'Lime',
+    import: lime
+  },
+  {
+    id: 'yellow',
+    name: 'Yellow',
+    import: yellow
+  },
+  {
+    id: 'amber',
+    name: 'Amber',
+    import: amber
+  },
+  {
+    id: 'orange',
+    name: 'Orange',
+    import: orange
+  },
+  {
+    id: 'deep-orange',
+    name: 'Deep Orange',
+    import: deepOrange
+  },
+  {
+    id: 'brown',
+    name: 'Brown',
+    import: brown
+  },
+  {
+    id: 'gray',
+    name: 'Gray',
+    import: gray
+  },
+  {
+    id: 'blue-gray',
+    name: 'Blue Gray',
+    import: blueGray
+  }
+];
 
-const theme = createMuiTheme({
+let theme = createMuiTheme({
+  palette: {
+    primary: blueGray,
+    secondary: red
+  },
+
   typography: {
     useNextVariants: true
   }
@@ -48,11 +167,18 @@ const styles = theme => ({
   }
 });
 
+const settings = {
+  title: 'React + Material-UI + Firebase'
+};
+
 class App extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
+      primaryColor: 'blue-gray',
+      secondaryColor: 'red',
+
       isAuthReady: false,
 
       isSigningUp: false,
@@ -90,6 +216,55 @@ class App extends Component {
       }
     };
   }
+
+  updateTheme = (palette) => {
+    const { primaryColor, secondaryColor } = this.state;
+
+    if (!palette.primaryColor) {
+      palette.primaryColor = primaryColor;
+    }
+
+    if (!palette.secondaryColor) {
+      palette.secondaryColor = secondaryColor;
+    }
+
+    theme = createMuiTheme({
+      palette: {
+        primary: colors.find(color => color.id === palette.primaryColor).import,
+        secondary: colors.find(color => color.id === palette.secondaryColor).import
+      },
+
+      typography: {
+        useNextVariants: true
+      }
+    });
+
+    this.setState({
+      primaryColor: palette.primaryColor,
+      secondaryColor: palette.secondaryColor
+    }, () => {
+      localStorage.setItem('theme', JSON.stringify({
+        primaryColor: palette.primaryColor,
+        secondaryColor: palette.secondaryColor
+      }));
+    });
+  };
+
+  changePrimaryColor = (event) => {
+    const primaryColor = event.target.value;
+
+    this.updateTheme({
+      primaryColor
+    });
+  };
+
+  changeSecondaryColor = (event) => {
+    const secondaryColor = event.target.value;
+
+    this.updateTheme({
+      secondaryColor
+    });
+  };
 
   showSignUpDialog = () => {
     this.setState({
@@ -344,7 +519,7 @@ class App extends Component {
     const { classes } = this.props;
 
     // Properties
-    const { isAuthReady, isSigningUp, isSigningIn, isResettingPassword, isSignedIn, isSigningOut } = this.state;
+    const { primaryColor, secondaryColor, isAuthReady, isSigningUp, isSigningIn, isResettingPassword, isSignedIn, isSigningOut } = this.state;
 
     // Dialogs
     const { signUpDialog, signInDialog, resetPasswordDialog, settingsDialog, signOutDialog } = this.state;
@@ -382,7 +557,7 @@ class App extends Component {
         <SignUpDialog open={signUpDialog.open} isSigningUp={isSigningUp} signUp={this.signUp} onClose={this.closeSignUpDialog} />
         <SignInDialog open={signInDialog.open} isSigningIn={isSigningIn} signIn={this.signIn} onClose={this.closeSignInDialog} onResetPasswordClick={this.showResetPasswordDialog} />
         <ResetPasswordDialog open={resetPasswordDialog.open} isResettingPassword={isResettingPassword} resetPassword={this.resetPassword} onClose={this.closeResetPasswordDialog} />
-        <SettingsDialog open={settingsDialog.open} onClose={this.closeSettingsDialog} />
+        <SettingsDialog open={settingsDialog.open} colors={colors} primaryColor={primaryColor} secondaryColor={secondaryColor} onPrimaryColorChange={this.changePrimaryColor} onSecondaryColorChange={this.changeSecondaryColor} onClose={this.closeSettingsDialog} />
         <SignOutDialog open={signOutDialog.open} isSigningOut={isSigningOut} signOut={this.signOut} onClose={this.closeSignOutDialog} />
 
         <Snackbar autoHideDuration={snackbar.autoHideDuration} message={snackbar.message} onClose={this.closeSnackbar} open={snackbar.open} />
@@ -391,6 +566,12 @@ class App extends Component {
   }
 
   componentDidMount() {
+    const theme = JSON.parse(localStorage.getItem('theme'));
+
+    if (theme) {
+      this.updateTheme(theme);
+    }
+
     this.removeAuthObserver = firebase.auth().onAuthStateChanged((user) => {
       this.setState({
         isAuthReady: true,
