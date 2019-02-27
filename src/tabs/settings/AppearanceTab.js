@@ -1,20 +1,34 @@
 import React, { Component } from 'react';
 
+import { withStyles } from '@material-ui/core/styles';
+
+import DialogContentText from '@material-ui/core/DialogContentText';
 import FormControl from '@material-ui/core/FormControl';
 import InputLabel from '@material-ui/core/InputLabel';
 import Select from '@material-ui/core/Select';
 import MenuItem from '@material-ui/core/MenuItem';
 
+const styles = (theme) => ({
+  dialogContentText: {
+    marginTop: `${theme.spacing.unit * 2}px`
+  }
+});
+
 class AppearanceTab extends Component {
   render() {
     // Properties
-    const { colors, types, primaryColor, secondaryColor, type } = this.props;
+    const { classes, colors, types, primaryColor, secondaryColor, type } = this.props;
 
     // Events
     const { onPrimaryColorChange, onSecondaryColorChange, onTypeChange } = this.props;
 
     return (
       <div>
+        <DialogContentText className={classes.dialogContentText}>
+          Customize the look and feel of the whole app.
+          Reset settings by clearing the app's local storage.
+        </DialogContentText>
+
         <FormControl fullWidth margin="normal">
           <InputLabel>Primary color</InputLabel>
 
@@ -49,4 +63,4 @@ class AppearanceTab extends Component {
   }
 }
 
-export default AppearanceTab;
+export default withStyles(styles)(AppearanceTab);
