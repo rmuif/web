@@ -41,10 +41,10 @@ class SettingsDialog extends Component {
 
   render() {
     // Properties
-    const { open, colors, primaryColor, secondaryColor } = this.props;
+    const { open, colors, types, primaryColor, secondaryColor, type } = this.props;
 
     // Events
-    const { onClose, onPrimaryColorChange, onSecondaryColorChange } = this.props;
+    const { onClose, onPrimaryColorChange, onSecondaryColorChange, onTypeChange } = this.props;
 
     const { selectedTab } = this.state;
 
@@ -57,7 +57,18 @@ class SettingsDialog extends Component {
         </Tabs>
 
         <DialogContent>
-          {selectedTab === 0 && <AppearanceTab colors={colors} primaryColor={primaryColor} secondaryColor={secondaryColor} onPrimaryColorChange={onPrimaryColorChange} onSecondaryColorChange={onSecondaryColorChange} />}
+          {selectedTab === 0 &&
+            <AppearanceTab
+              colors={colors}
+              types={types}
+              primaryColor={primaryColor}
+              secondaryColor={secondaryColor}
+              type={type}
+              onPrimaryColorChange={onPrimaryColorChange}
+              onSecondaryColorChange={onSecondaryColorChange}
+              onTypeChange={onTypeChange}
+            />
+          }
         </DialogContent>
 
         <DialogActions>

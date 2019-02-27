@@ -150,10 +150,16 @@ const colors = [
   }
 ];
 
+const types = [
+  'light',
+  'dark'
+];
+
 let theme = createMuiTheme({
   palette: {
     primary: blueGray,
-    secondary: red
+    secondary: red,
+    type: 'light'
   },
 
   typography: {
@@ -178,6 +184,7 @@ class App extends Component {
     this.state = {
       primaryColor: 'blue-gray',
       secondaryColor: 'red',
+      type: 'light',
 
       isAuthReady: false,
 
@@ -218,7 +225,7 @@ class App extends Component {
   }
 
   updateTheme = (palette) => {
-    const { primaryColor, secondaryColor } = this.state;
+    const { primaryColor, secondaryColor, type } = this.state;
 
     if (!palette.primaryColor) {
       palette.primaryColor = primaryColor;
@@ -228,10 +235,15 @@ class App extends Component {
       palette.secondaryColor = secondaryColor;
     }
 
+    if (!palette.type) {
+      palette.type = type;
+    }
+
     theme = createMuiTheme({
       palette: {
         primary: colors.find(color => color.id === palette.primaryColor).import,
-        secondary: colors.find(color => color.id === palette.secondaryColor).import
+        secondary: colors.find(color => color.id === palette.secondaryColor).import,
+        type: palette.type
       },
 
       typography: {
@@ -241,11 +253,13 @@ class App extends Component {
 
     this.setState({
       primaryColor: palette.primaryColor,
-      secondaryColor: palette.secondaryColor
+      secondaryColor: palette.secondaryColor,
+      type: palette.type
     }, () => {
       localStorage.setItem('theme', JSON.stringify({
         primaryColor: palette.primaryColor,
-        secondaryColor: palette.secondaryColor
+        secondaryColor: palette.secondaryColor,
+        type: palette.type
       }));
     });
   };
@@ -263,6 +277,14 @@ class App extends Component {
 
     this.updateTheme({
       secondaryColor
+    });
+  };
+
+  changeType = (event) => {
+    const type = event.target.value;
+
+    this.updateTheme({
+      type
     });
   };
 
@@ -519,7 +541,7 @@ class App extends Component {
     const { classes } = this.props;
 
     // Properties
-    const { primaryColor, secondaryColor, isAuthReady, isSigningUp, isSigningIn, isResettingPassword, isSignedIn, isSigningOut } = this.state;
+    const { primaryColor, secondaryColor, type, isAuthReady, isSigningUp, isSigningIn, isResettingPassword, isSignedIn, isSigningOut } = this.state;
 
     // Dialogs
     const { signUpDialog, signInDialog, resetPasswordDialog, settingsDialog, signOutDialog } = this.state;
@@ -557,7 +579,7 @@ class App extends Component {
         <SignUpDialog open={signUpDialog.open} isSigningUp={isSigningUp} signUp={this.signUp} onClose={this.closeSignUpDialog} />
         <SignInDialog open={signInDialog.open} isSigningIn={isSigningIn} signIn={this.signIn} onClose={this.closeSignInDialog} onResetPasswordClick={this.showResetPasswordDialog} />
         <ResetPasswordDialog open={resetPasswordDialog.open} isResettingPassword={isResettingPassword} resetPassword={this.resetPassword} onClose={this.closeResetPasswordDialog} />
-        <SettingsDialog open={settingsDialog.open} colors={colors} primaryColor={primaryColor} secondaryColor={secondaryColor} onPrimaryColorChange={this.changePrimaryColor} onSecondaryColorChange={this.changeSecondaryColor} onClose={this.closeSettingsDialog} />
+        <SettingsDialog open={settingsDialog.open} colors={colors} types={types} primaryColor={primaryColor} secondaryColor={secondaryColor} type={type} onPrimaryColorChange={this.changePrimaryColor} onSecondaryColorChange={this.changeSecondaryColor} onTypeChange={this.changeType} onClose={this.closeSettingsDialog} />
         <SignOutDialog open={signOutDialog.open} isSigningOut={isSigningOut} signOut={this.signOut} onClose={this.closeSignOutDialog} />
 
         <Snackbar autoHideDuration={snackbar.autoHideDuration} message={snackbar.message} onClose={this.closeSnackbar} open={snackbar.open} />

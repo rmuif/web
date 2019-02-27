@@ -8,10 +8,10 @@ import MenuItem from '@material-ui/core/MenuItem';
 class AppearanceTab extends Component {
   render() {
     // Properties
-    const { colors, primaryColor, secondaryColor } = this.props;
+    const { colors, types, primaryColor, secondaryColor, type } = this.props;
 
     // Events
-    const { onPrimaryColorChange, onSecondaryColorChange } = this.props;
+    const { onPrimaryColorChange, onSecondaryColorChange, onTypeChange } = this.props;
 
     return (
       <div>
@@ -31,6 +31,16 @@ class AppearanceTab extends Component {
           <Select onChange={onSecondaryColorChange} value={secondaryColor}>
             {colors.map((color) => {
               return (<MenuItem key={color.id} value={color.id}>{color.name}</MenuItem>);
+            })}
+          </Select>
+        </FormControl>
+
+        <FormControl fullWidth margin="normal">
+          <InputLabel>Type</InputLabel>
+
+          <Select onChange={onTypeChange} value={type}>
+            {types.map((type, index) => {
+              return (<MenuItem key={index} value={type}>{type.charAt(0).toUpperCase() + type.slice(1)}</MenuItem>);
             })}
           </Select>
         </FormControl>
