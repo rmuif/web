@@ -576,12 +576,12 @@ class App extends Component {
           <EmptyState icon={<PersonOutlineIcon className={classes.emptyStateIcon} color="action" />} text="You are not signed in." />
         }
 
-        <SignUpDialog open={signUpDialog.open} isSigningUp={isSigningUp} signUp={this.signUp} onClose={this.closeSignUpDialog} />
-        <SignInDialog open={signInDialog.open} isSigningIn={isSigningIn} signIn={this.signIn} onClose={this.closeSignInDialog} onResetPasswordClick={this.showResetPasswordDialog} />
-        <ResetPasswordDialog open={resetPasswordDialog.open} isResettingPassword={isResettingPassword} resetPassword={this.resetPassword} onClose={this.closeResetPasswordDialog} />
-        <SettingsDialog open={settingsDialog.open} colors={colors} types={types} primaryColor={primaryColor} secondaryColor={secondaryColor} type={type} onPrimaryColorChange={this.changePrimaryColor} onSecondaryColorChange={this.changeSecondaryColor} onTypeChange={this.changeType} onClose={this.closeSettingsDialog} />
-        <SignOutDialog open={signOutDialog.open} isSigningOut={isSigningOut} signOut={this.signOut} onClose={this.closeSignOutDialog} />
-
+        {!isSignedIn && <SignUpDialog open={signUpDialog.open} isSigningUp={isSigningUp} signUp={this.signUp} onClose={this.closeSignUpDialog} />}
+        {!isSignedIn && <SignInDialog open={signInDialog.open} isSigningIn={isSigningIn} signIn={this.signIn} onClose={this.closeSignInDialog} onResetPasswordClick={this.showResetPasswordDialog} />}
+        {!isSignedIn && <ResetPasswordDialog open={resetPasswordDialog.open} isResettingPassword={isResettingPassword} resetPassword={this.resetPassword} onClose={this.closeResetPasswordDialog} />}
+        {isSignedIn && <SettingsDialog open={settingsDialog.open} colors={colors} types={types} primaryColor={primaryColor} secondaryColor={secondaryColor} type={type} onPrimaryColorChange={this.changePrimaryColor} onSecondaryColorChange={this.changeSecondaryColor} onTypeChange={this.changeType} onClose={this.closeSettingsDialog} />}
+        {isSignedIn && <SignOutDialog open={signOutDialog.open} isSigningOut={isSigningOut} signOut={this.signOut} onClose={this.closeSignOutDialog} />}
+        
         <Snackbar autoHideDuration={snackbar.autoHideDuration} message={snackbar.message} onClose={this.closeSnackbar} open={snackbar.open} />
       </MuiThemeProvider>
     );
