@@ -25,8 +25,8 @@ class AppearanceTab extends Component {
     return (
       <div>
         <DialogContentText className={classes.dialogContentText}>
-          Customize the look and feel of the whole app.
-          Reset settings by clearing the app's local storage.
+          Customize the look and feel to your own liking.
+          You can reset all changes you've made by clicking Reset.
         </DialogContentText>
 
         <FormControl fullWidth margin="normal">
