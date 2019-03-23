@@ -562,21 +562,21 @@ class App extends Component {
 
     return (
       <MuiThemeProvider theme={theme}>
-        <Bar
-          title={settings.title}
+        <div style={{ minHeight: '100vh', backgroundColor: theme.palette.type === 'dark' ? '#303030' : '#fafafa' }}>
+          <Bar
+            title={settings.title}
 
-          isSignedIn={isSignedIn}
-          isSigningUp={isSigningUp}
-          isSigningIn={isSigningIn}
+            isSignedIn={isSignedIn}
+            isSigningUp={isSigningUp}
+            isSigningIn={isSigningIn}
 
-          onSignUpClick={this.showSignUpDialog}
-          onSignInClick={this.showSignInDialog}
+            onSignUpClick={this.showSignUpDialog}
+            onSignInClick={this.showSignInDialog}
 
-          onSettingsClick={this.showSettingsDialog}
-          onSignOutClick={this.showSignOutDialog}
-        />
+            onSettingsClick={this.showSettingsDialog}
+            onSignOutClick={this.showSignOutDialog}
+          />
 
-        <div style={{ minHeight: '100vh', backgroundColor: theme.palette.type === 'dark' && '#303030' }}>
           {isSignedIn &&
           <EmptyState
             icon={<PersonIcon className={classes.emptyStateIcon} color="action" />}
