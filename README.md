@@ -1,6 +1,44 @@
 # React + Material-UI + Firebase
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
+## Getting Started
+
+To get started you basically clone the repository and install all the dependencies.
+
+### Clone `react-material-ui-firebase`
+
+Clone the `react-material-ui-firebase` repository using git:
+
+```
+git clone https://github.com/Phoqe/react-material-ui-firebase.git
+cd react-material-ui-firebase
+```
+
+If you just want to start a new project without the `react-material-ui-firebase` commit history then you can do:
+
+```
+git clone --depth=1 https://github.com/Phoqe/react-material-ui-firebase.git <your-project-name>
+```
+
+The `depth=1` tells git to only pull down one commit worth of historical data.
+
+### Install Dependencies
+
+```
+yarn
+```
+
+### Run the Application
+
+The project comes preconfigured with a simple development web server. The simplest way to start
+this server is:
+
+```
+yarn start
+```
+
+Now browse to the app at [`http://localhost:3000`](http://localhost:3000).
+
 ## Available Scripts
 
 In the project directory, you can run:
