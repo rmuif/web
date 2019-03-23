@@ -45,7 +45,7 @@ class SettingsDialog extends Component {
     const { open, colors, types, primaryColor, secondaryColor, type } = this.props;
 
     // Events
-    const { onClose, onPrimaryColorChange, onSecondaryColorChange, onTypeChange } = this.props;
+    const { onClose, onPrimaryColorChange, onSecondaryColorChange, onTypeChange, onResetClick } = this.props;
 
     const { selectedTab } = this.state;
 
@@ -80,6 +80,7 @@ class SettingsDialog extends Component {
 
         <DialogActions>
           <Button color="primary" onClick={onClose}>Cancel</Button>
+          <Button color="primary" variant="outlined" onClick={onResetClick}>Reset</Button>
           <Button color="primary" variant="contained" onClick={onClose}>OK</Button>
         </DialogActions>
       </Dialog>

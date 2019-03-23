@@ -264,6 +264,14 @@ class App extends Component {
     });
   };
 
+  resetTheme = () => {
+    this.updateTheme({
+      primaryColor: 'blue-gray',
+      secondaryColor: 'red',
+      type: 'light'
+    });
+  };
+
   changePrimaryColor = (event) => {
     const primaryColor = event.target.value;
 
@@ -579,7 +587,7 @@ class App extends Component {
         {!isSignedIn && <SignUpDialog open={signUpDialog.open} isSigningUp={isSigningUp} signUp={this.signUp} onClose={this.closeSignUpDialog} />}
         {!isSignedIn && <SignInDialog open={signInDialog.open} isSigningIn={isSigningIn} signIn={this.signIn} onClose={this.closeSignInDialog} onResetPasswordClick={this.showResetPasswordDialog} />}
         {!isSignedIn && <ResetPasswordDialog open={resetPasswordDialog.open} isResettingPassword={isResettingPassword} resetPassword={this.resetPassword} onClose={this.closeResetPasswordDialog} />}
-        {isSignedIn && <SettingsDialog open={settingsDialog.open} colors={colors} types={types} primaryColor={primaryColor} secondaryColor={secondaryColor} type={type} onPrimaryColorChange={this.changePrimaryColor} onSecondaryColorChange={this.changeSecondaryColor} onTypeChange={this.changeType} onClose={this.closeSettingsDialog} />}
+        {isSignedIn && <SettingsDialog open={settingsDialog.open} colors={colors} types={types} primaryColor={primaryColor} secondaryColor={secondaryColor} type={type} onClose={this.closeSettingsDialog} onPrimaryColorChange={this.changePrimaryColor} onSecondaryColorChange={this.changeSecondaryColor} onTypeChange={this.changeType} onResetClick={this.resetTheme} />}
         {isSignedIn && <SignOutDialog open={signOutDialog.open} isSigningOut={isSigningOut} signOut={this.signOut} onClose={this.closeSignOutDialog} />}
         
         <Snackbar autoHideDuration={snackbar.autoHideDuration} message={snackbar.message} onClose={this.closeSnackbar} open={snackbar.open} />
