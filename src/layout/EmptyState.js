@@ -21,7 +21,7 @@ class EmptyState extends Component {
     return (
       <div className={classes.center}>
         {icon}
-        <Typography variant="h4">{text}</Typography>
+        <Typography color="textSecondary" variant="h4">{text}</Typography>
       </div>
     );
   }
