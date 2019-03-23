@@ -37,7 +37,7 @@ this server is:
 yarn start
 ```
 
-Now browse to the app at [`http://localhost:3000`](http://localhost:3000).
+Now browse to the app at [`http://localhost:3000`](http://localhost:3000) if it doesn't show up automatically.
 
 ## Available Scripts
 
