@@ -80,7 +80,7 @@ class SettingsDialog extends Component {
 
         <DialogActions>
           <Button color="primary" onClick={onClose}>Cancel</Button>
-          <Button color="primary" variant="outlined" onClick={() => { setTimeout(onResetClick, 550) }}>Reset</Button>
+          <Button color="primary" variant="outlined" onClick={() => { setTimeout(onResetClick, 137.5) }}>Reset</Button>
           <Button color="primary" variant="contained" onClick={onClose}>OK</Button>
         </DialogActions>
       </Dialog>
