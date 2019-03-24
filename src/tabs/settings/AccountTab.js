@@ -25,7 +25,7 @@ class AccountTab extends Component {
       <div>
         <DialogContentText className={classes.dialogContentText}>
           This is a summary of your account.
-          You can manage your settings throughout all the settings.
+          You can manage your account throughout all the settings.
         </DialogContentText>
 
         <List>
