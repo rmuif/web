@@ -549,7 +549,7 @@ class App extends Component {
     const { classes } = this.props;
 
     // Properties
-    const { primaryColor, secondaryColor, type, isAuthReady, isSigningUp, isSigningIn, isResettingPassword, isSignedIn, isSigningOut } = this.state;
+    const { primaryColor, secondaryColor, type, isAuthReady, isSigningUp, isSigningIn, isResettingPassword, isSignedIn, isSigningOut, user } = this.state;
 
     // Dialogs
     const { signUpDialog, signInDialog, resetPasswordDialog, settingsDialog, signOutDialog } = this.state;
@@ -622,6 +622,7 @@ class App extends Component {
           {isSignedIn &&
           <SettingsDialog
             open={settingsDialog.open}
+            user={user}
             colors={colors}
             types={types}
             primaryColor={primaryColor}

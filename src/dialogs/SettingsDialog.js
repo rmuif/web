@@ -11,6 +11,7 @@ import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
 import Button from '@material-ui/core/Button';
 
+import AccountTab from '../tabs/settings/AccountTab';
 import AppearanceTab from '../tabs/settings/AppearanceTab';
 
 class SettingsDialog extends Component {
@@ -42,7 +43,7 @@ class SettingsDialog extends Component {
 
   render() {
     // Properties
-    const { open, colors, types, primaryColor, secondaryColor, type } = this.props;
+    const { open, colors, types, primaryColor, secondaryColor, type, user } = this.props;
 
     // Events
     const { onClose, onPrimaryColorChange, onSecondaryColorChange, onTypeChange, onResetClick } = this.props;
@@ -60,11 +61,16 @@ class SettingsDialog extends Component {
         <DialogTitle>Settings</DialogTitle>
 
         <Tabs onChange={this.changeTab} value={selectedTab} variant="fullWidth">
+          <DynamicTab label="Account" />
           <DynamicTab label="Appearance" />
         </Tabs>
 
         <DialogContent>
           {selectedTab === 0 &&
+            <AccountTab user={user} />
+          }
+
+          {selectedTab === 1 &&
             <AppearanceTab
               colors={colors}
               types={types}
