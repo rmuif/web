@@ -471,11 +471,11 @@ class App extends Component {
         }, () => {
           this.closeSignInDialog(() => {
           const user = userCredential.user;
-          const displayName = user.displayName;
-          const emailAddress = user.email;
-    
-          this.openSnackbar('Signed in as ' + (displayName || emailAddress));
-        });
+            const displayName = user.displayName;
+            const emailAddress = user.email;
+      
+            this.openSnackbar('Signed in as ' + (displayName || emailAddress));
+          });
         });
       }).catch((error) => {
         this.setState({
