@@ -70,13 +70,8 @@ class Bar extends Component {
       <AppBar color="primary" position="static">
         <Toolbar variant="regular">
           <Typography style={{ flexGrow: 1 }} color="inherit" variant="h6">{title}</Typography>
-          
-          {!isSignedIn &&
-            <div>
-              <Button className={classes.signUpButton} color="secondary" disabled={isSigningUp} variant="contained" onClick={onSignUpClick}>Sign Up</Button>
-              <Button color="secondary" disabled={isSigningIn} variant="contained" onClick={onSignInClick}>Sign In</Button>
-            </div>
-          }
+          {!isSignedIn && <Button className={classes.signUpButton} color="secondary" disabled={isSigningUp} variant="contained" onClick={onSignUpClick}>Sign Up</Button>}
+          {!isSignedIn && <Button color="secondary" disabled={isSigningIn} variant="contained" onClick={onSignInClick}>Sign In</Button>}
 
           {isSignedIn &&
             <div>
