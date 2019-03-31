@@ -470,10 +470,10 @@ class App extends Component {
           isSigningIn: false
         }, () => {
           this.closeSignInDialog(() => {
-          const user = userCredential.user;
+            const user = userCredential.user;
             const displayName = user.displayName;
             const emailAddress = user.email;
-      
+
             this.openSnackbar('Signed in as ' + (displayName || emailAddress));
           });
         });
@@ -578,71 +578,73 @@ class App extends Component {
           />
 
           {isSignedIn &&
-          <EmptyState
-            icon={<PersonIcon className={classes.emptyStateIcon} color="action" />}
-            text="You are signed in."
-          />
+            <EmptyState
+              icon={<PersonIcon className={classes.emptyStateIcon} color="action" />}
+              text="You are signed in."
+            />
           }
 
           {!isSignedIn &&
-          <EmptyState
-            icon={<PersonOutlineIcon className={classes.emptyStateIcon} color="action" />}
-            text="You are not signed in."
-          />
+            <EmptyState
+              icon={<PersonOutlineIcon className={classes.emptyStateIcon} color="action" />}
+              text="You are not signed in."
+            />
           }
 
           {!isSignedIn &&
-          <SignUpDialog
-            open={signUpDialog.open}
-            isSigningUp={isSigningUp}
-            signUp={this.signUp}
-            onClose={this.closeSignUpDialog}
-          />
+            <SignUpDialog
+              open={signUpDialog.open}
+              isSigningUp={isSigningUp}
+              signUp={this.signUp}
+              onClose={this.closeSignUpDialog}
+            />
           }
 
           {!isSignedIn &&
-          <SignInDialog
-            open={signInDialog.open}
-            isSigningIn={isSigningIn}
-            signIn={this.signIn}
-            onClose={this.closeSignInDialog}
-            onResetPasswordClick={this.showResetPasswordDialog}
-          />
+            <SignInDialog
+              open={signInDialog.open}
+              isSigningIn={isSigningIn}
+              signIn={this.signIn}
+              onClose={this.closeSignInDialog}
+              onResetPasswordClick={this.showResetPasswordDialog}
+            />
           }
 
           {!isSignedIn &&
-          <ResetPasswordDialog
-            open={resetPasswordDialog.open}
-            isResettingPassword={isResettingPassword}
-            resetPassword={this.resetPassword}
-            onClose={this.closeResetPasswordDialog}
-          />
+            <ResetPasswordDialog
+              open={resetPasswordDialog.open}
+              isResettingPassword={isResettingPassword}
+              resetPassword={this.resetPassword}
+              onClose={this.closeResetPasswordDialog}
+            />
           }
 
           {isSignedIn &&
-          <SettingsDialog
-            open={settingsDialog.open}
-            user={user}
-            colors={colors}
-            types={types}
-            primaryColor={primaryColor}
-            secondaryColor={secondaryColor}
-            type={type}
-            onClose={this.closeSettingsDialog}
-            onPrimaryColorChange={this.changePrimaryColor}
-            onSecondaryColorChange={this.changeSecondaryColor}
-            onTypeChange={this.changeType}
-            onResetClick={this.resetTheme}
-          />
+            <SettingsDialog
+              open={settingsDialog.open}
+              user={user}
+              colors={colors}
+              types={types}
+              primaryColor={primaryColor}
+              secondaryColor={secondaryColor}
+              type={type}
+
+              onClose={this.closeSettingsDialog}
+              onVerifyEmailAddressClick={this.verifyEmailAddress}
+              onPrimaryColorChange={this.changePrimaryColor}
+              onSecondaryColorChange={this.changeSecondaryColor}
+              onTypeChange={this.changeType}
+              onResetClick={this.resetTheme}
+            />
           }
 
           {isSignedIn &&
-          <SignOutDialog
-            open={signOutDialog.open}
-            isSigningOut={isSigningOut}
-            signOut={this.signOut}
-            onClose={this.closeSignOutDialog}
-          />
+            <SignOutDialog
+              open={signOutDialog.open}
+              isSigningOut={isSigningOut}
+              signOut={this.signOut}
+              onClose={this.closeSignOutDialog}
+            />
           }
 
           <Snackbar

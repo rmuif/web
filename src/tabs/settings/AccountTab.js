@@ -9,7 +9,10 @@ import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 
+import Tooltip from '@material-ui/core/Tooltip';
+
 import EmailIcon from '@material-ui/icons/Email';
+import AccessTimeIcon from '@material-ui/icons/AccessTime';
 
 const styles = (theme) => ({
   dialogContentText: {
@@ -31,10 +34,32 @@ class AccountTab extends Component {
         <List>
           <ListItem>
             <ListItemIcon>
-              <EmailIcon />
+              <Tooltip title="E-mail address">
+                <EmailIcon />
+              </Tooltip>
             </ListItemIcon>
 
-            <ListItemText primary={user.email} />
+            <ListItemText primary={user.email} secondary={user.email.emailVerified ? 'Verified' : 'Not verified'} />
+          </ListItem>
+
+          <ListItem>
+            <ListItemIcon>
+              <Tooltip title="Last sign-in time">
+                <AccessTimeIcon />
+              </Tooltip>
+            </ListItemIcon>
+
+            <ListItemText primary={user.metadata.lastSignInTime} />
+          </ListItem>
+
+          <ListItem>
+            <ListItemIcon>
+              <Tooltip title="Creation time">
+                <AccessTimeIcon />
+              </Tooltip>
+            </ListItemIcon>
+
+            <ListItemText primary={user.metadata.creationTime} />
           </ListItem>
         </List>
       </div>
