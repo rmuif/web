@@ -155,6 +155,11 @@ const types = [
   'dark'
 ];
 
+const defaultTheme = {
+  primaryColor: 'blue-gray',
+  secondaryColor: 'red'
+};
+
 let theme = createMuiTheme({
   palette: {
     primary: blueGray,
@@ -182,8 +187,8 @@ class App extends Component {
     super(props);
 
     this.state = {
-      primaryColor: 'blue-gray',
-      secondaryColor: 'red',
+      primaryColor: defaultTheme.primaryColor,
+      secondaryColor: defaultTheme.secondaryColor,
       type: 'light',
 
       isAuthReady: false,
@@ -266,8 +271,8 @@ class App extends Component {
 
   resetTheme = () => {
     this.updateTheme({
-      primaryColor: 'blue-gray',
-      secondaryColor: 'red',
+      primaryColor: defaultTheme.primaryColor,
+      secondaryColor: defaultTheme.secondaryColor,
       type: 'light'
     });
   };
