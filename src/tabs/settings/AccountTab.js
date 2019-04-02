@@ -63,7 +63,7 @@ class AccountTab extends Component {
   };
 
   render() {
-    const { classes, user } = this.props;
+    const { classes, user, isVerifyingEmailAddress } = this.props;
     const { verifyEmailAddressDialog } = this.state;
 
     return (
@@ -83,7 +83,7 @@ class AccountTab extends Component {
 
             <ListItemText primary={user.email} secondary={user.emailVerified ? 'Verified' : 'Not verified'} />
 
-            {!user.emailVerified &&
+            {(!user.emailVerified && !isVerifyingEmailAddress) &&
               <ListItemSecondaryAction>
                 <Tooltip title="Verify e-mail address">
                   <IconButton onClick={this.openVerifyEmailAddressDialog}>

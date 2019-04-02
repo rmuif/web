@@ -197,6 +197,7 @@ class App extends Component {
       isSigningIn: false,
       isResettingPassword: false,
       isSignedIn: false,
+      isVerifyingEmailAddress: false,
       isSigningOut: false,
 
       user: null,
@@ -525,14 +526,18 @@ class App extends Component {
   };
 
   verifyEmailAddress = () => {
-    const { isSignedIn, user } = this.state;
+    const { isSignedIn, isVerifyingEmailAddress, user } = this.state;
 
-    if (!isSignedIn || !user) {
+    if (!isSignedIn || isVerifyingEmailAddress || !user) {
       return;
     }
 
     user.sendEmailVerification().then(() => {
-      this.openSnackbar('Password reset e-mail sent');
+      this.setState({
+        isVerifyingEmailAddress: true
+      }, () => {
+        this.openSnackbar('Password reset e-mail sent');
+      });
     }).catch((error) => {
       this.openSnackbar(error.message);
     });
@@ -572,7 +577,7 @@ class App extends Component {
     const { classes } = this.props;
 
     // Properties
-    const { primaryColor, secondaryColor, type, isAuthReady, isSigningUp, isSigningIn, isResettingPassword, isSignedIn, isSigningOut, user } = this.state;
+    const { primaryColor, secondaryColor, type, isAuthReady, isSigningUp, isSigningIn, isResettingPassword, isSignedIn, isVerifyingEmailAddress, isSigningOut, user } = this.state;
 
     // Dialogs
     const { signUpDialog, signInDialog, resetPasswordDialog, settingsDialog, signOutDialog } = this.state;
@@ -646,6 +651,7 @@ class App extends Component {
             <SettingsDialog
               open={settingsDialog.open}
               user={user}
+              isVerifyingEmailAddress={isVerifyingEmailAddress}
               colors={colors}
               types={types}
               primaryColor={primaryColor}

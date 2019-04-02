@@ -43,7 +43,7 @@ class SettingsDialog extends Component {
 
   render() {
     // Properties
-    const { open, colors, types, primaryColor, secondaryColor, type, user } = this.props;
+    const { open, user, isVerifyingEmailAddress, colors, types, primaryColor, secondaryColor, type } = this.props;
 
     // Events
     const { onClose, onVerifyEmailAddressClick, onPrimaryColorChange, onSecondaryColorChange, onTypeChange, onResetClick } = this.props;
@@ -67,7 +67,7 @@ class SettingsDialog extends Component {
 
         <DialogContent>
           {selectedTab === 0 &&
-            <AccountTab user={user} onVerifyEmailAddressClick={onVerifyEmailAddressClick} />
+            <AccountTab user={user} isVerifyingEmailAddress={isVerifyingEmailAddress} onVerifyEmailAddressClick={onVerifyEmailAddressClick} />
           }
 
           {selectedTab === 1 &&
