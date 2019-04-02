@@ -229,7 +229,7 @@ class App extends Component {
     };
   }
 
-  updateTheme = (palette) => {
+  updateTheme = (palette, removeLocalStorage) => {
     const { primaryColor, secondaryColor, type } = this.state;
 
     if (!palette.primaryColor) {
@@ -261,11 +261,15 @@ class App extends Component {
       secondaryColor: palette.secondaryColor,
       type: palette.type
     }, () => {
-      localStorage.setItem('theme', JSON.stringify({
-        primaryColor: palette.primaryColor,
-        secondaryColor: palette.secondaryColor,
-        type: palette.type
-      }));
+      if (removeLocalStorage) {
+        localStorage.removeItem('theme');
+      } else {
+        localStorage.setItem('theme', JSON.stringify({
+          primaryColor: palette.primaryColor,
+          secondaryColor: palette.secondaryColor,
+          type: palette.type
+        }));
+      }
     });
   };
 
@@ -274,7 +278,7 @@ class App extends Component {
       primaryColor: defaultTheme.primaryColor,
       secondaryColor: defaultTheme.secondaryColor,
       type: 'light'
-    });
+    }, true);
   };
 
   changePrimaryColor = (event) => {
