@@ -8,11 +8,16 @@ import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
+import ListItemSecondaryAction from '@material-ui/core/ListItemSecondaryAction';
 
 import Tooltip from '@material-ui/core/Tooltip';
+import IconButton from '@material-ui/core/IconButton';
 
 import EmailIcon from '@material-ui/icons/Email';
+import CheckIcon from '@material-ui/icons/Check';
 import AccessTimeIcon from '@material-ui/icons/AccessTime';
+
+import ConfirmationDialog from '../../dialogs/ConfirmationDialog';
 
 const styles = (theme) => ({
   dialogContentText: {
@@ -21,8 +26,45 @@ const styles = (theme) => ({
 });
 
 class AccountTab extends Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      verifyEmailAddressDialog: {
+        open: false
+      }
+    };
+  }
+
+  openVerifyEmailAddressDialog = () => {
+    this.setState({
+      verifyEmailAddressDialog: {
+        open: true
+      }
+    });
+  };
+
+  closeVerifyEmailAddressDialog = (callback) => {
+    this.setState({
+      verifyEmailAddressDialog: {
+        open: false
+      }
+    }, () => {
+      if (callback && typeof callback === 'function') {
+        callback();
+      }
+    });
+  };
+
+  verifyEmailAddress = () => {
+    this.closeVerifyEmailAddressDialog(() => {
+      this.props.onVerifyEmailAddressClick();
+    });
+  };
+
   render() {
-    const { classes, user } = this.props;
+    const { classes, user, isVerifyingEmailAddress } = this.props;
+    const { verifyEmailAddressDialog } = this.state;
 
     return (
       <div>
@@ -39,7 +81,17 @@ class AccountTab extends Component {
               </Tooltip>
             </ListItemIcon>
 
-            <ListItemText primary={user.email} secondary={user.email.emailVerified ? 'Verified' : 'Not verified'} />
+            <ListItemText primary={user.email} secondary={user.emailVerified ? 'Verified' : 'Not verified'} />
+
+            {(!user.emailVerified && !isVerifyingEmailAddress) &&
+              <ListItemSecondaryAction>
+                <Tooltip title="Verify e-mail address">
+                  <IconButton onClick={this.openVerifyEmailAddressDialog}>
+                    <CheckIcon />
+                  </IconButton>
+                </Tooltip>
+              </ListItemSecondaryAction>
+            }
           </ListItem>
 
           <ListItem>
@@ -62,6 +114,20 @@ class AccountTab extends Component {
             <ListItemText primary={user.metadata.creationTime} />
           </ListItem>
         </List>
+
+        <ConfirmationDialog
+          open={verifyEmailAddressDialog.open}
+
+          title="Verify e-mail address?"
+          contentText="An e-mail will be sent to your e-mail address containing instructions on how to verify your e-mail address."
+          okText="Verify"
+          highlightOkButton
+
+          onClose={this.closeVerifyEmailAddressDialog}
+
+          onCancelClick={this.closeVerifyEmailAddressDialog}
+          onOkClick={this.verifyEmailAddress}
+        />
       </div>
     );
   }

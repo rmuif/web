@@ -197,6 +197,7 @@ class App extends Component {
       isSigningIn: false,
       isResettingPassword: false,
       isSignedIn: false,
+      isVerifyingEmailAddress: false,
       isSigningOut: false,
 
       user: null,
@@ -420,7 +421,7 @@ class App extends Component {
 
   /**
    * Sets the `open` state of a snackbar to `false`. A direct response to the snackbar's `onClose` event.
-   * @param clearState Whether or not to clear the message of the snackbar.
+   * @param clearMessage Whether or not to clear the message of the snackbar.
    */
   closeSnackbar = (clearMessage = false) => {
     const { snackbar } = this.state;
@@ -524,6 +525,24 @@ class App extends Component {
     });
   };
 
+  verifyEmailAddress = () => {
+    const { isSignedIn, isVerifyingEmailAddress, user } = this.state;
+
+    if (!isSignedIn || isVerifyingEmailAddress || !user) {
+      return;
+    }
+
+    user.sendEmailVerification().then(() => {
+      this.setState({
+        isVerifyingEmailAddress: true
+      }, () => {
+        this.openSnackbar('Password reset e-mail sent');
+      });
+    }).catch((error) => {
+      this.openSnackbar(error.message);
+    });
+  };
+
   signOut = () => {
     if (!this.state.isSignedIn) {
       this.openSnackbar('Not signed in');
@@ -558,7 +577,7 @@ class App extends Component {
     const { classes } = this.props;
 
     // Properties
-    const { primaryColor, secondaryColor, type, isAuthReady, isSigningUp, isSigningIn, isResettingPassword, isSignedIn, isSigningOut, user } = this.state;
+    const { primaryColor, secondaryColor, type, isAuthReady, isSigningUp, isSigningIn, isResettingPassword, isSignedIn, isVerifyingEmailAddress, isSigningOut, user } = this.state;
 
     // Dialogs
     const { signUpDialog, signInDialog, resetPasswordDialog, settingsDialog, signOutDialog } = this.state;
@@ -632,6 +651,7 @@ class App extends Component {
             <SettingsDialog
               open={settingsDialog.open}
               user={user}
+              isVerifyingEmailAddress={isVerifyingEmailAddress}
               colors={colors}
               types={types}
               primaryColor={primaryColor}
