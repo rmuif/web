@@ -17,6 +17,8 @@ import EmailIcon from '@material-ui/icons/Email';
 import CheckIcon from '@material-ui/icons/Check';
 import AccessTimeIcon from '@material-ui/icons/AccessTime';
 
+import ConfirmationDialog from '../../dialogs/ConfirmationDialog';
+
 const styles = (theme) => ({
   dialogContentText: {
     marginTop: `${theme.spacing.unit * 2}px`
@@ -24,12 +26,45 @@ const styles = (theme) => ({
 });
 
 class AccountTab extends Component {
-  render() {
-    // Properties
-    const { classes, user } = this.props;
+  constructor(props) {
+    super(props);
 
-    // Events
-    const { onVerifyEmailAddressClick } = this.props;
+    this.state = {
+      verifyEmailAddressDialog: {
+        open: false
+      }
+    };
+  }
+
+  openVerifyEmailAddressDialog = () => {
+    this.setState({
+      verifyEmailAddressDialog: {
+        open: true
+      }
+    });
+  };
+
+  closeVerifyEmailAddressDialog = (callback) => {
+    this.setState({
+      verifyEmailAddressDialog: {
+        open: false
+      }
+    }, () => {
+      if (callback && typeof callback === 'function') {
+        callback();
+      }
+    });
+  };
+
+  verifyEmailAddress = () => {
+    this.closeVerifyEmailAddressDialog(() => {
+      this.props.onVerifyEmailAddressClick();
+    });
+  };
+
+  render() {
+    const { classes, user } = this.props;
+    const { verifyEmailAddressDialog } = this.state;
 
     return (
       <div>
@@ -51,7 +86,7 @@ class AccountTab extends Component {
             {!user.emailVerified &&
               <ListItemSecondaryAction>
                 <Tooltip title="Verify e-mail address">
-                  <IconButton onClick={onVerifyEmailAddressClick}>
+                  <IconButton onClick={this.openVerifyEmailAddressDialog}>
                     <CheckIcon />
                   </IconButton>
                 </Tooltip>
@@ -79,6 +114,20 @@ class AccountTab extends Component {
             <ListItemText primary={user.metadata.creationTime} />
           </ListItem>
         </List>
+
+        <ConfirmationDialog
+          open={verifyEmailAddressDialog.open}
+
+          title="Verify e-mail address?"
+          contentText="An e-mail will be sent to your e-mail address containing instructions on how to verify your e-mail address."
+          okText="Verify"
+          highlightOkButton
+
+          onClose={this.closeVerifyEmailAddressDialog}
+
+          onCancelClick={this.closeVerifyEmailAddressDialog}
+          onOkClick={this.verifyEmailAddress}
+        />
       </div>
     );
   }
