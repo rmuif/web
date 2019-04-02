@@ -420,7 +420,7 @@ class App extends Component {
 
   /**
    * Sets the `open` state of a snackbar to `false`. A direct response to the snackbar's `onClose` event.
-   * @param clearState Whether or not to clear the message of the snackbar.
+   * @param clearMessage Whether or not to clear the message of the snackbar.
    */
   closeSnackbar = (clearMessage = false) => {
     const { snackbar } = this.state;
@@ -521,6 +521,20 @@ class App extends Component {
           this.openSnackbar(error.message);
         });
       });
+    });
+  };
+
+  verifyEmailAddress = () => {
+    const { isSignedIn, user } = this.state;
+
+    if (!isSignedIn || !user) {
+      return;
+    }
+
+    user.sendEmailVerification().then(() => {
+      this.openSnackbar('Password reset e-mail sent');
+    }).catch((error) => {
+      this.openSnackbar(error.message);
     });
   };
 

@@ -8,10 +8,13 @@ import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
+import ListItemSecondaryAction from '@material-ui/core/ListItemSecondaryAction';
 
 import Tooltip from '@material-ui/core/Tooltip';
+import IconButton from '@material-ui/core/IconButton';
 
 import EmailIcon from '@material-ui/icons/Email';
+import CheckIcon from '@material-ui/icons/Check';
 import AccessTimeIcon from '@material-ui/icons/AccessTime';
 
 const styles = (theme) => ({
@@ -22,7 +25,11 @@ const styles = (theme) => ({
 
 class AccountTab extends Component {
   render() {
+    // Properties
     const { classes, user } = this.props;
+
+    // Events
+    const { onVerifyEmailAddressClick } = this.props;
 
     return (
       <div>
@@ -39,7 +46,17 @@ class AccountTab extends Component {
               </Tooltip>
             </ListItemIcon>
 
-            <ListItemText primary={user.email} secondary={user.email.emailVerified ? 'Verified' : 'Not verified'} />
+            <ListItemText primary={user.email} secondary={user.emailVerified ? 'Verified' : 'Not verified'} />
+
+            {!user.emailVerified &&
+              <ListItemSecondaryAction>
+                <Tooltip title="Verify e-mail address">
+                  <IconButton onClick={onVerifyEmailAddressClick}>
+                    <CheckIcon />
+                  </IconButton>
+                </Tooltip>
+              </ListItemSecondaryAction>
+            }
           </ListItem>
 
           <ListItem>
