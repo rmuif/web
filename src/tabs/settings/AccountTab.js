@@ -67,7 +67,7 @@ class AccountTab extends Component {
     const { verifyEmailAddressDialog } = this.state;
 
     return (
-      <div>
+      <React.Fragment>
         <DialogContentText className={classes.dialogContentText}>
           This is a summary of your account.
           You can manage your account throughout all the settings.
@@ -128,7 +128,7 @@ class AccountTab extends Component {
           onCancelClick={this.closeVerifyEmailAddressDialog}
           onOkClick={this.verifyEmailAddress}
         />
-      </div>
+      </React.Fragment>
     );
   }
 }

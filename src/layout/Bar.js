@@ -70,12 +70,9 @@ class Bar extends Component {
       <AppBar color="primary" position="static">
         <Toolbar variant="regular">
           <Typography style={{ flexGrow: 1 }} color="inherit" variant="h6">{title}</Typography>
-          
-          {!isSignedIn && <Button className={classes.signUpButton} color="secondary" disabled={isSigningUp} variant="contained" onClick={onSignUpClick}>Sign Up</Button>}
-          {!isSignedIn && <Button color="secondary" disabled={isSigningIn} variant="contained" onClick={onSignInClick}>Sign In</Button>}
 
           {isSignedIn &&
-            <div>
+            <React.Fragment>
               <IconButton color="inherit" onClick={this.openMenu}>
                 <PersonIcon />
               </IconButton>
@@ -84,7 +81,14 @@ class Bar extends Component {
                 <MenuItem onClick={this.handleSettingsClick}>Settings</MenuItem>
                 <MenuItem onClick={this.handleSignOutClick}>Sign out</MenuItem>
               </Menu>
-            </div>
+            </React.Fragment>
+          }
+
+          {!isSignedIn &&
+            <React.Fragment>
+              <Button className={classes.signUpButton} color="secondary" disabled={isSigningUp} variant="contained" onClick={onSignUpClick}>Sign Up</Button>
+              <Button color="secondary" disabled={isSigningIn} variant="contained" onClick={onSignInClick}>Sign In</Button>
+            </React.Fragment>
           }
         </Toolbar>
       </AppBar>

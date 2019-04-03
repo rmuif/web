@@ -23,7 +23,7 @@ class AppearanceTab extends Component {
     const { onPrimaryColorChange, onSecondaryColorChange, onTypeChange } = this.props;
 
     return (
-      <div>
+      <React.Fragment>
         <DialogContentText className={classes.dialogContentText}>
           Customize the look and feel to your own liking.
           You can reset all changes you've made by clicking Reset.
@@ -58,8 +58,8 @@ class AppearanceTab extends Component {
             })}
           </Select>
         </FormControl>
-      </div>
-      );
+      </React.Fragment>
+    );
   }
 }
 
