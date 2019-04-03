@@ -112,36 +112,34 @@ class SignInDialog extends Component {
             While you're signed in you can manage your account.
           </DialogContentText>
 
-          <div>
-            <form>
-              <TextField
-                autoComplete="email"
-                autoFocus
-                error={(errors && errors.emailAddress) ? true : false}
-                fullWidth
-                helperText={(errors && errors.emailAddress) ? errors.emailAddress[0] : ''}
-                margin="normal"
-                onChange={this.handleEmailAddressChange}
-                placeholder="E-mail address"
-                required
-                type="email"
-                value={emailAddress}
-              />
+          <form>
+            <TextField
+              autoComplete="email"
+              autoFocus
+              error={(errors && errors.emailAddress) ? true : false}
+              fullWidth
+              helperText={(errors && errors.emailAddress) ? errors.emailAddress[0] : ''}
+              margin="normal"
+              onChange={this.handleEmailAddressChange}
+              placeholder="E-mail address"
+              required
+              type="email"
+              value={emailAddress}
+            />
 
-              <TextField
-                autoComplete="current-password"
-                error={(errors && errors.password) ? true : false}
-                fullWidth
-                helperText={(errors && errors.password) ? errors.password[0] : ''}
-                margin="normal"
-                onChange={this.handlePasswordChange}
-                placeholder="Password"
-                required
-                type="password"
-                value={password}
-              />
-            </form>
-          </div>
+            <TextField
+              autoComplete="current-password"
+              error={(errors && errors.password) ? true : false}
+              fullWidth
+              helperText={(errors && errors.password) ? errors.password[0] : ''}
+              margin="normal"
+              onChange={this.handlePasswordChange}
+              placeholder="Password"
+              required
+              type="password"
+              value={password}
+            />
+          </form>
         </DialogContent>
 
         <DialogActions>

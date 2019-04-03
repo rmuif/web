@@ -97,23 +97,21 @@ class ResetPasswordDialog extends Component {
             An e-mail will be sent to your e-mail address containing instructions on how to reset your password.
           </DialogContentText>
 
-          <div>
-            <form>
-              <TextField
-                autoComplete="email"
-                autoFocus
-                error={(errors && errors.emailAddress) ? true : false}
-                fullWidth
-                helperText={(errors && errors.emailAddress) ? errors.emailAddress[0] : ''}
-                margin="normal"
-                onChange={this.handleEmailAddressChange}
-                placeholder="E-mail address"
-                required
-                type="email"
-                value={emailAddress}
-              />
-            </form>
-          </div>
+          <form>
+            <TextField
+              autoComplete="email"
+              autoFocus
+              error={(errors && errors.emailAddress) ? true : false}
+              fullWidth
+              helperText={(errors && errors.emailAddress) ? errors.emailAddress[0] : ''}
+              margin="normal"
+              onChange={this.handleEmailAddressChange}
+              placeholder="E-mail address"
+              required
+              type="email"
+              value={emailAddress}
+            />
+          </form>
         </DialogContent>
 
         <DialogActions>

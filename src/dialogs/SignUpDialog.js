@@ -128,49 +128,47 @@ class SignUpDialog extends Component {
             Create an account to access features that are unavailable to users who haven't signed up.
           </DialogContentText>
 
-          <div>
-            <form>
-              <TextField
-                autoComplete="email"
-                autoFocus
-                error={(errors && errors.emailAddress) ? true : false}
-                fullWidth
-                helperText={(errors && errors.emailAddress) ? errors.emailAddress[0] : ''}
-                label="E-mail address"
-                margin="normal"
-                onChange={this.handleEmailAddressChange}
-                required
-                type="email"
-                value={emailAddress}
-              />
+          <form>
+            <TextField
+              autoComplete="email"
+              autoFocus
+              error={(errors && errors.emailAddress) ? true : false}
+              fullWidth
+              helperText={(errors && errors.emailAddress) ? errors.emailAddress[0] : ''}
+              label="E-mail address"
+              margin="normal"
+              onChange={this.handleEmailAddressChange}
+              required
+              type="email"
+              value={emailAddress}
+            />
 
-              <TextField
-                autoComplete="new-password"
-                error={(errors && errors.password) ? true : false}
-                fullWidth
-                helperText={(errors && errors.password) ? errors.password[0] : ''}
-                label="Password"
-                margin="normal"
-                onChange={this.handlePasswordChange}
-                required
-                type="password"
-                value={password}
-              />
+            <TextField
+              autoComplete="new-password"
+              error={(errors && errors.password) ? true : false}
+              fullWidth
+              helperText={(errors && errors.password) ? errors.password[0] : ''}
+              label="Password"
+              margin="normal"
+              onChange={this.handlePasswordChange}
+              required
+              type="password"
+              value={password}
+            />
 
-              <TextField
-                autoComplete="password"
-                error={(errors && errors.passwordConfirmation) ? true : false}
-                fullWidth
-                helperText={(errors && errors.passwordConfirmation) ? errors.passwordConfirmation[0] : ''}
-                label="Password confirmation"
-                margin="normal"
-                onChange={this.handlePasswordConfirmationChange}
-                required
-                type="password"
-                value={passwordConfirmation}
-              />
-            </form>
-          </div>
+            <TextField
+              autoComplete="password"
+              error={(errors && errors.passwordConfirmation) ? true : false}
+              fullWidth
+              helperText={(errors && errors.passwordConfirmation) ? errors.passwordConfirmation[0] : ''}
+              label="Password confirmation"
+              margin="normal"
+              onChange={this.handlePasswordConfirmationChange}
+              required
+              type="password"
+              value={passwordConfirmation}
+            />
+          </form>
         </DialogContent>
 
         <DialogActions>
