@@ -6,6 +6,7 @@
     "@material-ui/core": "^3.8.3",
     "@material-ui/icons": "^3.0.2",
     "firebase": "^5.7.3",
+    "gh-pages": "^2.0.1",
     "moment": "^2.24.0",
     "numeral": "^2.0.6",
     "react": "^16.7.0",
@@ -19,7 +20,9 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "predeploy": "react-scripts build",
+    "deploy": "gh-pages -d build"
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -29,5 +32,6 @@
     "not dead",
     "not ie <= 11",
     "not op_mini all"
-  ]
+  ],
+  "homepage": "https://phoqe.github.io/react-material-ui-firebase"
 }
