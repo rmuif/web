@@ -100,22 +100,22 @@ class AccountTab extends Component {
 
           <ListItem>
             <ListItemIcon>
-              <Tooltip title="Last sign-in time">
+              <Tooltip title="Signed in">
                 <AccessTimeIcon />
               </Tooltip>
             </ListItemIcon>
 
-            <ListItemText primary={moment(user.metadata.lastSignInTime).format('LLLL')} />
+            <ListItemText primary="Signed in" secondary={moment(user.metadata.lastSignInTime).format('LLLL')} />
           </ListItem>
 
           <ListItem>
             <ListItemIcon>
-              <Tooltip title="Creation time">
+              <Tooltip title="Signed up">
                 <AccessTimeIcon />
               </Tooltip>
             </ListItemIcon>
 
-            <ListItemText primary={moment(user.metadata.creationTime).format('LLLL')} />
+            <ListItemText primary="Signed up" secondary={moment(user.metadata.creationTime).format('LLLL')} />
           </ListItem>
         </List>
 
