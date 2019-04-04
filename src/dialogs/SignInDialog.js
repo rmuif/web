@@ -158,10 +158,10 @@ SignInDialog.propTypes = {
   open: PropTypes.bool,
   isSigningIn: PropTypes.bool,
 
-  onClose: PropTypes.func,
-  onResetPasswordClick: PropTypes.func,
+  resetPassword: PropTypes.func,
 
-  resetPassword: PropTypes.func
+  onClose: PropTypes.func,
+  onResetPasswordClick: PropTypes.func
 };
 
 export default SignInDialog;

@@ -129,9 +129,9 @@ ResetPasswordDialog.propTypes = {
   open: PropTypes.bool,
   isResettingPassword: PropTypes.bool,
 
-  onClose: PropTypes.func,
+  resetPassword: PropTypes.func,
 
-  resetPassword: PropTypes.func
+  onClose: PropTypes.func
 };
 
 export default ResetPasswordDialog;
