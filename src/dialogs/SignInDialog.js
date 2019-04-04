@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 
+import PropTypes from 'prop-types';
+
 import validate from 'validate.js';
 
 import Dialog from '@material-ui/core/Dialog';
@@ -151,5 +153,15 @@ class SignInDialog extends Component {
     );
   }
 }
+
+SignInDialog.propTypes = {
+  open: PropTypes.bool,
+  isSigningIn: PropTypes.bool,
+
+  onClose: PropTypes.func,
+  onResetPasswordClick: PropTypes.func,
+
+  resetPassword: PropTypes.func
+};
 
 export default SignInDialog;
