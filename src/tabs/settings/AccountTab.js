@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 
 import PropTypes from 'prop-types';
 
+import moment from 'moment';
+
 import { withStyles } from '@material-ui/core/styles';
 
 import DialogContentText from '@material-ui/core/DialogContentText';
@@ -103,7 +105,7 @@ class AccountTab extends Component {
               </Tooltip>
             </ListItemIcon>
 
-            <ListItemText primary={user.metadata.lastSignInTime} />
+            <ListItemText primary={moment(user.metadata.lastSignInTime).format('LLLL')} />
           </ListItem>
 
           <ListItem>
@@ -113,7 +115,7 @@ class AccountTab extends Component {
               </Tooltip>
             </ListItemIcon>
 
-            <ListItemText primary={user.metadata.creationTime} />
+            <ListItemText primary={moment(user.metadata.creationTime).format('LLLL')} />
           </ListItem>
         </List>
 
