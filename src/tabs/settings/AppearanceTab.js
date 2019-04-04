@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 
+import PropTypes from 'prop-types';
+
 import { withStyles } from '@material-ui/core/styles';
 
 import DialogContentText from '@material-ui/core/DialogContentText';
@@ -62,5 +64,18 @@ class AppearanceTab extends Component {
     );
   }
 }
+
+AppearanceTab.propTypes = {
+  classes: PropTypes.object.isRequired,
+  colors: PropTypes.array.isRequired,
+  types: PropTypes.array.isRequired,
+  primaryColor: PropTypes.string.isRequired,
+  secondaryColor: PropTypes.string.isRequired,
+  type: PropTypes.string.isRequired,
+
+  onPrimaryColorChange: PropTypes.func.isRequired,
+  onSecondaryColorChange: PropTypes.func.isRequired,
+  onTypeChange: PropTypes.func.isRequired
+};
 
 export default withStyles(styles)(AppearanceTab);

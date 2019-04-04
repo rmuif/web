@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 
+import PropTypes from 'prop-types';
+
 import firebase from 'firebase/app';
 import 'firebase/auth';
 
@@ -707,5 +709,9 @@ class App extends Component {
     this.removeAuthObserver();
   }
 }
+
+App.propTypes = {
+  classes: PropTypes.object.isRequired
+};
 
 export default withStyles(styles)(App);

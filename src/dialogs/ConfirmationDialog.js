@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 
+import PropTypes from 'prop-types';
+
 import Dialog from '@material-ui/core/Dialog';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import DialogContent from '@material-ui/core/DialogContent';
@@ -78,5 +80,19 @@ class ConfirmationDialog extends Component {
     );
   }
 }
+
+ConfirmationDialog.propTypes = {
+  open: PropTypes.bool.isRequired,
+
+  title: PropTypes.string.isRequired,
+  contentText: PropTypes.string.isRequired,
+  cancelText: PropTypes.string,
+  okText: PropTypes.string,
+  highlightOkButton: PropTypes.bool,
+
+  onClose: PropTypes.func.isRequired,
+  onCancelClick: PropTypes.func,
+  onOkClick: PropTypes.func
+};
 
 export default ConfirmationDialog;

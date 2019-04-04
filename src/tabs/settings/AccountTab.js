@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 
+import PropTypes from 'prop-types';
+
 import { withStyles } from '@material-ui/core/styles';
 
 import DialogContentText from '@material-ui/core/DialogContentText';
@@ -132,5 +134,13 @@ class AccountTab extends Component {
     );
   }
 }
+
+AccountTab.propTypes = {
+  classes: PropTypes.object.isRequired,
+  user: PropTypes.object.isRequired,
+  isVerifyingEmailAddress: PropTypes.bool.isRequired,
+
+  onVerifyEmailAddressClick: PropTypes.func.isRequired
+};
 
 export default withStyles(styles)(AccountTab);

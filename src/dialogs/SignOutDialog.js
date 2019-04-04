@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 
+import PropTypes from 'prop-types';
+
 import Dialog from '@material-ui/core/Dialog';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import DialogContent from '@material-ui/core/DialogContent';
@@ -51,5 +53,14 @@ class SignOutDialog extends Component {
     );
   }
 }
+
+SignOutDialog.propTypes = {
+  open: PropTypes.bool.isRequired,
+  isSigningOut: PropTypes.bool.isRequired,
+
+  signOut: PropTypes.func.isRequired,
+
+  onClose: PropTypes.func.isRequired
+};
 
 export default SignOutDialog;

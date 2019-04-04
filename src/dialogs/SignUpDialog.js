@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 
+import PropTypes from 'prop-types';
+
 import validate from 'validate.js';
 
 import Dialog from '@material-ui/core/Dialog';
@@ -179,5 +181,14 @@ class SignUpDialog extends Component {
     );
   }
 }
+
+SignUpDialog.propTypes = {
+  open: PropTypes.bool.isRequired,
+  isSigningUp: PropTypes.bool.isRequired,
+
+  signUp: PropTypes.func.isRequired,
+
+  onClose: PropTypes.func.isRequired
+};
 
 export default SignUpDialog;

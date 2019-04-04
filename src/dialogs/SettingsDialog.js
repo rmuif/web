@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 
+import PropTypes from 'prop-types';
+
 import { withStyles } from '@material-ui/core/styles';
 
 import Dialog from '@material-ui/core/Dialog';
@@ -93,5 +95,23 @@ class SettingsDialog extends Component {
     );
   }
 }
+
+SettingsDialog.propTypes = {
+  open: PropTypes.bool.isRequired,
+  user: PropTypes.object.isRequired,
+  isVerifyingEmailAddress: PropTypes.bool.isRequired,
+  colors: PropTypes.array.isRequired,
+  types: PropTypes.array.isRequired,
+  primaryColor: PropTypes.string.isRequired,
+  secondaryColor: PropTypes.string.isRequired,
+  type: PropTypes.string.isRequired,
+
+  onClose: PropTypes.func.isRequired,
+  onVerifyEmailAddressClick: PropTypes.func.isRequired,
+  onPrimaryColorChange: PropTypes.func.isRequired,
+  onSecondaryColorChange: PropTypes.func.isRequired,
+  onTypeChange: PropTypes.func.isRequired,
+  onResetClick: PropTypes.func.isRequired
+};
 
 export default SettingsDialog;

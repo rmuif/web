@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 
+import PropTypes from 'prop-types';
+
 import { withStyles } from '@material-ui/core/styles';
 
 import AppBar from '@material-ui/core/AppBar';
@@ -95,5 +97,16 @@ class Bar extends Component {
     );
   }
 }
+
+Bar.propTypes = {
+  classes: PropTypes.object.isRequired,
+  title: PropTypes.string.isRequired,
+  isSignedIn: PropTypes.bool.isRequired,
+  isSigningUp: PropTypes.bool.isRequired,
+  isSigningIn: PropTypes.bool.isRequired,
+
+  onSettingsClick: PropTypes.func.isRequired,
+  onSignOutClick: PropTypes.func.isRequired
+};
 
 export default withStyles(styles)(Bar);
