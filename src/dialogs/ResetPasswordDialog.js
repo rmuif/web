@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 
+import PropTypes from 'prop-types';
+
 import validate from 'validate.js';
 
 import Dialog from '@material-ui/core/Dialog';
@@ -122,5 +124,14 @@ class ResetPasswordDialog extends Component {
     );
   }
 }
+
+ResetPasswordDialog.propTypes = {
+  open: PropTypes.bool,
+  isResettingPassword: PropTypes.bool,
+
+  onClose: PropTypes.func,
+
+  resetPassword: PropTypes.func
+};
 
 export default ResetPasswordDialog;
