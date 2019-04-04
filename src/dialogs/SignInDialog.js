@@ -155,13 +155,13 @@ class SignInDialog extends Component {
 }
 
 SignInDialog.propTypes = {
-  open: PropTypes.bool,
-  isSigningIn: PropTypes.bool,
+  open: PropTypes.bool.isRequired,
+  isSigningIn: PropTypes.bool.isRequired,
 
-  resetPassword: PropTypes.func,
+  resetPassword: PropTypes.func.isRequired,
 
-  onClose: PropTypes.func,
-  onResetPasswordClick: PropTypes.func
+  onClose: PropTypes.func.isRequired,
+  onResetPasswordClick: PropTypes.func.isRequired
 };
 
 export default SignInDialog;

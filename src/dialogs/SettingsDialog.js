@@ -97,21 +97,21 @@ class SettingsDialog extends Component {
 }
 
 SettingsDialog.propTypes = {
-  open: PropTypes.bool,
-  user: PropTypes.object,
-  isVerifyingEmailAddress: PropTypes.bool,
-  colors: PropTypes.array,
-  types: PropTypes.array,
-  primaryColor: PropTypes.string,
-  secondaryColor: PropTypes.string,
-  type: PropTypes.string,
+  open: PropTypes.bool.isRequired,
+  user: PropTypes.object.isRequired,
+  isVerifyingEmailAddress: PropTypes.bool.isRequired,
+  colors: PropTypes.array.isRequired,
+  types: PropTypes.array.isRequired,
+  primaryColor: PropTypes.string.isRequired,
+  secondaryColor: PropTypes.string.isRequired,
+  type: PropTypes.string.isRequired,
 
-  onClose: PropTypes.func,
-  onVerifyEmailAddressClick: PropTypes.func,
-  onPrimaryColorChange: PropTypes.func,
-  onSecondaryColorChange: PropTypes.func,
-  onTypeChange: PropTypes.func,
-  onResetClick: PropTypes.func
+  onClose: PropTypes.func.isRequired,
+  onVerifyEmailAddressClick: PropTypes.func.isRequired,
+  onPrimaryColorChange: PropTypes.func.isRequired,
+  onSecondaryColorChange: PropTypes.func.isRequired,
+  onTypeChange: PropTypes.func.isRequired,
+  onResetClick: PropTypes.func.isRequired
 };
 
 export default SettingsDialog;

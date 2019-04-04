@@ -55,12 +55,12 @@ class SignOutDialog extends Component {
 }
 
 SignOutDialog.propTypes = {
-  open: PropTypes.bool,
-  isSigningOut: PropTypes.bool,
+  open: PropTypes.bool.isRequired,
+  isSigningOut: PropTypes.bool.isRequired,
 
-  signOut: PropTypes.func,
+  signOut: PropTypes.func.isRequired,
 
-  onClose: PropTypes.func
+  onClose: PropTypes.func.isRequired
 };
 
 export default SignOutDialog;

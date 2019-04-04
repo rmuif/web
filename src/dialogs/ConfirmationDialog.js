@@ -82,15 +82,15 @@ class ConfirmationDialog extends Component {
 }
 
 ConfirmationDialog.propTypes = {
-  open: PropTypes.bool,
+  open: PropTypes.bool.isRequired,
 
-  title: PropTypes.string,
-  contentText: PropTypes.string,
+  title: PropTypes.string.isRequired,
+  contentText: PropTypes.string.isRequired,
   cancelText: PropTypes.string,
   okText: PropTypes.string,
   highlightOkButton: PropTypes.bool,
 
-  onClose: PropTypes.func,
+  onClose: PropTypes.func.isRequired,
   onCancelClick: PropTypes.func,
   onOkClick: PropTypes.func
 };

@@ -183,12 +183,12 @@ class SignUpDialog extends Component {
 }
 
 SignUpDialog.propTypes = {
-  open: PropTypes.bool,
-  isSigningUp: PropTypes.bool,
+  open: PropTypes.bool.isRequired,
+  isSigningUp: PropTypes.bool.isRequired,
 
-  signUp: PropTypes.func,
+  signUp: PropTypes.func.isRequired,
 
-  onClose: PropTypes.func
+  onClose: PropTypes.func.isRequired
 };
 
 export default SignUpDialog;

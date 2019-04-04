@@ -126,12 +126,12 @@ class ResetPasswordDialog extends Component {
 }
 
 ResetPasswordDialog.propTypes = {
-  open: PropTypes.bool,
-  isResettingPassword: PropTypes.bool,
+  open: PropTypes.bool.isRequired,
+  isResettingPassword: PropTypes.bool.isRequired,
 
-  resetPassword: PropTypes.func,
+  resetPassword: PropTypes.func.isRequired,
 
-  onClose: PropTypes.func
+  onClose: PropTypes.func.isRequired
 };
 
 export default ResetPasswordDialog;
