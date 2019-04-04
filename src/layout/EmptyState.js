@@ -1,10 +1,12 @@
 import React, { Component } from 'react';
 
+import PropTypes from 'prop-types';
+
 import { withStyles } from '@material-ui/core/styles';
 
 import Typography from '@material-ui/core/Typography';
 
-const styles = (theme) => ({
+const styles = {
   center: {
     position: 'absolute',
     top: '50%',
@@ -12,7 +14,7 @@ const styles = (theme) => ({
     transform: 'translate(-50%, -50%)',
     textAlign: 'center'
   }
-});
+};
 
 class EmptyState extends Component {
   render() {
@@ -26,5 +28,11 @@ class EmptyState extends Component {
     );
   }
 }
+
+EmptyState.propTypes = {
+  classes: PropTypes.object.isRequired,
+  icon: PropTypes.element.isRequired,
+  text: PropTypes.string.isRequired
+};
 
 export default withStyles(styles)(EmptyState);
