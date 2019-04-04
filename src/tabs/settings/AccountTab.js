@@ -15,10 +15,9 @@ import ListItemText from '@material-ui/core/ListItemText';
 import ListItemSecondaryAction from '@material-ui/core/ListItemSecondaryAction';
 
 import Tooltip from '@material-ui/core/Tooltip';
-import IconButton from '@material-ui/core/IconButton';
+import Button from '@material-ui/core/Button';
 
 import EmailIcon from '@material-ui/icons/Email';
-import CheckIcon from '@material-ui/icons/Check';
 import AccessTimeIcon from '@material-ui/icons/AccessTime';
 
 import ConfirmationDialog from '../../dialogs/ConfirmationDialog';
@@ -87,13 +86,9 @@ class AccountTab extends Component {
 
             <ListItemText primary={user.email} secondary={user.emailVerified ? 'Verified' : 'Not verified'} />
 
-            {(!user.emailVerified && !isVerifyingEmailAddress) &&
+            {!user.emailVerified &&
               <ListItemSecondaryAction>
-                <Tooltip title="Verify e-mail address">
-                  <IconButton onClick={this.openVerifyEmailAddressDialog}>
-                    <CheckIcon />
-                  </IconButton>
-                </Tooltip>
+                <Button color="primary" disabled={isVerifyingEmailAddress} variant="contained" onClick={this.openVerifyEmailAddressDialog}>Verify</Button>
               </ListItemSecondaryAction>
             }
           </ListItem>
