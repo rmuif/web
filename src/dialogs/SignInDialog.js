@@ -158,8 +158,6 @@ SignInDialog.propTypes = {
   open: PropTypes.bool.isRequired,
   isSigningIn: PropTypes.bool.isRequired,
 
-  resetPassword: PropTypes.func.isRequired,
-
   onClose: PropTypes.func.isRequired,
   onResetPasswordClick: PropTypes.func.isRequired
 };
