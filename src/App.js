@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 
+import { BrowserRouter as Router, Route } from "react-router-dom";
+
 import PropTypes from 'prop-types';
 
 import firebase from 'firebase/app';
@@ -32,10 +34,11 @@ import { createMuiTheme, withStyles, MuiThemeProvider } from '@material-ui/core/
 import Snackbar from '@material-ui/core/Snackbar';
 
 import PersonOutlineIcon from '@material-ui/icons/PersonOutline';
-import PersonIcon from '@material-ui/icons/Person';
 
 import Bar from './layout/Bar';
 import EmptyState from './layout/EmptyState';
+
+import HomeContent from './content/HomeContent';
 
 import SignUpDialog from './dialogs/SignUpDialog';
 import SignInDialog from './dialogs/SignInDialog';
@@ -591,101 +594,100 @@ class App extends Component {
     }
 
     return (
-      <MuiThemeProvider theme={theme}>
-        <div style={{ minHeight: '100vh', backgroundColor: theme.palette.type === 'dark' ? '#303030' : '#fafafa' }}>
-          <Bar
-            title={settings.title}
+      <Router>
+        <MuiThemeProvider theme={theme}>
+          <div style={{ minHeight: '100vh', backgroundColor: theme.palette.type === 'dark' ? '#303030' : '#fafafa' }}>
+            <Bar
+              title={settings.title}
 
-            isSignedIn={isSignedIn}
-            isSigningUp={isSigningUp}
-            isSigningIn={isSigningIn}
-
-            onSignUpClick={this.showSignUpDialog}
-            onSignInClick={this.showSignInDialog}
-
-            onSettingsClick={this.showSettingsDialog}
-            onSignOutClick={this.showSignOutDialog}
-          />
-
-          {isSignedIn &&
-            <EmptyState
-              icon={<PersonIcon className={classes.emptyStateIcon} color="action" />}
-              text="You are signed in."
-            />
-          }
-
-          {!isSignedIn &&
-            <EmptyState
-              icon={<PersonOutlineIcon className={classes.emptyStateIcon} color="action" />}
-              text="You are not signed in."
-            />
-          }
-
-          {!isSignedIn &&
-            <SignUpDialog
-              open={signUpDialog.open}
+              isSignedIn={isSignedIn}
               isSigningUp={isSigningUp}
-              signUp={this.signUp}
-              onClose={this.closeSignUpDialog}
-            />
-          }
-
-          {!isSignedIn &&
-            <SignInDialog
-              open={signInDialog.open}
               isSigningIn={isSigningIn}
-              signIn={this.signIn}
-              onClose={this.closeSignInDialog}
-              onResetPasswordClick={this.showResetPasswordDialog}
+
+              onSignUpClick={this.showSignUpDialog}
+              onSignInClick={this.showSignInDialog}
+
+              onSettingsClick={this.showSettingsDialog}
+              onSignOutClick={this.showSignOutDialog}
             />
-          }
 
-          {!isSignedIn &&
-            <ResetPasswordDialog
-              open={resetPasswordDialog.open}
-              isResettingPassword={isResettingPassword}
-              resetPassword={this.resetPassword}
-              onClose={this.closeResetPasswordDialog}
+            {isSignedIn &&
+              <Route path="/" exact component={HomeContent} />
+            }
+
+            {!isSignedIn &&
+              <EmptyState
+                icon={<PersonOutlineIcon className={classes.emptyStateIcon} color="action" />}
+                text="You are not signed in."
+              />
+            }
+
+            {!isSignedIn &&
+              <SignUpDialog
+                open={signUpDialog.open}
+                isSigningUp={isSigningUp}
+                signUp={this.signUp}
+                onClose={this.closeSignUpDialog}
+              />
+            }
+
+            {!isSignedIn &&
+              <SignInDialog
+                open={signInDialog.open}
+                isSigningIn={isSigningIn}
+                signIn={this.signIn}
+                onClose={this.closeSignInDialog}
+                onResetPasswordClick={this.showResetPasswordDialog}
+              />
+            }
+
+            {!isSignedIn &&
+              <ResetPasswordDialog
+                open={resetPasswordDialog.open}
+                isResettingPassword={isResettingPassword}
+                resetPassword={this.resetPassword}
+                onClose={this.closeResetPasswordDialog}
+              />
+            }
+
+            {isSignedIn &&
+              <SettingsDialog
+                open={settingsDialog.open}
+                user={user}
+                isVerifyingEmailAddress={isVerifyingEmailAddress}
+                colors={colors}
+                types={types}
+                primaryColor={primaryColor}
+                secondaryColor={secondaryColor}
+                type={type}
+
+                onClose={this.closeSettingsDialog}
+                onVerifyEmailAddressClick={this.verifyEmailAddress}
+                onPrimaryColorChange={this.changePrimaryColor}
+                onSecondaryColorChange={this.changeSecondaryColor}
+                onTypeChange={this.changeType}
+                onResetClick={this.resetTheme}
+              />
+            }
+
+            {isSignedIn &&
+              <SignOutDialog
+                open={signOutDialog.open}
+                isSigningOut={isSigningOut}
+                signOut={this.signOut}
+                onClose={this.closeSignOutDialog}
+              />
+            }
+
+            <Snackbar
+              autoHideDuration={snackbar.autoHideDuration}
+              message={snackbar.message}
+              open={snackbar.open}
+              onClose={this.closeSnackbar}
             />
-          }
-
-          {isSignedIn &&
-            <SettingsDialog
-              open={settingsDialog.open}
-              user={user}
-              isVerifyingEmailAddress={isVerifyingEmailAddress}
-              colors={colors}
-              types={types}
-              primaryColor={primaryColor}
-              secondaryColor={secondaryColor}
-              type={type}
-
-              onClose={this.closeSettingsDialog}
-              onVerifyEmailAddressClick={this.verifyEmailAddress}
-              onPrimaryColorChange={this.changePrimaryColor}
-              onSecondaryColorChange={this.changeSecondaryColor}
-              onTypeChange={this.changeType}
-              onResetClick={this.resetTheme}
-            />
-          }
-
-          {isSignedIn &&
-            <SignOutDialog
-              open={signOutDialog.open}
-              isSigningOut={isSigningOut}
-              signOut={this.signOut}
-              onClose={this.closeSignOutDialog}
-            />
-          }
-
-          <Snackbar
-            autoHideDuration={snackbar.autoHideDuration}
-            message={snackbar.message}
-            open={snackbar.open}
-            onClose={this.closeSnackbar}
-          />
-        </div>
-      </MuiThemeProvider>
+          </div>
+        </MuiThemeProvider>
+      </Router>
     );
   }
 
