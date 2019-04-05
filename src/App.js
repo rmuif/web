@@ -451,11 +451,11 @@ class App extends Component {
           isSigningUp: false
         }, () => {
           this.closeSignUpDialog(() => {
-          const user = userCredential.user;
-          const emailAddress = user.email;
-    
-          this.openSnackbar('Signed up as ' + emailAddress);
-        });
+            const user = userCredential.user;
+            const emailAddress = user.email;
+
+            this.openSnackbar('Signed up as ' + emailAddress);
+          });
         });
       }).catch((error) => {
         this.setState({
