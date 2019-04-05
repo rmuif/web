@@ -25,7 +25,7 @@ The `depth=1` tells git to only pull down one commit worth of historical data.
 ### Install Dependencies
 
 ```
-yarn
+npm install
 ```
 
 ### Run the Application
@@ -34,7 +34,7 @@ The project comes preconfigured with a simple development web server. The simple
 this server is:
 
 ```
-yarn start
+npm start
 ```
 
 Now browse to the app at [`http://localhost:3000`](http://localhost:3000) if it doesn't show up automatically.
