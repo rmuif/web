@@ -185,7 +185,7 @@ const styles = theme => ({
 });
 
 const settings = {
-  title: 'React + Material-UI + Firebase'
+  name: 'React + Material-UI + Firebase'
 };
 
 class App extends Component {
@@ -599,7 +599,7 @@ class App extends Component {
         <MuiThemeProvider theme={theme}>
           <div style={{ minHeight: '100vh', backgroundColor: theme.palette.type === 'dark' ? '#303030' : '#fafafa' }}>
             <Bar
-              title={settings.title}
+              name={settings.name}
 
               isSignedIn={isSignedIn}
               isSigningUp={isSigningUp}
