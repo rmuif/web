@@ -50,14 +50,14 @@ const styles = (theme) => ({
 class AuthProviderList extends Component {
   render() {
     // Properties
-    const { classes, isSigningIn } = this.props;
+    const { classes, isSigningUp, isSigningIn } = this.props;
 
     // Events
     const { onAuthProviderClick } = this.props;
 
     return (
       <DialogActions className={classes.dialogActions}>
-        <Button className={classes.google} disabled={isSigningIn} variant="contained" onClick={() => onAuthProviderClick(new firebase.auth.GoogleAuthProvider())}>
+        <Button className={classes.google} disabled={isSigningIn || isSigningUp} variant="contained" onClick={() => onAuthProviderClick(new firebase.auth.GoogleAuthProvider())}>
           <GoogleIcon className={classes.icon} />
           Google
         </Button>
@@ -83,6 +83,8 @@ class AuthProviderList extends Component {
 
 AuthProviderList.propTypes = {
   classes: PropTypes.object.isRequired,
+  isSigningUp: PropTypes.bool,
+  isSigningIn: PropTypes.bool,
 
   onAuthProviderClick: PropTypes.func.isRequired
 };
