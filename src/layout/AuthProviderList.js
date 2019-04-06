@@ -17,7 +17,7 @@ import GitHubCircleIcon from 'mdi-material-ui/GithubCircle';
 const styles = (theme) => ({
   dialogActions: {
     marginTop: `${theme.spacing.unit * 2.5}px`,
-    marginBottom: `${theme.spacing.unit * 2}px`,
+    marginBottom: `${theme.spacing.unit}px`,
 
     justifyContent: 'center'
   },
