@@ -595,7 +595,7 @@ class App extends Component {
     }
 
     return (
-      <Router>
+      <Router basename="/react-material-ui-firebase">
         <MuiThemeProvider theme={theme}>
           <div style={{ minHeight: '100vh', backgroundColor: theme.palette.type === 'dark' ? '#303030' : '#fafafa' }}>
             <Bar
