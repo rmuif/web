@@ -503,7 +503,7 @@ class App extends Component {
     });
   };
 
-  signIn = (authProvider) => {
+  signInWithAuthProvider = (authProvider) => {
     if (!authProvider || this.state.isSignedIn) {
       return;
     }
@@ -635,6 +635,8 @@ class App extends Component {
               isSigningUp={isSigningUp}
               isSigningIn={isSigningIn}
 
+              user={user}
+
               onSignUpClick={this.showSignUpDialog}
               onSignInClick={this.showSignInDialog}
 
@@ -661,7 +663,9 @@ class App extends Component {
                 open={signUpDialog.open}
                 isSigningUp={isSigningUp}
                 signUp={this.signUp}
+
                 onClose={this.closeSignUpDialog}
+                onAuthProviderClick={this.signInWithAuthProvider}
               />
             }
 
@@ -670,8 +674,9 @@ class App extends Component {
                 open={signInDialog.open}
                 isSigningIn={isSigningIn}
                 signIn={this.signIn}
+
                 onClose={this.closeSignInDialog}
-                onAuthProviderClick={this.signIn}
+                onAuthProviderClick={this.signInWithAuthProvider}
                 onResetPasswordClick={this.showResetPasswordDialog}
               />
             }
