@@ -503,6 +503,36 @@ class App extends Component {
     });
   };
 
+  signIn = (authProvider) => {
+    if (!authProvider || this.state.isSignedIn) {
+      return;
+    }
+
+    this.setState({
+      isSigningIn: true
+    }, () => {
+      firebase.auth().signInWithPopup(authProvider).then((userCredential) => {
+        this.setState({
+          isSigningIn: false
+        }, () => {
+          this.closeSignInDialog(() => {
+            const user = userCredential.user;
+            const displayName = user.displayName;
+            const emailAddress = user.email;
+
+            this.openSnackbar('Signed in as ' + (displayName || emailAddress));
+          });
+        });
+      }).catch((error) => {
+        this.setState({
+          isSigningIn: false
+        }, () => {
+          this.openSnackbar(error.message);
+        });
+      });
+    });
+  };
+
   resetPassword = (emailAddress) => {
     if (this.state.isSignedIn) {
       this.openSnackbar('Signed in users can\'t reset their password');
@@ -641,6 +671,7 @@ class App extends Component {
                 isSigningIn={isSigningIn}
                 signIn={this.signIn}
                 onClose={this.closeSignInDialog}
+                onAuthProviderClick={this.signIn}
                 onResetPasswordClick={this.showResetPasswordDialog}
               />
             }

@@ -13,6 +13,8 @@ import DialogActions from '@material-ui/core/DialogActions';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 
+import AuthProviderList from '../layout/AuthProviderList';
+
 const initialState = {
   emailAddress: '',
   password: '',
@@ -98,7 +100,7 @@ class SignInDialog extends Component {
     const { open, isSigningIn } = this.props;
 
     // Events
-    const { onClose, onResetPasswordClick } = this.props;
+    const { onClose, onAuthProviderClick, onResetPasswordClick } = this.props;
 
     const { emailAddress, password, errors } = this.state;
 
@@ -113,6 +115,8 @@ class SignInDialog extends Component {
             Some features might be unavailable until you sign in.
             While you're signed in you can manage your account.
           </DialogContentText>
+
+          <AuthProviderList isSigningIn={isSigningIn} onAuthProviderClick={onAuthProviderClick} />
 
           <form>
             <TextField
@@ -159,6 +163,7 @@ SignInDialog.propTypes = {
   isSigningIn: PropTypes.bool.isRequired,
 
   onClose: PropTypes.func.isRequired,
+  onAuthProviderClick: PropTypes.func.isRequired,
   onResetPasswordClick: PropTypes.func.isRequired
 };
 
