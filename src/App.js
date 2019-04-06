@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-import { BrowserRouter as Router, Route } from "react-router-dom";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
 import PropTypes from 'prop-types';
 
@@ -39,6 +39,7 @@ import Bar from './layout/Bar';
 import EmptyState from './layout/EmptyState';
 
 import HomeContent from './content/HomeContent';
+import NotFoundContent from './content/NotFoundContent';
 
 import SignUpDialog from './dialogs/SignUpDialog';
 import SignInDialog from './dialogs/SignInDialog';
@@ -612,13 +613,16 @@ class App extends Component {
             />
 
             {isSignedIn &&
-              <Route path="/" exact component={HomeContent} />
+              <Switch>
+                <Route path="/" exact component={HomeContent} />
+                <Route component={NotFoundContent} />
+              </Switch>
             }
 
             {!isSignedIn &&
               <EmptyState
                 icon={<PersonOutlineIcon className={classes.emptyStateIcon} color="action" />}
-                text="You are not signed in."
+                title="You are not signed in."
               />
             }
 

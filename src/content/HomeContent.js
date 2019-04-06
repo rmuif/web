@@ -21,7 +21,7 @@ class HomeContent extends Component {
     return (
       <EmptyState
         icon={<HomeIcon className={classes.emptyStateIcon} color="action" />}
-        text="Home"
+        title="Home"
       />
     );
   }

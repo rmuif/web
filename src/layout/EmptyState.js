@@ -18,12 +18,14 @@ const styles = {
 
 class EmptyState extends Component {
   render() {
-    const { classes, icon, text } = this.props;
+    const { classes, icon, title, description, button } = this.props;
 
     return (
       <div className={classes.center}>
         {icon}
-        <Typography color="textSecondary" variant="h4">{text}</Typography>
+        {title && <Typography color="textSecondary" variant="h4">{title}</Typography>}
+        {description && <Typography color="textSecondary" variant="subtitle1">{description}</Typography>}
+        {button}
       </div>
     );
   }
@@ -31,8 +33,10 @@ class EmptyState extends Component {
 
 EmptyState.propTypes = {
   classes: PropTypes.object.isRequired,
-  icon: PropTypes.element.isRequired,
-  text: PropTypes.string.isRequired
+  icon: PropTypes.element,
+  title: PropTypes.string,
+  description: PropTypes.string,
+  button: PropTypes.element
 };
 
 export default withStyles(styles)(EmptyState);
