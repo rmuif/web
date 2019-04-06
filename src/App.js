@@ -662,6 +662,7 @@ class App extends Component {
               <SignUpDialog
                 open={signUpDialog.open}
                 isSigningUp={isSigningUp}
+                isSigningIn={isSigningIn}
                 signUp={this.signUp}
 
                 onClose={this.closeSignUpDialog}

@@ -114,7 +114,7 @@ class SignUpDialog extends Component {
 
   render() {
     // Properties
-    const { open, isSigningUp } = this.props;
+    const { open, isSigningUp, isSigningIn } = this.props;
 
     // Events
     const { onClose, onAuthProviderClick } = this.props;
@@ -132,7 +132,7 @@ class SignUpDialog extends Component {
             Create an account to access features that are unavailable to users who haven't signed up.
           </DialogContentText>
 
-          <AuthProviderList isSigningUp={isSigningUp} onAuthProviderClick={onAuthProviderClick} />
+          <AuthProviderList isSigningIn={isSigningIn} onAuthProviderClick={onAuthProviderClick} />
 
           <form>
             <TextField
@@ -189,6 +189,7 @@ class SignUpDialog extends Component {
 SignUpDialog.propTypes = {
   open: PropTypes.bool.isRequired,
   isSigningUp: PropTypes.bool.isRequired,
+  isSigningIn: PropTypes.bool.isRequired,
 
   signUp: PropTypes.func.isRequired,
 
