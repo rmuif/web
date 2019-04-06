@@ -13,6 +13,8 @@ import DialogActions from '@material-ui/core/DialogActions';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 
+import AuthProviderList from '../layout/AuthProviderList';
+
 const initialState = {
   emailAddress: '',
   password: '',
@@ -112,10 +114,10 @@ class SignUpDialog extends Component {
 
   render() {
     // Properties
-    const { open, isSigningUp } = this.props;
+    const { open, isSigningUp, isSigningIn } = this.props;
 
     // Events
-    const { onClose } = this.props;
+    const { onClose, onAuthProviderClick } = this.props;
 
     const { emailAddress, password, passwordConfirmation, errors } = this.state;
 
@@ -129,6 +131,8 @@ class SignUpDialog extends Component {
           <DialogContentText>
             Create an account to access features that are unavailable to users who haven't signed up.
           </DialogContentText>
+
+          <AuthProviderList isSigningIn={isSigningIn} onAuthProviderClick={onAuthProviderClick} />
 
           <form>
             <TextField
@@ -185,10 +189,12 @@ class SignUpDialog extends Component {
 SignUpDialog.propTypes = {
   open: PropTypes.bool.isRequired,
   isSigningUp: PropTypes.bool.isRequired,
+  isSigningIn: PropTypes.bool.isRequired,
 
   signUp: PropTypes.func.isRequired,
 
-  onClose: PropTypes.func.isRequired
+  onClose: PropTypes.func.isRequired,
+  onAuthProviderClick: PropTypes.func.isRequired
 };
 
 export default SignUpDialog;

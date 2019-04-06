@@ -9,6 +9,7 @@ import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
 import IconButton from '@material-ui/core/IconButton';
+import Avatar from '@material-ui/core/Avatar';
 import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
 
@@ -61,7 +62,7 @@ class Bar extends Component {
 
   render() {
     // Properties
-    const { classes, name, isSignedIn, isSigningUp, isSigningIn } = this.props;
+    const { classes, name, isSignedIn, isSigningUp, isSigningIn, user } = this.props;
 
     // Events
     const { onSignUpClick, onSignInClick } = this.props;
@@ -76,7 +77,7 @@ class Bar extends Component {
           {isSignedIn &&
             <React.Fragment>
               <IconButton color="inherit" onClick={this.openMenu}>
-                <PersonIcon />
+                {user.photoURL ? <Avatar alt="Avatar" src={user.photoURL} /> : <PersonIcon />}
               </IconButton>
 
               <Menu anchorEl={menu.anchorEl} open={Boolean(menu.anchorEl)} onClose={this.closeMenu}>

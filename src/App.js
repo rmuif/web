@@ -503,6 +503,36 @@ class App extends Component {
     });
   };
 
+  signInWithAuthProvider = (authProvider) => {
+    if (!authProvider || this.state.isSignedIn) {
+      return;
+    }
+
+    this.setState({
+      isSigningIn: true
+    }, () => {
+      firebase.auth().signInWithPopup(authProvider).then((userCredential) => {
+        this.setState({
+          isSigningIn: false
+        }, () => {
+          this.closeSignInDialog(() => {
+            const user = userCredential.user;
+            const displayName = user.displayName;
+            const emailAddress = user.email;
+
+            this.openSnackbar('Signed in as ' + (displayName || emailAddress));
+          });
+        });
+      }).catch((error) => {
+        this.setState({
+          isSigningIn: false
+        }, () => {
+          this.openSnackbar(error.message);
+        });
+      });
+    });
+  };
+
   resetPassword = (emailAddress) => {
     if (this.state.isSignedIn) {
       this.openSnackbar('Signed in users can\'t reset their password');
@@ -605,6 +635,8 @@ class App extends Component {
               isSigningUp={isSigningUp}
               isSigningIn={isSigningIn}
 
+              user={user}
+
               onSignUpClick={this.showSignUpDialog}
               onSignInClick={this.showSignInDialog}
 
@@ -630,8 +662,11 @@ class App extends Component {
               <SignUpDialog
                 open={signUpDialog.open}
                 isSigningUp={isSigningUp}
+                isSigningIn={isSigningIn}
                 signUp={this.signUp}
+
                 onClose={this.closeSignUpDialog}
+                onAuthProviderClick={this.signInWithAuthProvider}
               />
             }
 
@@ -640,7 +675,9 @@ class App extends Component {
                 open={signInDialog.open}
                 isSigningIn={isSigningIn}
                 signIn={this.signIn}
+
                 onClose={this.closeSignInDialog}
+                onAuthProviderClick={this.signInWithAuthProvider}
                 onResetPasswordClick={this.showResetPasswordDialog}
               />
             }
