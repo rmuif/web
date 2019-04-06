@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 
 import PropTypes from 'prop-types';
 
+import { Link } from 'react-router-dom';
+
 import { withStyles } from '@material-ui/core/styles';
 
 import Fab from '@material-ui/core/Fab';
@@ -35,7 +37,7 @@ class NotFoundContent extends Component {
         title="Content Not Found"
         description="The requested URL was not found on this server."
         button={
-          <Fab className={classes.button} color="primary" href="/" variant="extended">
+          <Fab className={classes.button} color="primary" component={Link} to="/" variant="extended">
             <HomeIcon className={classes.buttonIcon} /> Go Home
           </Fab>
         }
