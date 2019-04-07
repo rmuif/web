@@ -32,9 +32,12 @@ import blueGray from '@material-ui/core/colors/blueGrey';
 import { createMuiTheme, withStyles, MuiThemeProvider } from '@material-ui/core/styles';
 
 import Hidden from '@material-ui/core/Hidden';
+import Fab from '@material-ui/core/Fab';
 import Snackbar from '@material-ui/core/Snackbar';
 
-import PersonOutlineIcon from '@material-ui/icons/PersonOutline';
+import CodeIcon from '@material-ui/icons/Code';
+
+import GitHubCircleIcon from 'mdi-material-ui/GithubCircle';
 
 import Bar from './layout/Bar';
 import EmptyState from './layout/EmptyState';
@@ -182,6 +185,14 @@ let theme = createMuiTheme({
 const styles = theme => ({
   emptyStateIcon: {
     fontSize: `${theme.spacing.unit * 12}px`
+  },
+
+  button: {
+    marginTop: `${theme.spacing.unit}px`
+  },
+
+  buttonIcon: {
+    marginRight: `${theme.spacing.unit}px`
   }
 });
 
@@ -654,8 +665,15 @@ class App extends Component {
 
             {!isSignedIn &&
               <EmptyState
-                icon={<PersonOutlineIcon className={classes.emptyStateIcon} color="action" />}
-                title="You are not signed in."
+                icon={<CodeIcon className={classes.emptyStateIcon} color="action" />}
+                title={settings.name}
+                description="The three musketeers; all in one pack in the form of a boilerplate app."
+                button={
+                  <Fab className={classes.button} color="primary" href="https://github.com/Phoqe/react-material-ui-firebase" rel="noopener noreferrer" target="_blank" variant="extended">
+                    <GitHubCircleIcon className={classes.buttonIcon} />
+                    GitHub
+                  </Fab>
+                }
               />
             }
 
