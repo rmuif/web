@@ -45,7 +45,7 @@ class SettingsDialog extends Component {
 
   render() {
     // Properties
-    const { open, user, isVerifyingEmailAddress, colors, types, primaryColor, secondaryColor, type } = this.props;
+    const { open, fullScreen, user, isVerifyingEmailAddress, colors, types, primaryColor, secondaryColor, type } = this.props;
 
     // Events
     const { onClose, onVerifyEmailAddressClick, onPrimaryColorChange, onSecondaryColorChange, onTypeChange, onResetClick } = this.props;
@@ -59,7 +59,7 @@ class SettingsDialog extends Component {
     })(Tab);
 
     return (
-      <Dialog open={open} onClose={onClose} onKeyPress={this.handleKeyPress}>
+      <Dialog open={open} fullScreen={fullScreen} onClose={onClose} onKeyPress={this.handleKeyPress}>
         <DialogTitle>Settings</DialogTitle>
 
         <Tabs onChange={this.changeTab} value={selectedTab} variant="fullWidth">
@@ -98,6 +98,7 @@ class SettingsDialog extends Component {
 
 SettingsDialog.propTypes = {
   open: PropTypes.bool.isRequired,
+  fullScreen: PropTypes.bool,
   user: PropTypes.object.isRequired,
   isVerifyingEmailAddress: PropTypes.bool.isRequired,
   colors: PropTypes.array.isRequired,

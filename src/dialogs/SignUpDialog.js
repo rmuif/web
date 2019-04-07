@@ -114,7 +114,7 @@ class SignUpDialog extends Component {
 
   render() {
     // Properties
-    const { open, isSigningUp, isSigningIn } = this.props;
+    const { open, fullScreen, isSigningUp, isSigningIn } = this.props;
 
     // Events
     const { onClose, onAuthProviderClick } = this.props;
@@ -122,7 +122,7 @@ class SignUpDialog extends Component {
     const { emailAddress, password, passwordConfirmation, errors } = this.state;
 
     return (
-      <Dialog open={open} onClose={onClose} onExited={this.handleExited} onKeyPress={this.handleKeyPress}>
+      <Dialog open={open} fullScreen={fullScreen} onClose={onClose} onExited={this.handleExited} onKeyPress={this.handleKeyPress}>
         <DialogTitle>
           Sign up for an account
         </DialogTitle>
@@ -187,6 +187,7 @@ class SignUpDialog extends Component {
 
 SignUpDialog.propTypes = {
   open: PropTypes.bool.isRequired,
+  fullScreen: PropTypes.bool,
   isSigningUp: PropTypes.bool.isRequired,
   isSigningIn: PropTypes.bool.isRequired,
 

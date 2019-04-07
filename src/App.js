@@ -31,6 +31,7 @@ import blueGray from '@material-ui/core/colors/blueGrey';
 
 import { createMuiTheme, withStyles, MuiThemeProvider } from '@material-ui/core/styles';
 
+import Hidden from '@material-ui/core/Hidden';
 import Snackbar from '@material-ui/core/Snackbar';
 
 import PersonOutlineIcon from '@material-ui/icons/PersonOutline';
@@ -659,27 +660,61 @@ class App extends Component {
             }
 
             {!isSignedIn &&
-              <SignUpDialog
-                open={signUpDialog.open}
-                isSigningUp={isSigningUp}
-                isSigningIn={isSigningIn}
-                signUp={this.signUp}
+              <React.Fragment>
+                <Hidden only="xs">
+                  <SignUpDialog
+                    open={signUpDialog.open}
+                    isSigningUp={isSigningUp}
+                    isSigningIn={isSigningIn}
+                    signUp={this.signUp}
 
-                onClose={this.closeSignUpDialog}
-                onAuthProviderClick={this.signInWithAuthProvider}
-              />
+                    onClose={this.closeSignUpDialog}
+                    onAuthProviderClick={this.signInWithAuthProvider}
+                  />
+                </Hidden>
+
+                <Hidden only={['sm', 'md', 'lg', 'xl']}>
+                  <SignUpDialog
+                    open={signUpDialog.open}
+                    fullScreen
+                    isSigningUp={isSigningUp}
+                    isSigningIn={isSigningIn}
+                    signUp={this.signUp}
+
+                    onClose={this.closeSignUpDialog}
+                    onAuthProviderClick={this.signInWithAuthProvider}
+                  />
+                </Hidden>
+              </React.Fragment>
             }
 
             {!isSignedIn &&
-              <SignInDialog
-                open={signInDialog.open}
-                isSigningIn={isSigningIn}
-                signIn={this.signIn}
+              <React.Fragment>
+                <Hidden only="xs">
+                  <SignInDialog
+                    open={signInDialog.open}
+                    isSigningIn={isSigningIn}
+                    signIn={this.signIn}
 
-                onClose={this.closeSignInDialog}
-                onAuthProviderClick={this.signInWithAuthProvider}
-                onResetPasswordClick={this.showResetPasswordDialog}
-              />
+                    onClose={this.closeSignInDialog}
+                    onAuthProviderClick={this.signInWithAuthProvider}
+                    onResetPasswordClick={this.showResetPasswordDialog}
+                  />
+                </Hidden>
+
+                <Hidden only={['sm', 'md', 'lg', 'xl']}>
+                  <SignInDialog
+                    open={signInDialog.open}
+                    fullScreen
+                    isSigningIn={isSigningIn}
+                    signIn={this.signIn}
+
+                    onClose={this.closeSignInDialog}
+                    onAuthProviderClick={this.signInWithAuthProvider}
+                    onResetPasswordClick={this.showResetPasswordDialog}
+                  />
+                </Hidden>
+              </React.Fragment>
             }
 
             {!isSignedIn &&
@@ -692,23 +727,48 @@ class App extends Component {
             }
 
             {isSignedIn &&
-              <SettingsDialog
-                open={settingsDialog.open}
-                user={user}
-                isVerifyingEmailAddress={isVerifyingEmailAddress}
-                colors={colors}
-                types={types}
-                primaryColor={primaryColor}
-                secondaryColor={secondaryColor}
-                type={type}
+              <React.Fragment>
+                <Hidden only="xs">
+                  <SettingsDialog
+                    open={settingsDialog.open}
+                    user={user}
+                    isVerifyingEmailAddress={isVerifyingEmailAddress}
+                    colors={colors}
+                    types={types}
+                    primaryColor={primaryColor}
+                    secondaryColor={secondaryColor}
+                    type={type}
 
-                onClose={this.closeSettingsDialog}
-                onVerifyEmailAddressClick={this.verifyEmailAddress}
-                onPrimaryColorChange={this.changePrimaryColor}
-                onSecondaryColorChange={this.changeSecondaryColor}
-                onTypeChange={this.changeType}
-                onResetClick={this.resetTheme}
-              />
+                    onClose={this.closeSettingsDialog}
+                    onVerifyEmailAddressClick={this.verifyEmailAddress}
+                    onPrimaryColorChange={this.changePrimaryColor}
+                    onSecondaryColorChange={this.changeSecondaryColor}
+                    onTypeChange={this.changeType}
+                    onResetClick={this.resetTheme}
+                  />
+                </Hidden>
+
+                <Hidden only={['sm', 'md', 'lg', 'xl']}>
+                  <SettingsDialog
+                    open={settingsDialog.open}
+                    fullScreen
+                    user={user}
+                    isVerifyingEmailAddress={isVerifyingEmailAddress}
+                    colors={colors}
+                    types={types}
+                    primaryColor={primaryColor}
+                    secondaryColor={secondaryColor}
+                    type={type}
+
+                    onClose={this.closeSettingsDialog}
+                    onVerifyEmailAddressClick={this.verifyEmailAddress}
+                    onPrimaryColorChange={this.changePrimaryColor}
+                    onSecondaryColorChange={this.changeSecondaryColor}
+                    onTypeChange={this.changeType}
+                    onResetClick={this.resetTheme}
+                  />
+                </Hidden>
+              </React.Fragment>
             }
 
             {isSignedIn &&
