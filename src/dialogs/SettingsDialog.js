@@ -16,6 +16,16 @@ import Button from '@material-ui/core/Button';
 import AccountTab from '../tabs/settings/AccountTab';
 import AppearanceTab from '../tabs/settings/AppearanceTab';
 
+const styles = {
+  light: {
+    color: '#000000'
+  },
+
+  dark: {
+    color: '#ffffff'
+  }
+};
+
 class SettingsDialog extends Component {
   constructor(props) {
     super(props);
@@ -45,26 +55,20 @@ class SettingsDialog extends Component {
 
   render() {
     // Properties
-    const { open, fullScreen, user, isVerifyingEmailAddress, colors, types, primaryColor, secondaryColor, type } = this.props;
+    const { classes, open, fullScreen, user, isVerifyingEmailAddress, colors, types, primaryColor, secondaryColor, type } = this.props;
 
     // Events
     const { onClose, onVerifyEmailAddressClick, onPrimaryColorChange, onSecondaryColorChange, onTypeChange, onResetClick } = this.props;
 
     const { selectedTab } = this.state;
 
-    const DynamicTab = withStyles({
-      label: {
-        color: type === 'light' ? '#000000' : '#ffffff'
-      }
-    })(Tab);
-
     return (
       <Dialog open={open} fullScreen={fullScreen} onClose={onClose} onKeyPress={this.handleKeyPress}>
         <DialogTitle>Settings</DialogTitle>
 
         <Tabs onChange={this.changeTab} value={selectedTab} variant="fullWidth">
-          <DynamicTab label="Account" />
-          <DynamicTab label="Appearance" />
+          <Tab classes={{ label: type === 'light' ? classes.light : classes.dark }} label="Account" />
+          <Tab classes={{ label: type === 'light' ? classes.light : classes.dark }} label="Appearance" />
         </Tabs>
 
         <DialogContent>
@@ -97,6 +101,7 @@ class SettingsDialog extends Component {
 }
 
 SettingsDialog.propTypes = {
+  classes: PropTypes.object.isRequired,
   open: PropTypes.bool.isRequired,
   fullScreen: PropTypes.bool,
   user: PropTypes.object.isRequired,
@@ -115,4 +120,4 @@ SettingsDialog.propTypes = {
   onResetClick: PropTypes.func.isRequired
 };
 
-export default SettingsDialog;
+export default withStyles(styles)(SettingsDialog);
