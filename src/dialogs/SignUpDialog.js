@@ -137,7 +137,6 @@ class SignUpDialog extends Component {
           <form>
             <TextField
               autoComplete="email"
-              autoFocus
               error={(errors && errors.emailAddress) ? true : false}
               fullWidth
               helperText={(errors && errors.emailAddress) ? errors.emailAddress[0] : ''}
