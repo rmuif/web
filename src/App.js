@@ -163,13 +163,13 @@ const types = [
 ];
 
 const defaultTheme = {
-  primaryColor: 'blue-gray',
+  primaryColor: 'blue',
   secondaryColor: 'red'
 };
 
 let theme = createMuiTheme({
   palette: {
-    primary: blueGray,
+    primary: blue,
     secondary: red,
     type: 'light'
   },
