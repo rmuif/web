@@ -1,43 +1,22 @@
 # React + Material-UI + Firebase
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-## Getting Started
+This project is an application skeleton for a typical web application. You can use it to quickly bootstrap your own
+projects and development environment for these projects. This project itself was bootstrapped with
+[Create React App](https://github.com/facebook/create-react-app), you can
+expect the same type of tooling to be available as a regular Create React App project.
 
-To get started you basically clone the repository and install all the dependencies.
+## Features
 
-### Clone `react-material-ui-firebase`
+The project contains a sample React application laid out with [Material-UI](https://material-ui.com) and
+most logic through [Firebase](https://firebase.google.com) along with a bunch of development and testing tools for
+instant web development gratification.
 
-Clone the `react-material-ui-firebase` repository using git:
+- Bootstrapped with Create React App, same tooling works out-of-the-box
+- Simple and dynamic Material Design layout with user theming
+- Complete support for the Firebase suite; Firebase Authentication already set-up with multiple authentication providers
+- Robust routing with [React Router](https://reacttraining.com/react-router/), including error handling
 
-```
-git clone https://github.com/Phoqe/react-material-ui-firebase.git
-cd react-material-ui-firebase
-```
-
-If you just want to start a new project without the `react-material-ui-firebase` commit history then you can do:
-
-```
-git clone --depth=1 https://github.com/Phoqe/react-material-ui-firebase.git <your-project-name>
-```
-
-The `depth=1` tells git to only pull down one commit worth of historical data.
-
-### Install Dependencies
-
-```
-npm install
-```
-
-### Run the Application
-
-The project comes preconfigured with a simple development web server. The simplest way to start
-this server is:
-
-```
-npm start
-```
-
-Now browse to the app at [`http://localhost:3000`](http://localhost:3000) if it doesn't show up automatically.
+Still not convinced? Take a look at the [demo](https://phoqe.github.io/react-material-ui-firebase).
 
 ## Available Scripts
 
