@@ -77,17 +77,17 @@ class AuthProviderList extends Component {
               Google
             </Button>
 
-            <Button className={classes.facebook} disabled variant="contained" onClick={() => onAuthProviderClick(new firebase.auth.FacebookAuthProvider())}>
+            <Button className={classes.facebook} disabled={isSigningIn} variant="contained" onClick={() => onAuthProviderClick(new firebase.auth.FacebookAuthProvider())}>
               <FacebookBoxIcon className={classes.icon} />
               Facebook
             </Button>
 
-            <Button className={classes.twitter} disabled variant="contained" onClick={() => onAuthProviderClick(new firebase.auth.TwitterAuthProvider())}>
+            <Button className={classes.twitter} disabled={isSigningIn} variant="contained" onClick={() => onAuthProviderClick(new firebase.auth.TwitterAuthProvider())}>
               <TwitterIcon className={classes.icon} />
               Twitter
             </Button>
 
-            <Button className={classes.gitHub} disabled variant="contained" onClick={() => onAuthProviderClick(new firebase.auth.GithubAuthProvider())}>
+            <Button className={classes.gitHub} disabled={isSigningIn} variant="contained" onClick={() => onAuthProviderClick(new firebase.auth.GithubAuthProvider())}>
               <GitHubCircleIcon className={classes.icon} />
               GitHub
             </Button>
@@ -101,17 +101,17 @@ class AuthProviderList extends Component {
               Google
             </Button>
 
-            <Button className={`${classes.facebook} ${classes.buttonMobile}`} disabled variant="contained" onClick={() => onAuthProviderClick(new firebase.auth.FacebookAuthProvider())}>
+            <Button className={`${classes.facebook} ${classes.buttonMobile}`} disabled={isSigningIn} variant="contained" onClick={() => onAuthProviderClick(new firebase.auth.FacebookAuthProvider())}>
               <FacebookBoxIcon className={classes.icon} />
               Facebook
             </Button>
 
-            <Button className={`${classes.twitter} ${classes.buttonMobile}`} disabled variant="contained" onClick={() => onAuthProviderClick(new firebase.auth.TwitterAuthProvider())}>
+            <Button className={`${classes.twitter} ${classes.buttonMobile}`} disabled={isSigningIn} variant="contained" onClick={() => onAuthProviderClick(new firebase.auth.TwitterAuthProvider())}>
               <TwitterIcon className={classes.icon} />
               Twitter
             </Button>
 
-            <Button className={`${classes.gitHub} ${classes.buttonMobile}`} disabled variant="contained" onClick={() => onAuthProviderClick(new firebase.auth.GithubAuthProvider())}>
+            <Button className={`${classes.gitHub} ${classes.buttonMobile}`} disabled={isSigningIn} variant="contained" onClick={() => onAuthProviderClick(new firebase.auth.GithubAuthProvider())}>
               <GitHubCircleIcon className={classes.icon} />
               GitHub
             </Button>
