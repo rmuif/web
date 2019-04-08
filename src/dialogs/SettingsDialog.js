@@ -13,6 +13,8 @@ import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
 import Button from '@material-ui/core/Button';
 
+import SwipeableViews from 'react-swipeable-views';
+
 import AccountTab from '../tabs/settings/AccountTab';
 import AppearanceTab from '../tabs/settings/AppearanceTab';
 
@@ -53,6 +55,12 @@ class SettingsDialog extends Component {
     });
   };
 
+  changeIndex = (index) => {
+    this.setState({
+      selectedTab: index
+    });
+  };
+
   render() {
     // Properties
     const { classes, open, fullScreen, user, isVerifyingEmailAddress, colors, types, primaryColor, secondaryColor, type } = this.props;
@@ -72,22 +80,24 @@ class SettingsDialog extends Component {
         </Tabs>
 
         <DialogContent>
-          {selectedTab === 0 &&
-            <AccountTab user={user} isVerifyingEmailAddress={isVerifyingEmailAddress} onVerifyEmailAddressClick={onVerifyEmailAddressClick} />
-          }
+          <SwipeableViews index={selectedTab} onChangeIndex={this.changeIndex}>
+            {selectedTab === 0 &&
+              <AccountTab user={user} isVerifyingEmailAddress={isVerifyingEmailAddress} onVerifyEmailAddressClick={onVerifyEmailAddressClick} />
+            }
 
-          {selectedTab === 1 &&
-            <AppearanceTab
-              colors={colors}
-              types={types}
-              primaryColor={primaryColor}
-              secondaryColor={secondaryColor}
-              type={type}
-              onPrimaryColorChange={onPrimaryColorChange}
-              onSecondaryColorChange={onSecondaryColorChange}
-              onTypeChange={onTypeChange}
-            />
-          }
+            {selectedTab === 1 &&
+              <AppearanceTab
+                colors={colors}
+                types={types}
+                primaryColor={primaryColor}
+                secondaryColor={secondaryColor}
+                type={type}
+                onPrimaryColorChange={onPrimaryColorChange}
+                onSecondaryColorChange={onSecondaryColorChange}
+                onTypeChange={onTypeChange}
+              />
+            }
+          </SwipeableViews>
         </DialogContent>
 
         <DialogActions>
