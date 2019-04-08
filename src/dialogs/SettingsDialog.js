@@ -80,7 +80,7 @@ class SettingsDialog extends Component {
         </Tabs>
 
         <DialogContent>
-          <SwipeableViews style={{ height: '100%' }} index={selectedTab} onChangeIndex={this.changeIndex}>
+          <SwipeableViews index={selectedTab} onChangeIndex={this.changeIndex}>
             <AccountTab
               user={user}
               isVerifyingEmailAddress={isVerifyingEmailAddress}
