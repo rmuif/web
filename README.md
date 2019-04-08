@@ -1,17 +1,12 @@
-# React + Material-UI + Firebase
+# React + Material-UI + Firebase [![Build Status](https://travis-ci.org/Phoqe/react-material-ui-firebase.svg?branch=master)](https://travis-ci.org/Phoqe/react-material-ui-firebase)
 
-[![Build Status](https://travis-ci.org/Phoqe/react-material-ui-firebase.svg?branch=master)](https://travis-ci.org/Phoqe/react-material-ui-firebase)
-
-This project is an application skeleton for a typical web application. You can use it to quickly bootstrap your own
-projects and development environment for these projects. This project itself was bootstrapped with
-[Create React App](https://github.com/facebook/create-react-app), you can
-expect the same type of tooling to be available as a regular Create React App project.
+This project is an application skeleton for a typical web application.
+You can use it to quickly bootstrap your own projects and development environment for these projects.
+This project itself was bootstrapped with [Create React App](https://github.com/facebook/create-react-app), you can expect the same type of tooling to be available as a regular Create React App project.
 
 ## Features
 
-The project contains a sample React application laid out with [Material-UI](https://material-ui.com) and
-most logic through [Firebase](https://firebase.google.com) along with a bunch of development and testing tools for
-instant web development gratification.
+The project contains a sample React application laid out with [Material-UI](https://material-ui.com) and most logic through [Firebase](https://firebase.google.com) along with a bunch of development and testing tools for instant web development gratification.
 
 - Bootstrapped with Create React App, same tooling works out-of-the-box
 - Simple and dynamic Material Design layout with user theming
@@ -19,6 +14,23 @@ instant web development gratification.
 - Robust routing with [React Router](https://reacttraining.com/react-router/), including error handling
 
 Still not convinced? Take a look at the [demo](https://phoqe.github.io/react-material-ui-firebase).
+
+## Getting Started
+
+**You’ll need to have Node 8.10.0 or later on your local development machine** (but it’s not required on the server).
+You can use [nvm](https://github.com/creationix/nvm#installation) (macOS/Linux) or [nvm-windows](https://github.com/coreybutler/nvm-windows#node-version-manager-nvm-for-windows) to easily switch Node versions between different projects.
+
+### npm
+
+```sh
+npm install
+```
+
+### Yarn
+
+```sh
+yarn install
+```
 
 ## Available Scripts
 
