@@ -80,23 +80,23 @@ class SettingsDialog extends Component {
         </Tabs>
 
         <DialogContent>
-          <SwipeableViews index={selectedTab} onChangeIndex={this.changeIndex}>
-            {selectedTab === 0 &&
-              <AccountTab user={user} isVerifyingEmailAddress={isVerifyingEmailAddress} onVerifyEmailAddressClick={onVerifyEmailAddressClick} />
-            }
+          <SwipeableViews style={{ height: '100%' }} index={selectedTab} onChangeIndex={this.changeIndex}>
+            <AccountTab
+              user={user}
+              isVerifyingEmailAddress={isVerifyingEmailAddress}
+              onVerifyEmailAddressClick={onVerifyEmailAddressClick}
+            />
 
-            {selectedTab === 1 &&
-              <AppearanceTab
-                colors={colors}
-                types={types}
-                primaryColor={primaryColor}
-                secondaryColor={secondaryColor}
-                type={type}
-                onPrimaryColorChange={onPrimaryColorChange}
-                onSecondaryColorChange={onSecondaryColorChange}
-                onTypeChange={onTypeChange}
-              />
-            }
+            <AppearanceTab
+              colors={colors}
+              types={types}
+              primaryColor={primaryColor}
+              secondaryColor={secondaryColor}
+              type={type}
+              onPrimaryColorChange={onPrimaryColorChange}
+              onSecondaryColorChange={onSecondaryColorChange}
+              onTypeChange={onTypeChange}
+            />
           </SwipeableViews>
         </DialogContent>
 
