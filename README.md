@@ -1,5 +1,7 @@
 # React + Material-UI + Firebase
 
+[![Build Status](https://travis-ci.org/Phoqe/react-material-ui-firebase.svg?branch=master)](https://travis-ci.org/Phoqe/react-material-ui-firebase)
+
 This project is an application skeleton for a typical web application. You can use it to quickly bootstrap your own
 projects and development environment for these projects. This project itself was bootstrapped with
 [Create React App](https://github.com/facebook/create-react-app), you can
