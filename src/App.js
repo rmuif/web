@@ -667,7 +667,7 @@ class App extends Component {
               <EmptyState
                 icon={<CodeIcon className={classes.emptyStateIcon} color="action" />}
                 title={settings.name}
-                description="The three musketeers; all in one pack in the form of a boilerplate app."
+                description="The three musketeers, all in one pack in the form of a boilerplate app."
                 button={
                   <Fab className={classes.button} color="primary" href="https://github.com/Phoqe/react-material-ui-firebase" rel="noopener noreferrer" target="_blank" variant="extended">
                     <GitHubCircleIcon className={classes.buttonIcon} />
