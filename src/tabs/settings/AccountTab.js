@@ -84,7 +84,7 @@ class AccountTab extends Component {
               </Tooltip>
             </ListItemIcon>
 
-            <ListItemText primary={user.email} secondary={user.emailVerified ? 'Your e-mail address is verified.' : 'Your e-mail address is not verified.'} />
+            <ListItemText primary={user.email} secondary={user.emailVerified ? 'Verified' : 'Not verified'} />
 
             {!user.emailVerified &&
               <ListItemSecondaryAction>

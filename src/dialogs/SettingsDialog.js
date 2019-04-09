@@ -12,6 +12,7 @@ import DialogActions from '@material-ui/core/DialogActions';
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
 import Button from '@material-ui/core/Button';
+import Hidden from '@material-ui/core/Hidden';
 
 import SwipeableViews from 'react-swipeable-views';
 
@@ -80,24 +81,49 @@ class SettingsDialog extends Component {
         </Tabs>
 
         <DialogContent>
-          <SwipeableViews index={selectedTab} onChangeIndex={this.changeIndex}>
-            <AccountTab
-              user={user}
-              isVerifyingEmailAddress={isVerifyingEmailAddress}
-              onVerifyEmailAddressClick={onVerifyEmailAddressClick}
-            />
+          <Hidden only="xs">
+            {selectedTab === 0 &&
+              <AccountTab
+                user={user}
+                isVerifyingEmailAddress={isVerifyingEmailAddress}
+                onVerifyEmailAddressClick={onVerifyEmailAddressClick}
+              />
+            }
 
-            <AppearanceTab
-              colors={colors}
-              types={types}
-              primaryColor={primaryColor}
-              secondaryColor={secondaryColor}
-              type={type}
-              onPrimaryColorChange={onPrimaryColorChange}
-              onSecondaryColorChange={onSecondaryColorChange}
-              onTypeChange={onTypeChange}
-            />
-          </SwipeableViews>
+            {selectedTab === 1 &&
+              <AppearanceTab
+                colors={colors}
+                types={types}
+                primaryColor={primaryColor}
+                secondaryColor={secondaryColor}
+                type={type}
+                onPrimaryColorChange={onPrimaryColorChange}
+                onSecondaryColorChange={onSecondaryColorChange}
+                onTypeChange={onTypeChange}
+              />
+            }
+          </Hidden>
+
+          <Hidden only={['sm', 'md', 'lg', 'xl']}>
+            <SwipeableViews index={selectedTab} onChangeIndex={this.changeIndex}>
+              <AccountTab
+                user={user}
+                isVerifyingEmailAddress={isVerifyingEmailAddress}
+                onVerifyEmailAddressClick={onVerifyEmailAddressClick}
+              />
+
+              <AppearanceTab
+                colors={colors}
+                types={types}
+                primaryColor={primaryColor}
+                secondaryColor={secondaryColor}
+                type={type}
+                onPrimaryColorChange={onPrimaryColorChange}
+                onSecondaryColorChange={onSecondaryColorChange}
+                onTypeChange={onTypeChange}
+              />
+            </SwipeableViews>
+          </Hidden>
         </DialogContent>
 
         <DialogActions>
