@@ -49,7 +49,7 @@ import SignUpDialog from './dialogs/SignUpDialog';
 import SignInDialog from './dialogs/SignInDialog';
 import ResetPasswordDialog from './dialogs/ResetPasswordDialog';
 import SettingsDialog from './dialogs/SettingsDialog';
-import SignOutDialog from './dialogs/SignOutDialog';
+import ConfirmationDialog from './dialogs/ConfirmationDialog';
 
 const config = {
   apiKey: 'AIzaSyDYZOrZVpXkPQD6J31mb9t2eIIxmGEJK-Q',
@@ -790,11 +790,18 @@ class App extends Component {
             }
 
             {isSignedIn &&
-              <SignOutDialog
+              <ConfirmationDialog
                 open={signOutDialog.open}
-                isSigningOut={isSigningOut}
-                signOut={this.signOut}
+
+                title="Sign out?"
+                contentText="While signed out you are unable to manage your profile and conduct other activities that require you to be signed in."
+                okText="Sign Out"
+                disableOkButton={isSigningOut}
+                highlightOkButton
+
                 onClose={this.closeSignOutDialog}
+                onCancelClick={this.closeSignOutDialog}
+                onOkClick={this.signOut}
               />
             }
 

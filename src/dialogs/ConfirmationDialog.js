@@ -39,7 +39,7 @@ class ConfirmationDialog extends Component {
     const { open } = this.props;
 
     // Custom
-    const { title, contentText, cancelText, okText, highlightOkButton } = this.props;
+    const { title, contentText, cancelText, okText, disableOkButton, highlightOkButton } = this.props;
 
     /**
      * Events
@@ -70,7 +70,7 @@ class ConfirmationDialog extends Component {
             }
 
             {onOkClick &&
-              <Button color="primary" variant={highlightOkButton && 'contained'} onClick={onOkClick}>
+              <Button color="primary" disabled={disableOkButton} variant={highlightOkButton && 'contained'} onClick={onOkClick}>
                 {okText || 'OK'}
               </Button>
             }
@@ -88,6 +88,7 @@ ConfirmationDialog.propTypes = {
   contentText: PropTypes.string.isRequired,
   cancelText: PropTypes.string,
   okText: PropTypes.string,
+  disableOkButton: PropTypes.bool,
   highlightOkButton: PropTypes.bool,
 
   onClose: PropTypes.func.isRequired,
