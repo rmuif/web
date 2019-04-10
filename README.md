@@ -1,12 +1,12 @@
 # React + Material-UI + Firebase [![Build Status](https://travis-ci.org/Phoqe/react-material-ui-firebase.svg?branch=master)](https://travis-ci.org/Phoqe/react-material-ui-firebase)
 
-This project is an application skeleton for a typical web application.
+This project is an application skeleton for a typical web app.
 You can use it to quickly bootstrap your own projects and development environment for these projects.
-This project itself was bootstrapped with [Create React App](https://github.com/facebook/create-react-app), you can expect the same type of tooling to be available as a regular Create React App project.
+This project itself was bootstrapped with [Create React App](https://github.com/facebook/create-react-app), so you can expect the same type of tooling to be available as if it was a regular Create React App project.
 
 ## Features
 
-The project contains a sample React application laid out with [Material-UI](https://material-ui.com) and most logic through [Firebase](https://firebase.google.com) along with a bunch of development and testing tools for instant web development gratification.
+The project contains a sample React app laid out with [Material-UI](https://material-ui.com) and most logic through [Firebase](https://firebase.google.com) along with a bunch of development and testing tools for instant web development gratification.
 
 - Bootstrapped with Create React App, same tooling works out-of-the-box
 - Simple and dynamic Material Design layout with user theming
@@ -34,7 +34,7 @@ yarn install
 
 ### Changing the Name
 
-There's 4 files you need to modify to change the name throughout the application.
+There are 4 files you need to change to change the name of the app.
 
 - public/index.html
   - `title`
@@ -48,7 +48,7 @@ There's 4 files you need to modify to change the name throughout the application
   
 ### Replacing the Firebase Credentials
 
-By default the project uses a demo Firebase project, you should replace the demo credentials with your own project's credentials in `src/App.js`:
+The app uses a demo Firebase project by default, if you want to use your own Firebase project you can just replace the credentials with your own in `src/App.js`:
 
 ```js
 const config = {
@@ -84,6 +84,33 @@ let theme = createMuiTheme({
   }
 });
 ```
+
+Available colors:
+
+- `red`
+- `pink`
+- `purple`
+- `deepPurple`
+- `indigo`
+- `blue`
+- `lightBlue`
+- `cyan`
+- `teal`
+- `green`
+- `lightGreen`
+- `lime`
+- `yellow`
+- `amber`
+- `orange`
+- `deepOrange`
+- `brown`
+- `gray`
+- `blueGray`
+
+Available types:
+
+- `light`
+- `dark`
 
 ## Available Scripts
 
