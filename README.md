@@ -32,6 +32,59 @@ npm install
 yarn install
 ```
 
+### Changing the Name
+
+There's 4 files you need to modify to change the name throughout the application.
+
+- public/index.html
+  - `title`
+- public/manifest.json
+  - `short_name`
+  - `name`
+- src/App.js
+  - `settings.name`
+- package.json
+  - `name`
+  
+### Replacing the Firebase Credentials
+
+By default the project uses a demo Firebase project, you should replace the demo credentials with your own project's credentials in `src/App.js`:
+
+```js
+const config = {
+  apiKey: 'YOUR_API_KEY',
+  authDomain: 'YOUR_AUTH_DOMAIN',
+  databaseURL: 'YOUR_DATABASE_URL',
+  projectId: 'YOUR_PROJECT_ID',
+  storageBucket: 'YOUR_STORAGE_BUCKET',
+  messagingSenderId: 'YOUR_MESSAGING_SENDER_ID'
+};
+```
+
+### Changing the Default Theme
+
+By default the project uses a blue and red color combination where blue is the primary color and red the secondary color.
+You can change the default theme by modifying these values in `src/App.js`:
+
+```js
+const defaultTheme = {
+  primaryColor: 'YOUR_PRIMARY_COLOR',
+  secondaryColor: 'YOUR_SECONDARY_COLOR'
+};
+
+let theme = createMuiTheme({
+  palette: {
+    primary: YOUR_PRIMARY_COLOR,
+    secondary: YOUR_SECONDARY_COLOR,
+    type: 'YOUR_TYPE'
+  },
+
+  typography: {
+    useNextVariants: true
+  }
+});
+```
+
 ## Available Scripts
 
 In the project directory, you can run:
