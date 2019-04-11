@@ -62,12 +62,20 @@ class SettingsDialog extends Component {
     });
   };
 
+  handleResetClick = () => {
+    const { primaryColor, secondaryColor, type, defaultTheme } = this.props;
+
+    if (primaryColor !== defaultTheme.primaryColor || secondaryColor !== defaultTheme.secondaryColor || type !== defaultTheme.type) {
+      setTimeout(this.props.onResetClick, 137.5);
+    }
+  };
+
   render() {
     // Properties
     const { classes, open, fullScreen, user, isVerifyingEmailAddress, colors, types, primaryColor, secondaryColor, type } = this.props;
 
     // Events
-    const { onClose, onVerifyEmailAddressClick, onPrimaryColorChange, onSecondaryColorChange, onTypeChange, onResetClick } = this.props;
+    const { onClose, onVerifyEmailAddressClick, onPrimaryColorChange, onSecondaryColorChange, onTypeChange } = this.props;
 
     const { selectedTab } = this.state;
 
@@ -128,7 +136,7 @@ class SettingsDialog extends Component {
 
         <DialogActions>
           <Button color="primary" onClick={onClose}>Cancel</Button>
-          <Button color="primary" variant="outlined" onClick={() => { setTimeout(onResetClick, 137.5) }}>Reset</Button>
+          <Button color="primary" variant="outlined" onClick={this.handleResetClick}>Reset</Button>
           <Button color="primary" variant="contained" onClick={onClose}>OK</Button>
         </DialogActions>
       </Dialog>

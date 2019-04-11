@@ -167,7 +167,8 @@ const types = [
 
 const defaultTheme = {
   primaryColor: 'blue',
-  secondaryColor: 'red'
+  secondaryColor: 'red',
+  type: 'light'
 };
 
 let theme = createMuiTheme({
@@ -207,7 +208,7 @@ class App extends Component {
     this.state = {
       primaryColor: defaultTheme.primaryColor,
       secondaryColor: defaultTheme.secondaryColor,
-      type: 'light',
+      type: defaultTheme.type,
 
       isAuthReady: false,
 
@@ -296,7 +297,7 @@ class App extends Component {
     this.updateTheme({
       primaryColor: defaultTheme.primaryColor,
       secondaryColor: defaultTheme.secondaryColor,
-      type: 'light'
+      type: defaultTheme.type
     }, true);
   };
 
@@ -756,6 +757,7 @@ class App extends Component {
                     primaryColor={primaryColor}
                     secondaryColor={secondaryColor}
                     type={type}
+                    defaultTheme={defaultTheme}
 
                     onClose={this.closeSettingsDialog}
                     onVerifyEmailAddressClick={this.verifyEmailAddress}
@@ -777,6 +779,7 @@ class App extends Component {
                     primaryColor={primaryColor}
                     secondaryColor={secondaryColor}
                     type={type}
+                    defaultTheme={defaultTheme}
 
                     onClose={this.closeSettingsDialog}
                     onVerifyEmailAddressClick={this.verifyEmailAddress}
