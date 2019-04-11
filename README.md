@@ -1,19 +1,18 @@
 # React + Material-UI + Firebase [![Build Status](https://travis-ci.org/Phoqe/react-material-ui-firebase.svg?branch=master)](https://travis-ci.org/Phoqe/react-material-ui-firebase)
 
-This project is an application skeleton for a typical web app.
-You can use it to quickly bootstrap your own projects and development environment for these projects.
-This project itself was bootstrapped with [Create React App](https://github.com/facebook/create-react-app), so you can expect the same type of tooling to be available as if it was a regular Create React App project.
+This project is an application skeleton for a typical [React](https://reactjs.org) project. It comes bundled with [Material-UI](https://material-ui.com), [Firebase](https://firebase.google.com), and [React Router](https://reacttraining.com/react-router). With [Create React App](https://facebook.github.io/create-react-app) at its core, you can use it to bootstrap your projects and development environment with the same tooling.
 
 ## Features
 
-The project contains a sample React app laid out with [Material-UI](https://material-ui.com) and most logic through [Firebase](https://firebase.google.com) along with a bunch of development and testing tools for instant web development gratification.
+React + Material-UI + Firebase comes with a bunch of development and testing tools for instant web development gratification.
 
-- Bootstrapped with Create React App, same tooling works out-of-the-box
-- Simple and dynamic Material Design layout with user theming
-- Complete support for the Firebase suite; Firebase Authentication already set-up with multiple authentication providers
-- Robust routing with [React Router](https://reacttraining.com/react-router/), including error handling
+- Bootstrapped with Create React App, the same tooling works out-of-the-box
+- Scaffolding incorporates Google Material Design principles through Material-UI
+- Built on top of Firebase with authentication working from the start
+- Robust routing with React Router including error handling (404)
+- Extensive mobile support with [react-swipeable-views](https://react-swipeable-views.com) for tabs
 
-Still not convinced? Take a look at the [demo](https://phoqe.github.io/react-material-ui-firebase).
+Do you want to see it in action? Take a look at the [demo](https://phoqe.github.io/react-material-ui-firebase).
 
 ## Getting Started
 
@@ -32,9 +31,21 @@ npm install
 yarn install
 ```
 
+### Changing the Basename
+
+If you receive a warning like:
+
+```
+Warning: You are attempting to use a basename on a page whose URL path does not begin with the basename. Expected path "/" to begin with "/react-material-ui-firebase".
+```
+
+You may need to adjust the router to use the correct basename. A basename is the base URL for all locations. In most cases you can just remove the `basename` attribute from the `<Router>` element in `src/App.js`.
+
+If you're still having problems you can read more in [React Router's documentation](https://reacttraining.com/react-router/web/api/BrowserRouter/basename-string).
+
 ### Changing the Name
 
-There are 4 files you need to change to change the name of the app.
+Making this boilerplate your starting-point requires you changing its name. There are 4 files you'll need to modify to change the name of the project.
 
 - public/index.html
   - `title`
@@ -45,10 +56,12 @@ There are 4 files you need to change to change the name of the app.
   - `settings.name`
 - package.json
   - `name`
-  
+
 ### Replacing the Firebase Credentials
 
-The app uses a demo Firebase project by default, if you want to use your own Firebase project you can just replace the credentials with your own in `src/App.js`:
+By default, React + Material-UI + Firebase uses a demo Firebase project which you can't manage. You need to create a new Firebase project and replace the credentials with your own. You shouldn't use the demo project for anything more than testing as you have no control over it.
+
+When you've created a Firebase project you can copy-paste your credentials into the `config` object in `src/App.js`:
 
 ```js
 const config = {
@@ -63,20 +76,20 @@ const config = {
 
 ### Changing the Default Theme
 
-By default the project uses a blue and red color combination where blue is the primary color and red the secondary color.
-You can change the default theme by modifying these values in `src/App.js`:
+The sample app uses a blue and red color combination with a light theme type. When a user changes the theme, a local storage object will be created and read on startup. You can change the default theme, which is the theme all users will see before changing it themselves, in `src/App.js`:
 
 ```js
 const defaultTheme = {
   primaryColor: 'YOUR_PRIMARY_COLOR',
-  secondaryColor: 'YOUR_SECONDARY_COLOR'
+  secondaryColor: 'YOUR_SECONDARY_COLOR',
+  type: 'YOUR_TYPE'
 };
 
 let theme = createMuiTheme({
   palette: {
     primary: YOUR_PRIMARY_COLOR,
     secondary: YOUR_SECONDARY_COLOR,
-    type: 'YOUR_TYPE'
+    type: type
   },
 
   typography: {
