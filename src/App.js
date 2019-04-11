@@ -249,7 +249,7 @@ class App extends Component {
     };
   }
 
-  updateTheme = (palette, removeLocalStorage) => {
+  updateTheme = (palette, removeLocalStorage, callback) => {
     const { primaryColor, secondaryColor, type } = this.state;
 
     if (!palette.primaryColor) {
@@ -290,6 +290,10 @@ class App extends Component {
           type: palette.type
         }));
       }
+
+      if (callback && typeof callback === 'function') {
+        callback();
+      }
     });
   };
 
@@ -298,7 +302,9 @@ class App extends Component {
       primaryColor: defaultTheme.primaryColor,
       secondaryColor: defaultTheme.secondaryColor,
       type: defaultTheme.type
-    }, true);
+    }, true, () => {
+      this.openSnackbar('Settings reset');
+    });
   };
 
   changePrimaryColor = (event) => {
