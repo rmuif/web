@@ -2,8 +2,6 @@ import React, { Component } from 'react';
 
 import PropTypes from 'prop-types';
 
-import { withStyles } from '@material-ui/core/styles';
-
 import Dialog from '@material-ui/core/Dialog';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import DialogContent from '@material-ui/core/DialogContent';
@@ -18,16 +16,6 @@ import SwipeableViews from 'react-swipeable-views';
 
 import AccountTab from '../tabs/settings/AccountTab';
 import AppearanceTab from '../tabs/settings/AppearanceTab';
-
-const styles = {
-  light: {
-    color: '#000000'
-  },
-
-  dark: {
-    color: '#ffffff'
-  }
-};
 
 class SettingsDialog extends Component {
   constructor(props) {
@@ -72,7 +60,7 @@ class SettingsDialog extends Component {
 
   render() {
     // Properties
-    const { classes, open, fullScreen, user, isVerifyingEmailAddress, colors, types, primaryColor, secondaryColor, type } = this.props;
+    const { open, fullScreen, user, isVerifyingEmailAddress, colors, types, primaryColor, secondaryColor, type } = this.props;
 
     // Events
     const { onClose, onVerifyEmailAddressClick, onPrimaryColorChange, onSecondaryColorChange, onTypeChange } = this.props;
@@ -83,9 +71,9 @@ class SettingsDialog extends Component {
       <Dialog open={open} fullScreen={fullScreen} onClose={onClose} onKeyPress={this.handleKeyPress}>
         <DialogTitle>Settings</DialogTitle>
 
-        <Tabs onChange={this.changeTab} value={selectedTab} variant="fullWidth">
-          <Tab classes={{ label: type === 'light' ? classes.light : classes.dark }} label="Account" />
-          <Tab classes={{ label: type === 'light' ? classes.light : classes.dark }} label="Appearance" />
+        <Tabs indicatorColor="primary" textColor="primary" onChange={this.changeTab} value={selectedTab} variant="fullWidth">
+          <Tab label="Account" />
+          <Tab label="Appearance" />
         </Tabs>
 
         <DialogContent>
@@ -145,7 +133,6 @@ class SettingsDialog extends Component {
 }
 
 SettingsDialog.propTypes = {
-  classes: PropTypes.object.isRequired,
   open: PropTypes.bool.isRequired,
   fullScreen: PropTypes.bool,
   user: PropTypes.object.isRequired,
@@ -164,4 +151,4 @@ SettingsDialog.propTypes = {
   onResetClick: PropTypes.func.isRequired
 };
 
-export default withStyles(styles)(SettingsDialog);
+export default SettingsDialog;
