@@ -87,9 +87,9 @@ class AccountTab extends Component {
 
               <ListItemText primary={user.email} secondary={user.emailVerified ? 'Verified' : 'Not verified'} />
 
-              {!user.emailVerified &&
+              {(!user.emailVerified && !isVerifyingEmailAddress) &&
                 <ListItemSecondaryAction>
-                  <Button color="primary" disabled={isVerifyingEmailAddress} variant="contained" onClick={this.openVerifyEmailAddressDialog}>Verify</Button>
+                  <Button color="primary" variant="contained" onClick={this.openVerifyEmailAddressDialog}>Verify</Button>
                 </ListItemSecondaryAction>
               }
             </ListItem>
