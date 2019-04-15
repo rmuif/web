@@ -77,41 +77,47 @@ class AccountTab extends Component {
         </DialogContentText>
 
         <List>
-          <ListItem>
-            <ListItemIcon>
-              <Tooltip title="E-mail address">
-                <EmailIcon />
-              </Tooltip>
-            </ListItemIcon>
+          {user.email &&
+            <ListItem>
+              <ListItemIcon>
+                <Tooltip title="E-mail address">
+                  <EmailIcon />
+                </Tooltip>
+              </ListItemIcon>
 
-            <ListItemText primary={user.email} secondary={user.emailVerified ? 'Verified' : 'Not verified'} />
+              <ListItemText primary={user.email} secondary={user.emailVerified ? 'Verified' : 'Not verified'} />
 
-            {!user.emailVerified &&
-              <ListItemSecondaryAction>
-                <Button color="primary" disabled={isVerifyingEmailAddress} variant="contained" onClick={this.openVerifyEmailAddressDialog}>Verify</Button>
-              </ListItemSecondaryAction>
-            }
-          </ListItem>
+              {!user.emailVerified &&
+                <ListItemSecondaryAction>
+                  <Button color="primary" disabled={isVerifyingEmailAddress} variant="contained" onClick={this.openVerifyEmailAddressDialog}>Verify</Button>
+                </ListItemSecondaryAction>
+              }
+            </ListItem>
+          }
 
-          <ListItem>
-            <ListItemIcon>
-              <Tooltip title="Last sign-in">
-                <AccessTimeIcon />
-              </Tooltip>
-            </ListItemIcon>
+          {user.metadata.lastSignInTime &&
+            <ListItem>
+              <ListItemIcon>
+                <Tooltip title="Last sign-in">
+                  <AccessTimeIcon />
+                </Tooltip>
+              </ListItemIcon>
 
-            <ListItemText primary="Last sign-in" secondary={moment(user.metadata.lastSignInTime).format('LLLL')} />
-          </ListItem>
+              <ListItemText primary="Last sign-in" secondary={moment(user.metadata.lastSignInTime).format('LLLL')} />
+            </ListItem>
+          }
 
-          <ListItem>
-            <ListItemIcon>
-              <Tooltip title="Signed up">
-                <AccessTimeIcon />
-              </Tooltip>
-            </ListItemIcon>
+          {user.metadata.creationTime &&
+            <ListItem>
+              <ListItemIcon>
+                <Tooltip title="Signed up">
+                  <AccessTimeIcon />
+                </Tooltip>
+              </ListItemIcon>
 
-            <ListItemText primary="Signed up" secondary={moment(user.metadata.creationTime).format('LLLL')} />
-          </ListItem>
+              <ListItemText primary="Signed up" secondary={moment(user.metadata.creationTime).format('LLLL')} />
+            </ListItem>
+          }
         </List>
 
         <ConfirmationDialog
