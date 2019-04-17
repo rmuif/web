@@ -69,7 +69,7 @@ class SignUpDialog extends Component {
       this.setState({
         errors: null
       }, () => {
-        this.props.signUp(emailAddress, password);
+        this.props.signUp(emailAddress, password, passwordConfirmation);
       });
     }
   };
