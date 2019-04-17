@@ -1,0 +1,24 @@
+import React from 'react';
+
+import ReactDOM from 'react-dom';
+
+import ResetPasswordDialog from './ResetPasswordDialog';
+
+it('renders without crashing', () => {
+  const div = document.createElement('div');
+
+  ReactDOM.render(
+    (
+      <ResetPasswordDialog
+        open={false}
+        isResettingPassword={false}
+        constraints={{}}
+        resetPassword={() => {}}
+        onClose={() => {}}
+      />
+    ),
+    div
+  );
+
+  ReactDOM.unmountComponentAtNode(div);
+});
