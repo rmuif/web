@@ -9,7 +9,9 @@ it('renders without crashing', () => {
 
   ReactDOM.render(
     (
-      <AuthProviderList />
+      <AuthProviderList
+        onAuthProviderClick={() => {}}
+      />
     ),
     div
   );

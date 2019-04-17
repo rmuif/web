@@ -11,8 +11,8 @@ it('renders without crashing', () => {
     (
       <ConfirmationDialog
         open={false}
-        title="Title"
-        contentText="Content"
+        title=""
+        contentText=""
         onClose={() => {}}
       />
     ),
