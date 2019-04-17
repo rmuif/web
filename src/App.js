@@ -664,95 +664,12 @@ class App extends Component {
             />
 
             {isSignedIn &&
-              <Switch>
-                <Route path="/" exact component={HomeContent} />
-                <Route component={NotFoundContent} />
-              </Switch>
-            }
-
-            {!isSignedIn &&
-              <EmptyState
-                icon={<CodeIcon className={classes.emptyStateIcon} color="action" />}
-                title={settings.name}
-                description="The three musketeers, all in one pack in the form of a boilerplate app."
-                button={
-                  <Fab className={classes.button} color="primary" href="https://github.com/Phoqe/react-material-ui-firebase" rel="noopener noreferrer" target="_blank" variant="extended">
-                    <GitHubCircleIcon className={classes.buttonIcon} />
-                    GitHub
-                  </Fab>
-                }
-              />
-            }
-
-            {!isSignedIn &&
               <React.Fragment>
-                <Hidden only="xs">
-                  <SignUpDialog
-                    open={signUpDialog.open}
-                    isSigningUp={isSigningUp}
-                    isSigningIn={isSigningIn}
-                    signUp={this.signUp}
+                <Switch>
+                  <Route path="/" exact component={HomeContent} />
+                  <Route component={NotFoundContent} />
+                </Switch>
 
-                    onClose={this.closeSignUpDialog}
-                    onAuthProviderClick={this.signInWithAuthProvider}
-                  />
-                </Hidden>
-
-                <Hidden only={['sm', 'md', 'lg', 'xl']}>
-                  <SignUpDialog
-                    open={signUpDialog.open}
-                    fullScreen
-                    isSigningUp={isSigningUp}
-                    isSigningIn={isSigningIn}
-                    signUp={this.signUp}
-
-                    onClose={this.closeSignUpDialog}
-                    onAuthProviderClick={this.signInWithAuthProvider}
-                  />
-                </Hidden>
-              </React.Fragment>
-            }
-
-            {!isSignedIn &&
-              <React.Fragment>
-                <Hidden only="xs">
-                  <SignInDialog
-                    open={signInDialog.open}
-                    isSigningIn={isSigningIn}
-                    signIn={this.signIn}
-
-                    onClose={this.closeSignInDialog}
-                    onAuthProviderClick={this.signInWithAuthProvider}
-                    onResetPasswordClick={this.showResetPasswordDialog}
-                  />
-                </Hidden>
-
-                <Hidden only={['sm', 'md', 'lg', 'xl']}>
-                  <SignInDialog
-                    open={signInDialog.open}
-                    fullScreen
-                    isSigningIn={isSigningIn}
-                    signIn={this.signIn}
-
-                    onClose={this.closeSignInDialog}
-                    onAuthProviderClick={this.signInWithAuthProvider}
-                    onResetPasswordClick={this.showResetPasswordDialog}
-                  />
-                </Hidden>
-              </React.Fragment>
-            }
-
-            {!isSignedIn &&
-              <ResetPasswordDialog
-                open={resetPasswordDialog.open}
-                isResettingPassword={isResettingPassword}
-                resetPassword={this.resetPassword}
-                onClose={this.closeResetPasswordDialog}
-              />
-            }
-
-            {isSignedIn &&
-              <React.Fragment>
                 <Hidden only="xs">
                   <SettingsDialog
                     open={settingsDialog.open}
@@ -795,23 +712,94 @@ class App extends Component {
                     onResetClick={this.resetTheme}
                   />
                 </Hidden>
+
+                <ConfirmationDialog
+                  open={signOutDialog.open}
+
+                  title="Sign out?"
+                  contentText="While signed out you are unable to manage your profile and conduct other activities that require you to be signed in."
+                  okText="Sign Out"
+                  disableOkButton={isSigningOut}
+                  highlightOkButton
+
+                  onClose={this.closeSignOutDialog}
+                  onCancelClick={this.closeSignOutDialog}
+                  onOkClick={this.signOut}
+                />
               </React.Fragment>
             }
 
-            {isSignedIn &&
-              <ConfirmationDialog
-                open={signOutDialog.open}
+            {!isSignedIn &&
+              <React.Fragment>
+                <EmptyState
+                  icon={<CodeIcon className={classes.emptyStateIcon} color="action" />}
+                  title={settings.name}
+                  description="The three musketeers, all in one pack in the form of a boilerplate app."
+                  button={
+                    <Fab className={classes.button} color="primary" href="https://github.com/Phoqe/react-material-ui-firebase" rel="noopener noreferrer" target="_blank" variant="extended">
+                      <GitHubCircleIcon className={classes.buttonIcon} />
+                      GitHub
+                    </Fab>
+                  }
+                />
 
-                title="Sign out?"
-                contentText="While signed out you are unable to manage your profile and conduct other activities that require you to be signed in."
-                okText="Sign Out"
-                disableOkButton={isSigningOut}
-                highlightOkButton
+                <Hidden only="xs">
+                  <SignUpDialog
+                    open={signUpDialog.open}
+                    isSigningUp={isSigningUp}
+                    isSigningIn={isSigningIn}
+                    signUp={this.signUp}
 
-                onClose={this.closeSignOutDialog}
-                onCancelClick={this.closeSignOutDialog}
-                onOkClick={this.signOut}
-              />
+                    onClose={this.closeSignUpDialog}
+                    onAuthProviderClick={this.signInWithAuthProvider}
+                  />
+                </Hidden>
+
+                <Hidden only={['sm', 'md', 'lg', 'xl']}>
+                  <SignUpDialog
+                    open={signUpDialog.open}
+                    fullScreen
+                    isSigningUp={isSigningUp}
+                    isSigningIn={isSigningIn}
+                    signUp={this.signUp}
+
+                    onClose={this.closeSignUpDialog}
+                    onAuthProviderClick={this.signInWithAuthProvider}
+                  />
+                </Hidden>
+
+                <Hidden only="xs">
+                  <SignInDialog
+                    open={signInDialog.open}
+                    isSigningIn={isSigningIn}
+                    signIn={this.signIn}
+
+                    onClose={this.closeSignInDialog}
+                    onAuthProviderClick={this.signInWithAuthProvider}
+                    onResetPasswordClick={this.showResetPasswordDialog}
+                  />
+                </Hidden>
+
+                <Hidden only={['sm', 'md', 'lg', 'xl']}>
+                  <SignInDialog
+                    open={signInDialog.open}
+                    fullScreen
+                    isSigningIn={isSigningIn}
+                    signIn={this.signIn}
+
+                    onClose={this.closeSignInDialog}
+                    onAuthProviderClick={this.signInWithAuthProvider}
+                    onResetPasswordClick={this.showResetPasswordDialog}
+                  />
+                </Hidden>
+
+                <ResetPasswordDialog
+                  open={resetPasswordDialog.open}
+                  isResettingPassword={isResettingPassword}
+                  resetPassword={this.resetPassword}
+                  onClose={this.closeResetPasswordDialog}
+                />
+              </React.Fragment>
             }
 
             <Snackbar
