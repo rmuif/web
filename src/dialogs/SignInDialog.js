@@ -30,27 +30,9 @@ class SignInDialog extends Component {
   }
 
   signIn = () => {
-    const constraints = {
-      emailAddress: {
-        email: true,
-        presence: {
-          allowEmpty: false
-        }
-      },
-      
-      password: {
-        length: {
-          minimum: 6
-        },
-        presence: {
-          allowEmpty: false
-        }
-      }
-    };
-
     const { emailAddress, password } = this.state;
     
-    const errors = validate({ emailAddress, password }, constraints);
+    const errors = validate({ emailAddress, password }, this.props.constraints);
 
     if (errors) {
       this.setState({ errors });
@@ -161,6 +143,9 @@ SignInDialog.propTypes = {
   open: PropTypes.bool.isRequired,
   fullScreen: PropTypes.bool,
   isSigningIn: PropTypes.bool.isRequired,
+  constraints: PropTypes.object.isRequired,
+
+  signIn: PropTypes.func.isRequired,
 
   onClose: PropTypes.func.isRequired,
   onAuthProviderClick: PropTypes.func.isRequired,

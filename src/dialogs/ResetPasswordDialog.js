@@ -27,18 +27,9 @@ class ResetPasswordDialog extends Component {
   }
 
   resetPassword = () => {
-    const constraints = {
-      emailAddress: {
-        email: true,
-        presence: {
-          allowEmpty: false
-        }
-      }
-    };
-
     const { emailAddress } = this.state;
     
-    const errors = validate({ emailAddress }, constraints);
+    const errors = validate({ emailAddress }, this.props.constraints);
 
     if (errors) {
       this.setState({ errors });
@@ -128,6 +119,7 @@ class ResetPasswordDialog extends Component {
 ResetPasswordDialog.propTypes = {
   open: PropTypes.bool.isRequired,
   isResettingPassword: PropTypes.bool.isRequired,
+  constraints: PropTypes.object.isRequired,
 
   resetPassword: PropTypes.func.isRequired,
 

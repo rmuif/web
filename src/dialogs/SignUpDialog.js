@@ -31,37 +31,9 @@ class SignUpDialog extends Component {
   }
 
   signUp = () => {
-    const constraints = {
-      emailAddress: {
-        email: true,
-        presence: {
-          allowEmpty: false
-        }
-      },
-      
-      password: {
-        length: {
-          minimum: 6
-        },
-        presence: {
-          allowEmpty: false
-        }
-      },
-
-      passwordConfirmation: {
-        equality: 'password',
-        length: {
-          minimum: 6
-        },
-        presence: {
-          allowEmpty: false
-        }
-      }
-    };
-
     const { emailAddress, password, passwordConfirmation } = this.state;
     
-    const errors = validate({ emailAddress, password, passwordConfirmation }, constraints);
+    const errors = validate({ emailAddress, password, passwordConfirmation }, this.props.constraints);
 
     if (errors) {
       this.setState({ errors });
@@ -190,6 +162,7 @@ SignUpDialog.propTypes = {
   fullScreen: PropTypes.bool,
   isSigningUp: PropTypes.bool.isRequired,
   isSigningIn: PropTypes.bool.isRequired,
+  constraints: PropTypes.object.isRequired,
 
   signUp: PropTypes.func.isRequired,
 

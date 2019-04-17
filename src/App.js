@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
-
 import PropTypes from 'prop-types';
+
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
 import validate from 'validate.js';
 
@@ -53,6 +53,10 @@ import ResetPasswordDialog from './dialogs/ResetPasswordDialog';
 import SettingsDialog from './dialogs/SettingsDialog';
 import ConfirmationDialog from './dialogs/ConfirmationDialog';
 
+/**
+ * Firebase
+ */
+
 const config = {
   apiKey: 'AIzaSyDYZOrZVpXkPQD6J31mb9t2eIIxmGEJK-Q',
   authDomain: 'react-material-ui-firebase.firebaseapp.com',
@@ -65,6 +69,10 @@ const config = {
 firebase.initializeApp(config);
 
 const auth = firebase.auth();
+
+/**
+ * Theming
+ */
 
 const colors = [
   {
@@ -205,13 +213,11 @@ const styles = theme => ({
  * Settings
  */
 
-// Meta-data
 const settings = {
   name: 'React + Material-UI + Firebase'
 };
 
-// Validation
-const validation = {
+const constraints = {
   signUp: {
     emailAddress: {
       email: true,
@@ -337,7 +343,7 @@ class App extends Component {
       emailAddress,
       password,
       passwordConfirmation
-    }, validation.signUp);
+    }, constraints.signUp);
 
     if (errors) {
       return;
@@ -391,7 +397,7 @@ class App extends Component {
     const errors = validate({
       emailAddress,
       password,
-    }, validation.signIn);
+    }, constraints.signIn);
 
     if (errors) {
       return;
@@ -501,7 +507,7 @@ class App extends Component {
 
     const errors = validate({
       emailAddress
-    }, validation.resetPassword);
+    }, constraints.resetPassword);
 
     if (errors) {
       return;
@@ -945,6 +951,8 @@ class App extends Component {
                     open={signUpDialog.open}
                     isSigningUp={isSigningUp}
                     isSigningIn={isSigningIn}
+                    constraints={constraints.signUp}
+
                     signUp={this.signUp}
 
                     onClose={this.closeSignUpDialog}
@@ -958,6 +966,8 @@ class App extends Component {
                     fullScreen
                     isSigningUp={isSigningUp}
                     isSigningIn={isSigningIn}
+                    constraints={constraints.signUp}
+
                     signUp={this.signUp}
 
                     onClose={this.closeSignUpDialog}
@@ -969,6 +979,8 @@ class App extends Component {
                   <SignInDialog
                     open={signInDialog.open}
                     isSigningIn={isSigningIn}
+                    constraints={constraints.signIn}
+
                     signIn={this.signIn}
 
                     onClose={this.closeSignInDialog}
@@ -982,6 +994,8 @@ class App extends Component {
                     open={signInDialog.open}
                     fullScreen
                     isSigningIn={isSigningIn}
+                    constraints={constraints.signIn}
+
                     signIn={this.signIn}
 
                     onClose={this.closeSignInDialog}
@@ -993,7 +1007,10 @@ class App extends Component {
                 <ResetPasswordDialog
                   open={resetPasswordDialog.open}
                   isResettingPassword={isResettingPassword}
+                  constraints={constraints.resetPassword}
+
                   resetPassword={this.resetPassword}
+
                   onClose={this.closeResetPasswordDialog}
                 />
               </React.Fragment>
