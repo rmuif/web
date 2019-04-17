@@ -103,7 +103,7 @@ class SignInDialog extends Component {
           <form>
             <TextField
               autoComplete="email"
-              error={(errors && errors.emailAddress) ? true : false}
+              error={!!(errors && errors.emailAddress)}
               fullWidth
               helperText={(errors && errors.emailAddress) ? errors.emailAddress[0] : ''}
               margin="normal"
@@ -116,7 +116,7 @@ class SignInDialog extends Component {
 
             <TextField
               autoComplete="current-password"
-              error={(errors && errors.password) ? true : false}
+              error={!!(errors && errors.password)}
               fullWidth
               helperText={(errors && errors.password) ? errors.password[0] : ''}
               margin="normal"

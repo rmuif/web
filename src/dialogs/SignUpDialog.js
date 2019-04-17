@@ -109,7 +109,7 @@ class SignUpDialog extends Component {
           <form>
             <TextField
               autoComplete="email"
-              error={(errors && errors.emailAddress) ? true : false}
+              error={!!(errors && errors.emailAddress)}
               fullWidth
               helperText={(errors && errors.emailAddress) ? errors.emailAddress[0] : ''}
               label="E-mail address"
@@ -122,7 +122,7 @@ class SignUpDialog extends Component {
 
             <TextField
               autoComplete="new-password"
-              error={(errors && errors.password) ? true : false}
+              error={!!(errors && errors.password)}
               fullWidth
               helperText={(errors && errors.password) ? errors.password[0] : ''}
               label="Password"
@@ -135,7 +135,7 @@ class SignUpDialog extends Component {
 
             <TextField
               autoComplete="password"
-              error={(errors && errors.passwordConfirmation) ? true : false}
+              error={!!(errors && errors.passwordConfirmation)}
               fullWidth
               helperText={(errors && errors.passwordConfirmation) ? errors.passwordConfirmation[0] : ''}
               label="Password confirmation"

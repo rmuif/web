@@ -94,7 +94,7 @@ class ResetPasswordDialog extends Component {
             <TextField
               autoComplete="email"
               autoFocus
-              error={(errors && errors.emailAddress) ? true : false}
+              error={!!(errors && errors.emailAddress)}
               fullWidth
               helperText={(errors && errors.emailAddress) ? errors.emailAddress[0] : ''}
               margin="normal"
