@@ -123,9 +123,9 @@ class AccountTab extends Component {
         <ConfirmationDialog
           open={verifyEmailAddressDialog.open}
 
-          title="Verify e-mail address?"
+          title="Send verification e-mail?"
           contentText="An e-mail will be sent to your e-mail address containing instructions on how to verify your e-mail address."
-          okText="Verify"
+          okText="Send"
           highlightOkButton
 
           onClose={this.closeVerifyEmailAddressDialog}
