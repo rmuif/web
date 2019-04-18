@@ -860,187 +860,187 @@ class App extends Component {
 
     const { snackbar } = this.state;
 
-    if (!isAuthReady) {
-      return (
-        <MuiThemeProvider theme={theme}>
-          <LaunchScreen />
-        </MuiThemeProvider>
-      );
-    }
-
     return (
       <Router basename="/react-material-ui-firebase">
         <MuiThemeProvider theme={theme}>
           <div style={{ minHeight: '100vh', backgroundColor: theme.palette.type === 'dark' ? '#303030' : '#fafafa' }}>
-            <Bar
-              name={settings.name}
-
-              isSignedIn={isSignedIn}
-              isPerformingAuthAction={isPerformingAuthAction}
-
-              user={user}
-
-              onSignUpClick={this.showSignUpDialog}
-              onSignInClick={this.showSignInDialog}
-
-              onSettingsClick={this.showSettingsDialog}
-              onSignOutClick={this.showSignOutDialog}
-            />
-
-            {isSignedIn &&
-              <React.Fragment>
-                <Switch>
-                  <Route path="/" exact component={HomeContent} />
-                  <Route component={NotFoundContent} />
-                </Switch>
-
-                <Hidden only="xs">
-                  <SettingsDialog
-                    open={settingsDialog.open}
-                    user={user}
-                    isPerformingAuthAction={isPerformingAuthAction}
-                    colors={colors}
-                    types={types}
-                    primaryColor={primaryColor}
-                    secondaryColor={secondaryColor}
-                    type={type}
-                    defaultTheme={defaultTheme}
-
-                    onClose={this.closeSettingsDialog}
-                    onVerifyEmailAddressClick={this.verifyEmailAddress}
-                    onPrimaryColorChange={this.changePrimaryColor}
-                    onSecondaryColorChange={this.changeSecondaryColor}
-                    onTypeChange={this.changeType}
-                    onResetClick={this.resetTheme}
-                  />
-                </Hidden>
-
-                <Hidden only={['sm', 'md', 'lg', 'xl']}>
-                  <SettingsDialog
-                    open={settingsDialog.open}
-                    fullScreen
-                    user={user}
-                    isPerformingAuthAction={isPerformingAuthAction}
-                    colors={colors}
-                    types={types}
-                    primaryColor={primaryColor}
-                    secondaryColor={secondaryColor}
-                    type={type}
-                    defaultTheme={defaultTheme}
-
-                    onClose={this.closeSettingsDialog}
-                    onVerifyEmailAddressClick={this.verifyEmailAddress}
-                    onPrimaryColorChange={this.changePrimaryColor}
-                    onSecondaryColorChange={this.changeSecondaryColor}
-                    onTypeChange={this.changeType}
-                    onResetClick={this.resetTheme}
-                  />
-                </Hidden>
-
-                <ConfirmationDialog
-                  open={signOutDialog.open}
-
-                  title="Sign out?"
-                  contentText="While signed out you are unable to manage your profile and conduct other activities that require you to be signed in."
-                  okText="Sign Out"
-                  disableOkButton={isPerformingAuthAction}
-                  highlightOkButton
-
-                  onClose={this.closeSignOutDialog}
-                  onCancelClick={this.closeSignOutDialog}
-                  onOkClick={this.signOut}
-                />
-              </React.Fragment>
+            {!isAuthReady &&
+              <LaunchScreen />
             }
 
-            {!isSignedIn &&
+            {isAuthReady &&
               <React.Fragment>
-                <EmptyState
-                  icon={<CodeIcon className={classes.emptyStateIcon} color="action" />}
-                  title={settings.name}
-                  description="The three musketeers, all in one pack in the form of a boilerplate app."
-                  button={
-                    <Fab className={classes.button} color="primary" href="https://github.com/Phoqe/react-material-ui-firebase" rel="noopener noreferrer" target="_blank" variant="extended">
-                      <GitHubCircleIcon className={classes.buttonIcon} />
-                      GitHub
-                    </Fab>
-                  }
-                />
+                <Bar
+                  name={settings.name}
 
-                <Hidden only="xs">
-                  <SignUpDialog
-                    open={signUpDialog.open}
-                    isPerformingAuthAction={isPerformingAuthAction}
-                    constraints={constraints.signUp}
-
-                    signUp={this.signUp}
-
-                    onClose={this.closeSignUpDialog}
-                    onAuthProviderClick={this.signInWithProvider}
-                  />
-                </Hidden>
-
-                <Hidden only={['sm', 'md', 'lg', 'xl']}>
-                  <SignUpDialog
-                    open={signUpDialog.open}
-                    fullScreen
-                    isPerformingAuthAction={isPerformingAuthAction}
-                    constraints={constraints.signUp}
-
-                    signUp={this.signUp}
-
-                    onClose={this.closeSignUpDialog}
-                    onAuthProviderClick={this.signInWithProvider}
-                  />
-                </Hidden>
-
-                <Hidden only="xs">
-                  <SignInDialog
-                    open={signInDialog.open}
-                    isPerformingAuthAction={isPerformingAuthAction}
-                    constraints={constraints.signIn}
-
-                    signIn={this.signIn}
-
-                    onClose={this.closeSignInDialog}
-                    onAuthProviderClick={this.signInWithProvider}
-                    onResetPasswordClick={this.showResetPasswordDialog}
-                  />
-                </Hidden>
-
-                <Hidden only={['sm', 'md', 'lg', 'xl']}>
-                  <SignInDialog
-                    open={signInDialog.open}
-                    fullScreen
-                    isPerformingAuthAction={isPerformingAuthAction}
-                    constraints={constraints.signIn}
-
-                    signIn={this.signIn}
-
-                    onClose={this.closeSignInDialog}
-                    onAuthProviderClick={this.signInWithProvider}
-                    onResetPasswordClick={this.showResetPasswordDialog}
-                  />
-                </Hidden>
-
-                <ResetPasswordDialog
-                  open={resetPasswordDialog.open}
+                  isSignedIn={isSignedIn}
                   isPerformingAuthAction={isPerformingAuthAction}
-                  constraints={constraints.resetPassword}
 
-                  resetPassword={this.resetPassword}
+                  user={user}
 
-                  onClose={this.closeResetPasswordDialog}
+                  onSignUpClick={this.showSignUpDialog}
+                  onSignInClick={this.showSignInDialog}
+
+                  onSettingsClick={this.showSettingsDialog}
+                  onSignOutClick={this.showSignOutDialog}
+                />
+
+                {isSignedIn &&
+                  <React.Fragment>
+                    <Switch>
+                      <Route path="/" exact component={HomeContent} />
+                      <Route component={NotFoundContent} />
+                    </Switch>
+
+                    <Hidden only="xs">
+                      <SettingsDialog
+                        open={settingsDialog.open}
+                        user={user}
+                        isPerformingAuthAction={isPerformingAuthAction}
+                        colors={colors}
+                        types={types}
+                        primaryColor={primaryColor}
+                        secondaryColor={secondaryColor}
+                        type={type}
+                        defaultTheme={defaultTheme}
+
+                        onClose={this.closeSettingsDialog}
+                        onVerifyEmailAddressClick={this.verifyEmailAddress}
+                        onPrimaryColorChange={this.changePrimaryColor}
+                        onSecondaryColorChange={this.changeSecondaryColor}
+                        onTypeChange={this.changeType}
+                        onResetClick={this.resetTheme}
+                      />
+                    </Hidden>
+
+                    <Hidden only={['sm', 'md', 'lg', 'xl']}>
+                      <SettingsDialog
+                        open={settingsDialog.open}
+                        fullScreen
+                        user={user}
+                        isPerformingAuthAction={isPerformingAuthAction}
+                        colors={colors}
+                        types={types}
+                        primaryColor={primaryColor}
+                        secondaryColor={secondaryColor}
+                        type={type}
+                        defaultTheme={defaultTheme}
+
+                        onClose={this.closeSettingsDialog}
+                        onVerifyEmailAddressClick={this.verifyEmailAddress}
+                        onPrimaryColorChange={this.changePrimaryColor}
+                        onSecondaryColorChange={this.changeSecondaryColor}
+                        onTypeChange={this.changeType}
+                        onResetClick={this.resetTheme}
+                      />
+                    </Hidden>
+
+                    <ConfirmationDialog
+                      open={signOutDialog.open}
+
+                      title="Sign out?"
+                      contentText="While signed out you are unable to manage your profile and conduct other activities that require you to be signed in."
+                      okText="Sign Out"
+                      disableOkButton={isPerformingAuthAction}
+                      highlightOkButton
+
+                      onClose={this.closeSignOutDialog}
+                      onCancelClick={this.closeSignOutDialog}
+                      onOkClick={this.signOut}
+                    />
+                  </React.Fragment>
+                }
+
+                {!isSignedIn &&
+                  <React.Fragment>
+                    <EmptyState
+                      icon={<CodeIcon className={classes.emptyStateIcon} color="action" />}
+                      title={settings.name}
+                      description="The three musketeers, all in one pack in the form of a boilerplate app."
+                      button={
+                        <Fab className={classes.button} color="primary" href="https://github.com/Phoqe/react-material-ui-firebase" rel="noopener noreferrer" target="_blank" variant="extended">
+                          <GitHubCircleIcon className={classes.buttonIcon} />
+                          GitHub
+                        </Fab>
+                      }
+                    />
+
+                    <Hidden only="xs">
+                      <SignUpDialog
+                        open={signUpDialog.open}
+                        isPerformingAuthAction={isPerformingAuthAction}
+                        constraints={constraints.signUp}
+
+                        signUp={this.signUp}
+
+                        onClose={this.closeSignUpDialog}
+                        onAuthProviderClick={this.signInWithProvider}
+                      />
+                    </Hidden>
+
+                    <Hidden only={['sm', 'md', 'lg', 'xl']}>
+                      <SignUpDialog
+                        open={signUpDialog.open}
+                        fullScreen
+                        isPerformingAuthAction={isPerformingAuthAction}
+                        constraints={constraints.signUp}
+
+                        signUp={this.signUp}
+
+                        onClose={this.closeSignUpDialog}
+                        onAuthProviderClick={this.signInWithProvider}
+                      />
+                    </Hidden>
+
+                    <Hidden only="xs">
+                      <SignInDialog
+                        open={signInDialog.open}
+                        isPerformingAuthAction={isPerformingAuthAction}
+                        constraints={constraints.signIn}
+
+                        signIn={this.signIn}
+
+                        onClose={this.closeSignInDialog}
+                        onAuthProviderClick={this.signInWithProvider}
+                        onResetPasswordClick={this.showResetPasswordDialog}
+                      />
+                    </Hidden>
+
+                    <Hidden only={['sm', 'md', 'lg', 'xl']}>
+                      <SignInDialog
+                        open={signInDialog.open}
+                        fullScreen
+                        isPerformingAuthAction={isPerformingAuthAction}
+                        constraints={constraints.signIn}
+
+                        signIn={this.signIn}
+
+                        onClose={this.closeSignInDialog}
+                        onAuthProviderClick={this.signInWithProvider}
+                        onResetPasswordClick={this.showResetPasswordDialog}
+                      />
+                    </Hidden>
+
+                    <ResetPasswordDialog
+                      open={resetPasswordDialog.open}
+                      isPerformingAuthAction={isPerformingAuthAction}
+                      constraints={constraints.resetPassword}
+
+                      resetPassword={this.resetPassword}
+
+                      onClose={this.closeResetPasswordDialog}
+                    />
+                  </React.Fragment>
+                }
+
+                <Snackbar
+                  autoHideDuration={snackbar.autoHideDuration}
+                  message={snackbar.message}
+                  open={snackbar.open}
+                  onClose={this.closeSnackbar}
                 />
               </React.Fragment>
             }
-
-            <Snackbar
-              autoHideDuration={snackbar.autoHideDuration}
-              message={snackbar.message}
-              open={snackbar.open}
-              onClose={this.closeSnackbar}
-            />
           </div>
         </MuiThemeProvider>
       </Router>
