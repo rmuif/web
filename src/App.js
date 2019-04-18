@@ -614,6 +614,12 @@ class App extends Component {
     });
   };
 
+  /**
+   * Changes the current theme. Theme is applied in real-time.
+   * @param palette
+   * @param removeLocalStorage
+   * @param callback
+   */
   updateTheme = (palette, removeLocalStorage, callback) => {
     const { primaryColor, secondaryColor, type } = this.state;
 
@@ -662,6 +668,9 @@ class App extends Component {
     });
   };
 
+  /**
+   * Resets the current theme to the default one.
+   */
   resetTheme = () => {
     this.updateTheme({
       primaryColor: defaultTheme.primaryColor,
@@ -671,7 +680,7 @@ class App extends Component {
       this.openSnackbar('Settings reset');
     });
   };
-
+  
   changePrimaryColor = (event) => {
     const primaryColor = event.target.value;
 
