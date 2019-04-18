@@ -35,7 +35,7 @@ class NotFoundContent extends Component {
       <EmptyState
         icon={<FindIcon className={classes.emptyStateIcon} color="action" />}
         title="Content Not Found"
-        description="The requested URL was not found on this server."
+        description="The requested URL was not found on this server"
         button={
           <Fab className={classes.button} color="primary" component={Link} to="/" variant="extended">
             <HomeIcon className={classes.buttonIcon} /> Go Home
