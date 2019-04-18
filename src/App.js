@@ -41,6 +41,8 @@ import CodeIcon from '@material-ui/icons/Code';
 
 import GitHubCircleIcon from 'mdi-material-ui/GithubCircle';
 
+import LaunchScreen from './layout/LaunchScreen';
+
 import Bar from './layout/Bar';
 import EmptyState from './layout/EmptyState';
 
@@ -859,7 +861,11 @@ class App extends Component {
     const { snackbar } = this.state;
 
     if (!isAuthReady) {
-      return null;
+      return (
+        <MuiThemeProvider theme={theme}>
+          <LaunchScreen />
+        </MuiThemeProvider>
+      );
     }
 
     return (
