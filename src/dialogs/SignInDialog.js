@@ -79,7 +79,7 @@ class SignInDialog extends Component {
 
   render() {
     // Properties
-    const { open, fullScreen, isSigningIn } = this.props;
+    const { open, fullScreen, isPerformingAuthAction } = this.props;
 
     // Events
     const { onClose, onAuthProviderClick, onResetPasswordClick } = this.props;
@@ -98,7 +98,7 @@ class SignInDialog extends Component {
             While you're signed in you can manage your account.
           </DialogContentText>
 
-          <AuthProviderList isSigningIn={isSigningIn} onAuthProviderClick={onAuthProviderClick} />
+          <AuthProviderList isPerformingAuthAction={isPerformingAuthAction} onAuthProviderClick={onAuthProviderClick} />
 
           <form>
             <TextField
@@ -132,7 +132,7 @@ class SignInDialog extends Component {
         <DialogActions>
           <Button color="primary" onClick={onClose}>Cancel</Button>
           <Button color="primary" variant="outlined" onClick={onResetPasswordClick}>Reset Password</Button>
-          <Button color="primary" disabled={(!emailAddress || !password) || isSigningIn} variant="contained" onClick={this.handleSignInClick}>Sign In</Button>
+          <Button color="primary" disabled={(!emailAddress || !password) || isPerformingAuthAction} variant="contained" onClick={this.handleSignInClick}>Sign In</Button>
         </DialogActions>
       </Dialog>
     );
@@ -142,7 +142,7 @@ class SignInDialog extends Component {
 SignInDialog.propTypes = {
   open: PropTypes.bool.isRequired,
   fullScreen: PropTypes.bool,
-  isSigningIn: PropTypes.bool.isRequired,
+  isPerformingAuthAction: PropTypes.bool.isRequired,
   constraints: PropTypes.object.isRequired,
 
   signIn: PropTypes.func.isRequired,

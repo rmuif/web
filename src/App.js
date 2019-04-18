@@ -284,15 +284,8 @@ class App extends Component {
       type: defaultTheme.type,
 
       isAuthReady: false,
-
-      isSigningUp: false,
-      isSigningIn: false,
-      isResettingPassword: false,
-      isSignedIn: false,
-      isVerifyingEmailAddress: false,
-      isSigningOut: false,
-
       isPerformingAuthAction: false,
+      isSignedIn: false,
 
       user: null,
 
@@ -835,10 +828,24 @@ class App extends Component {
     const { classes } = this.props;
 
     // Properties
-    const { primaryColor, secondaryColor, type, isAuthReady, isSigningUp, isSigningIn, isResettingPassword, isSignedIn, isVerifyingEmailAddress, isSigningOut, user } = this.state;
+    const {
+      primaryColor,
+      secondaryColor,
+      type,
+      isAuthReady,
+      isPerformingAuthAction,
+      isSignedIn,
+      user
+    } = this.state;
 
     // Dialogs
-    const { signUpDialog, signInDialog, resetPasswordDialog, settingsDialog, signOutDialog } = this.state;
+    const {
+      signUpDialog,
+      signInDialog,
+      resetPasswordDialog,
+      settingsDialog,
+      signOutDialog
+    } = this.state;
 
     const { snackbar } = this.state;
 
@@ -854,8 +861,7 @@ class App extends Component {
               name={settings.name}
 
               isSignedIn={isSignedIn}
-              isSigningUp={isSigningUp}
-              isSigningIn={isSigningIn}
+              isPerformingAuthAction={isPerformingAuthAction}
 
               user={user}
 
@@ -877,7 +883,7 @@ class App extends Component {
                   <SettingsDialog
                     open={settingsDialog.open}
                     user={user}
-                    isVerifyingEmailAddress={isVerifyingEmailAddress}
+                    isPerformingAuthAction={isPerformingAuthAction}
                     colors={colors}
                     types={types}
                     primaryColor={primaryColor}
@@ -899,7 +905,7 @@ class App extends Component {
                     open={settingsDialog.open}
                     fullScreen
                     user={user}
-                    isVerifyingEmailAddress={isVerifyingEmailAddress}
+                    isPerformingAuthAction={isPerformingAuthAction}
                     colors={colors}
                     types={types}
                     primaryColor={primaryColor}
@@ -922,7 +928,7 @@ class App extends Component {
                   title="Sign out?"
                   contentText="While signed out you are unable to manage your profile and conduct other activities that require you to be signed in."
                   okText="Sign Out"
-                  disableOkButton={isSigningOut}
+                  disableOkButton={isPerformingAuthAction}
                   highlightOkButton
 
                   onClose={this.closeSignOutDialog}
@@ -949,8 +955,7 @@ class App extends Component {
                 <Hidden only="xs">
                   <SignUpDialog
                     open={signUpDialog.open}
-                    isSigningUp={isSigningUp}
-                    isSigningIn={isSigningIn}
+                    isPerformingAuthAction={isPerformingAuthAction}
                     constraints={constraints.signUp}
 
                     signUp={this.signUp}
@@ -964,8 +969,7 @@ class App extends Component {
                   <SignUpDialog
                     open={signUpDialog.open}
                     fullScreen
-                    isSigningUp={isSigningUp}
-                    isSigningIn={isSigningIn}
+                    isPerformingAuthAction={isPerformingAuthAction}
                     constraints={constraints.signUp}
 
                     signUp={this.signUp}
@@ -978,7 +982,7 @@ class App extends Component {
                 <Hidden only="xs">
                   <SignInDialog
                     open={signInDialog.open}
-                    isSigningIn={isSigningIn}
+                    isPerformingAuthAction={isPerformingAuthAction}
                     constraints={constraints.signIn}
 
                     signIn={this.signIn}
@@ -993,7 +997,7 @@ class App extends Component {
                   <SignInDialog
                     open={signInDialog.open}
                     fullScreen
-                    isSigningIn={isSigningIn}
+                    isPerformingAuthAction={isPerformingAuthAction}
                     constraints={constraints.signIn}
 
                     signIn={this.signIn}
@@ -1006,7 +1010,7 @@ class App extends Component {
 
                 <ResetPasswordDialog
                   open={resetPasswordDialog.open}
-                  isResettingPassword={isResettingPassword}
+                  isPerformingAuthAction={isPerformingAuthAction}
                   constraints={constraints.resetPassword}
 
                   resetPassword={this.resetPassword}

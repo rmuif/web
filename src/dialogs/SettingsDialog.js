@@ -60,7 +60,7 @@ class SettingsDialog extends Component {
 
   render() {
     // Properties
-    const { open, fullScreen, user, isVerifyingEmailAddress, colors, types, primaryColor, secondaryColor, type } = this.props;
+    const { open, fullScreen, user, isPerformingAuthAction, colors, types, primaryColor, secondaryColor, type } = this.props;
 
     // Events
     const { onClose, onVerifyEmailAddressClick, onPrimaryColorChange, onSecondaryColorChange, onTypeChange } = this.props;
@@ -81,7 +81,7 @@ class SettingsDialog extends Component {
             {selectedTab === 0 &&
               <AccountTab
                 user={user}
-                isVerifyingEmailAddress={isVerifyingEmailAddress}
+                isPerformingAuthAction={isPerformingAuthAction}
                 onVerifyEmailAddressClick={onVerifyEmailAddressClick}
               />
             }
@@ -104,7 +104,7 @@ class SettingsDialog extends Component {
             <SwipeableViews index={selectedTab} onChangeIndex={this.changeIndex}>
               <AccountTab
                 user={user}
-                isVerifyingEmailAddress={isVerifyingEmailAddress}
+                isPerformingAuthAction={isPerformingAuthAction}
                 onVerifyEmailAddressClick={onVerifyEmailAddressClick}
               />
 
@@ -136,7 +136,7 @@ SettingsDialog.propTypes = {
   open: PropTypes.bool.isRequired,
   fullScreen: PropTypes.bool,
   user: PropTypes.object.isRequired,
-  isVerifyingEmailAddress: PropTypes.bool.isRequired,
+  isPerformingAuthAction: PropTypes.bool.isRequired,
   colors: PropTypes.array.isRequired,
   types: PropTypes.array.isRequired,
   primaryColor: PropTypes.string.isRequired,

@@ -66,7 +66,7 @@ class AccountTab extends Component {
   };
 
   render() {
-    const { classes, user, isVerifyingEmailAddress } = this.props;
+    const { classes, user, isPerformingAuthAction } = this.props;
     const { verifyEmailAddressDialog } = this.state;
 
     return (
@@ -87,9 +87,9 @@ class AccountTab extends Component {
 
               <ListItemText primary={user.email} secondary={user.emailVerified ? 'Verified' : 'Not verified'} />
 
-              {(!user.emailVerified && !isVerifyingEmailAddress) &&
+              {!user.emailVerified &&
                 <ListItemSecondaryAction>
-                  <Button color="primary" variant="contained" onClick={this.openVerifyEmailAddressDialog}>Verify</Button>
+                  <Button color="primary" disabled={isPerformingAuthAction} variant="contained" onClick={this.openVerifyEmailAddressDialog}>Verify</Button>
                 </ListItemSecondaryAction>
               }
             </ListItem>
@@ -141,7 +141,7 @@ class AccountTab extends Component {
 AccountTab.propTypes = {
   classes: PropTypes.object.isRequired,
   user: PropTypes.object.isRequired,
-  isVerifyingEmailAddress: PropTypes.bool.isRequired,
+  isPerformingAuthAction: PropTypes.bool.isRequired,
 
   onVerifyEmailAddressClick: PropTypes.func.isRequired
 };

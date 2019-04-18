@@ -86,7 +86,7 @@ class SignUpDialog extends Component {
 
   render() {
     // Properties
-    const { open, fullScreen, isSigningUp, isSigningIn } = this.props;
+    const { open, fullScreen, isPerformingAuthAction } = this.props;
 
     // Events
     const { onClose, onAuthProviderClick } = this.props;
@@ -104,7 +104,7 @@ class SignUpDialog extends Component {
             Create an account to access features that are unavailable to users who haven't signed up.
           </DialogContentText>
 
-          <AuthProviderList isSigningIn={isSigningIn} onAuthProviderClick={onAuthProviderClick} />
+          <AuthProviderList isPerformingAuthAction={isPerformingAuthAction} onAuthProviderClick={onAuthProviderClick} />
 
           <form>
             <TextField
@@ -150,7 +150,7 @@ class SignUpDialog extends Component {
 
         <DialogActions>
           <Button color="primary" onClick={onClose}>Cancel</Button>
-          <Button color="primary" disabled={(!emailAddress || !password || !passwordConfirmation) || isSigningUp} variant="contained" onClick={this.handleSignUpClick}>Sign Up</Button>
+          <Button color="primary" disabled={(!emailAddress || !password || !passwordConfirmation) || isPerformingAuthAction} variant="contained" onClick={this.handleSignUpClick}>Sign Up</Button>
         </DialogActions>
       </Dialog>
     );
@@ -160,8 +160,7 @@ class SignUpDialog extends Component {
 SignUpDialog.propTypes = {
   open: PropTypes.bool.isRequired,
   fullScreen: PropTypes.bool,
-  isSigningUp: PropTypes.bool.isRequired,
-  isSigningIn: PropTypes.bool.isRequired,
+  isPerformingAuthAction: PropTypes.bool.isRequired,
   constraints: PropTypes.object.isRequired,
 
   signUp: PropTypes.func.isRequired,
