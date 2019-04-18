@@ -30,27 +30,9 @@ class SignInDialog extends Component {
   }
 
   signIn = () => {
-    const constraints = {
-      emailAddress: {
-        email: true,
-        presence: {
-          allowEmpty: false
-        }
-      },
-      
-      password: {
-        length: {
-          minimum: 6
-        },
-        presence: {
-          allowEmpty: false
-        }
-      }
-    };
-
     const { emailAddress, password } = this.state;
     
-    const errors = validate({ emailAddress, password }, constraints);
+    const errors = validate({ emailAddress, password }, this.props.constraints);
 
     if (errors) {
       this.setState({ errors });
@@ -97,7 +79,7 @@ class SignInDialog extends Component {
 
   render() {
     // Properties
-    const { open, fullScreen, isSigningIn } = this.props;
+    const { open, fullScreen, isPerformingAuthAction } = this.props;
 
     // Events
     const { onClose, onAuthProviderClick, onResetPasswordClick } = this.props;
@@ -116,12 +98,12 @@ class SignInDialog extends Component {
             While you're signed in you can manage your account.
           </DialogContentText>
 
-          <AuthProviderList isSigningIn={isSigningIn} onAuthProviderClick={onAuthProviderClick} />
+          <AuthProviderList isPerformingAuthAction={isPerformingAuthAction} onAuthProviderClick={onAuthProviderClick} />
 
           <form>
             <TextField
               autoComplete="email"
-              error={(errors && errors.emailAddress) ? true : false}
+              error={!!(errors && errors.emailAddress)}
               fullWidth
               helperText={(errors && errors.emailAddress) ? errors.emailAddress[0] : ''}
               margin="normal"
@@ -134,7 +116,7 @@ class SignInDialog extends Component {
 
             <TextField
               autoComplete="current-password"
-              error={(errors && errors.password) ? true : false}
+              error={!!(errors && errors.password)}
               fullWidth
               helperText={(errors && errors.password) ? errors.password[0] : ''}
               margin="normal"
@@ -150,7 +132,7 @@ class SignInDialog extends Component {
         <DialogActions>
           <Button color="primary" onClick={onClose}>Cancel</Button>
           <Button color="primary" variant="outlined" onClick={onResetPasswordClick}>Reset Password</Button>
-          <Button color="primary" disabled={(!emailAddress || !password) || isSigningIn} variant="contained" onClick={this.handleSignInClick}>Sign In</Button>
+          <Button color="primary" disabled={(!emailAddress || !password) || isPerformingAuthAction} variant="contained" onClick={this.handleSignInClick}>Sign In</Button>
         </DialogActions>
       </Dialog>
     );
@@ -160,7 +142,10 @@ class SignInDialog extends Component {
 SignInDialog.propTypes = {
   open: PropTypes.bool.isRequired,
   fullScreen: PropTypes.bool,
-  isSigningIn: PropTypes.bool.isRequired,
+  isPerformingAuthAction: PropTypes.bool.isRequired,
+  constraints: PropTypes.object.isRequired,
+
+  signIn: PropTypes.func.isRequired,
 
   onClose: PropTypes.func.isRequired,
   onAuthProviderClick: PropTypes.func.isRequired,

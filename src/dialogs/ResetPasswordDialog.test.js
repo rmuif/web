@@ -2,14 +2,20 @@ import React from 'react';
 
 import ReactDOM from 'react-dom';
 
-import App from './App';
+import ResetPasswordDialog from './ResetPasswordDialog';
 
 it('renders without crashing', () => {
   const div = document.createElement('div');
 
   ReactDOM.render(
     (
-      <App />
+      <ResetPasswordDialog
+        open={false}
+        isPerformingAuthAction={false}
+        constraints={{}}
+        resetPassword={() => {}}
+        onClose={() => {}}
+      />
     ),
     div
   );

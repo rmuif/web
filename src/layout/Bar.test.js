@@ -2,14 +2,20 @@ import React from 'react';
 
 import ReactDOM from 'react-dom';
 
-import App from './App';
+import Bar from './Bar';
 
 it('renders without crashing', () => {
   const div = document.createElement('div');
 
   ReactDOM.render(
     (
-      <App />
+      <Bar
+        name=""
+        isPerformingAuthAction
+        isSignedIn={false}
+        onSettingsClick={() => {}}
+        onSignOutClick={() => {}}
+      />
     ),
     div
   );

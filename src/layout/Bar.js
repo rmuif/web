@@ -62,7 +62,7 @@ class Bar extends Component {
 
   render() {
     // Properties
-    const { classes, name, isSignedIn, isSigningUp, isSigningIn, user } = this.props;
+    const { classes, name, isPerformingAuthAction, isSignedIn, user } = this.props;
 
     // Events
     const { onSignUpClick, onSignInClick } = this.props;
@@ -89,8 +89,8 @@ class Bar extends Component {
 
           {!isSignedIn &&
             <React.Fragment>
-              <Button className={classes.signUpButton} color="secondary" disabled={isSigningUp} variant="contained" onClick={onSignUpClick}>Sign Up</Button>
-              <Button color="secondary" disabled={isSigningIn} variant="contained" onClick={onSignInClick}>Sign In</Button>
+              <Button className={classes.signUpButton} color="secondary" disabled={isPerformingAuthAction} variant="contained" onClick={onSignUpClick}>Sign Up</Button>
+              <Button color="secondary" disabled={isPerformingAuthAction} variant="contained" onClick={onSignInClick}>Sign In</Button>
             </React.Fragment>
           }
         </Toolbar>
@@ -102,9 +102,8 @@ class Bar extends Component {
 Bar.propTypes = {
   classes: PropTypes.object.isRequired,
   name: PropTypes.string.isRequired,
+  isPerformingAuthAction: PropTypes.bool.isRequired,
   isSignedIn: PropTypes.bool.isRequired,
-  isSigningUp: PropTypes.bool.isRequired,
-  isSigningIn: PropTypes.bool.isRequired,
 
   onSettingsClick: PropTypes.func.isRequired,
   onSignOutClick: PropTypes.func.isRequired

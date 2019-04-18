@@ -2,14 +2,16 @@ import React from 'react';
 
 import ReactDOM from 'react-dom';
 
-import App from './App';
+import AuthProviderList from './AuthProviderList';
 
 it('renders without crashing', () => {
   const div = document.createElement('div');
 
   ReactDOM.render(
     (
-      <App />
+      <AuthProviderList
+        onAuthProviderClick={() => {}}
+      />
     ),
     div
   );

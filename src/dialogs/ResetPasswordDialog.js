@@ -27,18 +27,9 @@ class ResetPasswordDialog extends Component {
   }
 
   resetPassword = () => {
-    const constraints = {
-      emailAddress: {
-        email: true,
-        presence: {
-          allowEmpty: false
-        }
-      }
-    };
-
     const { emailAddress } = this.state;
     
-    const errors = validate({ emailAddress }, constraints);
+    const errors = validate({ emailAddress }, this.props.constraints);
 
     if (errors) {
       this.setState({ errors });
@@ -81,7 +72,7 @@ class ResetPasswordDialog extends Component {
 
   render() {
     // Properties
-    const { open, isResettingPassword } = this.props;
+    const { open, isPerformingAuthAction } = this.props;
 
     // Events
     const { onClose } = this.props;
@@ -103,7 +94,7 @@ class ResetPasswordDialog extends Component {
             <TextField
               autoComplete="email"
               autoFocus
-              error={(errors && errors.emailAddress) ? true : false}
+              error={!!(errors && errors.emailAddress)}
               fullWidth
               helperText={(errors && errors.emailAddress) ? errors.emailAddress[0] : ''}
               margin="normal"
@@ -118,7 +109,7 @@ class ResetPasswordDialog extends Component {
 
         <DialogActions>
           <Button color="primary" onClick={onClose}>Cancel</Button>
-          <Button color="primary" disabled={!emailAddress || isResettingPassword} variant="contained" onClick={this.handleResetPasswordClick}>Reset Password</Button>
+          <Button color="primary" disabled={!emailAddress || isPerformingAuthAction} variant="contained" onClick={this.handleResetPasswordClick}>Reset Password</Button>
         </DialogActions>
       </Dialog>
     );
@@ -127,7 +118,8 @@ class ResetPasswordDialog extends Component {
 
 ResetPasswordDialog.propTypes = {
   open: PropTypes.bool.isRequired,
-  isResettingPassword: PropTypes.bool.isRequired,
+  isPerformingAuthAction: PropTypes.bool.isRequired,
+  constraints: PropTypes.object.isRequired,
 
   resetPassword: PropTypes.func.isRequired,
 

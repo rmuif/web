@@ -2,14 +2,18 @@ import React from 'react';
 
 import ReactDOM from 'react-dom';
 
-import App from './App';
+import { MemoryRouter } from 'react-router-dom';
+
+import HomeContent from './HomeContent';
 
 it('renders without crashing', () => {
   const div = document.createElement('div');
 
   ReactDOM.render(
     (
-      <App />
+      <MemoryRouter>
+        <HomeContent />
+      </MemoryRouter>
     ),
     div
   );

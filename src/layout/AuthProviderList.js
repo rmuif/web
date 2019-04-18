@@ -63,7 +63,7 @@ const styles = (theme) => ({
 class AuthProviderList extends Component {
   render() {
     // Properties
-    const { classes, isSigningIn } = this.props;
+    const { classes, isPerformingAuthAction } = this.props;
 
     // Events
     const { onAuthProviderClick } = this.props;
@@ -72,22 +72,22 @@ class AuthProviderList extends Component {
       <React.Fragment>
         <Hidden only="xs">
           <DialogActions className={classes.dialogActions}>
-            <Button className={classes.google} disabled={isSigningIn} variant="contained" onClick={() => onAuthProviderClick(new firebase.auth.GoogleAuthProvider())}>
+            <Button className={classes.google} disabled={isPerformingAuthAction} variant="contained" onClick={() => onAuthProviderClick(new firebase.auth.GoogleAuthProvider())}>
               <GoogleIcon className={classes.icon} />
               Google
             </Button>
 
-            <Button className={classes.facebook} disabled={isSigningIn} variant="contained" onClick={() => onAuthProviderClick(new firebase.auth.FacebookAuthProvider())}>
+            <Button className={classes.facebook} disabled={isPerformingAuthAction} variant="contained" onClick={() => onAuthProviderClick(new firebase.auth.FacebookAuthProvider())}>
               <FacebookBoxIcon className={classes.icon} />
               Facebook
             </Button>
 
-            <Button className={classes.twitter} disabled={isSigningIn} variant="contained" onClick={() => onAuthProviderClick(new firebase.auth.TwitterAuthProvider())}>
+            <Button className={classes.twitter} disabled={isPerformingAuthAction} variant="contained" onClick={() => onAuthProviderClick(new firebase.auth.TwitterAuthProvider())}>
               <TwitterIcon className={classes.icon} />
               Twitter
             </Button>
 
-            <Button className={classes.gitHub} disabled={isSigningIn} variant="contained" onClick={() => onAuthProviderClick(new firebase.auth.GithubAuthProvider())}>
+            <Button className={classes.gitHub} disabled={isPerformingAuthAction} variant="contained" onClick={() => onAuthProviderClick(new firebase.auth.GithubAuthProvider())}>
               <GitHubCircleIcon className={classes.icon} />
               GitHub
             </Button>
@@ -96,22 +96,22 @@ class AuthProviderList extends Component {
 
         <Hidden only={['sm', 'md', 'lg', 'xl']}>
           <DialogActions className={classes.dialogActionsMobile}>
-            <Button className={`${classes.google} ${classes.buttonMobile}`} disabled={isSigningIn} variant="contained" onClick={() => onAuthProviderClick(new firebase.auth.GoogleAuthProvider())}>
+            <Button className={`${classes.google} ${classes.buttonMobile}`} disabled={isPerformingAuthAction} variant="contained" onClick={() => onAuthProviderClick(new firebase.auth.GoogleAuthProvider())}>
               <GoogleIcon className={classes.icon} />
               Google
             </Button>
 
-            <Button className={`${classes.facebook} ${classes.buttonMobile}`} disabled={isSigningIn} variant="contained" onClick={() => onAuthProviderClick(new firebase.auth.FacebookAuthProvider())}>
+            <Button className={`${classes.facebook} ${classes.buttonMobile}`} disabled={isPerformingAuthAction} variant="contained" onClick={() => onAuthProviderClick(new firebase.auth.FacebookAuthProvider())}>
               <FacebookBoxIcon className={classes.icon} />
               Facebook
             </Button>
 
-            <Button className={`${classes.twitter} ${classes.buttonMobile}`} disabled={isSigningIn} variant="contained" onClick={() => onAuthProviderClick(new firebase.auth.TwitterAuthProvider())}>
+            <Button className={`${classes.twitter} ${classes.buttonMobile}`} disabled={isPerformingAuthAction} variant="contained" onClick={() => onAuthProviderClick(new firebase.auth.TwitterAuthProvider())}>
               <TwitterIcon className={classes.icon} />
               Twitter
             </Button>
 
-            <Button className={`${classes.gitHub} ${classes.buttonMobile}`} disabled={isSigningIn} variant="contained" onClick={() => onAuthProviderClick(new firebase.auth.GithubAuthProvider())}>
+            <Button className={`${classes.gitHub} ${classes.buttonMobile}`} disabled={isPerformingAuthAction} variant="contained" onClick={() => onAuthProviderClick(new firebase.auth.GithubAuthProvider())}>
               <GitHubCircleIcon className={classes.icon} />
               GitHub
             </Button>
@@ -124,7 +124,7 @@ class AuthProviderList extends Component {
 
 AuthProviderList.propTypes = {
   classes: PropTypes.object.isRequired,
-  isSigningIn: PropTypes.bool,
+  isPerformingAuthAction: PropTypes.bool,
 
   onAuthProviderClick: PropTypes.func.isRequired
 };

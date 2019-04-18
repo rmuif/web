@@ -31,37 +31,9 @@ class SignUpDialog extends Component {
   }
 
   signUp = () => {
-    const constraints = {
-      emailAddress: {
-        email: true,
-        presence: {
-          allowEmpty: false
-        }
-      },
-      
-      password: {
-        length: {
-          minimum: 6
-        },
-        presence: {
-          allowEmpty: false
-        }
-      },
-
-      passwordConfirmation: {
-        equality: 'password',
-        length: {
-          minimum: 6
-        },
-        presence: {
-          allowEmpty: false
-        }
-      }
-    };
-
     const { emailAddress, password, passwordConfirmation } = this.state;
     
-    const errors = validate({ emailAddress, password, passwordConfirmation }, constraints);
+    const errors = validate({ emailAddress, password, passwordConfirmation }, this.props.constraints);
 
     if (errors) {
       this.setState({ errors });
@@ -69,7 +41,7 @@ class SignUpDialog extends Component {
       this.setState({
         errors: null
       }, () => {
-        this.props.signUp(emailAddress, password);
+        this.props.signUp(emailAddress, password, passwordConfirmation);
       });
     }
   };
@@ -114,7 +86,7 @@ class SignUpDialog extends Component {
 
   render() {
     // Properties
-    const { open, fullScreen, isSigningUp, isSigningIn } = this.props;
+    const { open, fullScreen, isPerformingAuthAction } = this.props;
 
     // Events
     const { onClose, onAuthProviderClick } = this.props;
@@ -132,12 +104,12 @@ class SignUpDialog extends Component {
             Create an account to access features that are unavailable to users who haven't signed up.
           </DialogContentText>
 
-          <AuthProviderList isSigningIn={isSigningIn} onAuthProviderClick={onAuthProviderClick} />
+          <AuthProviderList isPerformingAuthAction={isPerformingAuthAction} onAuthProviderClick={onAuthProviderClick} />
 
           <form>
             <TextField
               autoComplete="email"
-              error={(errors && errors.emailAddress) ? true : false}
+              error={!!(errors && errors.emailAddress)}
               fullWidth
               helperText={(errors && errors.emailAddress) ? errors.emailAddress[0] : ''}
               label="E-mail address"
@@ -150,7 +122,7 @@ class SignUpDialog extends Component {
 
             <TextField
               autoComplete="new-password"
-              error={(errors && errors.password) ? true : false}
+              error={!!(errors && errors.password)}
               fullWidth
               helperText={(errors && errors.password) ? errors.password[0] : ''}
               label="Password"
@@ -163,7 +135,7 @@ class SignUpDialog extends Component {
 
             <TextField
               autoComplete="password"
-              error={(errors && errors.passwordConfirmation) ? true : false}
+              error={!!(errors && errors.passwordConfirmation)}
               fullWidth
               helperText={(errors && errors.passwordConfirmation) ? errors.passwordConfirmation[0] : ''}
               label="Password confirmation"
@@ -178,7 +150,7 @@ class SignUpDialog extends Component {
 
         <DialogActions>
           <Button color="primary" onClick={onClose}>Cancel</Button>
-          <Button color="primary" disabled={(!emailAddress || !password || !passwordConfirmation) || isSigningUp} variant="contained" onClick={this.handleSignUpClick}>Sign Up</Button>
+          <Button color="primary" disabled={(!emailAddress || !password || !passwordConfirmation) || isPerformingAuthAction} variant="contained" onClick={this.handleSignUpClick}>Sign Up</Button>
         </DialogActions>
       </Dialog>
     );
@@ -188,8 +160,8 @@ class SignUpDialog extends Component {
 SignUpDialog.propTypes = {
   open: PropTypes.bool.isRequired,
   fullScreen: PropTypes.bool,
-  isSigningUp: PropTypes.bool.isRequired,
-  isSigningIn: PropTypes.bool.isRequired,
+  isPerformingAuthAction: PropTypes.bool.isRequired,
+  constraints: PropTypes.object.isRequired,
 
   signUp: PropTypes.func.isRequired,
 
