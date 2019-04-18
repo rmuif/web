@@ -16,7 +16,7 @@ it('renders without crashing', () => {
     (
       <AccountTab
         user={user}
-        isVerifyingEmailAddress={false}
+        isPerformingAuthAction={false}
         onVerifyEmailAddressClick={() => {}}
       />
     ),

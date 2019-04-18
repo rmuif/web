@@ -11,9 +11,8 @@ it('renders without crashing', () => {
     (
       <Bar
         name=""
+        isPerformingAuthAction
         isSignedIn={false}
-        isSigningUp={false}
-        isSigningIn={false}
         onSettingsClick={() => {}}
         onSignOutClick={() => {}}
       />

@@ -11,7 +11,7 @@ it('renders without crashing', () => {
     (
       <ResetPasswordDialog
         open={false}
-        isResettingPassword={false}
+        isPerformingAuthAction={false}
         constraints={{}}
         resetPassword={() => {}}
         onClose={() => {}}

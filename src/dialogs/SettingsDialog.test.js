@@ -12,7 +12,7 @@ it('renders without crashing', () => {
       <SettingsDialog
         open={false}
         user={{}}
-        isVerifyingEmailAddress={false}
+        isPerformingAuthAction={false}
         colors={[]}
         types={[]}
         primaryColor=""

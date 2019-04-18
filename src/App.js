@@ -680,7 +680,7 @@ class App extends Component {
       this.openSnackbar('Settings reset');
     });
   };
-  
+
   changePrimaryColor = (event) => {
     const primaryColor = event.target.value;
 

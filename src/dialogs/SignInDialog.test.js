@@ -11,7 +11,7 @@ it('renders without crashing', () => {
     (
       <SignInDialog
         open={false}
-        isSigningIn={false}
+        isPerformingAuthAction={false}
         constraints={{}}
         signIn={() => {}}
         onClose={() => {}}
