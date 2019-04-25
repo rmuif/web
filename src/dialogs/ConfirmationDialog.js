@@ -51,6 +51,10 @@ class ConfirmationDialog extends Component {
     // Custom
     const { onCancelClick, onOkClick } = this.props;
 
+    if (!onClose) {
+      return null;
+    }
+
     return (
       <Dialog open={open} onClose={onClose} onKeyPress={this.handleKeyPress}>
         {title && <DialogTitle>{title}</DialogTitle>}
@@ -84,8 +88,8 @@ class ConfirmationDialog extends Component {
 ConfirmationDialog.propTypes = {
   open: PropTypes.bool.isRequired,
 
-  title: PropTypes.string.isRequired,
-  contentText: PropTypes.string.isRequired,
+  title: PropTypes.string,
+  contentText: PropTypes.string,
   cancelText: PropTypes.string,
   okText: PropTypes.string,
   disableOkButton: PropTypes.bool,
