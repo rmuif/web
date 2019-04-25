@@ -80,15 +80,15 @@ The sample app uses a blue and red color combination with a light theme type. Wh
 
 ```js
 const defaultTheme = {
-  primaryColor: 'YOUR_PRIMARY_COLOR',
-  secondaryColor: 'YOUR_SECONDARY_COLOR',
-  type: 'YOUR_TYPE'
+  primaryColor: 'your-primary-color',
+  secondaryColor: 'your-secondary-color',
+  type: 'your-type'
 };
 
 let theme = createMuiTheme({
   palette: {
-    primary: YOUR_PRIMARY_COLOR,
-    secondary: YOUR_SECONDARY_COLOR,
+    primary: yourPrimaryColor,
+    secondary: yourSecondaryColor,
     type: type
   },
 
@@ -97,6 +97,8 @@ let theme = createMuiTheme({
   }
 });
 ```
+
+Remember to follow the proper casing for color names, there are 2 variants: color strings and color imports. Color strings are within quotes and follow `kebab-case` and imports are ES6 classes and are written in `camelCase`.
 
 Available colors:
 
