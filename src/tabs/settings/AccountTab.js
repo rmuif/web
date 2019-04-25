@@ -6,6 +6,9 @@ import moment from 'moment';
 
 import { withStyles } from '@material-ui/core/styles';
 
+import Avatar from '@material-ui/core/Avatar';
+import Typography from '@material-ui/core/Typography';
+
 import DialogContentText from '@material-ui/core/DialogContentText';
 
 import List from '@material-ui/core/List';
@@ -23,7 +26,31 @@ import AccessTimeIcon from '@material-ui/icons/AccessTime';
 import ConfirmationDialog from '../../dialogs/ConfirmationDialog';
 
 const styles = (theme) => ({
-  dialogContentText: {
+  profile: {
+    marginTop: `${theme.spacing.unit * 2}px`,
+    textAlign: 'center'
+  },
+
+  avatar: {
+    width: `${theme.spacing.unit * 12}px`,
+    height: `${theme.spacing.unit * 12}px`,
+    marginRight: 'auto',
+    marginLeft: 'auto'
+  },
+
+  info: {
+    marginTop: `${theme.spacing.unit * 0.5}px`
+  },
+
+  emailAddress: {
+    marginTop: `-${theme.spacing.unit * 0.5}px`
+  },
+
+  dialogContentTextComplete: {
+    marginTop: `${theme.spacing.unit}px`
+  },
+
+  dialogContentTextIncomplete: {
     marginTop: `${theme.spacing.unit * 2}px`
   }
 });
@@ -69,11 +96,23 @@ class AccountTab extends Component {
     const { classes, user, isPerformingAuthAction } = this.props;
     const { verifyEmailAddressDialog } = this.state;
 
+    const isUserComplete = (user.photoURL && user.displayName && user.email);
+
     return (
       <React.Fragment>
-        <DialogContentText className={classes.dialogContentText}>
-          This is a summary of your account.
-          You can manage your account throughout all the settings.
+        {isUserComplete &&
+          <div className={classes.profile}>
+            <Avatar className={classes.avatar} alt="Avatar" src={user.photoURL} />
+
+            <div className={classes.info}>
+              <Typography variant="h6">{user.displayName}</Typography>
+              <Typography className={classes.emailAddress} color="textSecondary" variant="body1">{user.email}</Typography>
+            </div>
+          </div>
+        }
+
+        <DialogContentText className={isUserComplete ? classes.dialogContentTextComplete : classes.dialogContentTextIncomplete}>
+          Here's some info about your account. You can manage your account through the tabs.
         </DialogContentText>
 
         <List>
