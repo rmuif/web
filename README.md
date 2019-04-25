@@ -12,7 +12,7 @@ React + Material-UI + Firebase comes with a bunch of development and testing too
 - Robust routing with React Router including error handling (404)
 - Extensive mobile support with [react-swipeable-views](https://react-swipeable-views.com) for tabs
 
-Do you want to see it in action? Take a look at the [demo](https://phoqe.github.io/react-material-ui-firebase).
+Want to see it in action? Take a look at the [demo](https://phoqe.github.io/react-material-ui-firebase).
 
 ## Getting Started
 
