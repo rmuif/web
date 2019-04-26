@@ -21,6 +21,7 @@ import Tooltip from '@material-ui/core/Tooltip';
 import IconButton from '@material-ui/core/IconButton';
 import Button from '@material-ui/core/Button';
 
+import PortraitIcon from '@material-ui/icons/Portrait';
 import PersonIcon from '@material-ui/icons/Person';
 import EditIcon from '@material-ui/icons/Edit';
 import EmailIcon from '@material-ui/icons/Email';
@@ -119,6 +120,22 @@ class AccountTab extends Component {
         </DialogContentText>
 
         <List>
+          {!user.photoURL &&
+            <ListItem>
+              <ListItemIcon>
+                <Tooltip title="Avatar">
+                  <PortraitIcon />
+                </Tooltip>
+              </ListItemIcon>
+
+              <ListItemText primary="You don't have an avatar. Add one!" />
+
+              <ListItemSecondaryAction>
+                <Button color="primary" variant="contained">Add</Button>
+              </ListItemSecondaryAction>
+            </ListItem>
+          }
+
           {user.displayName &&
             <ListItem>
               <ListItemIcon>
