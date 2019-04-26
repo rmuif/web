@@ -18,8 +18,11 @@ import ListItemText from '@material-ui/core/ListItemText';
 import ListItemSecondaryAction from '@material-ui/core/ListItemSecondaryAction';
 
 import Tooltip from '@material-ui/core/Tooltip';
+import IconButton from '@material-ui/core/IconButton';
 import Button from '@material-ui/core/Button';
 
+import PersonIcon from '@material-ui/icons/Person';
+import EditIcon from '@material-ui/icons/Edit';
 import EmailIcon from '@material-ui/icons/Email';
 import AccessTimeIcon from '@material-ui/icons/AccessTime';
 
@@ -116,6 +119,26 @@ class AccountTab extends Component {
         </DialogContentText>
 
         <List>
+          {user.displayName &&
+            <ListItem>
+              <ListItemIcon>
+                <Tooltip title="Display name">
+                  <PersonIcon />
+                </Tooltip>
+              </ListItemIcon>
+
+              <ListItemText primary="Display name" secondary={user.displayName} />
+
+              <ListItemSecondaryAction>
+                <Tooltip title="Edit">
+                  <IconButton>
+                    <EditIcon />
+                  </IconButton>
+                </Tooltip>
+              </ListItemSecondaryAction>
+            </ListItem>
+          }
+
           {user.email &&
             <ListItem>
               <ListItemIcon>
