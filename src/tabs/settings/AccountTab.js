@@ -139,6 +139,22 @@ class AccountTab extends Component {
             </ListItem>
           }
 
+          {!user.displayName &&
+            <ListItem>
+              <ListItemIcon>
+                <Tooltip title="Display name">
+                  <PersonIcon />
+                </Tooltip>
+              </ListItemIcon>
+
+              <ListItemText primary="You don't have a display name. Add one!" />
+
+              <ListItemSecondaryAction>
+                <Button color="primary" variant="contained">Add</Button>
+              </ListItemSecondaryAction>
+            </ListItem>
+          }
+
           {user.email &&
             <ListItem>
               <ListItemIcon>
@@ -154,6 +170,22 @@ class AccountTab extends Component {
                   <Button color="primary" disabled={isPerformingAuthAction} variant="contained" onClick={this.openVerifyEmailAddressDialog}>Verify</Button>
                 </ListItemSecondaryAction>
               }
+            </ListItem>
+          }
+
+          {!user.email &&
+            <ListItem>
+              <ListItemIcon>
+                <Tooltip title="E-mail address">
+                  <EmailIcon />
+                </Tooltip>
+              </ListItemIcon>
+
+              <ListItemText primary="You don't have an e-mail address. Add one!" />
+
+              <ListItemSecondaryAction>
+                <Button color="primary" variant="contained">Add</Button>
+              </ListItemSecondaryAction>
             </ListItem>
           }
 
