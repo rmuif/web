@@ -97,7 +97,12 @@ class AccountTab extends Component {
   };
 
   render() {
+    // Properties
     const { classes, user, isPerformingAuthAction } = this.props;
+
+    // Events
+    const { onChangeDisplayNameClick } = this.props;
+
     const { verifyEmailAddressDialog } = this.state;
 
     const isUserComplete = (user.photoURL && user.displayName && user.email);
@@ -148,7 +153,7 @@ class AccountTab extends Component {
 
               <ListItemSecondaryAction>
                 <Tooltip title="Edit">
-                  <IconButton>
+                  <IconButton onClick={onChangeDisplayNameClick}>
                     <EditIcon />
                   </IconButton>
                 </Tooltip>

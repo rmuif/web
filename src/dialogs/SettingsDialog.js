@@ -63,7 +63,7 @@ class SettingsDialog extends Component {
     const { open, fullScreen, user, isPerformingAuthAction, colors, types, primaryColor, secondaryColor, type } = this.props;
 
     // Events
-    const { onClose, onVerifyEmailAddressClick, onPrimaryColorChange, onSecondaryColorChange, onTypeChange } = this.props;
+    const { onClose, onChangeDisplayNameClick, onVerifyEmailAddressClick, onPrimaryColorChange, onSecondaryColorChange, onTypeChange } = this.props;
 
     const { selectedTab } = this.state;
 
@@ -82,6 +82,7 @@ class SettingsDialog extends Component {
               <AccountTab
                 user={user}
                 isPerformingAuthAction={isPerformingAuthAction}
+                onChangeDisplayNameClick={onChangeDisplayNameClick}
                 onVerifyEmailAddressClick={onVerifyEmailAddressClick}
               />
             }
@@ -105,6 +106,7 @@ class SettingsDialog extends Component {
               <AccountTab
                 user={user}
                 isPerformingAuthAction={isPerformingAuthAction}
+                onChangeDisplayNameClick={onChangeDisplayNameClick}
                 onVerifyEmailAddressClick={onVerifyEmailAddressClick}
               />
 

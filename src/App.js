@@ -35,6 +35,7 @@ import { createMuiTheme, withStyles, MuiThemeProvider } from '@material-ui/core/
 
 import Hidden from '@material-ui/core/Hidden';
 import Fab from '@material-ui/core/Fab';
+import TextField from '@material-ui/core/TextField';
 import Snackbar from '@material-ui/core/Snackbar';
 
 import CodeIcon from '@material-ui/icons/Code';
@@ -53,6 +54,7 @@ import SignUpDialog from './dialogs/SignUpDialog';
 import SignInDialog from './dialogs/SignInDialog';
 import ResetPasswordDialog from './dialogs/ResetPasswordDialog';
 import SettingsDialog from './dialogs/SettingsDialog';
+import InputDialog from './dialogs/InputDialog';
 import ConfirmationDialog from './dialogs/ConfirmationDialog';
 
 /**
@@ -273,6 +275,14 @@ const constraints = {
         allowEmpty: false
       }
     }
+  },
+
+  changeDisplayName: {
+    displayName: {
+      presence: {
+        allowEmpty: false
+      }
+    }
   }
 };
 
@@ -305,6 +315,13 @@ class App extends Component {
 
       settingsDialog: {
         open: false
+      },
+
+      changeDisplayNameDialog: {
+        open: false,
+
+        displayName: '',
+        errors: null
       },
 
       signOutDialog: {
@@ -584,6 +601,57 @@ class App extends Component {
     });
   };
 
+  changeDisplayName = (displayName) => {
+    const { user, isSignedIn } = this.state;
+
+    if (!user || !isSignedIn) {
+      return;
+    }
+
+    if (!displayName) {
+      return;
+    }
+
+    const errors = validate({ displayName }, constraints.changeDisplayName);
+
+    if (errors) {
+      return;
+    }
+
+    if (errors) {
+      this.setState({
+        changeDisplayNameDialog: {
+          errors
+        }
+      });
+
+      return;
+    }
+
+    this.setState({
+      isPerformingAuthAction: true
+    }, () => {
+      user.updateProfile({ displayName }).then(() => {
+        this.closeChangeDisplayNameDialog(() => {
+          this.openSnackbar('Display name changed');
+        });
+      }).catch((reason) => {
+        const code = reason.code;
+        const message = reason.message;
+
+        switch (code) {
+          default:
+            this.openSnackbar(message);
+            return;
+        }
+      }).finally(() => {
+        this.setState({
+          isPerformingAuthAction: false
+        });
+      });
+    });
+  };
+
   /**
    * Signs out the current user.
    */
@@ -787,6 +855,26 @@ class App extends Component {
     });
   };
 
+  openChangeDisplayNameDialog = () => {
+    this.setState({
+      changeDisplayNameDialog: {
+        open: true
+      }
+    });
+  };
+
+  closeChangeDisplayNameDialog = (callback) => {
+    this.setState({
+      changeDisplayNameDialog: {
+        open: false
+      }
+    }, () => {
+      if (callback && typeof callback === 'function') {
+        callback();
+      }
+    });
+  };
+
   showSignOutDialog = () => {
     this.setState({
       signOutDialog: {
@@ -855,6 +943,7 @@ class App extends Component {
       signInDialog,
       resetPasswordDialog,
       settingsDialog,
+      changeDisplayNameDialog,
       signOutDialog
     } = this.state;
 
@@ -906,6 +995,7 @@ class App extends Component {
 
                         onClose={this.closeSettingsDialog}
                         onVerifyEmailAddressClick={this.verifyEmailAddress}
+                        onChangeDisplayNameClick={this.openChangeDisplayNameDialog}
                         onPrimaryColorChange={this.changePrimaryColor}
                         onSecondaryColorChange={this.changeSecondaryColor}
                         onTypeChange={this.changeType}
@@ -927,6 +1017,7 @@ class App extends Component {
                         defaultTheme={defaultTheme}
 
                         onClose={this.closeSettingsDialog}
+                        onChangeDisplayNameClick={this.openChangeDisplayNameDialog}
                         onVerifyEmailAddressClick={this.verifyEmailAddress}
                         onPrimaryColorChange={this.changePrimaryColor}
                         onSecondaryColorChange={this.changeSecondaryColor}
@@ -934,6 +1025,33 @@ class App extends Component {
                         onResetClick={this.resetTheme}
                       />
                     </Hidden>
+
+                    <InputDialog
+                      open={changeDisplayNameDialog.open}
+
+                      title="Change display name"
+                      contentText="Your display name is used to represent you. It's visible to other users and can be changed any time."
+                      textField={
+                        <TextField
+                          autoComplete="name"
+                          autoFocus
+                          error={!!(changeDisplayNameDialog.errors && changeDisplayNameDialog.errors.displayName)}
+                          fullWidth
+                          helperText={(changeDisplayNameDialog.errors && changeDisplayNameDialog.errors.displayName) ? changeDisplayNameDialog.errors.displayName[0] : ''}
+                          margin="normal"
+                          placeholder={user.displayName}
+                          required
+                          type="text"
+                        />
+                      }
+                      okText="Change"
+                      highlightOkButton
+
+                      onClose={this.closeChangeDisplayNameDialog}
+
+                      onCancelClick={this.closeChangeDisplayNameDialog}
+                      onOkClick={this.changeDisplayName}
+                    />
 
                     <ConfirmationDialog
                       open={signOutDialog.open}
