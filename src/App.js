@@ -300,6 +300,7 @@ class App extends Component {
       isSignedIn: false,
 
       user: null,
+      displayName: '',
 
       signUpDialog: {
         open: false
@@ -601,12 +602,14 @@ class App extends Component {
     });
   };
 
-  changeDisplayName = (displayName) => {
+  changeDisplayName = () => {
     const { user, isSignedIn } = this.state;
 
     if (!user || !isSignedIn) {
       return;
     }
+
+    const { displayName } = this.state;
 
     if (!displayName) {
       return;
@@ -895,6 +898,12 @@ class App extends Component {
     });
   };
 
+  handleDisplayNameChange = (event) => {
+    const displayName = event.target.value;
+
+    this.setState({ displayName });
+  };
+
   /**
    * Opens a snackbar. Snackbars provide brief messages about app processes through a message.
    */
@@ -934,7 +943,8 @@ class App extends Component {
       isAuthReady,
       isPerformingAuthAction,
       isSignedIn,
-      user
+      user,
+      displayName
     } = this.state;
 
     // Dialogs
@@ -1039,9 +1049,11 @@ class App extends Component {
                           fullWidth
                           helperText={(changeDisplayNameDialog.errors && changeDisplayNameDialog.errors.displayName) ? changeDisplayNameDialog.errors.displayName[0] : ''}
                           margin="normal"
+                          onChange={this.handleDisplayNameChange}
                           placeholder={user.displayName}
                           required
                           type="text"
+                          value={displayName}
                         />
                       }
                       okText="Change"
