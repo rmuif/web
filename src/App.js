@@ -291,7 +291,16 @@ const constraints = {
         allowEmpty: false
       }
     }
-  }
+  },
+
+  addEmailAddress: {
+    emailAddress: {
+      email: true,
+      presence: {
+        allowEmpty: false
+      }
+    }
+  },
 };
 
 class App extends Component {
@@ -309,6 +318,7 @@ class App extends Component {
 
       user: null,
       displayName: '',
+      emailAddress: '',
 
       signUpDialog: {
         open: false
@@ -333,6 +343,12 @@ class App extends Component {
       },
 
       changeDisplayNameDialog: {
+        open: false,
+
+        errors: null
+      },
+
+      addEmailAddressDialog: {
         open: false,
 
         errors: null
@@ -629,15 +645,12 @@ class App extends Component {
     const errors = validate({ displayName }, constraints.addDisplayName);
 
     if (errors) {
-      return;
-    }
-
-    if (errors) {
-      this.setState({
+      this.setState((state) => ({
         addDisplayNameDialog: {
+          ...state.addDisplayNameDialog,
           errors
         }
-      });
+      }));
 
       return;
     }
@@ -682,15 +695,12 @@ class App extends Component {
     const errors = validate({ displayName }, constraints.changeDisplayName);
 
     if (errors) {
-      return;
-    }
-
-    if (errors) {
-      this.setState({
+      this.setState((state) => ({
         changeDisplayNameDialog: {
+          ...state.changeDisplayNameDialog,
           errors
         }
-      });
+      }));
 
       return;
     }
@@ -701,6 +711,54 @@ class App extends Component {
       user.updateProfile({ displayName }).then(() => {
         this.closeChangeDisplayNameDialog(() => {
           this.openSnackbar('Display name changed');
+        });
+      }).catch((reason) => {
+        const code = reason.code;
+        const message = reason.message;
+
+        switch (code) {
+          default:
+            this.openSnackbar(message);
+            return;
+        }
+      }).finally(() => {
+        this.setState({
+          isPerformingAuthAction: false
+        });
+      });
+    });
+  };
+
+  addEmailAddress = () => {
+    const { user, isSignedIn, emailAddress } = this.state;
+
+    if (!user || !isSignedIn || !emailAddress) {
+      return;
+    }
+
+    if (user.email) {
+      return;
+    }
+
+    const errors = validate({ emailAddress }, constraints.addEmailAddress);
+
+    if (errors) {
+      this.setState((state) => ({
+        addEmailAddressDialog: {
+          ...state.addEmailAddressDialog,
+          errors
+        }
+      }));
+
+      return;
+    }
+
+    this.setState({
+      isPerformingAuthAction: true
+    }, () => {
+      user.updateEmail(emailAddress).then(() => {
+        this.closeAddEmailAddressDialog(() => {
+          this.openSnackbar('E-mail address added');
         });
       }).catch((reason) => {
         const code = reason.code;
@@ -962,6 +1020,26 @@ class App extends Component {
     });
   };
 
+  openAddEmailAddressDialog = () => {
+    this.setState({
+      addEmailAddressDialog: {
+        open: true
+      }
+    });
+  };
+
+  closeAddEmailAddressDialog = (callback) => {
+    this.setState({
+      addEmailAddressDialog: {
+        open: false
+      }
+    }, () => {
+      if (callback && typeof callback === 'function') {
+        callback();
+      }
+    });
+  };
+
   showSignOutDialog = () => {
     this.setState({
       signOutDialog: {
@@ -986,6 +1064,12 @@ class App extends Component {
     const displayName = event.target.value;
 
     this.setState({ displayName });
+  };
+
+  handleEmailAddressChange = (event) => {
+    const emailAddress = event.target.value;
+
+    this.setState({ emailAddress });
   };
 
   /**
@@ -1028,7 +1112,8 @@ class App extends Component {
       isPerformingAuthAction,
       isSignedIn,
       user,
-      displayName
+      displayName,
+      emailAddress
     } = this.state;
 
     // Dialogs
@@ -1039,6 +1124,7 @@ class App extends Component {
       settingsDialog,
       addDisplayNameDialog,
       changeDisplayNameDialog,
+      addEmailAddressDialog,
       signOutDialog
     } = this.state;
 
@@ -1089,9 +1175,10 @@ class App extends Component {
                         defaultTheme={defaultTheme}
 
                         onClose={this.closeSettingsDialog}
-                        onVerifyEmailAddressClick={this.verifyEmailAddress}
                         onAddDisplayNameClick={this.openAddDisplayNameDialog}
                         onChangeDisplayNameClick={this.openChangeDisplayNameDialog}
+                        onAddEmailAddressClick={this.openAddEmailAddressDialog}
+                        onVerifyEmailAddressClick={this.verifyEmailAddress}
                         onPrimaryColorChange={this.changePrimaryColor}
                         onSecondaryColorChange={this.changeSecondaryColor}
                         onTypeChange={this.changeType}
@@ -1115,6 +1202,7 @@ class App extends Component {
                         onClose={this.closeSettingsDialog}
                         onAddDisplayNameClick={this.openAddDisplayNameDialog}
                         onChangeDisplayNameClick={this.openChangeDisplayNameDialog}
+                        onAddEmailAddressClick={this.openAddEmailAddressDialog}
                         onVerifyEmailAddressClick={this.verifyEmailAddress}
                         onPrimaryColorChange={this.changePrimaryColor}
                         onSecondaryColorChange={this.changeSecondaryColor}
@@ -1191,6 +1279,41 @@ class App extends Component {
 
                       onCancelClick={this.closeChangeDisplayNameDialog}
                       onOkClick={this.changeDisplayName}
+                    />
+
+                    <InputDialog
+                      open={addEmailAddressDialog.open}
+
+                      title="Add e-mail address"
+                      contentText="Your e-mail address is used to identify you. It's not visible to other users and can be changed any time."
+                      textField={
+                        <TextField
+                          autoComplete="email"
+                          autoFocus
+                          error={!!(addEmailAddressDialog.errors && addEmailAddressDialog.errors.emailAddress)}
+                          fullWidth
+                          helperText={(addEmailAddressDialog.errors && addEmailAddressDialog.errors.emailAddress) ? addEmailAddressDialog.errors.emailAddress[0] : ''}
+                          margin="normal"
+                          onChange={this.handleEmailAddressChange}
+                          placeholder="E-mail address"
+                          required
+                          type="email"
+                          value={emailAddress}
+                        />
+                      }
+                      okText="Add"
+                      disableOkButton={!emailAddress || isPerformingAuthAction}
+                      highlightOkButton
+
+                      onClose={this.closeAddEmailAddressDialog}
+                      onExited={() => {
+                        this.setState({
+                          emailAddress: ''
+                        });
+                      }}
+
+                      onCancelClick={this.closeAddEmailAddressDialog}
+                      onOkClick={this.addEmailAddress}
                     />
 
                     <ConfirmationDialog
