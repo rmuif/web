@@ -615,6 +615,12 @@ class App extends Component {
       return;
     }
 
+    if (displayName === user.displayName) {
+      this.openSnackbar(`Your name is already ${displayName}`);
+
+      return;
+    }
+
     const errors = validate({ displayName }, constraints.changeDisplayName);
 
     if (errors) {
