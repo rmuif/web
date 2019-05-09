@@ -277,6 +277,14 @@ const constraints = {
     }
   },
 
+  addDisplayName: {
+    displayName: {
+      presence: {
+        allowEmpty: false
+      }
+    }
+  },
+
   changeDisplayName: {
     displayName: {
       presence: {
@@ -316,6 +324,12 @@ class App extends Component {
 
       settingsDialog: {
         open: false
+      },
+
+      addDisplayNameDialog: {
+        open: false,
+
+        errors: null
       },
 
       changeDisplayNameDialog: {
@@ -601,16 +615,61 @@ class App extends Component {
     });
   };
 
-  changeDisplayName = () => {
-    const { user, isSignedIn } = this.state;
+  addDisplayName = () => {
+    const { user, isSignedIn, displayName } = this.state;
 
-    if (!user || !isSignedIn) {
+    if (!user || !isSignedIn || !displayName) {
       return;
     }
 
-    const { displayName } = this.state;
+    if (user.displayName) {
+      return;
+    }
 
-    if (!displayName) {
+    const errors = validate({ displayName }, constraints.addDisplayName);
+
+    if (errors) {
+      return;
+    }
+
+    if (errors) {
+      this.setState({
+        addDisplayNameDialog: {
+          errors
+        }
+      });
+
+      return;
+    }
+
+    this.setState({
+      isPerformingAuthAction: true
+    }, () => {
+      user.updateProfile({ displayName }).then(() => {
+        this.closeAddDisplayNameDialog(() => {
+          this.openSnackbar('Display name added');
+        });
+      }).catch((reason) => {
+        const code = reason.code;
+        const message = reason.message;
+
+        switch (code) {
+          default:
+            this.openSnackbar(message);
+            return;
+        }
+      }).finally(() => {
+        this.setState({
+          isPerformingAuthAction: false
+        });
+      });
+    });
+  };
+
+  changeDisplayName = () => {
+    const { user, isSignedIn, displayName } = this.state;
+
+    if (!user || !isSignedIn || !displayName) {
       return;
     }
 
@@ -863,6 +922,26 @@ class App extends Component {
     });
   };
 
+  openAddDisplayNameDialog = () => {
+    this.setState({
+      addDisplayNameDialog: {
+        open: true
+      }
+    });
+  };
+
+  closeAddDisplayNameDialog = (callback) => {
+    this.setState({
+      addDisplayNameDialog: {
+        open: false
+      }
+    }, () => {
+      if (callback && typeof callback === 'function') {
+        callback();
+      }
+    });
+  };
+
   openChangeDisplayNameDialog = () => {
     this.setState({
       changeDisplayNameDialog: {
@@ -958,6 +1037,7 @@ class App extends Component {
       signInDialog,
       resetPasswordDialog,
       settingsDialog,
+      addDisplayNameDialog,
       changeDisplayNameDialog,
       signOutDialog
     } = this.state;
@@ -1010,6 +1090,7 @@ class App extends Component {
 
                         onClose={this.closeSettingsDialog}
                         onVerifyEmailAddressClick={this.verifyEmailAddress}
+                        onAddDisplayNameClick={this.openAddDisplayNameDialog}
                         onChangeDisplayNameClick={this.openChangeDisplayNameDialog}
                         onPrimaryColorChange={this.changePrimaryColor}
                         onSecondaryColorChange={this.changeSecondaryColor}
@@ -1032,6 +1113,7 @@ class App extends Component {
                         defaultTheme={defaultTheme}
 
                         onClose={this.closeSettingsDialog}
+                        onAddDisplayNameClick={this.openAddDisplayNameDialog}
                         onChangeDisplayNameClick={this.openChangeDisplayNameDialog}
                         onVerifyEmailAddressClick={this.verifyEmailAddress}
                         onPrimaryColorChange={this.changePrimaryColor}
@@ -1040,6 +1122,41 @@ class App extends Component {
                         onResetClick={this.resetTheme}
                       />
                     </Hidden>
+
+                    <InputDialog
+                      open={addDisplayNameDialog.open}
+
+                      title="Add display name"
+                      contentText="Your display name is used to represent you. It's visible to other users and can be changed any time."
+                      textField={
+                        <TextField
+                          autoComplete="name"
+                          autoFocus
+                          error={!!(addDisplayNameDialog.errors && addDisplayNameDialog.errors.displayName)}
+                          fullWidth
+                          helperText={(addDisplayNameDialog.errors && addDisplayNameDialog.errors.displayName) ? addDisplayNameDialog.errors.displayName[0] : ''}
+                          margin="normal"
+                          onChange={this.handleDisplayNameChange}
+                          placeholder="Display name"
+                          required
+                          type="text"
+                          value={displayName}
+                        />
+                      }
+                      okText="Add"
+                      disableOkButton={!displayName || isPerformingAuthAction}
+                      highlightOkButton
+
+                      onClose={this.closeAddDisplayNameDialog}
+                      onExited={() => {
+                        this.setState({
+                          displayName: ''
+                        });
+                      }}
+
+                      onCancelClick={this.closeAddDisplayNameDialog}
+                      onOkClick={this.addDisplayName}
+                    />
 
                     <InputDialog
                       open={changeDisplayNameDialog.open}

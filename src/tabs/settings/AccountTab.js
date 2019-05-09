@@ -101,7 +101,7 @@ class AccountTab extends Component {
     const { classes, user, isPerformingAuthAction } = this.props;
 
     // Events
-    const { onChangeDisplayNameClick } = this.props;
+    const { onAddDisplayNameClick, onChangeDisplayNameClick } = this.props;
 
     const { verifyEmailAddressDialog } = this.state;
 
@@ -172,7 +172,7 @@ class AccountTab extends Component {
               <ListItemText primary="You don't have a display name. Add one!" />
 
               <ListItemSecondaryAction>
-                <Button color="primary" variant="contained">Add</Button>
+                <Button color="primary" variant="contained" onClick={onAddDisplayNameClick}>Add</Button>
               </ListItemSecondaryAction>
             </ListItem>
           }
@@ -259,6 +259,8 @@ AccountTab.propTypes = {
   user: PropTypes.object.isRequired,
   isPerformingAuthAction: PropTypes.bool.isRequired,
 
+  onAddDisplayNameClick: PropTypes.func.isRequired,
+  onChangeDisplayNameClick: PropTypes.func.isRequired,
   onVerifyEmailAddressClick: PropTypes.func.isRequired
 };
 

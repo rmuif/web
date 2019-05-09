@@ -63,7 +63,7 @@ class SettingsDialog extends Component {
     const { open, fullScreen, user, isPerformingAuthAction, colors, types, primaryColor, secondaryColor, type } = this.props;
 
     // Events
-    const { onClose, onChangeDisplayNameClick, onVerifyEmailAddressClick, onPrimaryColorChange, onSecondaryColorChange, onTypeChange } = this.props;
+    const { onClose, onAddDisplayNameClick, onChangeDisplayNameClick, onVerifyEmailAddressClick, onPrimaryColorChange, onSecondaryColorChange, onTypeChange } = this.props;
 
     const { selectedTab } = this.state;
 
@@ -82,6 +82,7 @@ class SettingsDialog extends Component {
               <AccountTab
                 user={user}
                 isPerformingAuthAction={isPerformingAuthAction}
+                onAddDisplayNameClick={onAddDisplayNameClick}
                 onChangeDisplayNameClick={onChangeDisplayNameClick}
                 onVerifyEmailAddressClick={onVerifyEmailAddressClick}
               />
@@ -106,6 +107,7 @@ class SettingsDialog extends Component {
               <AccountTab
                 user={user}
                 isPerformingAuthAction={isPerformingAuthAction}
+                onAddDisplayNameClick={onAddDisplayNameClick}
                 onChangeDisplayNameClick={onChangeDisplayNameClick}
                 onVerifyEmailAddressClick={onVerifyEmailAddressClick}
               />
@@ -146,6 +148,8 @@ SettingsDialog.propTypes = {
   type: PropTypes.string.isRequired,
 
   onClose: PropTypes.func.isRequired,
+  onAddDisplayNameClick: PropTypes.func.isRequired,
+  onChangeDisplayNameClick: PropTypes.func.isRequired,
   onVerifyEmailAddressClick: PropTypes.func.isRequired,
   onPrimaryColorChange: PropTypes.func.isRequired,
   onSecondaryColorChange: PropTypes.func.isRequired,
