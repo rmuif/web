@@ -1057,6 +1057,7 @@ class App extends Component {
                         />
                       }
                       okText="Change"
+                      disableOkButton={!displayName || isPerformingAuthAction}
                       highlightOkButton
 
                       onClose={this.closeChangeDisplayNameDialog}
