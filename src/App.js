@@ -636,7 +636,11 @@ class App extends Component {
     }, () => {
       user.updateProfile({ displayName }).then(() => {
         this.closeChangeDisplayNameDialog(() => {
-          this.openSnackbar('Display name changed');
+          this.setState({
+            displayName: ''
+          }, () => {
+            this.openSnackbar('Display name changed');
+          });
         });
       }).catch((reason) => {
         const code = reason.code;
