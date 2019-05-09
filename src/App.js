@@ -321,7 +321,6 @@ class App extends Component {
       changeDisplayNameDialog: {
         open: false,
 
-        displayName: '',
         errors: null
       },
 
