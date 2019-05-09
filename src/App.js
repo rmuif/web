@@ -642,11 +642,7 @@ class App extends Component {
     }, () => {
       user.updateProfile({ displayName }).then(() => {
         this.closeChangeDisplayNameDialog(() => {
-          this.setState({
-            displayName: ''
-          }, () => {
-            this.openSnackbar('Display name changed');
-          });
+          this.openSnackbar('Display name changed');
         });
       }).catch((reason) => {
         const code = reason.code;
@@ -1071,6 +1067,11 @@ class App extends Component {
                       highlightOkButton
 
                       onClose={this.closeChangeDisplayNameDialog}
+                      onExited={() => {
+                        this.setState({
+                          displayName: ''
+                        });
+                      }}
 
                       onCancelClick={this.closeChangeDisplayNameDialog}
                       onOkClick={this.changeDisplayName}

@@ -41,7 +41,7 @@ class InputDialog extends Component {
      */
 
     // Dialog
-    const { onClose } = this.props;
+    const { onClose, onExited } = this.props;
 
     // Custom
     const { onCancelClick, onOkClick } = this.props;
@@ -51,7 +51,7 @@ class InputDialog extends Component {
     }
 
     return (
-      <Dialog open={open} onClose={onClose} onKeyPress={this.handleKeyPress}>
+      <Dialog open={open} onClose={onClose} onExited={onExited} onKeyPress={this.handleKeyPress}>
         {title && <DialogTitle>{title}</DialogTitle>}
 
         {contentText &&
@@ -98,6 +98,7 @@ InputDialog.propTypes = {
   highlightOkButton: PropTypes.bool,
 
   onClose: PropTypes.func.isRequired,
+  onExited: PropTypes.func,
   onCancelClick: PropTypes.func,
   onOkClick: PropTypes.func
 };
