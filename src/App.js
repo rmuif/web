@@ -277,6 +277,18 @@ const constraints = {
     }
   },
 
+  addAvatar: {
+    avatar: {
+      presence: {
+        allowEmpty: false
+      },
+
+      url: {
+        message: "^Avatar URL is not a valid URL"
+      }
+    }
+  },
+
   addDisplayName: {
     displayName: {
       presence: {
@@ -317,6 +329,7 @@ class App extends Component {
       isSignedIn: false,
 
       user: null,
+      avatar: '',
       displayName: '',
       emailAddress: '',
 
@@ -334,6 +347,12 @@ class App extends Component {
 
       settingsDialog: {
         open: false
+      },
+
+      addAvatarDialog: {
+        open: false,
+
+        errors: null
       },
 
       addDisplayNameDialog: {
@@ -619,6 +638,54 @@ class App extends Component {
             this.openSnackbar(message);
             return;
 
+          default:
+            this.openSnackbar(message);
+            return;
+        }
+      }).finally(() => {
+        this.setState({
+          isPerformingAuthAction: false
+        });
+      });
+    });
+  };
+
+  addAvatar = () => {
+    const { user, isSignedIn, avatar } = this.state;
+
+    if (!user || !isSignedIn || !avatar) {
+      return;
+    }
+
+    if (user.photoURL) {
+      return;
+    }
+
+    const errors = validate({ avatar }, constraints.addAvatar);
+
+    if (errors) {
+      this.setState((state) => ({
+        addAvatarDialog: {
+          ...state.addAvatarDialog,
+          errors
+        }
+      }));
+
+      return;
+    }
+
+    this.setState({
+      isPerformingAuthAction: true
+    }, () => {
+      user.updateProfile({ photoURL: avatar }).then(() => {
+        this.closeAddAvatarDialog(() => {
+          this.openSnackbar('Avatar added');
+        });
+      }).catch((reason) => {
+        const code = reason.code;
+        const message = reason.message;
+
+        switch (code) {
           default:
             this.openSnackbar(message);
             return;
@@ -980,6 +1047,26 @@ class App extends Component {
     });
   };
 
+  openAddAvatarDialog = () => {
+    this.setState({
+      addAvatarDialog: {
+        open: true
+      }
+    });
+  };
+
+  closeAddAvatarDialog = (callback) => {
+    this.setState({
+      addAvatarDialog: {
+        open: false
+      }
+    }, () => {
+      if (callback && typeof callback === 'function') {
+        callback();
+      }
+    });
+  };
+
   openAddDisplayNameDialog = () => {
     this.setState({
       addDisplayNameDialog: {
@@ -1060,6 +1147,12 @@ class App extends Component {
     });
   };
 
+  handleAvatarChange = (event) => {
+    const avatar = event.target.value;
+
+    this.setState({ avatar });
+  };
+
   handleDisplayNameChange = (event) => {
     const displayName = event.target.value;
 
@@ -1112,6 +1205,7 @@ class App extends Component {
       isPerformingAuthAction,
       isSignedIn,
       user,
+      avatar,
       displayName,
       emailAddress
     } = this.state;
@@ -1122,6 +1216,7 @@ class App extends Component {
       signInDialog,
       resetPasswordDialog,
       settingsDialog,
+      addAvatarDialog,
       addDisplayNameDialog,
       changeDisplayNameDialog,
       addEmailAddressDialog,
@@ -1175,6 +1270,7 @@ class App extends Component {
                         defaultTheme={defaultTheme}
 
                         onClose={this.closeSettingsDialog}
+                        onAddAvatarClick={this.openAddAvatarDialog}
                         onAddDisplayNameClick={this.openAddDisplayNameDialog}
                         onChangeDisplayNameClick={this.openChangeDisplayNameDialog}
                         onAddEmailAddressClick={this.openAddEmailAddressDialog}
@@ -1200,6 +1296,7 @@ class App extends Component {
                         defaultTheme={defaultTheme}
 
                         onClose={this.closeSettingsDialog}
+                        onAddAvatarClick={this.openAddAvatarDialog}
                         onAddDisplayNameClick={this.openAddDisplayNameDialog}
                         onChangeDisplayNameClick={this.openChangeDisplayNameDialog}
                         onAddEmailAddressClick={this.openAddEmailAddressDialog}
@@ -1210,6 +1307,41 @@ class App extends Component {
                         onResetClick={this.resetTheme}
                       />
                     </Hidden>
+
+                    <InputDialog
+                      open={addAvatarDialog.open}
+
+                      title="Add avatar"
+                      contentText="Your avatar is used to represent you. It's visible to other users and can be changed any time."
+                      textField={
+                        <TextField
+                          autoComplete="name"
+                          autoFocus
+                          error={!!(addAvatarDialog.errors && addAvatarDialog.errors.avatar)}
+                          fullWidth
+                          helperText={(addAvatarDialog.errors && addAvatarDialog.errors.avatar) ? addAvatarDialog.errors.avatar[0] : ''}
+                          margin="normal"
+                          onChange={this.handleAvatarChange}
+                          placeholder="Avatar URL"
+                          required
+                          type="text"
+                          value={avatar}
+                        />
+                      }
+                      okText="Add"
+                      disableOkButton={!avatar || isPerformingAuthAction}
+                      highlightOkButton
+
+                      onClose={this.closeAddAvatarDialog}
+                      onExited={() => {
+                        this.setState({
+                          avatar: ''
+                        });
+                      }}
+
+                      onCancelClick={this.closeAddAvatarDialog}
+                      onOkClick={this.addAvatar}
+                    />
 
                     <InputDialog
                       open={addDisplayNameDialog.open}
