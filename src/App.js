@@ -627,47 +627,8 @@ class App extends Component {
   };
 
   /**
-   * Sends a verification email to a user.
+   * Sets an avatar.
    */
-  verifyEmailAddress = () => {
-    const { user, isSignedIn } = this.state;
-
-    if (!user || !user.email || !isSignedIn) {
-      return;
-    }
-
-    this.setState({
-      isPerformingAuthAction: true
-    }, () => {
-      user.sendEmailVerification().then(() => {
-        const emailAddress = user.email;
-
-        this.openSnackbar(`Verification e-mail sent to ${emailAddress}`);
-      }).catch((reason) => {
-        const code = reason.code;
-        const message = reason.message;
-
-        switch (code) {
-          case 'auth/missing-android-pkg-name':
-          case 'auth/missing-continue-uri':
-          case 'auth/missing-ios-bundle-id':
-          case 'auth/invalid-continue-uri':
-          case 'auth/unauthorized-continue-uri':
-            this.openSnackbar(message);
-            return;
-
-          default:
-            this.openSnackbar(message);
-            return;
-        }
-      }).finally(() => {
-        this.setState({
-          isPerformingAuthAction: false
-        });
-      });
-    });
-  };
-
   addAvatar = () => {
     const { user, isSignedIn, avatar } = this.state;
 
@@ -716,6 +677,9 @@ class App extends Component {
     });
   };
 
+  /**
+   * Changes the current avatar.
+   */
   changeAvatar = () => {
     const { user, isSignedIn, avatar } = this.state;
 
@@ -766,6 +730,9 @@ class App extends Component {
     });
   };
 
+  /**
+   * Sets a display name.
+   */
   addDisplayName = () => {
     const { user, isSignedIn, displayName } = this.state;
 
@@ -814,6 +781,9 @@ class App extends Component {
     });
   };
 
+  /**
+   * Changes the current display name.
+   */
   changeDisplayName = () => {
     const { user, isSignedIn, displayName } = this.state;
 
@@ -864,6 +834,9 @@ class App extends Component {
     });
   };
 
+  /**
+   * Sets an e-mail address.
+   */
   addEmailAddress = () => {
     const { user, isSignedIn, emailAddress } = this.state;
 
@@ -900,6 +873,48 @@ class App extends Component {
         const message = reason.message;
 
         switch (code) {
+          default:
+            this.openSnackbar(message);
+            return;
+        }
+      }).finally(() => {
+        this.setState({
+          isPerformingAuthAction: false
+        });
+      });
+    });
+  };
+
+  /**
+   * Sends a verification email to a user.
+   */
+  verifyEmailAddress = () => {
+    const { user, isSignedIn } = this.state;
+
+    if (!user || !user.email || !isSignedIn) {
+      return;
+    }
+
+    this.setState({
+      isPerformingAuthAction: true
+    }, () => {
+      user.sendEmailVerification().then(() => {
+        const emailAddress = user.email;
+
+        this.openSnackbar(`Verification e-mail sent to ${emailAddress}`);
+      }).catch((reason) => {
+        const code = reason.code;
+        const message = reason.message;
+
+        switch (code) {
+          case 'auth/missing-android-pkg-name':
+          case 'auth/missing-continue-uri':
+          case 'auth/missing-ios-bundle-id':
+          case 'auth/invalid-continue-uri':
+          case 'auth/unauthorized-continue-uri':
+            this.openSnackbar(message);
+            return;
+
           default:
             this.openSnackbar(message);
             return;
