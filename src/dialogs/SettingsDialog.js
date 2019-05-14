@@ -63,7 +63,18 @@ class SettingsDialog extends Component {
     const { open, fullScreen, user, isPerformingAuthAction, colors, types, primaryColor, secondaryColor, type } = this.props;
 
     // Events
-    const { onClose, onVerifyEmailAddressClick, onPrimaryColorChange, onSecondaryColorChange, onTypeChange } = this.props;
+    const {
+      onClose,
+      onAddAvatarClick,
+      onChangeAvatarClick,
+      onAddDisplayNameClick,
+      onChangeDisplayNameClick,
+      onAddEmailAddressClick,
+      onVerifyEmailAddressClick,
+      onPrimaryColorChange,
+      onSecondaryColorChange,
+      onTypeChange
+    } = this.props;
 
     const { selectedTab } = this.state;
 
@@ -82,6 +93,11 @@ class SettingsDialog extends Component {
               <AccountTab
                 user={user}
                 isPerformingAuthAction={isPerformingAuthAction}
+                onAddAvatarClick={onAddAvatarClick}
+                onChangeAvatarClick={onChangeAvatarClick}
+                onAddDisplayNameClick={onAddDisplayNameClick}
+                onChangeDisplayNameClick={onChangeDisplayNameClick}
+                onAddEmailAddressClick={onAddEmailAddressClick}
                 onVerifyEmailAddressClick={onVerifyEmailAddressClick}
               />
             }
@@ -105,6 +121,11 @@ class SettingsDialog extends Component {
               <AccountTab
                 user={user}
                 isPerformingAuthAction={isPerformingAuthAction}
+                onAddAvatarClick={onAddAvatarClick}
+                onChangeAvatarClick={onChangeAvatarClick}
+                onAddDisplayNameClick={onAddDisplayNameClick}
+                onChangeDisplayNameClick={onChangeDisplayNameClick}
+                onAddEmailAddressClick={onAddEmailAddressClick}
                 onVerifyEmailAddressClick={onVerifyEmailAddressClick}
               />
 
@@ -144,6 +165,11 @@ SettingsDialog.propTypes = {
   type: PropTypes.string.isRequired,
 
   onClose: PropTypes.func.isRequired,
+  onAddAvatarClick: PropTypes.func.isRequired,
+  onChangeAvatarClick: PropTypes.func.isRequired,
+  onAddDisplayNameClick: PropTypes.func.isRequired,
+  onChangeDisplayNameClick: PropTypes.func.isRequired,
+  onAddEmailAddressClick: PropTypes.func.isRequired,
   onVerifyEmailAddressClick: PropTypes.func.isRequired,
   onPrimaryColorChange: PropTypes.func.isRequired,
   onSecondaryColorChange: PropTypes.func.isRequired,

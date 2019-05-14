@@ -7,6 +7,7 @@ import moment from 'moment';
 import { withStyles } from '@material-ui/core/styles';
 
 import Avatar from '@material-ui/core/Avatar';
+import Fab from '@material-ui/core/Fab';
 import Typography from '@material-ui/core/Typography';
 
 import DialogContentText from '@material-ui/core/DialogContentText';
@@ -18,8 +19,12 @@ import ListItemText from '@material-ui/core/ListItemText';
 import ListItemSecondaryAction from '@material-ui/core/ListItemSecondaryAction';
 
 import Tooltip from '@material-ui/core/Tooltip';
+import IconButton from '@material-ui/core/IconButton';
 import Button from '@material-ui/core/Button';
 
+import EditIcon from '@material-ui/icons/Edit';
+import PortraitIcon from '@material-ui/icons/Portrait';
+import PersonIcon from '@material-ui/icons/Person';
 import EmailIcon from '@material-ui/icons/Email';
 import AccessTimeIcon from '@material-ui/icons/AccessTime';
 
@@ -31,11 +36,24 @@ const styles = (theme) => ({
     textAlign: 'center'
   },
 
+  changeAvatarContainer: {
+    position: 'relative',
+    width: '50%',
+    marginLeft: 'auto',
+    marginRight: 'auto'
+  },
+
   avatar: {
     width: `${theme.spacing.unit * 12}px`,
     height: `${theme.spacing.unit * 12}px`,
     marginRight: 'auto',
     marginLeft: 'auto'
+  },
+
+  changeAvatar: {
+    position: 'absolute',
+    top: '-7.5%',
+    left: '60%',
   },
 
   info: {
@@ -93,7 +111,12 @@ class AccountTab extends Component {
   };
 
   render() {
+    // Properties
     const { classes, user, isPerformingAuthAction } = this.props;
+
+    // Events
+    const { onAddAvatarClick, onChangeAvatarClick, onAddDisplayNameClick, onChangeDisplayNameClick, onAddEmailAddressClick } = this.props;
+
     const { verifyEmailAddressDialog } = this.state;
 
     const isUserComplete = (user.photoURL && user.displayName && user.email);
@@ -102,7 +125,15 @@ class AccountTab extends Component {
       <React.Fragment>
         {isUserComplete &&
           <div className={classes.profile}>
-            <Avatar className={classes.avatar} alt="Avatar" src={user.photoURL} />
+            <div className={classes.changeAvatarContainer}>
+              <Avatar className={classes.avatar} alt="Avatar" src={user.photoURL} />
+
+              <Tooltip title="Change avatar">
+                <Fab className={classes.changeAvatar} color="primary" size="small" onClick={onChangeAvatarClick}>
+                  <EditIcon />
+                </Fab>
+              </Tooltip>
+            </div>
 
             <div className={classes.info}>
               <Typography variant="h6">{user.displayName}</Typography>
@@ -116,6 +147,58 @@ class AccountTab extends Component {
         </DialogContentText>
 
         <List>
+          {!user.photoURL &&
+            <ListItem>
+              <ListItemIcon>
+                <Tooltip title="Avatar">
+                  <PortraitIcon />
+                </Tooltip>
+              </ListItemIcon>
+
+              <ListItemText primary="You don't have an avatar. Add one!" />
+
+              <ListItemSecondaryAction>
+                <Button color="primary" variant="contained" onClick={onAddAvatarClick}>Add</Button>
+              </ListItemSecondaryAction>
+            </ListItem>
+          }
+
+          {user.displayName &&
+            <ListItem>
+              <ListItemIcon>
+                <Tooltip title="Display name">
+                  <PersonIcon />
+                </Tooltip>
+              </ListItemIcon>
+
+              <ListItemText primary="Display name" secondary={user.displayName} />
+
+              <ListItemSecondaryAction>
+                <Tooltip title="Edit">
+                  <IconButton onClick={onChangeDisplayNameClick}>
+                    <EditIcon />
+                  </IconButton>
+                </Tooltip>
+              </ListItemSecondaryAction>
+            </ListItem>
+          }
+
+          {!user.displayName &&
+            <ListItem>
+              <ListItemIcon>
+                <Tooltip title="Display name">
+                  <PersonIcon />
+                </Tooltip>
+              </ListItemIcon>
+
+              <ListItemText primary="You don't have a display name. Add one!" />
+
+              <ListItemSecondaryAction>
+                <Button color="primary" variant="contained" onClick={onAddDisplayNameClick}>Add</Button>
+              </ListItemSecondaryAction>
+            </ListItem>
+          }
+
           {user.email &&
             <ListItem>
               <ListItemIcon>
@@ -131,6 +214,22 @@ class AccountTab extends Component {
                   <Button color="primary" disabled={isPerformingAuthAction} variant="contained" onClick={this.openVerifyEmailAddressDialog}>Verify</Button>
                 </ListItemSecondaryAction>
               }
+            </ListItem>
+          }
+
+          {!user.email &&
+            <ListItem>
+              <ListItemIcon>
+                <Tooltip title="E-mail address">
+                  <EmailIcon />
+                </Tooltip>
+              </ListItemIcon>
+
+              <ListItemText primary="You don't have an e-mail address. Add one!" />
+
+              <ListItemSecondaryAction>
+                <Button color="primary" variant="contained" onClick={onAddEmailAddressClick}>Add</Button>
+              </ListItemSecondaryAction>
             </ListItem>
           }
 
@@ -182,6 +281,11 @@ AccountTab.propTypes = {
   user: PropTypes.object.isRequired,
   isPerformingAuthAction: PropTypes.bool.isRequired,
 
+  onAddAvatarClick: PropTypes.func.isRequired,
+  onChangeAvatarClick: PropTypes.func.isRequired,
+  onAddDisplayNameClick: PropTypes.func.isRequired,
+  onChangeDisplayNameClick: PropTypes.func.isRequired,
+  onAddEmailAddressClick: PropTypes.func.isRequired,
   onVerifyEmailAddressClick: PropTypes.func.isRequired
 };
 
