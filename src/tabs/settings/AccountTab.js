@@ -7,6 +7,7 @@ import moment from 'moment';
 import { withStyles } from '@material-ui/core/styles';
 
 import Avatar from '@material-ui/core/Avatar';
+import Fab from '@material-ui/core/Fab';
 import Typography from '@material-ui/core/Typography';
 
 import DialogContentText from '@material-ui/core/DialogContentText';
@@ -21,9 +22,9 @@ import Tooltip from '@material-ui/core/Tooltip';
 import IconButton from '@material-ui/core/IconButton';
 import Button from '@material-ui/core/Button';
 
+import EditIcon from '@material-ui/icons/Edit';
 import PortraitIcon from '@material-ui/icons/Portrait';
 import PersonIcon from '@material-ui/icons/Person';
-import EditIcon from '@material-ui/icons/Edit';
 import EmailIcon from '@material-ui/icons/Email';
 import AccessTimeIcon from '@material-ui/icons/AccessTime';
 
@@ -35,11 +36,24 @@ const styles = (theme) => ({
     textAlign: 'center'
   },
 
+  changeAvatarContainer: {
+    position: 'relative',
+    width: '50%',
+    marginLeft: 'auto',
+    marginRight: 'auto'
+  },
+
   avatar: {
     width: `${theme.spacing.unit * 12}px`,
     height: `${theme.spacing.unit * 12}px`,
     marginRight: 'auto',
     marginLeft: 'auto'
+  },
+
+  changeAvatar: {
+    position: 'absolute',
+    top: '-7.5%',
+    left: '60%',
   },
 
   info: {
@@ -101,7 +115,7 @@ class AccountTab extends Component {
     const { classes, user, isPerformingAuthAction } = this.props;
 
     // Events
-    const { onAddAvatarClick, onAddDisplayNameClick, onChangeDisplayNameClick, onAddEmailAddressClick } = this.props;
+    const { onAddAvatarClick, onChangeAvatarClick, onAddDisplayNameClick, onChangeDisplayNameClick, onAddEmailAddressClick } = this.props;
 
     const { verifyEmailAddressDialog } = this.state;
 
@@ -111,7 +125,15 @@ class AccountTab extends Component {
       <React.Fragment>
         {isUserComplete &&
           <div className={classes.profile}>
-            <Avatar className={classes.avatar} alt="Avatar" src={user.photoURL} />
+            <div className={classes.changeAvatarContainer}>
+              <Avatar className={classes.avatar} alt="Avatar" src={user.photoURL} />
+
+              <Tooltip title="Change avatar">
+                <Fab className={classes.changeAvatar} color="primary" size="small" onClick={onChangeAvatarClick}>
+                  <EditIcon />
+                </Fab>
+              </Tooltip>
+            </div>
 
             <div className={classes.info}>
               <Typography variant="h6">{user.displayName}</Typography>
@@ -260,6 +282,7 @@ AccountTab.propTypes = {
   isPerformingAuthAction: PropTypes.bool.isRequired,
 
   onAddAvatarClick: PropTypes.func.isRequired,
+  onChangeAvatarClick: PropTypes.func.isRequired,
   onAddDisplayNameClick: PropTypes.func.isRequired,
   onChangeDisplayNameClick: PropTypes.func.isRequired,
   onAddEmailAddressClick: PropTypes.func.isRequired,

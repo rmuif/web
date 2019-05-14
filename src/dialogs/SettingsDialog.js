@@ -66,6 +66,7 @@ class SettingsDialog extends Component {
     const {
       onClose,
       onAddAvatarClick,
+      onChangeAvatarClick,
       onAddDisplayNameClick,
       onChangeDisplayNameClick,
       onAddEmailAddressClick,
@@ -93,6 +94,7 @@ class SettingsDialog extends Component {
                 user={user}
                 isPerformingAuthAction={isPerformingAuthAction}
                 onAddAvatarClick={onAddAvatarClick}
+                onChangeAvatarClick={onChangeAvatarClick}
                 onAddDisplayNameClick={onAddDisplayNameClick}
                 onChangeDisplayNameClick={onChangeDisplayNameClick}
                 onAddEmailAddressClick={onAddEmailAddressClick}
@@ -120,6 +122,7 @@ class SettingsDialog extends Component {
                 user={user}
                 isPerformingAuthAction={isPerformingAuthAction}
                 onAddAvatarClick={onAddAvatarClick}
+                onChangeAvatarClick={onChangeAvatarClick}
                 onAddDisplayNameClick={onAddDisplayNameClick}
                 onChangeDisplayNameClick={onChangeDisplayNameClick}
                 onAddEmailAddressClick={onAddEmailAddressClick}
@@ -163,6 +166,7 @@ SettingsDialog.propTypes = {
 
   onClose: PropTypes.func.isRequired,
   onAddAvatarClick: PropTypes.func.isRequired,
+  onChangeAvatarClick: PropTypes.func.isRequired,
   onAddDisplayNameClick: PropTypes.func.isRequired,
   onChangeDisplayNameClick: PropTypes.func.isRequired,
   onAddEmailAddressClick: PropTypes.func.isRequired,

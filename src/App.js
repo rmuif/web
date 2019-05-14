@@ -289,6 +289,18 @@ const constraints = {
     }
   },
 
+  changeAvatar: {
+    avatar: {
+      presence: {
+        allowEmpty: false
+      },
+
+      url: {
+        message: "^Avatar URL is not a valid URL"
+      }
+    }
+  },
+
   addDisplayName: {
     displayName: {
       presence: {
@@ -350,6 +362,12 @@ class App extends Component {
       },
 
       addAvatarDialog: {
+        open: false,
+
+        errors: null
+      },
+
+      changeAvatarDialog: {
         open: false,
 
         errors: null
@@ -698,6 +716,56 @@ class App extends Component {
     });
   };
 
+  changeAvatar = () => {
+    const { user, isSignedIn, avatar } = this.state;
+
+    if (!user || !isSignedIn || !avatar) {
+      return;
+    }
+
+    const errors = validate({ avatar }, constraints.changeAvatar);
+
+    if (errors) {
+      this.setState((state) => ({
+        changeAvatarDialog: {
+          ...state.changeAvatarDialog,
+          errors
+        }
+      }));
+
+      return;
+    }
+
+    if (user.photoURL === avatar) {
+      this.openSnackbar('Avatar already being used');
+
+      return;
+    }
+
+    this.setState({
+      isPerformingAuthAction: true
+    }, () => {
+      user.updateProfile({ photoURL: avatar }).then(() => {
+        this.closeChangeAvatarDialog(() => {
+          this.openSnackbar('Avatar changed');
+        });
+      }).catch((reason) => {
+        const code = reason.code;
+        const message = reason.message;
+
+        switch (code) {
+          default:
+            this.openSnackbar(message);
+            return;
+        }
+      }).finally(() => {
+        this.setState({
+          isPerformingAuthAction: false
+        });
+      });
+    });
+  };
+
   addDisplayName = () => {
     const { user, isSignedIn, displayName } = this.state;
 
@@ -753,12 +821,6 @@ class App extends Component {
       return;
     }
 
-    if (displayName === user.displayName) {
-      this.openSnackbar(`Your name is already ${displayName}`);
-
-      return;
-    }
-
     const errors = validate({ displayName }, constraints.changeDisplayName);
 
     if (errors) {
@@ -768,6 +830,12 @@ class App extends Component {
           errors
         }
       }));
+
+      return;
+    }
+
+    if (displayName === user.displayName) {
+      this.openSnackbar(`Display name is already ${displayName}`);
 
       return;
     }
@@ -967,7 +1035,7 @@ class App extends Component {
     });
   };
 
-  showSignUpDialog = () => {
+  openSignUpDialog = () => {
     this.setState({
       signUpDialog: {
         open: true
@@ -987,7 +1055,7 @@ class App extends Component {
     });
   };
 
-  showSignInDialog = () => {
+  openSignInDialog = () => {
     this.setState({
       signInDialog: {
         open: true
@@ -1007,7 +1075,7 @@ class App extends Component {
     });
   };
 
-  showResetPasswordDialog = () => {
+  openResetPasswordDialog = () => {
     this.setState({
       resetPasswordDialog: {
         open: true
@@ -1027,7 +1095,7 @@ class App extends Component {
     });
   };
 
-  showSettingsDialog = () => {
+  openSettingsDialog = () => {
     this.setState({
       settingsDialog: {
         open: true
@@ -1058,6 +1126,26 @@ class App extends Component {
   closeAddAvatarDialog = (callback) => {
     this.setState({
       addAvatarDialog: {
+        open: false
+      }
+    }, () => {
+      if (callback && typeof callback === 'function') {
+        callback();
+      }
+    });
+  };
+
+  openChangeAvatarDialog = () => {
+    this.setState({
+      changeAvatarDialog: {
+        open: true
+      }
+    });
+  };
+
+  closeChangeAvatarDialog = (callback) => {
+    this.setState({
+      changeAvatarDialog: {
         open: false
       }
     }, () => {
@@ -1127,7 +1215,7 @@ class App extends Component {
     });
   };
 
-  showSignOutDialog = () => {
+  openSignOutDialog = () => {
     this.setState({
       signOutDialog: {
         open: true
@@ -1217,6 +1305,7 @@ class App extends Component {
       resetPasswordDialog,
       settingsDialog,
       addAvatarDialog,
+      changeAvatarDialog,
       addDisplayNameDialog,
       changeDisplayNameDialog,
       addEmailAddressDialog,
@@ -1243,11 +1332,11 @@ class App extends Component {
 
                   user={user}
 
-                  onSignUpClick={this.showSignUpDialog}
-                  onSignInClick={this.showSignInDialog}
+                  onSignUpClick={this.openSignUpDialog}
+                  onSignInClick={this.openSignInDialog}
 
-                  onSettingsClick={this.showSettingsDialog}
-                  onSignOutClick={this.showSignOutDialog}
+                  onSettingsClick={this.openSettingsDialog}
+                  onSignOutClick={this.openSignOutDialog}
                 />
 
                 {isSignedIn &&
@@ -1271,6 +1360,7 @@ class App extends Component {
 
                         onClose={this.closeSettingsDialog}
                         onAddAvatarClick={this.openAddAvatarDialog}
+                        onChangeAvatarClick={this.openChangeAvatarDialog}
                         onAddDisplayNameClick={this.openAddDisplayNameDialog}
                         onChangeDisplayNameClick={this.openChangeDisplayNameDialog}
                         onAddEmailAddressClick={this.openAddEmailAddressDialog}
@@ -1297,6 +1387,7 @@ class App extends Component {
 
                         onClose={this.closeSettingsDialog}
                         onAddAvatarClick={this.openAddAvatarDialog}
+                        onChangeAvatarClick={this.openChangeAvatarDialog}
                         onAddDisplayNameClick={this.openAddDisplayNameDialog}
                         onChangeDisplayNameClick={this.openChangeDisplayNameDialog}
                         onAddEmailAddressClick={this.openAddEmailAddressDialog}
@@ -1315,7 +1406,7 @@ class App extends Component {
                       contentText="Your avatar is used to represent you. It's visible to other users and can be changed any time."
                       textField={
                         <TextField
-                          autoComplete="name"
+                          autoComplete="photo"
                           autoFocus
                           error={!!(addAvatarDialog.errors && addAvatarDialog.errors.avatar)}
                           fullWidth
@@ -1324,7 +1415,7 @@ class App extends Component {
                           onChange={this.handleAvatarChange}
                           placeholder="Avatar URL"
                           required
-                          type="text"
+                          type="url"
                           value={avatar}
                         />
                       }
@@ -1341,6 +1432,41 @@ class App extends Component {
 
                       onCancelClick={this.closeAddAvatarDialog}
                       onOkClick={this.addAvatar}
+                    />
+
+                    <InputDialog
+                      open={changeAvatarDialog.open}
+
+                      title="Change avatar"
+                      contentText="Your avatar is used to represent you. It's visible to other users and can be changed any time."
+                      textField={
+                        <TextField
+                          autoComplete="photo"
+                          autoFocus
+                          error={!!(changeAvatarDialog.errors && changeAvatarDialog.errors.avatar)}
+                          fullWidth
+                          helperText={(changeAvatarDialog.errors && changeAvatarDialog.errors.avatar) ? changeAvatarDialog.errors.avatar[0] : ''}
+                          margin="normal"
+                          onChange={this.handleAvatarChange}
+                          placeholder="Avatar URL"
+                          required
+                          type="url"
+                          value={avatar}
+                        />
+                      }
+                      okText="Change"
+                      disableOkButton={!avatar || isPerformingAuthAction}
+                      highlightOkButton
+
+                      onClose={this.closeChangeAvatarDialog}
+                      onExited={() => {
+                        this.setState({
+                          avatar: ''
+                        });
+                      }}
+
+                      onCancelClick={this.closeChangeAvatarDialog}
+                      onOkClick={this.changeAvatar}
                     />
 
                     <InputDialog
@@ -1515,7 +1641,7 @@ class App extends Component {
 
                         onClose={this.closeSignInDialog}
                         onAuthProviderClick={this.signInWithProvider}
-                        onResetPasswordClick={this.showResetPasswordDialog}
+                        onResetPasswordClick={this.openResetPasswordDialog}
                       />
                     </Hidden>
 
@@ -1530,7 +1656,7 @@ class App extends Component {
 
                         onClose={this.closeSignInDialog}
                         onAuthProviderClick={this.signInWithProvider}
-                        onResetPasswordClick={this.showResetPasswordDialog}
+                        onResetPasswordClick={this.openResetPasswordDialog}
                       />
                     </Hidden>
 
