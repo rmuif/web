@@ -36,5 +36,5 @@
     "not ie <= 11",
     "not op_mini all"
   ],
-  "homepage": "https://phoqe.github.io/react-material-ui-firebase"
+  "homepage": "https://phoqe.me/react-material-ui-firebase"
 }
