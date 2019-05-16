@@ -19,6 +19,10 @@ const styles = (theme) => ({
 
   button: {
     marginTop: `${theme.spacing.unit}px`
+  },
+
+  buttonIcon: {
+    marginRight: `${theme.spacing.unit}px`
   }
 });
 
