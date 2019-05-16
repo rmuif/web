@@ -46,17 +46,19 @@ class HomeContent extends Component {
       );
     }
 
-    return (<EmptyState
-      icon={<CodeIcon className={classes.emptyStateIcon} color="action" />}
-      title={title}
-      description="The three musketeers, all in one pack in the form of a boilerplate app."
-      button={
-        <Fab className={classes.button} color="primary" href="https://github.com/Phoqe/react-material-ui-firebase" rel="noopener noreferrer" target="_blank" variant="extended">
-          <GitHubCircleIcon className={classes.buttonIcon} />
-          GitHub
-        </Fab>
-      }
-    />);
+    return (
+      <EmptyState
+        icon={<CodeIcon className={classes.emptyStateIcon} color="action" />}
+        title={title}
+        description="The three musketeers, all in one pack in the form of a boilerplate app."
+        button={
+          <Fab className={classes.button} color="primary" href="https://github.com/Phoqe/react-material-ui-firebase" rel="noopener noreferrer" target="_blank" variant="extended">
+            <GitHubCircleIcon className={classes.buttonIcon} />
+            GitHub
+          </Fab>
+        }
+      />
+    );
   }
 }
 
