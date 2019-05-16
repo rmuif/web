@@ -17,6 +17,11 @@ it('renders without crashing', () => {
       <AccountTab
         user={user}
         isPerformingAuthAction={false}
+        onAddAvatarClick={() => {}}
+        onChangeAvatarClick={() => {}}
+        onAddDisplayNameClick={() => {}}
+        onChangeDisplayNameClick={() => {}}
+        onAddEmailAddressClick={() => {}}
         onVerifyEmailAddressClick={() => {}}
       />
     ),

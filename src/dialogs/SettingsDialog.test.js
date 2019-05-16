@@ -19,6 +19,11 @@ it('renders without crashing', () => {
         secondaryColor=""
         type=""
         onClose={() => {}}
+        onAddAvatarClick={() => {}}
+        onChangeAvatarClick={() => {}}
+        onAddDisplayNameClick={() => {}}
+        onChangeDisplayNameClick={() => {}}
+        onAddEmailAddressClick={() => {}}
         onVerifyEmailAddressClick={() => {}}
         onPrimaryColorChange={() => {}}
         onSecondaryColorChange={() => {}}

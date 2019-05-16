@@ -1,7 +1,5 @@
 import React, { Component } from 'react';
 
-import PropTypes from 'prop-types';
-
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
 import validate from 'validate.js';
@@ -31,21 +29,15 @@ import brown from '@material-ui/core/colors/brown';
 import gray from '@material-ui/core/colors/grey';
 import blueGray from '@material-ui/core/colors/blueGrey';
 
-import { createMuiTheme, withStyles, MuiThemeProvider } from '@material-ui/core/styles';
+import { createMuiTheme, MuiThemeProvider } from '@material-ui/core/styles';
 
 import Hidden from '@material-ui/core/Hidden';
-import Fab from '@material-ui/core/Fab';
 import TextField from '@material-ui/core/TextField';
 import Snackbar from '@material-ui/core/Snackbar';
-
-import CodeIcon from '@material-ui/icons/Code';
-
-import GitHubCircleIcon from 'mdi-material-ui/GithubCircle';
 
 import LaunchScreen from './layout/LaunchScreen';
 
 import Bar from './layout/Bar';
-import EmptyState from './layout/EmptyState';
 
 import HomeContent from './content/HomeContent';
 import NotFoundContent from './content/NotFoundContent';
@@ -199,20 +191,6 @@ let theme = createMuiTheme({
   }
 });
 
-const styles = theme => ({
-  emptyStateIcon: {
-    fontSize: `${theme.spacing.unit * 12}px`
-  },
-
-  button: {
-    marginTop: `${theme.spacing.unit}px`
-  },
-
-  buttonIcon: {
-    marginRight: `${theme.spacing.unit}px`
-  }
-});
-
 /**
  * Settings
  */
@@ -328,6 +306,8 @@ const constraints = {
 };
 
 class App extends Component {
+  _isMounted = false;
+
   constructor(props) {
     super(props);
 
@@ -1297,8 +1277,6 @@ class App extends Component {
   };
 
   render() {
-    const { classes } = this.props;
-
     // Properties
     const {
       primaryColor,
@@ -1354,13 +1332,13 @@ class App extends Component {
                   onSignOutClick={this.openSignOutDialog}
                 />
 
+                <Switch>
+                  <Route path="/" exact render={() => (<HomeContent isSignedIn={isSignedIn} title={settings.name} />)} />
+                  <Route component={NotFoundContent} />
+                </Switch>
+
                 {isSignedIn &&
                   <React.Fragment>
-                    <Switch>
-                      <Route path="/" exact component={HomeContent} />
-                      <Route component={NotFoundContent} />
-                    </Switch>
-
                     <Hidden only="xs">
                       <SettingsDialog
                         open={settingsDialog.open}
@@ -1607,18 +1585,6 @@ class App extends Component {
 
                 {!isSignedIn &&
                   <React.Fragment>
-                    <EmptyState
-                      icon={<CodeIcon className={classes.emptyStateIcon} color="action" />}
-                      title={settings.name}
-                      description="The three musketeers, all in one pack in the form of a boilerplate app."
-                      button={
-                        <Fab className={classes.button} color="primary" href="https://github.com/Phoqe/react-material-ui-firebase" rel="noopener noreferrer" target="_blank" variant="extended">
-                          <GitHubCircleIcon className={classes.buttonIcon} />
-                          GitHub
-                        </Fab>
-                      }
-                    />
-
                     <Hidden only="xs">
                       <SignUpDialog
                         open={signUpDialog.open}
@@ -1702,6 +1668,8 @@ class App extends Component {
   }
 
   componentDidMount() {
+    this._isMounted = true;
+
     const theme = JSON.parse(localStorage.getItem('theme'));
 
     if (theme) {
@@ -1709,21 +1677,21 @@ class App extends Component {
     }
 
     this.removeAuthObserver = firebase.auth().onAuthStateChanged((user) => {
-      this.setState({
-        isAuthReady: true,
-        isSignedIn: !!user,
-        user
-      });
+      if (this._isMounted) {
+        this.setState({
+          isAuthReady: true,
+          isSignedIn: !!user,
+          user
+        });
+      }
     });
   }
 
   componentWillUnmount() {
+    this._isMounted = false;
+
     this.removeAuthObserver();
   }
 }
 
-App.propTypes = {
-  classes: PropTypes.object.isRequired
-};
-
-export default withStyles(styles)(App);
+export default App;
