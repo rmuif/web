@@ -306,6 +306,8 @@ const constraints = {
 };
 
 class App extends Component {
+  _isMounted = false;
+
   constructor(props) {
     super(props);
 
@@ -1666,6 +1668,8 @@ class App extends Component {
   }
 
   componentDidMount() {
+    this._isMounted = true;
+
     const theme = JSON.parse(localStorage.getItem('theme'));
 
     if (theme) {
@@ -1673,15 +1677,19 @@ class App extends Component {
     }
 
     this.removeAuthObserver = firebase.auth().onAuthStateChanged((user) => {
-      this.setState({
-        isAuthReady: true,
-        isSignedIn: !!user,
-        user
-      });
+      if (this._isMounted) {
+        this.setState({
+          isAuthReady: true,
+          isSignedIn: !!user,
+          user
+        });
+      }
     });
   }
 
   componentWillUnmount() {
+    this._isMounted = false;
+
     this.removeAuthObserver();
   }
 }
