@@ -31,7 +31,7 @@ class InputDialog extends Component {
      */
 
     // Dialog
-    const { open } = this.props;
+    const { fullScreen, open } = this.props;
 
     // Custom
     const { title, contentText, textField, cancelText, okText, disableOkButton, highlightOkButton } = this.props;
@@ -51,7 +51,7 @@ class InputDialog extends Component {
     }
 
     return (
-      <Dialog open={open} onClose={onClose} onExited={onExited} onKeyPress={this.handleKeyPress}>
+      <Dialog fullScreen={fullScreen} open={open} onClose={onClose} onExited={onExited} onKeyPress={this.handleKeyPress}>
         {title && <DialogTitle>{title}</DialogTitle>}
 
         {contentText &&
@@ -87,6 +87,7 @@ class InputDialog extends Component {
 }
 
 InputDialog.propTypes = {
+  fullScreen: PropTypes.bool,
   open: PropTypes.bool.isRequired,
 
   title: PropTypes.string,
