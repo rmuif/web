@@ -60,7 +60,7 @@ class SettingsDialog extends Component {
 
   render() {
     // Properties
-    const { open, fullScreen, user, isPerformingAuthAction, colors, types, primaryColor, secondaryColor, type } = this.props;
+    const { fullScreen, open, user, isPerformingAuthAction, colors, types, primaryColor, secondaryColor, type } = this.props;
 
     // Events
     const {
@@ -79,7 +79,7 @@ class SettingsDialog extends Component {
     const { selectedTab } = this.state;
 
     return (
-      <Dialog open={open} fullScreen={fullScreen} onClose={onClose} onKeyPress={this.handleKeyPress}>
+      <Dialog fullScreen={fullScreen} open={open} onClose={onClose} onKeyPress={this.handleKeyPress}>
         <DialogTitle>Settings</DialogTitle>
 
         <Tabs indicatorColor="primary" textColor="primary" onChange={this.changeTab} value={selectedTab} variant="fullWidth">
@@ -154,8 +154,9 @@ class SettingsDialog extends Component {
 }
 
 SettingsDialog.propTypes = {
-  open: PropTypes.bool.isRequired,
   fullScreen: PropTypes.bool,
+  open: PropTypes.bool.isRequired,
+
   user: PropTypes.object.isRequired,
   isPerformingAuthAction: PropTypes.bool.isRequired,
   colors: PropTypes.array.isRequired,
