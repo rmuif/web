@@ -18,8 +18,11 @@ const styles = (theme) => ({
 
 class AppearanceTab extends Component {
   render() {
+    // Styling
+    const { classes } = this.props;
+
     // Properties
-    const { classes, colors, types, primaryColor, secondaryColor, type } = this.props;
+    const { colors, types, primaryColor, secondaryColor, type } = this.props;
 
     // Events
     const { onPrimaryColorChange, onSecondaryColorChange, onTypeChange } = this.props;
@@ -67,6 +70,7 @@ class AppearanceTab extends Component {
 
 AppearanceTab.propTypes = {
   classes: PropTypes.object.isRequired,
+
   colors: PropTypes.array.isRequired,
   types: PropTypes.array.isRequired,
   primaryColor: PropTypes.string.isRequired,

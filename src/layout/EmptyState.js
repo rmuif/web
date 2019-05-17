@@ -18,7 +18,11 @@ const styles = {
 
 class EmptyState extends Component {
   render() {
-    const { classes, icon, title, description, button } = this.props;
+    // Styling
+    const { classes } = this.props;
+
+    // Properties
+    const { icon, title, description, button } = this.props;
 
     return (
       <div className={classes.center}>

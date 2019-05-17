@@ -61,8 +61,11 @@ class Bar extends Component {
   };
 
   render() {
+    // Styling
+    const { classes } = this.props;
+
     // Properties
-    const { classes, name, isPerformingAuthAction, isSignedIn, user } = this.props;
+    const { name, isPerformingAuthAction, isSignedIn, user } = this.props;
 
     // Events
     const { onSignUpClick, onSignInClick } = this.props;
@@ -101,6 +104,7 @@ class Bar extends Component {
 
 Bar.propTypes = {
   classes: PropTypes.object.isRequired,
+  
   name: PropTypes.string.isRequired,
   isPerformingAuthAction: PropTypes.bool.isRequired,
   isSignedIn: PropTypes.bool.isRequired,

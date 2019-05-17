@@ -143,6 +143,7 @@ SignInDialog.propTypes = {
   open: PropTypes.bool.isRequired,
   fullScreen: PropTypes.bool,
   isPerformingAuthAction: PropTypes.bool.isRequired,
+
   constraints: PropTypes.object.isRequired,
 
   signIn: PropTypes.func.isRequired,

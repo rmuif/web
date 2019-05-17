@@ -111,8 +111,11 @@ class AccountTab extends Component {
   };
 
   render() {
+    // Styling
+    const { classes } = this.props;
+
     // Properties
-    const { classes, user, isPerformingAuthAction } = this.props;
+    const { user, isPerformingAuthAction } = this.props;
 
     // Events
     const { onAddAvatarClick, onChangeAvatarClick, onAddDisplayNameClick, onChangeDisplayNameClick, onAddEmailAddressClick } = this.props;
@@ -278,6 +281,7 @@ class AccountTab extends Component {
 
 AccountTab.propTypes = {
   classes: PropTypes.object.isRequired,
+
   user: PropTypes.object.isRequired,
   isPerformingAuthAction: PropTypes.bool.isRequired,
 

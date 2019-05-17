@@ -62,8 +62,11 @@ const styles = (theme) => ({
 
 class AuthProviderList extends Component {
   render() {
+    // Styling
+    const { classes } = this.props;
+
     // Properties
-    const { classes, isPerformingAuthAction } = this.props;
+    const { isPerformingAuthAction } = this.props;
 
     // Events
     const { onAuthProviderClick } = this.props;
@@ -124,6 +127,7 @@ class AuthProviderList extends Component {
 
 AuthProviderList.propTypes = {
   classes: PropTypes.object.isRequired,
+
   isPerformingAuthAction: PropTypes.bool,
 
   onAuthProviderClick: PropTypes.func.isRequired

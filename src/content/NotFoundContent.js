@@ -29,6 +29,7 @@ const styles = (theme) => ({
 
 class NotFoundContent extends Component {
   render() {
+    // Styling
     const { classes } = this.props;
 
     return (

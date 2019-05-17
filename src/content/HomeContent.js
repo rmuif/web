@@ -67,7 +67,10 @@ class HomeContent extends Component {
 }
 
 HomeContent.propTypes = {
-  classes: PropTypes.object.isRequired
+  classes: PropTypes.object.isRequired,
+
+  isSignedIn: PropTypes.bool.isRequired,
+  title: PropTypes.string.isRequired
 };
 
 export default withStyles(styles)(HomeContent);

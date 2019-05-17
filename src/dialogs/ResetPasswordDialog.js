@@ -119,6 +119,7 @@ class ResetPasswordDialog extends Component {
 ResetPasswordDialog.propTypes = {
   open: PropTypes.bool.isRequired,
   isPerformingAuthAction: PropTypes.bool.isRequired,
+
   constraints: PropTypes.object.isRequired,
 
   resetPassword: PropTypes.func.isRequired,

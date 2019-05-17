@@ -16,6 +16,7 @@ const styles = (theme) => ({
 
 class LaunchScreen extends Component {
   render() {
+    // Styling
     const { classes } = this.props;
 
     return (
