@@ -28,7 +28,7 @@ const styles = (theme) => ({
     justifyContent: 'stretch',
 
     marginTop: `${theme.spacing.unit * 2.5}px`,
-    marginBottom: `${theme.spacing.unit / 3}px`
+    marginBottom: `-${theme.spacing.unit / 2}px`
   },
 
   buttonMobile: {
