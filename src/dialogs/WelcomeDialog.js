@@ -107,8 +107,8 @@ WelcomeDialog.propTypes = {
 
   onClose: PropTypes.func.isRequired,
 
-  onCancelClick: PropTypes.func,
-  onVerifyClick: PropTypes.func
+  onCancelClick: PropTypes.func.isRequired,
+  onVerifyClick: PropTypes.func.isRequired
 };
 
 export default withStyles(styles)(WelcomeDialog);
