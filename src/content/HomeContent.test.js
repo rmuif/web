@@ -12,7 +12,10 @@ it('renders without crashing', () => {
   ReactDOM.render(
     (
       <MemoryRouter>
-        <HomeContent />
+        <HomeContent
+          isSignedIn={false}
+          title="q"
+        />
       </MemoryRouter>
     ),
     div
