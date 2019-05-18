@@ -45,6 +45,7 @@ import NotFoundContent from './content/NotFoundContent';
 import SignUpDialog from './dialogs/SignUpDialog';
 import SignInDialog from './dialogs/SignInDialog';
 import ResetPasswordDialog from './dialogs/ResetPasswordDialog';
+import WelcomeDialog from './dialogs/WelcomeDialog';
 import SettingsDialog from './dialogs/SettingsDialog';
 import InputDialog from './dialogs/InputDialog';
 import ConfirmationDialog from './dialogs/ConfirmationDialog';
@@ -337,6 +338,10 @@ class App extends Component {
         open: false
       },
 
+      welcomeDialog: {
+        open: false
+      },
+
       settingsDialog: {
         open: false
       },
@@ -413,7 +418,7 @@ class App extends Component {
     }, () => {
       auth.createUserWithEmailAndPassword(emailAddress, password).then((value) => {
         this.closeSignUpDialog(() => {
-          this.openSnackbar(`Welcome to ${settings.name}`);
+          this.openWelcomeDialog();
         });
       }).catch((reason) => {
         const code = reason.code;
@@ -868,7 +873,7 @@ class App extends Component {
   /**
    * Sends a verification email to a user.
    */
-  verifyEmailAddress = () => {
+  verifyEmailAddress = (callback) => {
     const { user, isSignedIn } = this.state;
 
     if (!user || !user.email || !isSignedIn) {
@@ -882,6 +887,10 @@ class App extends Component {
         const emailAddress = user.email;
 
         this.openSnackbar(`Verification e-mail sent to ${emailAddress}`);
+
+        if (callback && typeof callback === 'function') {
+          callback();
+        }
       }).catch((reason) => {
         const code = reason.code;
         const message = reason.message;
@@ -1081,6 +1090,26 @@ class App extends Component {
   closeResetPasswordDialog = (callback) => {
     this.setState({
       resetPasswordDialog: {
+        open: false
+      }
+    }, () => {
+      if (callback && typeof callback === 'function') {
+        callback();
+      }
+    });
+  };
+
+  openWelcomeDialog = () => {
+    this.setState({
+      welcomeDialog: {
+        open: true
+      }
+    });
+  };
+
+  closeWelcomeDialog = (callback) => {
+    this.setState({
+      welcomeDialog: {
         open: false
       }
     }, () => {
@@ -1296,6 +1325,7 @@ class App extends Component {
       signUpDialog,
       signInDialog,
       resetPasswordDialog,
+      welcomeDialog,
       settingsDialog,
       addAvatarDialog,
       changeAvatarDialog,
@@ -1339,6 +1369,45 @@ class App extends Component {
 
                 {isSignedIn &&
                   <React.Fragment>
+                    <Hidden only="xs">
+                      <WelcomeDialog
+                        open={welcomeDialog.open}
+
+                        title={settings.name}
+                        user={user}
+                        isPerformingAuthAction={isPerformingAuthAction}
+
+                        onClose={this.closeWelcomeDialog}
+
+                        onCancelClick={this.closeWelcomeDialog}
+                        onVerifyClick={() => {
+                          this.verifyEmailAddress(() => {
+                            this.closeWelcomeDialog()
+                          })
+                        }}
+                      />
+                    </Hidden>
+
+                    <Hidden only={['sm', 'md', 'lg', 'xl']}>
+                      <WelcomeDialog
+                        fullScreen
+                        open={welcomeDialog.open}
+
+                        title={settings.name}
+                        user={user}
+                        isPerformingAuthAction={isPerformingAuthAction}
+
+                        onClose={this.closeWelcomeDialog}
+
+                        onCancelClick={this.closeWelcomeDialog}
+                        onVerifyClick={() => {
+                          this.verifyEmailAddress(() => {
+                            this.closeWelcomeDialog()
+                          })
+                        }}
+                      />
+                    </Hidden>
+
                     <Hidden only="xs">
                       <SettingsDialog
                         open={settingsDialog.open}
