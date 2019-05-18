@@ -6,10 +6,6 @@ import moment from 'moment';
 
 import { withStyles } from '@material-ui/core/styles';
 
-import Avatar from '@material-ui/core/Avatar';
-import Fab from '@material-ui/core/Fab';
-import Typography from '@material-ui/core/Typography';
-
 import DialogContentText from '@material-ui/core/DialogContentText';
 
 import List from '@material-ui/core/List';
@@ -28,42 +24,11 @@ import PersonIcon from '@material-ui/icons/Person';
 import EmailIcon from '@material-ui/icons/Email';
 import AccessTimeIcon from '@material-ui/icons/AccessTime';
 
+import Profile from '../../layout/Profile';
+
 import ConfirmationDialog from '../../dialogs/ConfirmationDialog';
 
 const styles = (theme) => ({
-  profile: {
-    marginTop: `${theme.spacing.unit * 2}px`,
-    textAlign: 'center'
-  },
-
-  changeAvatarContainer: {
-    position: 'relative',
-    width: '50%',
-    marginLeft: 'auto',
-    marginRight: 'auto'
-  },
-
-  avatar: {
-    width: `${theme.spacing.unit * 12}px`,
-    height: `${theme.spacing.unit * 12}px`,
-    marginRight: 'auto',
-    marginLeft: 'auto'
-  },
-
-  changeAvatar: {
-    position: 'absolute',
-    top: '-7.5%',
-    left: '60%',
-  },
-
-  info: {
-    marginTop: `${theme.spacing.unit * 0.5}px`
-  },
-
-  emailAddress: {
-    marginTop: `-${theme.spacing.unit * 0.5}px`
-  },
-
   dialogContentTextComplete: {
     marginTop: `${theme.spacing.unit}px`
   },
@@ -126,24 +91,7 @@ class AccountTab extends Component {
 
     return (
       <React.Fragment>
-        {isUserComplete &&
-          <div className={classes.profile}>
-            <div className={classes.changeAvatarContainer}>
-              <Avatar className={classes.avatar} alt="Avatar" src={user.photoURL} />
-
-              <Tooltip title="Change avatar">
-                <Fab className={classes.changeAvatar} color="primary" size="small" onClick={onChangeAvatarClick}>
-                  <EditIcon />
-                </Fab>
-              </Tooltip>
-            </div>
-
-            <div className={classes.info}>
-              <Typography variant="h6">{user.displayName}</Typography>
-              <Typography className={classes.emailAddress} color="textSecondary" variant="body1">{user.email}</Typography>
-            </div>
-          </div>
-        }
+        <Profile user={user} onChangeAvatarClick={onChangeAvatarClick} />
 
         <DialogContentText className={isUserComplete ? classes.dialogContentTextComplete : classes.dialogContentTextIncomplete}>
           Here's some info about your account. You can manage your account through the tabs.
