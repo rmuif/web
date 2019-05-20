@@ -17,7 +17,7 @@ import PersonIcon from '@material-ui/icons/Person';
 
 const styles = (theme) => ({
   signUpButton: {
-    marginRight: theme.spacing.unit
+    marginRight: `${theme.spacing.unit}px`
   }
 });
 
