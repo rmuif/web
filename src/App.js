@@ -1553,7 +1553,7 @@ class App extends Component {
                             helperText={(changeAvatarDialog.errors && changeAvatarDialog.errors.avatar) ? changeAvatarDialog.errors.avatar[0] : ''}
                             margin="normal"
                             onChange={this.handleAvatarChange}
-                            placeholder="Avatar URL"
+                            placeholder={user.photoURL}
                             required
                             type="url"
                             value={avatar}
@@ -1591,7 +1591,7 @@ class App extends Component {
                             helperText={(changeAvatarDialog.errors && changeAvatarDialog.errors.avatar) ? changeAvatarDialog.errors.avatar[0] : ''}
                             margin="normal"
                             onChange={this.handleAvatarChange}
-                            placeholder="Avatar URL"
+                            placeholder={user.photoURL}
                             required
                             type="url"
                             value={avatar}
