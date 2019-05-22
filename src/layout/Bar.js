@@ -79,13 +79,13 @@ class Bar extends Component {
 
           {isSignedIn &&
             <React.Fragment>
-              <IconButton color="inherit" onClick={this.openMenu}>
+              <IconButton color="inherit" disabled={isPerformingAuthAction} onClick={this.openMenu}>
                 {user.photoURL ? <Avatar alt="Avatar" src={user.photoURL} /> : <PersonIcon />}
               </IconButton>
 
               <Menu anchorEl={menu.anchorEl} open={Boolean(menu.anchorEl)} onClose={this.closeMenu}>
-                <MenuItem onClick={this.handleSettingsClick}>Settings</MenuItem>
-                <MenuItem onClick={this.handleSignOutClick}>Sign out</MenuItem>
+                <MenuItem disabled={isPerformingAuthAction} onClick={this.handleSettingsClick}>Settings</MenuItem>
+                <MenuItem disabled={isPerformingAuthAction} onClick={this.handleSignOutClick}>Sign out</MenuItem>
               </Menu>
             </React.Fragment>
           }

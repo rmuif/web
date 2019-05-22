@@ -91,7 +91,7 @@ class AccountTab extends Component {
 
     return (
       <React.Fragment>
-        <Profile user={user} onChangeAvatarClick={onChangeAvatarClick} />
+        <Profile user={user} isPerformingAuthAction={isPerformingAuthAction} onChangeAvatarClick={onChangeAvatarClick} />
 
         <DialogContentText className={isUserComplete ? classes.dialogContentTextComplete : classes.dialogContentTextIncomplete}>
           Here's some info about your account. You can manage your account through the tabs.
@@ -109,7 +109,7 @@ class AccountTab extends Component {
               <ListItemText primary="You don't have an avatar. Add one!" />
 
               <ListItemSecondaryAction>
-                <Button color="primary" variant="contained" onClick={onAddAvatarClick}>Add</Button>
+                <Button color="primary" disabled={isPerformingAuthAction} variant="contained" onClick={onAddAvatarClick}>Add</Button>
               </ListItemSecondaryAction>
             </ListItem>
           }
@@ -126,7 +126,7 @@ class AccountTab extends Component {
 
               <ListItemSecondaryAction>
                 <Tooltip title="Edit">
-                  <IconButton onClick={onChangeDisplayNameClick}>
+                  <IconButton disabled={isPerformingAuthAction} onClick={onChangeDisplayNameClick}>
                     <EditIcon />
                   </IconButton>
                 </Tooltip>
@@ -145,7 +145,7 @@ class AccountTab extends Component {
               <ListItemText primary="You don't have a display name. Add one!" />
 
               <ListItemSecondaryAction>
-                <Button color="primary" variant="contained" onClick={onAddDisplayNameClick}>Add</Button>
+                <Button color="primary" disabled={isPerformingAuthAction} variant="contained" onClick={onAddDisplayNameClick}>Add</Button>
               </ListItemSecondaryAction>
             </ListItem>
           }
@@ -179,7 +179,7 @@ class AccountTab extends Component {
               <ListItemText primary="You don't have an e-mail address. Add one!" />
 
               <ListItemSecondaryAction>
-                <Button color="primary" variant="contained" onClick={onAddEmailAddressClick}>Add</Button>
+                <Button color="primary" disabled={isPerformingAuthAction} variant="contained" onClick={onAddEmailAddressClick}>Add</Button>
               </ListItemSecondaryAction>
             </ListItem>
           }
@@ -215,6 +215,7 @@ class AccountTab extends Component {
           title="Send verification e-mail?"
           contentText="An e-mail will be sent to your e-mail address containing instructions on how to verify your e-mail address."
           okText="Send"
+          disableOkButton={isPerformingAuthAction}
           highlightOkButton
 
           onClose={this.closeVerifyEmailAddressDialog}

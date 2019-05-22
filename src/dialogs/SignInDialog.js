@@ -131,7 +131,7 @@ class SignInDialog extends Component {
 
         <DialogActions>
           <Button color="primary" onClick={onClose}>Cancel</Button>
-          <Button color="primary" variant="outlined" onClick={onResetPasswordClick}>Reset Password</Button>
+          <Button color="primary" disabled={isPerformingAuthAction} variant="outlined" onClick={onResetPasswordClick}>Reset Password</Button>
           <Button color="primary" disabled={(!emailAddress || !password) || isPerformingAuthAction} variant="contained" onClick={this.handleSignInClick}>Sign In</Button>
         </DialogActions>
       </Dialog>
