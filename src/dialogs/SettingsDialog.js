@@ -145,7 +145,9 @@ class SettingsDialog extends Component {
 
         <DialogActions>
           <Button color="primary" onClick={onClose}>Cancel</Button>
-          <Button color="primary" variant="outlined" onClick={this.handleResetClick}>Reset</Button>
+
+          {selectedTab === 1 && <Button color="primary" variant="outlined" onClick={this.handleResetClick}>Reset</Button>}
+
           <Button color="primary" variant="contained" onClick={onClose}>OK</Button>
         </DialogActions>
       </Dialog>
