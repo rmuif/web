@@ -125,7 +125,7 @@ class AccountTab extends Component {
               <ListItemText primary="Display name" secondary={user.displayName} />
 
               <ListItemSecondaryAction>
-                <Tooltip title="Edit">
+                <Tooltip title="Change">
                   <IconButton disabled={isPerformingAuthAction} onClick={onChangeDisplayNameClick}>
                     <EditIcon />
                   </IconButton>
