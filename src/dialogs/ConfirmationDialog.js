@@ -31,24 +31,23 @@ class ConfirmationDialog extends Component {
   };
 
   render() {
-    /**
-     * Properties
-     */
-
-    // Dialog
+    // Dialog Properties
     const { open } = this.props;
 
-    // Custom
-    const { title, contentText, cancelText, okText, disableOkButton, highlightOkButton } = this.props;
+    // Custom Properties
+    const {
+      title,
+      contentText,
+      cancelText,
+      okText,
+      disableOkButton,
+      highlightOkButton
+    } = this.props;
 
-    /**
-     * Events
-     */
-
-    // Dialog
+    // Dialog Events
     const { onClose } = this.props;
 
-    // Custom
+    // Custom Events
     const { onCancelClick, onOkClick } = this.props;
 
     if (!onClose) {

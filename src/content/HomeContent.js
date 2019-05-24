@@ -31,8 +31,10 @@ const styles = (theme) => ({
 
 class HomeContent extends Component {
   render() {
+    // Styling
     const { classes } = this.props;
 
+    // Properties
     const { isSignedIn, title } = this.props;
 
     if (isSignedIn) {

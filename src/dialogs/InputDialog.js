@@ -26,24 +26,16 @@ class InputDialog extends Component {
   };
 
   render() {
-    /**
-     * Properties
-     */
-
-    // Dialog
+    // Dialog Properties
     const { fullScreen, open } = this.props;
 
-    // Custom
+    // Custom Properties
     const { title, contentText, textField, cancelText, okText, disableOkButton, highlightOkButton } = this.props;
 
-    /**
-     * Events
-     */
-
-    // Dialog
+    // Dialog Events
     const { onClose, onExited } = this.props;
 
-    // Custom
+    // Custom Events
     const { onCancelClick, onOkClick } = this.props;
 
     if (!onClose) {
