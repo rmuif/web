@@ -13,6 +13,7 @@ it('renders without crashing', () => {
         open={false}
         user={{}}
         isPerformingAuthAction={false}
+        isVerifyingEmailAddress={false}
         colors={[]}
         types={[]}
         primaryColor=""
