@@ -53,7 +53,8 @@ Making this boilerplate your starting-point requires you changing its name. Ther
   - `short_name`
   - `name`
 - src/App.js
-  - `settings.name`
+  - `settings`
+    - `name`
 - package.json
   - `name`
 
