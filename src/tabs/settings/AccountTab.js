@@ -17,6 +17,7 @@ import ListItemSecondaryAction from '@material-ui/core/ListItemSecondaryAction';
 import Tooltip from '@material-ui/core/Tooltip';
 import IconButton from '@material-ui/core/IconButton';
 import Button from '@material-ui/core/Button';
+import CircularProgress from '@material-ui/core/CircularProgress';
 
 import EditIcon from '@material-ui/icons/Edit';
 import PortraitIcon from '@material-ui/icons/Portrait';
@@ -80,7 +81,7 @@ class AccountTab extends Component {
     const { classes } = this.props;
 
     // Properties
-    const { user, isPerformingAuthAction } = this.props;
+    const { user, isPerformingAuthAction, isVerifyingEmailAddress } = this.props;
 
     // Events
     const { onAddAvatarClick, onChangeAvatarClick, onAddDisplayNameClick, onChangeDisplayNameClick, onAddEmailAddressClick } = this.props;
@@ -158,11 +159,21 @@ class AccountTab extends Component {
                 </Tooltip>
               </ListItemIcon>
 
-              <ListItemText primary={user.email} secondary={user.emailVerified ? 'Verified' : 'Not verified'} />
+              <ListItemText
+                primary={user.email}
+                secondary={
+                  <React.Fragment>
+                    {user.emailVerified && 'Verified'}
+                    {(!user.emailVerified && isVerifyingEmailAddress) && 'Awaiting e-mail address verification'}
+                    {(!user.emailVerified && !isVerifyingEmailAddress) && 'Not verified'}
+                  </React.Fragment>
+                }
+              />
 
               {!user.emailVerified &&
                 <ListItemSecondaryAction>
-                  <Button color="primary" disabled={isPerformingAuthAction} variant="contained" onClick={this.openVerifyEmailAddressDialog}>Verify</Button>
+                  {isVerifyingEmailAddress && <CircularProgress />}
+                  {!isVerifyingEmailAddress && <Button color="primary" disabled={isPerformingAuthAction} variant="contained" onClick={this.openVerifyEmailAddressDialog}>Verify</Button>}
                 </ListItemSecondaryAction>
               }
             </ListItem>
@@ -233,6 +244,7 @@ AccountTab.propTypes = {
 
   user: PropTypes.object.isRequired,
   isPerformingAuthAction: PropTypes.bool.isRequired,
+  isVerifyingEmailAddress: PropTypes.bool.isRequired,
 
   onAddAvatarClick: PropTypes.func.isRequired,
   onChangeAvatarClick: PropTypes.func.isRequired,

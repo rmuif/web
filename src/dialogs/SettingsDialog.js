@@ -60,7 +60,18 @@ class SettingsDialog extends Component {
 
   render() {
     // Properties
-    const { fullScreen, open, user, isPerformingAuthAction, colors, types, primaryColor, secondaryColor, type } = this.props;
+    const {
+      fullScreen,
+      open,
+      user,
+      isPerformingAuthAction,
+      isVerifyingEmailAddress,
+      colors,
+      types,
+      primaryColor,
+      secondaryColor,
+      type
+    } = this.props;
 
     // Events
     const {
@@ -93,6 +104,7 @@ class SettingsDialog extends Component {
               <AccountTab
                 user={user}
                 isPerformingAuthAction={isPerformingAuthAction}
+                isVerifyingEmailAddress={isVerifyingEmailAddress}
                 onAddAvatarClick={onAddAvatarClick}
                 onChangeAvatarClick={onChangeAvatarClick}
                 onAddDisplayNameClick={onAddDisplayNameClick}
@@ -121,6 +133,7 @@ class SettingsDialog extends Component {
               <AccountTab
                 user={user}
                 isPerformingAuthAction={isPerformingAuthAction}
+                isVerifyingEmailAddress={isVerifyingEmailAddress}
                 onAddAvatarClick={onAddAvatarClick}
                 onChangeAvatarClick={onChangeAvatarClick}
                 onAddDisplayNameClick={onAddDisplayNameClick}
@@ -161,6 +174,7 @@ SettingsDialog.propTypes = {
 
   user: PropTypes.object.isRequired,
   isPerformingAuthAction: PropTypes.bool.isRequired,
+  isVerifyingEmailAddress: PropTypes.bool.isRequired,
   colors: PropTypes.array.isRequired,
   types: PropTypes.array.isRequired,
   primaryColor: PropTypes.string.isRequired,

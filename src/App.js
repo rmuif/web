@@ -319,6 +319,7 @@ class App extends Component {
 
       isAuthReady: false,
       isPerformingAuthAction: false,
+      isVerifyingEmailAddress: false,
       isSignedIn: false,
 
       user: null,
@@ -884,13 +885,17 @@ class App extends Component {
       isPerformingAuthAction: true
     }, () => {
       user.sendEmailVerification().then(() => {
-        const emailAddress = user.email;
+        this.setState({
+          isVerifyingEmailAddress: true
+        }, () => {
+          const emailAddress = user.email;
 
-        this.openSnackbar(`Verification e-mail sent to ${emailAddress}`);
+          this.openSnackbar(`Verification e-mail sent to ${emailAddress}`);
 
-        if (callback && typeof callback === 'function') {
-          callback();
-        }
+          if (callback && typeof callback === 'function') {
+            callback();
+          }
+        });
       }).catch((reason) => {
         const code = reason.code;
         const message = reason.message;
@@ -1313,6 +1318,7 @@ class App extends Component {
       type,
       isAuthReady,
       isPerformingAuthAction,
+      isVerifyingEmailAddress,
       isSignedIn,
       user,
       avatar,
@@ -1414,6 +1420,7 @@ class App extends Component {
 
                         user={user}
                         isPerformingAuthAction={isPerformingAuthAction}
+                        isVerifyingEmailAddress={isVerifyingEmailAddress}
                         colors={colors}
                         types={types}
                         primaryColor={primaryColor}
@@ -1442,6 +1449,7 @@ class App extends Component {
 
                         user={user}
                         isPerformingAuthAction={isPerformingAuthAction}
+                        isVerifyingEmailAddress={isVerifyingEmailAddress}
                         colors={colors}
                         types={types}
                         primaryColor={primaryColor}
