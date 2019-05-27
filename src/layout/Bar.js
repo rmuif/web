@@ -8,7 +8,6 @@ import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
-import Tooltip from '@material-ui/core/Tooltip';
 import IconButton from '@material-ui/core/IconButton';
 import Avatar from '@material-ui/core/Avatar';
 import Menu from '@material-ui/core/Menu';
@@ -80,11 +79,9 @@ class Bar extends Component {
 
           {isSignedIn &&
             <React.Fragment>
-              <Tooltip title={user.displayName || user.email}>
-                <IconButton color="inherit" disabled={isPerformingAuthAction} onClick={this.openMenu}>
-                  {user.photoURL ? <Avatar alt="Avatar" src={user.photoURL} /> : <PersonIcon />}
-                </IconButton>
-              </Tooltip>
+              <IconButton color="inherit" disabled={isPerformingAuthAction} onClick={this.openMenu}>
+                {user.photoURL ? <Avatar alt="Avatar" src={user.photoURL} /> : <PersonIcon />}
+              </IconButton>
 
               <Menu anchorEl={menu.anchorEl} open={Boolean(menu.anchorEl)} onClose={this.closeMenu}>
                 <MenuItem disabled={isPerformingAuthAction} onClick={this.handleSettingsClick}>Settings</MenuItem>
