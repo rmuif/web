@@ -22,7 +22,7 @@ class AppearanceTab extends Component {
     const { classes } = this.props;
 
     // Properties
-    const { colors, types, primaryColor, secondaryColor, type } = this.props;
+    const { colors, types, primaryColor, secondaryColor, type, hasDeviatedFromDefaultSettings } = this.props;
 
     // Events
     const { onPrimaryColorChange, onSecondaryColorChange, onTypeChange } = this.props;
@@ -30,8 +30,8 @@ class AppearanceTab extends Component {
     return (
       <React.Fragment>
         <DialogContentText className={classes.dialogContentText}>
-          Customize the look and feel to your own liking.
-          You can reset all changes you've made by clicking Reset.
+          Customize the look and feel to your own liking by changing the primary and secondary color along with the theme type.
+          {hasDeviatedFromDefaultSettings && ' You can reset all changes you\'ve made by clicking Reset.'}
         </DialogContentText>
 
         <FormControl fullWidth margin="normal">
@@ -76,6 +76,7 @@ AppearanceTab.propTypes = {
   primaryColor: PropTypes.string.isRequired,
   secondaryColor: PropTypes.string.isRequired,
   type: PropTypes.string.isRequired,
+  hasDeviatedFromDefaultSettings: PropTypes.bool.isRequired,
 
   onPrimaryColorChange: PropTypes.func.isRequired,
   onSecondaryColorChange: PropTypes.func.isRequired,

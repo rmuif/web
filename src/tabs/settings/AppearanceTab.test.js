@@ -15,6 +15,7 @@ it('renders without crashing', () => {
         primaryColor=""
         secondaryColor=""
         type=""
+        hasDeviatedFromDefaultSettings={false}
         onPrimaryColorChange={() => {}}
         onSecondaryColorChange={() => {}}
         onTypeChange={() => {}}

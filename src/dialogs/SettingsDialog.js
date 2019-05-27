@@ -70,7 +70,8 @@ class SettingsDialog extends Component {
       types,
       primaryColor,
       secondaryColor,
-      type
+      type,
+      defaultTheme
     } = this.props;
 
     // Events
@@ -88,6 +89,16 @@ class SettingsDialog extends Component {
     } = this.props;
 
     const { selectedTab } = this.state;
+
+    let hasDeviatedFromDefaultSettings = false;
+
+    if (defaultTheme) {
+      hasDeviatedFromDefaultSettings = (
+        primaryColor !== defaultTheme.primaryColor ||
+        secondaryColor !== defaultTheme.secondaryColor ||
+        type !== defaultTheme.type
+      );
+    }
 
     return (
       <Dialog fullScreen={fullScreen} open={open} onClose={onClose} onKeyPress={this.handleKeyPress}>
@@ -121,6 +132,7 @@ class SettingsDialog extends Component {
                 primaryColor={primaryColor}
                 secondaryColor={secondaryColor}
                 type={type}
+                hasDeviatedFromDefaultSettings={hasDeviatedFromDefaultSettings}
                 onPrimaryColorChange={onPrimaryColorChange}
                 onSecondaryColorChange={onSecondaryColorChange}
                 onTypeChange={onTypeChange}
@@ -148,6 +160,7 @@ class SettingsDialog extends Component {
                 primaryColor={primaryColor}
                 secondaryColor={secondaryColor}
                 type={type}
+                hasDeviatedFromDefaultSettings={hasDeviatedFromDefaultSettings}
                 onPrimaryColorChange={onPrimaryColorChange}
                 onSecondaryColorChange={onSecondaryColorChange}
                 onTypeChange={onTypeChange}
@@ -159,7 +172,7 @@ class SettingsDialog extends Component {
         <DialogActions>
           <Button color="primary" onClick={onClose}>Cancel</Button>
 
-          {selectedTab === 1 && <Button color="primary" variant="outlined" onClick={this.handleResetClick}>Reset</Button>}
+          {(selectedTab === 1 && hasDeviatedFromDefaultSettings) && <Button color="primary" variant="outlined" onClick={this.handleResetClick}>Reset</Button>}
 
           <Button color="primary" variant="contained" onClick={onClose}>OK</Button>
         </DialogActions>
