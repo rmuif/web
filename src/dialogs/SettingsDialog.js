@@ -132,7 +132,6 @@ class SettingsDialog extends Component {
                 primaryColor={primaryColor}
                 secondaryColor={secondaryColor}
                 type={type}
-                hasDeviatedFromDefaultSettings={hasDeviatedFromDefaultSettings}
                 onPrimaryColorChange={onPrimaryColorChange}
                 onSecondaryColorChange={onSecondaryColorChange}
                 onTypeChange={onTypeChange}
@@ -160,7 +159,6 @@ class SettingsDialog extends Component {
                 primaryColor={primaryColor}
                 secondaryColor={secondaryColor}
                 type={type}
-                hasDeviatedFromDefaultSettings={hasDeviatedFromDefaultSettings}
                 onPrimaryColorChange={onPrimaryColorChange}
                 onSecondaryColorChange={onSecondaryColorChange}
                 onTypeChange={onTypeChange}
