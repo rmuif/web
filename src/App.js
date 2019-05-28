@@ -60,7 +60,8 @@ const config = {
   databaseURL: 'https://react-material-ui-firebase.firebaseio.com',
   projectId: 'react-material-ui-firebase',
   storageBucket: 'react-material-ui-firebase.appspot.com',
-  messagingSenderId: '552659850812'
+  messagingSenderId: '552659850812',
+  appId: '1:552659850812:web:d685f74f72161d96'
 };
 
 firebase.initializeApp(config);
