@@ -6,6 +6,7 @@ import validate from 'validate.js';
 
 import firebase from 'firebase/app';
 import 'firebase/auth';
+import 'firebase/performance';
 
 import readingTime from 'reading-time';
 
@@ -67,6 +68,9 @@ const config = {
 firebase.initializeApp(config);
 
 const auth = firebase.auth();
+
+// eslint-disable-next-line no-unused-vars
+const performance = firebase.performance();
 
 /**
  * Theming
