@@ -38,7 +38,7 @@ class NotFoundContent extends Component {
         title="Content Not Found"
         description="The requested URL was not found on this server"
         button={
-          <Fab className={classes.button} color="primary" component={Link} to="/" variant="extended">
+          <Fab className={classes.button} color="secondary" component={Link} to="/" variant="extended">
             <HomeIcon className={classes.buttonIcon} /> Go Home
           </Fab>
         }

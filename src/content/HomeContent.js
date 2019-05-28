@@ -44,7 +44,7 @@ class HomeContent extends Component {
           title="Home"
           description="Use React + Material-UI + Firebase as the starting-point for your project"
           button={
-            <Fab className={classes.button} color="primary" component={Link} to="/some-magic" variant="extended">
+            <Fab className={classes.button} color="secondary" component={Link} to="/some-magic" variant="extended">
               Click For Some Magic
             </Fab>
           }
@@ -58,7 +58,7 @@ class HomeContent extends Component {
         title={title}
         description="The three musketeers, all in one pack in the form of a boilerplate app"
         button={
-          <Fab className={classes.button} color="primary" href="https://github.com/Phoqe/react-material-ui-firebase" rel="noopener noreferrer" target="_blank" variant="extended">
+          <Fab className={classes.button} color="secondary" href="https://github.com/Phoqe/react-material-ui-firebase" rel="noopener noreferrer" target="_blank" variant="extended">
             <GitHubCircleIcon className={classes.buttonIcon} />
             GitHub
           </Fab>
