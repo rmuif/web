@@ -10,13 +10,6 @@ import DialogActions from '@material-ui/core/DialogActions';
 
 import Button from '@material-ui/core/Button';
 
-/**
- * Confirmation dialogs give users the ability to provide final confirmation of a choice
- * before committing to it, so they have a chance to change their minds if necessary.
- * If the user confirms a choice, it’s carried out. Otherwise, the user can dismiss the
- * dialog. For example, users can listen to multiple ringtones but only make a final
- * selection upon touching “OK.”
- */
 class ConfirmationDialog extends Component {
   handleKeyPress = (event) => {
     const key = event.key;
