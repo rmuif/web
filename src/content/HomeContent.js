@@ -17,15 +17,15 @@ import EmptyState from '../layout/EmptyState';
 
 const styles = (theme) => ({
   emptyStateIcon: {
-    fontSize: `${theme.spacing.unit * 12}px`
+    fontSize: theme.spacing(12)
   },
 
   button: {
-    marginTop: `${theme.spacing.unit}px`
+    marginTop: theme.spacing(1)
   },
 
   buttonIcon: {
-    marginRight: `${theme.spacing.unit}px`
+    marginRight: theme.spacing(1)
   }
 });
 

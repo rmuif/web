@@ -12,7 +12,7 @@ import MenuItem from '@material-ui/core/MenuItem';
 
 const styles = (theme) => ({
   dialogContentText: {
-    marginTop: `${theme.spacing.unit * 3}px`
+    marginTop: theme.spacing(3)
   }
 });
 

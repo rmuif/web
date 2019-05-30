@@ -19,20 +19,20 @@ const styles = (theme) => ({
   dialogActions: {
     justifyContent: 'center',
 
-    marginTop: `${theme.spacing.unit * 2.5}px`,
-    marginBottom: `${theme.spacing.unit}px`
+    marginTop: theme.spacing(2.5),
+    marginBottom: theme.spacing(1)
   },
 
   dialogActionsMobile: {
     display: 'grid',
     justifyContent: 'stretch',
 
-    marginTop: `${theme.spacing.unit * 2.5}px`,
-    marginBottom: `-${theme.spacing.unit / 2}px`
+    marginTop: theme.spacing(2.5),
+    marginBottom: -theme.spacing(0.5)
   },
 
   buttonMobile: {
-    marginBottom: `${theme.spacing.unit * 1.5}px`
+    marginBottom: theme.spacing(1.5)
   },
 
   facebook: {
@@ -56,7 +56,7 @@ const styles = (theme) => ({
   },
 
   icon: {
-    marginRight: `${theme.spacing.unit / 2}px`
+    marginRight: theme.spacing(0.5)
   }
 });
 
