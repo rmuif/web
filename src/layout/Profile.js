@@ -17,6 +17,11 @@ const styles = (theme) => ({
     textAlign: 'center'
   },
 
+  profileExtraTopMargin: {
+    marginTop: `${theme.spacing.unit * 3}px`,
+    textAlign: 'center'
+  },
+
   changeAvatarContainer: {
     position: 'relative',
     width: '50%',
@@ -52,7 +57,7 @@ class Profile extends Component {
     const { classes } = this.props;
 
     // Properties
-    const { user, isPerformingAuthAction } = this.props;
+    const { user, isPerformingAuthAction, extraTopMargin } = this.props;
 
     // Events
     const { onChangeAvatarClick } = this.props;
@@ -62,7 +67,7 @@ class Profile extends Component {
     }
 
     return (
-      <div className={classes.profile}>
+      <div className={extraTopMargin ? classes.profileExtraTopMargin : classes.profile}>
         <div className={classes.changeAvatarContainer}>
           <Avatar className={classes.avatar} alt="Avatar" src={user.photoURL} />
 
@@ -89,6 +94,7 @@ Profile.propTypes = {
 
   user: PropTypes.object.isRequired,
   isPerformingAuthAction: PropTypes.bool,
+  extraTopMargin: PropTypes.bool,
 
   onChangeAvatarClick: PropTypes.func
 };
