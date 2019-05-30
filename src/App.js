@@ -190,10 +190,6 @@ let theme = createMuiTheme({
     primary: blue,
     secondary: red,
     type: 'light'
-  },
-
-  typography: {
-    useNextVariants: true
   }
 });
 
@@ -984,10 +980,6 @@ class App extends Component {
         primary: colors.find(color => color.id === palette.primaryColor).import,
         secondary: colors.find(color => color.id === palette.secondaryColor).import,
         type: palette.type
-      },
-
-      typography: {
-        useNextVariants: true
       }
     });
 
