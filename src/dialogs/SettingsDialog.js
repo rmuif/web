@@ -167,13 +167,11 @@ class SettingsDialog extends Component {
           </Hidden>
         </DialogContent>
 
-        <DialogActions>
-          <Button color="primary" onClick={onClose}>Cancel</Button>
-
-          {(selectedTab === 1 && hasDeviatedFromDefaultSettings) && <Button color="primary" variant="outlined" onClick={this.handleResetClick}>Reset</Button>}
-
-          <Button color="primary" variant="contained" onClick={onClose}>OK</Button>
-        </DialogActions>
+        {(selectedTab === 1 && hasDeviatedFromDefaultSettings) &&
+          <DialogActions>
+            <Button color="primary" variant="contained" onClick={this.handleResetClick}>Reset</Button>
+          </DialogActions>
+        }
       </Dialog>
     );
   }

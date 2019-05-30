@@ -31,11 +31,13 @@ import ConfirmationDialog from '../../dialogs/ConfirmationDialog';
 
 const styles = (theme) => ({
   dialogContentTextComplete: {
-    marginTop: `${theme.spacing.unit}px`
+    marginTop: `${theme.spacing.unit}px`,
+    marginBottom: `${theme.spacing.unit}px`
   },
 
   dialogContentTextIncomplete: {
-    marginTop: `${theme.spacing.unit * 2}px`
+    marginTop: `${theme.spacing.unit * 3}px`,
+    marginBottom: `${theme.spacing.unit}px`
   }
 });
 
@@ -92,13 +94,13 @@ class AccountTab extends Component {
 
     return (
       <React.Fragment>
-        <Profile user={user} isPerformingAuthAction={isPerformingAuthAction} onChangeAvatarClick={onChangeAvatarClick} />
+        <Profile user={user} isPerformingAuthAction={isPerformingAuthAction} extraTopMargin onChangeAvatarClick={onChangeAvatarClick} />
 
         <DialogContentText className={isUserComplete ? classes.dialogContentTextComplete : classes.dialogContentTextIncomplete}>
           Here's some info about your account. You can manage your account through the tabs.
         </DialogContentText>
 
-        <List>
+        <List disablePadding>
           {!user.photoURL &&
             <ListItem>
               <ListItemIcon>
