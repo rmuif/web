@@ -36,7 +36,8 @@ const styles = (theme) => ({
   },
 
   dialogContentTextIncomplete: {
-    marginTop: `${theme.spacing.unit * 3}px`
+    marginTop: `${theme.spacing.unit * 3}px`,
+    marginBottom: `${theme.spacing.unit}px`
   }
 });
 
