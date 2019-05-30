@@ -17,11 +17,11 @@ import Profile from '../layout/Profile';
 
 const styles = (theme) => ({
   title: {
-    marginTop: theme.spacing(3)
+    marginTop: `${theme.spacing.unit * 3}px`
   },
 
   contentText: {
-    marginTop: theme.spacing(2)
+    marginTop: `${theme.spacing.unit * 2}px`
   }
 });
 

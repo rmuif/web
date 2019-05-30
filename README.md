@@ -92,6 +92,10 @@ let theme = createMuiTheme({
     primary: yourPrimaryColor,
     secondary: yourSecondaryColor,
     type: type
+  },
+
+  typography: {
+    useNextVariants: true
   }
 });
 ```

@@ -13,7 +13,7 @@ import EditIcon from '@material-ui/icons/Edit';
 
 const styles = (theme) => ({
   profile: {
-    marginTop: theme.spacing(2),
+    marginTop: `${theme.spacing.unit * 2}px`,
     textAlign: 'center'
   },
 
@@ -25,8 +25,8 @@ const styles = (theme) => ({
   },
 
   avatar: {
-    width: theme.spacing(12),
-    height: theme.spacing(12),
+    width: `${theme.spacing.unit * 12}px`,
+    height: `${theme.spacing.unit * 12}px`,
     marginRight: 'auto',
     marginLeft: 'auto'
   },
@@ -38,11 +38,11 @@ const styles = (theme) => ({
   },
 
   info: {
-    marginTop: theme.spacing(0.5)
+    marginTop: `${theme.spacing.unit * 0.5}px`
   },
 
   emailAddress: {
-    marginTop: -theme.spacing(0.5)
+    marginTop: `-${theme.spacing.unit * 0.5}px`
   },
 });
 

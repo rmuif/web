@@ -31,11 +31,11 @@ import ConfirmationDialog from '../../dialogs/ConfirmationDialog';
 
 const styles = (theme) => ({
   dialogContentTextComplete: {
-    marginTop: theme.spacing(1)
+    marginTop: `${theme.spacing.unit}px`
   },
 
   dialogContentTextIncomplete: {
-    marginTop: theme.spacing(2)
+    marginTop: `${theme.spacing.unit * 2}px`
   }
 });
 
