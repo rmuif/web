@@ -4,7 +4,7 @@
   "private": true,
   "dependencies": {
     "@material-ui/core": "^4.0.1",
-    "@material-ui/icons": "^3.0.2",
+    "@material-ui/icons": "^4.0.1",
     "firebase": "^6.0.4",
     "gh-pages": "^2.0.1",
     "mdi-material-ui": "^5.10.0",
