@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 
 import PropTypes from 'prop-types';
 
+import { withStyles } from '@material-ui/core/styles';
+
 import Dialog from '@material-ui/core/Dialog';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import DialogContent from '@material-ui/core/DialogContent';
@@ -16,6 +18,12 @@ import SwipeableViews from 'react-swipeable-views';
 
 import AccountTab from '../tabs/settings/AccountTab';
 import AppearanceTab from '../tabs/settings/AppearanceTab';
+
+const styles = (theme) => ({
+  tabs: {
+    marginBottom: theme.spacing(1)
+  }
+});
 
 class SettingsDialog extends Component {
   constructor(props) {
@@ -59,6 +67,9 @@ class SettingsDialog extends Component {
   };
 
   render() {
+    // Styling
+    const { classes } = this.props;
+
     // Properties
     const {
       fullScreen,
@@ -104,7 +115,7 @@ class SettingsDialog extends Component {
       <Dialog fullScreen={fullScreen} open={open} onClose={onClose} onKeyPress={this.handleKeyPress}>
         <DialogTitle>Settings</DialogTitle>
 
-        <Tabs indicatorColor="primary" textColor="primary" onChange={this.changeTab} value={selectedTab} variant="fullWidth">
+        <Tabs className={classes.tabs} indicatorColor="primary" textColor="primary" onChange={this.changeTab} value={selectedTab} variant="fullWidth">
           <Tab label="Account" />
           <Tab label="Appearance" />
         </Tabs>
@@ -178,6 +189,8 @@ class SettingsDialog extends Component {
 }
 
 SettingsDialog.propTypes = {
+  classes: PropTypes.object.isRequired,
+
   fullScreen: PropTypes.bool,
   open: PropTypes.bool.isRequired,
 
@@ -203,4 +216,4 @@ SettingsDialog.propTypes = {
   onResetClick: PropTypes.func.isRequired
 };
 
-export default SettingsDialog;
+export default withStyles(styles)(SettingsDialog);

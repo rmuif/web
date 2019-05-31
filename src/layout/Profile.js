@@ -13,12 +13,6 @@ import EditIcon from '@material-ui/icons/Edit';
 
 const styles = (theme) => ({
   profile: {
-    marginTop: theme.spacing(2),
-    textAlign: 'center'
-  },
-
-  profileExtraTopMargin: {
-    marginTop: theme.spacing(3),
     textAlign: 'center'
   },
 
@@ -57,7 +51,7 @@ class Profile extends Component {
     const { classes } = this.props;
 
     // Properties
-    const { user, isPerformingAuthAction, extraTopMargin } = this.props;
+    const { user, isPerformingAuthAction } = this.props;
 
     // Events
     const { onChangeAvatarClick } = this.props;
@@ -67,7 +61,7 @@ class Profile extends Component {
     }
 
     return (
-      <div className={extraTopMargin ? classes.profileExtraTopMargin : classes.profile}>
+      <div className={classes.profile}>
         <div className={classes.changeAvatarContainer}>
           <Avatar className={classes.avatar} alt="Avatar" src={user.photoURL} />
 
@@ -94,7 +88,6 @@ Profile.propTypes = {
 
   user: PropTypes.object.isRequired,
   isPerformingAuthAction: PropTypes.bool,
-  extraTopMargin: PropTypes.bool,
 
   onChangeAvatarClick: PropTypes.func
 };

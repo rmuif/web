@@ -11,8 +11,8 @@ import Select from '@material-ui/core/Select';
 import MenuItem from '@material-ui/core/MenuItem';
 
 const styles = (theme) => ({
-  dialogContentText: {
-    marginTop: theme.spacing(3)
+  root: {
+    marginBottom: theme.spacing(0)
   }
 });
 
@@ -29,7 +29,7 @@ class AppearanceTab extends Component {
 
     return (
       <React.Fragment>
-        <DialogContentText className={classes.dialogContentText}>
+        <DialogContentText classes={{ root: classes.root }}>
           The app's primary and secondary colors, and their variants, help create a color theme that is harmonious,
           ensures accessible text, and distinguishes UI elements and surfaces from one another.
         </DialogContentText>
