@@ -13,7 +13,9 @@ import EditIcon from '@material-ui/icons/Edit';
 
 const styles = (theme) => ({
   profile: {
-    textAlign: 'center'
+    textAlign: 'center',
+
+    marginTop: theme.spacing(1)
   },
 
   changeAvatarContainer: {
