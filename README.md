@@ -12,7 +12,7 @@ React + Material-UI + Firebase comes with a bunch of development and testing too
 - Robust routing with React Router including error handling (404)
 - Extensive mobile support with [react-swipeable-views](https://react-swipeable-views.com) for tabs
 
-Want to see it in action? Take a look at the [demo](https://phoqe.github.io/react-material-ui-firebase).
+Want to see it in action? Take a look at the [demo](https://phoqe.me/react-material-ui-firebase).
 
 ## Getting Started
 
@@ -124,6 +124,12 @@ Available types:
 
 - `light`
 - `dark`
+
+## Built with React + Material-UI + Firebase
+
+### Sync (https://sync.phoqe.dev)
+
+Synchronize activities like watching YouTube or listening to Spotify with others, mainly friends or friends-to-be.
 
 ## Available Scripts
 
