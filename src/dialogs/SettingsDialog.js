@@ -179,9 +179,30 @@ class SettingsDialog extends Component {
         </DialogContent>
 
         {(selectedTab === 1 && hasDeviatedFromDefaultSettings) &&
-          <DialogActions>
-            <Button color="primary" variant="contained" onClick={this.handleResetClick}>Reset</Button>
-          </DialogActions>
+          <React.Fragment>
+            <Hidden only="xs">
+              <DialogActions>
+                <Button color="primary" variant="contained" onClick={this.handleResetClick}>Reset</Button>
+              </DialogActions>
+            </Hidden>
+
+            <Hidden only={['sm', 'md', 'lg', 'xl']}>
+              <DialogActions>
+                <Button color="primary" onClick={onClose}>Cancel</Button>
+                <Button color="primary" variant="outlined" onClick={this.handleResetClick}>Reset</Button>
+                <Button color="primary" variant="contained" onClick={onClose}>OK</Button>
+              </DialogActions>
+            </Hidden>
+          </React.Fragment>
+        }
+
+        {(selectedTab !== 1 || !hasDeviatedFromDefaultSettings) &&
+          <Hidden only={['sm', 'md', 'lg', 'xl']}>
+            <DialogActions>
+              <Button color="primary" onClick={onClose}>Cancel</Button>
+              <Button color="primary" variant="contained" onClick={onClose}>OK</Button>
+            </DialogActions>
+          </Hidden>
         }
       </Dialog>
     );
