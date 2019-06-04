@@ -8,7 +8,7 @@ React + Material-UI + Firebase comes with a bunch of development and testing too
 
 - Bootstrapped with Create React App, the same tooling works out-of-the-box
 - Scaffolding incorporates Google Material Design principles through Material-UI
-- Built on top of Firebase with authentication working from the start
+- Built on top of Firebase with authentication and performance monitoring working from the start
 - Robust routing with React Router including error handling (404)
 - Extensive mobile support with [react-swipeable-views](https://react-swipeable-views.com) for tabs
 
