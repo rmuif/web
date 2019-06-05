@@ -127,7 +127,7 @@ Available types:
 
 ## Built with React + Material-UI + Firebase
 
-### Sync (https://sync.phoqe.dev)
+### [Sync](https://sync.phoqe.dev)
 
 Synchronize activities like watching YouTube or listening to Spotify with others, mainly friends or friends-to-be.
 
