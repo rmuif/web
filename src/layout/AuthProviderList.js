@@ -98,7 +98,7 @@ class AuthProviderList extends Component {
         </Hidden>
 
         <Hidden only={['sm', 'md', 'lg', 'xl']}>
-          <DialogActions className={classes.dialogActionsMobile}>
+          <DialogActions className={classes.dialogActionsMobile} disableSpacing>
             <Button className={`${classes.facebook} ${classes.buttonMobile}`} disabled={isPerformingAuthAction} variant="contained" onClick={() => onAuthProviderClick(new firebase.auth.FacebookAuthProvider())}>
               <FacebookBoxIcon className={classes.icon} />
               Facebook
