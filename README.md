@@ -43,9 +43,9 @@ You may need to adjust the router to use the correct basename. A basename is the
 
 If you're still having problems you can read more in [React Router's documentation](https://reacttraining.com/react-router/web/api/BrowserRouter/basename-string).
 
-### Changing the Name
+### Changing the Name and URL
 
-Making this boilerplate your starting-point requires you changing its name. There are 4 files you'll need to modify to change the name of the project.
+Making this boilerplate your starting-point requires you changing its name and URL. There are 4 files you'll need to modify.
 
 - public/index.html
   - `title`
