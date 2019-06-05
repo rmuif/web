@@ -57,6 +57,7 @@ Making this boilerplate your starting-point requires you changing its name. Ther
     - `name`
 - package.json
   - `name`
+  - `homepage`
 
 ### Replacing the Firebase Credentials
 
