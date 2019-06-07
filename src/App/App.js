@@ -36,20 +36,20 @@ import Hidden from '@material-ui/core/Hidden';
 import TextField from '@material-ui/core/TextField';
 import Snackbar from '@material-ui/core/Snackbar';
 
-import LaunchScreen from './layout/LaunchScreen';
+import LaunchScreen from '../layout/LaunchScreen/LaunchScreen';
 
-import Bar from './layout/Bar';
+import Bar from '../layout/Bar/Bar';
 
-import HomeContent from './content/HomeContent';
-import NotFoundContent from './content/NotFoundContent';
+import HomeContent from '../content/HomeContent/HomeContent';
+import NotFoundContent from '../content/NotFoundContent/NotFoundContent';
 
-import SignUpDialog from './dialogs/SignUpDialog';
-import SignInDialog from './dialogs/SignInDialog';
-import ResetPasswordDialog from './dialogs/ResetPasswordDialog';
-import WelcomeDialog from './dialogs/WelcomeDialog';
-import SettingsDialog from './dialogs/SettingsDialog';
-import InputDialog from './dialogs/InputDialog';
-import ConfirmationDialog from './dialogs/ConfirmationDialog';
+import SignUpDialog from '../dialogs/SignUpDialog/SignUpDialog';
+import SignInDialog from '../dialogs/SignInDialog/SignInDialog';
+import ResetPasswordDialog from '../dialogs/ResetPasswordDialog/ResetPasswordDialog';
+import WelcomeDialog from '../dialogs/WelcomeDialog/WelcomeDialog';
+import SettingsDialog from '../dialogs/SettingsDialog/SettingsDialog';
+import InputDialog from '../dialogs/InputDialog/InputDialog';
+import ConfirmationDialog from '../dialogs/ConfirmationDialog/ConfirmationDialog';
 
 /**
  * Firebase

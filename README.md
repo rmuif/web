@@ -39,7 +39,7 @@ If you receive a warning like:
 Warning: You are attempting to use a basename on a page whose URL path does not begin with the basename. Expected path "/" to begin with "/react-material-ui-firebase".
 ```
 
-You may need to adjust the router to use the correct basename. A basename is the base URL for all locations. In most cases you can just remove the `basename` attribute from the `<Router>` element in `src/App.js`.
+You may need to adjust the router to use the correct basename. A basename is the base URL for all locations. In most cases you can just remove the `basename` attribute from the `<Router>` element in `src/App/App.js`.
 
 If you're still having problems you can read more in [React Router's documentation](https://reacttraining.com/react-router/web/api/BrowserRouter/basename-string).
 
@@ -52,7 +52,7 @@ Making this boilerplate your starting-point requires you changing its name and U
 - public/manifest.json
   - `short_name`
   - `name`
-- src/App.js
+- src/App/App.js
   - `settings`
     - `name`
 - package.json
@@ -63,7 +63,7 @@ Making this boilerplate your starting-point requires you changing its name and U
 
 By default, React + Material-UI + Firebase uses a demo Firebase project which you can't manage. You need to create a new Firebase project and replace the credentials with your own. You shouldn't use the demo project for anything more than testing as you have no control over it.
 
-When you've created a Firebase project you can copy-paste your credentials into the `config` object in `src/App.js`:
+When you've created a Firebase project you can copy-paste your credentials into the `config` object in `src/App/App.js`:
 
 ```js
 const config = {
@@ -79,7 +79,7 @@ const config = {
 
 ### Changing the Default Theme
 
-The sample app uses a blue and red color combination with a light theme type. When a user changes the theme, a local storage object will be created and read on startup. You can change the default theme, which is the theme all users will see before changing it themselves, in `src/App.js`:
+The sample app uses a blue and red color combination with a light theme type. When a user changes the theme, a local storage object will be created and read on startup. You can change the default theme, which is the theme all users will see before changing it themselves, in `src/App/App.js`:
 
 ```js
 const defaultTheme = {

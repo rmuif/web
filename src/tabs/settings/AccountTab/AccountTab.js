@@ -25,9 +25,9 @@ import PersonIcon from '@material-ui/icons/Person';
 import EmailIcon from '@material-ui/icons/Email';
 import AccessTimeIcon from '@material-ui/icons/AccessTime';
 
-import Profile from '../../layout/Profile';
+import Profile from '../../../layout/Profile/Profile';
 
-import ConfirmationDialog from '../../dialogs/ConfirmationDialog';
+import ConfirmationDialog from '../../../dialogs/ConfirmationDialog/ConfirmationDialog';
 
 const styles = (theme) => ({
   root: {
