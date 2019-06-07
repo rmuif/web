@@ -40,7 +40,7 @@ import LaunchScreen from './layout/LaunchScreen';
 
 import Bar from './layout/Bar';
 
-import HomeContent from './content/HomeContent';
+import HomeContent from './content/HomeContent/HomeContent';
 import NotFoundContent from './content/NotFoundContent';
 
 import SignUpDialog from './dialogs/SignUpDialog';
