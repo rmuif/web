@@ -43,7 +43,7 @@ import Bar from './layout/Bar';
 import HomeContent from './content/HomeContent/HomeContent';
 import NotFoundContent from './content/NotFoundContent/NotFoundContent';
 
-import SignUpDialog from './dialogs/SignUpDialog';
+import SignUpDialog from './dialogs/SignUpDialog/SignUpDialog';
 import SignInDialog from './dialogs/SignInDialog/SignInDialog';
 import ResetPasswordDialog from './dialogs/ResetPasswordDialog/ResetPasswordDialog';
 import WelcomeDialog from './dialogs/WelcomeDialog';
