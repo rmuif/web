@@ -48,7 +48,7 @@ import SignInDialog from './dialogs/SignInDialog';
 import ResetPasswordDialog from './dialogs/ResetPasswordDialog';
 import WelcomeDialog from './dialogs/WelcomeDialog';
 import SettingsDialog from './dialogs/SettingsDialog';
-import InputDialog from './dialogs/InputDialog';
+import InputDialog from './dialogs/InputDialog/InputDialog';
 import ConfirmationDialog from './dialogs/ConfirmationDialog/ConfirmationDialog';
 
 /**
