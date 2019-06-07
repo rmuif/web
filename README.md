@@ -132,6 +132,10 @@ Available types:
 
 Synchronize activities like watching YouTube or listening to Spotify with others, mainly friends or friends-to-be.
 
+####  Your project could be here...
+
+Are you using this project as a skeleton for your application? Don't hesitate adding it through a pull request.
+
 ## Available Scripts
 
 In the project directory, you can run:
