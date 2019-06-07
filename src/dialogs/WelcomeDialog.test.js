@@ -13,7 +13,6 @@ it('renders without crashing', () => {
         open={false}
 
         title=""
-        user={{}}
         isPerformingAuthAction={false}
 
         onClose={() => {}}
