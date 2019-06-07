@@ -16,7 +16,7 @@ import Hidden from '@material-ui/core/Hidden';
 
 import SwipeableViews from 'react-swipeable-views';
 
-import AccountTab from '../../tabs/settings/AccountTab';
+import AccountTab from '../../tabs/settings/AccountTab/AccountTab';
 import AppearanceTab from '../../tabs/settings/AppearanceTab';
 
 const styles = (theme) => ({
