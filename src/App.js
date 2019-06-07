@@ -38,7 +38,7 @@ import Snackbar from '@material-ui/core/Snackbar';
 
 import LaunchScreen from './layout/LaunchScreen';
 
-import Bar from './layout/Bar';
+import Bar from './layout/Bar/Bar';
 
 import HomeContent from './content/HomeContent/HomeContent';
 import NotFoundContent from './content/NotFoundContent/NotFoundContent';
