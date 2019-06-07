@@ -2,28 +2,13 @@ import React, { Component } from 'react';
 
 import PropTypes from 'prop-types';
 
-import { withStyles } from '@material-ui/core/styles';
-
 import Dialog from '@material-ui/core/Dialog';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogActions from '@material-ui/core/DialogActions';
 
-import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
-
-import Profile from '../layout/Profile';
-
-const styles = (theme) => ({
-  title: {
-    marginTop: theme.spacing(3)
-  },
-
-  contentText: {
-    marginTop: theme.spacing(2)
-  }
-});
 
 class WelcomeDialog extends Component {
   handleKeyPress = (event) => {
@@ -39,14 +24,11 @@ class WelcomeDialog extends Component {
   };
 
   render() {
-    // Styling
-    const { classes } = this.props;
-
     // Dialog Properties
     const { fullScreen, open } = this.props;
 
     // Custom Properties
-    const { title, user, isPerformingAuthAction } = this.props;
+    const { title, isPerformingAuthAction } = this.props;
 
     // Dialog Events
     const { onClose } = this.props;
@@ -54,37 +36,18 @@ class WelcomeDialog extends Component {
     // Custom Events
     const { onCancelClick, onVerifyClick } = this.props;
 
-    const isUserComplete = (user.photoURL && user.displayName && user.email);
-
     return (
       <Dialog fullScreen={fullScreen} open={open} onClose={onClose} onKeyPress={this.handleKeyPress}>
-        {isUserComplete &&
-          <DialogContent>
-            <Profile user={user} />
+        <DialogTitle>
+          Welcome to {title}!
+        </DialogTitle>
 
-            <Typography className={classes.title} variant="h6">Welcome to {title}!</Typography>
-
-            <DialogContentText className={classes.contentText}>
-              Complete your account by verifying your e-mail address.
-              An e-mail will be sent to your e-mail address containing instructions on how to verify your e-mail address.
-            </DialogContentText>
-          </DialogContent>
-        }
-
-        {!isUserComplete &&
-          <React.Fragment>
-            <DialogTitle>
-              Welcome to {title}!
-            </DialogTitle>
-
-            <DialogContent>
-              <DialogContentText>
-                Complete your account by verifying your e-mail address.
-                An e-mail will be sent to your e-mail address containing instructions on how to verify your e-mail address.
-              </DialogContentText>
-            </DialogContent>
-          </React.Fragment>
-        }
+        <DialogContent>
+          <DialogContentText>
+            Complete your account by verifying your e-mail address.
+            An e-mail will be sent to your e-mail address containing instructions on how to verify your e-mail address.
+          </DialogContentText>
+        </DialogContent>
 
         <DialogActions>
           <Button color="primary" onClick={onCancelClick}>Cancel</Button>
@@ -96,13 +59,10 @@ class WelcomeDialog extends Component {
 }
 
 WelcomeDialog.propTypes = {
-  classes: PropTypes.object.isRequired,
-
   fullScreen: PropTypes.bool,
   open: PropTypes.bool.isRequired,
 
   title: PropTypes.string.isRequired,
-  user: PropTypes.object.isRequired,
   isPerformingAuthAction: PropTypes.bool.isRequired,
 
   onClose: PropTypes.func.isRequired,
@@ -111,4 +71,4 @@ WelcomeDialog.propTypes = {
   onVerifyClick: PropTypes.func.isRequired
 };
 
-export default withStyles(styles)(WelcomeDialog);
+export default WelcomeDialog;
