@@ -36,7 +36,7 @@ import Hidden from '@material-ui/core/Hidden';
 import TextField from '@material-ui/core/TextField';
 import Snackbar from '@material-ui/core/Snackbar';
 
-import LaunchScreen from './layout/LaunchScreen';
+import LaunchScreen from './layout/LaunchScreen/LaunchScreen';
 
 import Bar from './layout/Bar/Bar';
 
