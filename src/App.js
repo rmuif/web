@@ -1389,29 +1389,7 @@ class App extends Component {
                           })
                         }}
                       />
-                    </Hidden>
 
-                    <Hidden only={['sm', 'md', 'lg', 'xl']}>
-                      <WelcomeDialog
-                        fullScreen
-                        open={welcomeDialog.open}
-
-                        title={settings.name}
-                        user={user}
-                        isPerformingAuthAction={isPerformingAuthAction}
-
-                        onClose={this.closeWelcomeDialog}
-
-                        onCancelClick={this.closeWelcomeDialog}
-                        onVerifyClick={() => {
-                          this.verifyEmailAddress(() => {
-                            this.closeWelcomeDialog()
-                          })
-                        }}
-                      />
-                    </Hidden>
-
-                    <Hidden only="xs">
                       <SettingsDialog
                         open={settingsDialog.open}
 
@@ -1437,38 +1415,7 @@ class App extends Component {
                         onTypeChange={this.changeType}
                         onResetClick={this.resetTheme}
                       />
-                    </Hidden>
 
-                    <Hidden only={['sm', 'md', 'lg', 'xl']}>
-                      <SettingsDialog
-                        fullScreen
-                        open={settingsDialog.open}
-
-                        user={user}
-                        isPerformingAuthAction={isPerformingAuthAction}
-                        isVerifyingEmailAddress={isVerifyingEmailAddress}
-                        colors={colors}
-                        types={types}
-                        primaryColor={primaryColor}
-                        secondaryColor={secondaryColor}
-                        type={type}
-                        defaultTheme={defaultTheme}
-
-                        onClose={this.closeSettingsDialog}
-                        onAddAvatarClick={this.openAddAvatarDialog}
-                        onChangeAvatarClick={this.openChangeAvatarDialog}
-                        onAddDisplayNameClick={this.openAddDisplayNameDialog}
-                        onChangeDisplayNameClick={this.openChangeDisplayNameDialog}
-                        onAddEmailAddressClick={this.openAddEmailAddressDialog}
-                        onVerifyEmailAddressClick={this.verifyEmailAddress}
-                        onPrimaryColorChange={this.changePrimaryColor}
-                        onSecondaryColorChange={this.changeSecondaryColor}
-                        onTypeChange={this.changeType}
-                        onResetClick={this.resetTheme}
-                      />
-                    </Hidden>
-
-                    <Hidden only="xs">
                       <InputDialog
                         open={addAvatarDialog.open}
 
@@ -1503,47 +1450,7 @@ class App extends Component {
                         onCancelClick={this.closeAddAvatarDialog}
                         onOkClick={this.addAvatar}
                       />
-                    </Hidden>
 
-                    <Hidden only={['sm', 'md', 'lg', 'xl']}>
-                      <InputDialog
-                        fullScreen
-                        open={addAvatarDialog.open}
-
-                        title="Add avatar"
-                        contentText="Your avatar is used to represent you. It's visible to other users and can be changed any time."
-                        textField={
-                          <TextField
-                            autoComplete="photo"
-                            autoFocus
-                            error={!!(addAvatarDialog.errors && addAvatarDialog.errors.avatar)}
-                            fullWidth
-                            helperText={(addAvatarDialog.errors && addAvatarDialog.errors.avatar) ? addAvatarDialog.errors.avatar[0] : ''}
-                            margin="normal"
-                            onChange={this.handleAvatarChange}
-                            placeholder="Avatar URL"
-                            required
-                            type="url"
-                            value={avatar}
-                          />
-                        }
-                        okText="Add"
-                        disableOkButton={!avatar || isPerformingAuthAction}
-                        highlightOkButton
-
-                        onClose={this.closeAddAvatarDialog}
-                        onExited={() => {
-                          this.setState({
-                            avatar: ''
-                          });
-                        }}
-
-                        onCancelClick={this.closeAddAvatarDialog}
-                        onOkClick={this.addAvatar}
-                      />
-                    </Hidden>
-
-                    <Hidden only="xs">
                       <InputDialog
                         open={changeAvatarDialog.open}
 
@@ -1578,47 +1485,7 @@ class App extends Component {
                         onCancelClick={this.closeChangeAvatarDialog}
                         onOkClick={this.changeAvatar}
                       />
-                    </Hidden>
 
-                    <Hidden only={['sm', 'md', 'lg', 'xl']}>
-                      <InputDialog
-                        fullScreen
-                        open={changeAvatarDialog.open}
-
-                        title="Change avatar"
-                        contentText="Your avatar is used to represent you. It's visible to other users and can be changed any time."
-                        textField={
-                          <TextField
-                            autoComplete="photo"
-                            autoFocus
-                            error={!!(changeAvatarDialog.errors && changeAvatarDialog.errors.avatar)}
-                            fullWidth
-                            helperText={(changeAvatarDialog.errors && changeAvatarDialog.errors.avatar) ? changeAvatarDialog.errors.avatar[0] : ''}
-                            margin="normal"
-                            onChange={this.handleAvatarChange}
-                            placeholder={user.photoURL}
-                            required
-                            type="url"
-                            value={avatar}
-                          />
-                        }
-                        okText="Change"
-                        disableOkButton={!avatar || isPerformingAuthAction}
-                        highlightOkButton
-
-                        onClose={this.closeChangeAvatarDialog}
-                        onExited={() => {
-                          this.setState({
-                            avatar: ''
-                          });
-                        }}
-
-                        onCancelClick={this.closeChangeAvatarDialog}
-                        onOkClick={this.changeAvatar}
-                      />
-                    </Hidden>
-
-                    <Hidden only="xs">
                       <InputDialog
                         open={addDisplayNameDialog.open}
 
@@ -1653,47 +1520,7 @@ class App extends Component {
                         onCancelClick={this.closeAddDisplayNameDialog}
                         onOkClick={this.addDisplayName}
                       />
-                    </Hidden>
 
-                    <Hidden only={['sm', 'md', 'lg', 'xl']}>
-                      <InputDialog
-                        fullScreen
-                        open={addDisplayNameDialog.open}
-
-                        title="Add display name"
-                        contentText="Your display name is used to represent you. It's visible to other users and can be changed any time."
-                        textField={
-                          <TextField
-                            autoComplete="name"
-                            autoFocus
-                            error={!!(addDisplayNameDialog.errors && addDisplayNameDialog.errors.displayName)}
-                            fullWidth
-                            helperText={(addDisplayNameDialog.errors && addDisplayNameDialog.errors.displayName) ? addDisplayNameDialog.errors.displayName[0] : ''}
-                            margin="normal"
-                            onChange={this.handleDisplayNameChange}
-                            placeholder="Display name"
-                            required
-                            type="text"
-                            value={displayName}
-                          />
-                        }
-                        okText="Add"
-                        disableOkButton={!displayName || isPerformingAuthAction}
-                        highlightOkButton
-
-                        onClose={this.closeAddDisplayNameDialog}
-                        onExited={() => {
-                          this.setState({
-                            displayName: ''
-                          });
-                        }}
-
-                        onCancelClick={this.closeAddDisplayNameDialog}
-                        onOkClick={this.addDisplayName}
-                      />
-                    </Hidden>
-
-                    <Hidden only="xs">
                       <InputDialog
                         open={changeDisplayNameDialog.open}
 
@@ -1728,47 +1555,7 @@ class App extends Component {
                         onCancelClick={this.closeChangeDisplayNameDialog}
                         onOkClick={this.changeDisplayName}
                       />
-                    </Hidden>
 
-                    <Hidden only={['sm', 'md', 'lg', 'xl']}>
-                      <InputDialog
-                        fullScreen
-                        open={changeDisplayNameDialog.open}
-
-                        title="Change display name"
-                        contentText="Your display name is used to represent you. It's visible to other users and can be changed any time."
-                        textField={
-                          <TextField
-                            autoComplete="name"
-                            autoFocus
-                            error={!!(changeDisplayNameDialog.errors && changeDisplayNameDialog.errors.displayName)}
-                            fullWidth
-                            helperText={(changeDisplayNameDialog.errors && changeDisplayNameDialog.errors.displayName) ? changeDisplayNameDialog.errors.displayName[0] : ''}
-                            margin="normal"
-                            onChange={this.handleDisplayNameChange}
-                            placeholder={user.displayName}
-                            required
-                            type="text"
-                            value={displayName}
-                          />
-                        }
-                        okText="Change"
-                        disableOkButton={!displayName || isPerformingAuthAction}
-                        highlightOkButton
-
-                        onClose={this.closeChangeDisplayNameDialog}
-                        onExited={() => {
-                          this.setState({
-                            displayName: ''
-                          });
-                        }}
-
-                        onCancelClick={this.closeChangeDisplayNameDialog}
-                        onOkClick={this.changeDisplayName}
-                      />
-                    </Hidden>
-
-                    <Hidden only="xs">
                       <InputDialog
                         open={addEmailAddressDialog.open}
 
@@ -1806,6 +1593,195 @@ class App extends Component {
                     </Hidden>
 
                     <Hidden only={['sm', 'md', 'lg', 'xl']}>
+                      <WelcomeDialog
+                        fullScreen
+                        open={welcomeDialog.open}
+
+                        title={settings.name}
+                        user={user}
+                        isPerformingAuthAction={isPerformingAuthAction}
+
+                        onClose={this.closeWelcomeDialog}
+
+                        onCancelClick={this.closeWelcomeDialog}
+                        onVerifyClick={() => {
+                          this.verifyEmailAddress(() => {
+                            this.closeWelcomeDialog()
+                          })
+                        }}
+                      />
+
+                      <SettingsDialog
+                        fullScreen
+                        open={settingsDialog.open}
+
+                        user={user}
+                        isPerformingAuthAction={isPerformingAuthAction}
+                        isVerifyingEmailAddress={isVerifyingEmailAddress}
+                        colors={colors}
+                        types={types}
+                        primaryColor={primaryColor}
+                        secondaryColor={secondaryColor}
+                        type={type}
+                        defaultTheme={defaultTheme}
+
+                        onClose={this.closeSettingsDialog}
+                        onAddAvatarClick={this.openAddAvatarDialog}
+                        onChangeAvatarClick={this.openChangeAvatarDialog}
+                        onAddDisplayNameClick={this.openAddDisplayNameDialog}
+                        onChangeDisplayNameClick={this.openChangeDisplayNameDialog}
+                        onAddEmailAddressClick={this.openAddEmailAddressDialog}
+                        onVerifyEmailAddressClick={this.verifyEmailAddress}
+                        onPrimaryColorChange={this.changePrimaryColor}
+                        onSecondaryColorChange={this.changeSecondaryColor}
+                        onTypeChange={this.changeType}
+                        onResetClick={this.resetTheme}
+                      />
+
+                      <InputDialog
+                        fullScreen
+                        open={addAvatarDialog.open}
+
+                        title="Add avatar"
+                        contentText="Your avatar is used to represent you. It's visible to other users and can be changed any time."
+                        textField={
+                          <TextField
+                            autoComplete="photo"
+                            autoFocus
+                            error={!!(addAvatarDialog.errors && addAvatarDialog.errors.avatar)}
+                            fullWidth
+                            helperText={(addAvatarDialog.errors && addAvatarDialog.errors.avatar) ? addAvatarDialog.errors.avatar[0] : ''}
+                            margin="normal"
+                            onChange={this.handleAvatarChange}
+                            placeholder="Avatar URL"
+                            required
+                            type="url"
+                            value={avatar}
+                          />
+                        }
+                        okText="Add"
+                        disableOkButton={!avatar || isPerformingAuthAction}
+                        highlightOkButton
+
+                        onClose={this.closeAddAvatarDialog}
+                        onExited={() => {
+                          this.setState({
+                            avatar: ''
+                          });
+                        }}
+
+                        onCancelClick={this.closeAddAvatarDialog}
+                        onOkClick={this.addAvatar}
+                      />
+
+                      <InputDialog
+                        fullScreen
+                        open={changeAvatarDialog.open}
+
+                        title="Change avatar"
+                        contentText="Your avatar is used to represent you. It's visible to other users and can be changed any time."
+                        textField={
+                          <TextField
+                            autoComplete="photo"
+                            autoFocus
+                            error={!!(changeAvatarDialog.errors && changeAvatarDialog.errors.avatar)}
+                            fullWidth
+                            helperText={(changeAvatarDialog.errors && changeAvatarDialog.errors.avatar) ? changeAvatarDialog.errors.avatar[0] : ''}
+                            margin="normal"
+                            onChange={this.handleAvatarChange}
+                            placeholder={user.photoURL}
+                            required
+                            type="url"
+                            value={avatar}
+                          />
+                        }
+                        okText="Change"
+                        disableOkButton={!avatar || isPerformingAuthAction}
+                        highlightOkButton
+
+                        onClose={this.closeChangeAvatarDialog}
+                        onExited={() => {
+                          this.setState({
+                            avatar: ''
+                          });
+                        }}
+
+                        onCancelClick={this.closeChangeAvatarDialog}
+                        onOkClick={this.changeAvatar}
+                      />
+
+                      <InputDialog
+                        fullScreen
+                        open={addDisplayNameDialog.open}
+
+                        title="Add display name"
+                        contentText="Your display name is used to represent you. It's visible to other users and can be changed any time."
+                        textField={
+                          <TextField
+                            autoComplete="name"
+                            autoFocus
+                            error={!!(addDisplayNameDialog.errors && addDisplayNameDialog.errors.displayName)}
+                            fullWidth
+                            helperText={(addDisplayNameDialog.errors && addDisplayNameDialog.errors.displayName) ? addDisplayNameDialog.errors.displayName[0] : ''}
+                            margin="normal"
+                            onChange={this.handleDisplayNameChange}
+                            placeholder="Display name"
+                            required
+                            type="text"
+                            value={displayName}
+                          />
+                        }
+                        okText="Add"
+                        disableOkButton={!displayName || isPerformingAuthAction}
+                        highlightOkButton
+
+                        onClose={this.closeAddDisplayNameDialog}
+                        onExited={() => {
+                          this.setState({
+                            displayName: ''
+                          });
+                        }}
+
+                        onCancelClick={this.closeAddDisplayNameDialog}
+                        onOkClick={this.addDisplayName}
+                      />
+
+                      <InputDialog
+                        fullScreen
+                        open={changeDisplayNameDialog.open}
+
+                        title="Change display name"
+                        contentText="Your display name is used to represent you. It's visible to other users and can be changed any time."
+                        textField={
+                          <TextField
+                            autoComplete="name"
+                            autoFocus
+                            error={!!(changeDisplayNameDialog.errors && changeDisplayNameDialog.errors.displayName)}
+                            fullWidth
+                            helperText={(changeDisplayNameDialog.errors && changeDisplayNameDialog.errors.displayName) ? changeDisplayNameDialog.errors.displayName[0] : ''}
+                            margin="normal"
+                            onChange={this.handleDisplayNameChange}
+                            placeholder={user.displayName}
+                            required
+                            type="text"
+                            value={displayName}
+                          />
+                        }
+                        okText="Change"
+                        disableOkButton={!displayName || isPerformingAuthAction}
+                        highlightOkButton
+
+                        onClose={this.closeChangeDisplayNameDialog}
+                        onExited={() => {
+                          this.setState({
+                            displayName: ''
+                          });
+                        }}
+
+                        onCancelClick={this.closeChangeDisplayNameDialog}
+                        onOkClick={this.changeDisplayName}
+                      />
+
                       <InputDialog
                         fullScreen
                         open={addEmailAddressDialog.open}
@@ -1873,24 +1849,7 @@ class App extends Component {
                         onClose={this.closeSignUpDialog}
                         onAuthProviderClick={this.signInWithProvider}
                       />
-                    </Hidden>
 
-                    <Hidden only={['sm', 'md', 'lg', 'xl']}>
-                      <SignUpDialog
-                        fullScreen
-                        open={signUpDialog.open}
-
-                        isPerformingAuthAction={isPerformingAuthAction}
-                        constraints={constraints.signUp}
-
-                        signUp={this.signUp}
-
-                        onClose={this.closeSignUpDialog}
-                        onAuthProviderClick={this.signInWithProvider}
-                      />
-                    </Hidden>
-
-                    <Hidden only="xs">
                       <SignInDialog
                         open={signInDialog.open}
 
@@ -1906,6 +1865,19 @@ class App extends Component {
                     </Hidden>
 
                     <Hidden only={['sm', 'md', 'lg', 'xl']}>
+                      <SignUpDialog
+                        fullScreen
+                        open={signUpDialog.open}
+
+                        isPerformingAuthAction={isPerformingAuthAction}
+                        constraints={constraints.signUp}
+
+                        signUp={this.signUp}
+
+                        onClose={this.closeSignUpDialog}
+                        onAuthProviderClick={this.signInWithProvider}
+                      />
+
                       <SignInDialog
                         fullScreen
                         open={signInDialog.open}
