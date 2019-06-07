@@ -27,7 +27,7 @@ import AccessTimeIcon from '@material-ui/icons/AccessTime';
 
 import Profile from '../../layout/Profile';
 
-import ConfirmationDialog from '../../dialogs/ConfirmationDialog';
+import ConfirmationDialog from '../../dialogs/ConfirmationDialog/ConfirmationDialog';
 
 const styles = (theme) => ({
   root: {

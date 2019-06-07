@@ -49,7 +49,7 @@ import ResetPasswordDialog from './dialogs/ResetPasswordDialog';
 import WelcomeDialog from './dialogs/WelcomeDialog';
 import SettingsDialog from './dialogs/SettingsDialog';
 import InputDialog from './dialogs/InputDialog';
-import ConfirmationDialog from './dialogs/ConfirmationDialog';
+import ConfirmationDialog from './dialogs/ConfirmationDialog/ConfirmationDialog';
 
 /**
  * Firebase
