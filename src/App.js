@@ -46,7 +46,7 @@ import NotFoundContent from './content/NotFoundContent/NotFoundContent';
 import SignUpDialog from './dialogs/SignUpDialog/SignUpDialog';
 import SignInDialog from './dialogs/SignInDialog/SignInDialog';
 import ResetPasswordDialog from './dialogs/ResetPasswordDialog/ResetPasswordDialog';
-import WelcomeDialog from './dialogs/WelcomeDialog';
+import WelcomeDialog from './dialogs/WelcomeDialog/WelcomeDialog';
 import SettingsDialog from './dialogs/SettingsDialog/SettingsDialog';
 import InputDialog from './dialogs/InputDialog/InputDialog';
 import ConfirmationDialog from './dialogs/ConfirmationDialog/ConfirmationDialog';
