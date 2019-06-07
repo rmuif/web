@@ -41,7 +41,7 @@ import LaunchScreen from './layout/LaunchScreen';
 import Bar from './layout/Bar';
 
 import HomeContent from './content/HomeContent/HomeContent';
-import NotFoundContent from './content/NotFoundContent';
+import NotFoundContent from './content/NotFoundContent/NotFoundContent';
 
 import SignUpDialog from './dialogs/SignUpDialog';
 import SignInDialog from './dialogs/SignInDialog';
