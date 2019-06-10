@@ -83,14 +83,14 @@ The sample app uses a blue and red color combination with a light theme type. Wh
 ```js
 theme: {
   primaryColor: {
-    name: 'your-primary-color',
-    import: yourPrimaryColor
+    name: 'YOUR_PRIMARY_COLOR',
+    import: YOUR_PRIMARY_COLOR
   },
   secondaryColor: {
-    name: 'your-secondary-color',
-    import: yourSecondaryColor
+    name: 'YOUR_SECONDARY_COLOR',
+    import: YOUR_SECONDARY_COLOR
   },
-  type: 'your-type'
+  type: 'YOUR_TYPE'
 }
 ```
 
