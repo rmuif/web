@@ -100,25 +100,25 @@ Available colors:
 
 |Name|Import|
 |---|---|
-|'red'|red|
-|'pink'|pink|
-|'purple'|purple|
-|'deep-purple'|deepPurple|
-|'indigo'|indigo|
-|'blue'|blue|
-|'light-blue'|lightBlue|
-|'cyan'|cyan|
-|'teal'|teal|
-|'green'|green|
-|'light-green'|lightGreen|
-|'lime'|lime|
-|'yellow'|yellow|
-|'amber'|amber|
-|'orange'|orange|
-|'deep-orange'|deepOrange|
-|'brown'|brown|
-|'gray'|gray|
-|'blue-gray'|blueGray|
+|`'red'`|`red`|
+|`'pink'`|`pink`|
+|`'purple'`|`purple`|
+|`'deep-purple'`|`deepPurple`|
+|`'indigo'`|`indigo`|
+|`'blue'`|`blue`|
+|`'light-blue'`|`lightBlue`|
+|`'cyan'`|`cyan`|
+|`'teal'`|`teal`|
+|`'green'`|`green`|
+|`'light-green'`|`lightGreen`|
+|`'lime'`|`lime`|
+|`'yellow'`|`yellow`|
+|`'amber'`|`amber`|
+|`'orange'`|`orange`|
+|`'deep-orange'`|`deepOrange`|
+|`'brown'`|`brown`|
+|`'gray'`|`gray`|
+|`'blue-gray'`|`blueGray`|
 
 Available types:
 
