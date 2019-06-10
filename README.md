@@ -52,9 +52,8 @@ Making this boilerplate your starting-point requires you changing its name and U
 - public/manifest.json
   - `short_name`
   - `name`
-- src/App/App.js
-  - `settings`
-    - `name`
+- src/settings.js
+  - `title`
 - package.json
   - `name`
   - `homepage`
@@ -63,10 +62,10 @@ Making this boilerplate your starting-point requires you changing its name and U
 
 By default, React + Material-UI + Firebase uses a demo Firebase project which you can't manage. You need to create a new Firebase project and replace the credentials with your own. You shouldn't use the demo project for anything more than testing as you have no control over it.
 
-When you've created a Firebase project you can copy-paste your credentials into the `config` object in `src/App/App.js`:
+When you've created a Firebase project you can copy-paste your credentials into the `firebase` object in `src/settings.js`:
 
 ```js
-const config = {
+firebase: {
   apiKey: 'YOUR_API_KEY',
   authDomain: 'YOUR_AUTH_DOMAIN',
   databaseURL: 'YOUR_DATABASE_URL',
@@ -74,52 +73,52 @@ const config = {
   storageBucket: 'YOUR_STORAGE_BUCKET',
   messagingSenderId: 'YOUR_MESSAGING_SENDER_ID',
   appId: 'YOUR_APP_ID'
-};
+}
 ```
 
 ### Changing the Default Theme
 
-The sample app uses a blue and red color combination with a light theme type. When a user changes the theme, a local storage object will be created and read on startup. You can change the default theme, which is the theme all users will see before changing it themselves, in `src/App/App.js`:
+The sample app uses a blue and red color combination with a light theme type. When a user changes the theme, a local storage object will be created and read on startup. You can change the default theme, which is the theme all users will see before changing it themselves, in `src/settings.js`:
 
 ```js
-const defaultTheme = {
-  primaryColor: 'your-primary-color',
-  secondaryColor: 'your-secondary-color',
+theme: {
+  primaryColor: {
+    name: 'your-primary-color',
+    import: yourPrimaryColor
+  },
+  secondaryColor: {
+    name: 'your-secondary-color',
+    import: yourSecondaryColor
+  },
   type: 'your-type'
-};
-
-let theme = createMuiTheme({
-  palette: {
-    primary: yourPrimaryColor,
-    secondary: yourSecondaryColor,
-    type: type
-  }
-});
+}
 ```
 
-Remember to follow the proper casing for color names, there are 2 variants: color strings and color imports. Color strings are within quotes and follow `kebab-case` and imports are ES6 classes and are written in `camelCase`.
+Remember to follow the proper casing for colors, there are 2 variants: color names and color imports. Color names are within single-quotes and follow `kebab-case` and imports are ES6 classes written in `camelCase`.
 
 Available colors:
 
-- `red`
-- `pink`
-- `purple`
-- `deepPurple`
-- `indigo`
-- `blue`
-- `lightBlue`
-- `cyan`
-- `teal`
-- `green`
-- `lightGreen`
-- `lime`
-- `yellow`
-- `amber`
-- `orange`
-- `deepOrange`
-- `brown`
-- `gray`
-- `blueGray`
+|Name|Import|
+|---|---|
+|'red'|red|
+|'pink'|pink|
+|'purple'|purple|
+|'deep-purple'|deepPurple|
+|'indigo'|indigo|
+|'blue'|blue|
+|'light-blue'|lightBlue|
+|'cyan'|cyan|
+|'teal'|teal|
+|'green'|green|
+|'light-green'|lightGreen|
+|'lime'|lime|
+|'yellow'|yellow|
+|'amber'|amber|
+|'orange'|orange|
+|'deep-orange'|deepOrange|
+|'brown'|brown|
+|'gray'|gray|
+|'blue-gray'|blueGray|
 
 Available types:
 

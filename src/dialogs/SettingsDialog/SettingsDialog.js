@@ -78,7 +78,6 @@ class SettingsDialog extends Component {
       isPerformingAuthAction,
       isVerifyingEmailAddress,
       colors,
-      types,
       primaryColor,
       secondaryColor,
       type,
@@ -105,8 +104,8 @@ class SettingsDialog extends Component {
 
     if (defaultTheme) {
       hasDeviatedFromDefaultSettings = (
-        primaryColor !== defaultTheme.primaryColor ||
-        secondaryColor !== defaultTheme.secondaryColor ||
+        primaryColor !== defaultTheme.primaryColor.name ||
+        secondaryColor !== defaultTheme.secondaryColor.name ||
         type !== defaultTheme.type
       );
     }
@@ -139,7 +138,6 @@ class SettingsDialog extends Component {
             {selectedTab === 1 &&
               <AppearanceTab
                 colors={colors}
-                types={types}
                 primaryColor={primaryColor}
                 secondaryColor={secondaryColor}
                 type={type}
@@ -166,7 +164,6 @@ class SettingsDialog extends Component {
 
               <AppearanceTab
                 colors={colors}
-                types={types}
                 primaryColor={primaryColor}
                 secondaryColor={secondaryColor}
                 type={type}
@@ -219,7 +216,6 @@ SettingsDialog.propTypes = {
   isPerformingAuthAction: PropTypes.bool.isRequired,
   isVerifyingEmailAddress: PropTypes.bool.isRequired,
   colors: PropTypes.array.isRequired,
-  types: PropTypes.array.isRequired,
   primaryColor: PropTypes.string.isRequired,
   secondaryColor: PropTypes.string.isRequired,
   type: PropTypes.string.isRequired,
