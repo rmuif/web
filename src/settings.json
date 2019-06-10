@@ -1,0 +1,121 @@
+{
+  "title": "React + Material-UI + Firebase",
+
+  "credentials": {
+    "firebase": {
+      "apiKey": "AIzaSyDYZOrZVpXkPQD6J31mb9t2eIIxmGEJK-Q",
+      "authDomain": "react-material-ui-firebase.firebaseapp.com",
+      "databaseURL": "https://react-material-ui-firebase.firebaseio.com",
+      "projectId": "react-material-ui-firebase",
+      "storageBucket": "react-material-ui-firebase.appspot.com",
+      "messagingSenderId": "552659850812",
+      "appId": "1:552659850812:web:d685f74f72161d96"
+    }
+  },
+
+  "constraints": {
+    "signUp": {
+      "emailAddress": {
+        "email": true,
+        "presence": {
+          "allowEmpty": false
+        }
+      },
+
+      "password": {
+        "length": {
+          "minimum": 6
+        },
+        "presence": {
+          "allowEmpty": false
+        }
+      },
+
+      "passwordConfirmation": {
+        "equality": "password",
+        "length": {
+          "minimum": 6
+        },
+        "presence": {
+          "allowEmpty": false
+        }
+      }
+    },
+
+    "signIn": {
+      "emailAddress": {
+        "email": true,
+        "presence": {
+          "allowEmpty": false
+        }
+      },
+
+      "password": {
+        "length": {
+          "minimum": 6
+        },
+        "presence": {
+          "allowEmpty": false
+        }
+      }
+    },
+
+    "resetPassword": {
+      "emailAddress": {
+        "email": true,
+        "presence": {
+          "allowEmpty": false
+        }
+      }
+    },
+
+    "addAvatar": {
+      "avatar": {
+        "presence": {
+          "allowEmpty": false
+        },
+
+        "url": {
+          "message": "^Avatar URL is not a valid URL"
+        }
+      }
+    },
+
+    "changeAvatar": {
+      "avatar": {
+        "presence": {
+          "allowEmpty": false
+        },
+
+        "url": {
+          "message": "^Avatar URL is not a valid URL"
+        }
+      }
+    },
+
+    "addDisplayName": {
+      "displayName": {
+        "presence": {
+          "allowEmpty": false
+        }
+      }
+    },
+
+    "changeDisplayName": {
+      "displayName": {
+        "presence": {
+          "allowEmpty": false
+        }
+      }
+    },
+
+    "addEmailAddress": {
+      "emailAddress": {
+        "email": true,
+        "presence": {
+          "allowEmpty": false
+        }
+      }
+    }
+  }
+}
