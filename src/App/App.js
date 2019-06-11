@@ -1,40 +1,28 @@
+// React
 import React, { Component } from 'react';
 
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
+// validate.js
 import validate from 'validate.js';
 
+// Firebase
 import firebase from 'firebase/app';
 import 'firebase/auth';
 import 'firebase/performance';
 
 import readingTime from 'reading-time';
 
-import red from '@material-ui/core/colors/red';
-import pink from '@material-ui/core/colors/pink';
-import purple from '@material-ui/core/colors/purple';
-import deepPurple from '@material-ui/core/colors/deepPurple';
-import indigo from '@material-ui/core/colors/indigo';
-import blue from '@material-ui/core/colors/blue';
-import lightBlue from '@material-ui/core/colors/lightBlue';
-import cyan from '@material-ui/core/colors/cyan';
-import teal from '@material-ui/core/colors/teal';
-import green from '@material-ui/core/colors/green';
-import lightGreen from '@material-ui/core/colors/lightGreen';
-import lime from '@material-ui/core/colors/lime';
-import yellow from '@material-ui/core/colors/yellow';
-import amber from '@material-ui/core/colors/amber';
-import orange from '@material-ui/core/colors/orange';
-import deepOrange from '@material-ui/core/colors/deepOrange';
-import brown from '@material-ui/core/colors/brown';
-import gray from '@material-ui/core/colors/grey';
-import blueGray from '@material-ui/core/colors/blueGrey';
-
+// Material-UI
 import { createMuiTheme, MuiThemeProvider } from '@material-ui/core/styles';
 
 import Hidden from '@material-ui/core/Hidden';
 import TextField from '@material-ui/core/TextField';
 import Snackbar from '@material-ui/core/Snackbar';
+
+// Custom
+import colors from '../colors';
+import settings from '../settings';
 
 import LaunchScreen from '../layout/LaunchScreen/LaunchScreen';
 
@@ -51,261 +39,22 @@ import SettingsDialog from '../dialogs/SettingsDialog/SettingsDialog';
 import InputDialog from '../dialogs/InputDialog/InputDialog';
 import ConfirmationDialog from '../dialogs/ConfirmationDialog/ConfirmationDialog';
 
-/**
- * Firebase
- */
-
-const config = {
-  apiKey: 'AIzaSyDYZOrZVpXkPQD6J31mb9t2eIIxmGEJK-Q',
-  authDomain: 'react-material-ui-firebase.firebaseapp.com',
-  databaseURL: 'https://react-material-ui-firebase.firebaseio.com',
-  projectId: 'react-material-ui-firebase',
-  storageBucket: 'react-material-ui-firebase.appspot.com',
-  messagingSenderId: '552659850812',
-  appId: '1:552659850812:web:d685f74f72161d96'
-};
-
-firebase.initializeApp(config);
+firebase.initializeApp(settings.credentials.firebase);
 
 const auth = firebase.auth();
 
 // eslint-disable-next-line no-unused-vars
 const performance = firebase.performance();
 
-/**
- * Theming
- */
-
-const colors = [
-  {
-    id: 'red',
-    name: 'Red',
-    import: red
-  },
-  {
-    id: 'pink',
-    name: 'Pink',
-    import: pink
-  },
-  {
-    id: 'purple',
-    name: 'Purple',
-    import: purple
-  },
-  {
-    id: 'deep-purple',
-    name: 'Deep Purple',
-    import: deepPurple
-  },
-  {
-    id: 'indigo',
-    name: 'Indigo',
-    import: indigo
-  },
-  {
-    id: 'blue',
-    name: 'Blue',
-    import: blue
-  },
-  {
-    id: 'light-blue',
-    name: 'Light Blue',
-    import: lightBlue
-  },
-  {
-    id: 'cyan',
-    name: 'Cyan',
-    import: cyan
-  },
-  {
-    id: 'teal',
-    name: 'Teal',
-    import: teal
-  },
-  {
-    id: 'green',
-    name: 'Green',
-    import: green
-  },
-  {
-    id: 'light-green',
-    name: 'Light Green',
-    import: lightGreen
-  },
-  {
-    id: 'lime',
-    name: 'Lime',
-    import: lime
-  },
-  {
-    id: 'yellow',
-    name: 'Yellow',
-    import: yellow
-  },
-  {
-    id: 'amber',
-    name: 'Amber',
-    import: amber
-  },
-  {
-    id: 'orange',
-    name: 'Orange',
-    import: orange
-  },
-  {
-    id: 'deep-orange',
-    name: 'Deep Orange',
-    import: deepOrange
-  },
-  {
-    id: 'brown',
-    name: 'Brown',
-    import: brown
-  },
-  {
-    id: 'gray',
-    name: 'Gray',
-    import: gray
-  },
-  {
-    id: 'blue-gray',
-    name: 'Blue Gray',
-    import: blueGray
-  }
-];
-
-const types = [
-  'light',
-  'dark'
-];
-
-const defaultTheme = {
-  primaryColor: 'blue',
-  secondaryColor: 'red',
-  type: 'light'
-};
+auth.useDeviceLanguage();
 
 let theme = createMuiTheme({
   palette: {
-    primary: blue,
-    secondary: red,
-    type: 'light'
+    primary: settings.theme.primaryColor.import,
+    secondary: settings.theme.secondaryColor.import,
+    type: settings.theme.type
   }
 });
-
-/**
- * Settings
- */
-
-const settings = {
-  name: 'React + Material-UI + Firebase'
-};
-
-const constraints = {
-  signUp: {
-    emailAddress: {
-      email: true,
-      presence: {
-        allowEmpty: false
-      }
-    },
-
-    password: {
-      length: {
-        minimum: 6
-      },
-      presence: {
-        allowEmpty: false
-      }
-    },
-
-    passwordConfirmation: {
-      equality: 'password',
-      length: {
-        minimum: 6
-      },
-      presence: {
-        allowEmpty: false
-      }
-    }
-  },
-
-  signIn: {
-    emailAddress: {
-      email: true,
-      presence: {
-        allowEmpty: false
-      }
-    },
-
-    password: {
-      length: {
-        minimum: 6
-      },
-      presence: {
-        allowEmpty: false
-      }
-    }
-  },
-
-  resetPassword: {
-    emailAddress: {
-      email: true,
-      presence: {
-        allowEmpty: false
-      }
-    }
-  },
-
-  addAvatar: {
-    avatar: {
-      presence: {
-        allowEmpty: false
-      },
-
-      url: {
-        message: "^Avatar URL is not a valid URL"
-      }
-    }
-  },
-
-  changeAvatar: {
-    avatar: {
-      presence: {
-        allowEmpty: false
-      },
-
-      url: {
-        message: "^Avatar URL is not a valid URL"
-      }
-    }
-  },
-
-  addDisplayName: {
-    displayName: {
-      presence: {
-        allowEmpty: false
-      }
-    }
-  },
-
-  changeDisplayName: {
-    displayName: {
-      presence: {
-        allowEmpty: false
-      }
-    }
-  },
-
-  addEmailAddress: {
-    emailAddress: {
-      email: true,
-      presence: {
-        allowEmpty: false
-      }
-    }
-  },
-};
 
 class App extends Component {
   _isMounted = false;
@@ -314,9 +63,9 @@ class App extends Component {
     super(props);
 
     this.state = {
-      primaryColor: defaultTheme.primaryColor,
-      secondaryColor: defaultTheme.secondaryColor,
-      type: defaultTheme.type,
+      primaryColor: settings.theme.primaryColor.name,
+      secondaryColor: settings.theme.secondaryColor.name,
+      type: settings.theme.type,
 
       isAuthReady: false,
       isPerformingAuthAction: false,
@@ -390,12 +139,6 @@ class App extends Component {
     };
   }
 
-  /**
-   * Creates a new user account associated with the specified email address and password.
-   * @param emailAddress
-   * @param password
-   * @param passwordConfirmation
-   */
   signUp = (emailAddress, password, passwordConfirmation) => {
     if (this.state.isSignedIn) {
       return;
@@ -409,7 +152,7 @@ class App extends Component {
       emailAddress,
       password,
       passwordConfirmation
-    }, constraints.signUp);
+    }, settings.constraints.signUp);
 
     if (errors) {
       return;
@@ -446,11 +189,6 @@ class App extends Component {
     });
   };
 
-  /**
-   * Asynchronously signs in using an email and password.
-   * @param emailAddress
-   * @param password
-   */
   signIn = (emailAddress, password) => {
     if (this.state.isSignedIn) {
       return;
@@ -463,7 +201,7 @@ class App extends Component {
     const errors = validate({
       emailAddress,
       password,
-    }, constraints.signIn);
+    }, settings.constraints.signIn);
 
     if (errors) {
       return;
@@ -504,10 +242,6 @@ class App extends Component {
     });
   };
 
-  /**
-   * Authenticates a Firebase client using a popup-based OAuth authentication flow.
-   * @param provider
-   */
   signInWithProvider = (provider) => {
     if (this.state.isSignedIn) {
       return;
@@ -558,10 +292,6 @@ class App extends Component {
     });
   };
 
-  /**
-   * Sends a password reset email to the given email address.
-   * @param emailAddress
-   */
   resetPassword = (emailAddress) => {
     if (this.state.isSignedIn) {
       return;
@@ -573,7 +303,7 @@ class App extends Component {
 
     const errors = validate({
       emailAddress
-    }, constraints.resetPassword);
+    }, settings.constraints.resetPassword);
 
     if (errors) {
       return;
@@ -613,9 +343,6 @@ class App extends Component {
     });
   };
 
-  /**
-   * Sets an avatar.
-   */
   addAvatar = () => {
     const { user, isSignedIn, avatar } = this.state;
 
@@ -627,7 +354,7 @@ class App extends Component {
       return;
     }
 
-    const errors = validate({ avatar }, constraints.addAvatar);
+    const errors = validate({ avatar }, settings.constraints.addAvatar);
 
     if (errors) {
       this.setState((state) => ({
@@ -664,9 +391,6 @@ class App extends Component {
     });
   };
 
-  /**
-   * Changes the current avatar.
-   */
   changeAvatar = () => {
     const { user, isSignedIn, avatar } = this.state;
 
@@ -674,7 +398,7 @@ class App extends Component {
       return;
     }
 
-    const errors = validate({ avatar }, constraints.changeAvatar);
+    const errors = validate({ avatar }, settings.constraints.changeAvatar);
 
     if (errors) {
       this.setState((state) => ({
@@ -717,9 +441,6 @@ class App extends Component {
     });
   };
 
-  /**
-   * Sets a display name.
-   */
   addDisplayName = () => {
     const { user, isSignedIn, displayName } = this.state;
 
@@ -731,7 +452,7 @@ class App extends Component {
       return;
     }
 
-    const errors = validate({ displayName }, constraints.addDisplayName);
+    const errors = validate({ displayName }, settings.constraints.addDisplayName);
 
     if (errors) {
       this.setState((state) => ({
@@ -768,9 +489,6 @@ class App extends Component {
     });
   };
 
-  /**
-   * Changes the current display name.
-   */
   changeDisplayName = () => {
     const { user, isSignedIn, displayName } = this.state;
 
@@ -778,7 +496,7 @@ class App extends Component {
       return;
     }
 
-    const errors = validate({ displayName }, constraints.changeDisplayName);
+    const errors = validate({ displayName }, settings.constraints.changeDisplayName);
 
     if (errors) {
       this.setState((state) => ({
@@ -821,9 +539,6 @@ class App extends Component {
     });
   };
 
-  /**
-   * Sets an e-mail address.
-   */
   addEmailAddress = () => {
     const { user, isSignedIn, emailAddress } = this.state;
 
@@ -835,7 +550,7 @@ class App extends Component {
       return;
     }
 
-    const errors = validate({ emailAddress }, constraints.addEmailAddress);
+    const errors = validate({ emailAddress }, settings.constraints.addEmailAddress);
 
     if (errors) {
       this.setState((state) => ({
@@ -872,9 +587,6 @@ class App extends Component {
     });
   };
 
-  /**
-   * Sends a verification email to a user.
-   */
   verifyEmailAddress = (callback) => {
     const { user, isSignedIn } = this.state;
 
@@ -922,9 +634,6 @@ class App extends Component {
     });
   };
 
-  /**
-   * Signs out the current user.
-   */
   signOut = () => {
     if (!this.state.isSignedIn) {
       return;
@@ -954,12 +663,6 @@ class App extends Component {
     });
   };
 
-  /**
-   * Changes the current theme. Theme is applied in real-time.
-   * @param palette
-   * @param removeLocalStorage
-   * @param callback
-   */
   updateTheme = (palette, removeLocalStorage, callback) => {
     const { primaryColor, secondaryColor, type } = this.state;
 
@@ -1004,14 +707,11 @@ class App extends Component {
     });
   };
 
-  /**
-   * Resets the current theme to the default one.
-   */
   resetTheme = () => {
     this.updateTheme({
-      primaryColor: defaultTheme.primaryColor,
-      secondaryColor: defaultTheme.secondaryColor,
-      type: defaultTheme.type
+      primaryColor: settings.theme.primaryColor.name,
+      secondaryColor: settings.theme.secondaryColor.name,
+      type: settings.theme.type
     }, true, () => {
       this.openSnackbar('Settings reset');
     });
@@ -1279,9 +979,6 @@ class App extends Component {
     this.setState({ emailAddress });
   };
 
-  /**
-   * Opens a snackbar. Snackbars provide brief messages about app processes through a message.
-   */
   openSnackbar = (message) => {
     this.setState({
       snackbar: {
@@ -1292,10 +989,6 @@ class App extends Component {
     });
   };
 
-  /**
-   * Sets the `open` state of a snackbar to `false`. A direct response to the snackbar's `onClose` event.
-   * @param clearMessage Whether or not to clear the message of the snackbar.
-   */
   closeSnackbar = (clearMessage = false) => {
     const { snackbar } = this.state;
 
@@ -1308,7 +1001,6 @@ class App extends Component {
   };
 
   render() {
-    // Properties
     const {
       primaryColor,
       secondaryColor,
@@ -1323,7 +1015,6 @@ class App extends Component {
       emailAddress
     } = this.state;
 
-    // Dialogs
     const {
       signUpDialog,
       signInDialog,
@@ -1351,7 +1042,7 @@ class App extends Component {
             {isAuthReady &&
               <React.Fragment>
                 <Bar
-                  name={settings.name}
+                  title={settings.title}
 
                   isSignedIn={isSignedIn}
                   isPerformingAuthAction={isPerformingAuthAction}
@@ -1366,7 +1057,7 @@ class App extends Component {
                 />
 
                 <Switch>
-                  <Route path="/" exact render={() => (<HomeContent isSignedIn={isSignedIn} title={settings.name} />)} />
+                  <Route path="/" exact render={() => (<HomeContent isSignedIn={isSignedIn} title={settings.title} />)} />
                   <Route component={NotFoundContent} />
                 </Switch>
 
@@ -1376,7 +1067,7 @@ class App extends Component {
                       <WelcomeDialog
                         open={welcomeDialog.open}
 
-                        title={settings.name}
+                        title={settings.title}
                         user={user}
                         isPerformingAuthAction={isPerformingAuthAction}
 
@@ -1397,11 +1088,10 @@ class App extends Component {
                         isPerformingAuthAction={isPerformingAuthAction}
                         isVerifyingEmailAddress={isVerifyingEmailAddress}
                         colors={colors}
-                        types={types}
                         primaryColor={primaryColor}
                         secondaryColor={secondaryColor}
                         type={type}
-                        defaultTheme={defaultTheme}
+                        defaultTheme={settings.theme}
 
                         onClose={this.closeSettingsDialog}
                         onAddAvatarClick={this.openAddAvatarDialog}
@@ -1597,7 +1287,7 @@ class App extends Component {
                         fullScreen
                         open={welcomeDialog.open}
 
-                        title={settings.name}
+                        title={settings.title}
                         user={user}
                         isPerformingAuthAction={isPerformingAuthAction}
 
@@ -1619,11 +1309,10 @@ class App extends Component {
                         isPerformingAuthAction={isPerformingAuthAction}
                         isVerifyingEmailAddress={isVerifyingEmailAddress}
                         colors={colors}
-                        types={types}
                         primaryColor={primaryColor}
                         secondaryColor={secondaryColor}
                         type={type}
-                        defaultTheme={defaultTheme}
+                        defaultTheme={settings.theme}
 
                         onClose={this.closeSettingsDialog}
                         onAddAvatarClick={this.openAddAvatarDialog}
@@ -1842,7 +1531,7 @@ class App extends Component {
                         open={signUpDialog.open}
 
                         isPerformingAuthAction={isPerformingAuthAction}
-                        constraints={constraints.signUp}
+                        constraints={settings.constraints.signUp}
 
                         signUp={this.signUp}
 
@@ -1854,7 +1543,7 @@ class App extends Component {
                         open={signInDialog.open}
 
                         isPerformingAuthAction={isPerformingAuthAction}
-                        constraints={constraints.signIn}
+                        constraints={settings.constraints.signIn}
 
                         signIn={this.signIn}
 
@@ -1870,7 +1559,7 @@ class App extends Component {
                         open={signUpDialog.open}
 
                         isPerformingAuthAction={isPerformingAuthAction}
-                        constraints={constraints.signUp}
+                        constraints={settings.constraints.signUp}
 
                         signUp={this.signUp}
 
@@ -1883,7 +1572,7 @@ class App extends Component {
                         open={signInDialog.open}
 
                         isPerformingAuthAction={isPerformingAuthAction}
-                        constraints={constraints.signIn}
+                        constraints={settings.constraints.signIn}
 
                         signIn={this.signIn}
 
@@ -1897,7 +1586,7 @@ class App extends Component {
                       open={resetPasswordDialog.open}
 
                       isPerformingAuthAction={isPerformingAuthAction}
-                      constraints={constraints.resetPassword}
+                      constraints={settings.constraints.resetPassword}
 
                       resetPassword={this.resetPassword}
 

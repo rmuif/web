@@ -11,7 +11,6 @@ it('renders without crashing', () => {
     (
       <AppearanceTab
         colors={[]}
-        types={[]}
         primaryColor=""
         secondaryColor=""
         type=""

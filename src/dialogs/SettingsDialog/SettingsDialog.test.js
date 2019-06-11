@@ -15,7 +15,6 @@ it('renders without crashing', () => {
         isPerformingAuthAction={false}
         isVerifyingEmailAddress={false}
         colors={[]}
-        types={[]}
         primaryColor=""
         secondaryColor=""
         type=""

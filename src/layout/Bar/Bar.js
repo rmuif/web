@@ -65,7 +65,7 @@ class Bar extends Component {
     const { classes } = this.props;
 
     // Properties
-    const { name, isPerformingAuthAction, isSignedIn, user } = this.props;
+    const { title, isPerformingAuthAction, isSignedIn, user } = this.props;
 
     // Events
     const { onSignUpClick, onSignInClick } = this.props;
@@ -75,7 +75,7 @@ class Bar extends Component {
     return (
       <AppBar color="primary" position="static">
         <Toolbar variant="regular">
-          <Typography style={{ flexGrow: 1 }} color="inherit" variant="h6">{name}</Typography>
+          <Typography style={{ flexGrow: 1 }} color="inherit" variant="h6">{title}</Typography>
 
           {isSignedIn &&
             <React.Fragment>
@@ -105,7 +105,7 @@ class Bar extends Component {
 Bar.propTypes = {
   classes: PropTypes.object.isRequired,
   
-  name: PropTypes.string.isRequired,
+  title: PropTypes.string.isRequired,
   isPerformingAuthAction: PropTypes.bool.isRequired,
   isSignedIn: PropTypes.bool.isRequired,
 
