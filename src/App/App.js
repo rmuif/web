@@ -49,7 +49,7 @@ let theme = createMuiTheme({
   palette: {
     primary: settings.theme.primaryColor.import,
     secondary: settings.theme.secondaryColor.import,
-    type: 'light'
+    type: settings.theme.type
   }
 });
 
