@@ -46,7 +46,6 @@ const auth = firebase.auth();
 // eslint-disable-next-line no-unused-vars
 const performance = firebase.performance();
 
-// Apply the default browser preference instead of explicitly setting it.
 auth.useDeviceLanguage();
 
 let theme = createMuiTheme({
