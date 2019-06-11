@@ -10,7 +10,7 @@ it('renders without crashing', () => {
   ReactDOM.render(
     (
       <Bar
-        name=""
+        title=""
         isPerformingAuthAction
         isSignedIn={false}
         onSettingsClick={() => {}}
