@@ -1,23 +1,27 @@
+// React
 import React, { Component } from 'react';
 
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
+// validate.js
 import validate from 'validate.js';
 
+// Firebase
 import firebase from 'firebase/app';
 import 'firebase/auth';
 import 'firebase/performance';
 
 import readingTime from 'reading-time';
 
+// Material-UI
 import { createMuiTheme, MuiThemeProvider } from '@material-ui/core/styles';
 
 import Hidden from '@material-ui/core/Hidden';
 import TextField from '@material-ui/core/TextField';
 import Snackbar from '@material-ui/core/Snackbar';
 
+// Custom
 import colors from '../colors';
-
 import settings from '../settings';
 
 import LaunchScreen from '../layout/LaunchScreen/LaunchScreen';
