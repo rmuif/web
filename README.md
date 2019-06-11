@@ -122,8 +122,8 @@ Available colors:
 
 Available types:
 
-- `light`
-- `dark`
+- `'light'`
+- `'dark'`
 
 ## Built with React + Material-UI + Firebase
 
