@@ -49,7 +49,7 @@ const settings = {
     }
   },
 
-  providers: [
+  authProviders: [
     'facebook',
     'github',
     'google',
