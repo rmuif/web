@@ -4,7 +4,9 @@ This project is an application skeleton for a typical [React](https://reactjs.or
 
 ## Features
 
-React + Material-UI + Firebase comes with a bunch of development and testing tools for instant web development gratification.
+The boilerplate comes with a bunch of development and testing tools for instant web development gratification:
+
+**React + Material-UI + Firebase**
 
 - Bootstrapped with Create React App, the same tooling works out-of-the-box
 - Scaffolding incorporates Google Material Design principles through Material-UI
@@ -12,40 +14,90 @@ React + Material-UI + Firebase comes with a bunch of development and testing too
 - Robust routing with React Router including error handling (404)
 - Extensive mobile support with [react-swipeable-views](https://react-swipeable-views.com) for tabs
 
-Want to see it in action? Take a look at the [demo](https://phoqe.me/react-material-ui-firebase).
+**Create React App**
+
+- React, JSX, ES6, TypeScript and Flow syntax support
+- Language extras beyond ES6 like the object spread operator
+- Autoprefixed CSS, so you don’t need `-webkit-` or other prefixes
+- A fast interactive unit test runner with built-in support for coverage reporting
+- A live development server that warns about common mistakes
+- A build script to bundle JS, CSS, and images for production, with hashes and sourcemaps
+- An offline-first [service worker](https://developers.google.com/web/fundamentals/getting-started/primers/service-workers) and a [web app manifest](https://developers.google.com/web/fundamentals/engage-and-retain/web-app-manifest/), meeting all the [Progressive Web App](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app) criteria (_Note: Using the service worker is opt-in as of `react-scripts@2.0.0` and higher_)
+- Hassle-free updates for the above tools with a single dependency
+
+Check out [this guide](https://github.com/nitishdayal/cra_closer_look) for an overview of how these tools fit together.
+
+The tradeoff is that **these tools are preconfigured to work in a specific way**. If your project needs more customization, you can ["eject"](https://facebook.github.io/create-react-app/docs/available-scripts#npm-run-eject) and customize it, but then you will need to maintain this configuration.
+
+## Demo
+
+https://phoqe.me/react-material-ui-firebase
 
 ## Getting Started
 
-**You'll need to have Node 8.10.0 or later on your local development machine** (but it's not required on the server).
-You can use [nvm](https://github.com/creationix/nvm#installation) (macOS/Linux) or [nvm-windows](https://github.com/coreybutler/nvm-windows#node-version-manager-nvm-for-windows) to easily switch Node versions between different projects.
+**You’ll need to have Node >= 8.10 on your local development machine** (but it’s not required on the server). You can use [nvm](https://github.com/creationix/nvm#installation) (macOS/Linux) or [nvm-windows](https://github.com/coreybutler/nvm-windows#node-version-manager-nvm-for-windows) to easily switch Node versions between different projects.
 
-### npm
+### Clone Repository
 
-```sh
-npm install
+The command `git clone` is a Git command line utility which is used to target an existing repository and create a clone, or copy of the target repository. Replace `<your-project-name>` with the name of your project or remove that part of the command if you want to use the `react-material-ui-firebase` name for your project directory.
+
+```
+git clone https://github.com/Phoqe/react-material-ui-firebase.git <your-project-name>
 ```
 
-### yarn
+### Install Dependencies
 
-```sh
+Use the `cd` command, also known as `chdir` (change directory) to change the current working directory to your newly cloned project. Again, change `<your-project-name>` to reflect the correct directory name for your project.
+
+```
+cd <your-app-name>
+```
+
+The command `yarn install` is used to install all dependencies for the project. You can also run `yarn` with no command will run `yarn install`, passing through any provided flags.
+
+```
 yarn install
 ```
 
-### Changing the Basename
+If you are used to using npm you might be expecting to use `--save` or
+`--save-dev` when adding new dependencies. These have been replaced by `yarn add` and `yarn add --dev`. For
+more information, see [the `yarn add` documentation](https://yarnpkg.com/en/docs/cli/add).
 
-If you receive a warning like:
+## Scripts
 
-```
-Warning: You are attempting to use a basename on a page whose URL path does not begin with the basename. Expected path "/" to begin with "/react-material-ui-firebase".
-```
+Inside the newly created project, you can run some built-in commands:
 
-You may need to adjust the router to use the correct basename. A basename is the base URL for all locations. In most cases you can just remove the `basename` attribute from the `<Router>` element in `src/App/App.js`.
+### `npm start` or `yarn start`
 
-If you're still having problems you can read more in [React Router's documentation](https://reacttraining.com/react-router/web/api/BrowserRouter/basename-string).
+Runs the app in development mode. Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+
+The page will automatically reload if you make changes to the code. You will see the build errors and lint warnings in the console.
+
+<p align='center'>
+  <img src='https://cdn.rawgit.com/marionebl/create-react-app/9f62826/screencast-error.svg' width='600' alt='Build errors'>
+</p>
+
+### `npm test` or `yarn test`
+
+Runs the test watcher in an interactive mode. By default, runs tests related to files changed since the last commit.
+
+[Read more about testing](https://facebook.github.io/create-react-app/docs/running-tests).
+
+### `npm run build` or `yarn build`
+
+Builds the app for production to the `build` folder. It correctly bundles React in production mode and optimizes the build for the best performance.
+
+The build is minified and the filenames include the hashes.
+
+Your app is ready to be deployed.
+
+## Configuration
+
+Making this boilerplate your starting-point requires you to configure some parts to tailor it to your needs.
 
 ### Changing the Name and URL
 
-Making this boilerplate your starting-point requires you changing its name and URL. There are 4 files you'll need to modify.
+There are 4 files you'll need to modify to change the name and URL:
 
 - public/index.html
   - `title`
@@ -57,6 +109,18 @@ Making this boilerplate your starting-point requires you changing its name and U
 - package.json
   - `name`
   - `homepage`
+
+### Changing the Basename
+
+If you receive a warning like:
+
+```
+Warning: You are attempting to use a basename on a page whose URL path does not begin with the basename. Expected path "/" to begin with "/react-material-ui-firebase".
+```
+
+You may need to adjust the router to use the correct basename. A basename is the base URL for all locations. In most cases you can just remove the `basename` attribute from the `<Router>` element in `src/App/App.js`.
+
+If you're still having problems you can read more on [React Router's documentation](https://reacttraining.com/react-router/web/api/BrowserRouter/basename-string).
 
 ### Replacing the Firebase Credentials
 
@@ -83,14 +147,14 @@ The sample app uses a blue and red color combination with a light theme type. Wh
 ```js
 theme: {
   primaryColor: {
-    name: 'YOUR_PRIMARY_COLOR',
-    import: YOUR_PRIMARY_COLOR
+    name: 'your-primary-color',
+    import: yourPrimaryColor
   },
   secondaryColor: {
-    name: 'YOUR_SECONDARY_COLOR',
-    import: YOUR_SECONDARY_COLOR
+    name: 'your-secondary-color',
+    import: yourSecondaryColor
   },
-  type: 'YOUR_TYPE'
+  type: 'your-type'
 }
 ```
 
@@ -125,79 +189,6 @@ Available types:
 - `'light'`
 - `'dark'`
 
-## Built with React + Material-UI + Firebase
+## License
 
-### [Sync](https://sync.phoqe.dev)
-
-Synchronize activities like watching YouTube or listening to Spotify with others, mainly friends or friends-to-be.
-
-####  Your project could be here...
-
-Are you using this project as a skeleton for your application? Don't hesitate adding it through a pull request.
-
-## Available Scripts
-
-In the project directory, you can run:
-
-### `npm start`
-
-Runs the app in the development mode.<br>
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
-
-The page will reload if you make edits.<br>
-You will also see any lint errors in the console.
-
-### `npm test`
-
-Launches the test runner in the interactive watch mode.<br>
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `npm run build`
-
-Builds the app for production to the `build` folder.<br>
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.<br>
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (Webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
-
-### Analyzing the Bundle Size
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
-
-### Making a Progressive Web App
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
-
-### Advanced Configuration
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
-
-### Deployment
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
-
-### `npm run build` fails to minify
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+React + Material-UI + Firebase is open source software [licensed as MIT](https://github.com/Phoqe/react-material-ui-firebase/blob/master/LICENSE.md).
