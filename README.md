@@ -53,7 +53,7 @@ Use the `cd` command, also known as `chdir` (change directory) to change the cur
 cd <your-project-name>
 ```
 
-The command `yarn install` is used to install all dependencies for the project. You can also run `yarn` with no command will run `yarn install`, passing through any provided flags.
+The command `yarn install` is used to install all dependencies for the project. Running `yarn` with no command will run `yarn install`, passing through any provided flags.
 
 ```
 yarn install
