@@ -1032,7 +1032,7 @@ class App extends Component {
     const { snackbar } = this.state;
 
     return (
-      <Router basename="/react-material-ui-firebase">
+      <Router>
         <MuiThemeProvider theme={theme}>
           <div style={{ minHeight: '100vh', backgroundColor: theme.palette.type === 'dark' ? '#303030' : '#fafafa' }}>
             {!isAuthReady &&
