@@ -50,7 +50,7 @@ git clone https://github.com/Phoqe/react-material-ui-firebase.git <your-project-
 Use the `cd` command, also known as `chdir` (change directory) to change the current working directory to your newly cloned project. Again, change `<your-project-name>` to reflect the correct directory name for your project.
 
 ```
-cd <your-app-name>
+cd <your-project-name>
 ```
 
 The command `yarn install` is used to install all dependencies for the project. You can also run `yarn` with no command will run `yarn install`, passing through any provided flags.
@@ -96,8 +96,6 @@ Your app is ready to be deployed.
 Making this boilerplate your starting-point requires you to configure some parts to tailor it to your needs.
 
 ### Changing the Name and URL
-
-There are 4 files you'll need to modify to change the name and URL:
 
 - public/index.html
   - `title`
