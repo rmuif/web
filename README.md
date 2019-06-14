@@ -108,18 +108,6 @@ Making this boilerplate your starting-point requires you to configure some parts
   - `name`
   - `homepage`
 
-### Changing the Basename
-
-If you receive a warning like:
-
-```
-Warning: You are attempting to use a basename on a page whose URL path does not begin with the basename. Expected path "/" to begin with "/react-material-ui-firebase".
-```
-
-You may need to adjust the router to use the correct basename. A basename is the base URL for all locations. In most cases you can just remove the `basename` attribute from the `<Router>` element in `src/App/App.js`.
-
-If you're still having problems you can read more on [React Router's documentation](https://reacttraining.com/react-router/web/api/BrowserRouter/basename-string).
-
 ### Replacing the Firebase Credentials
 
 By default, React + Material-UI + Firebase uses a demo Firebase project which you can't manage. You need to create a new Firebase project and replace the credentials with your own. You shouldn't use the demo project for anything more than testing as you have no control over it.
