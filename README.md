@@ -6,7 +6,7 @@ This project is an application skeleton for a typical [React](https://reactjs.or
 
 The boilerplate comes with a bunch of development and testing tools for instant web development gratification:
 
-**React + Material-UI + Firebase**
+### React + Material-UI + Firebase
 
 - Bootstrapped with Create React App, the same tooling works out-of-the-box
 - Scaffolding incorporates Google Material Design principles through Material-UI
@@ -14,7 +14,7 @@ The boilerplate comes with a bunch of development and testing tools for instant 
 - Robust routing with React Router including error handling (404)
 - Extensive mobile support with [react-swipeable-views](https://react-swipeable-views.com) for tabs
 
-**Create React App**
+### Create React App
 
 - React, JSX, ES6, TypeScript and Flow syntax support
 - Language extras beyond ES6 like the object spread operator
