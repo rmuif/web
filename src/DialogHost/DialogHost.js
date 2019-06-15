@@ -28,7 +28,14 @@ class DialogHost extends Component {
   }
 
   openDialog = (dialogKey) => {
+
+    // Retrieve the dialog with the specified key
     const dialog = this.state[dialogKey];
+
+    // Make sure the dialog exists and is valid
+    if (!dialog || dialog.open === undefined || null) {
+      return;
+    }
 
     dialog.open = true;
 
@@ -36,7 +43,14 @@ class DialogHost extends Component {
   };
 
   closeDialog = (dialogKey) => {
+
+    // Retrieve the dialog with the specified key
     const dialog = this.state[dialogKey];
+
+    // Make sure the dialog exists and is valid
+    if (!dialog || dialog.open === undefined || null) {
+      return;
+    }
 
     dialog.open = false;
 
@@ -71,7 +85,6 @@ class DialogHost extends Component {
           onClose={() => this.closeDialog('aDialog')}
         />
 
-        {/* Regular Dialogs */}
         <Hidden xsDown>
           <WelcomeDialog
             open={welcomeDialog.open}
@@ -95,7 +108,6 @@ class DialogHost extends Component {
           />
         </Hidden>
 
-        {/* Full-screen Dialogs */}
         <Hidden smUp>
           <WelcomeDialog
             fullScreen
