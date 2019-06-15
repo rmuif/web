@@ -31,6 +31,8 @@ import Bar from '../layout/Bar/Bar';
 import HomeContent from '../content/HomeContent/HomeContent';
 import NotFoundContent from '../content/NotFoundContent/NotFoundContent';
 
+import DialogHost from '../DialogHost/DialogHost';
+
 import SignUpDialog from '../dialogs/SignUpDialog/SignUpDialog';
 import SignInDialog from '../dialogs/SignInDialog/SignInDialog';
 import ResetPasswordDialog from '../dialogs/ResetPasswordDialog/ResetPasswordDialog';
@@ -1061,26 +1063,33 @@ class App extends Component {
                   <Route component={NotFoundContent} />
                 </Switch>
 
+                <DialogHost
+                  parameters={
+                    {
+                      welcomeDialog: {
+                        title: settings.title,
+                        user: user,
+                        isPerformingAuthAction: isPerformingAuthAction
+                      }
+                    }
+                  }
+
+                  eventHandlers={
+                    {
+                      welcomeDialog: {
+                        onVerifyClick: () => {
+                          this.verifyEmailAddress(() => {
+                            this.closeWelcomeDialog()
+                          });
+                        }
+                      }
+                    }
+                  }
+                />
+
                 {isSignedIn &&
                   <React.Fragment>
                     <Hidden only="xs">
-                      <WelcomeDialog
-                        open={welcomeDialog.open}
-
-                        title={settings.title}
-                        user={user}
-                        isPerformingAuthAction={isPerformingAuthAction}
-
-                        onClose={this.closeWelcomeDialog}
-
-                        onCancelClick={this.closeWelcomeDialog}
-                        onVerifyClick={() => {
-                          this.verifyEmailAddress(() => {
-                            this.closeWelcomeDialog()
-                          })
-                        }}
-                      />
-
                       <SettingsDialog
                         open={settingsDialog.open}
 
@@ -1283,24 +1292,6 @@ class App extends Component {
                     </Hidden>
 
                     <Hidden only={['sm', 'md', 'lg', 'xl']}>
-                      <WelcomeDialog
-                        fullScreen
-                        open={welcomeDialog.open}
-
-                        title={settings.title}
-                        user={user}
-                        isPerformingAuthAction={isPerformingAuthAction}
-
-                        onClose={this.closeWelcomeDialog}
-
-                        onCancelClick={this.closeWelcomeDialog}
-                        onVerifyClick={() => {
-                          this.verifyEmailAddress(() => {
-                            this.closeWelcomeDialog()
-                          })
-                        }}
-                      />
-
                       <SettingsDialog
                         fullScreen
                         open={settingsDialog.open}
