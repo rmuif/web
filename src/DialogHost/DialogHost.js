@@ -58,6 +58,7 @@ class DialogHost extends Component {
   };
 
   render() {
+
     // Properties
     const {
       parameters,
