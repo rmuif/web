@@ -17,7 +17,7 @@
     "react-swipeable-views": "^0.13.1",
     "reading-time": "^1.1.3",
     "typeface-roboto": "^0.0.54",
-    "validate.js": "^0.12.0"
+    "validate.js": "^0.13.1"
   },
   "scripts": {
     "start": "react-scripts start",
