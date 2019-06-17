@@ -1531,7 +1531,6 @@ class App extends Component {
                         open={signUpDialog.open}
 
                         isPerformingAuthAction={isPerformingAuthAction}
-                        constraints={settings.constraints.signUp}
 
                         signUp={this.signUp}
 
@@ -1559,7 +1558,6 @@ class App extends Component {
                         open={signUpDialog.open}
 
                         isPerformingAuthAction={isPerformingAuthAction}
-                        constraints={settings.constraints.signUp}
 
                         signUp={this.signUp}
 
