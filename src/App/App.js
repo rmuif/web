@@ -1582,7 +1582,6 @@ class App extends Component {
                       open={resetPasswordDialog.open}
 
                       isPerformingAuthAction={isPerformingAuthAction}
-                      constraints={settings.constraints.resetPassword}
 
                       resetPassword={this.resetPassword}
 
