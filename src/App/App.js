@@ -36,8 +36,6 @@ import DialogHost from '../DialogHost/DialogHost';
 import SignUpDialog from '../dialogs/SignUpDialog/SignUpDialog';
 import SignInDialog from '../dialogs/SignInDialog/SignInDialog';
 import ResetPasswordDialog from '../dialogs/ResetPasswordDialog/ResetPasswordDialog';
-import WelcomeDialog from '../dialogs/WelcomeDialog/WelcomeDialog';
-import SettingsDialog from '../dialogs/SettingsDialog/SettingsDialog';
 import InputDialog from '../dialogs/InputDialog/InputDialog';
 import ConfirmationDialog from '../dialogs/ConfirmationDialog/ConfirmationDialog';
 
@@ -140,6 +138,36 @@ class App extends Component {
       }
     };
   }
+
+  openDialog = (dialogKey, callback) => {
+
+    // Retrieve the dialog with the specified key
+    const dialog = this.state[dialogKey];
+
+    // Make sure the dialog exists and is valid
+    if (!dialog || dialog.open === undefined || null) {
+      return;
+    }
+
+    dialog.open = true;
+
+    this.setState({ dialog }, callback);
+  };
+
+  closeDialog = (dialogKey, callback) => {
+
+    // Retrieve the dialog with the specified key
+    const dialog = this.state[dialogKey];
+
+    // Make sure the dialog exists and is valid
+    if (!dialog || dialog.open === undefined || null) {
+      return;
+    }
+
+    dialog.open = false;
+
+    this.setState({ dialog }, callback);
+  };
 
   signUp = (emailAddress, password, passwordConfirmation) => {
     if (this.state.isSignedIn) {
@@ -1054,7 +1082,7 @@ class App extends Component {
                   onSignUpClick={this.openSignUpDialog}
                   onSignInClick={this.openSignInDialog}
 
-                  onSettingsClick={this.openSettingsDialog}
+                  onSettingsClick={() => this.openDialog('settingsDialog')}
                   onSignOutClick={this.openSignOutDialog}
                 />
 
@@ -1064,12 +1092,44 @@ class App extends Component {
                 </Switch>
 
                 <DialogHost
+                  dialogs={
+                    {
+                      signUpDialog,
+                      signInDialog,
+                      resetPasswordDialog,
+                      welcomeDialog,
+                      settingsDialog,
+                      addAvatarDialog,
+                      changeAvatarDialog,
+                      addDisplayNameDialog,
+                      changeDisplayNameDialog,
+                      addEmailAddressDialog,
+                      signOutDialog
+                    }
+                  }
+
                   parameters={
                     {
+                      signUpDialog: {
+                        isPerformingAuthAction: isPerformingAuthAction,
+                        constraints: settings.constraints.signUp
+                      },
+
                       welcomeDialog: {
                         title: settings.title,
                         user: user,
                         isPerformingAuthAction: isPerformingAuthAction
+                      },
+
+                      settingsDialog: {
+                        user: user,
+                        isPerformingAuthAction: isPerformingAuthAction,
+                        isVerifyingEmailAddress: isVerifyingEmailAddress,
+                        colors: colors,
+                        primaryColor: primaryColor,
+                        secondaryColor: secondaryColor,
+                        type: type,
+                        defaultTheme: settings.theme
                       }
                     }
                   }
@@ -1079,42 +1139,33 @@ class App extends Component {
                       welcomeDialog: {
                         onVerifyClick: () => {
                           this.verifyEmailAddress(() => {
-                            this.closeWelcomeDialog()
+                            this.closeDialog('welcomeDialog');
                           });
                         }
+                      },
+
+                      settingsDialog: {
+                        onAddAvatarClick: this.openAddAvatarDialog,
+                        onChangeAvatarClick: this.changeAvatar,
+                        onAddDisplayNameClick: this.addDisplayName,
+                        onChangeDisplayNameClick: this.changeDisplayName,
+                        onAddEmailAddressClick: this.addEmailAddress,
+                        onVerifyEmailAddressClick: this.verifyEmailAddress,
+                        onPrimaryColorChange: this.changePrimaryColor,
+                        onSecondaryColorChange: this.changeSecondaryColor,
+                        onTypeChange: this.changeType,
+                        onResetClick: this.resetTheme
                       }
                     }
                   }
+
+                  openDialog={this.openDialog}
+                  closeDialog={this.closeDialog}
                 />
 
                 {isSignedIn &&
                   <React.Fragment>
                     <Hidden only="xs">
-                      <SettingsDialog
-                        open={settingsDialog.open}
-
-                        user={user}
-                        isPerformingAuthAction={isPerformingAuthAction}
-                        isVerifyingEmailAddress={isVerifyingEmailAddress}
-                        colors={colors}
-                        primaryColor={primaryColor}
-                        secondaryColor={secondaryColor}
-                        type={type}
-                        defaultTheme={settings.theme}
-
-                        onClose={this.closeSettingsDialog}
-                        onAddAvatarClick={this.openAddAvatarDialog}
-                        onChangeAvatarClick={this.openChangeAvatarDialog}
-                        onAddDisplayNameClick={this.openAddDisplayNameDialog}
-                        onChangeDisplayNameClick={this.openChangeDisplayNameDialog}
-                        onAddEmailAddressClick={this.openAddEmailAddressDialog}
-                        onVerifyEmailAddressClick={this.verifyEmailAddress}
-                        onPrimaryColorChange={this.changePrimaryColor}
-                        onSecondaryColorChange={this.changeSecondaryColor}
-                        onTypeChange={this.changeType}
-                        onResetClick={this.resetTheme}
-                      />
-
                       <InputDialog
                         open={addAvatarDialog.open}
 
@@ -1292,32 +1343,6 @@ class App extends Component {
                     </Hidden>
 
                     <Hidden only={['sm', 'md', 'lg', 'xl']}>
-                      <SettingsDialog
-                        fullScreen
-                        open={settingsDialog.open}
-
-                        user={user}
-                        isPerformingAuthAction={isPerformingAuthAction}
-                        isVerifyingEmailAddress={isVerifyingEmailAddress}
-                        colors={colors}
-                        primaryColor={primaryColor}
-                        secondaryColor={secondaryColor}
-                        type={type}
-                        defaultTheme={settings.theme}
-
-                        onClose={this.closeSettingsDialog}
-                        onAddAvatarClick={this.openAddAvatarDialog}
-                        onChangeAvatarClick={this.openChangeAvatarDialog}
-                        onAddDisplayNameClick={this.openAddDisplayNameDialog}
-                        onChangeDisplayNameClick={this.openChangeDisplayNameDialog}
-                        onAddEmailAddressClick={this.openAddEmailAddressDialog}
-                        onVerifyEmailAddressClick={this.verifyEmailAddress}
-                        onPrimaryColorChange={this.changePrimaryColor}
-                        onSecondaryColorChange={this.changeSecondaryColor}
-                        onTypeChange={this.changeType}
-                        onResetClick={this.resetTheme}
-                      />
-
                       <InputDialog
                         fullScreen
                         open={addAvatarDialog.open}

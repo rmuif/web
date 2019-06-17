@@ -4,87 +4,32 @@ import Button from '@material-ui/core/Button';
 import Hidden from '@material-ui/core/Hidden';
 
 import WelcomeDialog from '../dialogs/WelcomeDialog/WelcomeDialog';
-import AlertDialog from '../dialogs/AlertDialog/AlertDialog';
+import SettingsDialog from '../dialogs/SettingsDialog/SettingsDialog';
 
 import PropTypes from 'prop-types';
 
 class DialogHost extends Component {
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      welcomeDialog: {
-        open: false
-      },
-
-      aDialog: {
-        open: false
-      },
-
-      anotherDialog: {
-        open: false
-      }
-    };
-  }
-
-  openDialog = (dialogKey) => {
-
-    // Retrieve the dialog with the specified key
-    const dialog = this.state[dialogKey];
-
-    // Make sure the dialog exists and is valid
-    if (!dialog || dialog.open === undefined || null) {
-      return;
-    }
-
-    dialog.open = true;
-
-    this.setState({ dialog });
-  };
-
-  closeDialog = (dialogKey) => {
-
-    // Retrieve the dialog with the specified key
-    const dialog = this.state[dialogKey];
-
-    // Make sure the dialog exists and is valid
-    if (!dialog || dialog.open === undefined || null) {
-      return;
-    }
-
-    dialog.open = false;
-
-    this.setState({ dialog });
-  };
-
   render() {
 
     // Properties
     const {
+      dialogs,
       parameters,
       eventHandlers
     } = this.props;
 
-    // Dialogs
+    // Functions
     const {
-      welcomeDialog,
-      aDialog,
-      anotherDialog
-    } = this.state;
+      openDialog,
+      closeDialog
+    } = this.props;
+
+    const welcomeDialog = dialogs.welcomeDialog;
+    const settingsDialog = dialogs.settingsDialog;
 
     return (
       <React.Fragment>
-        <Button onClick={() => this.openDialog('aDialog')}>Open "aDialog" Dialog</Button>
-        <Button onClick={() => this.openDialog('anotherDialog')}>Open "anotherDialog" Dialog</Button>
-
-        <AlertDialog
-          open={aDialog.open}
-
-          title="A dialog"
-          contentText="This is a dialog"
-
-          onClose={() => this.closeDialog('aDialog')}
-        />
+        <Button onClick={() => openDialog('welcomeDialog')}>Open "welcomeDialog" Dialog</Button>
 
         <Hidden xsDown>
           <WelcomeDialog
@@ -92,20 +37,21 @@ class DialogHost extends Component {
 
             {...parameters.welcomeDialog}
 
-            onClose={() => this.closeDialog('welcomeDialog')}
+            onClose={() => closeDialog('welcomeDialog')}
 
-            onCancelClick={() => this.closeDialog('welcomeDialog')}
+            onCancelClick={() => closeDialog('welcomeDialog')}
 
             {...eventHandlers.welcomeDialog}
           />
 
-          <AlertDialog
-            open={anotherDialog.open}
+          <SettingsDialog
+            open={settingsDialog.open}
 
-            title="Another dialog"
-            contentText="This is another dialog"
+            {...parameters.settingsDialog}
 
-            onClose={() => this.closeDialog('anotherDialog')}
+            onClose={() => closeDialog('settingsDialog')}
+
+            {...eventHandlers.settingsDialog}
           />
         </Hidden>
 
@@ -116,21 +62,22 @@ class DialogHost extends Component {
 
             {...parameters.welcomeDialog}
 
-            onClose={() => this.closeDialog('welcomeDialog')}
+            onClose={() => closeDialog('welcomeDialog')}
 
-            onCancelClick={() => this.closeDialog('welcomeDialog')}
+            onCancelClick={() => closeDialog('welcomeDialog')}
 
             {...eventHandlers.welcomeDialog}
           />
 
-          <AlertDialog
+          <SettingsDialog
             fullScreen
-            open={anotherDialog.open}
+            open={settingsDialog.open}
 
-            title="Another dialog"
-            contentText="This is another dialog"
+            {...parameters.settingsDialog}
 
-            onClose={() => this.closeDialog('anotherDialog')}
+            onClose={() => closeDialog('settingsDialog')}
+
+            {...eventHandlers.settingsDialog}
           />
         </Hidden>
       </React.Fragment>
@@ -138,6 +85,16 @@ class DialogHost extends Component {
   }
 }
 
-DialogHost.propTypes = {};
+DialogHost.propTypes = {
+
+  // Properties
+  dialogs: PropTypes.object.isRequired,
+  parameters: PropTypes.object,
+  eventHandlers: PropTypes.object,
+
+  // Functions
+  openDialog: PropTypes.func.isRequired,
+  closeDialog: PropTypes.func.isRequired
+};
 
 export default DialogHost;
