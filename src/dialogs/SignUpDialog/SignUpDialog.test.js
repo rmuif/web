@@ -12,7 +12,6 @@ it('renders without crashing', () => {
       <SignUpDialog
         open={false}
         isPerformingAuthAction={false}
-        constraints={{}}
         signUp={() => {}}
         onClose={() => {}}
         onAuthProviderClick={() => {}}

@@ -1531,7 +1531,6 @@ class App extends Component {
                         open={signUpDialog.open}
 
                         isPerformingAuthAction={isPerformingAuthAction}
-                        constraints={settings.constraints.signUp}
 
                         signUp={this.signUp}
 
@@ -1543,7 +1542,6 @@ class App extends Component {
                         open={signInDialog.open}
 
                         isPerformingAuthAction={isPerformingAuthAction}
-                        constraints={settings.constraints.signIn}
 
                         signIn={this.signIn}
 
@@ -1559,7 +1557,6 @@ class App extends Component {
                         open={signUpDialog.open}
 
                         isPerformingAuthAction={isPerformingAuthAction}
-                        constraints={settings.constraints.signUp}
 
                         signUp={this.signUp}
 
@@ -1572,7 +1569,6 @@ class App extends Component {
                         open={signInDialog.open}
 
                         isPerformingAuthAction={isPerformingAuthAction}
-                        constraints={settings.constraints.signIn}
 
                         signIn={this.signIn}
 
@@ -1586,7 +1582,6 @@ class App extends Component {
                       open={resetPasswordDialog.open}
 
                       isPerformingAuthAction={isPerformingAuthAction}
-                      constraints={settings.constraints.resetPassword}
 
                       resetPassword={this.resetPassword}
 

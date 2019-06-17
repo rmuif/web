@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 
-import PropTypes from 'prop-types';
-
 import validate from 'validate.js';
+
+import settings from '../../settings';
 
 import Dialog from '@material-ui/core/Dialog';
 import DialogTitle from '@material-ui/core/DialogTitle';
@@ -14,6 +14,8 @@ import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 
 import AuthProviderList from '../../layout/AuthProviderList/AuthProviderList';
+
+import PropTypes from 'prop-types';
 
 const initialState = {
   emailAddress: '',
@@ -33,7 +35,7 @@ class SignUpDialog extends Component {
   signUp = () => {
     const { emailAddress, password, passwordConfirmation } = this.state;
     
-    const errors = validate({ emailAddress, password, passwordConfirmation }, this.props.constraints);
+    const errors = validate({ emailAddress, password, passwordConfirmation }, settings.constraints.signUp);
 
     if (errors) {
       this.setState({ errors });
@@ -162,8 +164,6 @@ SignUpDialog.propTypes = {
   open: PropTypes.bool.isRequired,
 
   isPerformingAuthAction: PropTypes.bool.isRequired,
-
-  constraints: PropTypes.object.isRequired,
 
   signUp: PropTypes.func.isRequired,
 
