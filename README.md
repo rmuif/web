@@ -33,11 +33,11 @@ The tradeoff is that **these tools are preconfigured to work in a specific way**
 
 https://phoqe.me/react-material-ui-firebase
 
-## Getting Started
+## Getting started
 
 **You’ll need to have Node >= 8.10 on your local development machine** (but it’s not required on the server). You can use [nvm](https://github.com/creationix/nvm#installation) (macOS/Linux) or [nvm-windows](https://github.com/coreybutler/nvm-windows#node-version-manager-nvm-for-windows) to easily switch Node versions between different projects.
 
-### Clone Repository
+### Clone repository
 
 The command `git clone` is a Git command line utility which is used to target an existing repository and create a clone, or copy of the target repository. Replace `<your-project-name>` with the name of your project or remove that part of the command if you want to use the `react-material-ui-firebase` name for your project directory.
 
@@ -45,7 +45,7 @@ The command `git clone` is a Git command line utility which is used to target an
 git clone https://github.com/Phoqe/react-material-ui-firebase.git <your-project-name>
 ```
 
-### Install Dependencies
+### Install dependencies
 
 Use the `cd` command, also known as `chdir` (change directory) to change the current working directory to your newly cloned project. Again, change `<your-project-name>` to reflect the correct directory name for your project.
 
@@ -95,7 +95,7 @@ Your app is ready to be deployed.
 
 Making this boilerplate your starting-point requires you to configure some parts to tailor it to your needs.
 
-### Changing the Name and URL
+### Changing the name and URL
 
 - public/index.html
   - `title`
@@ -108,7 +108,7 @@ Making this boilerplate your starting-point requires you to configure some parts
   - `name`
   - `homepage`
 
-### Replacing the Firebase Credentials
+### Replacing the Firebase credentials
 
 By default, React + Material-UI + Firebase uses a demo Firebase project which you can't manage. You need to create a new Firebase project and replace the credentials with your own. You shouldn't use the demo project for anything more than testing as you have no control over it.
 
@@ -126,7 +126,7 @@ firebase: {
 }
 ```
 
-### Changing the Default Theme
+### Changing the default theme
 
 The sample app uses a blue and red color combination with a light theme type. When a user changes the theme, a local storage object will be created and read on startup. You can change the default theme, which is the theme all users will see before changing it themselves, in `src/settings.js`:
 
