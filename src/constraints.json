@@ -1,0 +1,64 @@
+{
+  "firstName": {
+    "presence": {
+      "allowEmpty": false
+    }
+  },
+
+  "lastName": {
+    "presence": {
+      "allowEmpty": false
+    }
+  },
+
+  "username": {
+    "length": {
+      "minimum": 2,
+      "maximum": 20
+    },
+
+    "presence": {
+      "allowEmpty": false
+    }
+  },
+
+  "emailAddress": {
+    "email": true,
+
+    "presence": {
+      "allowEmpty": false
+    }
+  },
+
+  "password": {
+    "length": {
+      "minimum": 6
+    },
+
+    "presence": {
+      "allowEmpty": false
+    }
+  },
+
+  "passwordConfirmation": {
+    "equality": "password",
+
+    "length": {
+      "minimum": 6
+    },
+
+    "presence": {
+      "allowEmpty": false
+    }
+  },
+
+  "avatar": {
+    "presence": {
+      "allowEmpty": false
+    },
+
+    "url": {
+      "message": "^Avatar is not a valid URL"
+    }
+  }
+}

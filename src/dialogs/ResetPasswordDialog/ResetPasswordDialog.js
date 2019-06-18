@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 
-import validate from 'validate.js';
+import PropTypes from 'prop-types';
 
-import settings from '../../settings';
+import validate from 'validate.js';
 
 import Dialog from '@material-ui/core/Dialog';
 import DialogTitle from '@material-ui/core/DialogTitle';
@@ -13,7 +13,7 @@ import DialogActions from '@material-ui/core/DialogActions';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 
-import PropTypes from 'prop-types';
+import constraints from '../../constraints';
 
 const initialState = {
   emailAddress: '',
@@ -31,7 +31,11 @@ class ResetPasswordDialog extends Component {
   resetPassword = () => {
     const { emailAddress } = this.state;
     
-    const errors = validate({ emailAddress }, settings.constraints.resetPassword);
+    const errors = validate({
+      emailAddress: emailAddress
+    }, {
+      emailAddress: constraints.emailAddress
+    });
 
     if (errors) {
       this.setState({ errors });

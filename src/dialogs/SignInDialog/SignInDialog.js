@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 
-import validate from 'validate.js';
+import PropTypes from 'prop-types';
 
-import settings from '../../settings';
+import validate from 'validate.js';
 
 import Dialog from '@material-ui/core/Dialog';
 import DialogTitle from '@material-ui/core/DialogTitle';
@@ -13,9 +13,9 @@ import DialogActions from '@material-ui/core/DialogActions';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 
-import AuthProviderList from '../../layout/AuthProviderList/AuthProviderList';
+import constraints from '../../constraints';
 
-import PropTypes from 'prop-types';
+import AuthProviderList from '../../layout/AuthProviderList/AuthProviderList';
 
 const initialState = {
   emailAddress: '',
@@ -34,7 +34,13 @@ class SignInDialog extends Component {
   signIn = () => {
     const { emailAddress, password } = this.state;
     
-    const errors = validate({ emailAddress, password }, settings.constraints.signIn);
+    const errors = validate({
+      emailAddress: emailAddress,
+      password: password
+    }, {
+      emailAddress: constraints.emailAddress,
+      password: constraints.password
+    });
 
     if (errors) {
       this.setState({ errors });
