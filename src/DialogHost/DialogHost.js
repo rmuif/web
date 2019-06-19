@@ -10,6 +10,7 @@ import SignInDialog from '../dialogs/SignInDialog/SignInDialog';
 import ResetPasswordDialog from '../dialogs/ResetPasswordDialog/ResetPasswordDialog';
 import WelcomeDialog from '../dialogs/WelcomeDialog/WelcomeDialog';
 import SettingsDialog from '../dialogs/SettingsDialog/SettingsDialog';
+import AlertDialog from '../dialogs/AlertDialog/AlertDialog';
 
 class DialogHost extends Component {
   render() {
@@ -34,11 +35,10 @@ class DialogHost extends Component {
     const resetPasswordDialog = dialogs.resetPasswordDialog;
     const welcomeDialog = dialogs.welcomeDialog;
     const settingsDialog = dialogs.settingsDialog;
+    const signOutDialog = dialogs.signOutDialog;
 
     return (
       <React.Fragment>
-        <Button onClick={() => openDialog('welcomeDialog')}>Open "welcomeDialog" Dialog</Button>
-
         <Hidden xsDown>
           {isSignedIn &&
             <React.Fragment>
@@ -179,6 +179,22 @@ class DialogHost extends Component {
             </React.Fragment>
           }
         </Hidden>
+
+        {isSignedIn &&
+          <React.Fragment>
+            <AlertDialog
+              dialogProps={{
+                open: signOutDialog.open,
+
+                onClose: () => closeDialog('signOutDialog')
+              }}
+
+              {...parameters.signOutDialog}
+
+              {...eventHandlers.signOutDialog}
+            />
+          </React.Fragment>
+        }
       </React.Fragment>
     );
   }

@@ -16,6 +16,7 @@ import readingTime from 'reading-time';
 // Material-UI
 import { createMuiTheme, MuiThemeProvider } from '@material-ui/core/styles';
 
+import Button from '@material-ui/core/Button';
 import Hidden from '@material-ui/core/Hidden';
 import TextField from '@material-ui/core/TextField';
 import Snackbar from '@material-ui/core/Snackbar';
@@ -700,7 +701,7 @@ class App extends Component {
       isPerformingAuthAction: true
     }, () => {
       auth.signOut().then(() => {
-        this.closeSignOutDialog(() => {
+        this.closeDialog('signOutDialog', () => {
           this.openSnackbar('Signed out');
         });
       }).catch((reason) => {
@@ -938,26 +939,6 @@ class App extends Component {
     });
   };
 
-  openSignOutDialog = () => {
-    this.setState({
-      signOutDialog: {
-        open: true
-      }
-    });
-  };
-
-  closeSignOutDialog = (callback) => {
-    this.setState({
-      signOutDialog: {
-        open: false
-      }
-    }, () => {
-      if (callback && typeof callback === 'function') {
-        callback();
-      }
-    });
-  };
-
   handleAvatarChange = (event) => {
     const avatar = event.target.value;
 
@@ -1050,7 +1031,7 @@ class App extends Component {
                   onSignInClick={() => this.openDialog('signInDialog')}
 
                   onSettingsClick={() => this.openDialog('settingsDialog')}
-                  onSignOutClick={this.openSignOutDialog}
+                  onSignOutClick={() => this.openDialog('signOutDialog')}
                 />
 
                 <Switch>
@@ -1105,6 +1086,13 @@ class App extends Component {
                         secondaryColor: secondaryColor,
                         type: type,
                         defaultTheme: settings.theme
+                      },
+
+                      signOutDialog: {
+                        title: 'Sign out?',
+                        contentText: 'While signed out you are unable to manage your profile and conduct other activities that require you to be signed in.',
+                        dismissiveAction: <Button color="primary" onClick={() => this.closeDialog('signOutDialog')}>Cancel</Button>,
+                        confirmingAction: <Button color="primary" disabled={isPerformingAuthAction} variant="contained" onClick={this.signOut}>Sign Out</Button>
                       }
                     }
                   }
@@ -1523,20 +1511,6 @@ class App extends Component {
                         onOkClick={this.addEmailAddress}
                       />
                     </Hidden>
-
-                    <ConfirmationDialog
-                      open={signOutDialog.open}
-
-                      title="Sign out?"
-                      contentText="While signed out you are unable to manage your profile and conduct other activities that require you to be signed in."
-                      okText="Sign Out"
-                      disableOkButton={isPerformingAuthAction}
-                      highlightOkButton
-
-                      onClose={this.closeSignOutDialog}
-                      onCancelClick={this.closeSignOutDialog}
-                      onOkClick={this.signOut}
-                    />
                   </React.Fragment>
                 }
 
