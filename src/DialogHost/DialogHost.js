@@ -7,7 +7,6 @@ import Hidden from '@material-ui/core/Hidden';
 import SignUpDialog from '../dialogs/SignUpDialog/SignUpDialog';
 import SignInDialog from '../dialogs/SignInDialog/SignInDialog';
 import ResetPasswordDialog from '../dialogs/ResetPasswordDialog/ResetPasswordDialog';
-import WelcomeDialog from '../dialogs/WelcomeDialog/WelcomeDialog';
 import SettingsDialog from '../dialogs/SettingsDialog/SettingsDialog';
 import AlertDialog from '../dialogs/AlertDialog/AlertDialog';
 
@@ -40,14 +39,14 @@ class DialogHost extends Component {
         <Hidden xsDown>
           {isSignedIn &&
             <React.Fragment>
-              <WelcomeDialog
-                open={welcomeDialog.open}
+              <AlertDialog
+                dialogProps={{
+                  open: welcomeDialog.open,
+
+                  onClose: () => closeDialog('welcomeDialog')
+                }}
 
                 {...parameters.welcomeDialog}
-
-                onClose={() => closeDialog('welcomeDialog')}
-
-                onCancelClick={() => closeDialog('welcomeDialog')}
 
                 {...eventHandlers.welcomeDialog}
               />
@@ -108,15 +107,15 @@ class DialogHost extends Component {
         <Hidden smUp>
           {isSignedIn &&
             <React.Fragment>
-              <WelcomeDialog
-                fullScreen
-                open={welcomeDialog.open}
+              <AlertDialog
+                dialogProps={{
+                  fullScreen: true,
+                  open: welcomeDialog.open,
+
+                  onClose: () => closeDialog('welcomeDialog')
+                }}
 
                 {...parameters.welcomeDialog}
-
-                onClose={() => closeDialog('welcomeDialog')}
-
-                onCancelClick={() => closeDialog('welcomeDialog')}
 
                 {...eventHandlers.welcomeDialog}
               />

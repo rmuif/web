@@ -341,6 +341,53 @@ class App extends Component {
     });
   };
 
+  verifyEmailAddress = (callback) => {
+    const { user, isSignedIn } = this.state;
+
+    if (!user || !user.email || !isSignedIn) {
+      return;
+    }
+
+    this.setState({
+      isPerformingAuthAction: true
+    }, () => {
+      user.sendEmailVerification().then(() => {
+        this.setState({
+          isVerifyingEmailAddress: true
+        }, () => {
+          const emailAddress = user.email;
+
+          this.openSnackbar(`Verification e-mail sent to ${emailAddress}`);
+
+          if (callback && typeof callback === 'function') {
+            callback();
+          }
+        });
+      }).catch((reason) => {
+        const code = reason.code;
+        const message = reason.message;
+
+        switch (code) {
+          case 'auth/missing-android-pkg-name':
+          case 'auth/missing-continue-uri':
+          case 'auth/missing-ios-bundle-id':
+          case 'auth/invalid-continue-uri':
+          case 'auth/unauthorized-continue-uri':
+            this.openSnackbar(message);
+            return;
+
+          default:
+            this.openSnackbar(message);
+            return;
+        }
+      }).finally(() => {
+        this.setState({
+          isPerformingAuthAction: false
+        });
+      });
+    });
+  };
+
   signOut = () => {
     if (!this.state.isSignedIn) {
       return;
@@ -550,9 +597,10 @@ class App extends Component {
                       },
 
                       welcomeDialog: {
-                        title: settings.title,
-                        user: user,
-                        isPerformingAuthAction: isPerformingAuthAction
+                        title: `Welcome to ${settings.title}!`,
+                        contentText: 'Complete your account by verifying your e-mail address. An e-mail will be sent to your e-mail address containing instructions on how to verify your e-mail address.',
+                        dismissiveAction: <Button color="primary" onClick={() => this.closeDialog('welcomeDialog')}>Cancel</Button>,
+                        confirmingAction: <Button color="primary" disabled={isPerformingAuthAction} variant="contained" onClick={() => this.verifyEmailAddress(() => this.closeDialog('welcomeDialog'))}>Verify</Button>
                       },
 
                       settingsDialog: {
@@ -600,14 +648,6 @@ class App extends Component {
                       signInDialog: {
                         onAuthProviderClick: this.signInWithProvider,
                         onResetPasswordClick: () => this.openDialog('resetPasswordDialog')
-                      },
-
-                      welcomeDialog: {
-                        onVerifyClick: () => {
-                          this.verifyEmailAddress(() => {
-                            this.closeDialog('welcomeDialog');
-                          });
-                        }
                       },
 
                       settingsDialog: {
