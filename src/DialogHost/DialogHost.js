@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 
+import PropTypes from 'prop-types';
+
 import Button from '@material-ui/core/Button';
 import Hidden from '@material-ui/core/Hidden';
 
@@ -8,8 +10,6 @@ import SignInDialog from '../dialogs/SignInDialog/SignInDialog';
 import ResetPasswordDialog from '../dialogs/ResetPasswordDialog/ResetPasswordDialog';
 import WelcomeDialog from '../dialogs/WelcomeDialog/WelcomeDialog';
 import SettingsDialog from '../dialogs/SettingsDialog/SettingsDialog';
-
-import PropTypes from 'prop-types';
 
 class DialogHost extends Component {
   render() {
