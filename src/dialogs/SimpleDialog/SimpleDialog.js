@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 
+import PropTypes from 'prop-types';
+
 import Dialog from '@material-ui/core/Dialog';
 import DialogTitle from '@material-ui/core/DialogTitle';
-
-import PropTypes from 'prop-types';
 
 /**
  * Simple dialogs can display items that are immediately actionable when selected. They don’t have text buttons. As
@@ -25,7 +25,7 @@ class SimpleDialog extends Component {
     return (
       <Dialog {...dialogProps}>
         {title &&
-        <DialogTitle>{title}</DialogTitle>
+          <DialogTitle>{title}</DialogTitle>
         }
 
         {content}

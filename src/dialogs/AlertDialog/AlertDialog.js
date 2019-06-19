@@ -10,8 +10,6 @@ import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogActions from '@material-ui/core/DialogActions';
 
-import Button from '@material-ui/core/Button';
-
 const styles = (theme) => ({
   noTitlePadding: {
     paddingTop: theme.spacing(3)
@@ -32,12 +30,12 @@ class AlertDialog extends Component {
     const {
       title,
       contentText,
-      dismissiveActionText,
-      confirmingActionText,
-      acknowledgementActionText
+      dismissiveAction,
+      confirmingAction,
+      acknowledgementAction
     } = this.props;
 
-    if ((dismissiveActionText || confirmingActionText) && acknowledgementActionText) {
+    if ((dismissiveAction || confirmingAction) && acknowledgementAction) {
       console.error(
         'Dialogs should contain a maximum of two actions. ' +
         'If a single action is provided, it must be an acknowledgement action. ' +
@@ -61,11 +59,11 @@ class AlertDialog extends Component {
           </DialogContentText>
         </DialogContent>
 
-        {(dismissiveActionText || confirmingActionText || acknowledgementActionText) &&
+        {(dismissiveAction || confirmingAction || acknowledgementAction) &&
           <DialogActions>
-            {dismissiveActionText && <Button color="primary">{dismissiveActionText}</Button>}
-            {confirmingActionText && <Button color="primary">{confirmingActionText}</Button>}
-            {acknowledgementActionText && <Button color="primary">{acknowledgementActionText}</Button>}
+            {dismissiveAction}
+            {confirmingAction}
+            {acknowledgementAction}
           </DialogActions>
         }
       </Dialog>
@@ -84,9 +82,9 @@ AlertDialog.propTypes = {
   // Custom Properties
   title: PropTypes.string,
   contentText: PropTypes.string.isRequired,
-  dismissiveActionText: PropTypes.string,
-  confirmingActionText: PropTypes.string,
-  acknowledgementActionText: PropTypes.string,
+  dismissiveAction: PropTypes.element,
+  confirmingAction: PropTypes.element,
+  acknowledgementAction: PropTypes.element,
 };
 
 export default withStyles(styles)(AlertDialog);
