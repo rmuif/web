@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 
+import PropTypes from 'prop-types';
+
 import { withStyles } from '@material-ui/core/styles';
 
 import Dialog from '@material-ui/core/Dialog';
@@ -10,8 +12,6 @@ import DialogActions from '@material-ui/core/DialogActions';
 
 import Button from '@material-ui/core/Button';
 
-import PropTypes from 'prop-types';
-
 const styles = (theme) => ({
   noTitlePadding: {
     paddingTop: theme.spacing(3)
@@ -21,11 +21,12 @@ const styles = (theme) => ({
 // Alert dialogs interrupt users with urgent information, details, or actions.
 class AlertDialog extends Component {
   render() {
+
     // Styling
     const { classes } = this.props;
 
     // Dialog Properties
-    const { fullScreen, open } = this.props;
+    const { dialogProps } = this.props;
 
     // Custom Properties
     const {
@@ -35,9 +36,6 @@ class AlertDialog extends Component {
       confirmingActionText,
       acknowledgementActionText
     } = this.props;
-
-    // Dialog Events
-    const { onClose } = this.props;
 
     if ((dismissiveActionText || confirmingActionText) && acknowledgementActionText) {
       console.error(
@@ -52,9 +50,9 @@ class AlertDialog extends Component {
     }
 
     return (
-      <Dialog fullScreen={fullScreen} open={open} onClose={onClose}>
+      <Dialog {...dialogProps}>
         {title &&
-        <DialogTitle>{title}</DialogTitle>
+          <DialogTitle>{title}</DialogTitle>
         }
 
         <DialogContent className={title ? null : classes.noTitlePadding}>
@@ -64,11 +62,11 @@ class AlertDialog extends Component {
         </DialogContent>
 
         {(dismissiveActionText || confirmingActionText || acknowledgementActionText) &&
-        <DialogActions>
-          {dismissiveActionText && <Button color="primary">{dismissiveActionText}</Button>}
-          {confirmingActionText && <Button color="primary">{confirmingActionText}</Button>}
-          {acknowledgementActionText && <Button color="primary">{acknowledgementActionText}</Button>}
-        </DialogActions>
+          <DialogActions>
+            {dismissiveActionText && <Button color="primary">{dismissiveActionText}</Button>}
+            {confirmingActionText && <Button color="primary">{confirmingActionText}</Button>}
+            {acknowledgementActionText && <Button color="primary">{acknowledgementActionText}</Button>}
+          </DialogActions>
         }
       </Dialog>
     );
@@ -76,12 +74,12 @@ class AlertDialog extends Component {
 }
 
 AlertDialog.propTypes = {
+
   // Styling
   classes: PropTypes.object.isRequired,
 
   // Dialog Properties
-  fullScreen: PropTypes.bool,
-  open: PropTypes.bool.isRequired,
+  dialogProps: PropTypes.object.isRequired,
 
   // Custom Properties
   title: PropTypes.string,
@@ -89,9 +87,6 @@ AlertDialog.propTypes = {
   dismissiveActionText: PropTypes.string,
   confirmingActionText: PropTypes.string,
   acknowledgementActionText: PropTypes.string,
-
-  // Dialog Events
-  onClose: PropTypes.func.isRequired
 };
 
 export default withStyles(styles)(AlertDialog);

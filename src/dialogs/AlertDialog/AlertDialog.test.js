@@ -9,11 +9,15 @@ it('renders without crashing', () => {
 
   ReactDOM.render(
     <AlertDialog
-      open={false}
+      dialogProps={
+        {
+          open: true,
+
+          onClose: () => {}
+        }
+      }
 
       contentText=""
-
-      onClose={() => {}}
     />,
     div
   );
