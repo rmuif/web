@@ -34,9 +34,6 @@ import NotFoundContent from '../content/NotFoundContent/NotFoundContent';
 
 import DialogHost from '../DialogHost/DialogHost';
 
-import SignUpDialog from '../dialogs/SignUpDialog/SignUpDialog';
-import SignInDialog from '../dialogs/SignInDialog/SignInDialog';
-import ResetPasswordDialog from '../dialogs/ResetPasswordDialog/ResetPasswordDialog';
 import InputDialog from '../dialogs/InputDialog/InputDialog';
 import ConfirmationDialog from '../dialogs/ConfirmationDialog/ConfirmationDialog';
 
@@ -197,8 +194,8 @@ class App extends Component {
       isPerformingAuthAction: true
     }, () => {
       auth.createUserWithEmailAndPassword(emailAddress, password).then((value) => {
-        this.closeSignUpDialog(() => {
-          this.openWelcomeDialog();
+        this.closeDialog('signUpDialog', () => {
+          this.openDialog('welcomeDialog');
         });
       }).catch((reason) => {
         const code = reason.code;
@@ -249,7 +246,7 @@ class App extends Component {
       isPerformingAuthAction: true
     }, () => {
       auth.signInWithEmailAndPassword(emailAddress, password).then((value) => {
-        this.closeSignInDialog(() => {
+        this.closeDialog('signInDialog', () => {
           const user = value.user;
           const displayName = user.displayName;
           const emailAddress = user.email;
@@ -293,8 +290,8 @@ class App extends Component {
       isPerformingAuthAction: true
     }, () => {
       auth.signInWithPopup(provider).then((value) => {
-        this.closeSignUpDialog(() => {
-          this.closeSignInDialog(() => {
+        this.closeDialog('signUpDialog', () => {
+          this.closeDialog('signInDialog', () => {
             const user = value.user;
             const displayName = user.displayName;
             const emailAddress = user.email;
@@ -353,7 +350,7 @@ class App extends Component {
       isPerformingAuthAction: true
     }, () => {
       auth.sendPasswordResetEmail(emailAddress).then(() => {
-        this.closeResetPasswordDialog(() => {
+        this.closeDialog('resetPasswordDialog', () => {
           this.openSnackbar(`Password reset e-mail sent to ${emailAddress}`);
         });
       }).catch((reason) => {
@@ -801,66 +798,6 @@ class App extends Component {
     });
   };
 
-  openSignUpDialog = () => {
-    this.setState({
-      signUpDialog: {
-        open: true
-      }
-    });
-  };
-
-  closeSignUpDialog = (callback) => {
-    this.setState({
-      signUpDialog: {
-        open: false
-      }
-    }, () => {
-      if (callback && typeof callback === 'function') {
-        callback();
-      }
-    });
-  };
-
-  openSignInDialog = () => {
-    this.setState({
-      signInDialog: {
-        open: true
-      }
-    });
-  };
-
-  closeSignInDialog = (callback) => {
-    this.setState({
-      signInDialog: {
-        open: false
-      }
-    }, () => {
-      if (callback && typeof callback === 'function') {
-        callback();
-      }
-    });
-  };
-
-  openResetPasswordDialog = () => {
-    this.setState({
-      resetPasswordDialog: {
-        open: true
-      }
-    });
-  };
-
-  closeResetPasswordDialog = (callback) => {
-    this.setState({
-      resetPasswordDialog: {
-        open: false
-      }
-    }, () => {
-      if (callback && typeof callback === 'function') {
-        callback();
-      }
-    });
-  };
-
   openWelcomeDialog = () => {
     this.setState({
       welcomeDialog: {
@@ -1109,8 +1046,8 @@ class App extends Component {
 
                   user={user}
 
-                  onSignUpClick={this.openSignUpDialog}
-                  onSignInClick={this.openSignInDialog}
+                  onSignUpClick={() => this.openDialog('signUpDialog')}
+                  onSignInClick={() => this.openDialog('signInDialog')}
 
                   onSettingsClick={() => this.openDialog('settingsDialog')}
                   onSignOutClick={this.openSignOutDialog}
@@ -1141,8 +1078,15 @@ class App extends Component {
                   parameters={
                     {
                       signUpDialog: {
-                        isPerformingAuthAction: isPerformingAuthAction,
-                        constraints: settings.constraints.signUp
+                        isPerformingAuthAction: isPerformingAuthAction
+                      },
+
+                      signInDialog: {
+                        isPerformingAuthAction: isPerformingAuthAction
+                      },
+
+                      resetPasswordDialog: {
+                        isPerformingAuthAction: isPerformingAuthAction
                       },
 
                       welcomeDialog: {
@@ -1164,8 +1108,33 @@ class App extends Component {
                     }
                   }
 
+                  functions={
+                    {
+                      signUpDialog: {
+                        signUp: this.signUp
+                      },
+
+                      signInDialog: {
+                        signIn: this.signIn
+                      },
+
+                      resetPasswordDialog: {
+                        resetPassword: this.resetPassword
+                      }
+                    }
+                  }
+
                   eventHandlers={
                     {
+                      signUpDialog: {
+                        onAuthProviderClick: this.signInWithProvider
+                      },
+
+                      signInDialog: {
+                        onAuthProviderClick: this.signInWithProvider,
+                        onResetPasswordClick: () => this.openDialog('resetPasswordDialog')
+                      },
+
                       welcomeDialog: {
                         onVerifyClick: () => {
                           this.verifyEmailAddress(() => {
@@ -1566,72 +1535,6 @@ class App extends Component {
                       onClose={this.closeSignOutDialog}
                       onCancelClick={this.closeSignOutDialog}
                       onOkClick={this.signOut}
-                    />
-                  </React.Fragment>
-                }
-
-                {!isSignedIn &&
-                  <React.Fragment>
-                    <Hidden only="xs">
-                      <SignUpDialog
-                        open={signUpDialog.open}
-
-                        isPerformingAuthAction={isPerformingAuthAction}
-
-                        signUp={this.signUp}
-
-                        onClose={this.closeSignUpDialog}
-                        onAuthProviderClick={this.signInWithProvider}
-                      />
-
-                      <SignInDialog
-                        open={signInDialog.open}
-
-                        isPerformingAuthAction={isPerformingAuthAction}
-
-                        signIn={this.signIn}
-
-                        onClose={this.closeSignInDialog}
-                        onAuthProviderClick={this.signInWithProvider}
-                        onResetPasswordClick={this.openResetPasswordDialog}
-                      />
-                    </Hidden>
-
-                    <Hidden only={['sm', 'md', 'lg', 'xl']}>
-                      <SignUpDialog
-                        fullScreen
-                        open={signUpDialog.open}
-
-                        isPerformingAuthAction={isPerformingAuthAction}
-
-                        signUp={this.signUp}
-
-                        onClose={this.closeSignUpDialog}
-                        onAuthProviderClick={this.signInWithProvider}
-                      />
-
-                      <SignInDialog
-                        fullScreen
-                        open={signInDialog.open}
-
-                        isPerformingAuthAction={isPerformingAuthAction}
-
-                        signIn={this.signIn}
-
-                        onClose={this.closeSignInDialog}
-                        onAuthProviderClick={this.signInWithProvider}
-                        onResetPasswordClick={this.openResetPasswordDialog}
-                      />
-                    </Hidden>
-
-                    <ResetPasswordDialog
-                      open={resetPasswordDialog.open}
-
-                      isPerformingAuthAction={isPerformingAuthAction}
-
-                      resetPassword={this.resetPassword}
-
-                      onClose={this.closeResetPasswordDialog}
                     />
                   </React.Fragment>
                 }
