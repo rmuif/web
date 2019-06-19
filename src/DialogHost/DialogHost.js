@@ -16,6 +16,7 @@ class DialogHost extends Component {
 
     // Properties
     const {
+      isSignedIn,
       dialogs,
       parameters,
       functions,
@@ -39,128 +40,144 @@ class DialogHost extends Component {
         <Button onClick={() => openDialog('welcomeDialog')}>Open "welcomeDialog" Dialog</Button>
 
         <Hidden xsDown>
-          <SignUpDialog
-            open={signUpDialog.open}
+          {isSignedIn &&
+            <React.Fragment>
+              <WelcomeDialog
+                open={welcomeDialog.open}
 
-            {...parameters.signUpDialog}
+                {...parameters.welcomeDialog}
 
-            {...functions.signUpDialog}
+                onClose={() => closeDialog('welcomeDialog')}
 
-            onClose={() => closeDialog('signUpDialog')}
+                onCancelClick={() => closeDialog('welcomeDialog')}
 
-            {...eventHandlers.signUpDialog}
-          />
+                {...eventHandlers.welcomeDialog}
+              />
 
-          <SignInDialog
-            open={signInDialog.open}
+              <SettingsDialog
+                open={settingsDialog.open}
 
-            {...parameters.signInDialog}
+                {...parameters.settingsDialog}
 
-            {...functions.signInDialog}
+                onClose={() => closeDialog('settingsDialog')}
 
-            onClose={() => closeDialog('signInDialog')}
+                {...eventHandlers.settingsDialog}
+              />
+            </React.Fragment>
+          }
 
-            {...eventHandlers.signInDialog}
-          />
+          {!isSignedIn &&
+            <React.Fragment>
+              <SignUpDialog
+                open={signUpDialog.open}
 
-          <ResetPasswordDialog
-            open={resetPasswordDialog.open}
+                {...parameters.signUpDialog}
 
-            {...parameters.resetPasswordDialog}
+                {...functions.signUpDialog}
 
-            {...functions.resetPasswordDialog}
+                onClose={() => closeDialog('signUpDialog')}
 
-            onClose={() => closeDialog('resetPasswordDialog')}
+                {...eventHandlers.signUpDialog}
+              />
 
-            {...eventHandlers.resetPasswordDialog}
-          />
+              <SignInDialog
+                open={signInDialog.open}
 
-          <WelcomeDialog
-            open={welcomeDialog.open}
+                {...parameters.signInDialog}
 
-            {...parameters.welcomeDialog}
+                {...functions.signInDialog}
 
-            onClose={() => closeDialog('welcomeDialog')}
+                onClose={() => closeDialog('signInDialog')}
 
-            onCancelClick={() => closeDialog('welcomeDialog')}
+                {...eventHandlers.signInDialog}
+              />
 
-            {...eventHandlers.welcomeDialog}
-          />
+              <ResetPasswordDialog
+                open={resetPasswordDialog.open}
 
-          <SettingsDialog
-            open={settingsDialog.open}
+                {...parameters.resetPasswordDialog}
 
-            {...parameters.settingsDialog}
+                {...functions.resetPasswordDialog}
 
-            onClose={() => closeDialog('settingsDialog')}
+                onClose={() => closeDialog('resetPasswordDialog')}
 
-            {...eventHandlers.settingsDialog}
-          />
+                {...eventHandlers.resetPasswordDialog}
+              />
+            </React.Fragment>
+          }
         </Hidden>
 
         <Hidden smUp>
-          <SignUpDialog
-            fullScreen
-            open={signUpDialog.open}
+          {isSignedIn &&
+            <React.Fragment>
+              <WelcomeDialog
+                fullScreen
+                open={welcomeDialog.open}
 
-            {...parameters.signUpDialog}
+                {...parameters.welcomeDialog}
 
-            {...functions.signUpDialog}
+                onClose={() => closeDialog('welcomeDialog')}
 
-            onClose={() => closeDialog('signUpDialog')}
+                onCancelClick={() => closeDialog('welcomeDialog')}
 
-            {...eventHandlers.signUpDialog}
-          />
+                {...eventHandlers.welcomeDialog}
+              />
 
-          <SignInDialog
-            fullScreen
-            open={signInDialog.open}
+              <SettingsDialog
+                fullScreen
+                open={settingsDialog.open}
 
-            {...parameters.signInDialog}
+                {...parameters.settingsDialog}
 
-            {...functions.signInDialog}
+                onClose={() => closeDialog('settingsDialog')}
 
-            onClose={() => closeDialog('signInDialog')}
+                {...eventHandlers.settingsDialog}
+              />
+            </React.Fragment>
+          }
 
-            {...eventHandlers.signInDialog}
-          />
+          {!isSignedIn &&
+            <React.Fragment>
+              <SignUpDialog
+                fullScreen
+                open={signUpDialog.open}
 
-          <ResetPasswordDialog
-            fullScreen
-            open={resetPasswordDialog.open}
+                {...parameters.signUpDialog}
 
-            {...parameters.resetPasswordDialog}
+                {...functions.signUpDialog}
 
-            {...functions.resetPasswordDialog}
+                onClose={() => closeDialog('signUpDialog')}
 
-            onClose={() => closeDialog('resetPasswordDialog')}
+                {...eventHandlers.signUpDialog}
+              />
 
-            {...eventHandlers.resetPasswordDialog}
-          />
+              <SignInDialog
+                fullScreen
+                open={signInDialog.open}
 
-          <WelcomeDialog
-            fullScreen
-            open={welcomeDialog.open}
+                {...parameters.signInDialog}
 
-            {...parameters.welcomeDialog}
+                {...functions.signInDialog}
 
-            onClose={() => closeDialog('welcomeDialog')}
+                onClose={() => closeDialog('signInDialog')}
 
-            onCancelClick={() => closeDialog('welcomeDialog')}
+                {...eventHandlers.signInDialog}
+              />
 
-            {...eventHandlers.welcomeDialog}
-          />
+              <ResetPasswordDialog
+                fullScreen
+                open={resetPasswordDialog.open}
 
-          <SettingsDialog
-            fullScreen
-            open={settingsDialog.open}
+                {...parameters.resetPasswordDialog}
 
-            {...parameters.settingsDialog}
+                {...functions.resetPasswordDialog}
 
-            onClose={() => closeDialog('settingsDialog')}
+                onClose={() => closeDialog('resetPasswordDialog')}
 
-            {...eventHandlers.settingsDialog}
-          />
+                {...eventHandlers.resetPasswordDialog}
+              />
+            </React.Fragment>
+          }
         </Hidden>
       </React.Fragment>
     );
@@ -170,6 +187,7 @@ class DialogHost extends Component {
 DialogHost.propTypes = {
 
   // Properties
+  isSignedIn: PropTypes.bool.isRequired,
   dialogs: PropTypes.object.isRequired,
   parameters: PropTypes.object,
   eventHandlers: PropTypes.object,

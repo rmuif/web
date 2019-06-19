@@ -1059,6 +1059,7 @@ class App extends Component {
                 </Switch>
 
                 <DialogHost
+                  isSignedIn={isSignedIn}
                   dialogs={
                     {
                       signUpDialog,
