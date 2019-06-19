@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 
 import PropTypes from 'prop-types';
 
-import Button from '@material-ui/core/Button';
 import Hidden from '@material-ui/core/Hidden';
 
 import SignUpDialog from '../dialogs/SignUpDialog/SignUpDialog';
@@ -26,7 +25,6 @@ class DialogHost extends Component {
 
     // Functions
     const {
-      openDialog,
       closeDialog
     } = this.props;
 
@@ -209,7 +207,6 @@ DialogHost.propTypes = {
   eventHandlers: PropTypes.object,
 
   // Functions
-  openDialog: PropTypes.func.isRequired,
   closeDialog: PropTypes.func.isRequired
 };
 

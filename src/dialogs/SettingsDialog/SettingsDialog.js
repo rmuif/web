@@ -221,14 +221,6 @@ SettingsDialog.propTypes = {
   type: PropTypes.string.isRequired,
 
   onClose: PropTypes.func.isRequired,
-  onAddAvatarClick: PropTypes.func.isRequired,
-  onChangeAvatarClick: PropTypes.func.isRequired,
-  onAddDisplayNameClick: PropTypes.func.isRequired,
-  onChangeDisplayNameClick: PropTypes.func.isRequired,
-  onAddEmailAddressClick: PropTypes.func.isRequired,
-  onVerifyEmailAddressClick: PropTypes.func.isRequired,
-  onPrimaryColorChange: PropTypes.func.isRequired,
-  onSecondaryColorChange: PropTypes.func.isRequired,
   onTypeChange: PropTypes.func.isRequired,
   onResetClick: PropTypes.func.isRequired
 };

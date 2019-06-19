@@ -27,8 +27,6 @@ import AccessTimeIcon from '@material-ui/icons/AccessTime';
 
 import Profile from '../../../layout/Profile/Profile';
 
-import ConfirmationDialog from '../../../dialogs/ConfirmationDialog/ConfirmationDialog';
-
 const styles = (theme) => ({
   root: {
     marginBottom: theme.spacing(0)
@@ -85,8 +83,6 @@ class AccountTab extends Component {
 
     // Events
     const { onAddAvatarClick, onChangeAvatarClick, onAddDisplayNameClick, onChangeDisplayNameClick, onAddEmailAddressClick } = this.props;
-
-    const { verifyEmailAddressDialog } = this.state;
 
     const isUserComplete = (user.photoURL && user.displayName && user.email);
 
@@ -219,21 +215,6 @@ class AccountTab extends Component {
             </ListItem>
           }
         </List>
-
-        <ConfirmationDialog
-          open={verifyEmailAddressDialog.open}
-
-          title="Send verification e-mail?"
-          contentText="An e-mail will be sent to your e-mail address containing instructions on how to verify your e-mail address."
-          okText="Send"
-          disableOkButton={isPerformingAuthAction}
-          highlightOkButton
-
-          onClose={this.closeVerifyEmailAddressDialog}
-
-          onCancelClick={this.closeVerifyEmailAddressDialog}
-          onOkClick={this.verifyEmailAddress}
-        />
       </React.Fragment>
     );
   }
@@ -244,14 +225,7 @@ AccountTab.propTypes = {
 
   user: PropTypes.object.isRequired,
   isPerformingAuthAction: PropTypes.bool.isRequired,
-  isVerifyingEmailAddress: PropTypes.bool.isRequired,
-
-  onAddAvatarClick: PropTypes.func.isRequired,
-  onChangeAvatarClick: PropTypes.func.isRequired,
-  onAddDisplayNameClick: PropTypes.func.isRequired,
-  onChangeDisplayNameClick: PropTypes.func.isRequired,
-  onAddEmailAddressClick: PropTypes.func.isRequired,
-  onVerifyEmailAddressClick: PropTypes.func.isRequired
+  isVerifyingEmailAddress: PropTypes.bool.isRequired
 };
 
 export default withStyles(styles)(AccountTab);
