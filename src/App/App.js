@@ -23,6 +23,7 @@ import Snackbar from '@material-ui/core/Snackbar';
 // Custom
 import colors from '../colors';
 import settings from '../settings';
+import constraints from '../constraints';
 
 import LaunchScreen from '../layout/LaunchScreen/LaunchScreen';
 
@@ -179,10 +180,14 @@ class App extends Component {
     }
 
     const errors = validate({
-      emailAddress,
-      password,
-      passwordConfirmation
-    }, settings.constraints.signUp);
+      emailAddress: emailAddress,
+      password: password,
+      passwordConfirmation: passwordConfirmation
+    }, {
+      emailAddress: constraints.emailAddress,
+      password: constraints.password,
+      passwordConfirmation: constraints.passwordConfirmation
+    });
 
     if (errors) {
       return;
@@ -229,9 +234,12 @@ class App extends Component {
     }
 
     const errors = validate({
-      emailAddress,
-      password,
-    }, settings.constraints.signIn);
+      emailAddress: emailAddress,
+      password: password,
+    }, {
+      emailAddress: constraints.emailAddress,
+      password: constraints.password
+    });
 
     if (errors) {
       return;
@@ -332,8 +340,10 @@ class App extends Component {
     }
 
     const errors = validate({
-      emailAddress
-    }, settings.constraints.resetPassword);
+      emailAddress: emailAddress
+    }, {
+      emailAddress: constraints.emailAddress
+    });
 
     if (errors) {
       return;
@@ -384,7 +394,11 @@ class App extends Component {
       return;
     }
 
-    const errors = validate({ avatar }, settings.constraints.addAvatar);
+    const errors = validate({
+      avatar: avatar
+    }, {
+      avatar: constraints.avatar
+    });
 
     if (errors) {
       this.setState((state) => ({
@@ -428,7 +442,11 @@ class App extends Component {
       return;
     }
 
-    const errors = validate({ avatar }, settings.constraints.changeAvatar);
+    const errors = validate({
+      avatar: avatar
+    }, {
+      avatar: constraints.avatar
+    });
 
     if (errors) {
       this.setState((state) => ({
@@ -482,7 +500,11 @@ class App extends Component {
       return;
     }
 
-    const errors = validate({ displayName }, settings.constraints.addDisplayName);
+    const errors = validate({
+      displayName: displayName
+    }, {
+      displayName: constraints.username
+    });
 
     if (errors) {
       this.setState((state) => ({
@@ -526,7 +548,11 @@ class App extends Component {
       return;
     }
 
-    const errors = validate({ displayName }, settings.constraints.changeDisplayName);
+    const errors = validate({
+      displayName: displayName
+    }, {
+      displayName: constraints.username
+    });
 
     if (errors) {
       this.setState((state) => ({
@@ -580,7 +606,11 @@ class App extends Component {
       return;
     }
 
-    const errors = validate({ emailAddress }, settings.constraints.addEmailAddress);
+    const errors = validate({
+      emailAddress: emailAddress
+    }, {
+      emailAddress: constraints.emailAddress
+    });
 
     if (errors) {
       this.setState((state) => ({
@@ -1547,7 +1577,6 @@ class App extends Component {
                         open={signUpDialog.open}
 
                         isPerformingAuthAction={isPerformingAuthAction}
-                        constraints={settings.constraints.signUp}
 
                         signUp={this.signUp}
 
@@ -1559,7 +1588,6 @@ class App extends Component {
                         open={signInDialog.open}
 
                         isPerformingAuthAction={isPerformingAuthAction}
-                        constraints={settings.constraints.signIn}
 
                         signIn={this.signIn}
 
@@ -1575,7 +1603,6 @@ class App extends Component {
                         open={signUpDialog.open}
 
                         isPerformingAuthAction={isPerformingAuthAction}
-                        constraints={settings.constraints.signUp}
 
                         signUp={this.signUp}
 
@@ -1588,7 +1615,6 @@ class App extends Component {
                         open={signInDialog.open}
 
                         isPerformingAuthAction={isPerformingAuthAction}
-                        constraints={settings.constraints.signIn}
 
                         signIn={this.signIn}
 
@@ -1602,7 +1628,6 @@ class App extends Component {
                       open={resetPasswordDialog.open}
 
                       isPerformingAuthAction={isPerformingAuthAction}
-                      constraints={settings.constraints.resetPassword}
 
                       resetPassword={this.resetPassword}
 

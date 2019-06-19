@@ -13,6 +13,8 @@ import DialogActions from '@material-ui/core/DialogActions';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 
+import constraints from '../../constraints';
+
 const initialState = {
   emailAddress: '',
 
@@ -29,7 +31,11 @@ class ResetPasswordDialog extends Component {
   resetPassword = () => {
     const { emailAddress } = this.state;
     
-    const errors = validate({ emailAddress }, this.props.constraints);
+    const errors = validate({
+      emailAddress: emailAddress
+    }, {
+      emailAddress: constraints.emailAddress
+    });
 
     if (errors) {
       this.setState({ errors });
@@ -120,8 +126,6 @@ ResetPasswordDialog.propTypes = {
   open: PropTypes.bool.isRequired,
 
   isPerformingAuthAction: PropTypes.bool.isRequired,
-
-  constraints: PropTypes.object.isRequired,
 
   resetPassword: PropTypes.func.isRequired,
 
