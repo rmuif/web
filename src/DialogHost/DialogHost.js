@@ -16,15 +16,7 @@ class DialogHost extends Component {
     // Properties
     const {
       isSignedIn,
-      dialogs,
-      parameters,
-      functions,
-      eventHandlers
-    } = this.props;
-
-    // Functions
-    const {
-      closeDialog
+      dialogs
     } = this.props;
 
     const signUpDialog = dialogs.signUpDialog;
@@ -40,25 +32,15 @@ class DialogHost extends Component {
           {isSignedIn &&
             <React.Fragment>
               <AlertDialog
-                dialogProps={{
-                  open: welcomeDialog.open,
+                dialogProps={welcomeDialog.dialogProps}
 
-                  onClose: () => closeDialog('welcomeDialog')
-                }}
-
-                {...parameters.welcomeDialog}
-
-                {...eventHandlers.welcomeDialog}
+                {...welcomeDialog.props}
               />
 
               <SettingsDialog
-                open={settingsDialog.open}
+                {...settingsDialog.dialogProps}
 
-                {...parameters.settingsDialog}
-
-                onClose={() => closeDialog('settingsDialog')}
-
-                {...eventHandlers.settingsDialog}
+                {...settingsDialog.props}
               />
             </React.Fragment>
           }
@@ -66,39 +48,21 @@ class DialogHost extends Component {
           {!isSignedIn &&
             <React.Fragment>
               <SignUpDialog
-                open={signUpDialog.open}
+                {...signUpDialog.dialogProps}
 
-                {...parameters.signUpDialog}
-
-                {...functions.signUpDialog}
-
-                onClose={() => closeDialog('signUpDialog')}
-
-                {...eventHandlers.signUpDialog}
+                {...signUpDialog.props}
               />
 
               <SignInDialog
-                open={signInDialog.open}
+                {...signInDialog.dialogProps}
 
-                {...parameters.signInDialog}
-
-                {...functions.signInDialog}
-
-                onClose={() => closeDialog('signInDialog')}
-
-                {...eventHandlers.signInDialog}
+                {...signInDialog.props}
               />
 
               <ResetPasswordDialog
-                open={resetPasswordDialog.open}
+                {...resetPasswordDialog.dialogProps}
 
-                {...parameters.resetPasswordDialog}
-
-                {...functions.resetPasswordDialog}
-
-                onClose={() => closeDialog('resetPasswordDialog')}
-
-                {...eventHandlers.resetPasswordDialog}
+                {...resetPasswordDialog.props}
               />
             </React.Fragment>
           }
@@ -110,25 +74,19 @@ class DialogHost extends Component {
               <AlertDialog
                 dialogProps={{
                   fullScreen: true,
-                  open: welcomeDialog.open,
 
-                  onClose: () => closeDialog('welcomeDialog')
+                  ...welcomeDialog.dialogProps
                 }}
 
-                {...parameters.welcomeDialog}
-
-                {...eventHandlers.welcomeDialog}
+                {...welcomeDialog.props}
               />
 
               <SettingsDialog
                 fullScreen
-                open={settingsDialog.open}
 
-                {...parameters.settingsDialog}
+                {...settingsDialog.dialogProps}
 
-                onClose={() => closeDialog('settingsDialog')}
-
-                {...eventHandlers.settingsDialog}
+                {...settingsDialog.props}
               />
             </React.Fragment>
           }
@@ -137,41 +95,26 @@ class DialogHost extends Component {
             <React.Fragment>
               <SignUpDialog
                 fullScreen
-                open={signUpDialog.open}
 
-                {...parameters.signUpDialog}
+                {...signUpDialog.dialogProps}
 
-                {...functions.signUpDialog}
-
-                onClose={() => closeDialog('signUpDialog')}
-
-                {...eventHandlers.signUpDialog}
+                {...signUpDialog.props}
               />
 
               <SignInDialog
                 fullScreen
-                open={signInDialog.open}
 
-                {...parameters.signInDialog}
+                {...signInDialog.dialogProps}
 
-                {...functions.signInDialog}
-
-                onClose={() => closeDialog('signInDialog')}
-
-                {...eventHandlers.signInDialog}
+                {...signInDialog.props}
               />
 
               <ResetPasswordDialog
                 fullScreen
-                open={resetPasswordDialog.open}
 
-                {...parameters.resetPasswordDialog}
+                {...resetPasswordDialog.dialogProps}
 
-                {...functions.resetPasswordDialog}
-
-                onClose={() => closeDialog('resetPasswordDialog')}
-
-                {...eventHandlers.resetPasswordDialog}
+                {...resetPasswordDialog.props}
               />
             </React.Fragment>
           }
@@ -180,15 +123,9 @@ class DialogHost extends Component {
         {isSignedIn &&
           <React.Fragment>
             <AlertDialog
-              dialogProps={{
-                open: signOutDialog.open,
+              dialogProps={signOutDialog.dialogProps}
 
-                onClose: () => closeDialog('signOutDialog')
-              }}
-
-              {...parameters.signOutDialog}
-
-              {...eventHandlers.signOutDialog}
+              {...signOutDialog.props}
             />
           </React.Fragment>
         }
@@ -201,12 +138,7 @@ DialogHost.propTypes = {
 
   // Properties
   isSignedIn: PropTypes.bool.isRequired,
-  dialogs: PropTypes.object.isRequired,
-  parameters: PropTypes.object,
-  eventHandlers: PropTypes.object,
-
-  // Functions
-  closeDialog: PropTypes.func.isRequired
+  dialogs: PropTypes.object.isRequired
 };
 
 export default DialogHost;

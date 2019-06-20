@@ -573,93 +573,108 @@ class App extends Component {
                   isSignedIn={isSignedIn}
                   dialogs={
                     {
-                      signUpDialog,
-                      signInDialog,
-                      resetPasswordDialog,
-                      welcomeDialog,
-                      settingsDialog,
-                      signOutDialog
-                    }
-                  }
-
-                  parameters={
-                    {
                       signUpDialog: {
-                        isPerformingAuthAction: isPerformingAuthAction
+                        dialogProps: {
+                          open: signUpDialog.open,
+
+                          onClose: () => this.closeDialog('signUpDialog')
+                        },
+
+                        props: {
+                          isPerformingAuthAction: isPerformingAuthAction,
+
+                          signUp: this.signUp,
+
+                          onAuthProviderClick: this.signInWithProvider
+                        }
                       },
 
                       signInDialog: {
-                        isPerformingAuthAction: isPerformingAuthAction
+                        dialogProps: {
+                          open: signInDialog.open,
+
+                          onClose: () => this.closeDialog('signInDialog')
+                        },
+
+                        props: {
+                          isPerformingAuthAction: isPerformingAuthAction,
+
+                          signIn: this.signIn,
+
+                          onAuthProviderClick: this.signInWithProvider,
+                          onResetPasswordClick: () => this.openDialog('resetPasswordDialog')
+                        }
                       },
 
                       resetPasswordDialog: {
-                        isPerformingAuthAction: isPerformingAuthAction
+                        dialogProps: {
+                          open: resetPasswordDialog.open,
+
+                          onClose: () => this.closeDialog('resetPasswordDialog')
+                        },
+
+                        props: {
+                          isPerformingAuthAction: isPerformingAuthAction,
+
+                          resetPassword: this.resetPassword
+                        }
                       },
 
                       welcomeDialog: {
-                        title: `Welcome to ${settings.title}!`,
-                        contentText: 'Complete your account by verifying your e-mail address. An e-mail will be sent to your e-mail address containing instructions on how to verify your e-mail address.',
-                        dismissiveAction: <Button color="primary" onClick={() => this.closeDialog('welcomeDialog')}>Cancel</Button>,
-                        confirmingAction: <Button color="primary" disabled={isPerformingAuthAction} variant="contained" onClick={() => this.verifyEmailAddress(() => this.closeDialog('welcomeDialog'))}>Verify</Button>
+                        dialogProps: {
+                          open: welcomeDialog.open,
+
+                          onClose: () => this.closeDialog('welcomeDialog')
+                        },
+
+                        props: {
+                          title: `Welcome to ${settings.title}!`,
+                          contentText: 'Complete your account by verifying your e-mail address. An e-mail will be sent to your e-mail address containing instructions on how to verify your e-mail address.',
+                          dismissiveAction: <Button color="primary" onClick={() => this.closeDialog('welcomeDialog')}>Cancel</Button>,
+                          confirmingAction: <Button color="primary" disabled={isPerformingAuthAction} variant="contained" onClick={() => this.verifyEmailAddress(() => this.closeDialog('welcomeDialog'))}>Verify</Button>
+                        }
                       },
 
                       settingsDialog: {
-                        user: user,
-                        isPerformingAuthAction: isPerformingAuthAction,
-                        isVerifyingEmailAddress: isVerifyingEmailAddress,
-                        colors: colors,
-                        primaryColor: primaryColor,
-                        secondaryColor: secondaryColor,
-                        type: type,
-                        defaultTheme: settings.theme
+                        dialogProps: {
+                          open: settingsDialog.open,
+
+                          onClose: () => this.closeDialog('settingsDialog')
+                        },
+
+                        props: {
+                          user: user,
+                          isPerformingAuthAction: isPerformingAuthAction,
+                          isVerifyingEmailAddress: isVerifyingEmailAddress,
+                          colors: colors,
+                          primaryColor: primaryColor,
+                          secondaryColor: secondaryColor,
+                          type: type,
+                          defaultTheme: settings.theme,
+
+                          onPrimaryColorChange: this.changePrimaryColor,
+                          onSecondaryColorChange: this.changeSecondaryColor,
+                          onTypeChange: this.changeType,
+                          onResetClick: this.resetTheme
+                        }
                       },
 
                       signOutDialog: {
-                        title: 'Sign out?',
-                        contentText: 'While signed out you are unable to manage your profile and conduct other activities that require you to be signed in.',
-                        dismissiveAction: <Button color="primary" onClick={() => this.closeDialog('signOutDialog')}>Cancel</Button>,
-                        confirmingAction: <Button color="primary" disabled={isPerformingAuthAction} variant="contained" onClick={this.signOut}>Sign Out</Button>
+                        dialogProps: {
+                          open: signOutDialog.open,
+
+                          onClose: () => this.closeDialog('signOutDialog')
+                        },
+
+                        props: {
+                          title: 'Sign out?',
+                          contentText: 'While signed out you are unable to manage your profile and conduct other activities that require you to be signed in.',
+                          dismissiveAction: <Button color="primary" onClick={() => this.closeDialog('signOutDialog')}>Cancel</Button>,
+                          confirmingAction: <Button color="primary" disabled={isPerformingAuthAction} variant="contained" onClick={this.signOut}>Sign Out</Button>
+                        }
                       }
                     }
                   }
-
-                  functions={
-                    {
-                      signUpDialog: {
-                        signUp: this.signUp
-                      },
-
-                      signInDialog: {
-                        signIn: this.signIn
-                      },
-
-                      resetPasswordDialog: {
-                        resetPassword: this.resetPassword
-                      }
-                    }
-                  }
-
-                  eventHandlers={
-                    {
-                      signUpDialog: {
-                        onAuthProviderClick: this.signInWithProvider
-                      },
-
-                      signInDialog: {
-                        onAuthProviderClick: this.signInWithProvider,
-                        onResetPasswordClick: () => this.openDialog('resetPasswordDialog')
-                      },
-
-                      settingsDialog: {
-                        onPrimaryColorChange: this.changePrimaryColor,
-                        onSecondaryColorChange: this.changeSecondaryColor,
-                        onTypeChange: this.changeType,
-                        onResetClick: this.resetTheme
-                      }
-                    }
-                  }
-
-                  closeDialog={this.closeDialog}
                 />
 
                 <Snackbar
