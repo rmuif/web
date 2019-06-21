@@ -37,7 +37,10 @@
       "message": "^E-mail address is invalid"
     },
 
-    "equality": "emailAddress",
+    "equality": {
+      "attribute": "emailAddress",
+      "message": "^E-mail address confirmation is not equal to e-mail address"
+    },
 
     "presence": {
       "allowEmpty": false

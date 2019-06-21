@@ -114,9 +114,23 @@ class SignUpDialog extends Component {
   };
 
   handleKeyPress = (event) => {
-    const { emailAddress, password } = this.state;
+    const {
+      firstName,
+      lastName,
+      username,
+      emailAddress,
+      emailAddressConfirmation,
+      password,
+      passwordConfirmation
+    } = this.state;
 
-    if (!emailAddress || !password) {
+    if (!firstName ||
+      !lastName ||
+      !username ||
+      !emailAddress ||
+      !emailAddressConfirmation ||
+      !password ||
+      !passwordConfirmation) {
       return;
     }
 
