@@ -28,6 +28,10 @@ import constraints from '../../constraints';
 import settings from '../../settings';
 
 const styles = (theme) => ({
+  dialogContent: {
+    overflowY: 'hidden'
+  },
+
   icon: {
     marginRight: theme.spacing(0.5)
   },
@@ -317,7 +321,7 @@ class SignUpDialog extends Component {
           Sign up for an account
         </DialogTitle>
 
-        <DialogContent>
+        <DialogContent className={classes.dialogContent}>
           <Hidden xsDown>
             <Grid container direction="row">
               <Grid item xs={3}>
