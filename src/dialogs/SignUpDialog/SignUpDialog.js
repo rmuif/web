@@ -322,7 +322,7 @@ class SignUpDialog extends Component {
         </DialogTitle>
 
         <DialogContent className={classes.dialogContent}>
-          <Hidden xsDown>
+          <Hidden smDown>
             <Grid container direction="row">
               <Grid item xs={3}>
                 <Grid container direction="column" spacing={1}>
@@ -478,7 +478,7 @@ class SignUpDialog extends Component {
             </Grid>
           </Hidden>
 
-          <Hidden smUp>
+          <Hidden mdUp>
             <Grid className={classes.grid} container direction="column" spacing={1}>
               {authProviders.map((authProvider) => {
                 if (!settings.authProviders.includes(authProvider.providerId)) {
