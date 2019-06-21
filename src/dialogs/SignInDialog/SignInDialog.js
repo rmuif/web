@@ -182,6 +182,7 @@ class SignInDialog extends Component {
                       fullWidth
                       helperText={(errors && errors.emailAddress) ? errors.emailAddress[0] : ''}
                       label="E-mail address"
+                      placeholder="john@doe.com"
                       required
                       type="email"
                       value={emailAddress}
@@ -198,6 +199,7 @@ class SignInDialog extends Component {
                       fullWidth
                       helperText={(errors && errors.password) ? errors.password[0] : ''}
                       label="Password"
+                      placeholder="&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;"
                       required
                       type="password"
                       value={password}
@@ -227,6 +229,7 @@ class SignInDialog extends Component {
                   fullWidth
                   helperText={(errors && errors.emailAddress) ? errors.emailAddress[0] : ''}
                   label="E-mail address"
+                  placeholder="john@doe.com"
                   required
                   type="email"
                   value={emailAddress}
@@ -243,6 +246,7 @@ class SignInDialog extends Component {
                   fullWidth
                   helperText={(errors && errors.password) ? errors.password[0] : ''}
                   label="Password"
+                  placeholder="&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;"
                   required
                   type="password"
                   value={password}

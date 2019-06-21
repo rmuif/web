@@ -258,6 +258,7 @@ class SignUpDialog extends Component {
                       fullWidth
                       helperText={(errors && errors.firstName) ? errors.firstName[0] : ''}
                       label="First name"
+                      placeholder="John"
                       required
                       type="text"
                       value={firstName}
@@ -274,6 +275,7 @@ class SignUpDialog extends Component {
                       fullWidth
                       helperText={(errors && errors.lastName) ? errors.lastName[0] : ''}
                       label="Last name"
+                      placeholder="Doe"
                       required
                       type="text"
                       value={lastName}
@@ -292,6 +294,7 @@ class SignUpDialog extends Component {
                       fullWidth
                       helperText={(errors && errors.username) ? errors.username[0] : ''}
                       label="Username"
+                      placeholder="John"
                       required
                       type="text"
                       value={username}
@@ -310,6 +313,7 @@ class SignUpDialog extends Component {
                       fullWidth
                       helperText={(errors && errors.emailAddress) ? errors.emailAddress[0] : ''}
                       label="E-mail address"
+                      placeholder="john@doe.com"
                       required
                       type="email"
                       value={emailAddress}
@@ -326,6 +330,7 @@ class SignUpDialog extends Component {
                       fullWidth
                       helperText={(errors && errors.emailAddressConfirmation) ? errors.emailAddressConfirmation[0] : ''}
                       label="E-mail address confirmation"
+                      placeholder="john@doe.com"
                       required
                       type="email"
                       value={emailAddressConfirmation}
@@ -344,6 +349,7 @@ class SignUpDialog extends Component {
                       fullWidth
                       helperText={(errors && errors.password) ? errors.password[0] : ''}
                       label="Password"
+                      placeholder="&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;"
                       required
                       type="password"
                       value={password}
@@ -360,6 +366,7 @@ class SignUpDialog extends Component {
                       fullWidth
                       helperText={(errors && errors.passwordConfirmation) ? errors.passwordConfirmation[0] : ''}
                       label="Password confirmation"
+                      placeholder="&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;"
                       required
                       type="password"
                       value={passwordConfirmation}
@@ -389,6 +396,7 @@ class SignUpDialog extends Component {
                   fullWidth
                   helperText={(errors && errors.firstName) ? errors.firstName[0] : ''}
                   label="First name"
+                  placeholder="John"
                   required
                   type="text"
                   value={firstName}
@@ -405,6 +413,7 @@ class SignUpDialog extends Component {
                   fullWidth
                   helperText={(errors && errors.lastName) ? errors.lastName[0] : ''}
                   label="Last name"
+                  placeholder="Doe"
                   required
                   type="text"
                   value={lastName}
@@ -421,6 +430,7 @@ class SignUpDialog extends Component {
                   fullWidth
                   helperText={(errors && errors.username) ? errors.username[0] : ''}
                   label="Username"
+                  placeholder="John"
                   required
                   type="text"
                   value={username}
@@ -437,6 +447,7 @@ class SignUpDialog extends Component {
                   fullWidth
                   helperText={(errors && errors.emailAddress) ? errors.emailAddress[0] : ''}
                   label="E-mail address"
+                  placeholder="john@doe.com"
                   required
                   type="email"
                   value={emailAddress}
@@ -453,6 +464,7 @@ class SignUpDialog extends Component {
                   fullWidth
                   helperText={(errors && errors.emailAddressConfirmation) ? errors.emailAddressConfirmation[0] : ''}
                   label="E-mail address confirmation"
+                  placeholder="john@doe.com"
                   required
                   type="email"
                   value={emailAddressConfirmation}
@@ -469,6 +481,7 @@ class SignUpDialog extends Component {
                   fullWidth
                   helperText={(errors && errors.password) ? errors.password[0] : ''}
                   label="Password"
+                  placeholder="&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;"
                   required
                   type="password"
                   value={password}
@@ -485,6 +498,7 @@ class SignUpDialog extends Component {
                   fullWidth
                   helperText={(errors && errors.passwordConfirmation) ? errors.passwordConfirmation[0] : ''}
                   label="Password confirmation"
+                  placeholder="&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;"
                   required
                   type="password"
                   value={passwordConfirmation}
