@@ -129,10 +129,6 @@ class App extends Component {
   };
 
   signUp = (firstName, lastName, username, emailAddress, emailAddressConfirmation, password, passwordConfirmation) => {
-    if (this.state.isSignedIn) {
-      return;
-    }
-
     if (!firstName ||
       !lastName ||
       !username ||
@@ -140,6 +136,10 @@ class App extends Component {
       !emailAddressConfirmation ||
       !password ||
       !passwordConfirmation) {
+      return;
+    }
+
+    if (this.state.isSignedIn) {
       return;
     }
 
@@ -197,11 +197,11 @@ class App extends Component {
   };
 
   signIn = (emailAddress, password) => {
-    if (this.state.isSignedIn) {
+    if (!emailAddress || !password) {
       return;
     }
 
-    if (!emailAddress || !password) {
+    if (this.state.isSignedIn) {
       return;
     }
 
@@ -253,11 +253,11 @@ class App extends Component {
   };
 
   signInWithAuthProvider = (providerId) => {
-    if (this.state.isSignedIn) {
+    if (!providerId) {
       return;
     }
 
-    if (!providerId) {
+    if (this.state.isSignedIn) {
       return;
     }
 
@@ -309,11 +309,11 @@ class App extends Component {
   };
 
   resetPassword = (emailAddress) => {
-    if (this.state.isSignedIn) {
+    if (!emailAddress) {
       return;
     }
 
-    if (!emailAddress) {
+    if (this.state.isSignedIn) {
       return;
     }
 
