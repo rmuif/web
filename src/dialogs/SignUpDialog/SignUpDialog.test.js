@@ -10,10 +10,16 @@ it('renders without crashing', () => {
   ReactDOM.render(
     (
       <SignUpDialog
-        open={false}
+        dialogProps={{
+          open: true,
+
+          onClose: () => {}
+        }}
+
         isPerformingAuthAction={false}
+
         signUp={() => {}}
-        onClose={() => {}}
+
         onAuthProviderClick={() => {}}
       />
     ),
