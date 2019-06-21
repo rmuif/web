@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 
 import validate from 'validate.js';
 
-import { createMuiTheme, withStyles, MuiThemeProvider } from '@material-ui/core/styles';
+import { withStyles } from '@material-ui/core/styles';
 
 import Dialog from '@material-ui/core/Dialog';
 import DialogTitle from '@material-ui/core/DialogTitle';
@@ -17,15 +17,9 @@ import Button from '@material-ui/core/Button';
 import Divider from '@material-ui/core/Divider';
 import TextField from '@material-ui/core/TextField';
 
-import FacebookBoxIcon from 'mdi-material-ui/FacebookBox';
-import GitHubCircleIcon from 'mdi-material-ui/GithubCircle';
-import GoogleIcon from 'mdi-material-ui/Google';
-import MicrosoftIcon from 'mdi-material-ui/Microsoft';
-import TwitterIcon from 'mdi-material-ui/Twitter';
-import YahooIcon from 'mdi-material-ui/Yahoo';
+import AuthProviderList from '../../layout/AuthProviderList/AuthProviderList';
 
 import constraints from '../../constraints';
-import settings from '../../settings';
 
 const styles = (theme) => ({
   dialogContent: {
@@ -234,87 +228,6 @@ class SignUpDialog extends Component {
       errors
     } = this.state;
 
-    const authProviders = [
-      {
-        providerId: 'facebook.com',
-        theme: createMuiTheme({
-          palette: {
-            primary: {
-              main: '#3c5a99',
-              contrastText: '#ffffff'
-            }
-          }
-        }),
-        icon: <FacebookBoxIcon className={classes.icon} />,
-        name: 'Facebook'
-      },
-      {
-        providerId: 'github.com',
-        theme: createMuiTheme({
-          palette: {
-            primary: {
-              main: '#24292e',
-              contrastText: '#ffffff'
-            }
-          }
-        }),
-        icon: <GitHubCircleIcon className={classes.icon} />,
-        name: 'GitHub'
-      },
-      {
-        providerId: 'google.com',
-        theme: createMuiTheme({
-          palette: {
-            primary: {
-              main: '#4285f4',
-              contrastText: '#ffffff'
-            }
-          }
-        }),
-        icon: <GoogleIcon className={classes.icon} />,
-        name: 'Google'
-      },
-      {
-        providerId: 'microsoft.com',
-        theme: createMuiTheme({
-          palette: {
-            primary: {
-              main: '#f65314',
-              contrastText: '#ffffff'
-            }
-          }
-        }),
-        icon: <MicrosoftIcon className={classes.icon} />,
-        name: 'Microsoft'
-      },
-      {
-        providerId: 'twitter.com',
-        theme: createMuiTheme({
-          palette: {
-            primary: {
-              main: '#1da1f2',
-              contrastText: '#ffffff'
-            }
-          }
-        }),
-        icon: <TwitterIcon className={classes.icon} />,
-        name: 'Twitter'
-      },
-      {
-        providerId: 'yahoo.com',
-        theme: createMuiTheme({
-          palette: {
-            primary: {
-              main: '#410093',
-              contrastText: '#ffffff'
-            }
-          }
-        }),
-        icon: <YahooIcon className={classes.icon} />,
-        name: 'Yahoo'
-      }
-    ];
-
     return (
       <Dialog fullWidth maxWidth="md" {...dialogProps} onKeyPress={this.handleKeyPress} onExited={this.handleExited}>
         <DialogTitle>
@@ -325,29 +238,11 @@ class SignUpDialog extends Component {
           <Hidden smDown>
             <Grid container direction="row">
               <Grid item xs={3}>
-                <Grid container direction="column" spacing={1}>
-                  {authProviders.map((authProvider) => {
-                    if (!settings.authProviders.includes(authProvider.providerId)) {
-                      return null;
-                    }
+                <AuthProviderList
+                  isPerformingAuthAction={isPerformingAuthAction}
 
-                    return (
-                      <Grid key={authProvider.providerId} item>
-                        <MuiThemeProvider theme={authProvider.theme}>
-                          <Button
-                            color="primary"
-                            disabled={isPerformingAuthAction}
-                            fullWidth
-                            variant="contained"
-                            onClick={() => onAuthProviderClick(authProvider.providerId)}>
-                            {authProvider.icon}
-                            {authProvider.name}
-                          </Button>
-                        </MuiThemeProvider>
-                      </Grid>
-                    );
-                  })}
-                </Grid>
+                  onAuthProviderClick={onAuthProviderClick}
+                />
               </Grid>
 
               <Grid item xs={1}>
@@ -479,29 +374,12 @@ class SignUpDialog extends Component {
           </Hidden>
 
           <Hidden mdUp>
-            <Grid className={classes.grid} container direction="column" spacing={1}>
-              {authProviders.map((authProvider) => {
-                if (!settings.authProviders.includes(authProvider.providerId)) {
-                  return null;
-                }
+            <AuthProviderList
+              gutterBottom
+              isPerformingAuthAction={isPerformingAuthAction}
 
-                return (
-                  <Grid key={authProvider.providerId} item>
-                    <MuiThemeProvider theme={authProvider.theme}>
-                      <Button
-                        color="primary"
-                        disabled={isPerformingAuthAction}
-                        fullWidth
-                        variant="contained"
-                        onClick={() => onAuthProviderClick(authProvider.providerId)}>
-                        {authProvider.icon}
-                        {authProvider.name}
-                      </Button>
-                    </MuiThemeProvider>
-                  </Grid>
-                );
-              })}
-            </Grid>
+              onAuthProviderClick={onAuthProviderClick}
+            />
 
             <Grid container direction="column" spacing={2}>
               <Grid item xs>
@@ -654,7 +532,7 @@ SignUpDialog.propTypes = {
   dialogProps: PropTypes.object.isRequired,
 
   // Custom Properties
-  isPerformingAuthAction: PropTypes.bool.isRequired,
+  isPerformingAuthAction: PropTypes.bool,
 
   // Custom Functions
   signUp: PropTypes.func.isRequired,
