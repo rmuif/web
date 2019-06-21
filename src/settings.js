@@ -47,7 +47,16 @@ const settings = {
       messagingSenderId: '552659850812',
       appId: '1:552659850812:web:d685f74f72161d96'
     }
-  }
+  },
+
+  authProviders: [
+    'facebook.com',
+    'github.com',
+    'google.com',
+    'microsoft.com',
+    'twitter.com',
+    'yahoo.com'
+  ]
 };
 
 export default settings;

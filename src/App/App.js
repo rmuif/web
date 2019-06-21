@@ -238,6 +238,62 @@ class App extends Component {
     });
   };
 
+  signInWithAuthProvider = (providerId) => {
+    if (this.state.isSignedIn) {
+      return;
+    }
+
+    if (!providerId) {
+      return;
+    }
+
+    const provider = new firebase.auth.OAuthProvider(providerId);
+
+    if (!provider) {
+      return;
+    }
+
+    this.setState({
+      isPerformingAuthAction: true
+    }, () => {
+      auth.signInWithPopup(provider).then((value) => {
+        this.closeDialog('signUpDialog', () => {
+          this.closeDialog('signInDialog', () => {
+            const user = value.user;
+            const displayName = user.displayName;
+            const emailAddress = user.email;
+
+            this.openSnackbar(`Signed in as ${displayName || emailAddress}`);
+          });
+        });
+      }).catch((reason) => {
+        const code = reason.code;
+        const message = reason.message;
+
+        switch (code) {
+          case 'auth/account-exists-with-different-credential':
+          case 'auth/auth-domain-config-required':
+          case 'auth/cancelled-popup-request':
+          case 'auth/operation-not-allowed':
+          case 'auth/operation-not-supported-in-this-environment':
+          case 'auth/popup-blocked':
+          case 'auth/popup-closed-by-user':
+          case 'auth/unauthorized-domain':
+            this.openSnackbar(message);
+            return;
+
+          default:
+            this.openSnackbar(message);
+            return;
+        }
+      }).finally(() => {
+        this.setState({
+          isPerformingAuthAction: false
+        });
+      });
+    });
+  };
+
   signInWithProvider = (provider) => {
     if (this.state.isSignedIn) {
       return;
@@ -599,10 +655,10 @@ class App extends Component {
                         props: {
                           isPerformingAuthAction: isPerformingAuthAction,
 
+                          resetPassword: this.resetPassword,
                           signIn: this.signIn,
 
-                          onAuthProviderClick: this.signInWithProvider,
-                          onResetPasswordClick: () => this.openDialog('resetPasswordDialog')
+                          onAuthProviderClick: this.signInWithAuthProvider
                         }
                       },
 
