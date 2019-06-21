@@ -16,8 +16,6 @@ it('renders without crashing', () => {
           onClose: () => {}
         }}
 
-        isPerformingAuthAction={false}
-
         resetPassword={() => {}}
         signIn={() => {}}
 
