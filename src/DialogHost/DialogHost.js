@@ -54,7 +54,7 @@ class DialogHost extends Component {
               />
 
               <SignInDialog
-                {...signInDialog.dialogProps}
+                dialogProps={signInDialog.dialogProps}
 
                 {...signInDialog.props}
               />
@@ -102,9 +102,11 @@ class DialogHost extends Component {
               />
 
               <SignInDialog
-                fullScreen
+                dialogProps={{
+                  fullScreen: true,
 
-                {...signInDialog.dialogProps}
+                  ...signInDialog.dialogProps
+                }}
 
                 {...signInDialog.props}
               />

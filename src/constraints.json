@@ -23,7 +23,9 @@
   },
 
   "emailAddress": {
-    "email": true,
+    "email": {
+      "message": "^E-mail address is invalid"
+    },
 
     "presence": {
       "allowEmpty": false
@@ -49,16 +51,6 @@
 
     "presence": {
       "allowEmpty": false
-    }
-  },
-
-  "avatar": {
-    "presence": {
-      "allowEmpty": false
-    },
-
-    "url": {
-      "message": "^Avatar is not a valid URL"
     }
   }
 }

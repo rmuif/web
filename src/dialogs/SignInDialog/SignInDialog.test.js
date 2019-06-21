@@ -10,12 +10,18 @@ it('renders without crashing', () => {
   ReactDOM.render(
     (
       <SignInDialog
-        open={false}
+        dialogProps={{
+          open: true,
+
+          onClose: () => {}
+        }}
+
         isPerformingAuthAction={false}
+
+        resetPassword={() => {}}
         signIn={() => {}}
-        onClose={() => {}}
+
         onAuthProviderClick={() => {}}
-        onResetPasswordClick={() => {}}
       />
     ),
     div
