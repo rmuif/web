@@ -32,6 +32,18 @@
     }
   },
 
+  "emailAddressConfirmation": {
+    "email": {
+      "message": "^E-mail address is invalid"
+    },
+
+    "equality": "emailAddress",
+
+    "presence": {
+      "allowEmpty": false
+    }
+  },
+
   "password": {
     "length": {
       "minimum": 6

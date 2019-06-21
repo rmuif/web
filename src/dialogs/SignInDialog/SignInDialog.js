@@ -37,6 +37,10 @@ const styles = (theme) => ({
 
     width: theme.spacing(0.125),
     height: '100%'
+  },
+
+  grid: {
+    marginBottom: theme.spacing(2)
   }
 });
 
@@ -53,40 +57,6 @@ class SignInDialog extends Component {
 
     this.state = initialState;
   }
-
-  handleKeyPress = (event) => {
-    const { emailAddress, password } = this.state;
-
-    if (!emailAddress || !password) {
-      return;
-    }
-
-    const key = event.key;
-
-    if (event.altKey || event.ctrlKey || event.metaKey || event.shiftKey) {
-      return;
-    }
-
-    if (key === 'Enter') {
-      this.signIn();
-    }
-  };
-
-  handleExited = () => {
-    this.setState(initialState);
-  };
-
-  handleEmailAddressChange = (event) => {
-    const emailAddress = event.target.value;
-
-    this.setState({ emailAddress });
-  };
-
-  handlePasswordChange = (event) => {
-    const password = event.target.value;
-
-    this.setState({ password });
-  };
 
   resetPassword = () => {
     const { emailAddress } = this.state;
@@ -132,6 +102,44 @@ class SignInDialog extends Component {
         this.props.signIn(emailAddress, password);
       });
     }
+  };
+
+  handleKeyPress = (event) => {
+    const { emailAddress, password } = this.state;
+
+    if (!emailAddress || !password) {
+      return;
+    }
+
+    const key = event.key;
+
+    if (event.altKey || event.ctrlKey || event.metaKey || event.shiftKey) {
+      return;
+    }
+
+    if (key === 'Enter') {
+      this.signIn();
+    }
+  };
+
+  handleExited = () => {
+    this.setState(initialState);
+  };
+
+  handleEmailAddressChange = (event) => {
+    const emailAddress = event.target.value;
+
+    this.setState({
+      emailAddress: emailAddress
+    });
+  };
+
+  handlePasswordChange = (event) => {
+    const password = event.target.value;
+
+    this.setState({
+      password: password
+    });
   };
 
   render() {
@@ -232,7 +240,7 @@ class SignInDialog extends Component {
     ];
 
     return (
-      <Dialog {...dialogProps} onKeyPress={this.handleKeyPress} onExited={this.handleExited}>
+      <Dialog fullWidth maxWidth="sm" {...dialogProps} onKeyPress={this.handleKeyPress} onExited={this.handleExited}>
         <DialogTitle>
           Sign in to your account
         </DialogTitle>
@@ -271,41 +279,45 @@ class SignInDialog extends Component {
               </Grid>
 
               <Grid item xs={7}>
-                <TextField
-                  autoComplete="email"
-                  error={!!(errors && errors.emailAddress)}
-                  fullWidth
-                  helperText={(errors && errors.emailAddress) ? errors.emailAddress[0] : ''}
-                  label="E-mail address"
-                  margin="normal"
-                  required
-                  type="email"
-                  value={emailAddress}
-                  variant="outlined"
+                <Grid container direction="column" spacing={2}>
+                  <Grid item xs>
+                    <TextField
+                      autoComplete="email"
+                      error={!!(errors && errors.emailAddress)}
+                      fullWidth
+                      helperText={(errors && errors.emailAddress) ? errors.emailAddress[0] : ''}
+                      label="E-mail address"
+                      required
+                      type="email"
+                      value={emailAddress}
+                      variant="outlined"
 
-                  onChange={this.handleEmailAddressChange}
-                />
+                      onChange={this.handleEmailAddressChange}
+                    />
+                  </Grid>
 
-                <TextField
-                  autoComplete="current-password"
-                  error={!!(errors && errors.password)}
-                  fullWidth
-                  helperText={(errors && errors.password) ? errors.password[0] : ''}
-                  label="Password"
-                  margin="normal"
-                  required
-                  type="password"
-                  value={password}
-                  variant="outlined"
+                  <Grid item xs>
+                    <TextField
+                      autoComplete="current-password"
+                      error={!!(errors && errors.password)}
+                      fullWidth
+                      helperText={(errors && errors.password) ? errors.password[0] : ''}
+                      label="Password"
+                      required
+                      type="password"
+                      value={password}
+                      variant="outlined"
 
-                  onChange={this.handlePasswordChange}
-                />
+                      onChange={this.handlePasswordChange}
+                    />
+                  </Grid>
+                </Grid>
               </Grid>
             </Grid>
           </Hidden>
 
           <Hidden smUp>
-            <Grid container direction="column" spacing={1}>
+            <Grid className={classes.grid} container direction="column" spacing={1}>
               {authProviders.map((authProvider) => {
                 if (!settings.authProviders.includes(authProvider.providerId)) {
                   return null;
@@ -329,35 +341,39 @@ class SignInDialog extends Component {
               })}
             </Grid>
 
-            <TextField
-              autoComplete="email"
-              error={!!(errors && errors.emailAddress)}
-              fullWidth
-              helperText={(errors && errors.emailAddress) ? errors.emailAddress[0] : ''}
-              label="E-mail address"
-              margin="normal"
-              required
-              type="email"
-              value={emailAddress}
-              variant="outlined"
+            <Grid container direction="column" spacing={2}>
+              <Grid item xs>
+                <TextField
+                  autoComplete="email"
+                  error={!!(errors && errors.emailAddress)}
+                  fullWidth
+                  helperText={(errors && errors.emailAddress) ? errors.emailAddress[0] : ''}
+                  label="E-mail address"
+                  required
+                  type="email"
+                  value={emailAddress}
+                  variant="outlined"
 
-              onChange={this.handleEmailAddressChange}
-            />
+                  onChange={this.handleEmailAddressChange}
+                />
+              </Grid>
 
-            <TextField
-              autoComplete="current-password"
-              error={!!(errors && errors.password)}
-              fullWidth
-              helperText={(errors && errors.password) ? errors.password[0] : ''}
-              label="Password"
-              margin="normal"
-              required
-              type="password"
-              value={password}
-              variant="outlined"
+              <Grid item xs>
+                <TextField
+                  autoComplete="current-password"
+                  error={!!(errors && errors.password)}
+                  fullWidth
+                  helperText={(errors && errors.password) ? errors.password[0] : ''}
+                  label="Password"
+                  required
+                  type="password"
+                  value={password}
+                  variant="outlined"
 
-              onChange={this.handlePasswordChange}
-            />
+                  onChange={this.handlePasswordChange}
+                />
+              </Grid>
+            </Grid>
           </Hidden>
         </DialogContent>
 

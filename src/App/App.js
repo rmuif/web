@@ -128,21 +128,35 @@ class App extends Component {
     this.setState({ dialog }, callback);
   };
 
-  signUp = (emailAddress, password, passwordConfirmation) => {
+  signUp = (firstName, lastName, username, emailAddress, emailAddressConfirmation, password, passwordConfirmation) => {
     if (this.state.isSignedIn) {
       return;
     }
 
-    if (!emailAddress || !password || !passwordConfirmation) {
+    if (!firstName ||
+      !lastName ||
+      !username ||
+      !emailAddress ||
+      !emailAddressConfirmation ||
+      !password ||
+      !passwordConfirmation) {
       return;
     }
 
     const errors = validate({
+      firstName: firstName,
+      lastName: lastName,
+      username: username,
       emailAddress: emailAddress,
+      emailAddressConfirmation: emailAddressConfirmation,
       password: password,
       passwordConfirmation: passwordConfirmation
     }, {
+      firstName: constraints.firstName,
+      lastName: constraints.lastName,
+      username: constraints.username,
       emailAddress: constraints.emailAddress,
+      emailAddressConfirmation: constraints.emailAddressConfirmation,
       password: constraints.password,
       passwordConfirmation: constraints.passwordConfirmation
     });
@@ -248,56 +262,6 @@ class App extends Component {
     }
 
     const provider = new firebase.auth.OAuthProvider(providerId);
-
-    if (!provider) {
-      return;
-    }
-
-    this.setState({
-      isPerformingAuthAction: true
-    }, () => {
-      auth.signInWithPopup(provider).then((value) => {
-        this.closeDialog('signUpDialog', () => {
-          this.closeDialog('signInDialog', () => {
-            const user = value.user;
-            const displayName = user.displayName;
-            const emailAddress = user.email;
-
-            this.openSnackbar(`Signed in as ${displayName || emailAddress}`);
-          });
-        });
-      }).catch((reason) => {
-        const code = reason.code;
-        const message = reason.message;
-
-        switch (code) {
-          case 'auth/account-exists-with-different-credential':
-          case 'auth/auth-domain-config-required':
-          case 'auth/cancelled-popup-request':
-          case 'auth/operation-not-allowed':
-          case 'auth/operation-not-supported-in-this-environment':
-          case 'auth/popup-blocked':
-          case 'auth/popup-closed-by-user':
-          case 'auth/unauthorized-domain':
-            this.openSnackbar(message);
-            return;
-
-          default:
-            this.openSnackbar(message);
-            return;
-        }
-      }).finally(() => {
-        this.setState({
-          isPerformingAuthAction: false
-        });
-      });
-    });
-  };
-
-  signInWithProvider = (provider) => {
-    if (this.state.isSignedIn) {
-      return;
-    }
 
     if (!provider) {
       return;
@@ -641,7 +605,7 @@ class App extends Component {
 
                           signUp: this.signUp,
 
-                          onAuthProviderClick: this.signInWithProvider
+                          onAuthProviderClick: this.signInWithAuthProvider
                         }
                       },
 

@@ -48,7 +48,7 @@ class DialogHost extends Component {
           {!isSignedIn &&
             <React.Fragment>
               <SignUpDialog
-                {...signUpDialog.dialogProps}
+                dialogProps={signUpDialog.dialogProps}
 
                 {...signUpDialog.props}
               />
@@ -94,9 +94,11 @@ class DialogHost extends Component {
           {!isSignedIn &&
             <React.Fragment>
               <SignUpDialog
-                fullScreen
+                dialogProps={{
+                  fullScreen: true,
 
-                {...signUpDialog.dialogProps}
+                  ...signUpDialog.dialogProps
+                }}
 
                 {...signUpDialog.props}
               />
