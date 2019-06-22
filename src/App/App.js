@@ -6,6 +6,7 @@ import validate from 'validate.js';
 
 import firebase from 'firebase/app';
 import 'firebase/auth';
+import 'firebase/firestore';
 import 'firebase/performance';
 
 import readingTime from 'reading-time';
@@ -31,6 +32,7 @@ import DialogHost from '../DialogHost/DialogHost';
 firebase.initializeApp(settings.credentials.firebase);
 
 const auth = firebase.auth();
+const firestore = firebase.firestore();
 
 // eslint-disable-next-line no-unused-vars
 const performance = firebase.performance();
@@ -169,10 +171,31 @@ class App extends Component {
       isPerformingAuthAction: true
     }, () => {
       auth.createUserWithEmailAndPassword(emailAddress, password).then((value) => {
-        this.closeDialog('signUpDialog', () => {
-          this.openDialog('welcomeDialog');
+
+        const user = value.user;
+        const uid = user.uid;
+
+        firestore.collection('users').doc(uid).set({
+          firstName: firstName,
+          lastName: lastName,
+          username: username
+        }).then((value) => {
+          this.closeDialog('signUpDialog', () => {
+            this.openDialog('welcomeDialog');
+          });
+        }).catch((reason) => {
+          const code = reason.code;
+          const message = reason.message;
+
+          switch (code) {
+            default:
+              this.openSnackbar(message);
+              return;
+          }
         });
+
       }).catch((reason) => {
+
         const code = reason.code;
         const message = reason.message;
 
@@ -188,10 +211,13 @@ class App extends Component {
             this.openSnackbar(message);
             return;
         }
+
       }).finally(() => {
+
         this.setState({
           isPerformingAuthAction: false
         });
+
       });
     });
   };
