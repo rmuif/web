@@ -309,7 +309,7 @@ class AccountTab extends Component {
 
     return (
       <DialogContent>
-        <Box textAlign="center">
+        <Box mb={1} textAlign="center">
           <Box mb={1}>
             <Avatar className={classes.avatar} alt="Avatar" src={user.photoURL} />
           </Box>
