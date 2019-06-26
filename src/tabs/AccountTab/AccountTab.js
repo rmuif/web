@@ -24,7 +24,9 @@ import CloudUploadIcon from '@material-ui/icons/CloudUpload';
 import PersonIcon from '@material-ui/icons/Person';
 import EditIcon from '@material-ui/icons/Edit';
 import PersonOutlineIcon from '@material-ui/icons/PersonOutline';
-import EmailIcon from '@material-ui/icons/Email';
+import CheckCircleIcon from '@material-ui/icons/CheckCircle';
+import WarningIcon from '@material-ui/icons/Warning';
+import CheckIcon from '@material-ui/icons/Check';
 import AccessTimeIcon from '@material-ui/icons/AccessTime';
 
 import validate from 'validate.js';
@@ -462,11 +464,21 @@ class AccountTab extends Component {
           </ListItem>
 
           <ListItem>
-            <Hidden xsDown>
-              <ListItemIcon>
-                <EmailIcon />
-              </ListItemIcon>
-            </Hidden>
+            <ListItemIcon>
+              <React.Fragment>
+                {user.emailVerified &&
+                  <Tooltip title="Verified">
+                    <CheckCircleIcon color="primary" />
+                  </Tooltip>
+                }
+
+                {!user.emailVerified &&
+                  <Tooltip title="Not verified">
+                    <WarningIcon color="error" />
+                  </Tooltip>
+                }
+              </React.Fragment>
+            </ListItemIcon>
 
             {showingField === 'emailAddress' &&
               <TextField
@@ -495,6 +507,18 @@ class AccountTab extends Component {
                   primary="E-mail address"
                   secondary={user.email}
                 />
+
+                {!user.emailVerified &&
+                  <Box clone mr={7}>
+                    <ListItemSecondaryAction>
+                      <Tooltip title="Verify">
+                        <IconButton>
+                          <CheckIcon />
+                        </IconButton>
+                      </Tooltip>
+                    </ListItemSecondaryAction>
+                  </Box>
+                }
 
                 <ListItemSecondaryAction>
                   <Tooltip title="Change">
