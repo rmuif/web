@@ -22,6 +22,7 @@ import IconButton from '@material-ui/core/IconButton';
 import CloudUploadIcon from '@material-ui/icons/CloudUpload';
 import PersonIcon from '@material-ui/icons/Person';
 import EditIcon from '@material-ui/icons/Edit';
+import PersonOutlineIcon from '@material-ui/icons/PersonOutline';
 import EmailIcon from '@material-ui/icons/Email';
 import AccessTimeIcon from '@material-ui/icons/AccessTime';
 
@@ -411,7 +412,7 @@ class AccountTab extends Component {
 
           <ListItem>
             <ListItemIcon>
-              <PersonIcon />
+              <PersonOutlineIcon />
             </ListItemIcon>
 
             {showingField === 'username' &&
