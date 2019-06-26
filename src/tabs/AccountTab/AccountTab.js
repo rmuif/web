@@ -2,7 +2,12 @@ import React, { Component } from 'react';
 
 import PropTypes from 'prop-types';
 
+import { withStyles } from '@material-ui/core/styles';
+
 import DialogContent from '@material-ui/core/DialogContent';
+import Box from '@material-ui/core/Box';
+import Avatar from '@material-ui/core/Avatar';
+import Button from '@material-ui/core/Button';
 
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
@@ -14,6 +19,7 @@ import TextField from '@material-ui/core/TextField';
 import Tooltip from '@material-ui/core/Tooltip';
 import IconButton from '@material-ui/core/IconButton';
 
+import CloudUploadIcon from '@material-ui/icons/CloudUpload';
 import PersonIcon from '@material-ui/icons/Person';
 import EditIcon from '@material-ui/icons/Edit';
 import EmailIcon from '@material-ui/icons/Email';
@@ -24,6 +30,20 @@ import moment from 'moment';
 
 import constraints from '../../constraints';
 import * as auth from '../../auth';
+
+const styles = (theme) => ({
+  avatar: {
+    marginRight: 'auto',
+    marginLeft: 'auto',
+
+    width: theme.spacing(15),
+    height: theme.spacing(15)
+  },
+
+  uploadButtonIcon: {
+    marginRight: theme.spacing(1)
+  }
+});
 
 const initialState = {
   showingField: '',
@@ -176,6 +196,28 @@ class AccountTab extends Component {
     }
   };
 
+  handleKeyDown = (event, fieldId) => {
+    if (!event || !fieldId) {
+      return;
+    }
+
+    if (event.altKey || event.ctrlKey || event.metaKey || event.shiftKey) {
+      return;
+    }
+
+    const key = event.key;
+
+    if (!key) {
+      return;
+    }
+
+    if (key === 'Escape') {
+      this.hideFields();
+    } else if (key === 'Enter') {
+      this.changeField(fieldId);
+    }
+  };
+
   handleKeyPress = (event, fieldId) => {
     if (!event || !fieldId) {
       return;
@@ -245,6 +287,9 @@ class AccountTab extends Component {
   };
 
   render() {
+    // Styling
+    const { classes } = this.props;
+
     // Properties
     const {
       user,
@@ -264,8 +309,23 @@ class AccountTab extends Component {
 
     return (
       <DialogContent>
+        <Box textAlign="center">
+          <Box mb={1}>
+            <Avatar className={classes.avatar} alt="Avatar" src={user.photoURL} />
+          </Box>
+
+          <Button color="primary" variant="contained">
+            <CloudUploadIcon className={classes.uploadButtonIcon} />
+            Upload
+          </Button>
+        </Box>
+
         <List disablePadding>
           <ListItem>
+            <ListItemIcon>
+              <PersonIcon />
+            </ListItemIcon>
+
             {showingField === 'firstName' &&
               <TextField
                 autoComplete="given-name"
@@ -281,7 +341,7 @@ class AccountTab extends Component {
                 variant="filled"
 
                 onBlur={this.hideFields}
-                onKeyPress={(event) => this.handleKeyPress(event, 'firstName')}
+                onKeyDown={(event) => this.handleKeyDown(event, 'firstName')}
 
                 onChange={this.handleFirstNameChange}
               />
@@ -289,10 +349,6 @@ class AccountTab extends Component {
 
             {showingField !== 'firstName' &&
               <React.Fragment>
-                <ListItemIcon>
-                  <PersonIcon />
-                </ListItemIcon>
-
                 <ListItemText
                   primary="First name"
                   secondary={userData.firstName}
@@ -310,6 +366,10 @@ class AccountTab extends Component {
           </ListItem>
 
           <ListItem>
+            <ListItemIcon>
+              <PersonIcon />
+            </ListItemIcon>
+
             {showingField === 'lastName' &&
               <TextField
                 autoComplete="family-name"
@@ -325,7 +385,7 @@ class AccountTab extends Component {
                 variant="filled"
 
                 onBlur={this.hideFields}
-                onKeyPress={(event) => this.handleKeyPress(event, 'lastName')}
+                onKeyDown={(event) => this.handleKeyDown(event, 'lastName')}
 
                 onChange={this.handleLastNameChange}
               />
@@ -333,10 +393,6 @@ class AccountTab extends Component {
 
             {showingField !== 'lastName' &&
               <React.Fragment>
-                <ListItemIcon>
-                  <PersonIcon />
-                </ListItemIcon>
-
                 <ListItemText
                   primary="Last name"
                   secondary={userData.lastName}
@@ -354,6 +410,10 @@ class AccountTab extends Component {
           </ListItem>
 
           <ListItem>
+            <ListItemIcon>
+              <PersonIcon />
+            </ListItemIcon>
+
             {showingField === 'username' &&
               <TextField
                 autoComplete="username"
@@ -369,7 +429,7 @@ class AccountTab extends Component {
                 variant="filled"
 
                 onBlur={this.hideFields}
-                onKeyPress={(event) => this.handleKeyPress(event, 'username')}
+                onKeyDown={(event) => this.handleKeyDown(event, 'username')}
 
                 onChange={this.handleUsernameChange}
               />
@@ -377,10 +437,6 @@ class AccountTab extends Component {
 
             {showingField !== 'username' &&
               <React.Fragment>
-                <ListItemIcon>
-                  <PersonIcon />
-                </ListItemIcon>
-
                 <ListItemText
                   primary="Username"
                   secondary={userData.username}
@@ -398,6 +454,10 @@ class AccountTab extends Component {
           </ListItem>
 
           <ListItem>
+            <ListItemIcon>
+              <EmailIcon />
+            </ListItemIcon>
+
             {showingField === 'emailAddress' &&
               <TextField
                 autoComplete="email"
@@ -413,7 +473,7 @@ class AccountTab extends Component {
                 variant="filled"
 
                 onBlur={this.hideFields}
-                onKeyPress={(event) => this.handleKeyPress(event, 'emailAddress')}
+                onKeyDown={(event) => this.handleKeyDown(event, 'emailAddress')}
 
                 onChange={this.handleEmailAddressChange}
               />
@@ -421,10 +481,6 @@ class AccountTab extends Component {
 
             {showingField !== 'emailAddress' &&
               <React.Fragment>
-                <ListItemIcon>
-                  <EmailIcon />
-                </ListItemIcon>
-
                 <ListItemText
                   primary="E-mail address"
                   secondary={user.email}
@@ -459,7 +515,7 @@ class AccountTab extends Component {
 
             <ListItemText
               primary="Signed up"
-              secondary={moment(user.metadata.creationTime).format('LLLL')}
+              secondary={moment(user.metadata.creationTime).format('LL')}
             />
           </ListItem>
         </List>
@@ -469,9 +525,12 @@ class AccountTab extends Component {
 }
 
 AccountTab.propTypes = {
+  // Styling
+  classes: PropTypes.object.isRequired,
+
   // Properties
   user: PropTypes.object.isRequired,
   userData: PropTypes.object.isRequired
 };
 
-export default AccountTab;
+export default withStyles(styles)(AccountTab);

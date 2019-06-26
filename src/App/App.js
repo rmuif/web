@@ -671,6 +671,7 @@ class App extends Component {
                       settingsDialog: {
                         dialogProps: {
                           open: settingsDialog.open,
+                          disableEscapeKeyDown: true,
 
                           onClose: () => this.closeDialog('settingsDialog')
                         },
