@@ -15,6 +15,7 @@ import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 import ListItemSecondaryAction from '@material-ui/core/ListItemSecondaryAction';
 
+import Hidden from '@material-ui/core/Hidden';
 import TextField from '@material-ui/core/TextField';
 import Tooltip from '@material-ui/core/Tooltip';
 import IconButton from '@material-ui/core/IconButton';
@@ -323,9 +324,11 @@ class AccountTab extends Component {
 
         <List disablePadding>
           <ListItem>
-            <ListItemIcon>
-              <PersonIcon />
-            </ListItemIcon>
+            <Hidden xsDown>
+              <ListItemIcon>
+                <PersonIcon />
+              </ListItemIcon>
+            </Hidden>
 
             {showingField === 'firstName' &&
               <TextField
@@ -367,9 +370,11 @@ class AccountTab extends Component {
           </ListItem>
 
           <ListItem>
-            <ListItemIcon>
-              <PersonIcon />
-            </ListItemIcon>
+            <Hidden xsDown>
+              <ListItemIcon>
+                <PersonIcon />
+              </ListItemIcon>
+            </Hidden>
 
             {showingField === 'lastName' &&
               <TextField
@@ -411,9 +416,11 @@ class AccountTab extends Component {
           </ListItem>
 
           <ListItem>
-            <ListItemIcon>
-              <PersonOutlineIcon />
-            </ListItemIcon>
+            <Hidden xsDown>
+              <ListItemIcon>
+                <PersonOutlineIcon />
+              </ListItemIcon>
+            </Hidden>
 
             {showingField === 'username' &&
               <TextField
@@ -455,9 +462,11 @@ class AccountTab extends Component {
           </ListItem>
 
           <ListItem>
-            <ListItemIcon>
-              <EmailIcon />
-            </ListItemIcon>
+            <Hidden xsDown>
+              <ListItemIcon>
+                <EmailIcon />
+              </ListItemIcon>
+            </Hidden>
 
             {showingField === 'emailAddress' &&
               <TextField
@@ -499,9 +508,11 @@ class AccountTab extends Component {
           </ListItem>
 
           <ListItem>
-            <ListItemIcon>
-              <AccessTimeIcon />
-            </ListItemIcon>
+            <Hidden xsDown>
+              <ListItemIcon>
+                <AccessTimeIcon />
+              </ListItemIcon>
+            </Hidden>
 
             <ListItemText
               primary="Last sign-in"
@@ -510,9 +521,11 @@ class AccountTab extends Component {
           </ListItem>
 
           <ListItem>
-            <ListItemIcon>
-              <AccessTimeIcon />
-            </ListItemIcon>
+            <Hidden xsDown>
+              <ListItemIcon>
+                <AccessTimeIcon />
+              </ListItemIcon>
+            </Hidden>
 
             <ListItemText
               primary="Signed up"
