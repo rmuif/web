@@ -28,6 +28,7 @@ import CheckCircleIcon from '@material-ui/icons/CheckCircle';
 import WarningIcon from '@material-ui/icons/Warning';
 import CheckIcon from '@material-ui/icons/Check';
 import AccessTimeIcon from '@material-ui/icons/AccessTime';
+import DeleteForeverIcon from '@material-ui/icons/DeleteForever';
 
 import validate from 'validate.js';
 import moment from 'moment';
@@ -555,6 +556,23 @@ class AccountTab extends Component {
               primary="Signed up"
               secondary={moment(user.metadata.creationTime).format('LL')}
             />
+          </ListItem>
+
+          <ListItem>
+            <Hidden xsDown>
+              <ListItemIcon>
+                <DeleteForeverIcon />
+              </ListItemIcon>
+            </Hidden>
+
+            <ListItemText
+              primary="Delete account"
+              secondary="Accounts cannot be recovered"
+            />
+
+            <ListItemSecondaryAction>
+              <Button color="secondary" variant="contained">Delete</Button>
+            </ListItemSecondaryAction>
           </ListItem>
         </List>
       </DialogContent>
