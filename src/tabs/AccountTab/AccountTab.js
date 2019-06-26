@@ -515,7 +515,7 @@ class AccountTab extends Component {
             </Hidden>
 
             <ListItemText
-              primary="Last sign-in"
+              primary="Signed in"
               secondary={moment(user.metadata.lastSignInTime).format('LLLL')}
             />
           </ListItem>
