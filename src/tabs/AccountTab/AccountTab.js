@@ -26,6 +26,7 @@ import IconButton from '@material-ui/core/IconButton';
 import CloudUploadIcon from '@material-ui/icons/CloudUpload';
 import PersonIcon from '@material-ui/icons/Person';
 import EditIcon from '@material-ui/icons/Edit';
+import AddIcon from '@material-ui/icons/Add';
 import PersonOutlineIcon from '@material-ui/icons/PersonOutline';
 import CheckCircleIcon from '@material-ui/icons/CheckCircle';
 import WarningIcon from '@material-ui/icons/Warning';
@@ -55,7 +56,6 @@ const styles = (theme) => ({
 
 const initialState = {
   profileCompletion: 0,
-  securityRating: 0,
 
   showingField: '',
 
@@ -84,10 +84,6 @@ class AccountTab extends Component {
     });
 
     return Math.floor(profileCompletion);
-  };
-
-  calculateSecurityRating = () => {
-    return 100;
   };
 
   showField = (fieldId) => {
@@ -314,7 +310,6 @@ class AccountTab extends Component {
 
     const {
       profileCompletion,
-      securityRating,
 
       showingField,
 
@@ -331,22 +326,6 @@ class AccountTab extends Component {
         <Grid alignItems="center" container>
           <Grid item xs>
             <Box textAlign="center">
-              <Typography gutterBottom variant="body1">Profile Completion</Typography>
-
-              {profileCompletion === 100 &&
-                <Box clone fontSize={50}>
-                  <CheckCircleIcon color="primary" />
-                </Box>
-              }
-
-              {profileCompletion !== 100 &&
-                <CircularProgress color="secondary" size={50} value={profileCompletion} variant="static" />
-              }
-            </Box>
-          </Grid>
-
-          <Grid item xs>
-            <Box textAlign="center">
               <Box mb={1}>
                 <Avatar className={classes.avatar} alt="Avatar" src={user.photoURL} />
               </Box>
@@ -360,16 +339,16 @@ class AccountTab extends Component {
 
           <Grid item xs>
             <Box textAlign="center">
-              <Typography gutterBottom variant="body1">Security Rating</Typography>
+              <Typography gutterBottom variant="body1">Profile Completion</Typography>
 
-              {securityRating === 100 &&
+              {profileCompletion === 100 &&
                 <Box clone fontSize={50}>
                   <CheckCircleIcon color="primary" />
                 </Box>
               }
 
-              {securityRating !== 100 &&
-                <CircularProgress color="secondary" size={50} value={securityRating} variant="static" />
+              {profileCompletion !== 100 &&
+                <CircularProgress color="secondary" size={50} value={profileCompletion} variant="static" />
               }
             </Box>
           </Grid>
@@ -379,7 +358,17 @@ class AccountTab extends Component {
           <ListItem>
             <Hidden xsDown>
               <ListItemIcon>
-                <PersonIcon />
+                <React.Fragment>
+                  {userData.firstName &&
+                    <PersonIcon />
+                  }
+
+                  {!userData.firstName &&
+                    <Tooltip title="No first name">
+                      <WarningIcon color="error" />
+                    </Tooltip>
+                  }
+                </React.Fragment>
               </ListItemIcon>
             </Hidden>
 
@@ -408,15 +397,25 @@ class AccountTab extends Component {
               <React.Fragment>
                 <ListItemText
                   primary="First name"
-                  secondary={userData.firstName}
+                  secondary={userData.firstName ? userData.firstName : 'You don\'t have a first name'}
                 />
 
                 <ListItemSecondaryAction>
-                  <Tooltip title="Change">
-                    <IconButton onClick={() => this.showField('firstName')}>
-                      <EditIcon />
-                    </IconButton>
-                  </Tooltip>
+                  {userData.firstName &&
+                    <Tooltip title="Change">
+                      <IconButton onClick={() => this.showField('firstName')}>
+                        <EditIcon />
+                      </IconButton>
+                    </Tooltip>
+                  }
+
+                  {!userData.firstName &&
+                    <Tooltip title="Add">
+                      <IconButton onClick={() => this.showField('firstName')}>
+                        <AddIcon />
+                      </IconButton>
+                    </Tooltip>
+                  }
                 </ListItemSecondaryAction>
               </React.Fragment>
             }
@@ -425,7 +424,17 @@ class AccountTab extends Component {
           <ListItem>
             <Hidden xsDown>
               <ListItemIcon>
-                <PersonIcon />
+                <React.Fragment>
+                  {userData.lastName &&
+                    <PersonIcon />
+                  }
+
+                  {!userData.lastName &&
+                    <Tooltip title="No last name">
+                      <WarningIcon color="error" />
+                    </Tooltip>
+                  }
+                </React.Fragment>
               </ListItemIcon>
             </Hidden>
 
@@ -458,11 +467,21 @@ class AccountTab extends Component {
                 />
 
                 <ListItemSecondaryAction>
-                  <Tooltip title="Change">
-                    <IconButton onClick={() => this.showField('lastName')}>
-                      <EditIcon />
-                    </IconButton>
-                  </Tooltip>
+                  {userData.lastName &&
+                    <Tooltip title="Change">
+                      <IconButton onClick={() => this.showField('lastName')}>
+                        <EditIcon />
+                      </IconButton>
+                    </Tooltip>
+                  }
+
+                  {!userData.lastName &&
+                    <Tooltip title="Add">
+                      <IconButton onClick={() => this.showField('lastName')}>
+                        <AddIcon />
+                      </IconButton>
+                    </Tooltip>
+                  }
                 </ListItemSecondaryAction>
               </React.Fragment>
             }
@@ -641,11 +660,8 @@ class AccountTab extends Component {
       user.emailVerified
     ]);
 
-    const securityRating = this.calculateSecurityRating();
-
     this.setState({
-      profileCompletion: profileCompletion,
-      securityRating: securityRating
+      profileCompletion: profileCompletion
     });
   }
 }
