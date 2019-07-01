@@ -463,7 +463,7 @@ class AccountTab extends Component {
               <React.Fragment>
                 <ListItemText
                   primary="Last name"
-                  secondary={userData.lastName}
+                  secondary={userData.lastName ? userData.lastName : 'You don\'t have a last name'}
                 />
 
                 <ListItemSecondaryAction>
@@ -490,7 +490,17 @@ class AccountTab extends Component {
           <ListItem>
             <Hidden xsDown>
               <ListItemIcon>
-                <PersonOutlineIcon />
+                <React.Fragment>
+                  {userData.username &&
+                    <PersonOutlineIcon />
+                  }
+
+                  {!userData.username &&
+                    <Tooltip title="No username">
+                      <WarningIcon color="error" />
+                    </Tooltip>
+                  }
+                </React.Fragment>
               </ListItemIcon>
             </Hidden>
 
@@ -519,15 +529,25 @@ class AccountTab extends Component {
               <React.Fragment>
                 <ListItemText
                   primary="Username"
-                  secondary={userData.username}
+                  secondary={userData.username ? userData.username : 'You don\'t have a username'}
                 />
 
                 <ListItemSecondaryAction>
-                  <Tooltip title="Change">
-                    <IconButton onClick={() => this.showField('username')}>
-                      <EditIcon />
-                    </IconButton>
-                  </Tooltip>
+                  {userData.username &&
+                    <Tooltip title="Change">
+                      <IconButton onClick={() => this.showField('username')}>
+                        <EditIcon />
+                      </IconButton>
+                    </Tooltip>
+                  }
+
+                  {!userData.username &&
+                    <Tooltip title="Add">
+                      <IconButton onClick={() => this.showField('username')}>
+                        <AddIcon />
+                      </IconButton>
+                    </Tooltip>
+                  }
                 </ListItemSecondaryAction>
               </React.Fragment>
             }
@@ -536,14 +556,24 @@ class AccountTab extends Component {
           <ListItem>
             <ListItemIcon>
               <React.Fragment>
-                {user.emailVerified &&
-                  <Tooltip title="Verified">
-                    <CheckCircleIcon color="primary" />
-                  </Tooltip>
+                {user.email &&
+                  <React.Fragment>
+                    {user.emailVerified &&
+                      <Tooltip title="Verified">
+                        <CheckCircleIcon color="primary" />
+                      </Tooltip>
+                    }
+
+                    {!user.emailVerified &&
+                      <Tooltip title="Not verified">
+                        <WarningIcon color="error" />
+                      </Tooltip>
+                    }
+                  </React.Fragment>
                 }
 
-                {!user.emailVerified &&
-                  <Tooltip title="Not verified">
+                {!user.email &&
+                  <Tooltip title="No e-mail address">
                     <WarningIcon color="error" />
                   </Tooltip>
                 }
@@ -575,10 +605,10 @@ class AccountTab extends Component {
               <React.Fragment>
                 <ListItemText
                   primary="E-mail address"
-                  secondary={user.email}
+                  secondary={user.email ? user.email : 'You don\'t have an e-mail address'}
                 />
 
-                {!user.emailVerified &&
+                {(user.email && !user.emailVerified) &&
                   <Box clone mr={7}>
                     <ListItemSecondaryAction>
                       <Tooltip title="Verify">
@@ -591,11 +621,21 @@ class AccountTab extends Component {
                 }
 
                 <ListItemSecondaryAction>
-                  <Tooltip title="Change">
-                    <IconButton onClick={() => this.showField('emailAddress')}>
-                      <EditIcon />
-                    </IconButton>
-                  </Tooltip>
+                  {user.email &&
+                    <Tooltip title="Change">
+                      <IconButton onClick={() => this.showField('emailAddress')}>
+                        <EditIcon />
+                      </IconButton>
+                    </Tooltip>
+                  }
+
+                  {!user.email &&
+                    <Tooltip title="Add">
+                      <IconButton onClick={() => this.showField('emailAddress')}>
+                        <AddIcon />
+                      </IconButton>
+                    </Tooltip>
+                  }
                 </ListItemSecondaryAction>
               </React.Fragment>
             }
