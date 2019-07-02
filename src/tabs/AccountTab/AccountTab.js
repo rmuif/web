@@ -28,6 +28,7 @@ import PersonIcon from '@material-ui/icons/Person';
 import EditIcon from '@material-ui/icons/Edit';
 import PersonOutlineIcon from '@material-ui/icons/PersonOutline';
 import CheckCircleIcon from '@material-ui/icons/CheckCircle';
+import RemoveCircleIcon from '@material-ui/icons/RemoveCircle';
 import WarningIcon from '@material-ui/icons/Warning';
 import CheckIcon from '@material-ui/icons/Check';
 import AccessTimeIcon from '@material-ui/icons/AccessTime';
@@ -347,13 +348,19 @@ class AccountTab extends Component {
               <Box textAlign="center">
                 <Typography gutterBottom variant="body1">Profile Completion</Typography>
 
+                {profileCompletion === 0 &&
+                  <Box clone fontSize={50}>
+                    <RemoveCircleIcon color="error" />
+                  </Box>
+                }
+
                 {profileCompletion === 100 &&
                   <Box clone fontSize={50}>
                     <CheckCircleIcon color="primary" />
                   </Box>
                 }
 
-                {profileCompletion !== 100 &&
+                {(profileCompletion !== 0 && profileCompletion !== 100)  &&
                   <CircularProgress color="secondary" size={50} value={profileCompletion} variant="static" />
                 }
               </Box>
@@ -363,13 +370,19 @@ class AccountTab extends Component {
               <Box textAlign="center">
                 <Typography gutterBottom variant="body1">Security Rating</Typography>
 
+                {securityRating === 0 &&
+                  <Box clone fontSize={50}>
+                    <RemoveCircleIcon color="error" />
+                  </Box>
+                }
+
                 {securityRating === 100 &&
                   <Box clone fontSize={50}>
                     <CheckCircleIcon color="primary" />
                   </Box>
                 }
 
-                {securityRating !== 100 &&
+                {(securityRating !== 0 && securityRating !== 100) &&
                   <CircularProgress color="secondary" size={50} value={securityRating} variant="static" />
                 }
               </Box>
