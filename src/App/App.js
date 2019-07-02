@@ -181,7 +181,6 @@ class App extends Component {
         });
 
       }).catch((reason) => {
-
         const code = reason.code;
         const message = reason.message;
 
