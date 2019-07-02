@@ -45,8 +45,8 @@ const styles = (theme) => ({
     marginRight: 'auto',
     marginLeft: 'auto',
 
-    width: theme.spacing(15),
-    height: theme.spacing(15)
+    width: theme.spacing(12.5),
+    height: theme.spacing(12.5)
   },
 
   uploadButtonIcon: {
@@ -349,19 +349,19 @@ class AccountTab extends Component {
                 <Typography gutterBottom variant="body1">Profile Completion</Typography>
 
                 {profileCompletion === 0 &&
-                  <Box clone fontSize={50}>
+                  <Box clone fontSize={40}>
                     <RemoveCircleIcon color="error" />
                   </Box>
                 }
 
                 {profileCompletion === 100 &&
-                  <Box clone fontSize={50}>
+                  <Box clone fontSize={40}>
                     <CheckCircleIcon color="primary" />
                   </Box>
                 }
 
                 {(profileCompletion !== 0 && profileCompletion !== 100)  &&
-                  <CircularProgress color="secondary" size={50} value={profileCompletion} variant="static" />
+                  <CircularProgress color="secondary" size={40} value={profileCompletion} variant="static" />
                 }
               </Box>
             </Grid>
@@ -371,19 +371,19 @@ class AccountTab extends Component {
                 <Typography gutterBottom variant="body1">Security Rating</Typography>
 
                 {securityRating === 0 &&
-                  <Box clone fontSize={50}>
+                  <Box clone fontSize={40}>
                     <RemoveCircleIcon color="error" />
                   </Box>
                 }
 
                 {securityRating === 100 &&
-                  <Box clone fontSize={50}>
+                  <Box clone fontSize={40}>
                     <CheckCircleIcon color="primary" />
                   </Box>
                 }
 
                 {(securityRating !== 0 && securityRating !== 100) &&
-                  <CircularProgress color="secondary" size={50} value={securityRating} variant="static" />
+                  <CircularProgress color="secondary" size={40} value={securityRating} variant="static" />
                 }
               </Box>
             </Grid>
