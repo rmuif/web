@@ -23,6 +23,7 @@ import TextField from '@material-ui/core/TextField';
 import Tooltip from '@material-ui/core/Tooltip';
 import IconButton from '@material-ui/core/IconButton';
 
+import PortraitIcon from '@material-ui/icons/Portrait';
 import CloudUploadIcon from '@material-ui/icons/CloudUpload';
 import PersonIcon from '@material-ui/icons/Person';
 import EditIcon from '@material-ui/icons/Edit';
@@ -45,8 +46,8 @@ const styles = (theme) => ({
     marginRight: 'auto',
     marginLeft: 'auto',
 
-    width: theme.spacing(12.5),
-    height: theme.spacing(12.5)
+    width: theme.spacing(13.125),
+    height: theme.spacing(13.125)
   },
 
   uploadButtonIcon: {
@@ -333,9 +334,19 @@ class AccountTab extends Component {
           <Grid alignItems="center" container>
             <Grid item xs>
               <Box textAlign="center">
-                <Box mb={1}>
-                  <Avatar className={classes.avatar} alt="Avatar" src={user.photoURL} />
-                </Box>
+                {user.photoURL &&
+                  <Box mb={1}>
+                    <Avatar className={classes.avatar} alt="Avatar" src={user.photoURL} />
+                  </Box>
+                }
+
+                {!user.photoURL &&
+                  <Box mb={1}>
+                    <Avatar className={classes.avatar} alt="Avatar">
+                      <PortraitIcon fontSize="large" />
+                    </Avatar>
+                  </Box>
+                }
 
                 <Button color="primary" variant="contained">
                   <CloudUploadIcon className={classes.uploadButtonIcon} />
@@ -349,19 +360,15 @@ class AccountTab extends Component {
                 <Typography gutterBottom variant="body1">Profile Completion</Typography>
 
                 {profileCompletion === 0 &&
-                  <Box clone fontSize={40}>
-                    <RemoveCircleIcon color="error" />
-                  </Box>
+                  <RemoveCircleIcon color="error" fontSize="large" />
                 }
 
                 {profileCompletion === 100 &&
-                  <Box clone fontSize={40}>
-                    <CheckCircleIcon color="primary" />
-                  </Box>
+                  <CheckCircleIcon color="primary" fontSize="large" />
                 }
 
                 {(profileCompletion !== 0 && profileCompletion !== 100)  &&
-                  <CircularProgress color="secondary" size={40} value={profileCompletion} variant="static" />
+                  <CircularProgress color="secondary" size={35} value={profileCompletion} variant="static" />
                 }
               </Box>
             </Grid>
@@ -371,19 +378,15 @@ class AccountTab extends Component {
                 <Typography gutterBottom variant="body1">Security Rating</Typography>
 
                 {securityRating === 0 &&
-                  <Box clone fontSize={40}>
-                    <RemoveCircleIcon color="error" />
-                  </Box>
+                  <RemoveCircleIcon color="error" fontSize="large" />
                 }
 
                 {securityRating === 100 &&
-                  <Box clone fontSize={40}>
-                    <CheckCircleIcon color="primary" />
-                  </Box>
+                  <CheckCircleIcon color="primary" fontSize="large" />
                 }
 
                 {(securityRating !== 0 && securityRating !== 100) &&
-                  <CircularProgress color="secondary" size={40} value={securityRating} variant="static" />
+                  <CircularProgress color="secondary" size={35} value={securityRating} variant="static" />
                 }
               </Box>
             </Grid>
