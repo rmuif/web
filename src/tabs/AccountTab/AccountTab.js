@@ -56,6 +56,7 @@ const styles = (theme) => ({
 
 const initialState = {
   profileCompletion: 0,
+  securityRating: 0,
 
   showingField: '',
 
@@ -84,6 +85,10 @@ class AccountTab extends Component {
     });
 
     return Math.floor(profileCompletion);
+  };
+
+  calculateSecurityRating = () => {
+    return 100;
   };
 
   showField = (fieldId) => {
@@ -310,6 +315,7 @@ class AccountTab extends Component {
 
     const {
       profileCompletion,
+      securityRating,
 
       showingField,
 
@@ -323,36 +329,54 @@ class AccountTab extends Component {
 
     return (
       <DialogContent>
-        <Grid alignItems="center" container>
-          <Grid item xs>
-            <Box textAlign="center">
-              <Box mb={1}>
-                <Avatar className={classes.avatar} alt="Avatar" src={user.photoURL} />
-              </Box>
-
-              <Button color="primary" variant="contained">
-                <CloudUploadIcon className={classes.uploadButtonIcon} />
-                Upload
-              </Button>
-            </Box>
-          </Grid>
-
-          <Grid item xs>
-            <Box textAlign="center">
-              <Typography gutterBottom variant="body1">Profile Completion</Typography>
-
-              {profileCompletion === 100 &&
-                <Box clone fontSize={50}>
-                  <CheckCircleIcon color="primary" />
+        <Box mb={1}>
+          <Grid alignItems="center" container>
+            <Grid item xs>
+              <Box textAlign="center">
+                <Box mb={1}>
+                  <Avatar className={classes.avatar} alt="Avatar" src={user.photoURL} />
                 </Box>
-              }
 
-              {profileCompletion !== 100 &&
-                <CircularProgress color="secondary" size={50} value={profileCompletion} variant="static" />
-              }
-            </Box>
+                <Button color="primary" variant="contained">
+                  <CloudUploadIcon className={classes.uploadButtonIcon} />
+                  Upload
+                </Button>
+              </Box>
+            </Grid>
+
+            <Grid item xs>
+              <Box textAlign="center">
+                <Typography gutterBottom variant="body1">Profile Completion</Typography>
+
+                {profileCompletion === 100 &&
+                  <Box clone fontSize={50}>
+                    <CheckCircleIcon color="primary" />
+                  </Box>
+                }
+
+                {profileCompletion !== 100 &&
+                  <CircularProgress color="secondary" size={50} value={profileCompletion} variant="static" />
+                }
+              </Box>
+            </Grid>
+
+            <Grid item xs>
+              <Box textAlign="center">
+                <Typography gutterBottom variant="body1">Security Rating</Typography>
+
+                {securityRating === 100 &&
+                  <Box clone fontSize={50}>
+                    <CheckCircleIcon color="primary" />
+                  </Box>
+                }
+
+                {securityRating !== 100 &&
+                  <CircularProgress color="secondary" size={50} value={securityRating} variant="static" />
+                }
+              </Box>
+            </Grid>
           </Grid>
-        </Grid>
+        </Box>
 
         <List disablePadding>
           <ListItem>
@@ -700,8 +724,11 @@ class AccountTab extends Component {
       user.emailVerified
     ]);
 
+    const securityRating = this.calculateSecurityRating();
+
     this.setState({
-      profileCompletion: profileCompletion
+      profileCompletion: profileCompletion,
+      securityRating: securityRating
     });
   }
 }
