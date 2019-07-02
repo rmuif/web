@@ -434,11 +434,12 @@ class AccountTab extends Component {
                   }
 
                   {!userData.firstName &&
-                    <Tooltip title="Add">
-                      <IconButton onClick={() => this.showField('firstName')}>
-                        <AddIcon />
-                      </IconButton>
-                    </Tooltip>
+                    <Button
+                      color="primary"
+                      variant="contained"
+                      onClick={() => this.showField('firstName')}>
+                      Add
+                    </Button>
                   }
                 </ListItemSecondaryAction>
               </React.Fragment>
@@ -500,11 +501,12 @@ class AccountTab extends Component {
                   }
 
                   {!userData.lastName &&
-                    <Tooltip title="Add">
-                      <IconButton onClick={() => this.showField('lastName')}>
-                        <AddIcon />
-                      </IconButton>
-                    </Tooltip>
+                    <Button
+                      color="primary"
+                      variant="contained"
+                      onClick={() => this.showField('lastName')}>
+                      Add
+                    </Button>
                   }
                 </ListItemSecondaryAction>
               </React.Fragment>
@@ -566,11 +568,12 @@ class AccountTab extends Component {
                   }
 
                   {!userData.username &&
-                    <Tooltip title="Add">
-                      <IconButton onClick={() => this.showField('username')}>
-                        <AddIcon />
-                      </IconButton>
-                    </Tooltip>
+                    <Button
+                      color="primary"
+                      variant="contained"
+                      onClick={() => this.showField('username')}>
+                      Add
+                    </Button>
                   }
                 </ListItemSecondaryAction>
               </React.Fragment>
@@ -578,31 +581,33 @@ class AccountTab extends Component {
           </ListItem>
 
           <ListItem>
-            <ListItemIcon>
-              <React.Fragment>
-                {user.email &&
-                  <React.Fragment>
-                    {user.emailVerified &&
-                      <Tooltip title="Verified">
-                        <CheckCircleIcon color="primary" />
-                      </Tooltip>
-                    }
+            {user.email &&
+              <ListItemIcon>
+                <React.Fragment>
+                  {user.emailVerified &&
+                    <Tooltip title="Verified">
+                      <CheckCircleIcon color="primary" />
+                    </Tooltip>
+                  }
 
-                    {!user.emailVerified &&
-                      <Tooltip title="Not verified">
-                        <WarningIcon color="error" />
-                      </Tooltip>
-                    }
-                  </React.Fragment>
-                }
+                  {!user.emailVerified &&
+                    <Tooltip title="Not verified">
+                      <WarningIcon color="error" />
+                    </Tooltip>
+                  }
+                </React.Fragment>
+              </ListItemIcon>
+            }
 
-                {!user.email &&
+            {!user.email &&
+              <Hidden xsDown>
+                <ListItemIcon>
                   <Tooltip title="No e-mail address">
                     <WarningIcon color="error" />
                   </Tooltip>
-                }
-              </React.Fragment>
-            </ListItemIcon>
+                </ListItemIcon>
+              </Hidden>
+            }
 
             {showingField === 'emailAddress' &&
               <TextField
@@ -654,11 +659,12 @@ class AccountTab extends Component {
                   }
 
                   {!user.email &&
-                    <Tooltip title="Add">
-                      <IconButton onClick={() => this.showField('emailAddress')}>
-                        <AddIcon />
-                      </IconButton>
-                    </Tooltip>
+                    <Button
+                      color="primary"
+                      variant="contained"
+                      onClick={() => this.showField('emailAddress')}>
+                      Add
+                    </Button>
                   }
                 </ListItemSecondaryAction>
               </React.Fragment>
@@ -721,7 +727,7 @@ class AccountTab extends Component {
       userData.lastName,
       userData.username,
       user.email,
-      user.emailVerified
+      user.email && user.emailVerified
     ]);
 
     const securityRating = this.calculateSecurityRating();
