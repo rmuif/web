@@ -368,7 +368,7 @@ class AccountTab extends Component {
                 }
 
                 {(profileCompletion !== 0 && profileCompletion !== 100)  &&
-                  <CircularProgress color="secondary" size={35} value={profileCompletion} variant="static" />
+                  <CircularProgress color="secondary" size={35} thickness={5.6} value={profileCompletion} variant="static" />
                 }
               </Box>
             </Grid>
@@ -386,7 +386,7 @@ class AccountTab extends Component {
                 }
 
                 {(securityRating !== 0 && securityRating !== 100) &&
-                  <CircularProgress color="secondary" size={35} value={securityRating} variant="static" />
+                  <CircularProgress color="secondary" size={35} thickness={5.6} value={securityRating} variant="static" />
                 }
               </Box>
             </Grid>
