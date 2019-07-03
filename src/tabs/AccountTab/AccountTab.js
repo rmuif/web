@@ -23,7 +23,6 @@ import TextField from '@material-ui/core/TextField';
 import Tooltip from '@material-ui/core/Tooltip';
 import IconButton from '@material-ui/core/IconButton';
 
-import PortraitIcon from '@material-ui/icons/Portrait';
 import CloudUploadIcon from '@material-ui/icons/CloudUpload';
 import PersonIcon from '@material-ui/icons/Person';
 import EditIcon from '@material-ui/icons/Edit';
@@ -75,6 +74,25 @@ class AccountTab extends Component {
 
     this.state = initialState;
   }
+
+  getNameInitials = () => {
+    const { userData, user } = this.props;
+
+    const firstName = userData.firstName;
+    const lastName = userData.lastName;
+    const username = userData.username;
+    const displayName = user.displayName;
+
+    if (firstName && lastName) {
+      return firstName.charAt(0) + lastName.charAt(0);
+    } else if (username) {
+      return username.charAt(0);
+    } else if (displayName) {
+      return displayName.charAt(0);
+    } else {
+      return 'NN';
+    }
+  };
 
   calculateProfileCompletion = (fields) => {
     let profileCompletion = 0;
@@ -344,7 +362,7 @@ class AccountTab extends Component {
                   {!user.photoURL &&
                     <Box mb={1}>
                       <Avatar className={classes.avatar} alt="Avatar">
-                        <PortraitIcon fontSize="large" />
+                        <Typography variant="h4">{this.getNameInitials()}</Typography>
                       </Avatar>
                     </Box>
                   }
@@ -405,7 +423,7 @@ class AccountTab extends Component {
               {!user.photoURL &&
                 <Box mb={1}>
                   <Avatar className={classes.avatar} alt="Avatar">
-                    <PortraitIcon fontSize="large" />
+                    <Typography variant="h4">{this.getNameInitials()}</Typography>
                   </Avatar>
                 </Box>
               }
