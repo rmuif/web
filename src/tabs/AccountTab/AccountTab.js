@@ -331,66 +331,129 @@ class AccountTab extends Component {
     return (
       <DialogContent>
         <Box mb={1}>
-          <Grid alignItems="center" container>
-            <Grid item xs>
-              <Box textAlign="center">
-                {user.photoURL &&
-                  <Box mb={1}>
-                    <Avatar className={classes.avatar} alt="Avatar" src={user.photoURL} />
-                  </Box>
-                }
+          <Hidden xsDown>
+            <Grid alignItems="center" container>
+              <Grid item xs>
+                <Box textAlign="center">
+                  {user.photoURL &&
+                    <Box mb={1}>
+                      <Avatar className={classes.avatar} alt="Avatar" src={user.photoURL} />
+                    </Box>
+                  }
 
-                {!user.photoURL &&
-                  <Box mb={1}>
-                    <Avatar className={classes.avatar} alt="Avatar">
-                      <PortraitIcon fontSize="large" />
-                    </Avatar>
-                  </Box>
-                }
+                  {!user.photoURL &&
+                    <Box mb={1}>
+                      <Avatar className={classes.avatar} alt="Avatar">
+                        <PortraitIcon fontSize="large" />
+                      </Avatar>
+                    </Box>
+                  }
 
-                <Button color="primary" variant="contained">
-                  <CloudUploadIcon className={classes.uploadButtonIcon} />
-                  Upload
-                </Button>
-              </Box>
+                  <Button color="primary" variant="contained">
+                    <CloudUploadIcon className={classes.uploadButtonIcon} />
+                    Upload
+                  </Button>
+                </Box>
+              </Grid>
+
+              <Grid item xs>
+                <Box textAlign="center">
+                  <Typography gutterBottom variant="body1">Profile Completion</Typography>
+
+                  {profileCompletion === 0 &&
+                    <RemoveCircleIcon color="error" fontSize="large" />
+                  }
+
+                  {profileCompletion === 100 &&
+                    <CheckCircleIcon color="primary" fontSize="large" />
+                  }
+
+                  {(profileCompletion !== 0 && profileCompletion !== 100)  &&
+                    <CircularProgress color="secondary" size={35} thickness={5.6} value={profileCompletion} variant="static" />
+                  }
+                </Box>
+              </Grid>
+
+              <Grid item xs>
+                <Box textAlign="center">
+                  <Typography gutterBottom variant="body1">Security Rating</Typography>
+
+                  {securityRating === 0 &&
+                    <RemoveCircleIcon color="error" fontSize="large" />
+                  }
+
+                  {securityRating === 100 &&
+                    <CheckCircleIcon color="primary" fontSize="large" />
+                  }
+
+                  {(securityRating !== 0 && securityRating !== 100) &&
+                    <CircularProgress color="secondary" size={35} thickness={5.6} value={securityRating} variant="static" />
+                  }
+                </Box>
+              </Grid>
             </Grid>
+          </Hidden>
 
-            <Grid item xs>
-              <Box textAlign="center">
-                <Typography gutterBottom variant="body1">Profile Completion</Typography>
+          <Hidden smUp>
+            <Box mb={2} textAlign="center">
+              {user.photoURL &&
+                <Box mb={1}>
+                  <Avatar className={classes.avatar} alt="Avatar" src={user.photoURL} />
+                </Box>
+              }
 
-                {profileCompletion === 0 &&
-                  <RemoveCircleIcon color="error" fontSize="large" />
-                }
+              {!user.photoURL &&
+                <Box mb={1}>
+                  <Avatar className={classes.avatar} alt="Avatar">
+                    <PortraitIcon fontSize="large" />
+                  </Avatar>
+                </Box>
+              }
 
-                {profileCompletion === 100 &&
-                  <CheckCircleIcon color="primary" fontSize="large" />
-                }
+              <Button color="primary" variant="contained">
+                <CloudUploadIcon className={classes.uploadButtonIcon} />
+                Upload
+              </Button>
+            </Box>
 
-                {(profileCompletion !== 0 && profileCompletion !== 100)  &&
-                  <CircularProgress color="secondary" size={35} thickness={5.6} value={profileCompletion} variant="static" />
-                }
-              </Box>
+            <Grid container>
+              <Grid item xs>
+                <Box textAlign="center">
+                  <Typography gutterBottom variant="body1">Profile Completion</Typography>
+
+                  {profileCompletion === 0 &&
+                    <RemoveCircleIcon color="error" fontSize="large" />
+                  }
+
+                  {profileCompletion === 100 &&
+                    <CheckCircleIcon color="primary" fontSize="large" />
+                  }
+
+                  {(profileCompletion !== 0 && profileCompletion !== 100)  &&
+                    <CircularProgress color="secondary" size={35} thickness={5.6} value={profileCompletion} variant="static" />
+                  }
+                </Box>
+              </Grid>
+
+              <Grid item xs>
+                <Box textAlign="center">
+                  <Typography gutterBottom variant="body1">Security Rating</Typography>
+
+                  {securityRating === 0 &&
+                    <RemoveCircleIcon color="error" fontSize="large" />
+                  }
+
+                  {securityRating === 100 &&
+                    <CheckCircleIcon color="primary" fontSize="large" />
+                  }
+
+                  {(securityRating !== 0 && securityRating !== 100) &&
+                    <CircularProgress color="secondary" size={35} thickness={5.6} value={securityRating} variant="static" />
+                  }
+                </Box>
+              </Grid>
             </Grid>
-
-            <Grid item xs>
-              <Box textAlign="center">
-                <Typography gutterBottom variant="body1">Security Rating</Typography>
-
-                {securityRating === 0 &&
-                  <RemoveCircleIcon color="error" fontSize="large" />
-                }
-
-                {securityRating === 100 &&
-                  <CheckCircleIcon color="primary" fontSize="large" />
-                }
-
-                {(securityRating !== 0 && securityRating !== 100) &&
-                  <CircularProgress color="secondary" size={35} thickness={5.6} value={securityRating} variant="static" />
-                }
-              </Box>
-            </Grid>
-          </Grid>
+          </Hidden>
         </Box>
 
         <List disablePadding>
