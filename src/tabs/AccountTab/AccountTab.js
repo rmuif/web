@@ -719,7 +719,7 @@ class AccountTab extends Component {
                   <Box clone mr={7}>
                     <ListItemSecondaryAction>
                       <Tooltip title="Verify">
-                        <IconButton>
+                        <IconButton color="secondary">
                           <CheckIcon />
                         </IconButton>
                       </Tooltip>
