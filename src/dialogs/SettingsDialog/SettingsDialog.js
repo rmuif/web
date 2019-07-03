@@ -2,14 +2,21 @@ import React, { Component } from 'react';
 
 import PropTypes from 'prop-types';
 
+import { withStyles } from '@material-ui/core/styles';
+
 import Dialog from '@material-ui/core/Dialog';
 import DialogTitle from '@material-ui/core/DialogTitle';
+
+import Typography from '@material-ui/core/Typography';
+import Tooltip from '@material-ui/core/Tooltip';
+import IconButton from '@material-ui/core/IconButton';
 
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
 
 import Hidden from '@material-ui/core/Hidden';
 
+import CloseIcon from '@material-ui/icons/Close';
 import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 import PaletteIcon from '@material-ui/icons/Palette';
 import LinkIcon from '@material-ui/icons/Link';
@@ -18,6 +25,14 @@ import SecurityIcon from '@material-ui/icons/Security';
 import SwipeableViews from 'react-swipeable-views';
 
 import AccountTab from '../../tabs/AccountTab/AccountTab';
+
+const styles = (theme) => ({
+  closeButton: {
+    position: 'absolute',
+    right: theme.spacing(1),
+    top: theme.spacing(1)
+  }
+});
 
 const tabs = [
   {
@@ -67,6 +82,9 @@ class SettingsDialog extends Component {
   };
 
   render() {
+    // Styling
+    const { classes } = this.props;
+
     // Dialog Properties
     const { dialogProps } = this.props;
 
@@ -80,8 +98,16 @@ class SettingsDialog extends Component {
 
     return (
       <Dialog {...dialogProps}>
-        <DialogTitle>
-          Settings
+        <DialogTitle disableTypography>
+          <Typography variant="h6">
+            Settings
+          </Typography>
+
+          <Tooltip title="Close">
+            <IconButton className={classes.closeButton} onClick={dialogProps.onClose}>
+              <CloseIcon />
+            </IconButton>
+          </Tooltip>
         </DialogTitle>
 
         <Tabs indicatorColor="primary" textColor="primary" value={selectedTab} onChange={this.handleTabChange}>
@@ -115,6 +141,9 @@ class SettingsDialog extends Component {
 }
 
 SettingsDialog.propTypes = {
+  // Styling
+  classes: PropTypes.object.isRequired,
+
   // Dialog Properties
   dialogProps: PropTypes.object.isRequired,
 
@@ -123,4 +152,4 @@ SettingsDialog.propTypes = {
   userData: PropTypes.object.isRequired
 };
 
-export default SettingsDialog;
+export default withStyles(styles)(SettingsDialog);
