@@ -1,45 +1,111 @@
 import { auth, firestore } from './firebase';
 
-export let isPerformingAuthAction = false;
-
-export function changeFirstName(firstName, callback) {
+export function changeFirstName(firstName) {
   if (!firstName) {
     return;
   }
 
-  isPerformingAuthAction = true;
+  const currentUser = auth.currentUser;
 
-  if (callback && typeof callback === 'function') {
-    callback();
+  if (!currentUser) {
+    return;
   }
+
+  const uid = currentUser.uid;
+
+  if (!uid) {
+    return;
+  }
+
+  return new Promise((resolve, reject) => {
+    firestore.collection('users').doc(uid).update({
+      firstName: firstName
+    }).then((value) => {
+      resolve(value);
+    }).catch((reason) => {
+      reject(reason);
+    });
+  });
 }
 
-export function changeLastName(lastName, callback) {
+export function changeLastName(lastName) {
   if (!lastName) {
     return;
   }
 
-  if (callback && typeof callback === 'function') {
-    callback();
+  const currentUser = auth.currentUser;
+
+  if (!currentUser) {
+    return;
   }
+
+  const uid = currentUser.uid;
+
+  if (!uid) {
+    return;
+  }
+
+  return new Promise((resolve, reject) => {
+    firestore.collection('users').doc(uid).update({
+      lastName: lastName
+    }).then((value) => {
+      resolve(value);
+    }).catch((reason) => {
+      reject(reason);
+    });
+  });
 }
 
-export function changeUsername(username, callback) {
+export function changeUsername(username) {
   if (!username) {
     return;
   }
 
-  if (callback && typeof callback === 'function') {
-    callback();
-  }
-}
+  const currentUser = auth.currentUser;
 
-export function changeEmailAddress(username, callback) {
-  if (!username) {
+  if (!currentUser) {
     return;
   }
 
-  if (callback && typeof callback === 'function') {
-    callback();
+  const uid = currentUser.uid;
+
+  if (!uid) {
+    return;
   }
+
+  return new Promise((resolve, reject) => {
+    firestore.collection('users').doc(uid).update({
+      username: username
+    }).then((value) => {
+      resolve(value);
+    }).catch((reason) => {
+      reject(reason);
+    });
+  });
+}
+
+export function changeEmailAddress(emailAddress) {
+  if (!emailAddress) {
+    return;
+  }
+
+  const currentUser = auth.currentUser;
+
+  if (!currentUser) {
+    return;
+  }
+
+  const uid = currentUser.uid;
+
+  if (!uid) {
+    return;
+  }
+
+  return new Promise((resolve, reject) => {
+    currentUser.updateEmail(emailAddress).then((value) => {
+      resolve(value);
+    }).catch((reason) => {
+      reject(reason);
+    });
+  });
 }
