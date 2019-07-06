@@ -109,3 +109,19 @@ export function changeEmailAddress(emailAddress) {
     });
   });
 }
+
+export function verifyEmailAddress() {
+  const currentUser = auth.currentUser;
+
+  if (!currentUser) {
+    return;
+  }
+
+  return new Promise((resolve, reject) => {
+    currentUser.sendEmailVerification().then((value) => {
+      resolve(value);
+    }).catch((reason) => {
+      reject(reason);
+    });
+  });
+}

@@ -169,6 +169,8 @@ class AccountTab extends Component {
         isPerformingAuthAction: true
       }, () => {
         auth.changeFirstName(firstName).then(() => {
+          // TODO: Display success
+
           this.hideFields();
         }).catch((reason) => {
           // TODO: Display error
@@ -213,6 +215,8 @@ class AccountTab extends Component {
         isPerformingAuthAction: true
       }, () => {
         auth.changeLastName(lastName).then(() => {
+          // TODO: Display success
+
           this.hideFields();
         }).catch((reason) => {
           // TODO: Display error
@@ -257,6 +261,8 @@ class AccountTab extends Component {
         isPerformingAuthAction: true
       }, () => {
         auth.changeUsername(username).then(() => {
+          // TODO: Display success
+
           this.hideFields();
         }).catch((reason) => {
           // TODO: Display error
@@ -301,6 +307,8 @@ class AccountTab extends Component {
         isPerformingAuthAction: true
       }, () => {
         auth.changeEmailAddress(emailAddress).then(() => {
+          // TODO: Display success
+
           this.hideFields();
         }).catch((reason) => {
           // TODO: Display error
@@ -310,6 +318,14 @@ class AccountTab extends Component {
           });
         });
       });
+    });
+  };
+
+  verifyEmailAddress = () => {
+    auth.verifyEmailAddress().then(() => {
+      // TODO: Display success
+    }).catch((reason) => {
+      // TODO: Display error
     });
   };
 
@@ -833,7 +849,7 @@ class AccountTab extends Component {
                     <ListItemSecondaryAction>
                       <Tooltip title="Verify">
                         <div>
-                          <IconButton color="secondary" disabled={isPerformingAuthAction}>
+                          <IconButton color="secondary" disabled={isPerformingAuthAction} onClick={this.verifyEmailAddress}>
                             <CheckIcon />
                           </IconButton>
                         </div>
