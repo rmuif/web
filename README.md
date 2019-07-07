@@ -175,6 +175,10 @@ Available types:
 - `'light'`
 - `'dark'`
 
+## Help
+
+There is a [Discord channel](https://discord.gg/y3EMyrN) dedicated to React + Material-UI + Firebase in my Discord server. If you want help with something related to this project quickly, send me a message there, I'm @Phoqe#0756!
+
 ## License
 
 React + Material-UI + Firebase is open source software [licensed as MIT](https://github.com/Phoqe/react-material-ui-firebase/blob/master/LICENSE.md).
