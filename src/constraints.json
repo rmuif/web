@@ -2,13 +2,17 @@
   "firstName": {
     "presence": {
       "allowEmpty": false
-    }
+    },
+
+    "type": "string"
   },
 
   "lastName": {
     "presence": {
       "allowEmpty": false
-    }
+    },
+
+    "type": "string"
   },
 
   "username": {
@@ -19,7 +23,9 @@
 
     "presence": {
       "allowEmpty": false
-    }
+    },
+
+    "type": "string"
   },
 
   "emailAddress": {
@@ -29,7 +35,9 @@
 
     "presence": {
       "allowEmpty": false
-    }
+    },
+
+    "type": "string"
   },
 
   "emailAddressConfirmation": {
@@ -44,7 +52,9 @@
 
     "presence": {
       "allowEmpty": false
-    }
+    },
+
+    "type": "string"
   },
 
   "password": {
@@ -54,7 +64,9 @@
 
     "presence": {
       "allowEmpty": false
-    }
+    },
+
+    "type": "string"
   },
 
   "passwordConfirmation": {
@@ -66,6 +78,8 @@
 
     "presence": {
       "allowEmpty": false
-    }
+    },
+
+    "type": "string"
   }
 }
