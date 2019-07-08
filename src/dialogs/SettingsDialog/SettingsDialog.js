@@ -110,13 +110,38 @@ class SettingsDialog extends Component {
           </Tooltip>
         </DialogTitle>
 
-        <Tabs indicatorColor="primary" textColor="primary" value={selectedTab} onChange={this.handleTabChange}>
-          {tabs.map((tab) => {
-            return (
-              <Tab key={tab.key} icon={tab.icon} label={tab.label} />
-            );
-          })}
-        </Tabs>
+        <Hidden xsDown>
+          <Tabs
+            indicatorColor="primary"
+            scrollButtons="off"
+            textColor="primary"
+            value={selectedTab}
+            variant="scrollable"
+            onChange={this.handleTabChange}>
+            {tabs.map((tab) => {
+              return (
+                <Tab key={tab.key} icon={tab.icon} label={tab.label} />
+              );
+            })}
+          </Tabs>
+        </Hidden>
+
+        <Hidden smUp>
+          <Tabs
+            style={{ overflow: 'initial' }}
+            indicatorColor="primary"
+            scrollButtons="off"
+            textColor="primary"
+            value={selectedTab}
+            variant="scrollable"
+            onChange={this.handleTabChange}>
+            {tabs.map((tab) => {
+              return (
+                <Tab key={tab.key} icon={tab.icon} label={tab.label} />
+              );
+            })}
+          </Tabs>
+        </Hidden>
 
         <Hidden xsDown>
           {selectedTab === 0 &&
