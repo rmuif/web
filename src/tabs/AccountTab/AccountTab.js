@@ -382,6 +382,38 @@ class AccountTab extends Component {
     }
   };
 
+  handleAvatarChange = (event) => {
+    if (!event) {
+      return;
+    }
+
+    const files = event.target.files;
+
+    if (!files) {
+      return;
+    }
+
+    const avatar = files[0];
+
+    if (!avatar) {
+      return;
+    }
+
+    this.setState({
+      isPerformingAuthAction: true
+    }, () => {
+      auth.changeAvatar(avatar).then((value) => {
+        console.log(value);
+      }).catch((reason) => {
+        console.log(reason);
+      }).finally(() => {
+        this.setState({
+          isPerformingAuthAction: false
+        });
+      });
+    });
+  };
+
   handleFirstNameChange = (event) => {
     if (!event) {
       return;
@@ -475,10 +507,20 @@ class AccountTab extends Component {
                     }
                   </Box>
 
-                  <Button color="primary" disabled={isPerformingAuthAction} variant="contained">
-                    <CloudUploadIcon className={classes.uploadButtonIcon} />
-                    Upload
-                  </Button>
+                  <input
+                    id="avatar-input"
+                    type="file"
+                    hidden
+
+                    onChange={this.handleAvatarChange}
+                  />
+
+                  <label htmlFor="avatar-input">
+                    <Button color="primary" component="span" disabled={isPerformingAuthAction} variant="contained">
+                      <CloudUploadIcon className={classes.uploadButtonIcon} />
+                      Upload
+                    </Button>
+                  </label>
                 </Box>
               </Grid>
 
