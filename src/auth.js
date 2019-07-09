@@ -1,23 +1,49 @@
-import { auth, firestore } from './firebase';
+import { auth, firestore, storage } from './firebase';
 
-export function changeFirstName(firstName) {
-  if (!firstName) {
-    return;
-  }
-
-  const currentUser = auth.currentUser;
-
-  if (!currentUser) {
-    return;
-  }
-
-  const uid = currentUser.uid;
-
-  if (!uid) {
-    return;
-  }
-
+export const changeAvatar = (avatar) => {
   return new Promise((resolve, reject) => {
+    if (!avatar) {
+      reject();
+    }
+  
+    const currentUser = auth.currentUser;
+  
+    if (!currentUser) {
+      reject();
+    }
+  
+    const uid = currentUser.uid;
+  
+    if (!uid) {
+      reject();
+    }
+
+    storage.ref().child('images').child('avatars').child(uid).put(avatar).then((uploadTaskSnapshot) => {
+      resolve(uploadTaskSnapshot);
+    }).catch((reason) => {
+      reject(reason);
+    });
+  });
+};
+
+export const changeFirstName = (firstName) => {
+  return new Promise((resolve, reject) => {
+    if (!firstName) {
+      reject();
+    }
+  
+    const currentUser = auth.currentUser;
+  
+    if (!currentUser) {
+      reject();
+    }
+  
+    const uid = currentUser.uid;
+  
+    if (!uid) {
+      reject();
+    }
+
     firestore.collection('users').doc(uid).update({
       firstName: firstName
     }).then((value) => {
@@ -26,26 +52,26 @@ export function changeFirstName(firstName) {
       reject(reason);
     });
   });
-}
+};
 
-export function changeLastName(lastName) {
-  if (!lastName) {
-    return;
-  }
-
-  const currentUser = auth.currentUser;
-
-  if (!currentUser) {
-    return;
-  }
-
-  const uid = currentUser.uid;
-
-  if (!uid) {
-    return;
-  }
-
+export const changeLastName = (lastName) => {
   return new Promise((resolve, reject) => {
+    if (!lastName) {
+      reject();
+    }
+  
+    const currentUser = auth.currentUser;
+  
+    if (!currentUser) {
+      reject();
+    }
+  
+    const uid = currentUser.uid;
+  
+    if (!uid) {
+      reject();
+    }
+
     firestore.collection('users').doc(uid).update({
       lastName: lastName
     }).then((value) => {
@@ -54,26 +80,26 @@ export function changeLastName(lastName) {
       reject(reason);
     });
   });
-}
+};
 
-export function changeUsername(username) {
-  if (!username) {
-    return;
-  }
-
-  const currentUser = auth.currentUser;
-
-  if (!currentUser) {
-    return;
-  }
-
-  const uid = currentUser.uid;
-
-  if (!uid) {
-    return;
-  }
-
+export const changeUsername = (username) => {
   return new Promise((resolve, reject) => {
+    if (!username) {
+      reject();
+    }
+  
+    const currentUser = auth.currentUser;
+  
+    if (!currentUser) {
+      reject();
+    }
+  
+    const uid = currentUser.uid;
+  
+    if (!uid) {
+      reject();
+    }
+
     firestore.collection('users').doc(uid).update({
       username: username
     }).then((value) => {
@@ -82,46 +108,46 @@ export function changeUsername(username) {
       reject(reason);
     });
   });
-}
+};
 
-export function changeEmailAddress(emailAddress) {
-  if (!emailAddress) {
-    return;
-  }
-
-  const currentUser = auth.currentUser;
-
-  if (!currentUser) {
-    return;
-  }
-
-  const uid = currentUser.uid;
-
-  if (!uid) {
-    return;
-  }
-
+export const changeEmailAddress = (emailAddress) => {
   return new Promise((resolve, reject) => {
+    if (!emailAddress) {
+      reject();
+    }
+  
+    const currentUser = auth.currentUser;
+  
+    if (!currentUser) {
+      reject();
+    }
+  
+    const uid = currentUser.uid;
+  
+    if (!uid) {
+      reject();
+    }
+
     currentUser.updateEmail(emailAddress).then((value) => {
       resolve(value);
     }).catch((reason) => {
       reject(reason);
     });
   });
-}
+};
 
-export function verifyEmailAddress() {
-  const currentUser = auth.currentUser;
-
-  if (!currentUser) {
-    return;
-  }
-
+export const verifyEmailAddress = () => {
   return new Promise((resolve, reject) => {
+    const currentUser = auth.currentUser;
+
+    if (!currentUser) {
+      reject();
+    }
+
     currentUser.sendEmailVerification().then((value) => {
       resolve(value);
     }).catch((reason) => {
       reject(reason);
     });
   });
-}
+};
