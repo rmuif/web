@@ -322,10 +322,18 @@ class AccountTab extends Component {
   };
 
   verifyEmailAddress = () => {
-    auth.verifyEmailAddress().then(() => {
-      // TODO: Display success
-    }).catch((reason) => {
-      // TODO: Display error
+    this.setState({
+      isPerformingAuthAction: true
+    }, () => {
+      auth.verifyEmailAddress().then(() => {
+        // TODO: Display success
+      }).catch((reason) => {
+        // TODO: Display error
+      }).finally(() => {
+        this.setState({
+          isPerformingAuthAction: false
+        });
+      });
     });
   };
 
