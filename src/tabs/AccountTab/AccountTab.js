@@ -907,19 +907,6 @@ class AccountTab extends Component {
           <ListItem>
             <Hidden xsDown>
               <ListItemIcon>
-                <AccessTimeIcon />
-              </ListItemIcon>
-            </Hidden>
-
-            <ListItemText
-              primary="Signed up"
-              secondary={moment(user.metadata.creationTime).format('LL')}
-            />
-          </ListItem>
-
-          <ListItem>
-            <Hidden xsDown>
-              <ListItemIcon>
                 <DeleteForeverIcon />
               </ListItemIcon>
             </Hidden>
