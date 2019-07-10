@@ -425,6 +425,22 @@ class AccountTab extends Component {
       return;
     }
 
+    console.log(avatar);
+
+    const fileTypes = [
+      'image/gif',
+      'image/jpeg',
+      'image/png',
+      'image/webp',
+      'image/svg+xml'
+    ];
+
+    if (!fileTypes.includes(avatar.type)) {
+      // TODO: Display error
+
+      return;
+    }
+
     this.setState({
       avatar: avatar
     });
@@ -553,6 +569,7 @@ class AccountTab extends Component {
                         id="avatar-input"
                         type="file"
                         hidden
+                        accept="image/*"
 
                         onChange={this.handleAvatarChange}
                       />
