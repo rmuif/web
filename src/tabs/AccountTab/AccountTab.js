@@ -22,6 +22,7 @@ import TextField from '@material-ui/core/TextField';
 import Tooltip from '@material-ui/core/Tooltip';
 import IconButton from '@material-ui/core/IconButton';
 
+import PhotoIcon from '@material-ui/icons/Photo';
 import CloudUploadIcon from '@material-ui/icons/CloudUpload';
 import PersonIcon from '@material-ui/icons/Person';
 import EditIcon from '@material-ui/icons/Edit';
@@ -47,11 +48,11 @@ const styles = (theme) => ({
     marginRight: 'auto',
     marginLeft: 'auto',
 
-    width: theme.spacing(13.125),
-    height: theme.spacing(13.125)
+    width: theme.spacing(15),
+    height: theme.spacing(15)
   },
 
-  uploadButtonIcon: {
+  buttonIcon: {
     marginRight: theme.spacing(1)
   }
 });
@@ -64,6 +65,7 @@ const initialState = {
 
   isPerformingAuthAction: false,
 
+  avatar: null,
   firstName: '',
   lastName: '',
   username: '',
@@ -96,6 +98,30 @@ class AccountTab extends Component {
     } else {
       return 'NN';
     }
+  };
+
+  uploadAvatar = () => {
+    const { avatar } = this.state;
+
+    if (!avatar) {
+      return;
+    }
+
+    this.setState({
+      isPerformingAuthAction: true
+    }, () => {
+      auth.changeAvatar(avatar).then((value) => {
+        // TODO: Display success
+      }).catch((reason) => {
+        // TODO: Display error
+      }).finally(() => {
+        this.setState({
+          isPerformingAuthAction: false,
+
+          avatar: null
+        });
+      });
+    });
   };
 
   calculateProfileCompletion = (fields) => {
@@ -400,17 +426,7 @@ class AccountTab extends Component {
     }
 
     this.setState({
-      isPerformingAuthAction: true
-    }, () => {
-      auth.changeAvatar(avatar).then((value) => {
-        console.log(value);
-      }).catch((reason) => {
-        console.log(reason);
-      }).finally(() => {
-        this.setState({
-          isPerformingAuthAction: false
-        });
-      });
+      avatar: avatar
     });
   };
 
@@ -480,6 +496,7 @@ class AccountTab extends Component {
 
       isPerformingAuthAction,
 
+      avatar,
       firstName,
       lastName,
       username,
@@ -497,30 +514,57 @@ class AccountTab extends Component {
                 <Box textAlign="center">
                   <Box mb={1.5}>
                     {user.photoURL &&
-                      <Avatar className={classes.avatar} alt="Avatar" src={user.photoURL} />
+                      <React.Fragment>
+                        {avatar &&
+                          <Avatar className={classes.avatar} alt="Avatar" src={URL.createObjectURL(avatar)} />
+                        }
+
+                        {!avatar &&
+                          <Avatar className={classes.avatar} alt="Avatar" src={user.photoURL} />
+                        }
+                      </React.Fragment>
                     }
 
                     {!user.photoURL &&
-                      <Avatar className={classes.avatar} alt="Avatar">
-                        <Typography variant="h4">{this.getNameInitials()}</Typography>
-                      </Avatar>
+                      <React.Fragment>
+                        {avatar &&
+                          <Avatar className={classes.avatar} alt="Avatar" src={URL.createObjectURL(avatar)} />
+                        }
+
+                        {!avatar &&
+                          <Avatar className={classes.avatar} alt="Avatar">
+                            <Typography variant="h3">{this.getNameInitials()}</Typography>
+                          </Avatar>
+                        }
+                      </React.Fragment>
                     }
                   </Box>
 
-                  <input
-                    id="avatar-input"
-                    type="file"
-                    hidden
-
-                    onChange={this.handleAvatarChange}
-                  />
-
-                  <label htmlFor="avatar-input">
-                    <Button color="primary" component="span" disabled={isPerformingAuthAction} variant="contained">
-                      <CloudUploadIcon className={classes.uploadButtonIcon} />
+                  {avatar &&
+                    <Button color="primary" component="span" disabled={isPerformingAuthAction} variant="contained" onClick={this.uploadAvatar}>
+                      <CloudUploadIcon className={classes.buttonIcon} />
                       Upload
                     </Button>
-                  </label>
+                  }
+
+                  {!avatar &&
+                    <React.Fragment>
+                      <input
+                        id="avatar-input"
+                        type="file"
+                        hidden
+
+                        onChange={this.handleAvatarChange}
+                      />
+
+                      <label htmlFor="avatar-input">
+                        <Button color="primary" component="span" disabled={isPerformingAuthAction} variant="contained">
+                          <PhotoIcon className={classes.buttonIcon} />
+                          Choose...
+                        </Button>
+                      </label>
+                    </React.Fragment>
+                  }
                 </Box>
               </Grid>
 
@@ -577,7 +621,7 @@ class AccountTab extends Component {
               </Box>
 
               <Button color="primary" variant="contained">
-                <CloudUploadIcon className={classes.uploadButtonIcon} />
+                <CloudUploadIcon className={classes.buttonIcon} />
                 Upload
               </Button>
             </Box>

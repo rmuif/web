@@ -18,8 +18,20 @@ export const changeAvatar = (avatar) => {
       reject();
     }
 
-    storage.ref().child('images').child('avatars').child(uid).put(avatar).then((uploadTaskSnapshot) => {
-      resolve(uploadTaskSnapshot);
+    const reference = storage.ref().child('images').child('avatars').child(uid);
+
+    reference.put(avatar).then((uploadTaskSnapshot) => {
+      reference.getDownloadURL().then((value) => {
+        currentUser.updateProfile({
+          photoURL: value
+        }).then((value) => {
+          resolve(value);
+        }).catch((reason) => {
+          reject(reason);
+        });
+      }).catch((reason) => {
+        reject(reason);
+      });
     }).catch((reason) => {
       reject(reason);
     });
