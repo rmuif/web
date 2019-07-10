@@ -425,8 +425,6 @@ class AccountTab extends Component {
       return;
     }
 
-    console.log(avatar);
-
     const fileTypes = [
       'image/gif',
       'image/jpeg',
