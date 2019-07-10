@@ -112,6 +112,8 @@ class AccountTab extends Component {
     }, () => {
       auth.changeAvatar(avatar).then((value) => {
         // TODO: Display success
+
+        this.calculateProfileCompletion();
       }).catch((reason) => {
         // TODO: Display error
       }).finally(() => {
@@ -124,8 +126,23 @@ class AccountTab extends Component {
     });
   };
 
-  calculateProfileCompletion = (fields) => {
+  calculateProfileCompletion = () => {
+    const { user, userData } = this.props;
+
+    if (!user || !userData) {
+      return;
+    }
+
     let profileCompletion = 0;
+
+    const fields = [
+      user.photoURL,
+      userData.firstName,
+      userData.lastName,
+      userData.username,
+      user.email,
+      user.email && user.emailVerified
+    ];
 
     fields.forEach((field) => {
       if (field) {
@@ -133,11 +150,15 @@ class AccountTab extends Component {
       }
     });
 
-    return Math.floor(profileCompletion);
+    this.setState({
+      profileCompletion: Math.floor(profileCompletion)
+    });
   };
 
   calculateSecurityRating = () => {
-    return 100;
+    this.setState({
+      securityRating: 100
+    });
   };
 
   showField = (fieldId) => {
@@ -197,6 +218,7 @@ class AccountTab extends Component {
         auth.changeFirstName(firstName).then(() => {
           // TODO: Display success
 
+          this.calculateProfileCompletion();
           this.hideFields();
         }).catch((reason) => {
           // TODO: Display error
@@ -243,6 +265,7 @@ class AccountTab extends Component {
         auth.changeLastName(lastName).then(() => {
           // TODO: Display success
 
+          this.calculateProfileCompletion();
           this.hideFields();
         }).catch((reason) => {
           // TODO: Display error
@@ -289,6 +312,7 @@ class AccountTab extends Component {
         auth.changeUsername(username).then(() => {
           // TODO: Display success
 
+          this.calculateProfileCompletion();
           this.hideFields();
         }).catch((reason) => {
           // TODO: Display error
@@ -335,6 +359,7 @@ class AccountTab extends Component {
         auth.changeEmailAddress(emailAddress).then(() => {
           // TODO: Display success
 
+          this.calculateProfileCompletion();
           this.hideFields();
         }).catch((reason) => {
           // TODO: Display error
@@ -353,6 +378,8 @@ class AccountTab extends Component {
     }, () => {
       auth.verifyEmailAddress().then(() => {
         // TODO: Display success
+
+        this.calculateProfileCompletion();
       }).catch((reason) => {
         // TODO: Display error
       }).finally(() => {
@@ -1027,23 +1054,8 @@ class AccountTab extends Component {
   }
 
   componentDidMount() {
-    const { user, userData } = this.props;
-
-    const profileCompletion = this.calculateProfileCompletion([
-      user.photoURL,
-      userData.firstName,
-      userData.lastName,
-      userData.username,
-      user.email,
-      user.email && user.emailVerified
-    ]);
-
-    const securityRating = this.calculateSecurityRating();
-
-    this.setState({
-      profileCompletion: profileCompletion,
-      securityRating: securityRating
-    });
+    this.calculateProfileCompletion();
+    this.calculateSecurityRating();
   }
 }
 
