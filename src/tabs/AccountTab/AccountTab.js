@@ -146,6 +146,8 @@ class AccountTab extends Component {
       }, () => {
         auth.removeAvatar().then((value) => {
           // TODO: Display success
+
+          this.calculateProfileCompletion();
         }).catch((reason) => {
           // TODO: Display error
         }).finally(() => {
