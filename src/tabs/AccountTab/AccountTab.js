@@ -68,6 +68,7 @@ const initialState = {
   isPerformingAuthAction: false,
 
   avatar: null,
+  avatarUrl: '',
   firstName: '',
   lastName: '',
   username: '',
@@ -130,17 +131,20 @@ class AccountTab extends Component {
 
   removeAvatar = () => {
     const { user } = this.props;
-    const { avatar } = this.state;
+    const { avatar, avatarUrl } = this.state;
 
-    if (!user.photoURL && !avatar) {
+    if (!user.photoURL && !avatar && !avatarUrl) {
       return;
     }
 
-    if (!user.photoURL && avatar || user.photoURL && avatar) {
+    if (!user.photoURL && avatar && avatarUrl || user.photoURL && avatar && avatarUrl) {
+      URL.revokeObjectURL(avatarUrl);
+
       this.setState({
-        avatar: null
+        avatar: null,
+        avatarUrl: ''
       });
-    } else if (user.photoURL && !avatar) {
+    } else if (user.photoURL && !avatar && !avatarUrl) {
       this.setState({
         isPerformingAuthAction: true
       }, () => {
@@ -500,7 +504,8 @@ class AccountTab extends Component {
     }
 
     this.setState({
-      avatar: avatar
+      avatar: avatar,
+      avatarUrl: URL.createObjectURL(avatar)
     });
   };
 
@@ -571,6 +576,7 @@ class AccountTab extends Component {
       isPerformingAuthAction,
 
       avatar,
+      avatarUrl,
       firstName,
       lastName,
       username,
@@ -590,7 +596,7 @@ class AccountTab extends Component {
                     {user.photoURL &&
                       <React.Fragment>
                         {avatar &&
-                          <Avatar className={classes.avatar} alt="Avatar" src={URL.createObjectURL(avatar)} />
+                          <Avatar className={classes.avatar} alt="Avatar" src={avatarUrl} />
                         }
 
                         {!avatar &&
@@ -602,7 +608,7 @@ class AccountTab extends Component {
                     {!user.photoURL &&
                       <React.Fragment>
                         {avatar &&
-                          <Avatar className={classes.avatar} alt="Avatar" src={URL.createObjectURL(avatar)} />
+                          <Avatar className={classes.avatar} alt="Avatar" src={avatarUrl} />
                         }
 
                         {!avatar &&
@@ -697,7 +703,7 @@ class AccountTab extends Component {
                 {user.photoURL &&
                   <React.Fragment>
                     {avatar &&
-                      <Avatar className={classes.avatar} alt="Avatar" src={URL.createObjectURL(avatar)} />
+                      <Avatar className={classes.avatar} alt="Avatar" src={avatarUrl} />
                     }
 
                     {!avatar &&
@@ -709,7 +715,7 @@ class AccountTab extends Component {
                 {!user.photoURL &&
                   <React.Fragment>
                     {avatar &&
-                      <Avatar className={classes.avatar} alt="Avatar" src={URL.createObjectURL(avatar)} />
+                      <Avatar className={classes.avatar} alt="Avatar" src={avatarUrl} />
                     }
 
                     {!avatar &&
@@ -1147,6 +1153,18 @@ class AccountTab extends Component {
   componentDidMount() {
     this.calculateProfileCompletion();
     this.calculateSecurityRating();
+  }
+
+  componentWillUnmount() {
+    const { avatarUrl } = this.state;
+
+    if (avatarUrl) {
+      URL.revokeObjectURL(avatarUrl);
+
+      this.setState({
+        avatarUrl: ''
+      });
+    }
   }
 }
 
