@@ -504,6 +504,12 @@ class AccountTab extends Component {
       return;
     }
 
+    if (avatar.size > (20 * 1024 * 1024)) {
+      // TODO: Display error
+
+      return;
+    }
+
     this.setState({
       avatar: avatar,
       avatarUrl: URL.createObjectURL(avatar)
