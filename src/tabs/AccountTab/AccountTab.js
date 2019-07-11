@@ -690,23 +690,71 @@ class AccountTab extends Component {
           </Hidden>
 
           <Hidden smUp>
-            <Box mb={3} textAlign="center">
-              <Box mb={1.5}>
+            <Box textAlign="center" mb={3}>
+              <Box position="relative" mb={1.5}>
                 {user.photoURL &&
-                  <Avatar className={classes.avatar} alt="Avatar" src={user.photoURL} />
+                  <React.Fragment>
+                    {avatar &&
+                      <Avatar className={classes.avatar} alt="Avatar" src={URL.createObjectURL(avatar)} />
+                    }
+
+                    {!avatar &&
+                      <Avatar className={classes.avatar} alt="Avatar" src={user.photoURL} />
+                    }
+                  </React.Fragment>
                 }
 
                 {!user.photoURL &&
-                  <Avatar className={classes.avatar} alt="Avatar">
-                    <Typography variant="h4">{this.getNameInitials()}</Typography>
-                  </Avatar>
+                  <React.Fragment>
+                    {avatar &&
+                      <Avatar className={classes.avatar} alt="Avatar" src={URL.createObjectURL(avatar)} />
+                    }
+
+                    {!avatar &&
+                      <Avatar className={classes.avatar} alt="Avatar">
+                        <Typography variant="h3">{this.getNameInitials()}</Typography>
+                      </Avatar>
+                    }
+                  </React.Fragment>
+                }
+
+                {(user.photoURL || avatar) &&
+                  <Box position="absolute" top={0} right={0}>
+                    <Tooltip title="Remove">
+                      <Fab color="secondary" disabled={isPerformingAuthAction} size="small" onClick={this.removeAvatar}>
+                        <CloseIcon />
+                      </Fab>
+                    </Tooltip>
+                  </Box>
                 }
               </Box>
 
-              <Button color="primary" variant="contained">
-                <CloudUploadIcon className={classes.buttonIcon} />
-                Upload
-              </Button>
+              {avatar &&
+                <Button color="primary" component="span" disabled={isPerformingAuthAction} variant="contained" onClick={this.uploadAvatar}>
+                  <CloudUploadIcon className={classes.buttonIcon} />
+                  Upload
+                </Button>
+              }
+
+              {!avatar &&
+                <React.Fragment>
+                  <input
+                    id="avatar-input"
+                    type="file"
+                    hidden
+                    accept="image/*"
+
+                    onChange={this.handleAvatarChange}
+                  />
+
+                  <label htmlFor="avatar-input">
+                    <Button color="primary" component="span" disabled={isPerformingAuthAction} variant="contained">
+                      <PhotoIcon className={classes.buttonIcon} />
+                      Choose...
+                    </Button>
+                  </label>
+                </React.Fragment>
+              }
             </Box>
 
             <Grid container>
