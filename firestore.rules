@@ -9,8 +9,12 @@ service cloud.firestore {
                     request.resource.data.keys().hasAll(['firstName', 'lastName', 'username']) &&
                     request.resource.data.username.size() > 2 &&
                     request.resource.data.username.size() <= 20;
-      allow update: if request.auth.uid != null;
-      allow delete: if request.auth.uid != null;
+
+      allow update: if request.auth.uid != null &&
+                       request.auth.uid == uid;
+
+      allow delete: if request.auth.uid != null &&
+                       request.auth.uid == uid;
     }
   }
 }
