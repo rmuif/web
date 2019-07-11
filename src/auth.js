@@ -38,6 +38,36 @@ export const changeAvatar = (avatar) => {
   });
 };
 
+export const removeAvatar = () => {
+  return new Promise((resolve, reject) => {
+    const currentUser = auth.currentUser;
+
+    if (!currentUser) {
+      reject();
+    }
+
+    const uid = currentUser.uid;
+
+    if (!uid) {
+      reject();
+    }
+
+    currentUser.updateProfile({
+      photoURL: null
+    }).then((value) => {
+      const reference = storage.ref().child('images').child('avatars').child(uid);
+
+      reference.delete().then((value) => {
+        resolve(value);
+      }).catch((reason) => {
+        reject(reason);
+      });
+    }).catch((reason) => {
+      reject(reason);
+    });
+  });
+};
+
 export const changeFirstName = (firstName) => {
   return new Promise((resolve, reject) => {
     if (!firstName) {
