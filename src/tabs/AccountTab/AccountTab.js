@@ -9,6 +9,7 @@ import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import Box from '@material-ui/core/Box';
 import Avatar from '@material-ui/core/Avatar';
+import Fab from '@material-ui/core/Fab';
 import Button from '@material-ui/core/Button';
 
 import List from '@material-ui/core/List';
@@ -22,6 +23,7 @@ import TextField from '@material-ui/core/TextField';
 import Tooltip from '@material-ui/core/Tooltip';
 import IconButton from '@material-ui/core/IconButton';
 
+import CloseIcon from '@material-ui/icons/Close';
 import PhotoIcon from '@material-ui/icons/Photo';
 import CloudUploadIcon from '@material-ui/icons/CloudUpload';
 import PersonIcon from '@material-ui/icons/Person';
@@ -124,6 +126,35 @@ class AccountTab extends Component {
         });
       });
     });
+  };
+
+  removeAvatar = () => {
+    const { user } = this.props;
+    const { avatar } = this.state;
+
+    if (!user.photoURL && !avatar) {
+      return;
+    }
+
+    if (!user.photoURL && avatar || user.photoURL && avatar) {
+      this.setState({
+        avatar: null
+      });
+    } else if (user.photoURL && !avatar) {
+      this.setState({
+        isPerformingAuthAction: true
+      }, () => {
+        auth.removeAvatar().then((value) => {
+          // TODO: Display success
+        }).catch((reason) => {
+          // TODO: Display error
+        }).finally(() => {
+          this.setState({
+            isPerformingAuthAction: false
+          });
+        });
+      });
+    }
   };
 
   calculateProfileCompletion = () => {
@@ -553,7 +584,7 @@ class AccountTab extends Component {
             <Grid alignItems="center" container>
               <Grid item xs>
                 <Box textAlign="center">
-                  <Box mb={1.5}>
+                  <Box position="relative" mb={1.5}>
                     {user.photoURL &&
                       <React.Fragment>
                         {avatar &&
@@ -578,6 +609,16 @@ class AccountTab extends Component {
                           </Avatar>
                         }
                       </React.Fragment>
+                    }
+
+                    {(user.photoURL || avatar) &&
+                      <Box position="absolute" top={0} right={0}>
+                        <Tooltip title="Remove">
+                          <Fab color="secondary" disabled={isPerformingAuthAction} size="small" onClick={this.removeAvatar}>
+                            <CloseIcon />
+                          </Fab>
+                        </Tooltip>
+                      </Box>
                     }
                   </Box>
 
