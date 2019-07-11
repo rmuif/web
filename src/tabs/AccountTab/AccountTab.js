@@ -123,7 +123,8 @@ class AccountTab extends Component {
         this.setState({
           isPerformingAuthAction: false,
 
-          avatar: null
+          avatar: null,
+          avatarUrl: ''
         });
       });
     });
@@ -137,7 +138,7 @@ class AccountTab extends Component {
       return;
     }
 
-    if (!user.photoURL && avatar && avatarUrl || user.photoURL && avatar && avatarUrl) {
+    if ((!user.photoURL && avatar && avatarUrl) || (user.photoURL && avatar && avatarUrl)) {
       URL.revokeObjectURL(avatarUrl);
 
       this.setState({
@@ -593,25 +594,17 @@ class AccountTab extends Component {
               <Grid item xs>
                 <Box textAlign="center">
                   <Box position="relative" mb={1.5}>
-                    {user.photoURL &&
-                      <React.Fragment>
-                        {avatar &&
-                          <Avatar className={classes.avatar} alt="Avatar" src={avatarUrl} />
-                        }
-
-                        {!avatar &&
-                          <Avatar className={classes.avatar} alt="Avatar" src={user.photoURL} />
-                        }
-                      </React.Fragment>
+                    {(avatar && avatarUrl) &&
+                      <Avatar className={classes.avatar} alt="Avatar" src={avatarUrl} />
                     }
 
-                    {!user.photoURL &&
+                    {(!avatar && !avatarUrl) &&
                       <React.Fragment>
-                        {avatar &&
-                          <Avatar className={classes.avatar} alt="Avatar" src={avatarUrl} />
+                        {user.photoURL &&
+                          <Avatar className={classes.avatar} alt="Avatar" src={user.photoURL} />
                         }
 
-                        {!avatar &&
+                        {!user.photoURL &&
                           <Avatar className={classes.avatar} alt="Avatar">
                             <Typography variant="h3">{this.getNameInitials()}</Typography>
                           </Avatar>
@@ -619,7 +612,7 @@ class AccountTab extends Component {
                       </React.Fragment>
                     }
 
-                    {(user.photoURL || avatar) &&
+                    {(user.photoURL || (avatar && avatarUrl)) &&
                       <Box position="absolute" top={0} right={0}>
                         <Tooltip title="Remove">
                           <Fab color="secondary" disabled={isPerformingAuthAction} size="small" onClick={this.removeAvatar}>
@@ -630,14 +623,14 @@ class AccountTab extends Component {
                     }
                   </Box>
 
-                  {avatar &&
+                  {(avatar && avatarUrl) &&
                     <Button color="primary" component="span" disabled={isPerformingAuthAction} variant="contained" onClick={this.uploadAvatar}>
                       <CloudUploadIcon className={classes.buttonIcon} />
                       Upload
                     </Button>
                   }
 
-                  {!avatar &&
+                  {(!avatar && !avatarUrl) &&
                     <React.Fragment>
                       <input
                         id="avatar-input"
