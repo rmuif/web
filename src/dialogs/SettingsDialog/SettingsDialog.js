@@ -97,7 +97,7 @@ class SettingsDialog extends Component {
     const { selectedTab } = this.state;
 
     return (
-      <Dialog fullWidth maxWidth="md" {...dialogProps}>
+      <Dialog {...dialogProps}>
         <DialogTitle disableTypography>
           <Typography variant="h6">
             Settings
@@ -113,7 +113,7 @@ class SettingsDialog extends Component {
         <Hidden xsDown>
           <Tabs
             style={{ overflow: 'initial', minHeight: 'initial' }}
-
+            
             indicatorColor="primary"
             textColor="primary"
             value={selectedTab}
@@ -130,6 +130,7 @@ class SettingsDialog extends Component {
         <Hidden smUp>
           <Tabs
             style={{ overflow: 'initial', minHeight: 'initial' }}
+            
             indicatorColor="primary"
             scrollButtons="off"
             textColor="primary"
