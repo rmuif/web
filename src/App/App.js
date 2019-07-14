@@ -741,7 +741,8 @@ class App extends Component {
           this.setState({
             isAuthReady: true,
             isSignedIn: false,
-            user: null
+            user: null,
+            userData: null
           });
         }
       }
