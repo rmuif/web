@@ -526,12 +526,16 @@ class App extends Component {
     });
   };
 
-  openSnackbar = (message) => {
+  openSnackbar = (message, callback) => {
     this.setState({
       snackbar: {
         autoHideDuration: readingTime(message).time * 2,
         message,
         open: true
+      }
+    }, () => {
+      if (callback && typeof callback === 'function') {
+        callback();
       }
     });
   };
@@ -677,7 +681,9 @@ class App extends Component {
 
                         props: {
                           user: user,
-                          userData: userData
+                          userData: userData,
+
+                          openSnackbar: this.openSnackbar
                         }
                       },
 

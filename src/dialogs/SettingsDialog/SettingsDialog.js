@@ -94,6 +94,11 @@ class SettingsDialog extends Component {
       userData
     } = this.props;
 
+    // Custom Functions
+    const {
+      openSnackbar
+    } = this.props;
+
     const { selectedTab } = this.state;
 
     return (
@@ -150,6 +155,8 @@ class SettingsDialog extends Component {
             <AccountTab
               user={user}
               userData={userData}
+
+              openSnackbar={openSnackbar}
             />
           }
         </Hidden>
@@ -159,6 +166,8 @@ class SettingsDialog extends Component {
             <AccountTab
               user={user}
               userData={userData}
+
+              openSnackbar={openSnackbar}
             />
           </SwipeableViews>
         </Hidden>
@@ -176,7 +185,10 @@ SettingsDialog.propTypes = {
 
   // Custom Properties
   user: PropTypes.object.isRequired,
-  userData: PropTypes.object.isRequired
+  userData: PropTypes.object.isRequired,
+
+  // Custom Functions
+  openSnackbar: PropTypes.func.isRequired
 };
 
 export default withStyles(styles)(SettingsDialog);

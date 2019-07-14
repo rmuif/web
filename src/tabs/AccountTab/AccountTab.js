@@ -114,11 +114,18 @@ class AccountTab extends Component {
       isPerformingAuthAction: true
     }, () => {
       auth.changeAvatar(avatar).then((value) => {
-        // TODO: Display success
-
-        this.calculateProfileCompletion();
+        this.calculateProfileCompletion(() => {
+          this.props.openSnackbar('Avatar changed');
+        });
       }).catch((reason) => {
-        // TODO: Display error
+        const code = reason.code;
+        const message = reason.message;
+
+        switch (code) {
+          default:
+            this.props.openSnackbar(message);
+            return;
+        }
       }).finally(() => {
         this.setState({
           isPerformingAuthAction: false,
@@ -150,11 +157,18 @@ class AccountTab extends Component {
         isPerformingAuthAction: true
       }, () => {
         auth.removeAvatar().then((value) => {
-          // TODO: Display success
-
-          this.calculateProfileCompletion();
+          this.calculateProfileCompletion(() => {
+            this.props.openSnackbar('Avatar removed');
+          });
         }).catch((reason) => {
-          // TODO: Display error
+          const code = reason.code;
+          const message = reason.message;
+  
+          switch (code) {
+            default:
+              this.props.openSnackbar(message);
+              return;
+          }
         }).finally(() => {
           this.setState({
             isPerformingAuthAction: false
@@ -164,7 +178,7 @@ class AccountTab extends Component {
     }
   };
 
-  calculateProfileCompletion = () => {
+  calculateProfileCompletion = (callback) => {
     const { user, userData } = this.props;
 
     if (!user || !userData) {
@@ -190,6 +204,10 @@ class AccountTab extends Component {
 
     this.setState({
       profileCompletion: Math.floor(profileCompletion)
+    }, () => {
+      if (callback && typeof callback === 'function') {
+        callback();
+      }
     });
   };
 
@@ -209,7 +227,7 @@ class AccountTab extends Component {
     });
   };
 
-  hideFields = () => {
+  hideFields = (callback) => {
     this.setState({
       showingField: '',
 
@@ -219,6 +237,10 @@ class AccountTab extends Component {
       emailAddress: '',
 
       errors: null
+    }, () => {
+      if (callback && typeof callback === 'function') {
+        callback();
+      }
     });
   };
 
@@ -245,8 +267,6 @@ class AccountTab extends Component {
       const { userData } = this.props;
 
       if (firstName === userData.firstName) {
-        // TODO: Display error
-
         return;
       }
 
@@ -254,12 +274,20 @@ class AccountTab extends Component {
         isPerformingAuthAction: true
       }, () => {
         auth.changeFirstName(firstName).then(() => {
-          // TODO: Display success
-
-          this.calculateProfileCompletion();
-          this.hideFields();
+          this.calculateProfileCompletion(() => {
+            this.hideFields(() => {
+              this.props.openSnackbar('First name changed');
+            });
+          });
         }).catch((reason) => {
-          // TODO: Display error
+          const code = reason.code;
+          const message = reason.message;
+  
+          switch (code) {
+            default:
+              this.props.openSnackbar(message);
+              return;
+          }
         }).finally(() => {
           this.setState({
             isPerformingAuthAction: false
@@ -292,8 +320,6 @@ class AccountTab extends Component {
       const { userData } = this.props;
 
       if (lastName === userData.lastName) {
-        // TODO: Display error
-
         return;
       }
 
@@ -301,12 +327,20 @@ class AccountTab extends Component {
         isPerformingAuthAction: true
       }, () => {
         auth.changeLastName(lastName).then(() => {
-          // TODO: Display success
-
-          this.calculateProfileCompletion();
-          this.hideFields();
+          this.calculateProfileCompletion(() => {
+            this.hideFields(() => {
+              this.props.openSnackbar('Last name changed');
+            });
+          });
         }).catch((reason) => {
-          // TODO: Display error
+          const code = reason.code;
+          const message = reason.message;
+  
+          switch (code) {
+            default:
+              this.props.openSnackbar(message);
+              return;
+          }
         }).finally(() => {
           this.setState({
             isPerformingAuthAction: false
@@ -339,8 +373,6 @@ class AccountTab extends Component {
       const { userData } = this.props;
 
       if (username === userData.username) {
-        // TODO: Display error
-
         return;
       }
 
@@ -348,12 +380,20 @@ class AccountTab extends Component {
         isPerformingAuthAction: true
       }, () => {
         auth.changeUsername(username).then(() => {
-          // TODO: Display success
-
-          this.calculateProfileCompletion();
-          this.hideFields();
+          this.calculateProfileCompletion(() => {
+            this.hideFields(() => {
+              this.props.openSnackbar('Username changed');
+            });
+          });
         }).catch((reason) => {
-          // TODO: Display error
+          const code = reason.code;
+          const message = reason.message;
+  
+          switch (code) {
+            default:
+              this.props.openSnackbar(message);
+              return;
+          }
         }).finally(() => {
           this.setState({
             isPerformingAuthAction: false
@@ -386,8 +426,6 @@ class AccountTab extends Component {
       const { user } = this.props;
 
       if (emailAddress === user.email) {
-        // TODO: Display error
-
         return;
       }
 
@@ -395,12 +433,20 @@ class AccountTab extends Component {
         isPerformingAuthAction: true
       }, () => {
         auth.changeEmailAddress(emailAddress).then(() => {
-          // TODO: Display success
-
-          this.calculateProfileCompletion();
-          this.hideFields();
+          this.calculateProfileCompletion(() => {
+            this.hideFields(() => {
+              this.props.openSnackbar('E-mail address changed');
+            });
+          });
         }).catch((reason) => {
-          // TODO: Display error
+          const code = reason.code;
+          const message = reason.message;
+  
+          switch (code) {
+            default:
+              this.props.openSnackbar(message);
+              return;
+          }
         }).finally(() => {
           this.setState({
             isPerformingAuthAction: false
@@ -415,11 +461,16 @@ class AccountTab extends Component {
       isPerformingAuthAction: true
     }, () => {
       auth.verifyEmailAddress().then(() => {
-        // TODO: Display success
-
-        this.calculateProfileCompletion();
+        this.props.openSnackbar('Verification e-mail sent');
       }).catch((reason) => {
-        // TODO: Display error
+        const code = reason.code;
+        const message = reason.message;
+
+        switch (code) {
+          default:
+            this.props.openSnackbar(message);
+            return;
+        }
       }).finally(() => {
         this.setState({
           isPerformingAuthAction: false
@@ -499,14 +550,10 @@ class AccountTab extends Component {
     ];
 
     if (!fileTypes.includes(avatar.type)) {
-      // TODO: Display error
-
       return;
     }
 
     if (avatar.size > (20 * 1024 * 1024)) {
-      // TODO: Display error
-
       return;
     }
 
@@ -1179,7 +1226,10 @@ AccountTab.propTypes = {
 
   // Properties
   user: PropTypes.object.isRequired,
-  userData: PropTypes.object.isRequired
+  userData: PropTypes.object.isRequired,
+
+  // Functions
+  openSnackbar: PropTypes.func.isRequired
 };
 
 export default withStyles(styles)(AccountTab);
