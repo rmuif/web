@@ -29,6 +29,7 @@ import CloudUploadIcon from '@material-ui/icons/CloudUpload';
 import PersonIcon from '@material-ui/icons/Person';
 import EditIcon from '@material-ui/icons/Edit';
 import PersonOutlineIcon from '@material-ui/icons/PersonOutline';
+import EmailIcon from '@material-ui/icons/Email';
 import CheckCircleIcon from '@material-ui/icons/CheckCircle';
 import WarningIcon from '@material-ui/icons/Warning';
 import CheckIcon from '@material-ui/icons/Check';
@@ -809,18 +810,18 @@ class AccountTab extends Component {
             <Hidden xsDown>
               <ListItemIcon>
                 <React.Fragment>
-                  {userData.firstName &&
-                    <PersonIcon />
-                  }
-
-                  {!userData.firstName &&
-                    <Tooltip title="No first name">
-                      <WarningIcon color="error" />
-                    </Tooltip>
-                  }
+                  <PersonIcon />
                 </React.Fragment>
               </ListItemIcon>
             </Hidden>
+
+            {!userData.firstName &&
+              <ListItemIcon>
+                <Tooltip title="No first name">
+                  <WarningIcon color="error" />
+                </Tooltip>
+              </ListItemIcon>
+            }
 
             {showingField === 'firstName' &&
               <TextField
@@ -880,18 +881,18 @@ class AccountTab extends Component {
             <Hidden xsDown>
               <ListItemIcon>
                 <React.Fragment>
-                  {userData.lastName &&
-                    <PersonIcon />
-                  }
-
-                  {!userData.lastName &&
-                    <Tooltip title="No last name">
-                      <WarningIcon color="error" />
-                    </Tooltip>
-                  }
+                  <PersonIcon />
                 </React.Fragment>
               </ListItemIcon>
             </Hidden>
+
+            {!userData.lastName &&
+              <ListItemIcon>
+                <Tooltip title="No last name">
+                  <WarningIcon color="error" />
+                </Tooltip>
+              </ListItemIcon>
+            }
 
             {showingField === 'lastName' &&
               <TextField
@@ -951,18 +952,18 @@ class AccountTab extends Component {
             <Hidden xsDown>
               <ListItemIcon>
                 <React.Fragment>
-                  {userData.username &&
-                    <PersonOutlineIcon />
-                  }
-
-                  {!userData.username &&
-                    <Tooltip title="No username">
-                      <WarningIcon color="error" />
-                    </Tooltip>
-                  }
+                  <PersonOutlineIcon />
                 </React.Fragment>
               </ListItemIcon>
             </Hidden>
+
+            {!userData.username &&
+              <ListItemIcon>
+                <Tooltip title="No username">
+                  <WarningIcon color="error" />
+                </Tooltip>
+              </ListItemIcon>
+            }
 
             {showingField === 'username' &&
               <TextField
@@ -1019,12 +1020,20 @@ class AccountTab extends Component {
           </ListItem>
 
           <ListItem>
+            <Hidden xsDown>
+              <ListItemIcon>
+                <React.Fragment>
+                  <EmailIcon />
+                </React.Fragment>
+              </ListItemIcon>
+            </Hidden>
+
             {user.email &&
               <ListItemIcon>
                 <React.Fragment>
                   {user.emailVerified &&
                     <Tooltip title="Verified">
-                      <CheckCircleIcon color="primary" />
+                      <CheckIcon color="primary" />
                     </Tooltip>
                   }
 
@@ -1038,13 +1047,11 @@ class AccountTab extends Component {
             }
 
             {!user.email &&
-              <Hidden xsDown>
-                <ListItemIcon>
-                  <Tooltip title="No e-mail address">
-                    <WarningIcon color="error" />
-                  </Tooltip>
-                </ListItemIcon>
-              </Hidden>
+              <ListItemIcon>
+                <Tooltip title="No e-mail address">
+                  <WarningIcon color="error" />
+                </Tooltip>
+              </ListItemIcon>
             }
 
             {showingField === 'emailAddress' &&
