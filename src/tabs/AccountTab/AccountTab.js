@@ -677,7 +677,7 @@ class AccountTab extends Component {
                   </Box>
 
                   {(avatar && avatarUrl) &&
-                    <Button color="primary" component="span" disabled={isPerformingAuthAction} variant="contained" onClick={this.uploadAvatar}>
+                    <Button color="primary" disabled={isPerformingAuthAction} variant="contained" onClick={this.uploadAvatar}>
                       <CloudUploadIcon className={classes.buttonIcon} />
                       Upload
                     </Button>
