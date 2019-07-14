@@ -1194,7 +1194,7 @@ class AccountTab extends Component {
             />
 
             <ListItemSecondaryAction>
-              <Button color="secondary" disabled={isPerformingAuthAction} variant="contained">Delete</Button>
+              <Button color="secondary" disabled={isPerformingAuthAction || true} variant="contained">Delete</Button>
             </ListItemSecondaryAction>
           </ListItem>
         </List>
