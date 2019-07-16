@@ -1,8 +1,16 @@
+const admin = require('firebase-admin');
 const functions = require('firebase-functions');
 
-// // Create and Deploy Your First Cloud Functions
-// // https://firebase.google.com/docs/functions/write-firebase-functions
-//
-// exports.helloWorld = functions.https.onRequest((request, response) => {
-//  response.send("Hello from Firebase!");
-// });
+admin.initializeApp();
+
+const firestore = admin.firestore();
+
+exports.deleteAccount = functions.auth.user().onDelete((user) => {
+  const uid = user.uid;
+
+  if (!uid) {
+    return null;
+  }
+
+  return firestore.collection('users').doc(uid).delete();
+});
