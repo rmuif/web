@@ -479,6 +479,29 @@ class AccountTab extends Component {
     });
   };
 
+  deleteAccount = () => {
+    this.setState({
+      isPerformingAuthAction: true
+    }, () => {
+      auth.deleteAccount().then(() => {
+        this.props.openSnackbar('Account deleted');
+      }).catch((reason) => {
+        const code = reason.code;
+        const message = reason.message;
+
+        switch (code) {
+          default:
+            this.props.openSnackbar(message);
+            return;
+        }
+      }).finally(() => {
+        this.setState({
+          isPerformingAuthAction: false
+        });
+      });
+    });
+  };
+
   changeField = (fieldId) => {
     switch (fieldId) {
       case 'firstName':
@@ -1194,7 +1217,7 @@ class AccountTab extends Component {
             />
 
             <ListItemSecondaryAction>
-              <Button color="secondary" disabled={isPerformingAuthAction || true} variant="contained">Delete</Button>
+              <Button color="secondary" disabled={isPerformingAuthAction} variant="contained" onClick={this.deleteAccount}>Delete</Button>
             </ListItemSecondaryAction>
           </ListItem>
         </List>

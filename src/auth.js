@@ -261,3 +261,21 @@ export const verifyEmailAddress = () => {
     });
   });
 };
+
+export const deleteAccount = () => {
+  return new Promise((resolve, reject) => {
+    const currentUser = auth.currentUser;
+
+    if (!currentUser) {
+      reject();
+
+      return;
+    }
+
+    currentUser.delete().then((value) => {
+      resolve(value);
+    }).catch((reason) => {
+      reject(reason);
+    });
+  });
+};
