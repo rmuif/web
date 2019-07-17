@@ -54,6 +54,13 @@ const styles = (theme) => ({
     height: theme.spacing(15)
   },
 
+  small: {
+    width: theme.spacing(4),
+    height: theme.spacing(4),
+
+    minHeight: 'initial'
+  },
+
   buttonIcon: {
     marginRight: theme.spacing(1)
   }
@@ -697,10 +704,10 @@ class AccountTab extends Component {
                     }
 
                     {(user.photoURL || (avatar && avatarUrl)) &&
-                      <Box position="absolute" top={0} right={0}>
+                      <Box position="absolute" top={0} right={4}>
                         <Tooltip title="Remove">
-                          <Fab color="secondary" disabled={isPerformingAuthAction} size="small" onClick={this.removeAvatar}>
-                            <CloseIcon />
+                          <Fab classes={{ sizeSmall: classes.small }} color="secondary" disabled={isPerformingAuthAction} size="small" onClick={this.removeAvatar}>
+                            <CloseIcon fontSize="small" />
                           </Fab>
                         </Tooltip>
                       </Box>
@@ -804,10 +811,10 @@ class AccountTab extends Component {
                 }
 
                 {(user.photoURL || avatar) &&
-                  <Box position="absolute" top={0} right={0}>
+                  <Box position="absolute" top={0} right={4}>
                     <Tooltip title="Remove">
-                      <Fab color="secondary" disabled={isPerformingAuthAction} size="small" onClick={this.removeAvatar}>
-                        <CloseIcon />
+                      <Fab classes={{ sizeSmall: classes.small }} color="secondary" disabled={isPerformingAuthAction} size="small" onClick={this.removeAvatar}>
+                        <CloseIcon fontSize="small" />
                       </Fab>
                     </Tooltip>
                   </Box>
