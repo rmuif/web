@@ -63,9 +63,9 @@ const initialState = {
   profileCompletion: 0,
   securityRating: 0,
 
-  showingField: '',
-
   isPerformingAuthAction: false,
+
+  showingField: '',
 
   avatar: null,
   avatarUrl: '',
@@ -73,6 +73,8 @@ const initialState = {
   lastName: '',
   username: '',
   emailAddress: '',
+
+  hasSentVerificationEmail: false,
 
   errors: null
 };
@@ -461,7 +463,11 @@ class AccountTab extends Component {
       isPerformingAuthAction: true
     }, () => {
       auth.verifyEmailAddress().then(() => {
-        this.props.openSnackbar('Verification e-mail sent');
+        this.setState({
+          hasSentVerificationEmail: true
+        }, () => {
+          this.props.openSnackbar('Verification e-mail sent');
+        });
       }).catch((reason) => {
         const code = reason.code;
         const message = reason.message;
@@ -658,6 +664,8 @@ class AccountTab extends Component {
       lastName,
       username,
       emailAddress,
+
+      hasSentVerificationEmail,
 
       errors
     } = this.state;
@@ -1157,7 +1165,7 @@ class AccountTab extends Component {
                     <ListItemSecondaryAction>
                       <Tooltip title="Verify">
                         <div>
-                          <IconButton color="secondary" disabled={isPerformingAuthAction} onClick={this.verifyEmailAddress}>
+                          <IconButton color="secondary" disabled={isPerformingAuthAction || hasSentVerificationEmail} onClick={this.verifyEmailAddress}>
                             <CheckIcon />
                           </IconButton>
                         </div>
