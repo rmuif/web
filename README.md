@@ -21,17 +21,33 @@ https://phoqe.me/react-material-ui-firebase
 
 ## Get started
 
-```
-git clone https://github.com/Phoqe/react-material-ui-firebase.git
-```
+### Clone the repository
+
+The command `git clone` is a [Git](https://www.git-scm.com) command-line utility which is used to target an existing repository and create a clone, or copy of the target repository. The `<directory>` option is the name of a new directory to clone into, you can replace it with your project’s name. The ”humanish“ part of the source repository is used if no directory is explicitly given (`repo` for `/path/to/repo.git` and `foo` for `host.xz:foo/.git`).
 
 ```
-cd react-material-ui-firebase
+git clone https://github.com/Phoqe/react-material-ui-firebase.git <directory>
 ```
+
+### Install the dependencies
+
+The command `cd`, also known as `chdir` (**ch**ange **dir**ectory), is a command-line OS shell command used to change the current working directory.
+
+```
+cd <directory>
+```
+
+The command `yarn install` is a [Yarn](https://yarnpkg.com) command-line utility used to install all dependencies for a project. This is most commonly used when you have just checked out code for a project, or when another developer on the project has added a new dependency that you need to pick up.
 
 ```
 yarn install
 ```
+
+### Run the app
+
+The command `yarn start` runs the app in development mode. Open http://localhost:3000 to view it in the browser.
+
+The page will automatically reload if you make changes to the code. You will see the build errors and lint warnings in the console.
 
 ```
 yarn start
