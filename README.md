@@ -55,21 +55,29 @@ yarn start
 
 ## Make it yours
 
-React + Material-UI + Firebase is a skeleton for your own project. It wouldn’t make sense if you couldn’t customize it to the core.
+React + Material-UI + Firebase is a boilerplate for your own project. It wouldn’t make sense if you couldn’t customize it to the core.
 
 ### Use your own Git repository
+
+The command `git remote` is another Git command-line utility which is used to manage the set of repositories (”remotes“) whose branches you track. The options `rm origin` is used to remove the remote named `origin`. All remote-tracking branches and configuration settings for the remote are removed.
 
 ```
 git remote rm origin
 ```
 
+The options `add origin` adds a remote named `origin` for the repository at `<url>`. The command `git fetch origin` can then be used to create and update remote-tracking branches `origin/<branch>`.
+
 ```
-git remote add origin https://github.com/Phoqe/react-material-ui-firebase.git
+git remote add origin <url>
 ```
+
+The options `add upstream` adds a remote named `upstream` for the repository at `https://github.com/Phoqe/react-material-ui-firebase.git`. The command `git fetch upstream` can then be used to create and update remote-tracking branches `upstream/<branch>`.
 
 ```
 git remote add upstream https://github.com/Phoqe/react-material-ui-firebase.git
 ```
+
+The command `git push` is yet another Git command-line utility which is used to update remote refs using local refs, while sending objects necessary to complete the given refs.
 
 ```
 git push -u origin master
