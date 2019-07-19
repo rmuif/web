@@ -5,7 +5,7 @@
 ![GitHub repo size](https://img.shields.io/github/repo-size/Phoqe/react-material-ui-firebase.svg)
 ![Website](https://img.shields.io/website/https/phoqe.me/react-material-ui-firebase.svg)
 
-This project is an application skeleton for a typical [React](https://reactjs.org) project. It comes bundled with [Material-UI](https://material-ui.com), [Firebase](https://firebase.google.com), and [React Router](https://reacttraining.com/react-router). With [Create React App](https://facebook.github.io/create-react-app) at its core, you can use it to bootstrap your projects and development environment with the same tooling.
+This project is an application skeleton for a typical [React](https://reactjs.org) project. With [Create React App](https://facebook.github.io/create-react-app) at its core, you can use it to bootstrap your projects and development environment with the same tooling. It comes bundled with [Material-UI](https://material-ui.com), [Firebase](https://firebase.google.com), and [React Router](https://reacttraining.com/react-router).
 
 ## Features
 
@@ -14,6 +14,8 @@ This project is an application skeleton for a typical [React](https://reactjs.or
 - Built on top of Firebase with Authentication, Firestore, Functions, Storage, and Performance Monitoring working from the start
 - Robust routing with React Router including error handling
 - Extensive mobile support with full-screen dialogs and [react-swipeable-views](https://react-swipeable-views.com) for tabs
+
+For an exhaustive list you can visit [the Features page on the Wiki](https://github.com/Phoqe/react-material-ui-firebase/wiki/Features).
 
 ## Demo
 
