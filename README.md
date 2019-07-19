@@ -65,13 +65,13 @@ The command `git remote` is another Git command-line utility which is used to ma
 git remote rm origin
 ```
 
-The options `add origin` adds a remote named `origin` for the repository at `<url>`. The command `git fetch origin` can then be used to create and update remote-tracking branches `origin/<branch>`.
+The options `add origin` adds a remote named `origin` for the repository at `<url>`.
 
 ```
 git remote add origin <url>
 ```
 
-The options `add upstream` adds a remote named `upstream` for the repository at `https://github.com/Phoqe/react-material-ui-firebase.git`. The command `git fetch upstream` can then be used to create and update remote-tracking branches `upstream/<branch>`.
+The options `add upstream` adds a remote named `upstream` for the repository at `https://github.com/Phoqe/react-material-ui-firebase.git`.
 
 ```
 git remote add upstream https://github.com/Phoqe/react-material-ui-firebase.git
