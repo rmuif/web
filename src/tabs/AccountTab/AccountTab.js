@@ -103,6 +103,10 @@ class AccountTab extends Component {
 
     if (firstName && lastName) {
       return firstName.charAt(0) + lastName.charAt(0);
+    } else if (firstName) {
+      return firstName.charAt(0)
+    } else if (lastName) {
+      return lastName.charAt(0);
     } else if (username) {
       return username.charAt(0);
     } else if (displayName) {
