@@ -43,7 +43,7 @@ The command `cd`, also known as `chdir` (**ch**ange **dir**ectory), is a command
 cd <directory>
 ```
 
-The command `yarn install` is a [Yarn](https://yarnpkg.com) command-line utility used to install all dependencies for a project. This is most commonly used when you have just checked out code for a project, or when another developer on the project has added a new dependency that you need to pick up.
+The command `yarn install` is a [Yarn](https://yarnpkg.com) command-line utility which is used to install all dependencies for a project. This is most commonly used when you have just checked out code for a project, or when another developer on the project has added a new dependency that you need to pick up.
 
 ```
 yarn install
@@ -51,7 +51,7 @@ yarn install
 
 ### Run the app
 
-The command `yarn start` runs the app in development mode. Open http://localhost:3000 to view it in the browser. The page will automatically reload if you make changes to the code. You will see the build errors and lint warnings in the console.
+The command `yarn start` is another Yarn command-line utility which is used to run the app in development mode. Open http://localhost:3000 to view it in the browser. The page will automatically reload if you make changes to the code. You will see the build errors and lint warnings in the console.
 
 ```
 yarn start
