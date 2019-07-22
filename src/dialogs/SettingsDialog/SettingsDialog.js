@@ -6,24 +6,59 @@ import { withStyles } from '@material-ui/core/styles';
 
 import Dialog from '@material-ui/core/Dialog';
 import DialogTitle from '@material-ui/core/DialogTitle';
-import DialogContent from '@material-ui/core/DialogContent';
-import DialogActions from '@material-ui/core/DialogActions';
+
+import Typography from '@material-ui/core/Typography';
+import Tooltip from '@material-ui/core/Tooltip';
+import IconButton from '@material-ui/core/IconButton';
 
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
-import Button from '@material-ui/core/Button';
+
 import Hidden from '@material-ui/core/Hidden';
+
+import CloseIcon from '@material-ui/icons/Close';
+import AccountCircleIcon from '@material-ui/icons/AccountCircle';
+import PaletteIcon from '@material-ui/icons/Palette';
+import LinkIcon from '@material-ui/icons/Link';
+import SecurityIcon from '@material-ui/icons/Security';
 
 import SwipeableViews from 'react-swipeable-views';
 
-import AccountTab from '../../tabs/settings/AccountTab/AccountTab';
-import AppearanceTab from '../../tabs/settings/AppearanceTab/AppearanceTab';
+import AccountTab from '../../tabs/AccountTab/AccountTab';
 
 const styles = (theme) => ({
-  tabs: {
-    marginBottom: theme.spacing(1)
+  closeButton: {
+    position: 'absolute',
+    right: theme.spacing(1),
+    top: theme.spacing(1)
   }
 });
+
+const tabs = [
+  {
+    key: 'account',
+    icon: <AccountCircleIcon />,
+    label: 'Account'
+  },
+
+  {
+    key: 'appearance',
+    icon: <PaletteIcon />,
+    label: 'Appearance'
+  },
+
+  {
+    key: 'connections',
+    icon: <LinkIcon />,
+    label: 'Connections'
+  },
+
+  {
+    key: 'security',
+    icon: <SecurityIcon />,
+    label: 'Security'
+  }
+];
 
 class SettingsDialog extends Component {
   constructor(props) {
@@ -34,195 +69,126 @@ class SettingsDialog extends Component {
     };
   }
 
-  handleKeyPress = (event) => {
-    const key = event.key;
-
-    if (event.altKey || event.ctrlKey || event.metaKey || event.shiftKey) {
-      return;
-    }
-
-    if (key === 'Enter') {
-      this.props.onClose();
-    }
-  };
-
-  changeTab = (event, value) => {
+  handleTabChange = (event, value) => {
     this.setState({
       selectedTab: value
     });
   };
 
-  changeIndex = (index) => {
+  handleIndexChange = (index) => {
     this.setState({
       selectedTab: index
     });
-  };
-
-  handleResetClick = () => {
-    const { primaryColor, secondaryColor, type, defaultTheme } = this.props;
-
-    if (primaryColor !== defaultTheme.primaryColor || secondaryColor !== defaultTheme.secondaryColor || type !== defaultTheme.type) {
-      setTimeout(this.props.onResetClick, 137.5);
-    }
   };
 
   render() {
     // Styling
     const { classes } = this.props;
 
-    // Properties
+    // Dialog Properties
+    const { dialogProps } = this.props;
+
+    // Custom Properties
     const {
-      fullScreen,
-      open,
       user,
-      isPerformingAuthAction,
-      isVerifyingEmailAddress,
-      colors,
-      primaryColor,
-      secondaryColor,
-      type,
-      defaultTheme
+      userData
     } = this.props;
 
-    // Events
+    // Custom Functions
     const {
-      onClose,
-      onAddAvatarClick,
-      onChangeAvatarClick,
-      onAddDisplayNameClick,
-      onChangeDisplayNameClick,
-      onAddEmailAddressClick,
-      onVerifyEmailAddressClick,
-      onPrimaryColorChange,
-      onSecondaryColorChange,
-      onTypeChange
+      openSnackbar
     } = this.props;
 
     const { selectedTab } = this.state;
 
-    let hasDeviatedFromDefaultSettings = false;
-
-    if (defaultTheme) {
-      hasDeviatedFromDefaultSettings = (
-        primaryColor !== defaultTheme.primaryColor.name ||
-        secondaryColor !== defaultTheme.secondaryColor.name ||
-        type !== defaultTheme.type
-      );
-    }
-
     return (
-      <Dialog fullScreen={fullScreen} open={open} onClose={onClose} onKeyPress={this.handleKeyPress}>
-        <DialogTitle>Settings</DialogTitle>
+      <Dialog {...dialogProps}>
+        <DialogTitle disableTypography>
+          <Typography variant="h6">
+            Settings
+          </Typography>
 
-        <Tabs className={classes.tabs} indicatorColor="primary" textColor="primary" onChange={this.changeTab} value={selectedTab} variant="fullWidth">
-          <Tab label="Account" />
-          <Tab label="Appearance" />
-        </Tabs>
+          <Tooltip title="Close">
+            <IconButton className={classes.closeButton} onClick={dialogProps.onClose}>
+              <CloseIcon />
+            </IconButton>
+          </Tooltip>
+        </DialogTitle>
 
-        <DialogContent>
-          <Hidden only="xs">
-            {selectedTab === 0 &&
-              <AccountTab
-                user={user}
-                isPerformingAuthAction={isPerformingAuthAction}
-                isVerifyingEmailAddress={isVerifyingEmailAddress}
-                onAddAvatarClick={onAddAvatarClick}
-                onChangeAvatarClick={onChangeAvatarClick}
-                onAddDisplayNameClick={onAddDisplayNameClick}
-                onChangeDisplayNameClick={onChangeDisplayNameClick}
-                onAddEmailAddressClick={onAddEmailAddressClick}
-                onVerifyEmailAddressClick={onVerifyEmailAddressClick}
-              />
-            }
+        <Hidden xsDown>
+          <Tabs
+            style={{ overflow: 'initial', minHeight: 'initial' }}
+            
+            indicatorColor="primary"
+            textColor="primary"
+            value={selectedTab}
+            variant="fullWidth"
+            onChange={this.handleTabChange}>
+            {tabs.map((tab) => {
+              return (
+                <Tab key={tab.key} icon={tab.icon} label={tab.label} />
+              );
+            })}
+          </Tabs>
+        </Hidden>
 
-            {selectedTab === 1 &&
-              <AppearanceTab
-                colors={colors}
-                primaryColor={primaryColor}
-                secondaryColor={secondaryColor}
-                type={type}
-                onPrimaryColorChange={onPrimaryColorChange}
-                onSecondaryColorChange={onSecondaryColorChange}
-                onTypeChange={onTypeChange}
-              />
-            }
-          </Hidden>
+        <Hidden smUp>
+          <Tabs
+            style={{ overflow: 'initial', minHeight: 'initial' }}
+            
+            indicatorColor="primary"
+            scrollButtons="off"
+            textColor="primary"
+            value={selectedTab}
+            variant="scrollable"
+            onChange={this.handleTabChange}>
+            {tabs.map((tab) => {
+              return (
+                <Tab key={tab.key} icon={tab.icon} label={tab.label} />
+              );
+            })}
+          </Tabs>
+        </Hidden>
 
-          <Hidden only={['sm', 'md', 'lg', 'xl']}>
-            <SwipeableViews index={selectedTab} onChangeIndex={this.changeIndex}>
-              <AccountTab
-                user={user}
-                isPerformingAuthAction={isPerformingAuthAction}
-                isVerifyingEmailAddress={isVerifyingEmailAddress}
-                onAddAvatarClick={onAddAvatarClick}
-                onChangeAvatarClick={onChangeAvatarClick}
-                onAddDisplayNameClick={onAddDisplayNameClick}
-                onChangeDisplayNameClick={onChangeDisplayNameClick}
-                onAddEmailAddressClick={onAddEmailAddressClick}
-                onVerifyEmailAddressClick={onVerifyEmailAddressClick}
-              />
+        <Hidden xsDown>
+          {selectedTab === 0 &&
+            <AccountTab
+              user={user}
+              userData={userData}
 
-              <AppearanceTab
-                colors={colors}
-                primaryColor={primaryColor}
-                secondaryColor={secondaryColor}
-                type={type}
-                onPrimaryColorChange={onPrimaryColorChange}
-                onSecondaryColorChange={onSecondaryColorChange}
-                onTypeChange={onTypeChange}
-              />
-            </SwipeableViews>
-          </Hidden>
-        </DialogContent>
+              openSnackbar={openSnackbar}
+            />
+          }
+        </Hidden>
 
-        {(selectedTab === 1 && hasDeviatedFromDefaultSettings) &&
-          <React.Fragment>
-            <Hidden only="xs">
-              <DialogActions>
-                <Button color="primary" variant="contained" onClick={this.handleResetClick}>Reset</Button>
-              </DialogActions>
-            </Hidden>
+        <Hidden smUp>
+          <SwipeableViews index={selectedTab} onChangeIndex={this.handleIndexChange}>
+            <AccountTab
+              user={user}
+              userData={userData}
 
-            <Hidden only={['sm', 'md', 'lg', 'xl']}>
-              <DialogActions>
-                <Button color="primary" onClick={onClose}>Cancel</Button>
-                <Button color="primary" variant="outlined" onClick={this.handleResetClick}>Reset</Button>
-                <Button color="primary" variant="contained" onClick={onClose}>OK</Button>
-              </DialogActions>
-            </Hidden>
-          </React.Fragment>
-        }
-
-        {(selectedTab !== 1 || !hasDeviatedFromDefaultSettings) &&
-          <Hidden only={['sm', 'md', 'lg', 'xl']}>
-            <DialogActions>
-              <Button color="primary" onClick={onClose}>Cancel</Button>
-              <Button color="primary" variant="contained" onClick={onClose}>OK</Button>
-            </DialogActions>
-          </Hidden>
-        }
+              openSnackbar={openSnackbar}
+            />
+          </SwipeableViews>
+        </Hidden>
       </Dialog>
     );
   }
 }
 
 SettingsDialog.propTypes = {
+  // Styling
   classes: PropTypes.object.isRequired,
 
-  fullScreen: PropTypes.bool,
-  open: PropTypes.bool.isRequired,
+  // Dialog Properties
+  dialogProps: PropTypes.object.isRequired,
 
+  // Custom Properties
   user: PropTypes.object.isRequired,
-  isPerformingAuthAction: PropTypes.bool.isRequired,
-  isVerifyingEmailAddress: PropTypes.bool.isRequired,
-  colors: PropTypes.array.isRequired,
-  primaryColor: PropTypes.string.isRequired,
-  secondaryColor: PropTypes.string.isRequired,
-  type: PropTypes.string.isRequired,
+  userData: PropTypes.object.isRequired,
 
-  onClose: PropTypes.func.isRequired,
-  onTypeChange: PropTypes.func.isRequired,
-  onResetClick: PropTypes.func.isRequired
+  // Custom Functions
+  openSnackbar: PropTypes.func.isRequired
 };
 
 export default withStyles(styles)(SettingsDialog);

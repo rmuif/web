@@ -1,0 +1,20 @@
+service cloud.firestore {
+  match /databases/{database}/documents {
+    match /users/{uid} {
+      allow get: if request.auth.uid != null;
+      allow list: if request.auth.uid != null;
+      
+      allow create: if request.auth.uid != null &&
+                    request.auth.uid == uid &&
+                    request.resource.data.keys().hasAll(['firstName', 'lastName', 'username']) &&
+                    request.resource.data.username.size() > 2 &&
+                    request.resource.data.username.size() <= 20;
+
+      allow update: if request.auth.uid != null &&
+                       request.auth.uid == uid;
+
+      allow delete: if request.auth.uid != null &&
+                       request.auth.uid == uid;
+    }
+  }
+}

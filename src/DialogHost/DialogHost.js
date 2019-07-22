@@ -38,7 +38,7 @@ class DialogHost extends Component {
               />
 
               <SettingsDialog
-                {...settingsDialog.dialogProps}
+                dialogProps={settingsDialog.dialogProps}
 
                 {...settingsDialog.props}
               />
@@ -82,9 +82,11 @@ class DialogHost extends Component {
               />
 
               <SettingsDialog
-                fullScreen
+                dialogProps={{
+                  fullScreen: true,
 
-                {...settingsDialog.dialogProps}
+                  ...settingsDialog.dialogProps
+                }}
 
                 {...settingsDialog.props}
               />

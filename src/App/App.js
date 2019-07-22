@@ -4,11 +4,6 @@ import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
 import validate from 'validate.js';
 
-import firebase from 'firebase/app';
-import 'firebase/auth';
-import 'firebase/firestore';
-import 'firebase/performance';
-
 import readingTime from 'reading-time';
 
 import { createMuiTheme, MuiThemeProvider } from '@material-ui/core/styles';
@@ -16,6 +11,7 @@ import { createMuiTheme, MuiThemeProvider } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
 import Snackbar from '@material-ui/core/Snackbar';
 
+import firebase, { auth, firestore } from '../firebase';
 import colors from '../colors';
 import settings from '../settings';
 import constraints from '../constraints';
@@ -28,16 +24,6 @@ import HomeContent from '../content/HomeContent/HomeContent';
 import NotFoundContent from '../content/NotFoundContent/NotFoundContent';
 
 import DialogHost from '../DialogHost/DialogHost';
-
-firebase.initializeApp(settings.credentials.firebase);
-
-const auth = firebase.auth();
-const firestore = firebase.firestore();
-
-// eslint-disable-next-line no-unused-vars
-const performance = firebase.performance();
-
-auth.useDeviceLanguage();
 
 let theme = createMuiTheme({
   palette: {
@@ -60,10 +46,10 @@ class App extends Component {
 
       isAuthReady: false,
       isPerformingAuthAction: false,
-      isVerifyingEmailAddress: false,
       isSignedIn: false,
 
       user: null,
+      userData: null,
       avatar: '',
       displayName: '',
       emailAddress: '',
@@ -85,7 +71,7 @@ class App extends Component {
       },
 
       settingsDialog: {
-        open: false
+        open: true
       },
 
       signOutDialog: {
@@ -195,7 +181,6 @@ class App extends Component {
         });
 
       }).catch((reason) => {
-
         const code = reason.code;
         const message = reason.message;
 
@@ -541,12 +526,16 @@ class App extends Component {
     });
   };
 
-  openSnackbar = (message) => {
+  openSnackbar = (message, callback) => {
     this.setState({
       snackbar: {
         autoHideDuration: readingTime(message).time * 2,
         message,
         open: true
+      }
+    }, () => {
+      if (callback && typeof callback === 'function') {
+        callback();
       }
     });
   };
@@ -571,7 +560,8 @@ class App extends Component {
       isPerformingAuthAction,
       isVerifyingEmailAddress,
       isSignedIn,
-      user
+      user,
+      userData
     } = this.state;
 
     const {
@@ -684,24 +674,16 @@ class App extends Component {
                       settingsDialog: {
                         dialogProps: {
                           open: settingsDialog.open,
+                          disableEscapeKeyDown: true,
 
                           onClose: () => this.closeDialog('settingsDialog')
                         },
 
                         props: {
                           user: user,
-                          isPerformingAuthAction: isPerformingAuthAction,
-                          isVerifyingEmailAddress: isVerifyingEmailAddress,
-                          colors: colors,
-                          primaryColor: primaryColor,
-                          secondaryColor: secondaryColor,
-                          type: type,
-                          defaultTheme: settings.theme,
+                          userData: userData,
 
-                          onPrimaryColorChange: this.changePrimaryColor,
-                          onSecondaryColorChange: this.changeSecondaryColor,
-                          onTypeChange: this.changeType,
-                          onResetClick: this.resetTheme
+                          openSnackbar: this.openSnackbar
                         }
                       },
 
@@ -746,13 +728,29 @@ class App extends Component {
       this.updateTheme(theme);
     }
 
-    this.removeAuthObserver = firebase.auth().onAuthStateChanged((user) => {
+    this.removeAuthObserver = auth.onAuthStateChanged((user) => {
       if (this._isMounted) {
-        this.setState({
-          isAuthReady: true,
-          isSignedIn: !!user,
-          user
-        });
+        if (user) {
+          const uid = user.uid;
+
+          this.removeUserObserver = firestore.collection('users').doc(uid).onSnapshot((documentSnapshot) => {
+            const data = documentSnapshot.data();
+
+            this.setState({
+              isAuthReady: true,
+              isSignedIn: true,
+              user: user,
+              userData: data
+            });
+          });
+        } else {
+          this.setState({
+            isAuthReady: true,
+            isSignedIn: false,
+            user: null,
+            userData: null
+          });
+        }
       }
     });
   }
@@ -761,6 +759,10 @@ class App extends Component {
     this._isMounted = false;
 
     this.removeAuthObserver();
+
+    if (this.state.isSignedIn) {
+      this.removeUserObserver();
+    }
   }
 }
 

@@ -96,7 +96,7 @@ class SignUpDialog extends Component {
       });
     } else {
       this.setState({
-        errors: errors
+        errors: null
       }, () => {
         this.props.signUp(
           firstName,
