@@ -9,6 +9,8 @@ This project is an application skeleton for a typical [React](https://reactjs.or
 
 ## Features
 
+There’s already a bunch of features included for instant web development gratification.
+
 - Bootstrapped with Create React App, the same tooling works out-of-the-box
 - Scaffolding incorporates Google Material Design principles through Material-UI
 - Built on top of Firebase with Authentication, Firestore, Functions, Storage, and Performance Monitoring working from the start
