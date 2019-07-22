@@ -897,9 +897,7 @@ class AccountTab extends Component {
           <ListItem>
             <Hidden xsDown>
               <ListItemIcon>
-                <React.Fragment>
-                  <PersonIcon />
-                </React.Fragment>
+                <PersonIcon />
               </ListItemIcon>
             </Hidden>
 
@@ -968,9 +966,7 @@ class AccountTab extends Component {
           <ListItem>
             <Hidden xsDown>
               <ListItemIcon>
-                <React.Fragment>
-                  <PersonIcon />
-                </React.Fragment>
+                <PersonIcon />
               </ListItemIcon>
             </Hidden>
 
@@ -1039,9 +1035,7 @@ class AccountTab extends Component {
           <ListItem>
             <Hidden xsDown>
               <ListItemIcon>
-                <React.Fragment>
-                  <PersonOutlineIcon />
-                </React.Fragment>
+                <PersonOutlineIcon />
               </ListItemIcon>
             </Hidden>
 
@@ -1110,9 +1104,7 @@ class AccountTab extends Component {
           <ListItem>
             <Hidden xsDown>
               <ListItemIcon>
-                <React.Fragment>
-                  <EmailIcon />
-                </React.Fragment>
+                <EmailIcon />
               </ListItemIcon>
             </Hidden>
 
