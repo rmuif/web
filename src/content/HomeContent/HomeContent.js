@@ -15,6 +15,8 @@ import GitHubCircleIcon from 'mdi-material-ui/GithubCircle';
 
 import EmptyState from '../../layout/EmptyState/EmptyState';
 
+import settings from '../../settings';
+
 const styles = (theme) => ({
   emptyStateIcon: {
     fontSize: theme.spacing(12)
@@ -35,7 +37,7 @@ class HomeContent extends Component {
     const { classes } = this.props;
 
     // Properties
-    const { isSignedIn, title } = this.props;
+    const { isSignedIn } = this.props;
 
     if (isSignedIn) {
       return (
@@ -55,7 +57,7 @@ class HomeContent extends Component {
     return (
       <EmptyState
         icon={<CodeIcon className={classes.emptyStateIcon} color="action" />}
-        title={title}
+        title={settings.title}
         description="The three musketeers, all in one pack in the form of a boilerplate app"
         button={
           <Fab className={classes.button} color="secondary" href="https://github.com/Phoqe/react-material-ui-firebase" rel="noopener noreferrer" target="_blank" variant="extended">
@@ -71,8 +73,7 @@ class HomeContent extends Component {
 HomeContent.propTypes = {
   classes: PropTypes.object.isRequired,
 
-  isSignedIn: PropTypes.bool.isRequired,
-  title: PropTypes.string.isRequired
+  isSignedIn: PropTypes.bool.isRequired
 };
 
 export default withStyles(styles)(HomeContent);

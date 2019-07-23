@@ -1,7 +1,5 @@
 import React, { Component } from 'react';
 
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
-
 import validate from 'validate.js';
 
 import readingTime from 'reading-time';
@@ -20,9 +18,7 @@ import LaunchScreen from '../layout/LaunchScreen/LaunchScreen';
 
 import Bar from '../layout/Bar/Bar';
 
-import HomeContent from '../content/HomeContent/HomeContent';
-import NotFoundContent from '../content/NotFoundContent/NotFoundContent';
-
+import Router from '../Router/Router';
 import DialogHost from '../DialogHost/DialogHost';
 
 let theme = createMuiTheme({
@@ -576,146 +572,141 @@ class App extends Component {
     const { snackbar } = this.state;
 
     return (
-      <Router>
-        <MuiThemeProvider theme={theme}>
-          <div style={{ minHeight: '100vh', backgroundColor: theme.palette.type === 'dark' ? '#303030' : '#fafafa' }}>
-            {!isAuthReady &&
-              <LaunchScreen />
-            }
+      <MuiThemeProvider theme={theme}>
+        <div style={{ minHeight: '100vh', backgroundColor: theme.palette.type === 'dark' ? '#303030' : '#fafafa' }}>
+          {!isAuthReady &&
+            <LaunchScreen />
+          }
 
-            {isAuthReady &&
-              <React.Fragment>
-                <Bar
-                  title={settings.title}
+          {isAuthReady &&
+            <React.Fragment>
+              <Bar
+                title={settings.title}
 
-                  isSignedIn={isSignedIn}
-                  isPerformingAuthAction={isPerformingAuthAction}
+                isSignedIn={isSignedIn}
+                isPerformingAuthAction={isPerformingAuthAction}
 
-                  user={user}
+                user={user}
 
-                  onSignUpClick={() => this.openDialog('signUpDialog')}
-                  onSignInClick={() => this.openDialog('signInDialog')}
+                onSignUpClick={() => this.openDialog('signUpDialog')}
+                onSignInClick={() => this.openDialog('signInDialog')}
 
-                  onSettingsClick={() => this.openDialog('settingsDialog')}
-                  onSignOutClick={() => this.openDialog('signOutDialog')}
-                />
+                onSettingsClick={() => this.openDialog('settingsDialog')}
+                onSignOutClick={() => this.openDialog('signOutDialog')}
+              />
 
-                <Switch>
-                  <Route path="/" exact render={() => (<HomeContent isSignedIn={isSignedIn} title={settings.title} />)} />
-                  <Route component={NotFoundContent} />
-                </Switch>
+              <Router isSignedIn={isSignedIn} />
 
-                <DialogHost
-                  isSignedIn={isSignedIn}
-                  dialogs={
-                    {
-                      signUpDialog: {
-                        dialogProps: {
-                          open: signUpDialog.open,
+              <DialogHost
+                isSignedIn={isSignedIn}
+                dialogs={
+                  {
+                    signUpDialog: {
+                      dialogProps: {
+                        open: signUpDialog.open,
 
-                          onClose: () => this.closeDialog('signUpDialog')
-                        },
-
-                        props: {
-                          isPerformingAuthAction: isPerformingAuthAction,
-
-                          signUp: this.signUp,
-
-                          onAuthProviderClick: this.signInWithAuthProvider
-                        }
+                        onClose: () => this.closeDialog('signUpDialog')
                       },
 
-                      signInDialog: {
-                        dialogProps: {
-                          open: signInDialog.open,
+                      props: {
+                        isPerformingAuthAction: isPerformingAuthAction,
 
-                          onClose: () => this.closeDialog('signInDialog')
-                        },
+                        signUp: this.signUp,
 
-                        props: {
-                          isPerformingAuthAction: isPerformingAuthAction,
+                        onAuthProviderClick: this.signInWithAuthProvider
+                      }
+                    },
 
-                          resetPassword: this.resetPassword,
-                          signIn: this.signIn,
+                    signInDialog: {
+                      dialogProps: {
+                        open: signInDialog.open,
 
-                          onAuthProviderClick: this.signInWithAuthProvider
-                        }
+                        onClose: () => this.closeDialog('signInDialog')
                       },
 
-                      resetPasswordDialog: {
-                        dialogProps: {
-                          open: resetPasswordDialog.open,
+                      props: {
+                        isPerformingAuthAction: isPerformingAuthAction,
 
-                          onClose: () => this.closeDialog('resetPasswordDialog')
-                        },
+                        resetPassword: this.resetPassword,
+                        signIn: this.signIn,
 
-                        props: {
-                          isPerformingAuthAction: isPerformingAuthAction,
+                        onAuthProviderClick: this.signInWithAuthProvider
+                      }
+                    },
 
-                          resetPassword: this.resetPassword
-                        }
+                    resetPasswordDialog: {
+                      dialogProps: {
+                        open: resetPasswordDialog.open,
+
+                        onClose: () => this.closeDialog('resetPasswordDialog')
                       },
 
-                      welcomeDialog: {
-                        dialogProps: {
-                          open: welcomeDialog.open,
+                      props: {
+                        isPerformingAuthAction: isPerformingAuthAction,
 
-                          onClose: () => this.closeDialog('welcomeDialog')
-                        },
+                        resetPassword: this.resetPassword
+                      }
+                    },
 
-                        props: {
-                          title: `Welcome to ${settings.title}!`,
-                          contentText: 'Complete your account by verifying your e-mail address. An e-mail will be sent to your e-mail address containing instructions on how to verify your e-mail address.',
-                          dismissiveAction: <Button color="primary" onClick={() => this.closeDialog('welcomeDialog')}>Cancel</Button>,
-                          confirmingAction: <Button color="primary" disabled={isPerformingAuthAction} variant="contained" onClick={() => this.verifyEmailAddress(() => this.closeDialog('welcomeDialog'))}>Verify</Button>
-                        }
+                    welcomeDialog: {
+                      dialogProps: {
+                        open: welcomeDialog.open,
+
+                        onClose: () => this.closeDialog('welcomeDialog')
                       },
 
-                      settingsDialog: {
-                        dialogProps: {
-                          open: settingsDialog.open,
-                          disableEscapeKeyDown: true,
+                      props: {
+                        title: `Welcome to ${settings.title}!`,
+                        contentText: 'Complete your account by verifying your e-mail address. An e-mail will be sent to your e-mail address containing instructions on how to verify your e-mail address.',
+                        dismissiveAction: <Button color="primary" onClick={() => this.closeDialog('welcomeDialog')}>Cancel</Button>,
+                        confirmingAction: <Button color="primary" disabled={isPerformingAuthAction} variant="contained" onClick={() => this.verifyEmailAddress(() => this.closeDialog('welcomeDialog'))}>Verify</Button>
+                      }
+                    },
 
-                          onClose: () => this.closeDialog('settingsDialog')
-                        },
+                    settingsDialog: {
+                      dialogProps: {
+                        open: settingsDialog.open,
+                        disableEscapeKeyDown: true,
 
-                        props: {
-                          user: user,
-                          userData: userData,
-
-                          openSnackbar: this.openSnackbar
-                        }
+                        onClose: () => this.closeDialog('settingsDialog')
                       },
 
-                      signOutDialog: {
-                        dialogProps: {
-                          open: signOutDialog.open,
+                      props: {
+                        user: user,
+                        userData: userData,
 
-                          onClose: () => this.closeDialog('signOutDialog')
-                        },
+                        openSnackbar: this.openSnackbar
+                      }
+                    },
 
-                        props: {
-                          title: 'Sign out?',
-                          contentText: 'While signed out you are unable to manage your profile and conduct other activities that require you to be signed in.',
-                          dismissiveAction: <Button color="primary" onClick={() => this.closeDialog('signOutDialog')}>Cancel</Button>,
-                          confirmingAction: <Button color="primary" disabled={isPerformingAuthAction} variant="contained" onClick={this.signOut}>Sign Out</Button>
-                        }
+                    signOutDialog: {
+                      dialogProps: {
+                        open: signOutDialog.open,
+
+                        onClose: () => this.closeDialog('signOutDialog')
+                      },
+
+                      props: {
+                        title: 'Sign out?',
+                        contentText: 'While signed out you are unable to manage your profile and conduct other activities that require you to be signed in.',
+                        dismissiveAction: <Button color="primary" onClick={() => this.closeDialog('signOutDialog')}>Cancel</Button>,
+                        confirmingAction: <Button color="primary" disabled={isPerformingAuthAction} variant="contained" onClick={this.signOut}>Sign Out</Button>
                       }
                     }
                   }
-                />
+                }
+              />
 
-                <Snackbar
-                  autoHideDuration={snackbar.autoHideDuration}
-                  message={snackbar.message}
-                  open={snackbar.open}
-                  onClose={this.closeSnackbar}
-                />
-              </React.Fragment>
-            }
-          </div>
-        </MuiThemeProvider>
-      </Router>
+              <Snackbar
+                autoHideDuration={snackbar.autoHideDuration}
+                message={snackbar.message}
+                open={snackbar.open}
+                onClose={this.closeSnackbar}
+              />
+            </React.Fragment>
+          }
+        </div>
+      </MuiThemeProvider>
     );
   }
 
