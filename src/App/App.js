@@ -62,10 +62,6 @@ class App extends Component {
         open: false
       },
 
-      welcomeDialog: {
-        open: false
-      },
-
       settingsDialog: {
         open: true
       },
@@ -162,9 +158,7 @@ class App extends Component {
           lastName: lastName,
           username: username
         }).then((value) => {
-          this.closeDialog('signUpDialog', () => {
-            this.openDialog('welcomeDialog');
-          });
+          this.closeDialog('signUpDialog');
         }).catch((reason) => {
           const code = reason.code;
           const message = reason.message;
@@ -564,7 +558,6 @@ class App extends Component {
       signUpDialog,
       signInDialog,
       resetPasswordDialog,
-      welcomeDialog,
       settingsDialog,
       signOutDialog
     } = this.state;
@@ -645,21 +638,6 @@ class App extends Component {
                         isPerformingAuthAction: isPerformingAuthAction,
 
                         resetPassword: this.resetPassword
-                      }
-                    },
-
-                    welcomeDialog: {
-                      dialogProps: {
-                        open: welcomeDialog.open,
-
-                        onClose: () => this.closeDialog('welcomeDialog')
-                      },
-
-                      props: {
-                        title: `Welcome to ${settings.title}!`,
-                        contentText: 'Complete your account by verifying your e-mail address. An e-mail will be sent to your e-mail address containing instructions on how to verify your e-mail address.',
-                        dismissiveAction: <Button color="primary" onClick={() => this.closeDialog('welcomeDialog')}>Cancel</Button>,
-                        confirmingAction: <Button color="primary" disabled={isPerformingAuthAction} variant="contained" onClick={() => this.verifyEmailAddress(() => this.closeDialog('welcomeDialog'))}>Verify</Button>
                       }
                     },
 
