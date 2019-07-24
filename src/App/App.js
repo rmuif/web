@@ -1,7 +1,5 @@
 import React, { Component } from 'react';
 
-import validate from 'validate.js';
-
 import readingTime from 'reading-time';
 
 import { createMuiTheme, MuiThemeProvider } from '@material-ui/core/styles';
@@ -9,10 +7,9 @@ import { createMuiTheme, MuiThemeProvider } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
 import Snackbar from '@material-ui/core/Snackbar';
 
-import firebase, { auth, firestore } from '../firebase';
+import { auth, firestore } from '../firebase';
 import colors from '../colors';
 import settings from '../settings';
-import constraints from '../constraints';
 
 import LaunchScreen from '../layout/LaunchScreen/LaunchScreen';
 
@@ -100,305 +97,6 @@ class App extends Component {
     dialog.open = false;
 
     this.setState({ dialog }, callback);
-  };
-
-  signUp = (firstName, lastName, username, emailAddress, emailAddressConfirmation, password, passwordConfirmation) => {
-    if (!firstName ||
-      !lastName ||
-      !username ||
-      !emailAddress ||
-      !emailAddressConfirmation ||
-      !password ||
-      !passwordConfirmation) {
-      return;
-    }
-
-    if (this.state.isSignedIn) {
-      return;
-    }
-
-    const errors = validate({
-      firstName: firstName,
-      lastName: lastName,
-      username: username,
-      emailAddress: emailAddress,
-      emailAddressConfirmation: emailAddressConfirmation,
-      password: password,
-      passwordConfirmation: passwordConfirmation
-    }, {
-      firstName: constraints.firstName,
-      lastName: constraints.lastName,
-      username: constraints.username,
-      emailAddress: constraints.emailAddress,
-      emailAddressConfirmation: constraints.emailAddressConfirmation,
-      password: constraints.password,
-      passwordConfirmation: constraints.passwordConfirmation
-    });
-
-    if (errors) {
-      return;
-    }
-
-    this.setState({
-      isPerformingAuthAction: true
-    }, () => {
-      auth.createUserWithEmailAndPassword(emailAddress, password).then((value) => {
-
-        const user = value.user;
-        const uid = user.uid;
-
-        firestore.collection('users').doc(uid).set({
-          firstName: firstName,
-          lastName: lastName,
-          username: username
-        }).then((value) => {
-          this.closeDialog('signUpDialog');
-        }).catch((reason) => {
-          const code = reason.code;
-          const message = reason.message;
-
-          switch (code) {
-            default:
-              this.openSnackbar(message);
-              return;
-          }
-        });
-
-      }).catch((reason) => {
-        const code = reason.code;
-        const message = reason.message;
-
-        switch (code) {
-          case 'auth/email-already-in-use':
-          case 'auth/invalid-email':
-          case 'auth/operation-not-allowed':
-          case 'auth/weak-password':
-            this.openSnackbar(message);
-            return;
-
-          default:
-            this.openSnackbar(message);
-            return;
-        }
-
-      }).finally(() => {
-
-        this.setState({
-          isPerformingAuthAction: false
-        });
-
-      });
-    });
-  };
-
-  signIn = (emailAddress, password) => {
-    if (!emailAddress || !password) {
-      return;
-    }
-
-    if (this.state.isSignedIn) {
-      return;
-    }
-
-    const errors = validate({
-      emailAddress: emailAddress,
-      password: password,
-    }, {
-      emailAddress: constraints.emailAddress,
-      password: constraints.password
-    });
-
-    if (errors) {
-      return;
-    }
-
-    this.setState({
-      isPerformingAuthAction: true
-    }, () => {
-      auth.signInWithEmailAndPassword(emailAddress, password).then((value) => {
-        this.closeDialog('signInDialog', () => {
-          const user = value.user;
-          const displayName = user.displayName;
-          const emailAddress = user.email;
-
-          this.openSnackbar(`Signed in as ${displayName || emailAddress}`);
-        });
-      }).catch((reason) => {
-        const code = reason.code;
-        const message = reason.message;
-
-        switch (code) {
-          case 'auth/invalid-email':
-          case 'auth/user-disabled':
-          case 'auth/user-not-found':
-          case 'auth/wrong-password':
-            this.openSnackbar(message);
-            return;
-
-          default:
-            this.openSnackbar(message);
-            return;
-        }
-      }).finally(() => {
-        this.setState({
-          isPerformingAuthAction: false
-        });
-      });
-    });
-  };
-
-  signInWithAuthProvider = (providerId) => {
-    if (!providerId) {
-      return;
-    }
-
-    if (this.state.isSignedIn) {
-      return;
-    }
-
-    const provider = new firebase.auth.OAuthProvider(providerId);
-
-    if (!provider) {
-      return;
-    }
-
-    this.setState({
-      isPerformingAuthAction: true
-    }, () => {
-      auth.signInWithPopup(provider).then((value) => {
-        this.closeDialog('signUpDialog', () => {
-          this.closeDialog('signInDialog', () => {
-            const user = value.user;
-            const displayName = user.displayName;
-            const emailAddress = user.email;
-
-            this.openSnackbar(`Signed in as ${displayName || emailAddress}`);
-          });
-        });
-      }).catch((reason) => {
-        const code = reason.code;
-        const message = reason.message;
-
-        switch (code) {
-          case 'auth/account-exists-with-different-credential':
-          case 'auth/auth-domain-config-required':
-          case 'auth/cancelled-popup-request':
-          case 'auth/operation-not-allowed':
-          case 'auth/operation-not-supported-in-this-environment':
-          case 'auth/popup-blocked':
-          case 'auth/popup-closed-by-user':
-          case 'auth/unauthorized-domain':
-            this.openSnackbar(message);
-            return;
-
-          default:
-            this.openSnackbar(message);
-            return;
-        }
-      }).finally(() => {
-        this.setState({
-          isPerformingAuthAction: false
-        });
-      });
-    });
-  };
-
-  resetPassword = (emailAddress) => {
-    if (!emailAddress) {
-      return;
-    }
-
-    if (this.state.isSignedIn) {
-      return;
-    }
-
-    const errors = validate({
-      emailAddress: emailAddress
-    }, {
-      emailAddress: constraints.emailAddress
-    });
-
-    if (errors) {
-      return;
-    }
-
-    this.setState({
-      isPerformingAuthAction: true
-    }, () => {
-      auth.sendPasswordResetEmail(emailAddress).then(() => {
-        this.openSnackbar(`Password reset e-mail sent to ${emailAddress}`);
-      }).catch((reason) => {
-        const code = reason.code;
-        const message = reason.message;
-
-        switch (code) {
-          case 'auth/invalid-email':
-          case 'auth/missing-android-pkg-name':
-          case 'auth/missing-continue-uri':
-          case 'auth/missing-ios-bundle-id':
-          case 'auth/invalid-continue-uri':
-          case 'auth/unauthorized-continue-uri':
-          case 'auth/user-not-found':
-            this.openSnackbar(message);
-            return;
-
-          default:
-            this.openSnackbar(message);
-            return;
-        }
-      }).finally(() => {
-        this.setState({
-          isPerformingAuthAction: false
-        });
-      });
-    });
-  };
-
-  verifyEmailAddress = (callback) => {
-    const { user, isSignedIn } = this.state;
-
-    if (!user || !user.email || !isSignedIn) {
-      return;
-    }
-
-    this.setState({
-      isPerformingAuthAction: true
-    }, () => {
-      user.sendEmailVerification().then(() => {
-        this.setState({
-          isVerifyingEmailAddress: true
-        }, () => {
-          const emailAddress = user.email;
-
-          this.openSnackbar(`Verification e-mail sent to ${emailAddress}`);
-
-          if (callback && typeof callback === 'function') {
-            callback();
-          }
-        });
-      }).catch((reason) => {
-        const code = reason.code;
-        const message = reason.message;
-
-        switch (code) {
-          case 'auth/missing-android-pkg-name':
-          case 'auth/missing-continue-uri':
-          case 'auth/missing-ios-bundle-id':
-          case 'auth/invalid-continue-uri':
-          case 'auth/unauthorized-continue-uri':
-            this.openSnackbar(message);
-            return;
-
-          default:
-            this.openSnackbar(message);
-            return;
-        }
-      }).finally(() => {
-        this.setState({
-          isPerformingAuthAction: false
-        });
-      });
-    });
   };
 
   signOut = () => {
@@ -589,15 +287,19 @@ class App extends Component {
                       dialogProps: {
                         open: signUpDialog.open,
 
-                        onClose: () => this.closeDialog('signUpDialog')
+                        onClose: (callback) => {
+                          this.closeDialog('signUpDialog');
+
+                          if (callback && typeof callback === 'function') {
+                            callback();
+                          }
+                        }
                       },
 
                       props: {
                         isPerformingAuthAction: isPerformingAuthAction,
 
-                        signUp: this.signUp,
-
-                        onAuthProviderClick: this.signInWithAuthProvider
+                        openSnackbar: this.openSnackbar
                       }
                     },
 
@@ -605,16 +307,19 @@ class App extends Component {
                       dialogProps: {
                         open: signInDialog.open,
 
-                        onClose: () => this.closeDialog('signInDialog')
+                        onClose: (callback) => {
+                          this.closeDialog('signInDialog');
+
+                          if (callback && typeof callback === 'function') {
+                            callback();
+                          }
+                        }
                       },
 
                       props: {
                         isPerformingAuthAction: isPerformingAuthAction,
 
-                        resetPassword: this.resetPassword,
-                        signIn: this.signIn,
-
-                        onAuthProviderClick: this.signInWithAuthProvider
+                        openSnackbar: this.openSnackbar
                       }
                     },
 
