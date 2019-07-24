@@ -76,6 +76,30 @@ export const signUp = (user) => {
   });
 };
 
+export const signIn = (emailAddress, password) => {
+  return new Promise((resolve, reject) => {
+    if (!emailAddress || !password) {
+      reject();
+
+      return;
+    }
+
+    const currentUser = auth.currentUser;
+
+    if (currentUser) {
+      reject();
+
+      return;
+    }
+
+    auth.signInWithEmailAndPassword(emailAddress, password).then((value) => {
+      resolve(value);
+    }).catch((reason) => {
+      reject(reason);
+    });
+  });
+};
+
 export const changeAvatar = (avatar) => {
   return new Promise((resolve, reject) => {
     if (!avatar) {
