@@ -1,7 +1,7 @@
 # React + Material-UI + Firebase
 
 [![Build Status](https://travis-ci.org/Phoqe/react-material-ui-firebase.svg?branch=master)](https://travis-ci.org/Phoqe/react-material-ui-firebase)
-![Discord](https://img.shields.io/discord/567707014361513995.svg)
+[![Discord](https://img.shields.io/discord/567707014361513995.svg)](https://discord.gg/y3EMyrN)
 ![GitHub repo size](https://img.shields.io/github/repo-size/Phoqe/react-material-ui-firebase.svg)
 ![Website](https://img.shields.io/website/https/phoqe.me/react-material-ui-firebase.svg)
 
