@@ -8,6 +8,74 @@ const avatarFileTypes = [
   'image/svg+xml'
 ];
 
+export const signUp = (user) => {
+  return new Promise((resolve, reject) => {
+    if (!user) {
+      reject();
+
+      return;
+    }
+
+    const firstName = user.firstName;
+    const lastName = user.lastName;
+    const username = user.username;
+    const emailAddress = user.emailAddress;
+    const password = user.password;
+
+    if (!firstName || !lastName || !username || !emailAddress || !password) {
+      reject();
+
+      return;
+    }
+
+    const currentUser = auth.currentUser;
+
+    if (currentUser) {
+      reject();
+
+      return;
+    }
+
+    auth.createUserWithEmailAndPassword(emailAddress, password).then((value) => {
+      const user = value.user;
+
+      if (!user) {
+        reject();
+
+        return;
+      }
+
+      const uid = user.uid;
+
+      if (!uid) {
+        reject();
+
+        return;
+      }
+
+      const reference = firestore.collection('users').doc(uid);
+
+      if (!reference) {
+        reject();
+
+        return;
+      }
+
+      reference.set({
+        firstName: firstName,
+        lastName: lastName,
+        username: username
+      }).then((value) => {
+        resolve(value);
+      }).catch((reason) => {
+        reject(reason);
+      });
+    }).catch((reason) => {
+      reject(reason);
+    });
+  });
+};
+
 export const changeAvatar = (avatar) => {
   return new Promise((resolve, reject) => {
     if (!avatar) {
