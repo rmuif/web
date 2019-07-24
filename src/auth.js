@@ -134,7 +134,15 @@ export const changeFirstName = (firstName) => {
       return;
     }
 
-    firestore.collection('users').doc(uid).update({
+    const reference = firestore.collection('users').doc(uid);
+
+    if (!reference) {
+      reject();
+
+      return;
+    }
+
+    reference.update({
       firstName: firstName
     }).then((value) => {
       resolve(value);
@@ -168,7 +176,15 @@ export const changeLastName = (lastName) => {
       return;
     }
 
-    firestore.collection('users').doc(uid).update({
+    const reference = firestore.collection('users').doc(uid);
+
+    if (!reference) {
+      reject();
+
+      return;
+    }
+
+    reference.update({
       lastName: lastName
     }).then((value) => {
       resolve(value);
@@ -202,7 +218,15 @@ export const changeUsername = (username) => {
       return;
     }
 
-    firestore.collection('users').doc(uid).update({
+    const reference = firestore.collection('users').doc(uid);
+
+    if (!reference) {
+      reject();
+
+      return;
+    }
+
+    reference.update({
       username: username
     }).then((value) => {
       resolve(value);
