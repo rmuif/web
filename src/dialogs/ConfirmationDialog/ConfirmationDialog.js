@@ -14,7 +14,6 @@ import DialogActions from '@material-ui/core/DialogActions';
  */
 class ConfirmationDialog extends Component {
   render() {
-
     // Dialog Properties
     const { dialogProps } = this.props;
 
@@ -50,7 +49,6 @@ class ConfirmationDialog extends Component {
 }
 
 ConfirmationDialog.propTypes = {
-
   // Dialog Properties
   dialogProps: PropTypes.object.isRequired,
 

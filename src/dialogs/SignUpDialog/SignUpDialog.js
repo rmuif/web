@@ -204,7 +204,6 @@ class SignUpDialog extends Component {
   };
 
   render() {
-
     // Styling
     const { classes } = this.props;
 
@@ -538,7 +537,6 @@ class SignUpDialog extends Component {
 }
 
 SignUpDialog.propTypes = {
-
   // Styling
   classes: PropTypes.object.isRequired,
 

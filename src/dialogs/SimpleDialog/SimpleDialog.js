@@ -12,7 +12,6 @@ import DialogTitle from '@material-ui/core/DialogTitle';
  */
 class SimpleDialog extends Component {
   render() {
-
     // Dialog Properties
     const { dialogProps } = this.props;
 
@@ -35,7 +34,6 @@ class SimpleDialog extends Component {
 }
 
 SimpleDialog.propTypes = {
-
   // Dialog Properties
   dialogProps: PropTypes.object.isRequired,
 

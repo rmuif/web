@@ -6,13 +6,11 @@ import Hidden from '@material-ui/core/Hidden';
 
 import SignUpDialog from '../dialogs/SignUpDialog/SignUpDialog';
 import SignInDialog from '../dialogs/SignInDialog/SignInDialog';
-import ResetPasswordDialog from '../dialogs/ResetPasswordDialog/ResetPasswordDialog';
 import SettingsDialog from '../dialogs/SettingsDialog/SettingsDialog';
 import AlertDialog from '../dialogs/AlertDialog/AlertDialog';
 
 class DialogHost extends Component {
   render() {
-
     // Properties
     const {
       isSignedIn,
@@ -21,7 +19,6 @@ class DialogHost extends Component {
 
     const signUpDialog = dialogs.signUpDialog;
     const signInDialog = dialogs.signInDialog;
-    const resetPasswordDialog = dialogs.resetPasswordDialog;
     const settingsDialog = dialogs.settingsDialog;
     const signOutDialog = dialogs.signOutDialog;
 
@@ -48,12 +45,6 @@ class DialogHost extends Component {
                 dialogProps={signInDialog.dialogProps}
 
                 {...signInDialog.props}
-              />
-
-              <ResetPasswordDialog
-                {...resetPasswordDialog.dialogProps}
-
-                {...resetPasswordDialog.props}
               />
             </React.Fragment>
           }
@@ -93,14 +84,6 @@ class DialogHost extends Component {
 
                 {...signInDialog.props}
               />
-
-              <ResetPasswordDialog
-                fullScreen
-
-                {...resetPasswordDialog.dialogProps}
-
-                {...resetPasswordDialog.props}
-              />
             </React.Fragment>
           }
         </Hidden>
@@ -120,7 +103,6 @@ class DialogHost extends Component {
 }
 
 DialogHost.propTypes = {
-
   // Properties
   isSignedIn: PropTypes.bool.isRequired,
   dialogs: PropTypes.object.isRequired

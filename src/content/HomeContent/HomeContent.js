@@ -71,8 +71,10 @@ class HomeContent extends Component {
 }
 
 HomeContent.propTypes = {
+  // Styling
   classes: PropTypes.object.isRequired,
 
+  // Properties
   isSignedIn: PropTypes.bool.isRequired
 };
 

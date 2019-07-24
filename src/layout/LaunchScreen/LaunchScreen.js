@@ -26,6 +26,7 @@ class LaunchScreen extends Component {
 }
 
 LaunchScreen.propTypes = {
+  // Styling
   classes: PropTypes.object.isRequired
 };
 

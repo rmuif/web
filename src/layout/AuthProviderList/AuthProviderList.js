@@ -28,7 +28,6 @@ const styles = (theme) => ({
 
 class AuthProviderList extends Component {
   render() {
-
     // Styling
     const { classes } = this.props;
 
@@ -148,7 +147,6 @@ class AuthProviderList extends Component {
 }
 
 AuthProviderList.propTypes = {
-
   // Styling
   classes: PropTypes.object.isRequired,
 

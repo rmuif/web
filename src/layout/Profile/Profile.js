@@ -86,11 +86,14 @@ class Profile extends Component {
 }
 
 Profile.propTypes = {
+  // Styling
   classes: PropTypes.object.isRequired,
 
+  // Properties
   user: PropTypes.object.isRequired,
   isPerformingAuthAction: PropTypes.bool,
 
+  // Events
   onChangeAvatarClick: PropTypes.func
 };
 

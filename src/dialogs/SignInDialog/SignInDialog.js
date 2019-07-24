@@ -137,7 +137,6 @@ class SignInDialog extends Component {
   };
 
   render() {
-
     // Styling
     const { classes } = this.props;
 
@@ -286,7 +285,6 @@ class SignInDialog extends Component {
 }
 
 SignInDialog.propTypes = {
-
   // Styling
   classes: PropTypes.object.isRequired,
 

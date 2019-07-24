@@ -58,10 +58,6 @@ class App extends Component {
         open: false
       },
 
-      resetPasswordDialog: {
-        open: false
-      },
-
       settingsDialog: {
         open: true
       },
@@ -79,7 +75,6 @@ class App extends Component {
   }
 
   openDialog = (dialogKey, callback) => {
-
     // Retrieve the dialog with the specified key
     const dialog = this.state[dialogKey];
 
@@ -94,7 +89,6 @@ class App extends Component {
   };
 
   closeDialog = (dialogKey, callback) => {
-
     // Retrieve the dialog with the specified key
     const dialog = this.state[dialogKey];
 
@@ -332,9 +326,7 @@ class App extends Component {
       isPerformingAuthAction: true
     }, () => {
       auth.sendPasswordResetEmail(emailAddress).then(() => {
-        this.closeDialog('resetPasswordDialog', () => {
-          this.openSnackbar(`Password reset e-mail sent to ${emailAddress}`);
-        });
+        this.openSnackbar(`Password reset e-mail sent to ${emailAddress}`);
       }).catch((reason) => {
         const code = reason.code;
         const message = reason.message;
@@ -557,7 +549,6 @@ class App extends Component {
     const {
       signUpDialog,
       signInDialog,
-      resetPasswordDialog,
       settingsDialog,
       signOutDialog
     } = this.state;
@@ -624,20 +615,6 @@ class App extends Component {
                         signIn: this.signIn,
 
                         onAuthProviderClick: this.signInWithAuthProvider
-                      }
-                    },
-
-                    resetPasswordDialog: {
-                      dialogProps: {
-                        open: resetPasswordDialog.open,
-
-                        onClose: () => this.closeDialog('resetPasswordDialog')
-                      },
-
-                      props: {
-                        isPerformingAuthAction: isPerformingAuthAction,
-
-                        resetPassword: this.resetPassword
                       }
                     },
 

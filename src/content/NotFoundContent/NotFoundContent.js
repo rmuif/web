@@ -48,6 +48,7 @@ class NotFoundContent extends Component {
 }
 
 NotFoundContent.propTypes = {
+  // Styling
   classes: PropTypes.object.isRequired
 };
 

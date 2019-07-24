@@ -19,7 +19,6 @@ const styles = (theme) => ({
 // Alert dialogs interrupt users with urgent information, details, or actions.
 class AlertDialog extends Component {
   render() {
-
     // Styling
     const { classes } = this.props;
 
@@ -72,7 +71,6 @@ class AlertDialog extends Component {
 }
 
 AlertDialog.propTypes = {
-
   // Styling
   classes: PropTypes.object.isRequired,
 

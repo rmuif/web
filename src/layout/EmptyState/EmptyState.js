@@ -36,8 +36,10 @@ class EmptyState extends Component {
 }
 
 EmptyState.propTypes = {
+  // Styling
   classes: PropTypes.object.isRequired,
 
+  // Properties
   icon: PropTypes.element,
   title: PropTypes.string,
   description: PropTypes.string,

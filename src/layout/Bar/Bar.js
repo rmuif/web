@@ -103,12 +103,15 @@ class Bar extends Component {
 }
 
 Bar.propTypes = {
+  // Styling
   classes: PropTypes.object.isRequired,
   
+  // Properties
   title: PropTypes.string.isRequired,
   isPerformingAuthAction: PropTypes.bool.isRequired,
   isSignedIn: PropTypes.bool.isRequired,
 
+  // Events
   onSettingsClick: PropTypes.func.isRequired,
   onSignOutClick: PropTypes.func.isRequired
 };
