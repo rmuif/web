@@ -100,7 +100,7 @@ export const signIn = (emailAddress, password) => {
   });
 };
 
-export const signInWithProvider = (providerId) => {
+export const signInWithAuthProvider = (providerId) => {
   return new Promise((resolve, reject) => {
     if (!providerId) {
       reject();

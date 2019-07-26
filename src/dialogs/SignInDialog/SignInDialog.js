@@ -160,11 +160,11 @@ class SignInDialog extends Component {
     }
   };
 
-  signInWithProvider = (providerId) => {
+  signInWithAuthProvider = (providerId) => {
     this.setState({
       isPerformingAuthAction: true
     }, () => {
-      auth.signInWithProvider(providerId).then((value) => {
+      auth.signInWithAuthProvider(providerId).then((value) => {
         this.props.dialogProps.onClose(() => {
           const user = value.user;
           const displayName = user.displayName;
@@ -267,7 +267,7 @@ class SignInDialog extends Component {
                 <AuthProviderList
                   isPerformingAuthAction={isPerformingAuthAction}
 
-                  onAuthProviderClick={this.signInWithProvider}
+                  onAuthProviderClick={this.signInWithAuthProvider}
                 />
               </Grid>
 
@@ -322,7 +322,7 @@ class SignInDialog extends Component {
               gutterBottom
               isPerformingAuthAction={isPerformingAuthAction}
 
-              onAuthProviderClick={this.signInWithProvider}
+              onAuthProviderClick={this.signInWithAuthProvider}
             />
 
             <Grid container direction="column" spacing={2}>
