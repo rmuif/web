@@ -56,7 +56,7 @@ class App extends Component {
       },
 
       settingsDialog: {
-        open: true
+        open: false
       },
 
       signOutDialog: {
