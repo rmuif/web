@@ -127,10 +127,6 @@ class SignUpDialog extends Component {
               this.props.openSnackbar(message);
               return;
           }
-        }).finally(() => {
-          this.setState({
-            isPerformingAuthAction: false
-          });
         });
       });
     }
