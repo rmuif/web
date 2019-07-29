@@ -101,10 +101,6 @@ class App extends Component {
   };
 
   signOut = () => {
-    if (!this.state.isSignedIn) {
-      return;
-    }
-
     this.setState({
       isPerformingAuthAction: true
     }, () => {
