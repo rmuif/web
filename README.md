@@ -89,12 +89,22 @@ git push -u origin master
 
 ### Replace Firebase configuration
 
+The command `npm install` is an [npm](https://www.npmjs.com) command-line utility which is used to install the dependencies in the local `node_modules` folder. In global mode (i.e., with `-g` or `--global` appended to the command), it installs the current package context (i.e., the current working directory) as a global package. The Firebase CLI provides a variety of tools for managing, viewing, and deploying to Firebase projects.
+
 ```
 npm install -g firebase-tools
 ```
 
+The command `firebase login` is a [Firebase](https://firebase.google.com) command-line utility which is used to sign into Firebase using your Google account and connects your local machine to Firebase and grants you access to your Firebase projects.
+
 ```
 firebase login
+```
+
+The command `firebase list` is another Firebase command-line utility which print a list of all of your Firebase projects. Use it to test that authentication worked (and to list all of your Firebase projects), the displayed list should be the same as the Firebase projects listed in the Firebase console.
+
+```
+firebase list
 ```
 
 ```
