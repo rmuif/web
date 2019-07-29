@@ -7,9 +7,10 @@ import { createMuiTheme, MuiThemeProvider } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
 import Snackbar from '@material-ui/core/Snackbar';
 
-import { auth, firestore } from '../firebase';
+import firebase from '../firebase';
 import colors from '../colors';
 import settings from '../settings';
+import * as auth from '../auth';
 
 import LaunchScreen from '../layout/LaunchScreen/LaunchScreen';
 
@@ -379,12 +380,12 @@ class App extends Component {
       this.updateTheme(theme);
     }
 
-    this.removeAuthObserver = auth.onAuthStateChanged((user) => {
+    this.removeAuthObserver = firebase.auth().onAuthStateChanged((user) => {
       if (this._isMounted) {
         if (user) {
           const uid = user.uid;
 
-          this.removeUserObserver = firestore.collection('users').doc(uid).onSnapshot((documentSnapshot) => {
+          this.removeUserObserver = firebase.firestore().collection('users').doc(uid).onSnapshot((documentSnapshot) => {
             const data = documentSnapshot.data();
 
             this.setState({
