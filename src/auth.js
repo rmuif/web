@@ -1,4 +1,4 @@
-import { auth, firestore, storage } from './firebase';
+import firebase, { auth, firestore, storage } from './firebase';
 
 const avatarFileTypes = [
   'image/gif',
@@ -8,19 +8,19 @@ const avatarFileTypes = [
   'image/svg+xml'
 ];
 
-export const signUp = (user) => {
+export const signUp = (fields) => {
   return new Promise((resolve, reject) => {
-    if (!user) {
+    if (!fields) {
       reject();
 
       return;
     }
 
-    const firstName = user.firstName;
-    const lastName = user.lastName;
-    const username = user.username;
-    const emailAddress = user.emailAddress;
-    const password = user.password;
+    const firstName = fields.firstName;
+    const lastName = fields.lastName;
+    const username = fields.username;
+    const emailAddress = fields.emailAddress;
+    const password = fields.password;
 
     if (!firstName || !lastName || !username || !emailAddress || !password) {
       reject();
@@ -93,6 +93,80 @@ export const signIn = (emailAddress, password) => {
     }
 
     auth.signInWithEmailAndPassword(emailAddress, password).then((value) => {
+      resolve(value);
+    }).catch((reason) => {
+      reject(reason);
+    });
+  });
+};
+
+export const signInWithAuthProvider = (providerId) => {
+  return new Promise((resolve, reject) => {
+    if (!providerId) {
+      reject();
+
+      return;
+    }
+
+    const provider = new firebase.auth.OAuthProvider(providerId);
+
+    if (!provider) {
+      reject();
+
+      return;
+    }
+
+    const currentUser = auth.currentUser;
+
+    if (currentUser) {
+      reject();
+
+      return;
+    }
+
+    auth.signInWithPopup(provider).then((value) => {
+      resolve(value);
+    }).catch((reason) => {
+      reject(reason);
+    });
+  });
+};
+
+export const signOut = () => {
+  return new Promise((resolve, reject) => {
+    const currentUser = auth.currentUser;
+
+    if (!currentUser) {
+      reject();
+
+      return;
+    }
+
+    auth.signOut().then((value) => {
+      resolve(value);
+    }).catch((reason) => {
+      reject(reason);
+    });
+  });
+};
+
+export const resetPassword = (emailAddress) => {
+  return new Promise((resolve, reject) => {
+    if (!emailAddress) {
+      reject();
+
+      return;
+    }
+
+    const currentUser = auth.currentUser;
+
+    if (currentUser) {
+      reject();
+
+      return;
+    }
+
+    auth.sendPasswordResetEmail(emailAddress).then((value) => {
       resolve(value);
     }).catch((reason) => {
       reject(reason);

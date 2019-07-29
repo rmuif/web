@@ -20,6 +20,7 @@ import TextField from '@material-ui/core/TextField';
 import AuthProviderList from '../../layout/AuthProviderList/AuthProviderList';
 
 import constraints from '../../constraints';
+import * as auth from '../../auth';
 
 const styles = (theme) => ({
   dialogContent: {
@@ -43,6 +44,8 @@ const styles = (theme) => ({
 });
 
 const initialState = {
+  isPerformingAuthAction: false,
+
   firstName: '',
   lastName: '',
   username: '',
@@ -96,19 +99,77 @@ class SignUpDialog extends Component {
       });
     } else {
       this.setState({
+        isPerformingAuthAction: true,
+
         errors: null
       }, () => {
-        this.props.signUp(
-          firstName,
-          lastName,
-          username,
-          emailAddress,
-          emailAddressConfirmation,
-          password,
-          passwordConfirmation
-        );
+        auth.signUp({
+          firstName: firstName,
+          lastName: lastName,
+          username: username,
+          emailAddress: emailAddress,
+          password: password
+        }).then((value) => {
+          this.props.dialogProps.onClose();
+        }).catch((reason) => {
+          const code = reason.code;
+          const message = reason.message;
+  
+          switch (code) {
+            case 'auth/email-already-in-use':
+            case 'auth/invalid-email':
+            case 'auth/operation-not-allowed':
+            case 'auth/weak-password':
+              this.props.openSnackbar(message);
+              return;
+  
+            default:
+              this.props.openSnackbar(message);
+              return;
+          }
+        });
       });
     }
+  };
+
+  signInWithAuthProvider = (providerId) => {
+    this.setState({
+      isPerformingAuthAction: true
+    }, () => {
+      auth.signInWithAuthProvider(providerId).then((value) => {
+        this.props.dialogProps.onClose(() => {
+          const user = value.user;
+          const displayName = user.displayName;
+          const emailAddress = user.email;
+
+          this.props.openSnackbar(`Signed in as ${displayName || emailAddress}`);
+        });
+      }).catch((reason) => {
+        const code = reason.code;
+        const message = reason.message;
+
+        switch (code) {
+          case 'auth/account-exists-with-different-credential':
+          case 'auth/auth-domain-config-required':
+          case 'auth/cancelled-popup-request':
+          case 'auth/operation-not-allowed':
+          case 'auth/operation-not-supported-in-this-environment':
+          case 'auth/popup-blocked':
+          case 'auth/popup-closed-by-user':
+          case 'auth/unauthorized-domain':
+            this.props.openSnackbar(message);
+            return;
+
+          default:
+            this.props.openSnackbar(message);
+            return;
+        }
+      }).finally(() => {
+        this.setState({
+          isPerformingAuthAction: false
+        });
+      });
+    });
   };
 
   handleKeyPress = (event) => {
@@ -210,13 +271,9 @@ class SignUpDialog extends Component {
     // Dialog Properties
     const { dialogProps } = this.props;
 
-    // Custom Properties
-    const { isPerformingAuthAction } = this.props;
-
-    // Custom Events
-    const { onAuthProviderClick } = this.props;
-
     const {
+      isPerformingAuthAction,
+
       firstName,
       lastName,
       username,
@@ -224,6 +281,7 @@ class SignUpDialog extends Component {
       emailAddressConfirmation,
       password,
       passwordConfirmation,
+
       errors
     } = this.state;
 
@@ -240,7 +298,7 @@ class SignUpDialog extends Component {
                 <AuthProviderList
                   isPerformingAuthAction={isPerformingAuthAction}
 
-                  onAuthProviderClick={onAuthProviderClick}
+                  onAuthProviderClick={this.signInWithAuthProvider}
                 />
               </Grid>
 
@@ -253,6 +311,7 @@ class SignUpDialog extends Component {
                   <Grid item xs>
                     <TextField
                       autoComplete="given-name"
+                      disabled={isPerformingAuthAction}
                       error={!!(errors && errors.firstName)}
                       fullWidth
                       helperText={(errors && errors.firstName) ? errors.firstName[0] : ''}
@@ -270,6 +329,7 @@ class SignUpDialog extends Component {
                   <Grid item xs>
                     <TextField
                       autoComplete="family-name"
+                      disabled={isPerformingAuthAction}
                       error={!!(errors && errors.lastName)}
                       fullWidth
                       helperText={(errors && errors.lastName) ? errors.lastName[0] : ''}
@@ -289,6 +349,7 @@ class SignUpDialog extends Component {
                   <Grid item xs>
                     <TextField
                       autoComplete="username"
+                      disabled={isPerformingAuthAction}
                       error={!!(errors && errors.username)}
                       fullWidth
                       helperText={(errors && errors.username) ? errors.username[0] : ''}
@@ -308,6 +369,7 @@ class SignUpDialog extends Component {
                   <Grid item xs>
                     <TextField
                       autoComplete="email"
+                      disabled={isPerformingAuthAction}
                       error={!!(errors && errors.emailAddress)}
                       fullWidth
                       helperText={(errors && errors.emailAddress) ? errors.emailAddress[0] : ''}
@@ -325,6 +387,7 @@ class SignUpDialog extends Component {
                   <Grid item xs>
                     <TextField
                       autoComplete="email"
+                      disabled={isPerformingAuthAction}
                       error={!!(errors && errors.emailAddressConfirmation)}
                       fullWidth
                       helperText={(errors && errors.emailAddressConfirmation) ? errors.emailAddressConfirmation[0] : ''}
@@ -344,6 +407,7 @@ class SignUpDialog extends Component {
                   <Grid item xs>
                     <TextField
                       autoComplete="new-password"
+                      disabled={isPerformingAuthAction}
                       error={!!(errors && errors.password)}
                       fullWidth
                       helperText={(errors && errors.password) ? errors.password[0] : ''}
@@ -361,6 +425,7 @@ class SignUpDialog extends Component {
                   <Grid item xs>
                     <TextField
                       autoComplete="password"
+                      disabled={isPerformingAuthAction}
                       error={!!(errors && errors.passwordConfirmation)}
                       fullWidth
                       helperText={(errors && errors.passwordConfirmation) ? errors.passwordConfirmation[0] : ''}
@@ -384,13 +449,14 @@ class SignUpDialog extends Component {
               gutterBottom
               isPerformingAuthAction={isPerformingAuthAction}
 
-              onAuthProviderClick={onAuthProviderClick}
+              onAuthProviderClick={this.signInWithAuthProvider}
             />
 
             <Grid container direction="column" spacing={2}>
               <Grid item xs>
                 <TextField
                   autoComplete="given-name"
+                  disabled={isPerformingAuthAction}
                   error={!!(errors && errors.firstName)}
                   fullWidth
                   helperText={(errors && errors.firstName) ? errors.firstName[0] : ''}
@@ -408,6 +474,7 @@ class SignUpDialog extends Component {
               <Grid item xs>
                 <TextField
                   autoComplete="family-name"
+                  disabled={isPerformingAuthAction}
                   error={!!(errors && errors.lastName)}
                   fullWidth
                   helperText={(errors && errors.lastName) ? errors.lastName[0] : ''}
@@ -425,6 +492,7 @@ class SignUpDialog extends Component {
               <Grid item xs>
                 <TextField
                   autoComplete="username"
+                  disabled={isPerformingAuthAction}
                   error={!!(errors && errors.username)}
                   fullWidth
                   helperText={(errors && errors.username) ? errors.username[0] : ''}
@@ -442,6 +510,7 @@ class SignUpDialog extends Component {
               <Grid item xs>
                 <TextField
                   autoComplete="email"
+                  disabled={isPerformingAuthAction}
                   error={!!(errors && errors.emailAddress)}
                   fullWidth
                   helperText={(errors && errors.emailAddress) ? errors.emailAddress[0] : ''}
@@ -459,6 +528,7 @@ class SignUpDialog extends Component {
               <Grid item xs>
                 <TextField
                   autoComplete="email"
+                  disabled={isPerformingAuthAction}
                   error={!!(errors && errors.emailAddressConfirmation)}
                   fullWidth
                   helperText={(errors && errors.emailAddressConfirmation) ? errors.emailAddressConfirmation[0] : ''}
@@ -476,6 +546,7 @@ class SignUpDialog extends Component {
               <Grid item xs>
                 <TextField
                   autoComplete="new-password"
+                  disabled={isPerformingAuthAction}
                   error={!!(errors && errors.password)}
                   fullWidth
                   helperText={(errors && errors.password) ? errors.password[0] : ''}
@@ -493,6 +564,7 @@ class SignUpDialog extends Component {
               <Grid item xs>
                 <TextField
                   autoComplete="password"
+                  disabled={isPerformingAuthAction}
                   error={!!(errors && errors.passwordConfirmation)}
                   fullWidth
                   helperText={(errors && errors.passwordConfirmation) ? errors.passwordConfirmation[0] : ''}
@@ -543,14 +615,8 @@ SignUpDialog.propTypes = {
   // Dialog Properties
   dialogProps: PropTypes.object.isRequired,
 
-  // Custom Properties
-  isPerformingAuthAction: PropTypes.bool,
-
   // Custom Functions
-  signUp: PropTypes.func.isRequired,
-
-  // Custom Events
-  onAuthProviderClick: PropTypes.func.isRequired
+  openSnackbar: PropTypes.func.isRequired
 };
 
 export default withStyles(styles)(SignUpDialog);

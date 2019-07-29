@@ -20,6 +20,7 @@ import TextField from '@material-ui/core/TextField';
 import AuthProviderList from '../../layout/AuthProviderList/AuthProviderList';
 
 import constraints from '../../constraints';
+import * as auth from '../../auth';
 
 const styles = (theme) => ({
   icon: {
@@ -39,6 +40,8 @@ const styles = (theme) => ({
 });
 
 const initialState = {
+  isPerformingAuthAction: false,
+
   emailAddress: '',
   password: '',
 
@@ -69,7 +72,36 @@ class SignInDialog extends Component {
       this.setState({
         errors: null
       }, () => {
-        this.props.resetPassword(emailAddress);
+        this.setState({
+          isPerformingAuthAction: true
+        }, () => {
+          auth.resetPassword(emailAddress).then((value) => {
+            this.props.openSnackbar(`Password reset e-mail sent to ${emailAddress}`);
+          }).catch((reason) => {
+            const code = reason.code;
+            const message = reason.message;
+    
+            switch (code) {
+              case 'auth/invalid-email':
+              case 'auth/missing-android-pkg-name':
+              case 'auth/missing-continue-uri':
+              case 'auth/missing-ios-bundle-id':
+              case 'auth/invalid-continue-uri':
+              case 'auth/unauthorized-continue-uri':
+              case 'auth/user-not-found':
+                this.props.openSnackbar(message);
+                return;
+    
+              default:
+                this.props.openSnackbar(message);
+                return;
+            }
+          }).finally(() => {
+            this.setState({
+              isPerformingAuthAction: false
+            });
+          });
+        });
       });
     }
   };
@@ -91,11 +123,81 @@ class SignInDialog extends Component {
       });
     } else {
       this.setState({
-        errors: errors
+        isPerformingAuthAction: true,
+
+        errors: null
       }, () => {
-        this.props.signIn(emailAddress, password);
+        auth.signIn(emailAddress, password).then((value) => {
+          this.props.dialogProps.onClose(() => {
+            const user = value.user;
+            const displayName = user.displayName;
+            const emailAddress = user.email;
+  
+            this.props.openSnackbar(`Signed in as ${displayName || emailAddress}`);
+          });
+        }).catch((reason) => {
+          const code = reason.code;
+          const message = reason.message;
+  
+          switch (code) {
+            case 'auth/invalid-email':
+            case 'auth/user-disabled':
+            case 'auth/user-not-found':
+            case 'auth/wrong-password':
+              this.props.openSnackbar(message);
+              return;
+  
+            default:
+              this.props.openSnackbar(message);
+              return;
+          }
+        }).finally(() => {
+          this.setState({
+            isPerformingAuthAction: false
+          });
+        });
       });
     }
+  };
+
+  signInWithAuthProvider = (providerId) => {
+    this.setState({
+      isPerformingAuthAction: true
+    }, () => {
+      auth.signInWithAuthProvider(providerId).then((value) => {
+        this.props.dialogProps.onClose(() => {
+          const user = value.user;
+          const displayName = user.displayName;
+          const emailAddress = user.email;
+
+          this.props.openSnackbar(`Signed in as ${displayName || emailAddress}`);
+        });
+      }).catch((reason) => {
+        const code = reason.code;
+        const message = reason.message;
+
+        switch (code) {
+          case 'auth/account-exists-with-different-credential':
+          case 'auth/auth-domain-config-required':
+          case 'auth/cancelled-popup-request':
+          case 'auth/operation-not-allowed':
+          case 'auth/operation-not-supported-in-this-environment':
+          case 'auth/popup-blocked':
+          case 'auth/popup-closed-by-user':
+          case 'auth/unauthorized-domain':
+            this.props.openSnackbar(message);
+            return;
+
+          default:
+            this.props.openSnackbar(message);
+            return;
+        }
+      }).finally(() => {
+        this.setState({
+          isPerformingAuthAction: false
+        });
+      });
+    });
   };
 
   handleKeyPress = (event) => {
@@ -143,13 +245,14 @@ class SignInDialog extends Component {
     // Dialog Properties
     const { dialogProps } = this.props;
 
-    // Custom Properties
-    const { isPerformingAuthAction } = this.props;
+    const {
+      isPerformingAuthAction,
 
-    // Custom Events
-    const { onAuthProviderClick } = this.props;
-
-    const { emailAddress, password, errors } = this.state;
+      emailAddress,
+      password,
+      
+      errors
+    } = this.state;
 
     return (
       <Dialog fullWidth maxWidth="sm" {...dialogProps} onKeyPress={this.handleKeyPress} onExited={this.handleExited}>
@@ -164,7 +267,7 @@ class SignInDialog extends Component {
                 <AuthProviderList
                   isPerformingAuthAction={isPerformingAuthAction}
 
-                  onAuthProviderClick={onAuthProviderClick}
+                  onAuthProviderClick={this.signInWithAuthProvider}
                 />
               </Grid>
 
@@ -177,6 +280,7 @@ class SignInDialog extends Component {
                   <Grid item xs>
                     <TextField
                       autoComplete="email"
+                      disabled={isPerformingAuthAction}
                       error={!!(errors && errors.emailAddress)}
                       fullWidth
                       helperText={(errors && errors.emailAddress) ? errors.emailAddress[0] : ''}
@@ -194,6 +298,7 @@ class SignInDialog extends Component {
                   <Grid item xs>
                     <TextField
                       autoComplete="current-password"
+                      disabled={isPerformingAuthAction}
                       error={!!(errors && errors.password)}
                       fullWidth
                       helperText={(errors && errors.password) ? errors.password[0] : ''}
@@ -217,13 +322,14 @@ class SignInDialog extends Component {
               gutterBottom
               isPerformingAuthAction={isPerformingAuthAction}
 
-              onAuthProviderClick={onAuthProviderClick}
+              onAuthProviderClick={this.signInWithAuthProvider}
             />
 
             <Grid container direction="column" spacing={2}>
               <Grid item xs>
                 <TextField
                   autoComplete="email"
+                  disabled={isPerformingAuthAction}
                   error={!!(errors && errors.emailAddress)}
                   fullWidth
                   helperText={(errors && errors.emailAddress) ? errors.emailAddress[0] : ''}
@@ -241,6 +347,7 @@ class SignInDialog extends Component {
               <Grid item xs>
                 <TextField
                   autoComplete="current-password"
+                  disabled={isPerformingAuthAction}
                   error={!!(errors && errors.password)}
                   fullWidth
                   helperText={(errors && errors.password) ? errors.password[0] : ''}
@@ -291,15 +398,8 @@ SignInDialog.propTypes = {
   // Dialog Properties
   dialogProps: PropTypes.object.isRequired,
 
-  // Custom Properties
-  isPerformingAuthAction: PropTypes.bool,
-
   // Custom Functions
-  resetPassword: PropTypes.func.isRequired,
-  signIn: PropTypes.func.isRequired,
-
-  // Custom Events
-  onAuthProviderClick: PropTypes.func.isRequired
+  openSnackbar: PropTypes.func.isRequired
 };
 
 export default withStyles(styles)(SignInDialog);
