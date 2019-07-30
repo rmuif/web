@@ -101,15 +101,19 @@ The command `firebase login` is a [Firebase](https://firebase.google.com) comman
 firebase login
 ```
 
-The command `firebase list` is another Firebase command-line utility which print a list of all of your Firebase projects. Use it to test that authentication worked (and to list all of your Firebase projects), the displayed list should be the same as the Firebase projects listed in the Firebase console.
+The command `firebase list` is another Firebase command-line utility which is used to print a list of all of your Firebase projects. Use it to test that authentication worked (and to list all of your Firebase projects), the displayed list should be the same as the Firebase projects listed in the Firebase console.
 
 ```
 firebase list
 ```
 
+The command `firebase init` is yet another Firebase command-line utility which is used to set up a new Firebase project in the current directory. This command will create a `firebase.json` configuration file in the current directory.
+
 ```
 firebase init
 ```
+
+The last Firebase command-line utility, `firebase deploy` is used to deploy code and assets from your project directory to your Firebase project. For Firebase Hosting, a `firebase.json` configuration file is required.
 
 ```
 firebase deploy --only firestore:rules,storage,functions
