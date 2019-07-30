@@ -2,24 +2,15 @@ import React from 'react';
 
 import ReactDOM from 'react-dom';
 
-import SignUpDialog from './SignUpDialog';
+import Router from './Router';
 
 it('renders without crashing', () => {
   const div = document.createElement('div');
 
   ReactDOM.render(
     (
-      <SignUpDialog
-        dialogProps={{
-          open: true,
-
-          onClose: () => {}
-        }}
-
-        signUp={() => {}}
-
-        onAuthProviderClick={() => {}}
-        openSnackbar={() => {}}
+      <Router
+        isSignedIn={false}
       />
     ),
     div

@@ -2,24 +2,27 @@ import React from 'react';
 
 import ReactDOM from 'react-dom';
 
-import SignInDialog from './SignInDialog';
+import AccountTab from './AccountTab';
 
 it('renders without crashing', () => {
   const div = document.createElement('div');
 
   ReactDOM.render(
     (
-      <SignInDialog
+      <AccountTab
         dialogProps={{
           open: true,
 
           onClose: () => {}
         }}
 
-        resetPassword={() => {}}
-        signIn={() => {}}
+        user={{
+          metadata: {
+            lastSignInTime: 0
+          }
+        }}
+        userData={{}}
 
-        onAuthProviderClick={() => {}}
         openSnackbar={() => {}}
       />
     ),
