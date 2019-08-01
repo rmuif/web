@@ -230,12 +230,8 @@ class App extends Component {
 
   render() {
     const {
-      primaryColor,
-      secondaryColor,
-      type,
       isAuthReady,
       isPerformingAuthAction,
-      isVerifyingEmailAddress,
       isSignedIn,
       user,
       userData
