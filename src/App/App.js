@@ -420,7 +420,10 @@ class App extends Component {
     this._isMounted = false;
 
     this.removeAuthObserver();
-    this.removeUserObserver();
+
+    if (this.removeUserObserver) {
+      this.removeUserObserver();
+    }
   }
 }
 
