@@ -25,6 +25,9 @@ import SecurityIcon from '@material-ui/icons/Security';
 import SwipeableViews from 'react-swipeable-views';
 
 import AccountTab from '../../tabs/AccountTab/AccountTab';
+import AppearanceTab from '../../tabs/AppearanceTab/AppearanceTab';
+import ConnectionsTab from '../../tabs/ConnectionsTab/ConnectionsTab';
+import SecurityTab from '../../tabs/SecurityTab/SecurityTab';
 
 const styles = (theme) => ({
   closeButton: {
@@ -65,7 +68,7 @@ class SettingsDialog extends Component {
     super(props);
 
     this.state = {
-      selectedTab: 0
+      selectedTab: 3
     };
   }
 
@@ -159,6 +162,18 @@ class SettingsDialog extends Component {
               openSnackbar={openSnackbar}
             />
           }
+
+          {selectedTab === 1 &&
+            <AppearanceTab />
+          }
+
+          {selectedTab === 2 &&
+            <ConnectionsTab />
+          }
+
+          {selectedTab === 3 &&
+            <SecurityTab />
+          }
         </Hidden>
 
         <Hidden smUp>
@@ -169,6 +184,12 @@ class SettingsDialog extends Component {
 
               openSnackbar={openSnackbar}
             />
+
+            <AppearanceTab />
+
+            <ConnectionsTab />
+
+            <SecurityTab />
           </SwipeableViews>
         </Hidden>
       </Dialog>
