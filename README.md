@@ -17,7 +17,7 @@ There’s already a bunch of features included for instant web development grati
 - Robust routing with React Router including error handling
 - Extensive mobile support with full-screen dialogs and [react-swipeable-views](https://react-swipeable-views.com) for tabs
 
-For an exhaustive list you can visit [the Features page on the Wiki](https://github.com/Phoqe/react-material-ui-firebase/wiki/Features).
+For an exhaustive list you can visit the [Features page](https://github.com/Phoqe/react-material-ui-firebase/wiki/Features).
 
 ## Demo
 
