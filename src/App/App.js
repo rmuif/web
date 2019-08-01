@@ -390,8 +390,21 @@ class App extends Component {
               user: user,
               userData: data
             });
+          }, (error) => {
+            const code = error.code;
+            const message = error.message;
+    
+            switch (code) {
+              default:
+                this.openSnackbar(message);
+                return;
+            }
           });
         } else {
+          if (this.removeUserObserver) {
+            this.removeUserObserver();
+          }
+
           this.setState({
             isAuthReady: true,
             isSignedIn: false,
@@ -407,10 +420,7 @@ class App extends Component {
     this._isMounted = false;
 
     this.removeAuthObserver();
-
-    if (this.state.isSignedIn) {
-      this.removeUserObserver();
-    }
+    this.removeUserObserver();
   }
 }
 
