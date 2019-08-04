@@ -1,15 +1,17 @@
 import React, { Component } from 'react';
 
+import _ from 'lodash';
 import readingTime from 'reading-time';
 
-import { createMuiTheme, MuiThemeProvider } from '@material-ui/core/styles';
+import { createMuiTheme } from '@material-ui/core/styles';
+import { ThemeProvider } from '@material-ui/styles';
 
 import Button from '@material-ui/core/Button';
 import Snackbar from '@material-ui/core/Snackbar';
 
 import firebase from '../firebase';
-import colors from '../colors';
 import settings from '../settings';
+import colors from '../colors';
 import * as auth from '../auth';
 
 import LaunchScreen from '../layout/LaunchScreen/LaunchScreen';
@@ -23,7 +25,7 @@ let theme = createMuiTheme({
   palette: {
     primary: settings.theme.primaryColor.import,
     secondary: settings.theme.secondaryColor.import,
-    type: settings.theme.type
+    type: settings.theme.dark ? 'dark' : 'light'
   }
 });
 
@@ -34,10 +36,6 @@ class App extends Component {
     super(props);
 
     this.state = {
-      primaryColor: settings.theme.primaryColor.name,
-      secondaryColor: settings.theme.secondaryColor.name,
-      type: settings.theme.type,
-
       isAuthReady: false,
       isPerformingAuthAction: false,
       isSignedIn: false,
@@ -57,7 +55,7 @@ class App extends Component {
       },
 
       settingsDialog: {
-        open: true
+        open: false
       },
 
       signOutDialog: {
@@ -71,6 +69,33 @@ class App extends Component {
       }
     };
   }
+
+  changeTheme = (primaryColor, secondaryColor, dark) => {
+    if (!primaryColor || !secondaryColor) {
+      return;
+    }
+
+    primaryColor = _.camelCase(primaryColor);
+    secondaryColor = _.camelCase(secondaryColor);
+
+    const primary = colors[primaryColor].import;
+    const secondary = colors[secondaryColor].import;
+    const type = dark ? 'dark' : 'light';
+
+    if (!primary || !secondary || !type) {
+      return;
+    }
+
+    const palette = {
+      primary: primary,
+      secondary: secondary,
+      type: type
+    };
+
+    theme = createMuiTheme({
+      palette: palette
+    });
+  };
 
   openDialog = (dialogKey, callback) => {
     // Retrieve the dialog with the specified key
@@ -125,84 +150,6 @@ class App extends Component {
     });
   };
 
-  updateTheme = (palette, removeLocalStorage, callback) => {
-    const { primaryColor, secondaryColor, type } = this.state;
-
-    if (!palette.primaryColor) {
-      palette.primaryColor = primaryColor;
-    }
-
-    if (!palette.secondaryColor) {
-      palette.secondaryColor = secondaryColor;
-    }
-
-    if (!palette.type) {
-      palette.type = type;
-    }
-
-    theme = createMuiTheme({
-      palette: {
-        primary: colors.find(color => color.id === palette.primaryColor).import,
-        secondary: colors.find(color => color.id === palette.secondaryColor).import,
-        type: palette.type
-      }
-    });
-
-    this.setState({
-      primaryColor: palette.primaryColor,
-      secondaryColor: palette.secondaryColor,
-      type: palette.type
-    }, () => {
-      if (removeLocalStorage) {
-        localStorage.removeItem('theme');
-      } else {
-        localStorage.setItem('theme', JSON.stringify({
-          primaryColor: palette.primaryColor,
-          secondaryColor: palette.secondaryColor,
-          type: palette.type
-        }));
-      }
-
-      if (callback && typeof callback === 'function') {
-        callback();
-      }
-    });
-  };
-
-  resetTheme = () => {
-    this.updateTheme({
-      primaryColor: settings.theme.primaryColor.name,
-      secondaryColor: settings.theme.secondaryColor.name,
-      type: settings.theme.type
-    }, true, () => {
-      this.openSnackbar('Settings reset');
-    });
-  };
-
-  changePrimaryColor = (event) => {
-    const primaryColor = event.target.value;
-
-    this.updateTheme({
-      primaryColor
-    });
-  };
-
-  changeSecondaryColor = (event) => {
-    const secondaryColor = event.target.value;
-
-    this.updateTheme({
-      secondaryColor
-    });
-  };
-
-  changeType = (event) => {
-    const type = event.target.value;
-
-    this.updateTheme({
-      type
-    });
-  };
-
   openSnackbar = (message, callback) => {
     this.setState({
       snackbar: {
@@ -247,7 +194,7 @@ class App extends Component {
     const { snackbar } = this.state;
 
     return (
-      <MuiThemeProvider theme={theme}>
+      <ThemeProvider theme={theme}>
         <div style={{ minHeight: '100vh', backgroundColor: theme.palette.type === 'dark' ? '#303030' : '#fafafa' }}>
           {!isAuthReady &&
             <LaunchScreen />
@@ -359,18 +306,12 @@ class App extends Component {
             </React.Fragment>
           }
         </div>
-      </MuiThemeProvider>
+      </ThemeProvider>
     );
   }
 
   componentDidMount() {
     this._isMounted = true;
-
-    const theme = JSON.parse(localStorage.getItem('theme'));
-
-    if (theme) {
-      this.updateTheme(theme);
-    }
 
     this.removeAuthObserver = firebase.auth().onAuthStateChanged((user) => {
       if (this._isMounted) {
@@ -379,6 +320,12 @@ class App extends Component {
 
           this.removeUserObserver = firebase.firestore().collection('users').doc(uid).onSnapshot((documentSnapshot) => {
             const data = documentSnapshot.data();
+            const theme = data.theme;
+            const primaryColor = theme.primaryColor;
+            const secondaryColor = theme.secondaryColor;
+            const dark = theme.dark;
+
+            this.changeTheme(primaryColor, secondaryColor, dark);
 
             this.setState({
               isAuthReady: true,
@@ -406,6 +353,14 @@ class App extends Component {
             isSignedIn: false,
             user: null,
             userData: null
+          }, () => {
+            theme = createMuiTheme({
+              palette: {
+                primary: settings.theme.primaryColor.import,
+                secondary: settings.theme.secondaryColor.import,
+                type: settings.theme.dark ? 'dark' : 'light'
+              }
+            });
           });
         }
       }
