@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 
 import PropTypes from 'prop-types';
 
-import { createMuiTheme, withStyles, MuiThemeProvider } from '@material-ui/core/styles';
+import { createMuiTheme, withStyles } from '@material-ui/core/styles';
+import { ThemeProvider } from '@material-ui/styles';
 
 import Grid from '@material-ui/core/Grid';
 import Button from '@material-ui/core/Button';
@@ -127,7 +128,7 @@ class AuthProviderList extends Component {
 
           return (
             <Grid key={authProvider.providerId} item>
-              <MuiThemeProvider theme={authProvider.theme}>
+              <ThemeProvider theme={authProvider.theme}>
                 <Button
                   color="primary"
                   disabled={isPerformingAuthAction}
@@ -137,7 +138,7 @@ class AuthProviderList extends Component {
                   {authProvider.icon}
                   {authProvider.name}
                 </Button>
-              </MuiThemeProvider>
+              </ThemeProvider>
             </Grid>
           );
         })}
