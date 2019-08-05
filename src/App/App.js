@@ -97,6 +97,16 @@ class App extends Component {
     });
   };
 
+  resetTheme = () => {
+    theme = createMuiTheme({
+      palette: {
+        primary: settings.theme.primaryColor.import,
+        secondary: settings.theme.secondaryColor.import,
+        type: settings.theme.dark ? 'dark' : 'light'
+      }
+    });
+  };
+
   openDialog = (dialogKey, callback) => {
     // Retrieve the dialog with the specified key
     const dialog = this.state[dialogKey];
@@ -321,11 +331,16 @@ class App extends Component {
           this.removeUserObserver = firebase.firestore().collection('users').doc(uid).onSnapshot((documentSnapshot) => {
             const data = documentSnapshot.data();
             const theme = data.theme;
-            const primaryColor = theme.primaryColor;
-            const secondaryColor = theme.secondaryColor;
-            const dark = theme.dark;
 
-            this.changeTheme(primaryColor, secondaryColor, dark);
+            if (theme) {
+              const primaryColor = theme.primaryColor;
+              const secondaryColor = theme.secondaryColor;
+              const dark = theme.dark;
+  
+              this.changeTheme(primaryColor, secondaryColor, dark);
+            } else {
+              this.resetTheme();
+            }
 
             this.setState({
               isAuthReady: true,
