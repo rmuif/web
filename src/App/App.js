@@ -3,8 +3,7 @@ import React, { Component } from 'react';
 import _ from 'lodash';
 import readingTime from 'reading-time';
 
-import { createMuiTheme } from '@material-ui/core/styles';
-import { ThemeProvider } from '@material-ui/styles';
+import { createMuiTheme, MuiThemeProvider } from '@material-ui/core/styles';
 
 import Button from '@material-ui/core/Button';
 import Snackbar from '@material-ui/core/Snackbar';
@@ -204,7 +203,7 @@ class App extends Component {
     const { snackbar } = this.state;
 
     return (
-      <ThemeProvider theme={theme}>
+      <MuiThemeProvider theme={theme}>
         <div style={{ minHeight: '100vh', backgroundColor: theme.palette.type === 'dark' ? '#303030' : '#fafafa' }}>
           {!isAuthReady &&
             <LaunchScreen />
@@ -316,7 +315,7 @@ class App extends Component {
             </React.Fragment>
           }
         </div>
-      </ThemeProvider>
+      </MuiThemeProvider>
     );
   }
 
