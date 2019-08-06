@@ -8,6 +8,7 @@ import DialogContent from '@material-ui/core/DialogContent';
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import Box from '@material-ui/core/Box';
+import Badge from '@material-ui/core/Badge';
 import Avatar from '@material-ui/core/Avatar';
 import Fab from '@material-ui/core/Fab';
 import Button from '@material-ui/core/Button';
@@ -42,8 +43,13 @@ import constraints from '../../constraints';
 import authentication from '../../authentication';
 
 const styles = (theme) => ({
-  root: {
+  dialogContent: {
     paddingTop: theme.spacing(2)
+  },
+
+  badge: {
+    top: theme.spacing(2),
+    right: -theme.spacing(2)
   },
 
   avatar: {
@@ -682,21 +688,37 @@ class AccountTab extends Component {
     } = this.state;
 
     return (
-      <DialogContent classes={{ root: classes.root }}>
+      <DialogContent classes={{ root: classes.dialogContent }}>
         <Box mb={2}>
           <Hidden xsDown>
             <Grid alignItems="center" container>
               <Grid item xs>
                 <Box textAlign="center">
-                  <Box position="relative" mb={1.5}>
+                  <Box mb={1.5}>
                     {(avatar && avatarUrl) &&
-                      <Avatar className={classes.avatar} alt="Avatar" src={avatarUrl} />
+                      <Badge classes={{ badge: classes.badge }} badgeContent={
+                        <Tooltip title="Remove">
+                          <Fab classes={{ sizeSmall: classes.small }} color="secondary" disabled={isPerformingAuthAction} size="small" onClick={this.removeAvatar}>
+                            <CloseIcon fontSize="small" />
+                          </Fab>
+                        </Tooltip>
+                      }>
+                        <Avatar className={classes.avatar} alt="Avatar" src={avatarUrl} />
+                      </Badge>
                     }
 
                     {(!avatar && !avatarUrl) &&
                       <React.Fragment>
                         {user.photoURL &&
-                          <Avatar className={classes.avatar} alt="Avatar" src={user.photoURL} />
+                          <Badge classes={{ badge: classes.badge }} badgeContent={
+                            <Tooltip title="Remove">
+                              <Fab classes={{ sizeSmall: classes.small }} color="secondary" disabled={isPerformingAuthAction} size="small" onClick={this.removeAvatar}>
+                                <CloseIcon fontSize="small" />
+                              </Fab>
+                            </Tooltip>
+                          }>
+                            <Avatar className={classes.avatar} alt="Avatar" src={user.photoURL} />
+                          </Badge>
                         }
 
                         {!user.photoURL &&
@@ -705,16 +727,6 @@ class AccountTab extends Component {
                           </Avatar>
                         }
                       </React.Fragment>
-                    }
-
-                    {(user.photoURL || (avatar && avatarUrl)) &&
-                      <Box position="absolute" top={0} right={4}>
-                        <Tooltip title="Remove">
-                          <Fab classes={{ sizeSmall: classes.small }} color="secondary" disabled={isPerformingAuthAction} size="small" onClick={this.removeAvatar}>
-                            <CloseIcon fontSize="small" />
-                          </Fab>
-                        </Tooltip>
-                      </Box>
                     }
                   </Box>
 
@@ -787,52 +799,50 @@ class AccountTab extends Component {
 
           <Hidden smUp>
             <Box textAlign="center" mb={3}>
-              <Box position="relative" mb={1.5}>
-                {user.photoURL &&
-                  <React.Fragment>
-                    {avatar &&
-                      <Avatar className={classes.avatar} alt="Avatar" src={avatarUrl} />
-                    }
-
-                    {!avatar &&
-                      <Avatar className={classes.avatar} alt="Avatar" src={user.photoURL} />
-                    }
-                  </React.Fragment>
+              <Box mb={1.5}>
+                {(avatar && avatarUrl) &&
+                  <Badge classes={{ badge: classes.badge }} badgeContent={
+                    <Tooltip title="Remove">
+                      <Fab classes={{ sizeSmall: classes.small }} color="secondary" disabled={isPerformingAuthAction} size="small" onClick={this.removeAvatar}>
+                        <CloseIcon fontSize="small" />
+                      </Fab>
+                    </Tooltip>
+                  }>
+                    <Avatar className={classes.avatar} alt="Avatar" src={avatarUrl} />
+                  </Badge>
                 }
 
-                {!user.photoURL &&
+                {(!avatar && !avatarUrl) &&
                   <React.Fragment>
-                    {avatar &&
-                      <Avatar className={classes.avatar} alt="Avatar" src={avatarUrl} />
+                    {user.photoURL &&
+                      <Badge classes={{ badge: classes.badge }} badgeContent={
+                        <Tooltip title="Remove">
+                          <Fab classes={{ sizeSmall: classes.small }} color="secondary" disabled={isPerformingAuthAction} size="small" onClick={this.removeAvatar}>
+                            <CloseIcon fontSize="small" />
+                          </Fab>
+                        </Tooltip>
+                      }>
+                        <Avatar className={classes.avatar} alt="Avatar" src={user.photoURL} />
+                      </Badge>
                     }
 
-                    {!avatar &&
+                    {!user.photoURL &&
                       <Avatar className={classes.avatar} alt="Avatar">
                         <Typography variant="h3">{this.getNameInitials()}</Typography>
                       </Avatar>
                     }
                   </React.Fragment>
                 }
-
-                {(user.photoURL || avatar) &&
-                  <Box position="absolute" top={0} right={4}>
-                    <Tooltip title="Remove">
-                      <Fab classes={{ sizeSmall: classes.small }} color="secondary" disabled={isPerformingAuthAction} size="small" onClick={this.removeAvatar}>
-                        <CloseIcon fontSize="small" />
-                      </Fab>
-                    </Tooltip>
-                  </Box>
-                }
               </Box>
 
-              {avatar &&
-                <Button color="primary" component="span" disabled={isPerformingAuthAction} variant="contained" onClick={this.uploadAvatar}>
+              {(avatar && avatarUrl) &&
+                <Button color="primary" disabled={isPerformingAuthAction} variant="contained" onClick={this.uploadAvatar}>
                   <CloudUploadIcon className={classes.buttonIcon} />
                   Upload
                 </Button>
               }
 
-              {!avatar &&
+              {(!avatar && !avatarUrl) &&
                 <React.Fragment>
                   <input
                     id="avatar-input"
