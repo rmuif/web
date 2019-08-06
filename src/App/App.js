@@ -11,7 +11,7 @@ import Snackbar from '@material-ui/core/Snackbar';
 import firebase from '../firebase';
 import settings from '../settings';
 import colors from '../colors';
-import * as auth from '../auth';
+import authentication from '../authentication';
 
 import LaunchScreen from '../layout/LaunchScreen/LaunchScreen';
 
@@ -138,7 +138,7 @@ class App extends Component {
     this.setState({
       isPerformingAuthAction: true
     }, () => {
-      auth.signOut().then(() => {
+      authentication.signOut().then(() => {
         this.closeDialog('signOutDialog', () => {
           this.openSnackbar('Signed out');
         });

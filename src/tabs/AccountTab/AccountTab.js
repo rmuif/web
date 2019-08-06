@@ -39,7 +39,7 @@ import validate from 'validate.js';
 import moment from 'moment';
 
 import constraints from '../../constraints';
-import * as auth from '../../auth';
+import authentication from '../../authentication';
 
 const styles = (theme) => ({
   root: {
@@ -126,7 +126,7 @@ class AccountTab extends Component {
     this.setState({
       isPerformingAuthAction: true
     }, () => {
-      auth.changeAvatar(avatar).then((value) => {
+      authentication.changeAvatar(avatar).then((value) => {
         this.calculateProfileCompletion(() => {
           this.props.openSnackbar('Avatar changed');
         });
@@ -169,7 +169,7 @@ class AccountTab extends Component {
       this.setState({
         isPerformingAuthAction: true
       }, () => {
-        auth.removeAvatar().then((value) => {
+        authentication.removeAvatar().then((value) => {
           this.calculateProfileCompletion(() => {
             this.props.openSnackbar('Avatar removed');
           });
@@ -286,7 +286,7 @@ class AccountTab extends Component {
       this.setState({
         isPerformingAuthAction: true
       }, () => {
-        auth.changeFirstName(firstName).then(() => {
+        authentication.changeFirstName(firstName).then(() => {
           this.calculateProfileCompletion(() => {
             this.hideFields(() => {
               this.props.openSnackbar('First name changed');
@@ -339,7 +339,7 @@ class AccountTab extends Component {
       this.setState({
         isPerformingAuthAction: true
       }, () => {
-        auth.changeLastName(lastName).then(() => {
+        authentication.changeLastName(lastName).then(() => {
           this.calculateProfileCompletion(() => {
             this.hideFields(() => {
               this.props.openSnackbar('Last name changed');
@@ -392,7 +392,7 @@ class AccountTab extends Component {
       this.setState({
         isPerformingAuthAction: true
       }, () => {
-        auth.changeUsername(username).then(() => {
+        authentication.changeUsername(username).then(() => {
           this.calculateProfileCompletion(() => {
             this.hideFields(() => {
               this.props.openSnackbar('Username changed');
@@ -445,7 +445,7 @@ class AccountTab extends Component {
       this.setState({
         isPerformingAuthAction: true
       }, () => {
-        auth.changeEmailAddress(emailAddress).then(() => {
+        authentication.changeEmailAddress(emailAddress).then(() => {
           this.calculateProfileCompletion(() => {
             this.hideFields(() => {
               this.props.openSnackbar('E-mail address changed');
@@ -473,7 +473,7 @@ class AccountTab extends Component {
     this.setState({
       isPerformingAuthAction: true
     }, () => {
-      auth.verifyEmailAddress().then(() => {
+      authentication.verifyEmailAddress().then(() => {
         this.setState({
           hasSentVerificationEmail: true
         }, () => {
@@ -500,7 +500,7 @@ class AccountTab extends Component {
     this.setState({
       isPerformingAuthAction: true
     }, () => {
-      auth.deleteAccount().then(() => {
+      authentication.deleteAccount().then(() => {
         this.props.openSnackbar('Account deleted');
       }).catch((reason) => {
         const code = reason.code;

@@ -20,7 +20,7 @@ import TextField from '@material-ui/core/TextField';
 import AuthProviderList from '../../layout/AuthProviderList/AuthProviderList';
 
 import constraints from '../../constraints';
-import * as auth from '../../auth';
+import authentication from '../../authentication';
 
 const styles = (theme) => ({
   icon: {
@@ -75,7 +75,7 @@ class SignInDialog extends Component {
         this.setState({
           isPerformingAuthAction: true
         }, () => {
-          auth.resetPassword(emailAddress).then((value) => {
+          authentication.resetPassword(emailAddress).then((value) => {
             this.props.openSnackbar(`Password reset e-mail sent to ${emailAddress}`);
           }).catch((reason) => {
             const code = reason.code;
@@ -127,7 +127,7 @@ class SignInDialog extends Component {
 
         errors: null
       }, () => {
-        auth.signIn(emailAddress, password).then((value) => {
+        authentication.signIn(emailAddress, password).then((value) => {
           this.props.dialogProps.onClose(() => {
             const user = value.user;
             const displayName = user.displayName;
@@ -164,7 +164,7 @@ class SignInDialog extends Component {
     this.setState({
       isPerformingAuthAction: true
     }, () => {
-      auth.signInWithAuthProvider(providerId).then((value) => {
+      authentication.signInWithAuthProvider(providerId).then((value) => {
         this.props.dialogProps.onClose(() => {
           const user = value.user;
           const displayName = user.displayName;

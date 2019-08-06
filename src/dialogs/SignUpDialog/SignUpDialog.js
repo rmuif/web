@@ -20,7 +20,7 @@ import TextField from '@material-ui/core/TextField';
 import AuthProviderList from '../../layout/AuthProviderList/AuthProviderList';
 
 import constraints from '../../constraints';
-import * as auth from '../../auth';
+import authentication from '../../authentication';
 
 const styles = (theme) => ({
   dialogContent: {
@@ -103,7 +103,7 @@ class SignUpDialog extends Component {
 
         errors: null
       }, () => {
-        auth.signUp({
+        authentication.signUp({
           firstName: firstName,
           lastName: lastName,
           username: username,
@@ -140,7 +140,7 @@ class SignUpDialog extends Component {
     this.setState({
       isPerformingAuthAction: true
     }, () => {
-      auth.signInWithAuthProvider(providerId).then((value) => {
+      authentication.signInWithAuthProvider(providerId).then((value) => {
         this.props.dialogProps.onClose(() => {
           const user = value.user;
           const displayName = user.displayName;
