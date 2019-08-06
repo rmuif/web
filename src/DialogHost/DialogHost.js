@@ -25,14 +25,6 @@ class DialogHost extends Component {
     return (
       <React.Fragment>
         <Hidden xsDown>
-          {isSignedIn &&
-            <SettingsDialog
-              dialogProps={settingsDialog.dialogProps}
-
-              {...settingsDialog.props}
-            />
-          }
-
           {!isSignedIn &&
             <React.Fragment>
               <SignUpDialog
@@ -50,19 +42,17 @@ class DialogHost extends Component {
           }
         </Hidden>
 
-        <Hidden smUp>
+        <Hidden smDown>
           {isSignedIn &&
             <SettingsDialog
-              dialogProps={{
-                fullScreen: true,
-
-                ...settingsDialog.dialogProps
-              }}
+              dialogProps={settingsDialog.dialogProps}
 
               {...settingsDialog.props}
             />
           }
+        </Hidden>
 
+        <Hidden smUp>
           {!isSignedIn &&
             <React.Fragment>
               <SignUpDialog
@@ -85,6 +75,20 @@ class DialogHost extends Component {
                 {...signInDialog.props}
               />
             </React.Fragment>
+          }
+        </Hidden>
+
+        <Hidden mdUp>
+          {isSignedIn &&
+            <SettingsDialog
+              dialogProps={{
+                fullScreen: true,
+
+                ...settingsDialog.dialogProps
+              }}
+
+              {...settingsDialog.props}
+            />
           }
         </Hidden>
 
