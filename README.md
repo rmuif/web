@@ -63,6 +63,8 @@ React + Material-UI + Firebase is a boilerplate for your own project. It wouldn�
 
 ### Change name and URL
 
+Changing your project’s name can be tedious sometimes as it often involves changing the name of both files and directories along with a ton of hard-coded values. With this template, you can change your project’s name by modifying 4 files:
+
 - **public/**
   - index.html
     - `title`
