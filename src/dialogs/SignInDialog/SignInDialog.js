@@ -76,7 +76,7 @@ class SignInDialog extends Component {
           isPerformingAuthAction: true
         }, () => {
           authentication.resetPassword(emailAddress).then((value) => {
-            this.props.openSnackbar(`Password reset e-mail sent to ${emailAddress}`);
+            this.props.openSnackbar(`Sent password reset e-mail to ${emailAddress}`);
           }).catch((reason) => {
             const code = reason.code;
             const message = reason.message;

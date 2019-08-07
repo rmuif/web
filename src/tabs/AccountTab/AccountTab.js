@@ -134,7 +134,7 @@ class AccountTab extends Component {
     }, () => {
       authentication.changeAvatar(avatar).then((value) => {
         this.calculateProfileCompletion(() => {
-          this.props.openSnackbar('Avatar changed');
+          this.props.openSnackbar('Changed avatar');
         });
       }).catch((reason) => {
         const code = reason.code;
@@ -170,6 +170,8 @@ class AccountTab extends Component {
       this.setState({
         avatar: null,
         avatarUrl: ''
+      }, () => {
+        this.props.openSnackbar(`Removed image “${avatar.name}”`, 5);
       });
     } else if (user.photoURL && !avatar && !avatarUrl) {
       this.setState({
@@ -177,7 +179,7 @@ class AccountTab extends Component {
       }, () => {
         authentication.removeAvatar().then((value) => {
           this.calculateProfileCompletion(() => {
-            this.props.openSnackbar('Avatar removed');
+            this.props.openSnackbar('Removed avatar');
           });
         }).catch((reason) => {
           const code = reason.code;
@@ -295,7 +297,7 @@ class AccountTab extends Component {
         authentication.changeFirstName(firstName).then(() => {
           this.calculateProfileCompletion(() => {
             this.hideFields(() => {
-              this.props.openSnackbar('First name changed');
+              this.props.openSnackbar('Changed first name');
             });
           });
         }).catch((reason) => {
@@ -348,7 +350,7 @@ class AccountTab extends Component {
         authentication.changeLastName(lastName).then(() => {
           this.calculateProfileCompletion(() => {
             this.hideFields(() => {
-              this.props.openSnackbar('Last name changed');
+              this.props.openSnackbar('Changed last name');
             });
           });
         }).catch((reason) => {
@@ -401,7 +403,7 @@ class AccountTab extends Component {
         authentication.changeUsername(username).then(() => {
           this.calculateProfileCompletion(() => {
             this.hideFields(() => {
-              this.props.openSnackbar('Username changed');
+              this.props.openSnackbar('Changed username');
             });
           });
         }).catch((reason) => {
@@ -454,7 +456,7 @@ class AccountTab extends Component {
         authentication.changeEmailAddress(emailAddress).then(() => {
           this.calculateProfileCompletion(() => {
             this.hideFields(() => {
-              this.props.openSnackbar('E-mail address changed');
+              this.props.openSnackbar('Changed e-mail address');
             });
           });
         }).catch((reason) => {
@@ -483,7 +485,7 @@ class AccountTab extends Component {
         this.setState({
           hasSentVerificationEmail: true
         }, () => {
-          this.props.openSnackbar('Verification e-mail sent');
+          this.props.openSnackbar('Sent verification e-mail');
         });
       }).catch((reason) => {
         const code = reason.code;
@@ -507,7 +509,7 @@ class AccountTab extends Component {
       isPerformingAuthAction: true
     }, () => {
       authentication.deleteAccount().then(() => {
-        this.props.openSnackbar('Account deleted');
+        this.props.openSnackbar('Deleted account');
       }).catch((reason) => {
         const code = reason.code;
         const message = reason.message;
@@ -606,6 +608,8 @@ class AccountTab extends Component {
     this.setState({
       avatar: avatar,
       avatarUrl: URL.createObjectURL(avatar)
+    }, () => {
+      this.props.openSnackbar(`Selected image “${avatar.name}”`, 5);
     });
   };
 
