@@ -61,6 +61,21 @@ yarn start
 
 React + Material-UI + Firebase is a boilerplate for your own project. It wouldn’t make sense if you couldn’t customize it to the core.
 
+### Change name and URL
+
+- **public/**
+  - index.html
+    - `title`
+  - manifest.json
+    - `name`
+    - `short_name`
+- **src/**
+  - settings.js
+    - `title`
+- package.json
+  - `name`
+  - `homepage`
+
 ### Use your own Git repository
 
 The command `git remote` is another Git command-line utility which is used to manage the set of repositories (”remotes“) whose branches you track. The options `rm origin` is used to remove the remote named `origin`. All remote-tracking branches and configuration settings for the remote are removed.
@@ -89,7 +104,7 @@ git push -u origin master
 
 ### Deploy Firebase rules and functions
 
-The command `npm install` is an [npm](https://www.npmjs.com) command-line utility which is used to install the dependencies in the local `node_modules` folder. In global mode (i.e., with `-g` or `--global` appended to the command), it installs the current package context (i.e., the current working directory) as a global package. The Firebase CLI provides a variety of tools for managing, viewing, and deploying to Firebase projects.
+The command `npm install` is an [npm](https://www.npmjs.com) command-line utility which is used to install the dependencies in the local `node_modules` folder. In global mode (i.e., with `-g` or `--global` appended to the command), it installs the current package context as a global package. The Firebase CLI provides a variety of tools for managing, viewing, and deploying to Firebase projects.
 
 ```
 npm install -g firebase-tools
@@ -101,7 +116,7 @@ The command `firebase login` is a [Firebase](https://firebase.google.com) comman
 firebase login
 ```
 
-The command `firebase list` is another Firebase command-line utility which is used to print a list of all of your Firebase projects. Use it to test that authentication worked (and to list all of your Firebase projects), the displayed list should be the same as the Firebase projects listed in the Firebase console.
+The command `firebase list` is another Firebase command-line utility which is used to print a list of all of your Firebase projects. Use it to test that authentication worked (and to list all of your Firebase projects), the displayed list should be the same as the Firebase projects listed in the [Firebase console](https://console.firebase.google.com).
 
 ```
 firebase list
@@ -113,7 +128,7 @@ The command `firebase init` is yet another Firebase command-line utility which i
 firebase init
 ```
 
-The last Firebase command-line utility, `firebase deploy` is used to deploy code and assets from your project directory to your Firebase project. For Firebase Hosting, a `firebase.json` configuration file is required.
+The command `firebase deploy` is also a Firebase command-line utility which is used to deploy code and assets from your project directory to your Firebase project.
 
 ```
 firebase deploy --only firestore:rules,storage,functions
