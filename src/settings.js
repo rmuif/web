@@ -4,8 +4,8 @@ const settings = {
   title: 'React + Material-UI + Firebase',
 
   theme: {
-    primaryColor: colors.blue,
-    secondaryColor: colors.red,
+    primaryColor: colors.deepPurple,
+    secondaryColor: colors.pink,
     dark: false
   },
 
