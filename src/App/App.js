@@ -159,10 +159,10 @@ class App extends Component {
     });
   };
 
-  openSnackbar = (message, callback) => {
+  openSnackbar = (message, autoHideDuration = 2, callback) => {
     this.setState({
       snackbar: {
-        autoHideDuration: readingTime(message).time * 2,
+        autoHideDuration: readingTime(message).time * autoHideDuration,
         message,
         open: true
       }
