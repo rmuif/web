@@ -6,6 +6,8 @@ import validate from 'validate.js';
 import moment from 'moment';
 
 import DialogContent from '@material-ui/core/DialogContent';
+import Box from '@material-ui/core/Box';
+import Typography from '@material-ui/core/Typography';
 
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
@@ -25,6 +27,8 @@ import constraints from '../../constraints';
 import authentication from '../../authentication';
 
 const initialState = {
+  securityRating: 0,
+
   showingField: '',
 
   password: '',
@@ -41,6 +45,47 @@ class SecurityTab extends Component {
 
     this.state = initialState;
   }
+
+  calculateSecurityRating = () => {
+    const { user, userData } = this.props;
+
+    if (!user || !user.metadata || !userData) {
+      return;
+    }
+
+    let creationTime = user.metadata.creationTime;
+    let lastChangedPassword = userData.lastChangedPassword;
+
+    if (!creationTime) {
+      return;
+    }
+
+    creationTime = moment(creationTime);
+    
+    if (lastChangedPassword) {
+      lastChangedPassword = moment(lastChangedPassword.toDate());
+
+      if (creationTime.diff(lastChangedPassword, 'days') >= 365.242199) {
+        this.setState({
+          securityRating: 50
+        });
+      } else {
+        this.setState({
+          securityRating: 100
+        });
+      }
+    } else {
+      if (moment().diff(creationTime, 'days') >= 365.242199) {
+        this.setState({
+          securityRating: 50
+        });
+      } else {
+        this.setState({
+          securityRating: 100
+        });
+      }
+    }
+  };
 
   showField = (fieldId) => {
     if (!fieldId) {
@@ -200,6 +245,8 @@ class SecurityTab extends Component {
     const { userData } = this.props;
 
     const {
+      securityRating,
+
       showingField,
 
       password,
@@ -212,6 +259,22 @@ class SecurityTab extends Component {
 
     return (
       <DialogContent>
+        <Box textAlign="center">
+          <Typography variant="body1">Security Rating</Typography>
+
+          {securityRating === 0 &&
+            <Typography color="error" variant="h5">{securityRating}%</Typography>
+          }
+
+          {securityRating === 100 &&
+            <Typography color="primary" variant="h5">{securityRating}%</Typography>
+          }
+
+          {(securityRating !== 0 && securityRating !== 100) &&
+            <Typography color="secondary" variant="h5">{securityRating}%</Typography>
+          }
+        </Box>
+
         <List disablePadding>
           <ListItem>
             <Hidden xsDown>
@@ -285,10 +348,15 @@ class SecurityTab extends Component {
       </DialogContent>
     )
   }
+
+  componentDidMount() {
+    this.calculateSecurityRating();
+  }
 }
 
 SecurityTab.propTypes = {
   // Properties
+  user: PropTypes.object.isRequired,
   userData: PropTypes.object.isRequired,
 
   // Functions
