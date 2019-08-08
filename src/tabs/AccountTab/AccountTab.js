@@ -76,8 +76,6 @@ const initialState = {
   profileCompletion: 0,
   securityRating: 0,
 
-  isPerformingAuthAction: false,
-
   showingField: '',
 
   avatar: null,
@@ -87,6 +85,7 @@ const initialState = {
   username: '',
   emailAddress: '',
 
+  isPerformingAuthAction: false,
   hasSentVerificationEmail: false,
 
   errors: null
