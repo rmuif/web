@@ -68,7 +68,7 @@ class SettingsDialog extends Component {
     super(props);
 
     this.state = {
-      selectedTab: 0
+      selectedTab: 3
     };
   }
 
@@ -172,7 +172,11 @@ class SettingsDialog extends Component {
           }
 
           {selectedTab === 3 &&
-            <SecurityTab />
+            <SecurityTab
+              userData={userData}
+
+              openSnackbar={openSnackbar}
+            />
           }
         </Hidden>
 
@@ -189,7 +193,11 @@ class SettingsDialog extends Component {
 
             <ConnectionsTab />
 
-            <SecurityTab />
+            <SecurityTab
+              userData={userData}
+
+              openSnackbar={openSnackbar}
+            />
           </SwipeableViews>
         </Hidden>
       </Dialog>
