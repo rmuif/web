@@ -528,11 +528,11 @@ class AccountTab extends Component {
 
   changeField = (fieldId) => {
     switch (fieldId) {
-      case 'firstName':
+      case 'first-name':
         this.changeFirstName();
         return;
 
-      case 'lastName':
+      case 'last-name':
         this.changeLastName();
         return;
 
@@ -540,7 +540,7 @@ class AccountTab extends Component {
         this.changeUsername();
         return;
 
-      case 'emailAddress':
+      case 'email-address':
         this.changeEmailAddress();
         return;
 
@@ -922,7 +922,7 @@ class AccountTab extends Component {
               </ListItemIcon>
             }
 
-            {showingField === 'firstName' &&
+            {showingField === 'first-name' &&
               <TextField
                 autoComplete="given-name"
                 autoFocus
@@ -938,13 +938,13 @@ class AccountTab extends Component {
                 variant="filled"
 
                 onBlur={this.hideFields}
-                onKeyDown={(event) => this.handleKeyDown(event, 'firstName')}
+                onKeyDown={(event) => this.handleKeyDown(event, 'first-name')}
 
                 onChange={this.handleFirstNameChange}
               />
             }
 
-            {showingField !== 'firstName' &&
+            {showingField !== 'first-name' &&
               <React.Fragment>
                 <ListItemText
                   primary="First name"
@@ -955,7 +955,7 @@ class AccountTab extends Component {
                   {userData.firstName &&
                     <Tooltip title="Change">
                       <div>
-                        <IconButton disabled={isPerformingAuthAction} onClick={() => this.showField('firstName')}>
+                        <IconButton disabled={isPerformingAuthAction} onClick={() => this.showField('first-name')}>
                           <EditIcon />
                         </IconButton>
                       </div>
@@ -967,7 +967,7 @@ class AccountTab extends Component {
                       color="primary"
                       disabled={isPerformingAuthAction}
                       variant="contained"
-                      onClick={() => this.showField('firstName')}>
+                      onClick={() => this.showField('first-name')}>
                       Add
                     </Button>
                   }
@@ -991,7 +991,7 @@ class AccountTab extends Component {
               </ListItemIcon>
             }
 
-            {showingField === 'lastName' &&
+            {showingField === 'last-name' &&
               <TextField
                 autoComplete="family-name"
                 autoFocus
@@ -1007,13 +1007,13 @@ class AccountTab extends Component {
                 variant="filled"
 
                 onBlur={this.hideFields}
-                onKeyDown={(event) => this.handleKeyDown(event, 'lastName')}
+                onKeyDown={(event) => this.handleKeyDown(event, 'last-name')}
 
                 onChange={this.handleLastNameChange}
               />
             }
 
-            {showingField !== 'lastName' &&
+            {showingField !== 'last-name' &&
               <React.Fragment>
                 <ListItemText
                   primary="Last name"
@@ -1024,7 +1024,7 @@ class AccountTab extends Component {
                   {userData.lastName &&
                     <Tooltip title="Change">
                       <div>
-                        <IconButton disabled={isPerformingAuthAction} onClick={() => this.showField('lastName')}>
+                        <IconButton disabled={isPerformingAuthAction} onClick={() => this.showField('last-name')}>
                           <EditIcon />
                         </IconButton>
                       </div>
@@ -1036,7 +1036,7 @@ class AccountTab extends Component {
                       color="primary"
                       disabled={isPerformingAuthAction}
                       variant="contained"
-                      onClick={() => this.showField('lastName')}>
+                      onClick={() => this.showField('last-name')}>
                       Add
                     </Button>
                   }
@@ -1147,7 +1147,7 @@ class AccountTab extends Component {
               </ListItemIcon>
             }
 
-            {showingField === 'emailAddress' &&
+            {showingField === 'email-address' &&
               <TextField
                 autoComplete="email"
                 autoFocus
@@ -1163,13 +1163,13 @@ class AccountTab extends Component {
                 variant="filled"
 
                 onBlur={this.hideFields}
-                onKeyDown={(event) => this.handleKeyDown(event, 'emailAddress')}
+                onKeyDown={(event) => this.handleKeyDown(event, 'email-address')}
 
                 onChange={this.handleEmailAddressChange}
               />
             }
 
-            {showingField !== 'emailAddress' &&
+            {showingField !== 'email-address' &&
               <React.Fragment>
                 <ListItemText
                   primary="E-mail address"
@@ -1194,7 +1194,7 @@ class AccountTab extends Component {
                   {user.email &&
                     <Tooltip title="Change">
                       <div>
-                        <IconButton disabled={isPerformingAuthAction} onClick={() => this.showField('emailAddress')}>
+                        <IconButton disabled={isPerformingAuthAction} onClick={() => this.showField('email-address')}>
                           <EditIcon />
                         </IconButton>
                       </div>
@@ -1206,7 +1206,7 @@ class AccountTab extends Component {
                       color="primary"
                       disabled={isPerformingAuthAction}
                       variant="contained"
-                      onClick={() => this.showField('emailAddress')}>
+                      onClick={() => this.showField('email-address')}>
                       Add
                     </Button>
                   }
