@@ -61,7 +61,7 @@ class SecurityTab extends Component {
     }
 
     creationTime = moment(creationTime);
-    
+
     if (lastChangedPassword) {
       lastChangedPassword = moment(lastChangedPassword.toDate());
 

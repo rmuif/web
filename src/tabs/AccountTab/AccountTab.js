@@ -232,9 +232,44 @@ class AccountTab extends Component {
   };
 
   calculateSecurityRating = () => {
-    this.setState({
-      securityRating: 100
-    });
+    const { user, userData } = this.props;
+
+    if (!user || !user.metadata || !userData) {
+      return;
+    }
+
+    let creationTime = user.metadata.creationTime;
+    let lastChangedPassword = userData.lastChangedPassword;
+
+    if (!creationTime) {
+      return;
+    }
+
+    creationTime = moment(creationTime);
+
+    if (lastChangedPassword) {
+      lastChangedPassword = moment(lastChangedPassword.toDate());
+
+      if (creationTime.diff(lastChangedPassword, 'days') >= 365.242199) {
+        this.setState({
+          securityRating: 50
+        });
+      } else {
+        this.setState({
+          securityRating: 100
+        });
+      }
+    } else {
+      if (moment().diff(creationTime, 'days') >= 365.242199) {
+        this.setState({
+          securityRating: 50
+        });
+      } else {
+        this.setState({
+          securityRating: 100
+        });
+      }
+    }
   };
 
   showField = (fieldId) => {
