@@ -426,9 +426,55 @@ const authentication = {
   
         return;
       }
-  
+
       currentUser.updateEmail(emailAddress).then((value) => {
         resolve(value);
+      }).catch((reason) => {
+        reject(reason);
+      });
+    });
+  },
+
+  changePassword: (password) => {
+    return new Promise((resolve, reject) => {
+      if (!password) {
+        reject();
+
+        return;
+      }
+
+      const currentUser = auth.currentUser;
+
+      if (!currentUser) {
+        reject();
+
+        return;
+      }
+
+      const uid = currentUser.uid;
+
+      if (!uid) {
+        reject();
+
+        return;
+      }
+
+      currentUser.updatePassword(password).then((value) => {
+        const reference = firestore.collection('users').doc(uid);
+
+        if (!reference) {
+          reject();
+
+          return;
+        }
+
+        reference.update({
+          lastChangedPassword: firebase.firestore.FieldValue.serverTimestamp()
+        }).then((value) => {
+          resolve(value);
+        }).catch((reason) => {
+          reject(reason);
+        });
       }).catch((reason) => {
         reject(reason);
       });
