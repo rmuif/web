@@ -266,7 +266,7 @@ class SecurityTab extends Component {
               <React.Fragment>
                 <ListItemText
                   primary="Password"
-                  secondary={userData.changedPassword ? `Changed ${moment(userData.changedPassword.toDate()).format('LLLL')}` : ''}
+                  secondary={userData.changedPassword ? `Changed ${moment(userData.changedPassword.toDate()).format('LLLL')}` : 'Never changed'}
                 />
 
                 <ListItemSecondaryAction>
