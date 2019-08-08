@@ -5,6 +5,8 @@ import PropTypes from 'prop-types'
 import validate from 'validate.js';
 import moment from 'moment';
 
+import { withStyles } from '@material-ui/core/styles';
+
 import DialogContent from '@material-ui/core/DialogContent';
 import Box from '@material-ui/core/Box';
 import Typography from '@material-ui/core/Typography';
@@ -38,6 +40,12 @@ const initialState = {
 
   errors: null
 };
+
+const styles = (theme) => ({
+  dialogContent: {
+    paddingTop: theme.spacing(2)
+  }
+});
 
 class SecurityTab extends Component {
   constructor(props) {
@@ -241,6 +249,9 @@ class SecurityTab extends Component {
   };
 
   render() {
+    // Styling
+    const { classes } = this.props;
+
     // Properties
     const { userData } = this.props;
 
@@ -258,7 +269,7 @@ class SecurityTab extends Component {
     } = this.state;
 
     return (
-      <DialogContent>
+      <DialogContent classes={{ root: classes.dialogContent }}>
         <Box textAlign="center">
           <Typography variant="body1">Security Rating</Typography>
 
@@ -355,6 +366,9 @@ class SecurityTab extends Component {
 }
 
 SecurityTab.propTypes = {
+  // Styling
+  classes: PropTypes.object.isRequired,
+
   // Properties
   user: PropTypes.object.isRequired,
   userData: PropTypes.object.isRequired,
@@ -363,4 +377,4 @@ SecurityTab.propTypes = {
   openSnackbar: PropTypes.func.isRequired
 };
 
-export default SecurityTab;
+export default withStyles(styles)(SecurityTab);
