@@ -2,6 +2,9 @@ import React, { Component } from 'react';
 
 import PropTypes from 'prop-types';
 
+import validate from 'validate.js';
+import moment from 'moment';
+
 import { withStyles } from '@material-ui/core/styles';
 
 import DialogContent from '@material-ui/core/DialogContent';
@@ -35,9 +38,6 @@ import WarningIcon from '@material-ui/icons/Warning';
 import CheckIcon from '@material-ui/icons/Check';
 import AccessTimeIcon from '@material-ui/icons/AccessTime';
 import DeleteForeverIcon from '@material-ui/icons/DeleteForever';
-
-import validate from 'validate.js';
-import moment from 'moment';
 
 import constraints from '../../constraints';
 import authentication from '../../authentication';
