@@ -5,7 +5,7 @@
   "dependencies": {
     "@material-ui/core": "^4.3.1",
     "@material-ui/icons": "^4.2.1",
-    "firebase": "^6.3.4",
+    "firebase": "^6.3.5",
     "gh-pages": "^2.1.1",
     "mdi-material-ui": "^6.2.0",
     "moment": "^2.24.0",
