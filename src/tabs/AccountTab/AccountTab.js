@@ -231,7 +231,7 @@ class AccountTab extends Component {
     });
   };
 
-  calculateSecurityRating = () => {
+  calculateSecurityRating = (callback) => {
     const { user, userData } = this.props;
 
     if (!user || !user.metadata || !userData) {
@@ -239,7 +239,6 @@ class AccountTab extends Component {
     }
 
     let creationTime = user.metadata.creationTime;
-    let lastChangedPassword = userData.lastChangedPassword;
 
     if (!creationTime) {
       return;
@@ -247,29 +246,32 @@ class AccountTab extends Component {
 
     creationTime = moment(creationTime);
 
+    let lastChangedPassword = userData.lastChangedPassword;
+    let securityRating = 0;
+
     if (lastChangedPassword) {
       lastChangedPassword = moment(lastChangedPassword.toDate());
 
       if (creationTime.diff(lastChangedPassword, 'days') >= 365.242199) {
-        this.setState({
-          securityRating: 50
-        });
+        securityRating = 50;
       } else {
-        this.setState({
-          securityRating: 100
-        });
+        securityRating = 100;
       }
     } else {
       if (moment().diff(creationTime, 'days') >= 365.242199) {
-        this.setState({
-          securityRating: 50
-        });
+        securityRating = 50;
       } else {
-        this.setState({
-          securityRating: 100
-        });
+        securityRating = 100;
       }
     }
+
+    this.setState({
+      securityRating: securityRating
+    }, () => {
+      if (callback && typeof callback === 'function') {
+        callback();
+      }
+    });
   };
 
   showField = (fieldId) => {
