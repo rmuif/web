@@ -80,7 +80,7 @@ Changing your project’s name can be tedious sometimes as it often involves cha
 
 ### Use your own Git repository
 
-The command `git remote` is another Git command-line utility which is used to manage the set of repositories (”remotes“) whose branches you track. The options `rm origin` is used to remove the remote named `origin`. All remote-tracking branches and configuration settings for the remote are removed.
+The command `git remote` is another Git command-line utility which is used to manage the set of repositories (“remotes”) whose branches you track. The options `rm origin` is used to remove the remote named `origin`. All remote-tracking branches and configuration settings for the remote are removed.
 
 ```
 git remote rm origin
