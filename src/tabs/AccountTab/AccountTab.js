@@ -231,9 +231,46 @@ class AccountTab extends Component {
     });
   };
 
-  calculateSecurityRating = () => {
+  calculateSecurityRating = (callback) => {
+    const { user, userData } = this.props;
+
+    if (!user || !user.metadata || !userData) {
+      return;
+    }
+
+    let creationTime = user.metadata.creationTime;
+
+    if (!creationTime) {
+      return;
+    }
+
+    creationTime = moment(creationTime);
+
+    let lastChangedPassword = userData.lastChangedPassword;
+    let securityRating = 0;
+
+    if (lastChangedPassword) {
+      lastChangedPassword = moment(lastChangedPassword.toDate());
+
+      if (creationTime.diff(lastChangedPassword, 'days') >= 365.242199) {
+        securityRating = 50;
+      } else {
+        securityRating = 100;
+      }
+    } else {
+      if (moment().diff(creationTime, 'days') >= 365.242199) {
+        securityRating = 50;
+      } else {
+        securityRating = 100;
+      }
+    }
+
     this.setState({
-      securityRating: 100
+      securityRating: securityRating
+    }, () => {
+      if (callback && typeof callback === 'function') {
+        callback();
+      }
     });
   };
 
