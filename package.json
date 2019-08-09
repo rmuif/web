@@ -10,7 +10,7 @@
     "mdi-material-ui": "^6.2.0",
     "moment": "^2.24.0",
     "numeral": "^2.0.6",
-    "react": "^16.8.6",
+    "react": "^16.9.0",
     "react-dom": "^16.8.6",
     "react-router-dom": "^5.0.0",
     "react-scripts": "3.0.1",
