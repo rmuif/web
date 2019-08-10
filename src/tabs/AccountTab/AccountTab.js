@@ -1259,10 +1259,19 @@ class AccountTab extends Component {
               </ListItemIcon>
             </Hidden>
 
-            <ListItemText
-              primary="Signed in"
-              secondary={moment(user.metadata.lastSignInTime).format('LLLL')}
-            />
+            <Hidden xsDown>
+              <ListItemText
+                primary="Signed in"
+                secondary={moment(user.metadata.lastSignInTime).format('LLLL')}
+              />
+            </Hidden>
+
+            <Hidden smUp>
+              <ListItemText
+                primary="Signed in"
+                secondary={moment(user.metadata.lastSignInTime).format('llll')}
+              />
+            </Hidden>
           </ListItem>
 
           <ListItem>

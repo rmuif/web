@@ -342,10 +342,19 @@ class SecurityTab extends Component {
 
             {(showingField !== 'password' && showingField !== 'password-confirmation') &&
               <React.Fragment>
-                <ListItemText
-                  primary="Password"
-                  secondary={userData.lastChangedPassword ? `Last changed ${moment(userData.lastChangedPassword.toDate()).format('LLL')}` : 'Never changed'}
-                />
+                <Hidden xsDown>
+                  <ListItemText
+                    primary="Password"
+                    secondary={userData.lastChangedPassword ? `Last changed ${moment(userData.lastChangedPassword.toDate()).format('LL')}` : 'Never changed'}
+                  />
+                </Hidden>
+
+                <Hidden smUp>
+                  <ListItemText
+                    primary="Password"
+                    secondary={userData.lastChangedPassword ? `Last changed ${moment(userData.lastChangedPassword.toDate()).format('ll')}` : 'Never changed'}
+                  />
+                </Hidden>
 
                 <ListItemSecondaryAction>
                   <Tooltip title="Change">
