@@ -132,6 +132,82 @@ const authentication = {
       });
     });
   },
+
+  linkAuthProvider: (providerId) => {
+    return new Promise((resolve, reject) => {
+      if (!providerId) {
+        reject();
+
+        return;
+      }
+
+      const provider = new firebase.auth.OAuthProvider(providerId);
+
+      if (!provider) {
+        reject();
+
+        return;
+      }
+
+      const currentUser = auth.currentUser;
+
+      if (!currentUser) {
+        reject();
+
+        return;
+      }
+
+      currentUser.linkWithPopup(provider).then((value) => {
+        resolve(value);
+      }).catch((reason) => {
+        reject(reason);
+      });
+    });
+  },
+
+  unlinkAuthProvider: (providerId) => {
+    return new Promise((resolve, reject) => {
+      if (!providerId) {
+        reject();
+
+        return;
+      }
+
+      const currentUser = auth.currentUser;
+
+      if (!currentUser) {
+        reject();
+
+        return;
+      }
+
+      currentUser.unlink(providerId).then((value) => {
+        resolve(value);
+      }).catch((reason) => {
+        reject(reason);
+      });
+    });
+  },
+
+  authProviderData: (providerId) => {
+    if (!providerId) {
+      return;
+    }
+
+    const currentUser = auth.currentUser;
+
+    if (!currentUser) {
+      return;
+    }
+
+    const providerData = currentUser.providerData;
+
+    if (!providerData) {
+      return;
+    }
+
+    return providerData.find(authProvider => authProvider.providerId === providerId);
+  },
   
   signOut: () => {
     return new Promise((resolve, reject) => {

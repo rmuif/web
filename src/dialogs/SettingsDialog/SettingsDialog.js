@@ -68,7 +68,7 @@ class SettingsDialog extends Component {
     super(props);
 
     this.state = {
-      selectedTab: 3
+      selectedTab: 2
     };
   }
 
@@ -168,7 +168,9 @@ class SettingsDialog extends Component {
           }
 
           {selectedTab === 2 &&
-            <ConnectionsTab />
+            <ConnectionsTab
+              openSnackbar={openSnackbar}
+            />
           }
 
           {selectedTab === 3 &&
@@ -192,7 +194,9 @@ class SettingsDialog extends Component {
 
             <AppearanceTab />
 
-            <ConnectionsTab />
+            <ConnectionsTab
+              openSnackbar={openSnackbar}
+            />
 
             <SecurityTab
               user={user}
