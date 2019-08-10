@@ -41,7 +41,7 @@ class ConnectionsTab extends Component {
       performingAction: true
     }, () => {
       authentication.linkAuthProvider(authProvider.providerId).then((value) => {
-        this.props.openSnackbar(`Linked ${authProvider.name}`, 5);
+        this.props.openSnackbar(`${authProvider.name} linked`, 5);
       }).catch((reason) => {
         const code = reason.code;
         const message = reason.message;
@@ -64,7 +64,7 @@ class ConnectionsTab extends Component {
       performingAction: true
     }, () => {
       authentication.unlinkAuthProvider(authProvider.providerId).then((value) => {
-        this.props.openSnackbar(`Unlinked ${authProvider.name}`, 4);
+        this.props.openSnackbar(`${authProvider.name} unlinked`, 4);
       }).catch((reason) => {
         const code = reason.code;
         const message = reason.message;
