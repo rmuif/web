@@ -5,11 +5,7 @@ import PropTypes from 'prop-types'
 import validate from 'validate.js';
 import moment from 'moment';
 
-import { withStyles } from '@material-ui/core/styles';
-
 import DialogContent from '@material-ui/core/DialogContent';
-import Box from '@material-ui/core/Box';
-import Typography from '@material-ui/core/Typography';
 
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
@@ -29,8 +25,6 @@ import constraints from '../../constraints';
 import authentication from '../../authentication';
 
 const initialState = {
-  securityRating: 0,
-
   showingField: '',
 
   password: '',
@@ -41,61 +35,12 @@ const initialState = {
   errors: null
 };
 
-const styles = (theme) => ({
-  dialogContent: {
-    paddingTop: theme.spacing(2)
-  }
-});
-
 class SecurityTab extends Component {
   constructor(props) {
     super(props);
 
     this.state = initialState;
   }
-
-  calculateSecurityRating = (callback) => {
-    const { user, userData } = this.props;
-
-    if (!user || !user.metadata || !userData) {
-      return;
-    }
-
-    let creationTime = user.metadata.creationTime;
-
-    if (!creationTime) {
-      return;
-    }
-
-    creationTime = moment(creationTime);
-
-    let lastChangedPassword = userData.lastChangedPassword;
-    let securityRating = 0;
-
-    if (lastChangedPassword) {
-      lastChangedPassword = moment(lastChangedPassword.toDate());
-
-      if (creationTime.diff(lastChangedPassword, 'days') >= 365.242199) {
-        securityRating = 50;
-      } else {
-        securityRating = 100;
-      }
-    } else {
-      if (moment().diff(creationTime, 'days') >= 365.242199) {
-        securityRating = 50;
-      } else {
-        securityRating = 100;
-      }
-    }
-
-    this.setState({
-      securityRating: securityRating
-    }, () => {
-      if (callback && typeof callback === 'function') {
-        callback();
-      }
-    });
-  };
 
   showField = (fieldId) => {
     if (!fieldId) {
@@ -253,15 +198,10 @@ class SecurityTab extends Component {
   };
 
   render() {
-    // Styling
-    const { classes } = this.props;
-
     // Properties
     const { userData } = this.props;
 
     const {
-      securityRating,
-
       showingField,
 
       password,
@@ -273,23 +213,7 @@ class SecurityTab extends Component {
     } = this.state;
 
     return (
-      <DialogContent classes={{ root: classes.dialogContent }}>
-        <Box textAlign="center">
-          <Typography variant="body1">Security Rating</Typography>
-
-          {securityRating === 0 &&
-            <Typography color="error" variant="h5">{securityRating}%</Typography>
-          }
-
-          {securityRating === 100 &&
-            <Typography color="primary" variant="h5">{securityRating}%</Typography>
-          }
-
-          {(securityRating !== 0 && securityRating !== 100) &&
-            <Typography color="secondary" variant="h5">{securityRating}%</Typography>
-          }
-        </Box>
-
+      <DialogContent>
         <List disablePadding>
           <ListItem>
             <Hidden xsDown>
@@ -372,16 +296,9 @@ class SecurityTab extends Component {
       </DialogContent>
     )
   }
-
-  componentDidMount() {
-    this.calculateSecurityRating();
-  }
 }
 
 SecurityTab.propTypes = {
-  // Styling
-  classes: PropTypes.object.isRequired,
-
   // Properties
   user: PropTypes.object.isRequired,
   userData: PropTypes.object.isRequired,
@@ -390,4 +307,4 @@ SecurityTab.propTypes = {
   openSnackbar: PropTypes.func.isRequired
 };
 
-export default withStyles(styles)(SecurityTab);
+export default SecurityTab;
