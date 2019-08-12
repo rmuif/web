@@ -7,6 +7,10 @@
 
 This project is an application skeleton for a typical [React](https://reactjs.org) project. With [Create React App](https://facebook.github.io/create-react-app) at its core, you can use it to bootstrap your projects and development environment with the same tooling. It comes bundled with [Material-UI](https://material-ui.com), [Firebase](https://firebase.google.com), and [React Router](https://reacttraining.com/react-router).
 
+<p align="center">
+  <img src="https://user-images.githubusercontent.com/7033377/62852357-794cf800-bce9-11e9-8e0c-08774c616970.png">
+</p>
+
 ## Features
 
 There’s already a bunch of features included for instant web development gratification.
