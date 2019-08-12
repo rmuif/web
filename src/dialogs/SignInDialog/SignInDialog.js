@@ -40,7 +40,7 @@ const styles = (theme) => ({
 });
 
 const initialState = {
-  isPerformingAuthAction: false,
+  performingAction: false,
 
   emailAddress: '',
   password: '',
@@ -73,7 +73,7 @@ class SignInDialog extends Component {
         errors: null
       }, () => {
         this.setState({
-          isPerformingAuthAction: true
+          performingAction: true
         }, () => {
           authentication.resetPassword(emailAddress).then((value) => {
             this.props.openSnackbar(`Sent password reset e-mail to ${emailAddress}`);
@@ -98,7 +98,7 @@ class SignInDialog extends Component {
             }
           }).finally(() => {
             this.setState({
-              isPerformingAuthAction: false
+              performingAction: false
             });
           });
         });
@@ -123,7 +123,7 @@ class SignInDialog extends Component {
       });
     } else {
       this.setState({
-        isPerformingAuthAction: true,
+        performingAction: true,
 
         errors: null
       }, () => {
@@ -153,7 +153,7 @@ class SignInDialog extends Component {
           }
         }).finally(() => {
           this.setState({
-            isPerformingAuthAction: false
+            performingAction: false
           });
         });
       });
@@ -162,7 +162,7 @@ class SignInDialog extends Component {
 
   signInWithAuthProvider = (providerId) => {
     this.setState({
-      isPerformingAuthAction: true
+      performingAction: true
     }, () => {
       authentication.signInWithAuthProvider(providerId).then((value) => {
         this.props.dialogProps.onClose(() => {
@@ -194,7 +194,7 @@ class SignInDialog extends Component {
         }
       }).finally(() => {
         this.setState({
-          isPerformingAuthAction: false
+          performingAction: false
         });
       });
     });
@@ -246,7 +246,7 @@ class SignInDialog extends Component {
     const { dialogProps } = this.props;
 
     const {
-      isPerformingAuthAction,
+      performingAction,
 
       emailAddress,
       password,
@@ -265,7 +265,7 @@ class SignInDialog extends Component {
             <Grid container direction="row">
               <Grid item xs={4}>
                 <AuthProviderList
-                  isPerformingAuthAction={isPerformingAuthAction}
+                  performingAction={performingAction}
 
                   onAuthProviderClick={this.signInWithAuthProvider}
                 />
@@ -280,7 +280,7 @@ class SignInDialog extends Component {
                   <Grid item xs>
                     <TextField
                       autoComplete="email"
-                      disabled={isPerformingAuthAction}
+                      disabled={performingAction}
                       error={!!(errors && errors.emailAddress)}
                       fullWidth
                       helperText={(errors && errors.emailAddress) ? errors.emailAddress[0] : ''}
@@ -298,7 +298,7 @@ class SignInDialog extends Component {
                   <Grid item xs>
                     <TextField
                       autoComplete="current-password"
-                      disabled={isPerformingAuthAction}
+                      disabled={performingAction}
                       error={!!(errors && errors.password)}
                       fullWidth
                       helperText={(errors && errors.password) ? errors.password[0] : ''}
@@ -320,7 +320,7 @@ class SignInDialog extends Component {
           <Hidden smUp>
             <AuthProviderList
               gutterBottom
-              isPerformingAuthAction={isPerformingAuthAction}
+              performingAction={performingAction}
 
               onAuthProviderClick={this.signInWithAuthProvider}
             />
@@ -329,7 +329,7 @@ class SignInDialog extends Component {
               <Grid item xs>
                 <TextField
                   autoComplete="email"
-                  disabled={isPerformingAuthAction}
+                  disabled={performingAction}
                   error={!!(errors && errors.emailAddress)}
                   fullWidth
                   helperText={(errors && errors.emailAddress) ? errors.emailAddress[0] : ''}
@@ -347,7 +347,7 @@ class SignInDialog extends Component {
               <Grid item xs>
                 <TextField
                   autoComplete="current-password"
-                  disabled={isPerformingAuthAction}
+                  disabled={performingAction}
                   error={!!(errors && errors.password)}
                   fullWidth
                   helperText={(errors && errors.password) ? errors.password[0] : ''}
@@ -370,7 +370,7 @@ class SignInDialog extends Component {
 
           <Button
             color="primary"
-            disabled={!emailAddress || isPerformingAuthAction}
+            disabled={!emailAddress || performingAction}
             variant="outlined"
 
             onClick={this.resetPassword}>
@@ -379,7 +379,7 @@ class SignInDialog extends Component {
 
           <Button
             color="primary"
-            disabled={(!emailAddress || !password) || isPerformingAuthAction}
+            disabled={(!emailAddress || !password) || performingAction}
             variant="contained"
 
             onClick={this.signIn}>

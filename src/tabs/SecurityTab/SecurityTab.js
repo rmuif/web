@@ -36,7 +36,7 @@ const initialState = {
   password: '',
   passwordConfirmation: '',
 
-  isPerformingAuthAction: false,
+  performingAction: false,
 
   errors: null
 };
@@ -180,7 +180,7 @@ class SecurityTab extends Component {
       errors: null
     }, () => {
       this.setState({
-        isPerformingAuthAction: true
+        performingAction: true
       }, () => {
         authentication.changePassword(password).then(() => {
           this.calculateSecurityRating(() => {
@@ -199,7 +199,7 @@ class SecurityTab extends Component {
           }
         }).finally(() => {
           this.setState({
-            isPerformingAuthAction: false
+            performingAction: false
           });
         });
       });
@@ -267,7 +267,7 @@ class SecurityTab extends Component {
       password,
       passwordConfirmation,
 
-      isPerformingAuthAction,
+      performingAction,
 
       errors
     } = this.state;
@@ -302,7 +302,7 @@ class SecurityTab extends Component {
               <TextField
                 autoComplete="new-password"
                 autoFocus
-                disabled={isPerformingAuthAction}
+                disabled={performingAction}
                 error={!!(errors && errors.password)}
                 fullWidth
                 helperText={(errors && errors.password) ? errors.password[0] : 'Press Enter to change your password'}
@@ -323,7 +323,7 @@ class SecurityTab extends Component {
               <TextField
                 autoComplete="new-password"
                 autoFocus
-                disabled={isPerformingAuthAction}
+                disabled={performingAction}
                 error={!!(errors && errors.passwordConfirmation)}
                 fullWidth
                 helperText={(errors && errors.passwordConfirmation) ? errors.passwordConfirmation[0] : 'Press Enter to change your password'}
@@ -359,7 +359,7 @@ class SecurityTab extends Component {
                 <ListItemSecondaryAction>
                   <Tooltip title="Change">
                     <div>
-                      <IconButton disabled={isPerformingAuthAction} onClick={() => this.showField('password')}>
+                      <IconButton disabled={performingAction} onClick={() => this.showField('password')}>
                         <EditIcon />
                       </IconButton>
                     </div>

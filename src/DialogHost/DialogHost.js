@@ -13,7 +13,7 @@ class DialogHost extends Component {
   render() {
     // Properties
     const {
-      isSignedIn,
+      signedIn,
       dialogs
     } = this.props;
 
@@ -25,7 +25,7 @@ class DialogHost extends Component {
     return (
       <React.Fragment>
         <Hidden xsDown>
-          {!isSignedIn &&
+          {!signedIn &&
             <React.Fragment>
               <SignUpDialog
                 dialogProps={signUpDialog.dialogProps}
@@ -43,7 +43,7 @@ class DialogHost extends Component {
         </Hidden>
 
         <Hidden smDown>
-          {isSignedIn &&
+          {signedIn &&
             <SettingsDialog
               dialogProps={settingsDialog.dialogProps}
 
@@ -53,7 +53,7 @@ class DialogHost extends Component {
         </Hidden>
 
         <Hidden smUp>
-          {!isSignedIn &&
+          {!signedIn &&
             <React.Fragment>
               <SignUpDialog
                 dialogProps={{
@@ -79,7 +79,7 @@ class DialogHost extends Component {
         </Hidden>
 
         <Hidden mdUp>
-          {isSignedIn &&
+          {signedIn &&
             <SettingsDialog
               dialogProps={{
                 fullScreen: true,
@@ -92,7 +92,7 @@ class DialogHost extends Component {
           }
         </Hidden>
 
-        {isSignedIn &&
+        {signedIn &&
           <React.Fragment>
             <AlertDialog
               dialogProps={signOutDialog.dialogProps}
@@ -108,7 +108,7 @@ class DialogHost extends Component {
 
 DialogHost.propTypes = {
   // Properties
-  isSignedIn: PropTypes.bool.isRequired,
+  signedIn: PropTypes.bool.isRequired,
   dialogs: PropTypes.object.isRequired
 };
 

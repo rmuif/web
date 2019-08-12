@@ -66,7 +66,7 @@ class Bar extends Component {
     const { classes } = this.props;
 
     // Properties
-    const { title, isPerformingAuthAction, isSignedIn, user } = this.props;
+    const { title, performingAction, signedIn, user } = this.props;
 
     // Events
     const { onSignUpClick, onSignInClick } = this.props;
@@ -78,23 +78,23 @@ class Bar extends Component {
         <Toolbar variant="regular">
           <Typography style={{ flexGrow: 1 }} color="inherit" variant="h6">{title}</Typography>
 
-          {isSignedIn &&
+          {signedIn &&
             <React.Fragment>
-              <IconButton color="inherit" disabled={isPerformingAuthAction} onClick={this.openMenu}>
+              <IconButton color="inherit" disabled={performingAction} onClick={this.openMenu}>
                 {user.photoURL ? <Avatar alt="Avatar" src={user.photoURL} /> : <PersonIcon />}
               </IconButton>
 
               <Menu anchorEl={menu.anchorEl} open={Boolean(menu.anchorEl)} onClose={this.closeMenu}>
-                <MenuItem disabled={isPerformingAuthAction} onClick={this.handleSettingsClick}>Settings</MenuItem>
-                <MenuItem disabled={isPerformingAuthAction} onClick={this.handleSignOutClick}>Sign out</MenuItem>
+                <MenuItem disabled={performingAction} onClick={this.handleSettingsClick}>Settings</MenuItem>
+                <MenuItem disabled={performingAction} onClick={this.handleSignOutClick}>Sign out</MenuItem>
               </Menu>
             </React.Fragment>
           }
 
-          {!isSignedIn &&
+          {!signedIn &&
             <React.Fragment>
-              <Button className={classes.signUpButton} color="secondary" disabled={isPerformingAuthAction} variant="contained" onClick={onSignUpClick}>Sign Up</Button>
-              <Button color="secondary" disabled={isPerformingAuthAction} variant="contained" onClick={onSignInClick}>Sign In</Button>
+              <Button className={classes.signUpButton} color="secondary" disabled={performingAction} variant="contained" onClick={onSignUpClick}>Sign Up</Button>
+              <Button color="secondary" disabled={performingAction} variant="contained" onClick={onSignInClick}>Sign In</Button>
             </React.Fragment>
           }
         </Toolbar>
@@ -109,8 +109,8 @@ Bar.propTypes = {
   
   // Properties
   title: PropTypes.string.isRequired,
-  isPerformingAuthAction: PropTypes.bool.isRequired,
-  isSignedIn: PropTypes.bool.isRequired,
+  performingAction: PropTypes.bool.isRequired,
+  signedIn: PropTypes.bool.isRequired,
 
   // Events
   onSettingsClick: PropTypes.func.isRequired,

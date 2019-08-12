@@ -32,7 +32,7 @@ class AuthProviderList extends Component {
     const { classes } = this.props;
 
     // Properties
-    const { gutterBottom, isPerformingAuthAction } = this.props;
+    const { gutterBottom, performingAction } = this.props;
 
     // Events
     const { onAuthProviderClick } = this.props;
@@ -130,7 +130,7 @@ class AuthProviderList extends Component {
               <MuiThemeProvider theme={authProvider.theme}>
                 <Button
                   color="primary"
-                  disabled={isPerformingAuthAction}
+                  disabled={performingAction}
                   fullWidth
                   variant="contained"
                   onClick={() => onAuthProviderClick(authProvider.providerId)}>
@@ -152,7 +152,7 @@ AuthProviderList.propTypes = {
 
   // Properties
   gutterBottom: PropTypes.bool,
-  isPerformingAuthAction: PropTypes.bool,
+  performingAction: PropTypes.bool,
 
   // Events
   onAuthProviderClick: PropTypes.func.isRequired

@@ -10,12 +10,12 @@ import NotFoundContent from '../content/NotFoundContent/NotFoundContent';
 class Router extends Component {
   render() {
     // Properties
-    const { isSignedIn } = this.props;
+    const { signedIn } = this.props;
 
     return (
       <BrowserRouter>
         <Switch>
-          <Route path="/" exact render={() => (<HomeContent isSignedIn={isSignedIn} />)} />
+          <Route path="/" exact render={() => (<HomeContent signedIn={signedIn} />)} />
           <Route component={NotFoundContent} />
         </Switch>
       </BrowserRouter>
@@ -25,7 +25,7 @@ class Router extends Component {
 
 Router.propTypes = {
   // Properties
-  isSignedIn: PropTypes.bool.isRequired
+  signedIn: PropTypes.bool.isRequired
 };
 
 export default Router;

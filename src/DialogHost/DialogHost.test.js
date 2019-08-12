@@ -10,7 +10,7 @@ it('renders without crashing', () => {
   ReactDOM.render(
     (
       <DialogHost
-        isSignedIn={false}
+        signedIn={false}
         dialogs={{
           signUpDialog: {},
           signInDialog: {},

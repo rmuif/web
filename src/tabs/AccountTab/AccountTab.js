@@ -85,7 +85,7 @@ const initialState = {
   username: '',
   emailAddress: '',
 
-  isPerformingAuthAction: false,
+  performingAction: false,
   hasSentVerificationEmail: false,
 
   errors: null
@@ -129,7 +129,7 @@ class AccountTab extends Component {
     }
 
     this.setState({
-      isPerformingAuthAction: true
+      performingAction: true
     }, () => {
       authentication.changeAvatar(avatar).then((value) => {
         this.calculateProfileCompletion(() => {
@@ -146,7 +146,7 @@ class AccountTab extends Component {
         }
       }).finally(() => {
         this.setState({
-          isPerformingAuthAction: false,
+          performingAction: false,
 
           avatar: null,
           avatarUrl: ''
@@ -174,7 +174,7 @@ class AccountTab extends Component {
       });
     } else if (user.photoURL && !avatar && !avatarUrl) {
       this.setState({
-        isPerformingAuthAction: true
+        performingAction: true
       }, () => {
         authentication.removeAvatar().then((value) => {
           this.calculateProfileCompletion(() => {
@@ -191,7 +191,7 @@ class AccountTab extends Component {
           }
         }).finally(() => {
           this.setState({
-            isPerformingAuthAction: false
+            performingAction: false
           });
         });
       });
@@ -328,7 +328,7 @@ class AccountTab extends Component {
       }
 
       this.setState({
-        isPerformingAuthAction: true
+        performingAction: true
       }, () => {
         authentication.changeFirstName(firstName).then(() => {
           this.calculateProfileCompletion(() => {
@@ -347,7 +347,7 @@ class AccountTab extends Component {
           }
         }).finally(() => {
           this.setState({
-            isPerformingAuthAction: false
+            performingAction: false
           });
         });
       });
@@ -381,7 +381,7 @@ class AccountTab extends Component {
       }
 
       this.setState({
-        isPerformingAuthAction: true
+        performingAction: true
       }, () => {
         authentication.changeLastName(lastName).then(() => {
           this.calculateProfileCompletion(() => {
@@ -400,7 +400,7 @@ class AccountTab extends Component {
           }
         }).finally(() => {
           this.setState({
-            isPerformingAuthAction: false
+            performingAction: false
           });
         });
       });
@@ -434,7 +434,7 @@ class AccountTab extends Component {
       }
 
       this.setState({
-        isPerformingAuthAction: true
+        performingAction: true
       }, () => {
         authentication.changeUsername(username).then(() => {
           this.calculateProfileCompletion(() => {
@@ -453,7 +453,7 @@ class AccountTab extends Component {
           }
         }).finally(() => {
           this.setState({
-            isPerformingAuthAction: false
+            performingAction: false
           });
         });
       });
@@ -487,7 +487,7 @@ class AccountTab extends Component {
       }
 
       this.setState({
-        isPerformingAuthAction: true
+        performingAction: true
       }, () => {
         authentication.changeEmailAddress(emailAddress).then(() => {
           this.calculateProfileCompletion(() => {
@@ -506,7 +506,7 @@ class AccountTab extends Component {
           }
         }).finally(() => {
           this.setState({
-            isPerformingAuthAction: false
+            performingAction: false
           });
         });
       });
@@ -515,7 +515,7 @@ class AccountTab extends Component {
 
   verifyEmailAddress = () => {
     this.setState({
-      isPerformingAuthAction: true
+      performingAction: true
     }, () => {
       authentication.verifyEmailAddress().then(() => {
         this.setState({
@@ -534,7 +534,7 @@ class AccountTab extends Component {
         }
       }).finally(() => {
         this.setState({
-          isPerformingAuthAction: false
+          performingAction: false
         });
       });
     });
@@ -542,7 +542,7 @@ class AccountTab extends Component {
 
   deleteAccount = () => {
     this.setState({
-      isPerformingAuthAction: true
+      performingAction: true
     }, () => {
       authentication.deleteAccount().then(() => {
         this.props.openSnackbar('Deleted account');
@@ -557,7 +557,7 @@ class AccountTab extends Component {
         }
       }).finally(() => {
         this.setState({
-          isPerformingAuthAction: false
+          performingAction: false
         });
       });
     });
@@ -713,7 +713,7 @@ class AccountTab extends Component {
 
       showingField,
 
-      isPerformingAuthAction,
+      performingAction,
 
       avatar,
       avatarUrl,
@@ -738,7 +738,7 @@ class AccountTab extends Component {
                     {(avatar && avatarUrl) &&
                       <Badge classes={{ badge: classes.badge }} badgeContent={
                         <Tooltip title="Remove">
-                          <Fab classes={{ sizeSmall: classes.small }} color="secondary" disabled={isPerformingAuthAction} size="small" onClick={this.removeAvatar}>
+                          <Fab classes={{ sizeSmall: classes.small }} color="secondary" disabled={performingAction} size="small" onClick={this.removeAvatar}>
                             <CloseIcon fontSize="small" />
                           </Fab>
                         </Tooltip>
@@ -752,7 +752,7 @@ class AccountTab extends Component {
                         {user.photoURL &&
                           <Badge classes={{ badge: classes.badge }} badgeContent={
                             <Tooltip title="Remove">
-                              <Fab classes={{ sizeSmall: classes.small }} color="secondary" disabled={isPerformingAuthAction} size="small" onClick={this.removeAvatar}>
+                              <Fab classes={{ sizeSmall: classes.small }} color="secondary" disabled={performingAction} size="small" onClick={this.removeAvatar}>
                                 <CloseIcon fontSize="small" />
                               </Fab>
                             </Tooltip>
@@ -771,7 +771,7 @@ class AccountTab extends Component {
                   </Box>
 
                   {(avatar && avatarUrl) &&
-                    <Button color="primary" disabled={isPerformingAuthAction} variant="contained" onClick={this.uploadAvatar}>
+                    <Button color="primary" disabled={performingAction} variant="contained" onClick={this.uploadAvatar}>
                       <CloudUploadIcon className={classes.buttonIcon} />
                       Upload
                     </Button>
@@ -789,7 +789,7 @@ class AccountTab extends Component {
                       />
 
                       <label htmlFor="avatar-input">
-                        <Button color="primary" component="span" disabled={isPerformingAuthAction} variant="contained">
+                        <Button color="primary" component="span" disabled={performingAction} variant="contained">
                           <PhotoIcon className={classes.buttonIcon} />
                           Choose...
                         </Button>
@@ -843,7 +843,7 @@ class AccountTab extends Component {
                 {(avatar && avatarUrl) &&
                   <Badge classes={{ badge: classes.badge }} badgeContent={
                     <Tooltip title="Remove">
-                      <Fab classes={{ sizeSmall: classes.small }} color="secondary" disabled={isPerformingAuthAction} size="small" onClick={this.removeAvatar}>
+                      <Fab classes={{ sizeSmall: classes.small }} color="secondary" disabled={performingAction} size="small" onClick={this.removeAvatar}>
                         <CloseIcon fontSize="small" />
                       </Fab>
                     </Tooltip>
@@ -857,7 +857,7 @@ class AccountTab extends Component {
                     {user.photoURL &&
                       <Badge classes={{ badge: classes.badge }} badgeContent={
                         <Tooltip title="Remove">
-                          <Fab classes={{ sizeSmall: classes.small }} color="secondary" disabled={isPerformingAuthAction} size="small" onClick={this.removeAvatar}>
+                          <Fab classes={{ sizeSmall: classes.small }} color="secondary" disabled={performingAction} size="small" onClick={this.removeAvatar}>
                             <CloseIcon fontSize="small" />
                           </Fab>
                         </Tooltip>
@@ -876,7 +876,7 @@ class AccountTab extends Component {
               </Box>
 
               {(avatar && avatarUrl) &&
-                <Button color="primary" disabled={isPerformingAuthAction} variant="contained" onClick={this.uploadAvatar}>
+                <Button color="primary" disabled={performingAction} variant="contained" onClick={this.uploadAvatar}>
                   <CloudUploadIcon className={classes.buttonIcon} />
                   Upload
                 </Button>
@@ -894,7 +894,7 @@ class AccountTab extends Component {
                   />
 
                   <label htmlFor="avatar-input">
-                    <Button color="primary" component="span" disabled={isPerformingAuthAction} variant="contained">
+                    <Button color="primary" component="span" disabled={performingAction} variant="contained">
                       <PhotoIcon className={classes.buttonIcon} />
                       Choose...
                     </Button>
@@ -963,7 +963,7 @@ class AccountTab extends Component {
               <TextField
                 autoComplete="given-name"
                 autoFocus
-                disabled={isPerformingAuthAction}
+                disabled={performingAction}
                 error={!!(errors && errors.firstName)}
                 fullWidth
                 helperText={(errors && errors.firstName) ? errors.firstName[0] : 'Press Enter to change your first name'}
@@ -992,7 +992,7 @@ class AccountTab extends Component {
                   {userData.firstName &&
                     <Tooltip title="Change">
                       <div>
-                        <IconButton disabled={isPerformingAuthAction} onClick={() => this.showField('first-name')}>
+                        <IconButton disabled={performingAction} onClick={() => this.showField('first-name')}>
                           <EditIcon />
                         </IconButton>
                       </div>
@@ -1002,7 +1002,7 @@ class AccountTab extends Component {
                   {!userData.firstName &&
                     <Button
                       color="primary"
-                      disabled={isPerformingAuthAction}
+                      disabled={performingAction}
                       variant="contained"
                       onClick={() => this.showField('first-name')}>
                       Add
@@ -1032,7 +1032,7 @@ class AccountTab extends Component {
               <TextField
                 autoComplete="family-name"
                 autoFocus
-                disabled={isPerformingAuthAction}
+                disabled={performingAction}
                 error={!!(errors && errors.lastName)}
                 fullWidth
                 helperText={(errors && errors.lastName) ? errors.lastName[0] : 'Press Enter to change your last name'}
@@ -1061,7 +1061,7 @@ class AccountTab extends Component {
                   {userData.lastName &&
                     <Tooltip title="Change">
                       <div>
-                        <IconButton disabled={isPerformingAuthAction} onClick={() => this.showField('last-name')}>
+                        <IconButton disabled={performingAction} onClick={() => this.showField('last-name')}>
                           <EditIcon />
                         </IconButton>
                       </div>
@@ -1071,7 +1071,7 @@ class AccountTab extends Component {
                   {!userData.lastName &&
                     <Button
                       color="primary"
-                      disabled={isPerformingAuthAction}
+                      disabled={performingAction}
                       variant="contained"
                       onClick={() => this.showField('last-name')}>
                       Add
@@ -1101,7 +1101,7 @@ class AccountTab extends Component {
               <TextField
                 autoComplete="username"
                 autoFocus
-                disabled={isPerformingAuthAction}
+                disabled={performingAction}
                 error={!!(errors && errors.username)}
                 fullWidth
                 helperText={(errors && errors.username) ? errors.username[0] : 'Press Enter to change your username'}
@@ -1130,7 +1130,7 @@ class AccountTab extends Component {
                   {userData.username &&
                     <Tooltip title="Change">
                       <div>
-                        <IconButton disabled={isPerformingAuthAction} onClick={() => this.showField('username')}>
+                        <IconButton disabled={performingAction} onClick={() => this.showField('username')}>
                           <EditIcon />
                         </IconButton>
                       </div>
@@ -1140,7 +1140,7 @@ class AccountTab extends Component {
                   {!userData.username &&
                     <Button
                       color="primary"
-                      disabled={isPerformingAuthAction}
+                      disabled={performingAction}
                       variant="contained"
                       onClick={() => this.showField('username')}>
                       Add
@@ -1188,7 +1188,7 @@ class AccountTab extends Component {
               <TextField
                 autoComplete="email"
                 autoFocus
-                disabled={isPerformingAuthAction}
+                disabled={performingAction}
                 error={!!(errors && errors.emailAddress)}
                 fullWidth
                 helperText={(errors && errors.emailAddress) ? errors.emailAddress[0] : 'Press Enter to change your e-mail address'}
@@ -1218,7 +1218,7 @@ class AccountTab extends Component {
                     <ListItemSecondaryAction>
                       <Tooltip title="Verify">
                         <div>
-                          <IconButton color="secondary" disabled={isPerformingAuthAction || hasSentVerificationEmail} onClick={this.verifyEmailAddress}>
+                          <IconButton color="secondary" disabled={performingAction || hasSentVerificationEmail} onClick={this.verifyEmailAddress}>
                             <CheckIcon />
                           </IconButton>
                         </div>
@@ -1231,7 +1231,7 @@ class AccountTab extends Component {
                   {user.email &&
                     <Tooltip title="Change">
                       <div>
-                        <IconButton disabled={isPerformingAuthAction} onClick={() => this.showField('email-address')}>
+                        <IconButton disabled={performingAction} onClick={() => this.showField('email-address')}>
                           <EditIcon />
                         </IconButton>
                       </div>
@@ -1241,7 +1241,7 @@ class AccountTab extends Component {
                   {!user.email &&
                     <Button
                       color="primary"
-                      disabled={isPerformingAuthAction}
+                      disabled={performingAction}
                       variant="contained"
                       onClick={() => this.showField('email-address')}>
                       Add
@@ -1287,7 +1287,7 @@ class AccountTab extends Component {
             />
 
             <ListItemSecondaryAction>
-              <Button color="secondary" disabled={isPerformingAuthAction} variant="contained" onClick={this.deleteAccount}>Delete</Button>
+              <Button color="secondary" disabled={performingAction} variant="contained" onClick={this.deleteAccount}>Delete</Button>
             </ListItemSecondaryAction>
           </ListItem>
         </List>

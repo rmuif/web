@@ -44,7 +44,7 @@ const styles = (theme) => ({
 });
 
 const initialState = {
-  isPerformingAuthAction: false,
+  performingAction: false,
 
   firstName: '',
   lastName: '',
@@ -99,7 +99,7 @@ class SignUpDialog extends Component {
       });
     } else {
       this.setState({
-        isPerformingAuthAction: true,
+        performingAction: true,
 
         errors: null
       }, () => {
@@ -129,7 +129,7 @@ class SignUpDialog extends Component {
           }
         }).finally(() => {
           this.setState({
-            isPerformingAuthAction: false
+            performingAction: false
           });
         });
       });
@@ -138,7 +138,7 @@ class SignUpDialog extends Component {
 
   signInWithAuthProvider = (providerId) => {
     this.setState({
-      isPerformingAuthAction: true
+      performingAction: true
     }, () => {
       authentication.signInWithAuthProvider(providerId).then((value) => {
         this.props.dialogProps.onClose(() => {
@@ -170,7 +170,7 @@ class SignUpDialog extends Component {
         }
       }).finally(() => {
         this.setState({
-          isPerformingAuthAction: false
+          performingAction: false
         });
       });
     });
@@ -276,7 +276,7 @@ class SignUpDialog extends Component {
     const { dialogProps } = this.props;
 
     const {
-      isPerformingAuthAction,
+      performingAction,
 
       firstName,
       lastName,
@@ -300,7 +300,7 @@ class SignUpDialog extends Component {
             <Grid container direction="row">
               <Grid item xs={3}>
                 <AuthProviderList
-                  isPerformingAuthAction={isPerformingAuthAction}
+                  performingAction={performingAction}
 
                   onAuthProviderClick={this.signInWithAuthProvider}
                 />
@@ -315,7 +315,7 @@ class SignUpDialog extends Component {
                   <Grid item xs>
                     <TextField
                       autoComplete="given-name"
-                      disabled={isPerformingAuthAction}
+                      disabled={performingAction}
                       error={!!(errors && errors.firstName)}
                       fullWidth
                       helperText={(errors && errors.firstName) ? errors.firstName[0] : ''}
@@ -333,7 +333,7 @@ class SignUpDialog extends Component {
                   <Grid item xs>
                     <TextField
                       autoComplete="family-name"
-                      disabled={isPerformingAuthAction}
+                      disabled={performingAction}
                       error={!!(errors && errors.lastName)}
                       fullWidth
                       helperText={(errors && errors.lastName) ? errors.lastName[0] : ''}
@@ -353,7 +353,7 @@ class SignUpDialog extends Component {
                   <Grid item xs>
                     <TextField
                       autoComplete="username"
-                      disabled={isPerformingAuthAction}
+                      disabled={performingAction}
                       error={!!(errors && errors.username)}
                       fullWidth
                       helperText={(errors && errors.username) ? errors.username[0] : ''}
@@ -373,7 +373,7 @@ class SignUpDialog extends Component {
                   <Grid item xs>
                     <TextField
                       autoComplete="email"
-                      disabled={isPerformingAuthAction}
+                      disabled={performingAction}
                       error={!!(errors && errors.emailAddress)}
                       fullWidth
                       helperText={(errors && errors.emailAddress) ? errors.emailAddress[0] : ''}
@@ -391,7 +391,7 @@ class SignUpDialog extends Component {
                   <Grid item xs>
                     <TextField
                       autoComplete="email"
-                      disabled={isPerformingAuthAction}
+                      disabled={performingAction}
                       error={!!(errors && errors.emailAddressConfirmation)}
                       fullWidth
                       helperText={(errors && errors.emailAddressConfirmation) ? errors.emailAddressConfirmation[0] : ''}
@@ -411,7 +411,7 @@ class SignUpDialog extends Component {
                   <Grid item xs>
                     <TextField
                       autoComplete="new-password"
-                      disabled={isPerformingAuthAction}
+                      disabled={performingAction}
                       error={!!(errors && errors.password)}
                       fullWidth
                       helperText={(errors && errors.password) ? errors.password[0] : ''}
@@ -429,7 +429,7 @@ class SignUpDialog extends Component {
                   <Grid item xs>
                     <TextField
                       autoComplete="password"
-                      disabled={isPerformingAuthAction}
+                      disabled={performingAction}
                       error={!!(errors && errors.passwordConfirmation)}
                       fullWidth
                       helperText={(errors && errors.passwordConfirmation) ? errors.passwordConfirmation[0] : ''}
@@ -451,7 +451,7 @@ class SignUpDialog extends Component {
           <Hidden mdUp>
             <AuthProviderList
               gutterBottom
-              isPerformingAuthAction={isPerformingAuthAction}
+              performingAction={performingAction}
 
               onAuthProviderClick={this.signInWithAuthProvider}
             />
@@ -460,7 +460,7 @@ class SignUpDialog extends Component {
               <Grid item xs>
                 <TextField
                   autoComplete="given-name"
-                  disabled={isPerformingAuthAction}
+                  disabled={performingAction}
                   error={!!(errors && errors.firstName)}
                   fullWidth
                   helperText={(errors && errors.firstName) ? errors.firstName[0] : ''}
@@ -478,7 +478,7 @@ class SignUpDialog extends Component {
               <Grid item xs>
                 <TextField
                   autoComplete="family-name"
-                  disabled={isPerformingAuthAction}
+                  disabled={performingAction}
                   error={!!(errors && errors.lastName)}
                   fullWidth
                   helperText={(errors && errors.lastName) ? errors.lastName[0] : ''}
@@ -496,7 +496,7 @@ class SignUpDialog extends Component {
               <Grid item xs>
                 <TextField
                   autoComplete="username"
-                  disabled={isPerformingAuthAction}
+                  disabled={performingAction}
                   error={!!(errors && errors.username)}
                   fullWidth
                   helperText={(errors && errors.username) ? errors.username[0] : ''}
@@ -514,7 +514,7 @@ class SignUpDialog extends Component {
               <Grid item xs>
                 <TextField
                   autoComplete="email"
-                  disabled={isPerformingAuthAction}
+                  disabled={performingAction}
                   error={!!(errors && errors.emailAddress)}
                   fullWidth
                   helperText={(errors && errors.emailAddress) ? errors.emailAddress[0] : ''}
@@ -532,7 +532,7 @@ class SignUpDialog extends Component {
               <Grid item xs>
                 <TextField
                   autoComplete="email"
-                  disabled={isPerformingAuthAction}
+                  disabled={performingAction}
                   error={!!(errors && errors.emailAddressConfirmation)}
                   fullWidth
                   helperText={(errors && errors.emailAddressConfirmation) ? errors.emailAddressConfirmation[0] : ''}
@@ -550,7 +550,7 @@ class SignUpDialog extends Component {
               <Grid item xs>
                 <TextField
                   autoComplete="new-password"
-                  disabled={isPerformingAuthAction}
+                  disabled={performingAction}
                   error={!!(errors && errors.password)}
                   fullWidth
                   helperText={(errors && errors.password) ? errors.password[0] : ''}
@@ -568,7 +568,7 @@ class SignUpDialog extends Component {
               <Grid item xs>
                 <TextField
                   autoComplete="password"
-                  disabled={isPerformingAuthAction}
+                  disabled={performingAction}
                   error={!!(errors && errors.passwordConfirmation)}
                   fullWidth
                   helperText={(errors && errors.passwordConfirmation) ? errors.passwordConfirmation[0] : ''}
@@ -599,7 +599,7 @@ class SignUpDialog extends Component {
               !emailAddressConfirmation ||
               !password ||
               !passwordConfirmation ||
-              isPerformingAuthAction
+              performingAction
             }
             variant="contained"
 

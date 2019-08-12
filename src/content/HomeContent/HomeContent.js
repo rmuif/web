@@ -37,9 +37,9 @@ class HomeContent extends Component {
     const { classes } = this.props;
 
     // Properties
-    const { isSignedIn } = this.props;
+    const { signedIn } = this.props;
 
-    if (isSignedIn) {
+    if (signedIn) {
       return (
         <EmptyState
           icon={<HomeIcon className={classes.emptyStateIcon} color="action" />}
@@ -75,7 +75,7 @@ HomeContent.propTypes = {
   classes: PropTypes.object.isRequired,
 
   // Properties
-  isSignedIn: PropTypes.bool.isRequired
+  signedIn: PropTypes.bool.isRequired
 };
 
 export default withStyles(styles)(HomeContent);

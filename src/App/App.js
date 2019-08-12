@@ -35,9 +35,9 @@ class App extends Component {
     super(props);
 
     this.state = {
-      isAuthReady: false,
-      isPerformingAuthAction: false,
-      isSignedIn: false,
+      authReady: false,
+      performingAction: false,
+      signedIn: false,
 
       user: null,
       userData: null,
@@ -136,7 +136,7 @@ class App extends Component {
 
   signOut = () => {
     this.setState({
-      isPerformingAuthAction: true
+      performingAction: true
     }, () => {
       authentication.signOut().then(() => {
         this.closeDialog('signOutDialog', () => {
@@ -153,7 +153,7 @@ class App extends Component {
         }
       }).finally(() => {
         this.setState({
-          isPerformingAuthAction: false
+          performingAction: false
         });
       });
     });
@@ -186,9 +186,9 @@ class App extends Component {
 
   render() {
     const {
-      isAuthReady,
-      isPerformingAuthAction,
-      isSignedIn,
+      authReady,
+      performingAction,
+      signedIn,
       user,
       userData
     } = this.state;
@@ -205,17 +205,17 @@ class App extends Component {
     return (
       <MuiThemeProvider theme={theme}>
         <div style={{ minHeight: '100vh', backgroundColor: theme.palette.type === 'dark' ? '#303030' : '#fafafa' }}>
-          {!isAuthReady &&
+          {!authReady &&
             <LaunchScreen />
           }
 
-          {isAuthReady &&
+          {authReady &&
             <React.Fragment>
               <Bar
                 title={settings.title}
 
-                isSignedIn={isSignedIn}
-                isPerformingAuthAction={isPerformingAuthAction}
+                signedIn={signedIn}
+                performingAction={performingAction}
 
                 user={user}
 
@@ -226,10 +226,10 @@ class App extends Component {
                 onSignOutClick={() => this.openDialog('signOutDialog')}
               />
 
-              <Router isSignedIn={isSignedIn} />
+              <Router signedIn={signedIn} />
 
               <DialogHost
-                isSignedIn={isSignedIn}
+                signedIn={signedIn}
                 dialogs={
                   {
                     signUpDialog: {
@@ -246,7 +246,7 @@ class App extends Component {
                       },
 
                       props: {
-                        isPerformingAuthAction: isPerformingAuthAction,
+                        performingAction: performingAction,
 
                         openSnackbar: this.openSnackbar
                       }
@@ -266,7 +266,7 @@ class App extends Component {
                       },
 
                       props: {
-                        isPerformingAuthAction: isPerformingAuthAction,
+                        performingAction: performingAction,
 
                         openSnackbar: this.openSnackbar
                       }
@@ -299,7 +299,7 @@ class App extends Component {
                         title: 'Sign out?',
                         contentText: 'While signed out you are unable to manage your profile and conduct other activities that require you to be signed in.',
                         dismissiveAction: <Button color="primary" onClick={() => this.closeDialog('signOutDialog')}>Cancel</Button>,
-                        confirmingAction: <Button color="primary" disabled={isPerformingAuthAction} variant="contained" onClick={this.signOut}>Sign Out</Button>
+                        confirmingAction: <Button color="primary" disabled={performingAction} variant="contained" onClick={this.signOut}>Sign Out</Button>
                       }
                     }
                   }
@@ -342,8 +342,8 @@ class App extends Component {
             }
 
             this.setState({
-              isAuthReady: true,
-              isSignedIn: true,
+              authReady: true,
+              signedIn: true,
               user: user,
               userData: data
             });
@@ -363,8 +363,8 @@ class App extends Component {
           }
 
           this.setState({
-            isAuthReady: true,
-            isSignedIn: false,
+            authReady: true,
+            signedIn: false,
             user: null,
             userData: null
           }, () => {

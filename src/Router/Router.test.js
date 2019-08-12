@@ -10,7 +10,7 @@ it('renders without crashing', () => {
   ReactDOM.render(
     (
       <Router
-        isSignedIn={false}
+        signedIn={false}
       />
     ),
     div
