@@ -273,6 +273,10 @@ class App extends Component {
 
           signedIn: false,
           ready: true
+        }, () => {
+          if (theme.currentTheme !== theme.defaultTheme) {
+            theme.resetTheme();
+          }
         });
 
         return;
@@ -290,6 +294,10 @@ class App extends Component {
 
           signedIn: false,
           ready: true
+        }, () => {
+          if (theme.currentTheme !== theme.defaultTheme) {
+            theme.resetTheme();
+          }
         });
 
         return;
@@ -307,6 +315,10 @@ class App extends Component {
 
           signedIn: false,
           ready: true
+        }, () => {
+          if (theme.currentTheme !== theme.defaultTheme) {
+            theme.resetTheme();
+          }
         });
 
         return;
@@ -323,6 +335,10 @@ class App extends Component {
 
             signedIn: false,
             ready: true
+          }, () => {
+            if (theme.currentTheme !== theme.defaultTheme) {
+              theme.resetTheme();
+            }
           });
 
           return;
@@ -340,9 +356,19 @@ class App extends Component {
 
             signedIn: false,
             ready: true
+          }, () => {
+            if (theme.currentTheme !== theme.defaultTheme) {
+              theme.resetTheme();
+            }
           });
 
           return;
+        }
+
+        if (data.theme) {
+          theme.changeTheme(data.theme);
+        } else if (theme.currentTheme !== theme.defaultTheme) {
+          theme.resetTheme();
         }
 
         this.setState({
@@ -365,6 +391,10 @@ class App extends Component {
           signedIn: false,
           ready: true
         }, () => {
+          if (theme.currentTheme !== theme.defaultTheme) {
+            theme.resetTheme();
+          }
+          
           const code = error.code;
           const message = error.message;
 
