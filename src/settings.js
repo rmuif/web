@@ -1,11 +1,9 @@
-import colors from './colors';
-
 const settings = {
   title: 'React + Material-UI + Firebase',
 
   theme: {
-    primaryColor: colors.deepPurple,
-    secondaryColor: colors.pink,
+    primaryColor: 'deep-purple',
+    secondaryColor: 'pink',
     dark: false
   },
 

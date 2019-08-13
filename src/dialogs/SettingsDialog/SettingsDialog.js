@@ -68,7 +68,7 @@ class SettingsDialog extends Component {
     super(props);
 
     this.state = {
-      selectedTab: 2
+      selectedTab: 1
     };
   }
 
@@ -93,8 +93,7 @@ class SettingsDialog extends Component {
 
     // Custom Properties
     const {
-      user,
-      userData
+      user
     } = this.props;
 
     // Custom Functions
@@ -157,7 +156,6 @@ class SettingsDialog extends Component {
           {selectedTab === 0 &&
             <AccountTab
               user={user}
-              userData={userData}
 
               openSnackbar={openSnackbar}
             />
@@ -176,7 +174,6 @@ class SettingsDialog extends Component {
           {selectedTab === 3 &&
             <SecurityTab
               user={user}
-              userData={userData}
 
               openSnackbar={openSnackbar}
             />
@@ -187,7 +184,6 @@ class SettingsDialog extends Component {
           <SwipeableViews index={selectedTab} onChangeIndex={this.handleIndexChange}>
             <AccountTab
               user={user}
-              userData={userData}
 
               openSnackbar={openSnackbar}
             />
@@ -200,7 +196,6 @@ class SettingsDialog extends Component {
 
             <SecurityTab
               user={user}
-              userData={userData}
 
               openSnackbar={openSnackbar}
             />
@@ -220,7 +215,6 @@ SettingsDialog.propTypes = {
 
   // Custom Properties
   user: PropTypes.object.isRequired,
-  userData: PropTypes.object.isRequired,
 
   // Custom Functions
   openSnackbar: PropTypes.func.isRequired

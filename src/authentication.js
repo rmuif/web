@@ -92,7 +92,7 @@ const authentication = {
   
         return;
       }
-  
+
       auth.signInWithEmailAndPassword(emailAddress, password).then((value) => {
         resolve(value);
       }).catch((reason) => {

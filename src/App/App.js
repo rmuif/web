@@ -1,17 +1,16 @@
 import React, { Component } from 'react';
 
-import _ from 'lodash';
 import readingTime from 'reading-time';
 
-import { createMuiTheme, MuiThemeProvider } from '@material-ui/core/styles';
+import { MuiThemeProvider } from '@material-ui/core/styles';
 
 import Button from '@material-ui/core/Button';
 import Snackbar from '@material-ui/core/Snackbar';
 
-import firebase from '../firebase';
+import { auth, firestore } from '../firebase';
 import settings from '../settings';
-import colors from '../colors';
 import authentication from '../authentication';
+import theme from '../theme';
 
 import LaunchScreen from '../layout/LaunchScreen/LaunchScreen';
 
@@ -20,30 +19,16 @@ import Bar from '../layout/Bar/Bar';
 import Router from '../Router/Router';
 import DialogHost from '../DialogHost/DialogHost';
 
-let theme = createMuiTheme({
-  palette: {
-    primary: settings.theme.primaryColor.import,
-    secondary: settings.theme.secondaryColor.import,
-    type: settings.theme.dark ? 'dark' : 'light'
-  }
-});
-
 class App extends Component {
-  _isMounted = false;
-
   constructor(props) {
     super(props);
 
     this.state = {
-      authReady: false,
-      performingAction: false,
-      signedIn: false,
-
       user: null,
-      userData: null,
-      avatar: '',
-      displayName: '',
-      emailAddress: '',
+
+      signedIn: false,
+      ready: false,
+      performingAction: false,
 
       signUpDialog: {
         open: false
@@ -54,7 +39,7 @@ class App extends Component {
       },
 
       settingsDialog: {
-        open: false
+        open: true
       },
 
       signOutDialog: {
@@ -68,43 +53,6 @@ class App extends Component {
       }
     };
   }
-
-  changeTheme = (primaryColor, secondaryColor, dark) => {
-    if (!primaryColor || !secondaryColor) {
-      return;
-    }
-
-    primaryColor = _.camelCase(primaryColor);
-    secondaryColor = _.camelCase(secondaryColor);
-
-    const primary = colors[primaryColor].import;
-    const secondary = colors[secondaryColor].import;
-    const type = dark ? 'dark' : 'light';
-
-    if (!primary || !secondary || !type) {
-      return;
-    }
-
-    const palette = {
-      primary: primary,
-      secondary: secondary,
-      type: type
-    };
-
-    theme = createMuiTheme({
-      palette: palette
-    });
-  };
-
-  resetTheme = () => {
-    theme = createMuiTheme({
-      palette: {
-        primary: settings.theme.primaryColor.import,
-        secondary: settings.theme.secondaryColor.import,
-        type: settings.theme.dark ? 'dark' : 'light'
-      }
-    });
-  };
 
   openDialog = (dialogKey, callback) => {
     // Retrieve the dialog with the specified key
@@ -186,11 +134,10 @@ class App extends Component {
 
   render() {
     const {
-      authReady,
+      ready,
       performingAction,
       signedIn,
-      user,
-      userData
+      user
     } = this.state;
 
     const {
@@ -203,13 +150,13 @@ class App extends Component {
     const { snackbar } = this.state;
 
     return (
-      <MuiThemeProvider theme={theme}>
-        <div style={{ minHeight: '100vh', backgroundColor: theme.palette.type === 'dark' ? '#303030' : '#fafafa' }}>
-          {!authReady &&
+      <MuiThemeProvider theme={theme.defaultTheme}>
+        <div style={{ minHeight: '100vh', backgroundColor: theme.currentTheme.palette.type === 'dark' ? '#303030' : '#fafafa' }}>
+          {!ready &&
             <LaunchScreen />
           }
 
-          {authReady &&
+          {ready &&
             <React.Fragment>
               <Bar
                 title={settings.title}
@@ -282,7 +229,6 @@ class App extends Component {
 
                       props: {
                         user: user,
-                        userData: userData,
 
                         openSnackbar: this.openSnackbar
                       }
@@ -320,75 +266,96 @@ class App extends Component {
   }
 
   componentDidMount() {
-    this._isMounted = true;
+    auth.onAuthStateChanged((user) => {
+      if (!user) {
+        this.setState({
+          user: null,
 
-    this.removeAuthObserver = firebase.auth().onAuthStateChanged((user) => {
-      if (this._isMounted) {
-        if (user) {
-          const uid = user.uid;
+          signedIn: false,
+          ready: true
+        });
 
-          this.removeUserObserver = firebase.firestore().collection('users').doc(uid).onSnapshot((documentSnapshot) => {
-            const data = documentSnapshot.data();
-            const theme = data.theme;
-
-            if (theme) {
-              const primaryColor = theme.primaryColor;
-              const secondaryColor = theme.secondaryColor;
-              const dark = theme.dark;
-  
-              this.changeTheme(primaryColor, secondaryColor, dark);
-            } else {
-              this.resetTheme();
-            }
-
-            this.setState({
-              authReady: true,
-              signedIn: true,
-              user: user,
-              userData: data
-            });
-          }, (error) => {
-            const code = error.code;
-            const message = error.message;
-    
-            switch (code) {
-              default:
-                this.openSnackbar(message);
-                return;
-            }
-          });
-        } else {
-          if (this.removeUserObserver) {
-            this.removeUserObserver();
-          }
-
-          this.setState({
-            authReady: true,
-            signedIn: false,
-            user: null,
-            userData: null
-          }, () => {
-            theme = createMuiTheme({
-              palette: {
-                primary: settings.theme.primaryColor.import,
-                secondary: settings.theme.secondaryColor.import,
-                type: settings.theme.dark ? 'dark' : 'light'
-              }
-            });
-          });
-        }
+        return;
       }
+
+      const uid = user.uid;
+
+      if (!uid) {
+        this.setState({
+          user: null,
+
+          signedIn: false,
+          ready: true
+        });
+
+        return;
+      }
+
+      const reference = firestore.collection('users').doc(uid);
+
+      if (!reference) {
+        this.setState({
+          user: null,
+
+          signedIn: false,
+          ready: true
+        });
+
+        return;
+      }
+
+      reference.onSnapshot((snapshot) => {
+        if (!snapshot.exists) {
+          this.setState({
+            user: null,
+
+            signedIn: false,
+            ready: true
+          });
+
+          return;
+        }
+
+        const data = snapshot.data();
+
+        if (!data) {
+          this.setState({
+            user: null,
+
+            signedIn: false,
+            ready: true
+          });
+
+          return;
+        }
+
+        this.setState({
+          user: {
+            ...user,
+            ...data
+          },
+
+          signedIn: true,
+          ready: true
+        });
+      }, (error) => {
+        this.setState({
+          user: null,
+
+          signedIn: false,
+          ready: true
+        }, () => {
+          const code = error.code;
+          const message = error.message;
+
+          switch (code) {
+            default:
+              this.openSnackbar(message);
+              return;
+          }
+        });
+      });
     });
-  }
-
-  componentWillUnmount() {
-    this._isMounted = false;
-
-    this.removeAuthObserver();
-
-    if (this.removeUserObserver) {
-      this.removeUserObserver();
-    }
   }
 }
 
