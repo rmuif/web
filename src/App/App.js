@@ -39,7 +39,7 @@ class App extends Component {
       },
 
       settingsDialog: {
-        open: true
+        open: false
       },
 
       signOutDialog: {
@@ -55,10 +55,8 @@ class App extends Component {
   }
 
   openDialog = (dialogKey, callback) => {
-    // Retrieve the dialog with the specified key
     const dialog = this.state[dialogKey];
 
-    // Make sure the dialog exists and is valid
     if (!dialog || dialog.open === undefined || null) {
       return;
     }
@@ -69,10 +67,8 @@ class App extends Component {
   };
 
   closeDialog = (dialogKey, callback) => {
-    // Retrieve the dialog with the specified key
     const dialog = this.state[dialogKey];
 
-    // Make sure the dialog exists and is valid
     if (!dialog || dialog.open === undefined || null) {
       return;
     }
@@ -150,7 +146,7 @@ class App extends Component {
     const { snackbar } = this.state;
 
     return (
-      <MuiThemeProvider theme={theme.defaultTheme}>
+      <MuiThemeProvider theme={theme.currentTheme}>
         <div style={{ minHeight: '100vh', backgroundColor: theme.currentTheme.palette.type === 'dark' ? '#303030' : '#fafafa' }}>
           {!ready &&
             <LaunchScreen />
@@ -266,8 +262,12 @@ class App extends Component {
   }
 
   componentDidMount() {
-    auth.onAuthStateChanged((user) => {
+    this.removeAuthStateChangedObserver = auth.onAuthStateChanged((user) => {
       if (!user) {
+        if (this.removeReferenceListener) {
+          this.removeReferenceListener();
+        }
+
         this.setState({
           user: null,
 
@@ -281,6 +281,10 @@ class App extends Component {
       const uid = user.uid;
 
       if (!uid) {
+        if (this.removeReferenceListener) {
+          this.removeReferenceListener();
+        }
+
         this.setState({
           user: null,
 
@@ -294,6 +298,10 @@ class App extends Component {
       const reference = firestore.collection('users').doc(uid);
 
       if (!reference) {
+        if (this.removeReferenceListener) {
+          this.removeReferenceListener();
+        }
+
         this.setState({
           user: null,
 
@@ -304,8 +312,12 @@ class App extends Component {
         return;
       }
 
-      reference.onSnapshot((snapshot) => {
+      this.removeReferenceListener = reference.onSnapshot((snapshot) => {
         if (!snapshot.exists) {
+          if (this.removeReferenceListener) {
+            this.removeReferenceListener();
+          }
+
           this.setState({
             user: null,
 
@@ -319,6 +331,10 @@ class App extends Component {
         const data = snapshot.data();
 
         if (!data) {
+          if (this.removeReferenceListener) {
+            this.removeReferenceListener();
+          }
+
           this.setState({
             user: null,
 
@@ -339,6 +355,10 @@ class App extends Component {
           ready: true
         });
       }, (error) => {
+        if (this.removeReferenceListener) {
+          this.removeReferenceListener();
+        }
+
         this.setState({
           user: null,
 
@@ -356,6 +376,16 @@ class App extends Component {
         });
       });
     });
+  }
+
+  componentWillUnmount() {
+    if (this.removeAuthStateChangedObserver) {
+      this.removeAuthStateChangedObserver();
+    }
+
+    if (this.removeReferenceListener) {
+      this.removeReferenceListener();
+    }
   }
 }
 
