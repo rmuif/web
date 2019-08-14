@@ -1,3 +1,5 @@
+import _ from 'lodash';
+
 import red from '@material-ui/core/colors/red';
 import pink from '@material-ui/core/colors/pink';
 import purple from '@material-ui/core/colors/purple';
@@ -135,3 +137,15 @@ const colors = {
 };
 
 export default colors;
+
+export const getColor = (colorId) => {
+  if (!colorId) {
+    return null;
+  }
+
+  colorId = _.camelCase(colorId);
+
+  const color = colors[colorId];
+
+  return color;
+};
