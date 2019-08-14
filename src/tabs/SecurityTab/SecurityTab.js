@@ -128,10 +128,8 @@ class SecurityTab extends Component {
         performingAction: true
       }, () => {
         authentication.changePassword(password).then(() => {
-          this.calculateSecurityRating(() => {
-            this.hideFields(() => {
-              this.props.openSnackbar('Changed password');
-            });
+          this.hideFields(() => {
+            this.props.openSnackbar('Changed password');
           });
         }).catch((reason) => {
           const code = reason.code;
