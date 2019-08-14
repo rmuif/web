@@ -10,7 +10,7 @@ import Snackbar from '@material-ui/core/Snackbar';
 import { auth, firestore } from '../firebase';
 import settings from '../settings';
 import authentication from '../authentication';
-import theme from '../theme';
+import theming from '../theming';
 
 import LaunchScreen from '../layout/LaunchScreen/LaunchScreen';
 
@@ -39,7 +39,7 @@ class App extends Component {
       },
 
       settingsDialog: {
-        open: false
+        open: true
       },
 
       signOutDialog: {
@@ -146,8 +146,8 @@ class App extends Component {
     const { snackbar } = this.state;
 
     return (
-      <MuiThemeProvider theme={theme.currentTheme}>
-        <div style={{ minHeight: '100vh', backgroundColor: theme.currentTheme.palette.type === 'dark' ? '#303030' : '#fafafa' }}>
+      <MuiThemeProvider theme={theming.currentTheme}>
+        <div style={{ minHeight: '100vh', backgroundColor: theming.currentTheme.dark ? '#303030' : '#fafafa' }}>
           {!ready &&
             <LaunchScreen />
           }
@@ -274,9 +274,7 @@ class App extends Component {
           signedIn: false,
           ready: true
         }, () => {
-          if (theme.currentTheme !== theme.defaultTheme) {
-            theme.resetTheme();
-          }
+          theming.resetTheme();
         });
 
         return;
@@ -295,9 +293,7 @@ class App extends Component {
           signedIn: false,
           ready: true
         }, () => {
-          if (theme.currentTheme !== theme.defaultTheme) {
-            theme.resetTheme();
-          }
+          theming.resetTheme();
         });
 
         return;
@@ -316,9 +312,7 @@ class App extends Component {
           signedIn: false,
           ready: true
         }, () => {
-          if (theme.currentTheme !== theme.defaultTheme) {
-            theme.resetTheme();
-          }
+          theming.resetTheme();
         });
 
         return;
@@ -336,9 +330,7 @@ class App extends Component {
             signedIn: false,
             ready: true
           }, () => {
-            if (theme.currentTheme !== theme.defaultTheme) {
-              theme.resetTheme();
-            }
+            theming.resetTheme();
           });
 
           return;
@@ -357,18 +349,16 @@ class App extends Component {
             signedIn: false,
             ready: true
           }, () => {
-            if (theme.currentTheme !== theme.defaultTheme) {
-              theme.resetTheme();
-            }
+            theming.resetTheme();
           });
 
           return;
         }
 
         if (data.theme) {
-          theme.changeTheme(data.theme);
-        } else if (theme.currentTheme !== theme.defaultTheme) {
-          theme.resetTheme();
+          theming.changeTheme(data.theme);
+        } else {
+          theming.resetTheme();
         }
 
         this.setState({
@@ -391,10 +381,8 @@ class App extends Component {
           signedIn: false,
           ready: true
         }, () => {
-          if (theme.currentTheme !== theme.defaultTheme) {
-            theme.resetTheme();
-          }
-          
+          theming.resetTheme();
+
           const code = error.code;
           const message = error.message;
 

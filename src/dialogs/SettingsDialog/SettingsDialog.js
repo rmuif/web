@@ -68,7 +68,7 @@ class SettingsDialog extends Component {
     super(props);
 
     this.state = {
-      selectedTab: 0
+      selectedTab: 1
     };
   }
 
