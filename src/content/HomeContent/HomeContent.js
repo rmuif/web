@@ -13,7 +13,7 @@ import HomeIcon from '@material-ui/icons/Home';
 
 import GitHubCircleIcon from 'mdi-material-ui/GithubCircle';
 
-import EmptyState from '../../layout/EmptyState/EmptyState';
+import EmptyState from '../../layout/EmptyState';
 
 import settings from '../../settings';
 

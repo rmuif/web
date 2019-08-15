@@ -12,12 +12,12 @@ import settings from '../settings';
 import authentication from '../authentication';
 import theming from '../theming';
 
-import LaunchScreen from '../layout/LaunchScreen/LaunchScreen';
+import LaunchScreen from '../layout/LaunchScreen';
 
-import Bar from '../layout/Bar/Bar';
+import Bar from '../layout/Bar';
 
-import Router from '../Router/Router';
-import DialogHost from '../DialogHost/DialogHost';
+import Router from '../Router';
+import DialogHost from '../DialogHost';
 
 class App extends Component {
   constructor(props) {

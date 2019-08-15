@@ -4,8 +4,8 @@ import PropTypes from 'prop-types';
 
 import { BrowserRouter, Switch, Route } from "react-router-dom";
 
-import HomeContent from '../content/HomeContent/HomeContent';
-import NotFoundContent from '../content/NotFoundContent/NotFoundContent';
+import HomeContent from '../content/HomeContent';
+import NotFoundContent from '../content/NotFoundContent';
 
 class Router extends Component {
   render() {

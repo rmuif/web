@@ -24,10 +24,10 @@ import SecurityIcon from '@material-ui/icons/Security';
 
 import SwipeableViews from 'react-swipeable-views';
 
-import AccountTab from '../../tabs/AccountTab/AccountTab';
-import AppearanceTab from '../../tabs/AppearanceTab/AppearanceTab';
-import ConnectionsTab from '../../tabs/ConnectionsTab/ConnectionsTab';
-import SecurityTab from '../../tabs/SecurityTab/SecurityTab';
+import AccountTab from '../../tabs/AccountTab';
+import AppearanceTab from '../../tabs/AppearanceTab';
+import ConnectionsTab from '../../tabs/ConnectionsTab';
+import SecurityTab from '../../tabs/SecurityTab';
 
 const styles = (theme) => ({
   closeButton: {
