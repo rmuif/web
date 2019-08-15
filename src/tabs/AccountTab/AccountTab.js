@@ -246,13 +246,13 @@ class AccountTab extends Component {
 
     creationTime = moment(creationTime);
 
-    let lastChangedPassword = user.lastChangedPassword;
+    let lastPasswordChange = user.lastPasswordChange;
     let securityRating = 0;
 
-    if (lastChangedPassword) {
-      lastChangedPassword = moment(lastChangedPassword.toDate());
+    if (lastPasswordChange) {
+      lastPasswordChange = moment(lastPasswordChange.toDate());
 
-      if (creationTime.diff(lastChangedPassword, 'days') >= 365.242199) {
+      if (creationTime.diff(lastPasswordChange, 'days') >= 365.242199) {
         securityRating = 50;
       } else {
         securityRating = 100;

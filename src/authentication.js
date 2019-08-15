@@ -545,7 +545,7 @@ const authentication = {
         }
 
         reference.update({
-          lastChangedPassword: firebase.firestore.FieldValue.serverTimestamp()
+          lastPasswordChange: firebase.firestore.FieldValue.serverTimestamp()
         }).then((value) => {
           resolve(value);
         }).catch((reason) => {

@@ -267,14 +267,14 @@ class SecurityTab extends Component {
                 <Hidden xsDown>
                   <ListItemText
                     primary="Password"
-                    secondary={user.lastChangedPassword ? `Last changed ${moment(user.lastChangedPassword.toDate()).format('LL')}` : 'Never changed'}
+                    secondary={user.lastPasswordChange ? `Last changed ${moment(user.lastPasswordChange.toDate()).format('LL')}` : 'Never changed'}
                   />
                 </Hidden>
 
                 <Hidden smUp>
                   <ListItemText
                     primary="Password"
-                    secondary={user.lastChangedPassword ? `Last changed ${moment(user.lastChangedPassword.toDate()).format('ll')}` : 'Never changed'}
+                    secondary={user.lastPasswordChange ? `Last changed ${moment(user.lastPasswordChange.toDate()).format('ll')}` : 'Never changed'}
                   />
                 </Hidden>
 
