@@ -262,20 +262,24 @@ class App extends Component {
   }
 
   componentDidMount() {
+    this.mounted = true;
+
     this.removeAuthStateChangedObserver = auth.onAuthStateChanged((user) => {
       if (!user) {
         if (this.removeReferenceListener) {
           this.removeReferenceListener();
         }
 
-        this.setState({
-          user: null,
+        if (this.mounted) {
+          this.setState({
+            user: null,
 
-          signedIn: false,
-          ready: true
-        }, () => {
-          theming.resetTheme();
-        });
+            signedIn: false,
+            ready: true
+          }, () => {
+            theming.resetTheme();
+          });
+        }
 
         return;
       }
@@ -287,14 +291,16 @@ class App extends Component {
           this.removeReferenceListener();
         }
 
-        this.setState({
-          user: null,
+        if (this.mounted) {
+          this.setState({
+            user: null,
 
-          signedIn: false,
-          ready: true
-        }, () => {
-          theming.resetTheme();
-        });
+            signedIn: false,
+            ready: true
+          }, () => {
+            theming.resetTheme();
+          });
+        }
 
         return;
       }
@@ -306,14 +312,16 @@ class App extends Component {
           this.removeReferenceListener();
         }
 
-        this.setState({
-          user: null,
+        if (this.mounted) {
+          this.setState({
+            user: null,
 
-          signedIn: false,
-          ready: true
-        }, () => {
-          theming.resetTheme();
-        });
+            signedIn: false,
+            ready: true
+          }, () => {
+            theming.resetTheme();
+          });
+        }
 
         return;
       }
@@ -324,14 +332,16 @@ class App extends Component {
             this.removeReferenceListener();
           }
 
-          this.setState({
-            user: null,
+          if (this.mounted) {
+            this.setState({
+              user: null,
 
-            signedIn: false,
-            ready: true
-          }, () => {
-            theming.resetTheme();
-          });
+              signedIn: false,
+              ready: true
+            }, () => {
+              theming.resetTheme();
+            });
+          }
 
           return;
         }
@@ -343,14 +353,16 @@ class App extends Component {
             this.removeReferenceListener();
           }
 
-          this.setState({
-            user: null,
+          if (this.mounted) {
+            this.setState({
+              user: null,
 
-            signedIn: false,
-            ready: true
-          }, () => {
-            theming.resetTheme();
-          });
+              signedIn: false,
+              ready: true
+            }, () => {
+              theming.resetTheme();
+            });
+          }
 
           return;
         }
@@ -361,37 +373,41 @@ class App extends Component {
           theming.resetTheme();
         }
 
-        this.setState({
-          user: {
-            ...user,
-            ...data
-          },
+        if (this.mounted) {
+          this.setState({
+            user: {
+              ...user,
+              ...data
+            },
 
-          signedIn: true,
-          ready: true
-        });
+            signedIn: true,
+            ready: true
+          });
+        }
       }, (error) => {
         if (this.removeReferenceListener) {
           this.removeReferenceListener();
         }
 
-        this.setState({
-          user: null,
+        if (this.mounted) {
+          this.setState({
+            user: null,
 
-          signedIn: false,
-          ready: true
-        }, () => {
-          theming.resetTheme();
+            signedIn: false,
+            ready: true
+          }, () => {
+            theming.resetTheme();
 
-          const code = error.code;
-          const message = error.message;
+            const code = error.code;
+            const message = error.message;
 
-          switch (code) {
-            default:
-              this.openSnackbar(message);
-              return;
-          }
-        });
+            switch (code) {
+              default:
+                this.openSnackbar(message);
+                return;
+            }
+          });
+        }
       });
     });
   }
@@ -404,6 +420,8 @@ class App extends Component {
     if (this.removeReferenceListener) {
       this.removeReferenceListener();
     }
+
+    this.mounted = false;
   }
 }
 
