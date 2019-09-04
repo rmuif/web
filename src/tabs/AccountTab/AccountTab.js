@@ -53,7 +53,7 @@ const styles = (theme) => ({
     right: -theme.spacing(2)
   },
 
-  uploadingBadge: {
+  loadingBadge: {
     top: '50%',
     right: '50%'
   },
@@ -753,7 +753,7 @@ class AccountTab extends Component {
                         </Tooltip>
                       }>
                         {uploadingAvatar &&
-                          <Badge classes={{ badge: classes.uploadingBadge }} badgeContent={
+                          <Badge classes={{ badge: classes.loadingBadge }} badgeContent={
                             <CircularProgress size={130} thickness={1.8} />
                           }>
                             <Avatar className={classes.avatar} alt="Avatar" src={avatarUrl} />
@@ -777,7 +777,7 @@ class AccountTab extends Component {
                             </Tooltip>
                           }>
                             {uploadingAvatar &&
-                              <Badge classes={{ badge: classes.uploadingBadge }} badgeContent={
+                              <Badge classes={{ badge: classes.loadingBadge }} badgeContent={
                                 <CircularProgress size={130} thickness={1.8} />
                               }>
                                 <Avatar className={classes.avatar} alt="Avatar" src={user.photoURL} />
@@ -793,7 +793,7 @@ class AccountTab extends Component {
                         {!user.photoURL &&
                           <React.Fragment>
                             {uploadingAvatar &&
-                              <Badge classes={{ badge: classes.uploadingBadge }} badgeContent={
+                              <Badge classes={{ badge: classes.loadingBadge }} badgeContent={
                                 <CircularProgress size={130} thickness={1.8} />
                               }>
                                 <Avatar className={classes.avatar} alt="Avatar">
@@ -892,7 +892,7 @@ class AccountTab extends Component {
                     </Tooltip>
                   }>
                     {uploadingAvatar &&
-                      <Badge classes={{ badge: classes.uploadingBadge }} badgeContent={
+                      <Badge classes={{ badge: classes.loadingBadge }} badgeContent={
                         <CircularProgress size={130} thickness={1.8} />
                       }>
                         <Avatar className={classes.avatar} alt="Avatar" src={avatarUrl} />
@@ -916,7 +916,7 @@ class AccountTab extends Component {
                         </Tooltip>
                       }>
                         {uploadingAvatar &&
-                          <Badge classes={{ badge: classes.uploadingBadge }} badgeContent={
+                          <Badge classes={{ badge: classes.loadingBadge }} badgeContent={
                             <CircularProgress size={130} thickness={1.8} />
                           }>
                             <Avatar className={classes.avatar} alt="Avatar" src={user.photoURL} />
@@ -932,7 +932,7 @@ class AccountTab extends Component {
                     {!user.photoURL &&
                       <React.Fragment>
                         {uploadingAvatar &&
-                          <Badge classes={{ badge: classes.uploadingBadge }} badgeContent={
+                          <Badge classes={{ badge: classes.loadingBadge }} badgeContent={
                             <CircularProgress size={130} thickness={1.8} />
                           }>
                             <Avatar className={classes.avatar} alt="Avatar">
