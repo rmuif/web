@@ -92,7 +92,7 @@ const initialState = {
   emailAddress: '',
 
   performingAction: false,
-  uploadingAvatar: false,
+  loadingAvatar: false,
   sentVerificationEmail: false,
 
   errors: null
@@ -137,7 +137,7 @@ class AccountTab extends Component {
 
     this.setState({
       performingAction: true,
-      uploadingAvatar: true
+      loadingAvatar: true
     }, () => {
       authentication.changeAvatar(avatar).then((value) => {
         this.calculateProfileCompletion(() => {
@@ -155,7 +155,7 @@ class AccountTab extends Component {
       }).finally(() => {
         this.setState({
           performingAction: false,
-          uploadingAvatar: false,
+          loadingAvatar: false,
 
           avatar: null,
           avatarUrl: ''
@@ -183,7 +183,8 @@ class AccountTab extends Component {
       });
     } else if (user.photoURL && !avatar && !avatarUrl) {
       this.setState({
-        performingAction: true
+        performingAction: true,
+        loadingAvatar: true
       }, () => {
         authentication.removeAvatar().then((value) => {
           this.calculateProfileCompletion(() => {
@@ -200,7 +201,8 @@ class AccountTab extends Component {
           }
         }).finally(() => {
           this.setState({
-            performingAction: false
+            performingAction: false,
+            loadingAvatar: false
           });
         });
       });
@@ -722,7 +724,7 @@ class AccountTab extends Component {
       showingField,
 
       performingAction,
-      uploadingAvatar,
+      loadingAvatar,
 
       avatar,
       avatarUrl,
@@ -752,7 +754,7 @@ class AccountTab extends Component {
                           </Fab>
                         </Tooltip>
                       }>
-                        {uploadingAvatar &&
+                        {loadingAvatar &&
                           <Badge classes={{ badge: classes.loadingBadge }} badgeContent={
                             <CircularProgress size={130} thickness={1.8} />
                           }>
@@ -760,7 +762,7 @@ class AccountTab extends Component {
                           </Badge>
                         }
 
-                        {!uploadingAvatar &&
+                        {!loadingAvatar &&
                           <Avatar className={classes.avatar} alt="Avatar" src={avatarUrl} />
                         }
                       </Badge>
@@ -776,7 +778,7 @@ class AccountTab extends Component {
                               </Fab>
                             </Tooltip>
                           }>
-                            {uploadingAvatar &&
+                            {loadingAvatar &&
                               <Badge classes={{ badge: classes.loadingBadge }} badgeContent={
                                 <CircularProgress size={130} thickness={1.8} />
                               }>
@@ -784,7 +786,7 @@ class AccountTab extends Component {
                               </Badge>
                             }
 
-                            {!uploadingAvatar &&
+                            {!loadingAvatar &&
                               <Avatar className={classes.avatar} alt="Avatar" src={user.photoURL} />
                             }
                           </Badge>
@@ -792,7 +794,7 @@ class AccountTab extends Component {
 
                         {!user.photoURL &&
                           <React.Fragment>
-                            {uploadingAvatar &&
+                            {loadingAvatar &&
                               <Badge classes={{ badge: classes.loadingBadge }} badgeContent={
                                 <CircularProgress size={130} thickness={1.8} />
                               }>
@@ -802,7 +804,7 @@ class AccountTab extends Component {
                               </Badge>
                             }
 
-                            {!uploadingAvatar &&
+                            {!loadingAvatar &&
                               <Avatar className={classes.avatar} alt="Avatar">
                                 <Typography variant="h3">{this.getNameInitials()}</Typography>
                               </Avatar>
@@ -891,7 +893,7 @@ class AccountTab extends Component {
                       </Fab>
                     </Tooltip>
                   }>
-                    {uploadingAvatar &&
+                    {loadingAvatar &&
                       <Badge classes={{ badge: classes.loadingBadge }} badgeContent={
                         <CircularProgress size={130} thickness={1.8} />
                       }>
@@ -899,7 +901,7 @@ class AccountTab extends Component {
                       </Badge>
                     }
 
-                    {!uploadingAvatar &&
+                    {!loadingAvatar &&
                       <Avatar className={classes.avatar} alt="Avatar" src={avatarUrl} />
                     }
                   </Badge>
@@ -915,7 +917,7 @@ class AccountTab extends Component {
                           </Fab>
                         </Tooltip>
                       }>
-                        {uploadingAvatar &&
+                        {loadingAvatar &&
                           <Badge classes={{ badge: classes.loadingBadge }} badgeContent={
                             <CircularProgress size={130} thickness={1.8} />
                           }>
@@ -923,7 +925,7 @@ class AccountTab extends Component {
                           </Badge>
                         }
 
-                        {!uploadingAvatar &&
+                        {!loadingAvatar &&
                           <Avatar className={classes.avatar} alt="Avatar" src={user.photoURL} />
                         }
                       </Badge>
@@ -931,7 +933,7 @@ class AccountTab extends Component {
 
                     {!user.photoURL &&
                       <React.Fragment>
-                        {uploadingAvatar &&
+                        {loadingAvatar &&
                           <Badge classes={{ badge: classes.loadingBadge }} badgeContent={
                             <CircularProgress size={130} thickness={1.8} />
                           }>
@@ -941,7 +943,7 @@ class AccountTab extends Component {
                           </Badge>
                         }
 
-                        {!uploadingAvatar &&
+                        {!loadingAvatar &&
                           <Avatar className={classes.avatar} alt="Avatar">
                             <Typography variant="h3">{this.getNameInitials()}</Typography>
                           </Avatar>
