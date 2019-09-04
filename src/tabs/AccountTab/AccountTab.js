@@ -11,6 +11,7 @@ import DialogContent from '@material-ui/core/DialogContent';
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import Box from '@material-ui/core/Box';
+import CircularProgress from '@material-ui/core/CircularProgress';
 import Badge from '@material-ui/core/Badge';
 import Avatar from '@material-ui/core/Avatar';
 import Fab from '@material-ui/core/Fab';
@@ -52,6 +53,11 @@ const styles = (theme) => ({
     right: -theme.spacing(2)
   },
 
+  uploadingBadge: {
+    top: '50%',
+    right: '50%'
+  },
+
   avatar: {
     marginRight: 'auto',
     marginLeft: 'auto',
@@ -86,6 +92,7 @@ const initialState = {
   emailAddress: '',
 
   performingAction: false,
+  uploadingAvatar: false,
   sentVerificationEmail: false,
 
   errors: null
@@ -129,7 +136,8 @@ class AccountTab extends Component {
     }
 
     this.setState({
-      performingAction: true
+      performingAction: true,
+      uploadingAvatar: true
     }, () => {
       authentication.changeAvatar(avatar).then((value) => {
         this.calculateProfileCompletion(() => {
@@ -147,6 +155,7 @@ class AccountTab extends Component {
       }).finally(() => {
         this.setState({
           performingAction: false,
+          uploadingAvatar: false,
 
           avatar: null,
           avatarUrl: ''
@@ -713,6 +722,7 @@ class AccountTab extends Component {
       showingField,
 
       performingAction,
+      uploadingAvatar,
 
       avatar,
       avatarUrl,
@@ -742,7 +752,17 @@ class AccountTab extends Component {
                           </Fab>
                         </Tooltip>
                       }>
-                        <Avatar className={classes.avatar} alt="Avatar" src={avatarUrl} />
+                        {uploadingAvatar &&
+                          <Badge classes={{ badge: classes.uploadingBadge }} badgeContent={
+                            <CircularProgress size={130} thickness={1.8} />
+                          }>
+                            <Avatar className={classes.avatar} alt="Avatar" src={avatarUrl} />
+                          </Badge>
+                        }
+
+                        {!uploadingAvatar &&
+                          <Avatar className={classes.avatar} alt="Avatar" src={avatarUrl} />
+                        }
                       </Badge>
                     }
 
@@ -756,14 +776,38 @@ class AccountTab extends Component {
                               </Fab>
                             </Tooltip>
                           }>
-                            <Avatar className={classes.avatar} alt="Avatar" src={user.photoURL} />
+                            {uploadingAvatar &&
+                              <Badge classes={{ badge: classes.uploadingBadge }} badgeContent={
+                                <CircularProgress size={130} thickness={1.8} />
+                              }>
+                                <Avatar className={classes.avatar} alt="Avatar" src={user.photoURL} />
+                              </Badge>
+                            }
+
+                            {!uploadingAvatar &&
+                              <Avatar className={classes.avatar} alt="Avatar" src={user.photoURL} />
+                            }
                           </Badge>
                         }
 
                         {!user.photoURL &&
-                          <Avatar className={classes.avatar} alt="Avatar">
-                            <Typography variant="h3">{this.getNameInitials()}</Typography>
-                          </Avatar>
+                          <React.Fragment>
+                            {uploadingAvatar &&
+                              <Badge classes={{ badge: classes.uploadingBadge }} badgeContent={
+                                <CircularProgress size={130} thickness={1.8} />
+                              }>
+                                <Avatar className={classes.avatar} alt="Avatar">
+                                  <Typography variant="h3">{this.getNameInitials()}</Typography>
+                                </Avatar>
+                              </Badge>
+                            }
+
+                            {!uploadingAvatar &&
+                              <Avatar className={classes.avatar} alt="Avatar">
+                                <Typography variant="h3">{this.getNameInitials()}</Typography>
+                              </Avatar>
+                            }
+                          </React.Fragment>
                         }
                       </React.Fragment>
                     }
@@ -847,7 +891,17 @@ class AccountTab extends Component {
                       </Fab>
                     </Tooltip>
                   }>
-                    <Avatar className={classes.avatar} alt="Avatar" src={avatarUrl} />
+                    {uploadingAvatar &&
+                      <Badge classes={{ badge: classes.uploadingBadge }} badgeContent={
+                        <CircularProgress size={130} thickness={1.8} />
+                      }>
+                        <Avatar className={classes.avatar} alt="Avatar" src={avatarUrl} />
+                      </Badge>
+                    }
+
+                    {!uploadingAvatar &&
+                      <Avatar className={classes.avatar} alt="Avatar" src={avatarUrl} />
+                    }
                   </Badge>
                 }
 
@@ -861,14 +915,38 @@ class AccountTab extends Component {
                           </Fab>
                         </Tooltip>
                       }>
-                        <Avatar className={classes.avatar} alt="Avatar" src={user.photoURL} />
+                        {uploadingAvatar &&
+                          <Badge classes={{ badge: classes.uploadingBadge }} badgeContent={
+                            <CircularProgress size={130} thickness={1.8} />
+                          }>
+                            <Avatar className={classes.avatar} alt="Avatar" src={user.photoURL} />
+                          </Badge>
+                        }
+
+                        {!uploadingAvatar &&
+                          <Avatar className={classes.avatar} alt="Avatar" src={user.photoURL} />
+                        }
                       </Badge>
                     }
 
                     {!user.photoURL &&
-                      <Avatar className={classes.avatar} alt="Avatar">
-                        <Typography variant="h3">{this.getNameInitials()}</Typography>
-                      </Avatar>
+                      <React.Fragment>
+                        {uploadingAvatar &&
+                          <Badge classes={{ badge: classes.uploadingBadge }} badgeContent={
+                            <CircularProgress size={130} thickness={1.8} />
+                          }>
+                            <Avatar className={classes.avatar} alt="Avatar">
+                              <Typography variant="h3">{this.getNameInitials()}</Typography>
+                            </Avatar>
+                          </Badge>
+                        }
+
+                        {!uploadingAvatar &&
+                          <Avatar className={classes.avatar} alt="Avatar">
+                            <Typography variant="h3">{this.getNameInitials()}</Typography>
+                          </Avatar>
+                        }
+                      </React.Fragment>
                     }
                   </React.Fragment>
                 }
