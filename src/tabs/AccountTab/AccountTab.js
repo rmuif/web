@@ -11,6 +11,7 @@ import DialogContent from '@material-ui/core/DialogContent';
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import Box from '@material-ui/core/Box';
+import Fade from '@material-ui/core/Fade';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import Badge from '@material-ui/core/Badge';
 import Avatar from '@material-ui/core/Avatar';
@@ -757,7 +758,12 @@ class AccountTab extends Component {
                       }>
                         {loadingAvatar &&
                           <Badge classes={{ badge: classes.loadingBadge }} badgeContent={
-                            <CircularProgress size={130} thickness={1.8} />
+                            <Fade
+                              style={{ transitionDelay: '1s' }}
+                              in={loadingAvatar}
+                              unmountOnExit>
+                              <CircularProgress size={130} thickness={1.8} />
+                            </Fade>
                           }>
                             <Avatar className={classes.avatar} alt="Avatar" src={avatarUrl} />
                           </Badge>
@@ -781,7 +787,12 @@ class AccountTab extends Component {
                           }>
                             {loadingAvatar &&
                               <Badge classes={{ badge: classes.loadingBadge }} badgeContent={
-                                <CircularProgress size={130} thickness={1.8} />
+                                <Fade
+                                  style={{ transitionDelay: '1s' }}
+                                  in={loadingAvatar}
+                                  unmountOnExit>
+                                  <CircularProgress size={130} thickness={1.8} />
+                                </Fade>
                               }>
                                 <Avatar className={classes.avatar} alt="Avatar" src={user.photoURL} />
                               </Badge>
@@ -797,7 +808,12 @@ class AccountTab extends Component {
                           <React.Fragment>
                             {loadingAvatar &&
                               <Badge classes={{ badge: classes.loadingBadge }} badgeContent={
-                                <CircularProgress size={130} thickness={1.8} />
+                                <Fade
+                                  style={{ transitionDelay: '1s' }}
+                                  in={loadingAvatar}
+                                  unmountOnExit>
+                                  <CircularProgress size={130} thickness={1.8} />
+                                </Fade>
                               }>
                                 <Avatar className={classes.avatar} alt="Avatar">
                                   <Typography variant="h3">{this.getNameInitials()}</Typography>
@@ -896,7 +912,12 @@ class AccountTab extends Component {
                   }>
                     {loadingAvatar &&
                       <Badge classes={{ badge: classes.loadingBadge }} badgeContent={
-                        <CircularProgress size={130} thickness={1.8} />
+                        <Fade
+                          style={{ transitionDelay: '1s' }}
+                          in={loadingAvatar}
+                          unmountOnExit>
+                          <CircularProgress size={130} thickness={1.8} />
+                        </Fade>
                       }>
                         <Avatar className={classes.avatar} alt="Avatar" src={avatarUrl} />
                       </Badge>
@@ -936,7 +957,12 @@ class AccountTab extends Component {
                       <React.Fragment>
                         {loadingAvatar &&
                           <Badge classes={{ badge: classes.loadingBadge }} badgeContent={
-                            <CircularProgress size={130} thickness={1.8} />
+                            <Fade
+                              style={{ transitionDelay: '1s' }}
+                              in={loadingAvatar}
+                              unmountOnExit>
+                              <CircularProgress size={130} thickness={1.8} />
+                            </Fade>
                           }>
                             <Avatar className={classes.avatar} alt="Avatar">
                               <Typography variant="h3">{this.getNameInitials()}</Typography>
