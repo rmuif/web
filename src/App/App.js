@@ -25,6 +25,7 @@ class App extends Component {
 
     this.state = {
       user: null,
+      userData: null,
 
       signedIn: false,
       ready: false,
@@ -133,7 +134,8 @@ class App extends Component {
       ready,
       performingAction,
       signedIn,
-      user
+      user,
+      userData
     } = this.state;
 
     const {
@@ -225,6 +227,7 @@ class App extends Component {
 
                       props: {
                         user: user,
+                        userData: userData,
 
                         openSnackbar: this.openSnackbar
                       }
@@ -273,6 +276,7 @@ class App extends Component {
         if (this.mounted) {
           this.setState({
             user: null,
+            userData: null,
 
             signedIn: false,
             ready: true
@@ -294,6 +298,7 @@ class App extends Component {
         if (this.mounted) {
           this.setState({
             user: null,
+            userData: null,
 
             signedIn: false,
             ready: true
@@ -315,6 +320,7 @@ class App extends Component {
         if (this.mounted) {
           this.setState({
             user: null,
+            userData: null,
 
             signedIn: false,
             ready: true
@@ -335,6 +341,7 @@ class App extends Component {
           if (this.mounted) {
             this.setState({
               user: null,
+              userData: null,
 
               signedIn: false,
               ready: true
@@ -356,6 +363,7 @@ class App extends Component {
           if (this.mounted) {
             this.setState({
               user: null,
+              userData: null,
 
               signedIn: false,
               ready: true
@@ -375,10 +383,8 @@ class App extends Component {
 
         if (this.mounted) {
           this.setState({
-            user: {
-              ...user,
-              ...data
-            },
+            user: user,
+            userData: data,
 
             signedIn: true,
             ready: true
@@ -392,6 +398,7 @@ class App extends Component {
         if (this.mounted) {
           this.setState({
             user: null,
+            userData: null,
 
             signedIn: false,
             ready: true

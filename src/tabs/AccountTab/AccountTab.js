@@ -106,11 +106,11 @@ class AccountTab extends Component {
   }
 
   getNameInitials = () => {
-    const { user } = this.props;
+    const { user, userData } = this.props;
 
-    const firstName = user.firstName;
-    const lastName = user.lastName;
-    const username = user.username;
+    const firstName = userData.firstName;
+    const lastName = userData.lastName;
+    const username = userData.username;
     const displayName = user.displayName;
 
     if (firstName && lastName) {
@@ -210,9 +210,9 @@ class AccountTab extends Component {
   };
 
   calculateProfileCompletion = (callback) => {
-    const { user } = this.props;
+    const { user, userData } = this.props;
 
-    if (!user) {
+    if (!user || !userData) {
       return;
     }
 
@@ -220,9 +220,9 @@ class AccountTab extends Component {
 
     const fields = [
       user.photoURL,
-      user.firstName,
-      user.lastName,
-      user.username,
+      userData.firstName,
+      userData.lastName,
+      userData.username,
       user.email,
       user.email && user.emailVerified
     ];
@@ -243,9 +243,9 @@ class AccountTab extends Component {
   };
 
   calculateSecurityRating = (callback) => {
-    const { user } = this.props;
+    const { user, userData } = this.props;
 
-    if (!user || !user.metadata || !user) {
+    if (!user || !user.metadata || !userData) {
       return;
     }
 
@@ -257,7 +257,7 @@ class AccountTab extends Component {
 
     creationTime = moment(creationTime);
 
-    let lastPasswordChange = user.lastPasswordChange;
+    let lastPasswordChange = userData.lastPasswordChange;
     let securityRating = 0;
 
     if (lastPasswordChange) {
@@ -332,9 +332,9 @@ class AccountTab extends Component {
     this.setState({
       errors: null
     }, () => {
-      const { user } = this.props;
+      const { userData } = this.props;
 
-      if (firstName === user.firstName) {
+      if (firstName === userData.firstName) {
         return;
       }
 
@@ -385,9 +385,9 @@ class AccountTab extends Component {
     this.setState({
       errors: null
     }, () => {
-      const { user } = this.props;
+      const { userData } = this.props;
 
-      if (lastName === user.lastName) {
+      if (lastName === userData.lastName) {
         return;
       }
 
@@ -438,9 +438,9 @@ class AccountTab extends Component {
     this.setState({
       errors: null
     }, () => {
-      const { user } = this.props;
+      const { userData } = this.props;
 
-      if (username === user.username) {
+      if (username === userData.username) {
         return;
       }
 
@@ -714,7 +714,8 @@ class AccountTab extends Component {
 
     // Properties
     const {
-      user
+      user,
+      userData
     } = this.props;
 
     const {
@@ -1030,7 +1031,7 @@ class AccountTab extends Component {
               </ListItemIcon>
             </Hidden>
 
-            {!user.firstName &&
+            {!userData.firstName &&
               <ListItemIcon>
                 <Tooltip title="No first name">
                   <WarningIcon color="error" />
@@ -1047,7 +1048,7 @@ class AccountTab extends Component {
                 fullWidth
                 helperText={(errors && errors.firstName) ? errors.firstName[0] : 'Press Enter to change your first name'}
                 label="First name"
-                placeholder={user.firstName}
+                placeholder={userData.firstName}
                 required
                 type="text"
                 value={firstName}
@@ -1064,11 +1065,11 @@ class AccountTab extends Component {
               <React.Fragment>
                 <ListItemText
                   primary="First name"
-                  secondary={user.firstName ? user.firstName : 'You don’t have a first name'}
+                  secondary={userData.firstName ? userData.firstName : 'You don’t have a first name'}
                 />
 
                 <ListItemSecondaryAction>
-                  {user.firstName &&
+                  {userData.firstName &&
                     <Tooltip title="Change">
                       <div>
                         <IconButton disabled={performingAction} onClick={() => this.showField('first-name')}>
@@ -1078,7 +1079,7 @@ class AccountTab extends Component {
                     </Tooltip>
                   }
 
-                  {!user.firstName &&
+                  {!userData.firstName &&
                     <Button
                       color="primary"
                       disabled={performingAction}
@@ -1099,7 +1100,7 @@ class AccountTab extends Component {
               </ListItemIcon>
             </Hidden>
 
-            {!user.lastName &&
+            {!userData.lastName &&
               <ListItemIcon>
                 <Tooltip title="No last name">
                   <WarningIcon color="error" />
@@ -1116,7 +1117,7 @@ class AccountTab extends Component {
                 fullWidth
                 helperText={(errors && errors.lastName) ? errors.lastName[0] : 'Press Enter to change your last name'}
                 label="Last name"
-                placeholder={user.lastName}
+                placeholder={userData.lastName}
                 required
                 type="text"
                 value={lastName}
@@ -1133,11 +1134,11 @@ class AccountTab extends Component {
               <React.Fragment>
                 <ListItemText
                   primary="Last name"
-                  secondary={user.lastName ? user.lastName : 'You don’t have a last name'}
+                  secondary={userData.lastName ? userData.lastName : 'You don’t have a last name'}
                 />
 
                 <ListItemSecondaryAction>
-                  {user.lastName &&
+                  {userData.lastName &&
                     <Tooltip title="Change">
                       <div>
                         <IconButton disabled={performingAction} onClick={() => this.showField('last-name')}>
@@ -1147,7 +1148,7 @@ class AccountTab extends Component {
                     </Tooltip>
                   }
 
-                  {!user.lastName &&
+                  {!userData.lastName &&
                     <Button
                       color="primary"
                       disabled={performingAction}
@@ -1168,7 +1169,7 @@ class AccountTab extends Component {
               </ListItemIcon>
             </Hidden>
 
-            {!user.username &&
+            {!userData.username &&
               <ListItemIcon>
                 <Tooltip title="No username">
                   <WarningIcon color="error" />
@@ -1185,7 +1186,7 @@ class AccountTab extends Component {
                 fullWidth
                 helperText={(errors && errors.username) ? errors.username[0] : 'Press Enter to change your username'}
                 label="Username"
-                placeholder={user.username}
+                placeholder={userData.username}
                 required
                 type="text"
                 value={username}
@@ -1202,11 +1203,11 @@ class AccountTab extends Component {
               <React.Fragment>
                 <ListItemText
                   primary="Username"
-                  secondary={user.username ? user.username : 'You don’t have a username'}
+                  secondary={userData.username ? userData.username : 'You don’t have a username'}
                 />
 
                 <ListItemSecondaryAction>
-                  {user.username &&
+                  {userData.username &&
                     <Tooltip title="Change">
                       <div>
                         <IconButton disabled={performingAction} onClick={() => this.showField('username')}>
@@ -1216,7 +1217,7 @@ class AccountTab extends Component {
                     </Tooltip>
                   }
 
-                  {!user.username &&
+                  {!userData.username &&
                     <Button
                       color="primary"
                       disabled={performingAction}
@@ -1398,6 +1399,7 @@ AccountTab.propTypes = {
 
   // Properties
   user: PropTypes.object.isRequired,
+  userData: PropTypes.object.isRequired,
 
   // Functions
   openSnackbar: PropTypes.func.isRequired
