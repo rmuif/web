@@ -16,7 +16,6 @@ const styles = (theme) => ({
   }
 });
 
-// Alert dialogs interrupt users with urgent information, details, or actions.
 class AlertDialog extends Component {
   render() {
     // Styling
