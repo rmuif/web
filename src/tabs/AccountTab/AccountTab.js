@@ -193,7 +193,7 @@ class AccountTab extends Component {
         }).catch((reason) => {
           const code = reason.code;
           const message = reason.message;
-  
+
           switch (code) {
             default:
               this.props.openSnackbar(message);
@@ -350,7 +350,7 @@ class AccountTab extends Component {
         }).catch((reason) => {
           const code = reason.code;
           const message = reason.message;
-  
+
           switch (code) {
             default:
               this.props.openSnackbar(message);
@@ -403,7 +403,7 @@ class AccountTab extends Component {
         }).catch((reason) => {
           const code = reason.code;
           const message = reason.message;
-  
+
           switch (code) {
             default:
               this.props.openSnackbar(message);
@@ -456,7 +456,7 @@ class AccountTab extends Component {
         }).catch((reason) => {
           const code = reason.code;
           const message = reason.message;
-  
+
           switch (code) {
             default:
               this.props.openSnackbar(message);
@@ -509,7 +509,7 @@ class AccountTab extends Component {
         }).catch((reason) => {
           const code = reason.code;
           const message = reason.message;
-  
+
           switch (code) {
             default:
               this.props.openSnackbar(message);
@@ -1064,7 +1064,7 @@ class AccountTab extends Component {
               <React.Fragment>
                 <ListItemText
                   primary="First name"
-                  secondary={user.firstName ? user.firstName : 'You don\'t have a first name'}
+                  secondary={user.firstName ? user.firstName : 'You don’t have a first name'}
                 />
 
                 <ListItemSecondaryAction>
@@ -1133,7 +1133,7 @@ class AccountTab extends Component {
               <React.Fragment>
                 <ListItemText
                   primary="Last name"
-                  secondary={user.lastName ? user.lastName : 'You don\'t have a last name'}
+                  secondary={user.lastName ? user.lastName : 'You don’t have a last name'}
                 />
 
                 <ListItemSecondaryAction>
@@ -1202,7 +1202,7 @@ class AccountTab extends Component {
               <React.Fragment>
                 <ListItemText
                   primary="Username"
-                  secondary={user.username ? user.username : 'You don\'t have a username'}
+                  secondary={user.username ? user.username : 'You don’t have a username'}
                 />
 
                 <ListItemSecondaryAction>
@@ -1289,7 +1289,7 @@ class AccountTab extends Component {
               <React.Fragment>
                 <ListItemText
                   primary="E-mail address"
-                  secondary={user.email ? user.email : 'You don\'t have an e-mail address'}
+                  secondary={user.email ? user.email : 'You don’t have an e-mail address'}
                 />
 
                 {(user.email && !user.emailVerified) &&
