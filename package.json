@@ -7,7 +7,7 @@
     "@material-ui/icons": "^4.2.1",
     "firebase": "^6.6.0",
     "gh-pages": "^2.1.1",
-    "mdi-material-ui": "^6.5.0",
+    "mdi-material-ui": "^6.6.0",
     "moment": "^2.24.0",
     "numeral": "^2.0.6",
     "react": "^16.9.0",
