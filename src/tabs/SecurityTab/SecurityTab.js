@@ -197,7 +197,7 @@ class SecurityTab extends Component {
 
   render() {
     // Properties
-    const { user } = this.props;
+    const { userData } = this.props;
 
     const {
       showingField,
@@ -267,14 +267,14 @@ class SecurityTab extends Component {
                 <Hidden xsDown>
                   <ListItemText
                     primary="Password"
-                    secondary={user.lastPasswordChange ? `Last changed ${moment(user.lastPasswordChange.toDate()).format('LL')}` : 'Never changed'}
+                    secondary={userData.lastPasswordChange ? `Last changed ${moment(userData.lastPasswordChange.toDate()).format('LL')}` : 'Never changed'}
                   />
                 </Hidden>
 
                 <Hidden smUp>
                   <ListItemText
                     primary="Password"
-                    secondary={user.lastPasswordChange ? `Last changed ${moment(user.lastPasswordChange.toDate()).format('ll')}` : 'Never changed'}
+                    secondary={userData.lastPasswordChange ? `Last changed ${moment(userData.lastPasswordChange.toDate()).format('ll')}` : 'Never changed'}
                   />
                 </Hidden>
 
@@ -298,7 +298,7 @@ class SecurityTab extends Component {
 
 SecurityTab.propTypes = {
   // Properties
-  user: PropTypes.object.isRequired,
+  userData: PropTypes.object.isRequired,
 
   // Functions
   openSnackbar: PropTypes.func.isRequired

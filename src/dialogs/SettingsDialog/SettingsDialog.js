@@ -176,6 +176,7 @@ class SettingsDialog extends Component {
           {selectedTab === 3 &&
             <SecurityTab
               user={user}
+              userData={userData}
 
               openSnackbar={openSnackbar}
             />
@@ -199,6 +200,7 @@ class SettingsDialog extends Component {
 
             <SecurityTab
               user={user}
+              userData={userData}
 
               openSnackbar={openSnackbar}
             />
