@@ -44,7 +44,6 @@ class HomeContent extends Component {
         <EmptyState
           icon={<HomeIcon className={classes.emptyStateIcon} color="action" />}
           title="Home"
-          description="The three musketeers, all in one pack in the form of a boilerplate app"
         />
       );
     }
