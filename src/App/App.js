@@ -155,7 +155,7 @@ class App extends Component {
           }
 
           {ready &&
-            <React.Fragment>
+            <>
               <Bar
                 title={settings.title}
 
@@ -257,7 +257,7 @@ class App extends Component {
                 open={snackbar.open}
                 onClose={this.closeSnackbar}
               />
-            </React.Fragment>
+            </>
           }
         </div>
       </MuiThemeProvider>

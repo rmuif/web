@@ -79,7 +79,7 @@ class Bar extends Component {
           <Typography style={{ flexGrow: 1 }} color="inherit" variant="h6">{title}</Typography>
 
           {signedIn &&
-            <React.Fragment>
+            <>
               <IconButton color="inherit" disabled={performingAction} onClick={this.openMenu}>
                 {user.photoURL ? <Avatar alt="Avatar" src={user.photoURL} /> : <PersonIcon />}
               </IconButton>
@@ -88,14 +88,14 @@ class Bar extends Component {
                 <MenuItem disabled={performingAction} onClick={this.handleSettingsClick}>Settings</MenuItem>
                 <MenuItem disabled={performingAction} onClick={this.handleSignOutClick}>Sign out</MenuItem>
               </Menu>
-            </React.Fragment>
+            </>
           }
 
           {!signedIn &&
-            <React.Fragment>
+            <>
               <Button className={classes.signUpButton} color="secondary" disabled={performingAction} variant="contained" onClick={onSignUpClick}>Sign Up</Button>
               <Button color="secondary" disabled={performingAction} variant="contained" onClick={onSignInClick}>Sign In</Button>
-            </React.Fragment>
+            </>
           }
         </Toolbar>
       </AppBar>
@@ -106,7 +106,7 @@ class Bar extends Component {
 Bar.propTypes = {
   // Styling
   classes: PropTypes.object.isRequired,
-  
+
   // Properties
   title: PropTypes.string.isRequired,
   performingAction: PropTypes.bool.isRequired,

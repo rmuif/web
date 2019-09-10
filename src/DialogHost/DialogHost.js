@@ -23,10 +23,10 @@ class DialogHost extends Component {
     const signOutDialog = dialogs.signOutDialog;
 
     return (
-      <React.Fragment>
+      <>
         <Hidden xsDown>
           {!signedIn &&
-            <React.Fragment>
+            <>
               <SignUpDialog
                 dialogProps={signUpDialog.dialogProps}
 
@@ -38,7 +38,7 @@ class DialogHost extends Component {
 
                 {...signInDialog.props}
               />
-            </React.Fragment>
+            </>
           }
         </Hidden>
 
@@ -54,7 +54,7 @@ class DialogHost extends Component {
 
         <Hidden smUp>
           {!signedIn &&
-            <React.Fragment>
+            <>
               <SignUpDialog
                 dialogProps={{
                   fullScreen: true,
@@ -74,7 +74,7 @@ class DialogHost extends Component {
 
                 {...signInDialog.props}
               />
-            </React.Fragment>
+            </>
           }
         </Hidden>
 
@@ -93,15 +93,15 @@ class DialogHost extends Component {
         </Hidden>
 
         {signedIn &&
-          <React.Fragment>
+          <>
             <AlertDialog
               dialogProps={signOutDialog.dialogProps}
 
               {...signOutDialog.props}
             />
-          </React.Fragment>
+          </>
         }
-      </React.Fragment>
+      </>
     );
   }
 }

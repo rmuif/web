@@ -263,7 +263,7 @@ class SecurityTab extends Component {
             }
 
             {(showingField !== 'password' && showingField !== 'password-confirmation') &&
-              <React.Fragment>
+              <>
                 <Hidden xsDown>
                   <ListItemText
                     primary="Password"
@@ -287,7 +287,7 @@ class SecurityTab extends Component {
                     </div>
                   </Tooltip>
                 </ListItemSecondaryAction>
-              </React.Fragment>
+              </>
             }
           </ListItem>
         </List>

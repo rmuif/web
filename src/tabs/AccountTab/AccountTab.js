@@ -776,7 +776,7 @@ class AccountTab extends Component {
                     }
 
                     {(!avatar && !avatarUrl) &&
-                      <React.Fragment>
+                      <>
                         {user.photoURL &&
                           <Badge classes={{ badge: classes.badge }} badgeContent={
                             <Tooltip title="Remove">
@@ -805,7 +805,7 @@ class AccountTab extends Component {
                         }
 
                         {!user.photoURL &&
-                          <React.Fragment>
+                          <>
                             {loadingAvatar &&
                               <Badge classes={{ badge: classes.loadingBadge }} badgeContent={
                                 <Fade
@@ -826,9 +826,9 @@ class AccountTab extends Component {
                                 <Typography variant="h3">{this.getNameInitials()}</Typography>
                               </Avatar>
                             }
-                          </React.Fragment>
+                          </>
                         }
-                      </React.Fragment>
+                      </>
                     }
                   </Box>
 
@@ -840,7 +840,7 @@ class AccountTab extends Component {
                   }
 
                   {(!avatar && !avatarUrl) &&
-                    <React.Fragment>
+                    <>
                       <input
                         id="avatar-input"
                         type="file"
@@ -856,7 +856,7 @@ class AccountTab extends Component {
                           Choose...
                         </Button>
                       </label>
-                    </React.Fragment>
+                    </>
                   }
                 </Box>
               </Grid>
@@ -930,7 +930,7 @@ class AccountTab extends Component {
                 }
 
                 {(!avatar && !avatarUrl) &&
-                  <React.Fragment>
+                  <>
                     {user.photoURL &&
                       <Badge classes={{ badge: classes.badge }} badgeContent={
                         <Tooltip title="Remove">
@@ -954,7 +954,7 @@ class AccountTab extends Component {
                     }
 
                     {!user.photoURL &&
-                      <React.Fragment>
+                      <>
                         {loadingAvatar &&
                           <Badge classes={{ badge: classes.loadingBadge }} badgeContent={
                             <Fade
@@ -975,9 +975,9 @@ class AccountTab extends Component {
                             <Typography variant="h3">{this.getNameInitials()}</Typography>
                           </Avatar>
                         }
-                      </React.Fragment>
+                      </>
                     }
-                  </React.Fragment>
+                  </>
                 }
               </Box>
 
@@ -989,7 +989,7 @@ class AccountTab extends Component {
               }
 
               {(!avatar && !avatarUrl) &&
-                <React.Fragment>
+                <>
                   <input
                     id="avatar-input"
                     type="file"
@@ -1005,7 +1005,7 @@ class AccountTab extends Component {
                       Choose...
                     </Button>
                   </label>
-                </React.Fragment>
+                </>
               }
             </Box>
 
@@ -1088,7 +1088,7 @@ class AccountTab extends Component {
             }
 
             {showingField !== 'first-name' &&
-              <React.Fragment>
+              <>
                 <ListItemText
                   primary="First name"
                   secondary={userData.firstName ? userData.firstName : 'You don’t have a first name'}
@@ -1115,7 +1115,7 @@ class AccountTab extends Component {
                     </Button>
                   }
                 </ListItemSecondaryAction>
-              </React.Fragment>
+              </>
             }
           </ListItem>
 
@@ -1157,7 +1157,7 @@ class AccountTab extends Component {
             }
 
             {showingField !== 'last-name' &&
-              <React.Fragment>
+              <>
                 <ListItemText
                   primary="Last name"
                   secondary={userData.lastName ? userData.lastName : 'You don’t have a last name'}
@@ -1184,7 +1184,7 @@ class AccountTab extends Component {
                     </Button>
                   }
                 </ListItemSecondaryAction>
-              </React.Fragment>
+              </>
             }
           </ListItem>
 
@@ -1226,7 +1226,7 @@ class AccountTab extends Component {
             }
 
             {showingField !== 'username' &&
-              <React.Fragment>
+              <>
                 <ListItemText
                   primary="Username"
                   secondary={userData.username ? userData.username : 'You don’t have a username'}
@@ -1253,7 +1253,7 @@ class AccountTab extends Component {
                     </Button>
                   }
                 </ListItemSecondaryAction>
-              </React.Fragment>
+              </>
             }
           </ListItem>
 
@@ -1266,7 +1266,7 @@ class AccountTab extends Component {
 
             {user.email &&
               <ListItemIcon>
-                <React.Fragment>
+                <>
                   {user.emailVerified &&
                     <Tooltip title="Verified">
                       <CheckIcon color="primary" />
@@ -1278,7 +1278,7 @@ class AccountTab extends Component {
                       <WarningIcon color="error" />
                     </Tooltip>
                   }
-                </React.Fragment>
+                </>
               </ListItemIcon>
             }
 
@@ -1313,7 +1313,7 @@ class AccountTab extends Component {
             }
 
             {showingField !== 'email-address' &&
-              <React.Fragment>
+              <>
                 <ListItemText
                   primary="E-mail address"
                   secondary={user.email ? user.email : 'You don’t have an e-mail address'}
@@ -1354,7 +1354,7 @@ class AccountTab extends Component {
                     </Button>
                   }
                 </ListItemSecondaryAction>
-              </React.Fragment>
+              </>
             }
           </ListItem>
 
