@@ -55,8 +55,8 @@ class App extends Component {
     };
   }
 
-  openDialog = (dialogKey, callback) => {
-    const dialog = this.state[dialogKey];
+  openDialog = (dialogId, callback) => {
+    const dialog = this.state[dialogId];
 
     if (!dialog || dialog.open === undefined || null) {
       return;
@@ -67,8 +67,8 @@ class App extends Component {
     this.setState({ dialog }, callback);
   };
 
-  closeDialog = (dialogKey, callback) => {
-    const dialog = this.state[dialogKey];
+  closeDialog = (dialogId, callback) => {
+    const dialog = this.state[dialogId];
 
     if (!dialog || dialog.open === undefined || null) {
       return;
