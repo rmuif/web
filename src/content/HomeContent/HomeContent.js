@@ -2,13 +2,10 @@ import React, { Component } from 'react';
 
 import PropTypes from 'prop-types';
 
-import { Link } from 'react-router-dom';
-
 import { withStyles } from '@material-ui/core/styles';
 
 import Fab from '@material-ui/core/Fab';
 
-import CodeIcon from '@material-ui/icons/Code';
 import HomeIcon from '@material-ui/icons/Home';
 
 import GitHubCircleIcon from 'mdi-material-ui/GithubCircle';
