@@ -1389,7 +1389,7 @@ class AccountTab extends Component {
 
             <ListItemText
               primary="Delete account"
-              secondary="Accounts cannot be recovered"
+              secondary="Accounts can’t be recovered"
             />
 
             <ListItemSecondaryAction>
