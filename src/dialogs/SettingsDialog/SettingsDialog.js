@@ -153,59 +153,27 @@ class SettingsDialog extends Component {
           </Tabs>
         </Hidden>
 
-        <Hidden xsDown>
-          {selectedTab === 0 &&
-            <AccountTab
-              user={user}
-              userData={userData}
+        <SwipeableViews index={selectedTab} onChangeIndex={this.handleIndexChange}>
+          <AccountTab
+            user={user}
+            userData={userData}
 
-              openSnackbar={openSnackbar}
-            />
-          }
+            openSnackbar={openSnackbar}
+          />
 
-          {selectedTab === 1 &&
-            <AppearanceTab />
-          }
+          <AppearanceTab />
 
-          {selectedTab === 2 &&
-            <ConnectionsTab
-              openSnackbar={openSnackbar}
-            />
-          }
+          <ConnectionsTab
+            openSnackbar={openSnackbar}
+          />
 
-          {selectedTab === 3 &&
-            <SecurityTab
-              user={user}
-              userData={userData}
+          <SecurityTab
+            user={user}
+            userData={userData}
 
-              openSnackbar={openSnackbar}
-            />
-          }
-        </Hidden>
-
-        <Hidden smUp>
-          <SwipeableViews index={selectedTab} onChangeIndex={this.handleIndexChange}>
-            <AccountTab
-              user={user}
-              userData={userData}
-
-              openSnackbar={openSnackbar}
-            />
-
-            <AppearanceTab />
-
-            <ConnectionsTab
-              openSnackbar={openSnackbar}
-            />
-
-            <SecurityTab
-              user={user}
-              userData={userData}
-
-              openSnackbar={openSnackbar}
-            />
-          </SwipeableViews>
-        </Hidden>
+            openSnackbar={openSnackbar}
+          />
+        </SwipeableViews>
       </Dialog>
     );
   }
