@@ -4,6 +4,7 @@ import readingTime from 'reading-time';
 
 import { MuiThemeProvider } from '@material-ui/core/styles';
 
+import CssBaseline from '@material-ui/core/CssBaseline';
 import Button from '@material-ui/core/Button';
 import Snackbar from '@material-ui/core/Snackbar';
 
@@ -148,115 +149,115 @@ class App extends Component {
 
     return (
       <MuiThemeProvider theme={theming.currentTheme}>
-        <div style={{ minHeight: '100vh', backgroundColor: theming.currentTheme.palette.type === 'light' ? '#fafafa' : '#303030' }}>
-          {!ready &&
-            <LaunchScreen />
-          }
+        <CssBaseline />
 
-          {ready &&
-            <>
-              <Bar
-                signedIn={signedIn}
-                performingAction={performingAction}
+        {!ready &&
+          <LaunchScreen />
+        }
 
-                user={user}
+        {ready &&
+          <>
+            <Bar
+              signedIn={signedIn}
+              performingAction={performingAction}
 
-                onSignUpClick={() => this.openDialog('signUpDialog')}
-                onSignInClick={() => this.openDialog('signInDialog')}
+              user={user}
 
-                onSettingsClick={() => this.openDialog('settingsDialog')}
-                onSignOutClick={() => this.openDialog('signOutDialog')}
-              />
+              onSignUpClick={() => this.openDialog('signUpDialog')}
+              onSignInClick={() => this.openDialog('signInDialog')}
 
-              <Router signedIn={signedIn} />
+              onSettingsClick={() => this.openDialog('settingsDialog')}
+              onSignOutClick={() => this.openDialog('signOutDialog')}
+            />
 
-              <DialogHost
-                signedIn={signedIn}
-                dialogs={
-                  {
-                    signUpDialog: {
-                      dialogProps: {
-                        open: signUpDialog.open,
+            <Router signedIn={signedIn} />
 
-                        onClose: (callback) => {
-                          this.closeDialog('signUpDialog');
+            <DialogHost
+              signedIn={signedIn}
+              dialogs={
+                {
+                  signUpDialog: {
+                    dialogProps: {
+                      open: signUpDialog.open,
 
-                          if (callback && typeof callback === 'function') {
-                            callback();
-                          }
+                      onClose: (callback) => {
+                        this.closeDialog('signUpDialog');
+
+                        if (callback && typeof callback === 'function') {
+                          callback();
                         }
-                      },
-
-                      props: {
-                        performingAction: performingAction,
-
-                        openSnackbar: this.openSnackbar
                       }
                     },
 
-                    signInDialog: {
-                      dialogProps: {
-                        open: signInDialog.open,
+                    props: {
+                      performingAction: performingAction,
 
-                        onClose: (callback) => {
-                          this.closeDialog('signInDialog');
+                      openSnackbar: this.openSnackbar
+                    }
+                  },
 
-                          if (callback && typeof callback === 'function') {
-                            callback();
-                          }
+                  signInDialog: {
+                    dialogProps: {
+                      open: signInDialog.open,
+
+                      onClose: (callback) => {
+                        this.closeDialog('signInDialog');
+
+                        if (callback && typeof callback === 'function') {
+                          callback();
                         }
-                      },
-
-                      props: {
-                        performingAction: performingAction,
-
-                        openSnackbar: this.openSnackbar
                       }
                     },
 
-                    settingsDialog: {
-                      dialogProps: {
-                        open: settingsDialog.open,
-                        disableEscapeKeyDown: true,
+                    props: {
+                      performingAction: performingAction,
 
-                        onClose: () => this.closeDialog('settingsDialog')
-                      },
+                      openSnackbar: this.openSnackbar
+                    }
+                  },
 
-                      props: {
-                        user: user,
-                        userData: userData,
+                  settingsDialog: {
+                    dialogProps: {
+                      open: settingsDialog.open,
+                      disableEscapeKeyDown: true,
 
-                        openSnackbar: this.openSnackbar
-                      }
+                      onClose: () => this.closeDialog('settingsDialog')
                     },
 
-                    signOutDialog: {
-                      dialogProps: {
-                        open: signOutDialog.open,
+                    props: {
+                      user: user,
+                      userData: userData,
 
-                        onClose: () => this.closeDialog('signOutDialog')
-                      },
+                      openSnackbar: this.openSnackbar
+                    }
+                  },
 
-                      props: {
-                        title: 'Sign out?',
-                        contentText: 'While signed out you are unable to manage your profile and conduct other activities that require you to be signed in.',
-                        dismissiveAction: <Button color="primary" onClick={() => this.closeDialog('signOutDialog')}>Cancel</Button>,
-                        confirmingAction: <Button color="primary" disabled={performingAction} variant="contained" onClick={this.signOut}>Sign Out</Button>
-                      }
+                  signOutDialog: {
+                    dialogProps: {
+                      open: signOutDialog.open,
+
+                      onClose: () => this.closeDialog('signOutDialog')
+                    },
+
+                    props: {
+                      title: 'Sign out?',
+                      contentText: 'While signed out you are unable to manage your profile and conduct other activities that require you to be signed in.',
+                      dismissiveAction: <Button color="primary" onClick={() => this.closeDialog('signOutDialog')}>Cancel</Button>,
+                      confirmingAction: <Button color="primary" disabled={performingAction} variant="contained" onClick={this.signOut}>Sign Out</Button>
                     }
                   }
                 }
-              />
+              }
+            />
 
-              <Snackbar
-                autoHideDuration={snackbar.autoHideDuration}
-                message={snackbar.message}
-                open={snackbar.open}
-                onClose={this.closeSnackbar}
-              />
-            </>
-          }
-        </div>
+            <Snackbar
+              autoHideDuration={snackbar.autoHideDuration}
+              message={snackbar.message}
+              open={snackbar.open}
+              onClose={this.closeSnackbar}
+            />
+          </>
+        }
       </MuiThemeProvider>
     );
   }
