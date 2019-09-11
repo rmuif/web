@@ -8,7 +8,6 @@ import Button from '@material-ui/core/Button';
 import Snackbar from '@material-ui/core/Snackbar';
 
 import { auth, firestore } from '../firebase';
-import settings from '../settings';
 import authentication from '../authentication';
 import theming from '../theming';
 
@@ -157,8 +156,6 @@ class App extends Component {
           {ready &&
             <>
               <Bar
-                title={settings.title}
-
                 signedIn={signedIn}
                 performingAction={performingAction}
 

@@ -14,8 +14,6 @@ import MicrosoftIcon from 'mdi-material-ui/Microsoft';
 import TwitterIcon from 'mdi-material-ui/Twitter';
 import YahooIcon from 'mdi-material-ui/Yahoo';
 
-import settings from '../../settings';
-
 const styles = (theme) => ({
   grid: {
     marginBottom: theme.spacing(2)
@@ -121,10 +119,6 @@ class AuthProviderList extends Component {
     return (
       <Grid className={gutterBottom && classes.grid} container direction="column" spacing={1}>
         {authProviders.map((authProvider) => {
-          if (!settings.authProviders.includes(authProvider.providerId)) {
-            return null;
-          }
-
           return (
             <Grid key={authProvider.providerId} item>
               <MuiThemeProvider theme={authProvider.theme}>

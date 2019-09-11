@@ -1,11 +1,10 @@
 import { createMuiTheme } from '@material-ui/core/styles';
 
-import settings from './settings';
 import { getColor } from './colors';
 
-const primaryColor = getColor(settings.theme.primaryColor);
-const secondaryColor = getColor(settings.theme.secondaryColor);
-const dark = settings.theme.dark;
+const primaryColor = getColor(process.env.REACT_APP_PRIMARY_COLOR);
+const secondaryColor = getColor(process.env.REACT_APP_SECONDARY_COLOR);
+const dark = process.env.REACT_APP_DARK === 'true';
 
 const defaultTheme = createMuiTheme({
   palette: {
