@@ -12,8 +12,6 @@ import GitHubCircleIcon from 'mdi-material-ui/GithubCircle';
 
 import EmptyState from '../../layout/EmptyState';
 
-import settings from '../../settings';
-
 const styles = (theme) => ({
   emptyStateIcon: {
     fontSize: theme.spacing(12)
@@ -47,7 +45,7 @@ class HomeContent extends Component {
 
     return (
       <EmptyState
-        title={settings.title}
+        title={process.env.REACT_APP_TITLE}
         description="The three musketeers, all in one pack in the form of a boilerplate app"
         button={
           <Fab className={classes.button} color="secondary" href="https://github.com/Phoqe/react-material-ui-firebase" rel="noopener noreferrer" target="_blank" variant="extended">
