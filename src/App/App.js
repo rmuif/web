@@ -148,7 +148,7 @@ class App extends Component {
 
     return (
       <MuiThemeProvider theme={theming.currentTheme}>
-        <div style={{ minHeight: '100vh', backgroundColor: theming.currentTheme.dark ? '#303030' : '#fafafa' }}>
+        <div style={{ minHeight: '100vh', backgroundColor: theming.currentTheme.palette.type === 'light' ? '#fafafa' : '#303030' }}>
           {!ready &&
             <LaunchScreen />
           }
