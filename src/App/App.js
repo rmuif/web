@@ -156,8 +156,6 @@ class App extends Component {
           {ready &&
             <>
               <Bar
-                title={process.env.REACT_APP_TITLE}
-
                 signedIn={signedIn}
                 performingAction={performingAction}
 

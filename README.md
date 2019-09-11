@@ -74,7 +74,7 @@ Changing your project’s name can be tedious sometimes as it often involves cha
     - `name`
     - `short_name`
 - .env
-    - `REACT_APP_TITLE`
+    - `REACT_APP_NAME`
 - package.json
   - `name`
   - `homepage`
