@@ -144,8 +144,6 @@ export const getColor = (colorId) => {
   }
 
   colorId = _.camelCase(colorId);
-
-  const color = colors[colorId];
-
-  return color;
+  
+  return colors[colorId];
 };
