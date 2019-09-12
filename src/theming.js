@@ -168,9 +168,9 @@ const getType = (typeId) => {
   return types[typeId];
 };
 
-const primaryColor = getColor(process.env.REACT_APP_PRIMARY_COLOR);
-const secondaryColor = getColor(process.env.REACT_APP_SECONDARY_COLOR);
-const type = getType(process.env.REACT_APP_TYPE);
+const primaryColor = getColor(process.env.REACT_APP_THEME_PRIMARY_COLOR);
+const secondaryColor = getColor(process.env.REACT_APP_THEME_SECONDARY_COLOR);
+const type = getType(process.env.REACT_APP_THEME_TYPE);
 
 const defaultTheme = createMuiTheme({
   palette: {
