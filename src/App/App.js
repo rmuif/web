@@ -162,6 +162,7 @@ class App extends Component {
               performingAction={performingAction}
 
               user={user}
+              userData={userData}
 
               onSignUpClick={() => this.openDialog('signUpDialog')}
               onSignInClick={() => this.openDialog('signInDialog')}

@@ -14,8 +14,6 @@ import Avatar from '@material-ui/core/Avatar';
 import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
 
-import PersonIcon from '@material-ui/icons/Person';
-
 const styles = (theme) => ({
   signUpButton: {
     marginRight: theme.spacing(1)
@@ -32,6 +30,29 @@ class Bar extends Component {
       }
     };
   }
+
+  getNameInitials = () => {
+    const { user, userData } = this.props;
+
+    const firstName = userData.firstName;
+    const lastName = userData.lastName;
+    const username = userData.username;
+    const displayName = user.displayName;
+
+    if (firstName && lastName) {
+      return firstName.charAt(0) + lastName.charAt(0);
+    } else if (firstName) {
+      return firstName.charAt(0)
+    } else if (lastName) {
+      return lastName.charAt(0);
+    } else if (username) {
+      return username.charAt(0);
+    } else if (displayName) {
+      return displayName.charAt(0);
+    } else {
+      return 'NN';
+    }
+  };
 
   openMenu = (event) => {
     const anchorEl = event.currentTarget;
@@ -81,7 +102,15 @@ class Bar extends Component {
           {signedIn &&
             <>
               <IconButton color="inherit" disabled={performingAction} onClick={this.openMenu}>
-                {user.photoURL ? <Avatar alt="Avatar" src={user.photoURL} /> : <PersonIcon />}
+                {user.photoURL &&
+                  <Avatar alt="Avatar" src={user.photoURL} />
+                }
+
+                {!user.photoURL &&
+                  <Avatar alt="Avatar">
+                    {this.getNameInitials()}
+                  </Avatar>
+                }
               </IconButton>
 
               <Menu anchorEl={menu.anchorEl} open={Boolean(menu.anchorEl)} onClose={this.closeMenu}>
@@ -110,6 +139,8 @@ Bar.propTypes = {
   // Properties
   performingAction: PropTypes.bool.isRequired,
   signedIn: PropTypes.bool.isRequired,
+  user: PropTypes.object,
+  userData: PropTypes.object,
 
   // Events
   onSettingsClick: PropTypes.func.isRequired,

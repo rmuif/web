@@ -63,8 +63,8 @@ const styles = (theme) => ({
     marginRight: 'auto',
     marginLeft: 'auto',
 
-    width: theme.spacing(15),
-    height: theme.spacing(15)
+    width: theme.spacing(14),
+    height: theme.spacing(14)
   },
 
   small: {
@@ -816,14 +816,14 @@ class AccountTab extends Component {
                                 </Fade>
                               }>
                                 <Avatar className={classes.avatar} alt="Avatar">
-                                  <Typography variant="h3">{this.getNameInitials()}</Typography>
+                                  <Typography variant="h2">{this.getNameInitials()}</Typography>
                                 </Avatar>
                               </Badge>
                             }
 
                             {!loadingAvatar &&
                               <Avatar className={classes.avatar} alt="Avatar">
-                                <Typography variant="h3">{this.getNameInitials()}</Typography>
+                                <Typography variant="h2">{this.getNameInitials()}</Typography>
                               </Avatar>
                             }
                           </>
@@ -965,14 +965,14 @@ class AccountTab extends Component {
                             </Fade>
                           }>
                             <Avatar className={classes.avatar} alt="Avatar">
-                              <Typography variant="h3">{this.getNameInitials()}</Typography>
+                              <Typography variant="h2">{this.getNameInitials()}</Typography>
                             </Avatar>
                           </Badge>
                         }
 
                         {!loadingAvatar &&
                           <Avatar className={classes.avatar} alt="Avatar">
-                            <Typography variant="h3">{this.getNameInitials()}</Typography>
+                            <Typography variant="h2">{this.getNameInitials()}</Typography>
                           </Avatar>
                         }
                       </>
