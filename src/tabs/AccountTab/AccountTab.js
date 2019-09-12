@@ -28,6 +28,7 @@ import Hidden from '@material-ui/core/Hidden';
 import TextField from '@material-ui/core/TextField';
 import Tooltip from '@material-ui/core/Tooltip';
 import IconButton from '@material-ui/core/IconButton';
+import Divider from '@material-ui/core/Divider';
 
 import CloseIcon from '@material-ui/icons/Close';
 import PhotoIcon from '@material-ui/icons/Photo';
@@ -1379,6 +1380,8 @@ class AccountTab extends Component {
               />
             </Hidden>
           </ListItem>
+
+          <Divider light />
 
           <ListItem>
             <Hidden xsDown>
