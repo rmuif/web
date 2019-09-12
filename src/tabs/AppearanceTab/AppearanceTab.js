@@ -1,6 +1,8 @@
 import React, { Component } from 'react'
 
-import PropTypes from 'prop-types'
+import PropTypes from 'prop-types';
+
+import { withStyles } from '@material-ui/core/styles';
 
 import DialogContent from '@material-ui/core/DialogContent';
 
@@ -10,25 +12,35 @@ import ListItemAvatar from '@material-ui/core/ListItemAvatar';
 import ListItemText from '@material-ui/core/ListItemText';
 import ListItemSecondaryAction from '@material-ui/core/ListItemSecondaryAction';
 
-import Box from '@material-ui/core/Box';
 import Avatar from '@material-ui/core/Avatar';
 import Tooltip from '@material-ui/core/Tooltip';
 import IconButton from '@material-ui/core/IconButton';
 
-import PaletteIcon from '@material-ui/icons/Palette';
+import EditIcon from '@material-ui/icons/Edit';
 
 import theming from '../../theming';
 
+const styles = (theme) => ({
+  primaryColorAvatar: {
+    backgroundColor: theme.palette.primary.main
+  },
+
+  secondaryColorAvatar: {
+    backgroundColor: theme.palette.secondary.main
+  }
+});
+
 class AppearanceTab extends Component {
   render() {
+    // Properties
+    const { classes } = this.props;
+
     return (
       <DialogContent>
         <List disablePadding>
           <ListItem>
             <ListItemAvatar>
-              <Box bgcolor="primary.main" clone>
-                <Avatar />
-              </Box>
+              <Avatar className={classes.primaryColorAvatar} />
             </ListItemAvatar>
 
             <ListItemText
@@ -37,9 +49,9 @@ class AppearanceTab extends Component {
             />
 
             <ListItemSecondaryAction>
-              <Tooltip title="Palette">
+              <Tooltip title="Change">
                 <IconButton>
-                  <PaletteIcon />
+                  <EditIcon />
                 </IconButton>
               </Tooltip>
             </ListItemSecondaryAction>
@@ -47,9 +59,7 @@ class AppearanceTab extends Component {
 
           <ListItem>
             <ListItemAvatar>
-              <Box bgcolor="secondary.main" clone>
-                <Avatar />
-              </Box>
+              <Avatar className={classes.secondaryColorAvatar} />
             </ListItemAvatar>
 
             <ListItemText
@@ -58,9 +68,9 @@ class AppearanceTab extends Component {
             />
 
             <ListItemSecondaryAction>
-              <Tooltip title="Palette">
+              <Tooltip title="Change">
                 <IconButton>
-                  <PaletteIcon />
+                  <EditIcon />
                 </IconButton>
               </Tooltip>
             </ListItemSecondaryAction>
@@ -72,7 +82,8 @@ class AppearanceTab extends Component {
 }
 
 AppearanceTab.propTypes = {
-
+  // Properties
+  classes: PropTypes.object.isRequired
 };
 
-export default AppearanceTab;
+export default withStyles(styles)(AppearanceTab);
