@@ -762,7 +762,7 @@ class AccountTab extends Component {
                               style={{ transitionDelay: '1s' }}
                               in={loadingAvatar}
                               unmountOnExit>
-                              <CircularProgress size={130} thickness={1.8} />
+                              <CircularProgress size={120} thickness={1.8} />
                             </Fade>
                           }>
                             <Avatar className={classes.avatar} alt="Avatar" src={avatarUrl} />
@@ -791,7 +791,7 @@ class AccountTab extends Component {
                                   style={{ transitionDelay: '1s' }}
                                   in={loadingAvatar}
                                   unmountOnExit>
-                                  <CircularProgress size={130} thickness={1.8} />
+                                  <CircularProgress size={120} thickness={1.8} />
                                 </Fade>
                               }>
                                 <Avatar className={classes.avatar} alt="Avatar" src={user.photoURL} />
@@ -812,7 +812,7 @@ class AccountTab extends Component {
                                   style={{ transitionDelay: '1s' }}
                                   in={loadingAvatar}
                                   unmountOnExit>
-                                  <CircularProgress size={130} thickness={1.8} />
+                                  <CircularProgress size={120} thickness={1.8} />
                                 </Fade>
                               }>
                                 <Avatar className={classes.avatar} alt="Avatar">
@@ -916,7 +916,7 @@ class AccountTab extends Component {
                           style={{ transitionDelay: '1s' }}
                           in={loadingAvatar}
                           unmountOnExit>
-                          <CircularProgress size={130} thickness={1.8} />
+                          <CircularProgress size={120} thickness={1.8} />
                         </Fade>
                       }>
                         <Avatar className={classes.avatar} alt="Avatar" src={avatarUrl} />
@@ -941,7 +941,7 @@ class AccountTab extends Component {
                       }>
                         {loadingAvatar &&
                           <Badge classes={{ badge: classes.loadingBadge }} badgeContent={
-                            <CircularProgress size={130} thickness={1.8} />
+                            <CircularProgress size={120} thickness={1.8} />
                           }>
                             <Avatar className={classes.avatar} alt="Avatar" src={user.photoURL} />
                           </Badge>
@@ -961,7 +961,7 @@ class AccountTab extends Component {
                               style={{ transitionDelay: '1s' }}
                               in={loadingAvatar}
                               unmountOnExit>
-                              <CircularProgress size={130} thickness={1.8} />
+                              <CircularProgress size={120} thickness={1.8} />
                             </Fade>
                           }>
                             <Avatar className={classes.avatar} alt="Avatar">
