@@ -1,47 +1,47 @@
 import React, { Component } from 'react'
 
-import PropTypes from 'prop-types';
-
-import { withStyles } from '@material-ui/core/styles';
-
 import DialogContent from '@material-ui/core/DialogContent';
 
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
-import ListItemAvatar from '@material-ui/core/ListItemAvatar';
+import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 import ListItemSecondaryAction from '@material-ui/core/ListItemSecondaryAction';
 
-import Avatar from '@material-ui/core/Avatar';
 import Tooltip from '@material-ui/core/Tooltip';
 import IconButton from '@material-ui/core/IconButton';
+import Box from '@material-ui/core/Box';
+import Hidden from '@material-ui/core/Hidden';
+import Checkbox from '@material-ui/core/Checkbox';
+import Switch from '@material-ui/core/Switch';
+import Divider from '@material-ui/core/Divider';
+import Button from '@material-ui/core/Button';
 
+import FiberManualRecord from '@material-ui/icons/FiberManualRecord';
 import EditIcon from '@material-ui/icons/Edit';
+import InvertColorsIcon from '@material-ui/icons/InvertColors';
+import FormatColorResetIcon from '@material-ui/icons/FormatColorReset';
 
 import theming from '../../theming';
 
-const styles = (theme) => ({
-  primaryColorAvatar: {
-    backgroundColor: theme.palette.primary.main
-  },
-
-  secondaryColorAvatar: {
-    backgroundColor: theme.palette.secondary.main
-  }
-});
-
 class AppearanceTab extends Component {
-  render() {
-    // Properties
-    const { classes } = this.props;
+  handleDarkModeChange = (event) => {
+    const checked = event.target.checked;
+    const type = checked ? 'dark' : 'light';
+  };
 
+  handleResetClick = () => {
+    theming.resetTheme();
+  };
+
+  render() {
     return (
       <DialogContent>
         <List disablePadding>
           <ListItem>
-            <ListItemAvatar>
-              <Avatar className={classes.primaryColorAvatar} />
-            </ListItemAvatar>
+            <ListItemIcon>
+              <FiberManualRecord color="primary" />
+            </ListItemIcon>
 
             <ListItemText
               primary="Primary color"
@@ -58,9 +58,9 @@ class AppearanceTab extends Component {
           </ListItem>
 
           <ListItem>
-            <ListItemAvatar>
-              <Avatar className={classes.secondaryColorAvatar} />
-            </ListItemAvatar>
+            <ListItemIcon>
+              <FiberManualRecord color="secondary" />
+            </ListItemIcon>
 
             <ListItemText
               primary="Secondary color"
@@ -75,15 +75,52 @@ class AppearanceTab extends Component {
               </Tooltip>
             </ListItemSecondaryAction>
           </ListItem>
+
+          <ListItem>
+            <ListItemIcon>
+              <InvertColorsIcon />
+            </ListItemIcon>
+
+            <ListItemText
+              primary="Dark mode"
+              secondary="Low-light UI that displays mostly dark surfaces"
+            />
+
+            <ListItemSecondaryAction>
+              <Hidden xsDown>
+                <Box mr={1 / 3}>
+                  <Checkbox checked={theming.currentTheme.palette.type === 'dark'} onChange={this.handleDarkModeChange} />
+                </Box>
+              </Hidden>
+
+              <Hidden smUp>
+                <Switch />
+              </Hidden>
+            </ListItemSecondaryAction>
+          </ListItem>
+
+          <Divider light />
+
+          <ListItem>
+            <ListItemIcon>
+              <FormatColorResetIcon />
+            </ListItemIcon>
+
+            <ListItemText
+              primary="Reset theme"
+              secondary="Changes to the theme will be reset"
+            />
+
+            <ListItemSecondaryAction>
+              <Button color="secondary" variant="contained" onClick={this.handleResetClick}>Reset</Button>
+            </ListItemSecondaryAction>
+          </ListItem>
         </List>
       </DialogContent>
     )
   }
 }
 
-AppearanceTab.propTypes = {
-  // Properties
-  classes: PropTypes.object.isRequired
-};
+AppearanceTab.propTypes = {};
 
-export default withStyles(styles)(AppearanceTab);
+export default AppearanceTab;
