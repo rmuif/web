@@ -68,6 +68,10 @@ const styles = (theme) => ({
     height: theme.spacing(14)
   },
 
+  nameInitials: {
+    cursor: 'default'
+  },
+
   small: {
     width: theme.spacing(4),
     height: theme.spacing(4),
@@ -817,14 +821,14 @@ class AccountTab extends Component {
                                 </Fade>
                               }>
                                 <Avatar className={classes.avatar} alt="Avatar">
-                                  <Typography variant="h2">{this.getNameInitials()}</Typography>
+                                  <Typography className={classes.nameInitials} variant="h2">{this.getNameInitials()}</Typography>
                                 </Avatar>
                               </Badge>
                             }
 
                             {!loadingAvatar &&
                               <Avatar className={classes.avatar} alt="Avatar">
-                                <Typography variant="h2">{this.getNameInitials()}</Typography>
+                                <Typography className={classes.nameInitials} variant="h2">{this.getNameInitials()}</Typography>
                               </Avatar>
                             }
                           </>
@@ -966,14 +970,14 @@ class AccountTab extends Component {
                             </Fade>
                           }>
                             <Avatar className={classes.avatar} alt="Avatar">
-                              <Typography variant="h2">{this.getNameInitials()}</Typography>
+                              <Typography className={classes.nameInitials} variant="h2">{this.getNameInitials()}</Typography>
                             </Avatar>
                           </Badge>
                         }
 
                         {!loadingAvatar &&
                           <Avatar className={classes.avatar} alt="Avatar">
-                            <Typography variant="h2">{this.getNameInitials()}</Typography>
+                            <Typography className={classes.nameInitials} variant="h2">{this.getNameInitials()}</Typography>
                           </Avatar>
                         }
                       </>
