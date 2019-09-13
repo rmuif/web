@@ -32,10 +32,7 @@ const styles = (theme) => ({
   },
 
   divider: {
-    margin: 'auto',
-
-    width: theme.spacing(0.125),
-    height: '100%'
+    margin: 'auto'
   },
 
   grid: {
@@ -114,7 +111,7 @@ class SignUpDialog extends Component {
         }).catch((reason) => {
           const code = reason.code;
           const message = reason.message;
-  
+
           switch (code) {
             case 'auth/email-already-in-use':
             case 'auth/invalid-email':
@@ -122,7 +119,7 @@ class SignUpDialog extends Component {
             case 'auth/weak-password':
               this.props.openSnackbar(message);
               return;
-  
+
             default:
               this.props.openSnackbar(message);
               return;
@@ -307,7 +304,7 @@ class SignUpDialog extends Component {
               </Grid>
 
               <Grid item xs={1}>
-                <Divider className={classes.divider} />
+                <Divider className={classes.divider} orientation="vertical" />
               </Grid>
 
               <Grid item xs={8}>

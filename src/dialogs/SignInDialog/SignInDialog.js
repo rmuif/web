@@ -28,10 +28,7 @@ const styles = (theme) => ({
   },
 
   divider: {
-    margin: 'auto',
-
-    width: theme.spacing(0.125),
-    height: '100%'
+    margin: 'auto'
   },
 
   grid: {
@@ -80,7 +77,7 @@ class SignInDialog extends Component {
           }).catch((reason) => {
             const code = reason.code;
             const message = reason.message;
-    
+
             switch (code) {
               case 'auth/invalid-email':
               case 'auth/missing-android-pkg-name':
@@ -91,7 +88,7 @@ class SignInDialog extends Component {
               case 'auth/user-not-found':
                 this.props.openSnackbar(message);
                 return;
-    
+
               default:
                 this.props.openSnackbar(message);
                 return;
@@ -132,13 +129,13 @@ class SignInDialog extends Component {
             const user = value.user;
             const displayName = user.displayName;
             const emailAddress = user.email;
-  
+
             this.props.openSnackbar(`Signed in as ${displayName || emailAddress}`);
           });
         }).catch((reason) => {
           const code = reason.code;
           const message = reason.message;
-  
+
           switch (code) {
             case 'auth/invalid-email':
             case 'auth/user-disabled':
@@ -146,7 +143,7 @@ class SignInDialog extends Component {
             case 'auth/wrong-password':
               this.props.openSnackbar(message);
               return;
-  
+
             default:
               this.props.openSnackbar(message);
               return;
@@ -250,7 +247,7 @@ class SignInDialog extends Component {
 
       emailAddress,
       password,
-      
+
       errors
     } = this.state;
 
@@ -272,7 +269,7 @@ class SignInDialog extends Component {
               </Grid>
 
               <Grid item xs={1}>
-                <Divider className={classes.divider} />
+                <Divider className={classes.divider} orientation="vertical" />
               </Grid>
 
               <Grid item xs={7}>
