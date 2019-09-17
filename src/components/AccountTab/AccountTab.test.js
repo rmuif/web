@@ -21,6 +21,7 @@ it('renders without crashing', () => {
             lastSignInTime: 0
           }
         }}
+        userData={{}}
 
         openSnackbar={() => {}}
       />

@@ -16,7 +16,12 @@ it('renders without crashing', () => {
           onClose: () => {}
         }}
 
-        user={{}}
+        user={{
+          metadata: {
+            lastSignInTime: 0
+          }
+        }}
+        userData={{}}
 
         openSnackbar={() => {}}
       />
