@@ -6,6 +6,7 @@ import { createMuiTheme, withStyles, MuiThemeProvider } from '@material-ui/core/
 
 import Grid from '@material-ui/core/Grid';
 import Button from '@material-ui/core/Button';
+import Box from '@material-ui/core/Box';
 
 import FacebookBoxIcon from 'mdi-material-ui/FacebookBox';
 import GitHubCircleIcon from 'mdi-material-ui/GithubCircle';
@@ -17,10 +18,6 @@ import YahooIcon from 'mdi-material-ui/Yahoo';
 const styles = (theme) => ({
   grid: {
     marginBottom: theme.spacing(2)
-  },
-
-  icon: {
-    marginRight: theme.spacing(0.5)
   }
 });
 
@@ -46,7 +43,7 @@ class AuthProviderList extends Component {
             }
           }
         }),
-        icon: <FacebookBoxIcon className={classes.icon} />,
+        icon: <FacebookBoxIcon />,
         name: 'Facebook'
       },
       {
@@ -59,7 +56,7 @@ class AuthProviderList extends Component {
             }
           }
         }),
-        icon: <GitHubCircleIcon className={classes.icon} />,
+        icon: <GitHubCircleIcon />,
         name: 'GitHub'
       },
       {
@@ -72,7 +69,7 @@ class AuthProviderList extends Component {
             }
           }
         }),
-        icon: <GoogleIcon className={classes.icon} />,
+        icon: <GoogleIcon />,
         name: 'Google'
       },
       {
@@ -85,7 +82,7 @@ class AuthProviderList extends Component {
             }
           }
         }),
-        icon: <MicrosoftIcon className={classes.icon} />,
+        icon: <MicrosoftIcon />,
         name: 'Microsoft'
       },
       {
@@ -98,7 +95,7 @@ class AuthProviderList extends Component {
             }
           }
         }),
-        icon: <TwitterIcon className={classes.icon} />,
+        icon: <TwitterIcon />,
         name: 'Twitter'
       },
       {
@@ -111,7 +108,7 @@ class AuthProviderList extends Component {
             }
           }
         }),
-        icon: <YahooIcon className={classes.icon} />,
+        icon: <YahooIcon />,
         name: 'Yahoo'
       }
     ];
@@ -128,7 +125,9 @@ class AuthProviderList extends Component {
                   fullWidth
                   variant="contained"
                   onClick={() => onAuthProviderClick(authProvider.providerId)}>
-                  {authProvider.icon}
+                  <Box mr={0.5} clone>
+                    {authProvider.icon}
+                  </Box>
                   {authProvider.name}
                 </Button>
               </MuiThemeProvider>
