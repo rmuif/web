@@ -77,10 +77,6 @@ const styles = (theme) => ({
     height: theme.spacing(4),
 
     minHeight: 'initial'
-  },
-
-  buttonIcon: {
-    marginRight: theme.spacing(1)
   }
 });
 
@@ -839,7 +835,9 @@ class AccountTab extends Component {
 
                   {(avatar && avatarUrl) &&
                     <Button color="primary" disabled={performingAction} variant="contained" onClick={this.uploadAvatar}>
-                      <CloudUploadIcon className={classes.buttonIcon} />
+                      <Box mr={1} clone>
+                        <CloudUploadIcon />
+                      </Box>
                       Upload
                     </Button>
                   }
@@ -857,7 +855,9 @@ class AccountTab extends Component {
 
                       <label htmlFor="avatar-input">
                         <Button color="primary" component="span" disabled={performingAction} variant="contained">
-                          <PhotoIcon className={classes.buttonIcon} />
+                          <Box mr={1} clone>
+                            <PhotoIcon />
+                          </Box>
                           Choose...
                         </Button>
                       </label>
@@ -988,7 +988,9 @@ class AccountTab extends Component {
 
               {(avatar && avatarUrl) &&
                 <Button color="primary" disabled={performingAction} variant="contained" onClick={this.uploadAvatar}>
-                  <CloudUploadIcon className={classes.buttonIcon} />
+                  <Box mr={1} clone>
+                    <CloudUploadIcon />
+                  </Box>
                   Upload
                 </Button>
               }
@@ -1006,7 +1008,9 @@ class AccountTab extends Component {
 
                   <label htmlFor="avatar-input">
                     <Button color="primary" component="span" disabled={performingAction} variant="contained">
-                      <PhotoIcon className={classes.buttonIcon} />
+                      <Box mr={1} clone>
+                        <PhotoIcon />
+                      </Box>
                       Choose...
                     </Button>
                   </label>
