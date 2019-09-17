@@ -10,7 +10,7 @@ import HomeIcon from '@material-ui/icons/Home';
 
 import GitHubCircleIcon from 'mdi-material-ui/GithubCircle';
 
-import EmptyState from '../../layout/EmptyState';
+import EmptyState from '../EmptyState';
 
 const styles = (theme) => ({
   emptyStateIcon: {

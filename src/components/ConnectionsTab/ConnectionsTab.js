@@ -24,7 +24,7 @@ import MicrosoftIcon from 'mdi-material-ui/Microsoft';
 import TwitterIcon from 'mdi-material-ui/Twitter';
 import YahooIcon from 'mdi-material-ui/Yahoo';
 
-import authentication from '../../authentication';
+import authentication from '../../services/authentication';
 
 class ConnectionsTab extends Component {
   constructor(props) {

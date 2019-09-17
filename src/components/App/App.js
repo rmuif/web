@@ -8,13 +8,13 @@ import CssBaseline from '@material-ui/core/CssBaseline';
 import Button from '@material-ui/core/Button';
 import Snackbar from '@material-ui/core/Snackbar';
 
-import { auth, firestore } from '../firebase';
-import authentication from '../authentication';
-import theming from '../theming';
+import { auth, firestore } from '../../firebase';
+import authentication from '../../services/authentication';
+import theming from '../../services/theming';
 
-import LaunchScreen from '../layout/LaunchScreen';
+import LaunchScreen from '../LaunchScreen';
 
-import Bar from '../layout/Bar';
+import Bar from '../Bar';
 
 import Router from '../Router';
 import DialogHost from '../DialogHost';

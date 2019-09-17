@@ -17,10 +17,10 @@ import Button from '@material-ui/core/Button';
 import Divider from '@material-ui/core/Divider';
 import TextField from '@material-ui/core/TextField';
 
-import AuthProviderList from '../../layout/AuthProviderList';
+import AuthProviderList from '../AuthProviderList';
 
 import constraints from '../../constraints';
-import authentication from '../../authentication';
+import authentication from '../../services/authentication';
 
 const styles = (theme) => ({
   icon: {

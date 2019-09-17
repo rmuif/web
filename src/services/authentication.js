@@ -1,4 +1,4 @@
-import firebase, { auth, firestore, storage } from './firebase';
+import firebase, { auth, firestore, storage } from '../firebase';
 
 const avatarFileTypes = [
   'image/gif',
@@ -575,7 +575,7 @@ authentication.verifyEmailAddress = () => {
     });
   });
 };
-  
+
 authentication.deleteAccount = () => {
   return new Promise((resolve, reject) => {
     const currentUser = auth.currentUser;

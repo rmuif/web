@@ -21,7 +21,7 @@ import EditIcon from '@material-ui/icons/Edit';
 import Brightness4Icon from '@material-ui/icons/Brightness4';
 import FormatColorResetIcon from '@material-ui/icons/FormatColorReset';
 
-import theming from '../../theming';
+import theming from '../../services/theming';
 
 class AppearanceTab extends Component {
   handleResetClick = () => {

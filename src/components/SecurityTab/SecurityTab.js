@@ -22,7 +22,7 @@ import LockIcon from '@material-ui/icons/Lock';
 import EditIcon from '@material-ui/icons/Edit';
 
 import constraints from '../../constraints';
-import authentication from '../../authentication';
+import authentication from '../../services/authentication';
 
 const initialState = {
   showingField: '',

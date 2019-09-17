@@ -43,7 +43,7 @@ import AccessTimeIcon from '@material-ui/icons/AccessTime';
 import DeleteForeverIcon from '@material-ui/icons/DeleteForever';
 
 import constraints from '../../constraints';
-import authentication from '../../authentication';
+import authentication from '../../services/authentication';
 
 const styles = (theme) => ({
   dialogContent: {
