@@ -81,11 +81,6 @@ const styles = (theme) => ({
 
   buttonIcon: {
     marginRight: theme.spacing(1)
-  },
-
-  divider: {
-    marginTop: theme.spacing(1),
-    marginBottom: theme.spacing(1)
   }
 });
 
@@ -1390,7 +1385,9 @@ class AccountTab extends Component {
             </Hidden>
           </ListItem>
 
-          <Divider className={classes.divider} light />
+          <Box mt={1} mb={1}>
+            <Divider light />
+          </Box>
 
           <ListItem>
             <Hidden xsDown>

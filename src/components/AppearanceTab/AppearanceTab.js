@@ -1,9 +1,5 @@
 import React, { Component } from 'react';
 
-import PropTypes from 'prop-types';
-
-import { withStyles } from '@material-ui/core/styles';
-
 import DialogContent from '@material-ui/core/DialogContent';
 
 import List from '@material-ui/core/List';
@@ -17,6 +13,7 @@ import IconButton from '@material-ui/core/IconButton';
 import Hidden from '@material-ui/core/Hidden';
 import Checkbox from '@material-ui/core/Checkbox';
 import Switch from '@material-ui/core/Switch';
+import Box from '@material-ui/core/Box';
 import Divider from '@material-ui/core/Divider';
 import Button from '@material-ui/core/Button';
 
@@ -27,22 +24,12 @@ import FormatColorResetIcon from '@material-ui/icons/FormatColorReset';
 
 import theming from '../../services/theming';
 
-const styles = (theme) => ({
-  divider: {
-    marginTop: theme.spacing(1),
-    marginBottom: theme.spacing(1)
-  }
-});
-
 class AppearanceTab extends Component {
   handleResetClick = () => {
     theming.resetTheme();
   };
 
   render() {
-    // Properties
-    const { classes } = this.props;
-
     return (
       <DialogContent>
         <List disablePadding>
@@ -105,7 +92,9 @@ class AppearanceTab extends Component {
             </ListItemSecondaryAction>
           </ListItem>
 
-          <Divider className={classes.divider} light />
+          <Box mt={1} mb={1}>
+            <Divider light />
+          </Box>
 
           <ListItem>
             <ListItemIcon>
@@ -127,9 +116,6 @@ class AppearanceTab extends Component {
   }
 }
 
-AppearanceTab.propTypes = {
-  // Properties
-  classes: PropTypes.object.isRequired
-};
+AppearanceTab.propTypes = {};
 
-export default withStyles(styles)(AppearanceTab);
+export default AppearanceTab;
