@@ -2,23 +2,16 @@ import React, { Component } from 'react';
 
 import PropTypes from 'prop-types';
 
-import { withStyles } from '@material-ui/core/styles';
-
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
+import Box from '@material-ui/core/Box';
 import Button from '@material-ui/core/Button';
 import IconButton from '@material-ui/core/IconButton';
 import Avatar from '@material-ui/core/Avatar';
 
 import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
-
-const styles = (theme) => ({
-  signUpButton: {
-    marginRight: theme.spacing(1)
-  }
-});
 
 class Bar extends Component {
   constructor(props) {
@@ -83,9 +76,6 @@ class Bar extends Component {
   };
 
   render() {
-    // Styling
-    const { classes } = this.props;
-
     // Properties
     const { performingAction, signedIn, user } = this.props;
 
@@ -122,7 +112,10 @@ class Bar extends Component {
 
           {!signedIn &&
             <>
-              <Button className={classes.signUpButton} color="secondary" disabled={performingAction} variant="contained" onClick={onSignUpClick}>Sign Up</Button>
+              <Box mr={1}>
+                <Button color="secondary" disabled={performingAction} variant="contained" onClick={onSignUpClick}>Sign Up</Button>
+              </Box>
+
               <Button color="secondary" disabled={performingAction} variant="contained" onClick={onSignInClick}>Sign In</Button>
             </>
           }
@@ -133,9 +126,6 @@ class Bar extends Component {
 }
 
 Bar.propTypes = {
-  // Styling
-  classes: PropTypes.object.isRequired,
-
   // Properties
   performingAction: PropTypes.bool.isRequired,
   signedIn: PropTypes.bool.isRequired,
@@ -147,4 +137,4 @@ Bar.propTypes = {
   onSignOutClick: PropTypes.func.isRequired
 };
 
-export default withStyles(styles)(Bar);
+export default Bar;
