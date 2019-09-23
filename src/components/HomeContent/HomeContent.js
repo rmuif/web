@@ -58,6 +58,10 @@ class HomeContent extends Component {
   }
 }
 
+HomeContent.defaultProps = {
+  signedIn: false
+};
+
 HomeContent.propTypes = {
   // Styling
   classes: PropTypes.object.isRequired,

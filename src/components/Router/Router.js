@@ -23,6 +23,10 @@ class Router extends Component {
   }
 }
 
+Router.defaultProps = {
+  signedIn: false
+};
+
 Router.propTypes = {
   // Properties
   signedIn: PropTypes.bool.isRequired

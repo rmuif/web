@@ -127,6 +127,11 @@ class Bar extends Component {
   }
 }
 
+Bar.defaultProps = {
+  performingAction: false,
+  signedIn: false
+};
+
 Bar.propTypes = {
   // Properties
   performingAction: PropTypes.bool.isRequired,

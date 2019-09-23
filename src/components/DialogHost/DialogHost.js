@@ -106,6 +106,10 @@ class DialogHost extends Component {
   }
 }
 
+DialogHost.defaultProps = {
+  signedIn: false
+};
+
 DialogHost.propTypes = {
   // Properties
   signedIn: PropTypes.bool.isRequired,

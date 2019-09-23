@@ -139,6 +139,11 @@ class AuthProviderList extends Component {
   }
 }
 
+AuthProviderList.defaultProps = {
+  gutterBottom: false,
+  performingAction: false
+};
+
 AuthProviderList.propTypes = {
   // Styling
   classes: PropTypes.object.isRequired,
