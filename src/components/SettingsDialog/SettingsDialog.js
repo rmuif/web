@@ -68,7 +68,7 @@ class SettingsDialog extends Component {
     super(props);
 
     this.state = {
-      selectedTab: 0
+      selectedTab: 1
     };
   }
 
@@ -94,7 +94,8 @@ class SettingsDialog extends Component {
     // Custom Properties
     const {
       user,
-      userData
+      userData,
+      theme
     } = this.props;
 
     // Custom Functions
@@ -161,7 +162,11 @@ class SettingsDialog extends Component {
             openSnackbar={openSnackbar}
           />
 
-          <AppearanceTab />
+          <AppearanceTab
+            theme={theme}
+
+            openSnackbar={openSnackbar}
+          />
 
           <ConnectionsTab
             openSnackbar={openSnackbar}
@@ -189,6 +194,7 @@ SettingsDialog.propTypes = {
   // Custom Properties
   user: PropTypes.object.isRequired,
   userData: PropTypes.object.isRequired,
+  theme: PropTypes.object.isRequired,
 
   // Custom Functions
   openSnackbar: PropTypes.func.isRequired
