@@ -10,7 +10,7 @@ import Snackbar from '@material-ui/core/Snackbar';
 
 import { auth, firestore } from '../../firebase';
 import authentication from '../../services/authentication';
-import theming from '../../services/theming';
+import theming from '../../services/theming.alt';
 
 import LaunchScreen from '../LaunchScreen';
 
@@ -26,6 +26,7 @@ class App extends Component {
     this.state = {
       user: null,
       userData: null,
+      theme: theming.defaultTheme,
 
       signedIn: false,
       ready: false,
@@ -40,7 +41,7 @@ class App extends Component {
       },
 
       settingsDialog: {
-        open: false
+        open: true
       },
 
       signOutDialog: {
@@ -131,11 +132,12 @@ class App extends Component {
 
   render() {
     const {
+      user,
+      userData,
+      theme,
+      signedIn,
       ready,
       performingAction,
-      signedIn,
-      user,
-      userData
     } = this.state;
 
     const {
@@ -148,7 +150,7 @@ class App extends Component {
     const { snackbar } = this.state;
 
     return (
-      <MuiThemeProvider theme={theming.currentTheme}>
+      <MuiThemeProvider theme={theme}>
         <CssBaseline />
 
         {!ready &&
@@ -228,6 +230,7 @@ class App extends Component {
                     props: {
                       user: user,
                       userData: userData,
+                      theme: theme,
 
                       openSnackbar: this.openSnackbar
                     }
@@ -375,7 +378,9 @@ class App extends Component {
         }
 
         if (data.theme) {
-          theming.changeTheme(data.theme);
+          this.setState({
+            theme: theming.createTheme(data.theme)
+          });
         } else {
           theming.resetTheme();
         }
