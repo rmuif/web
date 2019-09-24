@@ -10,7 +10,7 @@ import Snackbar from '@material-ui/core/Snackbar';
 
 import { auth, firestore } from '../../firebase';
 import authentication from '../../services/authentication';
-import theming from '../../services/theming.alt';
+import theming from '../../services/theming';
 
 import LaunchScreen from '../LaunchScreen';
 

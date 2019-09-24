@@ -23,7 +23,7 @@ import FiberManualRecord from '@material-ui/icons/FiberManualRecord';
 import InvertColorsIcon from '@material-ui/icons/InvertColors';
 import FormatColorResetIcon from '@material-ui/icons/FormatColorReset';
 
-import theming from '../../services/theming.alt';
+import theming from '../../services/theming';
 
 class AppearanceTab extends Component {
   constructor(props) {
