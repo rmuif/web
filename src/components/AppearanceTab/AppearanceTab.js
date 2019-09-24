@@ -200,6 +200,10 @@ class AppearanceTab extends Component {
     // Properties
     const { theme } = this.props;
 
+    if (!theme) {
+      return null;
+    }
+
     const { performingAction } = this.state;
 
     return (
