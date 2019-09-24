@@ -197,6 +197,30 @@ theming.defaultType = defaultType;
 
 theming.defaultTheme = defaultTheme;
 
+/**
+ * Returns whether a theme is the default theme.
+ * @param theme
+ * @returns {boolean}
+ */
+theming.isDefaultTheme = (theme) => {
+  if (!theme) {
+    return;
+  }
+
+  if (theme.primaryColor.id === defaultPrimaryColor.id &&
+      theme.secondaryColor.id === defaultSecondaryColor.id &&
+      theme.type.id === defaultType.id) {
+    return true;
+  }
+
+  return false;
+};
+
+/**
+ * Creates a Material-UI theme from a JSON theme object.
+ * @param theme
+ * @returns {null|Theme}
+ */
 theming.createTheme = (theme) => {
   if (!theme) {
     return null;
