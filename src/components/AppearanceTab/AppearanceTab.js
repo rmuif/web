@@ -35,9 +35,25 @@ class AppearanceTab extends Component {
   }
 
   handlePrimaryColorChange = (event) => {
+    if (!event) {
+      return;
+    }
+
     const primaryColor = event.target.value;
 
-    // TODO: Check if primary color is current primary color
+    if (!primaryColor) {
+      return;
+    }
+
+    const { theme } = this.props;
+
+    if (!theme) {
+      return;
+    }
+
+    if (theme.primaryColor.id === primaryColor) {
+      return;
+    }
 
     this.setState({
       performingAction: true
@@ -62,9 +78,25 @@ class AppearanceTab extends Component {
   };
 
   handleSecondaryColorChange = (event) => {
+    if (!event) {
+      return;
+    }
+
     const secondaryColor = event.target.value;
 
-    // TODO: Check if primary color is current primary color
+    if (!secondaryColor) {
+      return;
+    }
+
+    const { theme } = this.props;
+
+    if (!theme) {
+      return;
+    }
+
+    if (theme.secondaryColor.id === secondaryColor) {
+      return;
+    }
 
     this.setState({
       performingAction: true
@@ -89,9 +121,25 @@ class AppearanceTab extends Component {
   };
 
   handleTypeChange = (event) => {
+    if (!event) {
+      return;
+    }
+
     const type = event.target.value;
 
-    // TODO: Check if primary color is current primary color
+    if (!type) {
+      return;
+    }
+
+    const { theme } = this.props;
+
+    if (!theme) {
+      return;
+    }
+
+    if (theme.type.id === type) {
+      return;
+    }
 
     this.setState({
       performingAction: true
@@ -116,7 +164,15 @@ class AppearanceTab extends Component {
   };
 
   handleResetClick = () => {
-    // TODO: Check if current theme is default theme
+    const { theme } = this.props;
+
+    if (!theme) {
+      return;
+    }
+
+    if (theming.isDefaultTheme(theme)) {
+      return;
+    }
 
     this.setState({
       performingAction: true
@@ -146,22 +202,6 @@ class AppearanceTab extends Component {
 
     const { performingAction } = this.state;
 
-    const colors = Object.keys(theming.colors).map((color) => {
-      color = theming.colors[color];
-
-      return (
-        <MenuItem key={color.id} value={color.id}>{color.name}</MenuItem>
-      );
-    });
-
-    const types = Object.keys(theming.types).map((type) => {
-      type = theming.types[type];
-
-      return (
-        <MenuItem key={type.id} value={type.id}>{type.name}</MenuItem>
-      );
-    });
-
     return (
       <DialogContent>
         <List disablePadding>
@@ -177,7 +217,13 @@ class AppearanceTab extends Component {
                   value={theme.primaryColor.id}
 
                   onChange={this.handlePrimaryColorChange}>
-                  {colors}
+                  {Object.keys(theming.colors).map((color) => {
+                    color = theming.colors[color];
+
+                    return (
+                      <MenuItem key={color.id} value={color.id}>{color.name}</MenuItem>
+                    );
+                  })}
                 </Select>
               </FormControl>
             </ListItem>
@@ -195,7 +241,13 @@ class AppearanceTab extends Component {
                   value={theme.secondaryColor.id}
 
                   onChange={this.handleSecondaryColorChange}>
-                  {colors}
+                  {Object.keys(theming.colors).map((color) => {
+                    color = theming.colors[color];
+
+                    return (
+                      <MenuItem key={color.id} value={color.id}>{color.name}</MenuItem>
+                    );
+                  })}
                 </Select>
               </FormControl>
             </ListItem>
@@ -213,7 +265,13 @@ class AppearanceTab extends Component {
                   value={theme.type.id}
 
                   onChange={this.handleTypeChange}>
-                  {types}
+                  {Object.keys(theming.types).map((type) => {
+                    type = theming.types[type];
+
+                    return (
+                      <MenuItem key={type.id} value={type.id}>{type.name}</MenuItem>
+                    );
+                  })}
                 </Select>
               </FormControl>
             </ListItem>
@@ -234,7 +292,14 @@ class AppearanceTab extends Component {
             />
 
             <ListItemSecondaryAction>
-              <Button color="secondary" disabled={performingAction} variant="contained" onClick={this.handleResetClick}>Reset</Button>
+              <Button
+                color="secondary"
+                disabled={theming.isDefaultTheme(theme) || performingAction}
+                variant="contained"
+
+                onClick={this.handleResetClick}>
+                Reset
+              </Button>
             </ListItemSecondaryAction>
           </ListItem>
         </List>
