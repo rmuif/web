@@ -5,7 +5,7 @@
   "dependencies": {
     "@material-ui/core": "^4.4.3",
     "@material-ui/icons": "^4.4.3",
-    "@material-ui/styles": "^4.3.0",
+    "@material-ui/styles": "^4.4.3",
     "lodash": "^4.17.15",
     "firebase": "^6.6.2",
     "gh-pages": "^2.1.1",
