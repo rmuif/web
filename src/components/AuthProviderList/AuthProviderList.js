@@ -113,8 +113,34 @@ class AuthProviderList extends Component {
       }
     ];
 
+    if (gutterBottom) {
+      return (
+        <Grid className={classes.grid} container direction="column" spacing={1}>
+          {authProviders.map((authProvider) => {
+            return (
+              <Grid key={authProvider.providerId} item>
+                <MuiThemeProvider theme={authProvider.theme}>
+                  <Button
+                    color="primary"
+                    disabled={performingAction}
+                    fullWidth
+                    variant="contained"
+                    onClick={() => onAuthProviderClick(authProvider.providerId)}>
+                    <Box mr={0.5} clone>
+                      {authProvider.icon}
+                    </Box>
+                    {authProvider.name}
+                  </Button>
+                </MuiThemeProvider>
+              </Grid>
+            );
+          })}
+        </Grid>
+      );
+    }
+
     return (
-      <Grid className={gutterBottom && classes.grid} container direction="column" spacing={1}>
+      <Grid container direction="column" spacing={1}>
         {authProviders.map((authProvider) => {
           return (
             <Grid key={authProvider.providerId} item>
