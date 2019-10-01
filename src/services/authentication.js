@@ -1,4 +1,4 @@
-import firebase, { auth, firestore, storage } from '../firebase';
+import firebase, { analytics, auth, firestore, storage } from '../firebase';
 
 const avatarFileTypes = [
   'image/gif',
@@ -68,6 +68,10 @@ authentication.signUp = (fields) => {
         lastName: lastName,
         username: username
       }).then((value) => {
+        analytics.logEvent('sign_up', {
+          method: 'password'
+        });
+
         resolve(value);
       }).catch((reason) => {
         reject(reason);
@@ -95,6 +99,10 @@ authentication.signIn = (emailAddress, password) => {
     }
 
     auth.signInWithEmailAndPassword(emailAddress, password).then((value) => {
+      analytics.logEvent('login', {
+        method: 'password'
+      });
+
       resolve(value);
     }).catch((reason) => {
       reject(reason);
@@ -127,6 +135,10 @@ authentication.signInWithAuthProvider = (providerId) => {
     }
 
     auth.signInWithPopup(provider).then((value) => {
+      analytics.logEvent('login', {
+        method: providerId
+      });
+
       resolve(value);
     }).catch((reason) => {
       reject(reason);
@@ -159,6 +171,10 @@ authentication.linkAuthProvider = (providerId) => {
     }
 
     currentUser.linkWithPopup(provider).then((value) => {
+      analytics.logEvent('link_auth_provider', {
+        value: providerId
+      });
+
       resolve(value);
     }).catch((reason) => {
       reject(reason);
@@ -183,6 +199,10 @@ authentication.unlinkAuthProvider = (providerId) => {
     }
 
     currentUser.unlink(providerId).then((value) => {
+      analytics.logEvent('unlink_auth_provider', {
+        value: providerId
+      });
+
       resolve(value);
     }).catch((reason) => {
       reject(reason);
@@ -221,6 +241,8 @@ authentication.signOut = () => {
     }
 
     auth.signOut().then((value) => {
+      analytics.logEvent('sign_out');
+
       resolve(value);
     }).catch((reason) => {
       reject(reason);
@@ -245,6 +267,8 @@ authentication.resetPassword = (emailAddress) => {
     }
 
     auth.sendPasswordResetEmail(emailAddress).then((value) => {
+      analytics.logEvent('reset_password');
+
       resolve(value);
     }).catch((reason) => {
       reject(reason);
@@ -301,6 +325,8 @@ authentication.changeAvatar = (avatar) => {
         currentUser.updateProfile({
           photoURL: value
         }).then((value) => {
+          analytics.logEvent('change_avatar');
+
           resolve(value);
         }).catch((reason) => {
           reject(reason);
@@ -344,6 +370,8 @@ authentication.removeAvatar = () => {
       }
 
       reference.delete().then((value) => {
+        analytics.logEvent('remove_avatar');
+
         resolve(value);
       }).catch((reason) => {
         reject(reason);
@@ -389,6 +417,8 @@ authentication.changeFirstName = (firstName) => {
     reference.update({
       firstName: firstName
     }).then((value) => {
+      analytics.logEvent('change_first_name');
+
       resolve(value);
     }).catch((reason) => {
       reject(reason);
@@ -431,6 +461,8 @@ authentication.changeLastName = (lastName) => {
     reference.update({
       lastName: lastName
     }).then((value) => {
+      analytics.logEvent('change_last_name');
+
       resolve(value);
     }).catch((reason) => {
       reject(reason);
@@ -473,6 +505,8 @@ authentication.changeUsername = (username) => {
     reference.update({
       username: username
     }).then((value) => {
+      analytics.logEvent('change_username');
+
       resolve(value);
     }).catch((reason) => {
       reject(reason);
@@ -505,6 +539,8 @@ authentication.changeEmailAddress = (emailAddress) => {
     }
 
     currentUser.updateEmail(emailAddress).then((value) => {
+      analytics.logEvent('change_email_address');
+
       resolve(value);
     }).catch((reason) => {
       reject(reason);
@@ -548,6 +584,8 @@ authentication.changePassword = (password) => {
       reference.update({
         lastPasswordChange: firebase.firestore.FieldValue.serverTimestamp()
       }).then((value) => {
+        analytics.logEvent('change_password');
+
         resolve(value);
       }).catch((reason) => {
         reject(reason);
@@ -569,6 +607,8 @@ authentication.verifyEmailAddress = () => {
     }
 
     currentUser.sendEmailVerification().then((value) => {
+      analytics.logEvent('verify_email_address');
+
       resolve(value);
     }).catch((reason) => {
       reject(reason);
@@ -587,6 +627,8 @@ authentication.deleteAccount = () => {
     }
 
     currentUser.delete().then((value) => {
+      analytics.logEvent('delete_account');
+      
       resolve(value);
     }).catch((reason) => {
       reject(reason);
