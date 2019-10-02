@@ -17,6 +17,7 @@ import InputLabel from '@material-ui/core/InputLabel';
 import Select from '@material-ui/core/Select';
 import MenuItem from '@material-ui/core/MenuItem';
 import Divider from '@material-ui/core/Divider';
+import Hidden from '@material-ui/core/Hidden';
 import Button from '@material-ui/core/Button';
 
 import FiberManualRecord from '@material-ui/icons/FiberManualRecord';
@@ -286,9 +287,11 @@ class AppearanceTab extends Component {
           </Box>
 
           <ListItem>
-            <ListItemIcon>
-              <FormatColorResetIcon />
-            </ListItemIcon>
+            <Hidden xsDown>
+              <ListItemIcon>
+                <FormatColorResetIcon />
+              </ListItemIcon>
+            </Hidden>
 
             <ListItemText
               primary="Reset theme"
