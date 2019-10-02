@@ -34,6 +34,10 @@ const styles = (theme) => ({
     position: 'absolute',
     right: theme.spacing(1),
     top: theme.spacing(1)
+  },
+
+  tabs: {
+    display: 'initial'
   }
 });
 
@@ -121,6 +125,7 @@ class SettingsDialog extends Component {
 
         <Hidden xsDown>
           <Tabs
+            classes={{ root: classes.tabs }}
             style={{ overflow: 'initial', minHeight: 'initial' }}
 
             indicatorColor="primary"
@@ -138,6 +143,7 @@ class SettingsDialog extends Component {
 
         <Hidden smUp>
           <Tabs
+            classes={{ root: classes.tabs }}
             style={{ overflow: 'initial', minHeight: 'initial' }}
 
             indicatorColor="primary"
