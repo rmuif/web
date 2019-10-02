@@ -11,7 +11,7 @@ const auth = admin.auth();
  * Deletes every user.
  * @param nextPageToken The next page token. If not specified, returns users starting without any offset.
  */
-function deleteAllUsers(nextPageToken) {
+const deleteAllUsers = (nextPageToken) => {
   auth.listUsers(undefined, nextPageToken).then((listUserResult) => {
     listUserResult.users.forEach((userRecord) => {
       const uid = userRecord.uid;
@@ -31,4 +31,4 @@ function deleteAllUsers(nextPageToken) {
   }).catch((reason) => {
     console.log(reason);
   });
-}
+};
