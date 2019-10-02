@@ -292,8 +292,8 @@ class SignUpDialog extends Component {
           Sign up for an account
         </DialogTitle>
 
-        <DialogContent className={classes.dialogContent}>
-          <Hidden smDown>
+        <Hidden smDown>
+          <DialogContent className={classes.dialogContent}>
             <Grid container direction="row">
               <Grid item xs={3}>
                 <AuthProviderList
@@ -443,9 +443,11 @@ class SignUpDialog extends Component {
                 </Grid>
               </Grid>
             </Grid>
-          </Hidden>
+          </DialogContent>
+        </Hidden>
 
-          <Hidden mdUp>
+        <Hidden mdUp>
+          <DialogContent>
             <AuthProviderList
               gutterBottom
               performingAction={performingAction}
@@ -580,8 +582,8 @@ class SignUpDialog extends Component {
                 />
               </Grid>
             </Grid>
-          </Hidden>
-        </DialogContent>
+          </DialogContent>
+        </Hidden>
 
         <DialogActions>
           <Button color="primary" onClick={dialogProps.onClose}>Cancel</Button>
