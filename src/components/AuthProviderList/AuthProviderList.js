@@ -6,7 +6,6 @@ import { createMuiTheme, withStyles, MuiThemeProvider } from '@material-ui/core/
 
 import Grid from '@material-ui/core/Grid';
 import Button from '@material-ui/core/Button';
-import Box from '@material-ui/core/Box';
 
 import FacebookBoxIcon from 'mdi-material-ui/FacebookBox';
 import GitHubCircleIcon from 'mdi-material-ui/GithubCircle';
@@ -124,11 +123,9 @@ class AuthProviderList extends Component {
                     color="primary"
                     disabled={performingAction}
                     fullWidth
+                    startIcon={authProvider.icon}
                     variant="contained"
                     onClick={() => onAuthProviderClick(authProvider.providerId)}>
-                    <Box mr={0.5} clone>
-                      {authProvider.icon}
-                    </Box>
                     {authProvider.name}
                   </Button>
                 </MuiThemeProvider>
@@ -149,11 +146,9 @@ class AuthProviderList extends Component {
                   color="primary"
                   disabled={performingAction}
                   fullWidth
+                  startIcon={authProvider.icon}
                   variant="contained"
                   onClick={() => onAuthProviderClick(authProvider.providerId)}>
-                  <Box mr={0.5} clone>
-                    {authProvider.icon}
-                  </Box>
                   {authProvider.name}
                 </Button>
               </MuiThemeProvider>

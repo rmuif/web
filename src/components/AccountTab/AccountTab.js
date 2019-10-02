@@ -834,10 +834,7 @@ class AccountTab extends Component {
                   </Box>
 
                   {(avatar && avatarUrl) &&
-                    <Button color="primary" disabled={performingAction} variant="contained" onClick={this.uploadAvatar}>
-                      <Box mr={1} clone>
-                        <CloudUploadIcon />
-                      </Box>
+                    <Button color="primary" disabled={performingAction} startIcon={<CloudUploadIcon />} variant="contained" onClick={this.uploadAvatar}>
                       Upload
                     </Button>
                   }
@@ -854,10 +851,7 @@ class AccountTab extends Component {
                       />
 
                       <label htmlFor="avatar-input">
-                        <Button color="primary" component="span" disabled={performingAction} variant="contained">
-                          <Box mr={1} clone>
-                            <PhotoIcon />
-                          </Box>
+                        <Button color="primary" component="span" disabled={performingAction} startIcon={<PhotoIcon />} variant="contained">
                           Choose...
                         </Button>
                       </label>
@@ -987,10 +981,7 @@ class AccountTab extends Component {
               </Box>
 
               {(avatar && avatarUrl) &&
-                <Button color="primary" disabled={performingAction} variant="contained" onClick={this.uploadAvatar}>
-                  <Box mr={1} clone>
-                    <CloudUploadIcon />
-                  </Box>
+                <Button color="primary" disabled={performingAction} startIcon={<CloudUploadIcon />} variant="contained" onClick={this.uploadAvatar}>
                   Upload
                 </Button>
               }
@@ -1007,10 +998,7 @@ class AccountTab extends Component {
                   />
 
                   <label htmlFor="avatar-input">
-                    <Button color="primary" component="span" disabled={performingAction} variant="contained">
-                      <Box mr={1} clone>
-                        <PhotoIcon />
-                      </Box>
+                    <Button color="primary" component="span" disabled={performingAction} startIcon={<PhotoIcon />} variant="contained">
                       Choose...
                     </Button>
                   </label>
