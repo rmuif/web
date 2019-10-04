@@ -218,18 +218,37 @@ class AppearanceTab extends Component {
 
               <FormControl disabled={performingAction} fullWidth>
                 <InputLabel>Primary color</InputLabel>
-                <Select
-                  value={theme.primaryColor.id}
 
-                  onChange={this.handlePrimaryColorChange}>
-                  {Object.keys(theming.colors).map((color) => {
-                    color = theming.colors[color];
+                <Hidden smUp>
+                  <Select
+                    native
+                    value={theme.primaryColor.id}
 
-                    return (
-                      <MenuItem key={color.id} value={color.id}>{color.name}</MenuItem>
-                    );
-                  })}
-                </Select>
+                    onChange={this.handlePrimaryColorChange}>
+                    {Object.keys(theming.colors).map((color) => {
+                      color = theming.colors[color];
+
+                      return (
+                        <option key={color.id} value={color.id}>{color.name}</option>
+                      );
+                    })}
+                  </Select>
+                </Hidden>
+
+                <Hidden xsDown>
+                  <Select
+                    value={theme.primaryColor.id}
+
+                    onChange={this.handlePrimaryColorChange}>
+                    {Object.keys(theming.colors).map((color) => {
+                      color = theming.colors[color];
+
+                      return (
+                        <MenuItem key={color.id} value={color.id}>{color.name}</MenuItem>
+                      );
+                    })}
+                  </Select>
+                </Hidden>
               </FormControl>
             </ListItem>
           </Box>
@@ -242,18 +261,37 @@ class AppearanceTab extends Component {
 
               <FormControl disabled={performingAction} fullWidth>
                 <InputLabel>Secondary color</InputLabel>
-                <Select
-                  value={theme.secondaryColor.id}
 
-                  onChange={this.handleSecondaryColorChange}>
-                  {Object.keys(theming.colors).map((color) => {
-                    color = theming.colors[color];
+                <Hidden smUp>
+                  <Select
+                    native
+                    value={theme.secondaryColor.id}
 
-                    return (
-                      <MenuItem key={color.id} value={color.id}>{color.name}</MenuItem>
-                    );
-                  })}
-                </Select>
+                    onChange={this.handleSecondaryColorChange}>
+                    {Object.keys(theming.colors).map((color) => {
+                      color = theming.colors[color];
+
+                      return (
+                        <option key={color.id} value={color.id}>{color.name}</option>
+                      );
+                    })}
+                  </Select>
+                </Hidden>
+
+                <Hidden xsDown>
+                  <Select
+                    value={theme.secondaryColor.id}
+
+                    onChange={this.handleSecondaryColorChange}>
+                    {Object.keys(theming.colors).map((color) => {
+                      color = theming.colors[color];
+
+                      return (
+                        <MenuItem key={color.id} value={color.id}>{color.name}</MenuItem>
+                      );
+                    })}
+                  </Select>
+                </Hidden>
               </FormControl>
             </ListItem>
           </Box>
@@ -266,18 +304,37 @@ class AppearanceTab extends Component {
 
               <FormControl disabled={performingAction} fullWidth>
                 <InputLabel>Type</InputLabel>
-                <Select
-                  value={theme.type.id}
 
-                  onChange={this.handleTypeChange}>
-                  {Object.keys(theming.types).map((type) => {
-                    type = theming.types[type];
+                <Hidden smUp>
+                  <Select
+                    native
+                    value={theme.type.id}
 
-                    return (
-                      <MenuItem key={type.id} value={type.id}>{type.name}</MenuItem>
-                    );
-                  })}
-                </Select>
+                    onChange={this.handleTypeChange}>
+                    {Object.keys(theming.types).map((type) => {
+                      type = theming.types[type];
+
+                      return (
+                        <option key={type.id} value={type.id}>{type.name}</option>
+                      );
+                    })}
+                  </Select>
+                </Hidden>
+
+                <Hidden xsDown>
+                  <Select
+                    value={theme.type.id}
+
+                    onChange={this.handleTypeChange}>
+                    {Object.keys(theming.types).map((type) => {
+                      type = theming.types[type];
+
+                      return (
+                        <MenuItem key={type.id} value={type.id}>{type.name}</MenuItem>
+                      );
+                    })}
+                  </Select>
+                </Hidden>
               </FormControl>
             </ListItem>
           </Box>
