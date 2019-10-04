@@ -352,7 +352,7 @@ class AppearanceTab extends Component {
 
             <ListItemText
               primary="Reset theme"
-              secondary="Changes to the theme will be reset"
+              secondary="Changes will be reset"
             />
 
             <ListItemSecondaryAction>
