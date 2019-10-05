@@ -279,11 +279,10 @@ class App extends Component {
           this.setState({
             user: null,
             userData: null,
+            theme: theming.defaultTheme,
 
             signedIn: false,
             ready: true
-          }, () => {
-            theming.resetTheme();
           });
         }
 
@@ -301,11 +300,10 @@ class App extends Component {
           this.setState({
             user: null,
             userData: null,
+            theme: theming.defaultTheme,
 
             signedIn: false,
             ready: true
-          }, () => {
-            theming.resetTheme();
           });
         }
 
@@ -323,11 +321,10 @@ class App extends Component {
           this.setState({
             user: null,
             userData: null,
+            theme: theming.defaultTheme,
 
             signedIn: false,
             ready: true
-          }, () => {
-            theming.resetTheme();
           });
         }
 
@@ -344,11 +341,10 @@ class App extends Component {
             this.setState({
               user: null,
               userData: null,
+              theme: theming.defaultTheme,
 
               signedIn: false,
               ready: true
-            }, () => {
-              theming.resetTheme();
             });
           }
 
@@ -366,11 +362,10 @@ class App extends Component {
             this.setState({
               user: null,
               userData: null,
+              theme: theming.defaultTheme,
 
               signedIn: false,
               ready: true
-            }, () => {
-              theming.resetTheme();
             });
           }
 
@@ -382,7 +377,9 @@ class App extends Component {
             theme: theming.createTheme(data.theme)
           });
         } else {
-          theming.resetTheme();
+          this.setState({
+            theme: theming.defaultTheme
+          });
         }
 
         if (this.mounted) {
@@ -403,12 +400,11 @@ class App extends Component {
           this.setState({
             user: null,
             userData: null,
+            theme: theming.defaultTheme,
 
             signedIn: false,
             ready: true
           }, () => {
-            theming.resetTheme();
-
             const code = error.code;
             const message = error.message;
 
