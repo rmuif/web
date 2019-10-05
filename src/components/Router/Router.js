@@ -13,7 +13,7 @@ class Router extends Component {
     const { signedIn } = this.props;
 
     return (
-      <BrowserRouter>
+      <BrowserRouter basename={process.env.REACT_APP_BASENAME}>
         <Switch>
           <Route path="/" exact render={() => (<HomeContent signedIn={signedIn} />)} />
           <Route component={NotFoundContent} />
