@@ -4,7 +4,7 @@
   "private": true,
   "dependencies": {
     "@material-ui/core": "^4.5.1",
-    "@material-ui/icons": "^4.4.3",
+    "@material-ui/icons": "^4.5.1",
     "@material-ui/styles": "^4.4.3",
     "lodash": "^4.17.15",
     "firebase": "^7.2.0",
