@@ -1,4 +1,5 @@
 import firebase, { analytics, auth, firestore, storage } from '../firebase';
+import theming from './theming';
 
 const avatarFileTypes = [
   'image/gif',
@@ -66,7 +67,12 @@ authentication.signUp = (fields) => {
       reference.set({
         firstName: firstName,
         lastName: lastName,
-        username: username
+        username: username,
+        theme: {
+          primaryColor: theming.defaultPrimaryColor.id,
+          secondaryColor: theming.defaultSecondaryColor.id,
+          type: theming.defaultType.id
+        }
       }).then((value) => {
         analytics.logEvent('sign_up', {
           method: 'password'
@@ -628,7 +634,7 @@ authentication.deleteAccount = () => {
 
     currentUser.delete().then((value) => {
       analytics.logEvent('delete_account');
-      
+
       resolve(value);
     }).catch((reason) => {
       reject(reason);
