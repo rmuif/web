@@ -27,6 +27,8 @@ For an exhaustive list you can visit the [Features page](https://github.com/Phoq
 
 https://phoqe.me/react-material-ui-firebase
 
+Authentication providers like Google and Facebook are disabled, you can only sign up using an e-mail address and password.
+
 ## Get started
 
 The project is up and running after just 4 commands.
