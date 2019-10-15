@@ -1,5 +1,4 @@
 import firebase, { analytics, auth, firestore, storage } from '../firebase';
-import theming from './theming';
 
 const avatarFileTypes = [
   'image/gif',
@@ -67,12 +66,7 @@ authentication.signUp = (fields) => {
       reference.set({
         firstName: firstName,
         lastName: lastName,
-        username: username,
-        theme: {
-          primaryColor: theming.defaultPrimaryColor.id,
-          secondaryColor: theming.defaultSecondaryColor.id,
-          type: theming.defaultType.id
-        }
+        username: username
       }).then((value) => {
         analytics.logEvent('sign_up', {
           method: 'password'

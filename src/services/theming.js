@@ -22,7 +22,7 @@ import brown from '@material-ui/core/colors/brown';
 import gray from '@material-ui/core/colors/grey';
 import blueGray from '@material-ui/core/colors/blueGrey';
 
-import { analytics, auth, firestore } from '../firebase';
+import firebase, { analytics, auth, firestore } from '../firebase';
 
 const colors = {
   red: {
@@ -204,7 +204,7 @@ theming.defaultTheme = defaultTheme;
  */
 theming.isDefaultTheme = (theme) => {
   if (!theme) {
-    return;
+    return false;
   }
 
   if (theme.primaryColor.id === defaultPrimaryColor.id &&
@@ -544,11 +544,7 @@ theming.resetTheme = () => {
     }
 
     reference.update({
-      theme: {
-        primaryColor: defaultPrimaryColor.id,
-        secondaryColor: defaultSecondaryColor.id,
-        type: defaultType.id
-      }
+      theme: firebase.firestore.FieldValue.delete()
     }).then((value) => {
       analytics.logEvent('reset_theme');
 

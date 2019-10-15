@@ -59,7 +59,11 @@ class AppearanceTab extends Component {
     this.setState({
       performingAction: true
     }, () => {
-      theming.changePrimaryColor(primaryColor).then((value) => {
+      theming.changeTheme({
+        primaryColor: primaryColor,
+        secondaryColor: theme.secondaryColor.id,
+        type: theme.type.id
+      }).then((value) => {
         this.props.openSnackbar('Changed primary color');
       }).catch((reason) => {
         const code = reason.code;
@@ -102,7 +106,11 @@ class AppearanceTab extends Component {
     this.setState({
       performingAction: true
     }, () => {
-      theming.changeSecondaryColor(secondaryColor).then((value) => {
+      theming.changeTheme({
+        primaryColor: theme.primaryColor.id,
+        secondaryColor: secondaryColor,
+        type: theme.type.id
+      }).then((value) => {
         this.props.openSnackbar('Changed secondary color');
       }).catch((reason) => {
         const code = reason.code;
@@ -145,7 +153,11 @@ class AppearanceTab extends Component {
     this.setState({
       performingAction: true
     }, () => {
-      theming.changeType(type).then((value) => {
+      theming.changeTheme({
+        primaryColor: theme.primaryColor.id,
+        secondaryColor: theme.secondaryColor.id,
+        type: type
+      }).then((value) => {
         this.props.openSnackbar('Changed type');
       }).catch((reason) => {
         const code = reason.code;
