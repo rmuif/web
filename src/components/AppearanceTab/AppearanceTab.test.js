@@ -15,6 +15,20 @@ it('renders without crashing', () => {
 
           onClose: () => {}
         }}
+
+        theme={{
+          primaryColor: {
+            id: 'blue'
+          },
+          secondaryColor: {
+            id: 'red'
+          },
+          type: {
+            id: 'dark'
+          }
+        }}
+
+        openSnackbar={() => {}}
       />
     ),
     div

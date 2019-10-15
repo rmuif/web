@@ -22,6 +22,7 @@ it('renders without crashing', () => {
           }
         }}
         userData={{}}
+        theme={{}}
 
         openSnackbar={() => {}}
       />
