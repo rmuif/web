@@ -26,7 +26,7 @@ import SwipeableViews from 'react-swipeable-views';
 
 import AccountTab from '../AccountTab';
 import AppearanceTab from '../AppearanceTab';
-import ConnectionsTab from '../ConnectionsTab';
+import LinksTab from '../LinksTab';
 import SecurityTab from '../SecurityTab';
 
 const styles = (theme) => ({
@@ -55,9 +55,9 @@ const tabs = [
   },
 
   {
-    key: 'connections',
+    key: 'links',
     icon: <LinkIcon />,
-    label: 'Connections'
+    label: 'Links'
   },
 
   {
@@ -174,7 +174,7 @@ class SettingsDialog extends Component {
             openSnackbar={openSnackbar}
           />
 
-          <ConnectionsTab
+          <LinksTab
             openSnackbar={openSnackbar}
           />
 

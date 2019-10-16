@@ -26,7 +26,7 @@ import YahooIcon from 'mdi-material-ui/Yahoo';
 
 import authentication from '../../services/authentication';
 
-class ConnectionsTab extends Component {
+class LinksTab extends Component {
   constructor(props) {
     super(props);
 
@@ -190,9 +190,9 @@ class ConnectionsTab extends Component {
   }
 }
 
-ConnectionsTab.propTypes = {
+LinksTab.propTypes = {
   // Functions
   openSnackbar: PropTypes.func.isRequired
 };
 
-export default ConnectionsTab;
+export default LinksTab;
