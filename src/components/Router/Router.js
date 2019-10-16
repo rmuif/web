@@ -15,8 +15,13 @@ class Router extends Component {
     return (
       <BrowserRouter basename={process.env.REACT_APP_BASENAME}>
         <Switch>
-          <Route path="/" exact render={() => (<HomeContent signedIn={signedIn} />)} />
-          <Route component={NotFoundContent} />
+          <Route path="/" exact>
+            <HomeContent signedIn={signedIn} />
+          </Route>
+
+          <Route>
+            <NotFoundContent />
+          </Route>
         </Switch>
       </BrowserRouter>
     )
