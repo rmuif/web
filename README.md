@@ -136,8 +136,14 @@ firebase init
 The command `firebase deploy` is also a Firebase command-line utility which is used to deploy code and assets from your project directory to your Firebase project.
 
 ```
-firebase deploy --only firestore:rules,storage,functions
+firebase deploy --only firestore:rules,storage
 ```
+
+### Add Firebase Extension
+
+For account deletion to fully work you need to add a Firebase Extension to your Firebase project. The extension called [Delete User Data](https://firebase.google.com/products/extensions/delete-user-data) will remove any references to the deleted account, i.e. Cloud Firestore and Storage references.
+
+Use `users/{UID}` for Cloud Firestore paths and `{DEFAULT}/images/avatars/{UID}` for Cloud Storage paths.
 
 ## Attribution
 
