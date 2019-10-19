@@ -33,6 +33,10 @@ class DeleteAccountDialog extends Component {
 
     const { userData } = this.props;
 
+    if (!userData) {
+      return;
+    }
+
     if (username !== userData.username) {
       return;
     }
