@@ -7,6 +7,7 @@ import Hidden from '@material-ui/core/Hidden';
 import SignUpDialog from '../SignUpDialog';
 import SignInDialog from '../SignInDialog';
 import SettingsDialog from '../SettingsDialog';
+import DeleteAccountDialog from '../DeleteAccountDialog';
 import AlertDialog from '../AlertDialog';
 
 class DialogHost extends Component {
@@ -20,11 +21,22 @@ class DialogHost extends Component {
     const signUpDialog = dialogs.signUpDialog;
     const signInDialog = dialogs.signInDialog;
     const settingsDialog = dialogs.settingsDialog;
+    const deleteAccountDialog = dialogs.deleteAccountDialog;
     const signOutDialog = dialogs.signOutDialog;
 
     return (
       <>
         <Hidden xsDown>
+          {signedIn &&
+            <>
+              <DeleteAccountDialog
+                dialogProps={deleteAccountDialog.dialogProps}
+
+                {...deleteAccountDialog.props}
+              />
+            </>
+          }
+
           {!signedIn &&
             <>
               <SignUpDialog
@@ -44,15 +56,31 @@ class DialogHost extends Component {
 
         <Hidden smDown>
           {signedIn &&
-            <SettingsDialog
-              dialogProps={settingsDialog.dialogProps}
+            <>
+              <SettingsDialog
+                dialogProps={settingsDialog.dialogProps}
 
-              {...settingsDialog.props}
-            />
+                {...settingsDialog.props}
+              />
+            </>
           }
         </Hidden>
 
         <Hidden smUp>
+          {signedIn &&
+            <>
+              <DeleteAccountDialog
+                dialogProps={{
+                  fullScreen: true,
+
+                  ...deleteAccountDialog.dialogProps
+                }}
+
+                {...deleteAccountDialog.props}
+              />
+            </>
+          }
+
           {!signedIn &&
             <>
               <SignUpDialog
@@ -80,15 +108,17 @@ class DialogHost extends Component {
 
         <Hidden mdUp>
           {signedIn &&
-            <SettingsDialog
-              dialogProps={{
-                fullScreen: true,
+            <>
+              <SettingsDialog
+                dialogProps={{
+                  fullScreen: true,
 
-                ...settingsDialog.dialogProps
-              }}
+                  ...settingsDialog.dialogProps
+                }}
 
-              {...settingsDialog.props}
-            />
+                {...settingsDialog.props}
+              />
+            </>
           }
         </Hidden>
 

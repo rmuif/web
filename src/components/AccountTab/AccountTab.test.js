@@ -24,6 +24,8 @@ it('renders without crashing', () => {
         userData={{}}
 
         openSnackbar={() => {}}
+
+        onDeleteAccountClick={() => {}}
       />
     ),
     div

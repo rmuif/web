@@ -720,6 +720,11 @@ class AccountTab extends Component {
       userData
     } = this.props;
 
+    // Events
+    const {
+      onDeleteAccountClick
+    } = this.props;
+
     const {
       profileCompletion,
       securityRating,
@@ -1394,7 +1399,7 @@ class AccountTab extends Component {
             />
 
             <ListItemSecondaryAction>
-              <Button color="secondary" disabled={performingAction} variant="contained" onClick={this.deleteAccount}>Delete</Button>
+              <Button color="secondary" disabled={performingAction} variant="contained" onClick={onDeleteAccountClick}>Delete</Button>
             </ListItemSecondaryAction>
           </ListItem>
         </List>
@@ -1429,7 +1434,10 @@ AccountTab.propTypes = {
   userData: PropTypes.object.isRequired,
 
   // Functions
-  openSnackbar: PropTypes.func.isRequired
+  openSnackbar: PropTypes.func.isRequired,
+
+  // Events
+  onDeleteAccountClick: PropTypes.func.isRequired
 };
 
 export default withStyles(styles)(AccountTab);

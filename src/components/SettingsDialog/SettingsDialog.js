@@ -107,6 +107,11 @@ class SettingsDialog extends Component {
       openSnackbar
     } = this.props;
 
+    // Custom Functions
+    const {
+      onDeleteAccountClick
+    } = this.props;
+
     const { selectedTab } = this.state;
 
     return (
@@ -166,6 +171,8 @@ class SettingsDialog extends Component {
             userData={userData}
 
             openSnackbar={openSnackbar}
+
+            onDeleteAccountClick={onDeleteAccountClick}
           />
 
           <AppearanceTab
@@ -203,7 +210,10 @@ SettingsDialog.propTypes = {
   theme: PropTypes.object.isRequired,
 
   // Custom Functions
-  openSnackbar: PropTypes.func.isRequired
+  openSnackbar: PropTypes.func.isRequired,
+
+  // Custom Events
+  onDeleteAccountClick: PropTypes.func.isRequired
 };
 
 export default withStyles(styles)(SettingsDialog);
