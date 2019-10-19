@@ -44,6 +44,10 @@ class App extends Component {
         open: false
       },
 
+      deleteAccountDialog: {
+        open: false
+      },
+
       signOutDialog: {
         open: false
       },
@@ -78,6 +82,31 @@ class App extends Component {
     dialog.open = false;
 
     this.setState({ dialog }, callback);
+  };
+
+  deleteAccount = () => {
+    this.setState({
+      performingAction: true
+    }, () => {
+      authentication.deleteAccount().then(() => {
+        this.closeDialog('deleteAccountDialog', () => {
+          this.openSnackbar('Deleted account');
+        });
+      }).catch((reason) => {
+        const code = reason.code;
+        const message = reason.message;
+
+        switch (code) {
+          default:
+            this.openSnackbar(message);
+            return;
+        }
+      }).finally(() => {
+        this.setState({
+          performingAction: false
+        });
+      });
+    });
   };
 
   signOut = () => {
@@ -144,6 +173,7 @@ class App extends Component {
       signUpDialog,
       signInDialog,
       settingsDialog,
+      deleteAccountDialog,
       signOutDialog
     } = this.state;
 
@@ -232,7 +262,24 @@ class App extends Component {
                       userData: userData,
                       theme: theme,
 
-                      openSnackbar: this.openSnackbar
+                      openSnackbar: this.openSnackbar,
+
+                      onDeleteAccountClick: () => this.openDialog('deleteAccountDialog')
+                    }
+                  },
+
+                  deleteAccountDialog: {
+                    dialogProps: {
+                      open: deleteAccountDialog.open,
+
+                      onClose: () => this.closeDialog('deleteAccountDialog')
+                    },
+
+                    props: {
+                      performingAction: performingAction,
+                      userData: userData,
+
+                      deleteAccount: this.deleteAccount
                     }
                   },
 
