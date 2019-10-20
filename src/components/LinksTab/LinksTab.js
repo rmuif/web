@@ -83,6 +83,9 @@ class LinksTab extends Component {
   };
 
   render() {
+    // Properties
+    const { theme } = this.props;
+
     const { performingAction } = this.state;
 
     const authProviders = [
@@ -142,7 +145,7 @@ class LinksTab extends Component {
             return (
               <ListItem key={authProvider.providerId}>
                 <ListItemIcon>
-                  <Box color={authProvider.color}>
+                  <Box color={theme.type.id === 'light' ? authProvider.color : null}>
                     {authProvider.icon}
                   </Box>
                 </ListItemIcon>
@@ -191,6 +194,9 @@ class LinksTab extends Component {
 }
 
 LinksTab.propTypes = {
+  // Properties
+  theme: PropTypes.object.isRequired,
+
   // Functions
   openSnackbar: PropTypes.func.isRequired
 };

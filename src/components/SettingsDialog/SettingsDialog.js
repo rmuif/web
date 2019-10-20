@@ -182,6 +182,8 @@ class SettingsDialog extends Component {
           />
 
           <LinksTab
+            theme={theme}
+
             openSnackbar={openSnackbar}
           />
 
