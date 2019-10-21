@@ -107,7 +107,7 @@ The command `git push` is yet another Git command-line utility which is used to 
 git push -u origin master
 ```
 
-### Deploy Firebase rules and functions
+### Deploy Firebase rules
 
 The command `npm install` is an [npm](https://www.npmjs.com) command-line utility which is used to install the dependencies in the local `node_modules` folder. In global mode (i.e., with `-g` or `--global` appended to the command), it installs the current package context as a global package. The Firebase CLI provides a variety of tools for managing, viewing, and deploying to Firebase projects.
 
