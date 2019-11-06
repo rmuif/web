@@ -97,6 +97,7 @@ class DeleteAccountDialog extends Component {
 
           <TextField
             autoComplete="username"
+            autoFocus
             color="secondary"
             disabled={performingAction}
             fullWidth
