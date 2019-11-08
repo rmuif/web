@@ -43,9 +43,6 @@ const styles = (theme) => ({
 const initialState = {
   performingAction: false,
 
-  firstName: '',
-  lastName: '',
-  username: '',
   emailAddress: '',
   emailAddressConfirmation: '',
   password: '',
@@ -63,9 +60,6 @@ class SignUpDialog extends Component {
 
   signUp = () => {
     const {
-      firstName,
-      lastName,
-      username,
       emailAddress,
       emailAddressConfirmation,
       password,
@@ -73,17 +67,11 @@ class SignUpDialog extends Component {
     } = this.state;
 
     const errors = validate({
-      firstName: firstName,
-      lastName: lastName,
-      username: username,
       emailAddress: emailAddress,
       emailAddressConfirmation: emailAddressConfirmation,
       password: password,
       passwordConfirmation: passwordConfirmation
     }, {
-      firstName: constraints.firstName,
-      lastName: constraints.lastName,
-      username: constraints.username,
       emailAddress: constraints.emailAddress,
       emailAddressConfirmation: constraints.emailAddressConfirmation,
       password: constraints.password,
@@ -100,13 +88,7 @@ class SignUpDialog extends Component {
 
         errors: null
       }, () => {
-        authentication.signUp({
-          firstName: firstName,
-          lastName: lastName,
-          username: username,
-          emailAddress: emailAddress,
-          password: password
-        }).then((value) => {
+        authentication.signUpWithEmailAddressAndPassword(emailAddress, password).then((value) => {
           this.props.dialogProps.onClose();
         }).catch((reason) => {
           const code = reason.code;
@@ -175,19 +157,13 @@ class SignUpDialog extends Component {
 
   handleKeyPress = (event) => {
     const {
-      firstName,
-      lastName,
-      username,
       emailAddress,
       emailAddressConfirmation,
       password,
       passwordConfirmation
     } = this.state;
 
-    if (!firstName ||
-      !lastName ||
-      !username ||
-      !emailAddress ||
+    if (!emailAddress ||
       !emailAddressConfirmation ||
       !password ||
       !passwordConfirmation) {
@@ -207,30 +183,6 @@ class SignUpDialog extends Component {
 
   handleExited = () => {
     this.setState(initialState);
-  };
-
-  handleFirstNameChange = (event) => {
-    const firstName = event.target.value;
-
-    this.setState({
-      firstName: firstName
-    });
-  };
-
-  handleLastNameChange = (event) => {
-    const lastName = event.target.value;
-
-    this.setState({
-      lastName: lastName
-    });
-  };
-
-  handleUsernameChange = (event) => {
-    const username = event.target.value;
-
-    this.setState({
-      username: username
-    });
   };
 
   handleEmailAddressChange = (event) => {
@@ -275,9 +227,6 @@ class SignUpDialog extends Component {
     const {
       performingAction,
 
-      firstName,
-      lastName,
-      username,
       emailAddress,
       emailAddressConfirmation,
       password,
@@ -287,7 +236,7 @@ class SignUpDialog extends Component {
     } = this.state;
 
     return (
-      <Dialog fullWidth maxWidth="md" {...dialogProps} onKeyPress={this.handleKeyPress} onExited={this.handleExited}>
+      <Dialog fullWidth maxWidth="sm" {...dialogProps} onKeyPress={this.handleKeyPress} onExited={this.handleExited}>
         <DialogTitle>
           Sign up for an account
         </DialogTitle>
@@ -295,7 +244,7 @@ class SignUpDialog extends Component {
         <Hidden smDown>
           <DialogContent className={classes.dialogContent}>
             <Grid container direction="row">
-              <Grid item xs={3}>
+              <Grid item xs={4}>
                 <AuthProviderList
                   performingAction={performingAction}
 
@@ -307,66 +256,8 @@ class SignUpDialog extends Component {
                 <Divider className={classes.divider} orientation="vertical" />
               </Grid>
 
-              <Grid item xs={8}>
-                <Grid container spacing={4}>
-                  <Grid item xs>
-                    <TextField
-                      autoComplete="given-name"
-                      disabled={performingAction}
-                      error={!!(errors && errors.firstName)}
-                      fullWidth
-                      helperText={(errors && errors.firstName) ? errors.firstName[0] : ''}
-                      label="First name"
-                      placeholder="John"
-                      required
-                      type="text"
-                      value={firstName}
-                      variant="outlined"
-
-                      onChange={this.handleFirstNameChange}
-                    />
-                  </Grid>
-
-                  <Grid item xs>
-                    <TextField
-                      autoComplete="family-name"
-                      disabled={performingAction}
-                      error={!!(errors && errors.lastName)}
-                      fullWidth
-                      helperText={(errors && errors.lastName) ? errors.lastName[0] : ''}
-                      label="Last name"
-                      placeholder="Doe"
-                      required
-                      type="text"
-                      value={lastName}
-                      variant="outlined"
-
-                      onChange={this.handleLastNameChange}
-                    />
-                  </Grid>
-                </Grid>
-
-                <Grid container spacing={4}>
-                  <Grid item xs>
-                    <TextField
-                      autoComplete="username"
-                      disabled={performingAction}
-                      error={!!(errors && errors.username)}
-                      fullWidth
-                      helperText={(errors && errors.username) ? errors.username[0] : ''}
-                      label="Username"
-                      placeholder="John"
-                      required
-                      type="text"
-                      value={username}
-                      variant="outlined"
-
-                      onChange={this.handleUsernameChange}
-                    />
-                  </Grid>
-                </Grid>
-
-                <Grid container spacing={4}>
+              <Grid item xs={7}>
+                <Grid container direction="column" spacing={2}>
                   <Grid item xs>
                     <TextField
                       autoComplete="email"
@@ -402,9 +293,7 @@ class SignUpDialog extends Component {
                       onChange={this.handleEmailAddressConfirmationChange}
                     />
                   </Grid>
-                </Grid>
 
-                <Grid container spacing={4}>
                   <Grid item xs>
                     <TextField
                       autoComplete="new-password"
@@ -456,60 +345,6 @@ class SignUpDialog extends Component {
             />
 
             <Grid container direction="column" spacing={2}>
-              <Grid item xs>
-                <TextField
-                  autoComplete="given-name"
-                  disabled={performingAction}
-                  error={!!(errors && errors.firstName)}
-                  fullWidth
-                  helperText={(errors && errors.firstName) ? errors.firstName[0] : ''}
-                  label="First name"
-                  placeholder="John"
-                  required
-                  type="text"
-                  value={firstName}
-                  variant="outlined"
-
-                  onChange={this.handleFirstNameChange}
-                />
-              </Grid>
-
-              <Grid item xs>
-                <TextField
-                  autoComplete="family-name"
-                  disabled={performingAction}
-                  error={!!(errors && errors.lastName)}
-                  fullWidth
-                  helperText={(errors && errors.lastName) ? errors.lastName[0] : ''}
-                  label="Last name"
-                  placeholder="Doe"
-                  required
-                  type="text"
-                  value={lastName}
-                  variant="outlined"
-
-                  onChange={this.handleLastNameChange}
-                />
-              </Grid>
-
-              <Grid item xs>
-                <TextField
-                  autoComplete="username"
-                  disabled={performingAction}
-                  error={!!(errors && errors.username)}
-                  fullWidth
-                  helperText={(errors && errors.username) ? errors.username[0] : ''}
-                  label="Username"
-                  placeholder="John"
-                  required
-                  type="text"
-                  value={username}
-                  variant="outlined"
-
-                  onChange={this.handleUsernameChange}
-                />
-              </Grid>
-
               <Grid item xs>
                 <TextField
                   autoComplete="email"
@@ -591,9 +426,6 @@ class SignUpDialog extends Component {
           <Button
             color="primary"
             disabled={
-              !firstName ||
-              !lastName ||
-              !username ||
               !emailAddress ||
               !emailAddressConfirmation ||
               !password ||
