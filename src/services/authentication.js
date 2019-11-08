@@ -82,6 +82,34 @@ authentication.signUp = (fields) => {
   });
 };
 
+authentication.signUpWithEmailAddressAndPassword = (emailAddress, password) => {
+  return new Promise((resolve, reject) => {
+    if (!emailAddress || !password) {
+      reject();
+
+      return;
+    }
+
+    const currentUser = auth.currentUser;
+
+    if (currentUser) {
+      reject();
+
+      return;
+    }
+
+    auth.createUserWithEmailAndPassword(emailAddress, password).then((value) => {
+      analytics.logEvent('sign_up', {
+        method: 'password'
+      });
+
+      resolve(value);
+    }).catch((reason) => {
+      reject(reason);
+    });
+  });
+};
+
 authentication.signIn = (emailAddress, password) => {
   return new Promise((resolve, reject) => {
     if (!emailAddress || !password) {
