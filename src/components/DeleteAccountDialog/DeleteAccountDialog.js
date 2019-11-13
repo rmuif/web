@@ -25,20 +25,18 @@ class DeleteAccountDialog extends Component {
   }
 
   handleKeyPress = (event) => {
-    const { username } = this.state;
-
-    if (!username) {
-      return;
-    }
-
     const { userData } = this.props;
 
-    if (!userData) {
-      return;
-    }
+    if (userData && userData.username) {
+      const { username } = this.state;
 
-    if (username !== userData.username) {
-      return;
+      if (!username) {
+        return;
+      }
+
+      if (username !== userData.username) {
+        return;
+      }
     }
 
     const key = event.key;
@@ -89,32 +87,36 @@ class DeleteAccountDialog extends Component {
               All data associated with your account will be deleted.
             </DialogContentText>
 
-            <DialogContentText>
-              Type your username and <Hidden xsDown>click</Hidden><Hidden smUp>tap</Hidden> Delete to delete your account.
-              This action is irreversible.
-            </DialogContentText>
+            {userData.username &&
+              <DialogContentText>
+                Type your username and <Hidden xsDown>click</Hidden><Hidden smUp>tap</Hidden> Delete to delete your account.
+                This action is irreversible.
+              </DialogContentText>
+            }
           </Box>
 
-          <TextField
-            autoComplete="username"
-            autoFocus
-            color="secondary"
-            disabled={performingAction}
-            fullWidth
-            label="Username"
-            placeholder={userData.username}
-            required
-            type="text"
-            value={username}
-            variant="outlined"
+          {userData.username &&
+            <TextField
+              autoComplete="username"
+              autoFocus
+              color="secondary"
+              disabled={performingAction}
+              fullWidth
+              label="Username"
+              placeholder={userData.username}
+              required
+              type="text"
+              value={username}
+              variant="outlined"
 
-            onChange={this.handleUsernameChange}
-          />
+              onChange={this.handleUsernameChange}
+            />
+          }
         </DialogContent>
 
         <DialogActions>
           <Button color="secondary" disabled={performingAction} onClick={dialogProps.onClose}>Cancel</Button>
-          <Button color="secondary" disabled={performingAction || (username !== userData.username)} variant="contained" onClick={deleteAccount}>Delete</Button>
+          <Button color="secondary" disabled={performingAction || (userData.username && username !== userData.username)} variant="contained" onClick={deleteAccount}>Delete</Button>
         </DialogActions>
       </Dialog>
     );
