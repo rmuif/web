@@ -81,7 +81,7 @@ class DeleteAccountDialog extends Component {
         </DialogTitle>
 
         <DialogContent>
-          <Box mb={2}>
+          <Box mb={userData.username && 2}>
             <DialogContentText>
               Deleted accounts can’t be recovered.
               All data associated with your account will be deleted.
