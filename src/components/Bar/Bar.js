@@ -13,6 +13,8 @@ import Avatar from '@material-ui/core/Avatar';
 import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
 
+import PersonIcon from '@material-ui/icons/Person';
+
 class Bar extends Component {
   constructor(props) {
     super(props);
@@ -24,26 +26,39 @@ class Bar extends Component {
     };
   }
 
-  getNameInitials = () => {
-    const { user, userData } = this.props;
+  getAvatar = () => {
+    const { signedIn, user } = this.props;
+
+    if (!signedIn || !user) {
+      return null;
+    }
+
+    const photoUrl = user.photoURL;
+
+    if (photoUrl) {
+      return (<Avatar alt="Avatar" src={photoUrl} />);
+    }
+
+    const { userData } = this.props;
+
+    if (!userData) {
+      return <PersonIcon />;
+    }
 
     const firstName = userData.firstName;
     const lastName = userData.lastName;
     const username = userData.username;
-    const displayName = user.displayName;
 
     if (firstName && lastName) {
-      return firstName.charAt(0) + lastName.charAt(0);
+      return (<Avatar alt="Avatar">{firstName.charAt(0) + lastName.charAt(0)}</Avatar>);
     } else if (firstName) {
-      return firstName.charAt(0)
+      return (<Avatar alt="Avatar">{firstName.charAt(0)}</Avatar>);
     } else if (lastName) {
-      return lastName.charAt(0);
+      return (<Avatar alt="Avatar">{lastName.charAt(0)}</Avatar>);
     } else if (username) {
-      return username.charAt(0);
-    } else if (displayName) {
-      return displayName.charAt(0);
+      return (<Avatar alt="Avatar">{username.charAt(0)}</Avatar>);
     } else {
-      return 'NN';
+      return <PersonIcon />;
     }
   };
 
@@ -94,15 +109,7 @@ class Bar extends Component {
           {signedIn &&
             <>
               <IconButton color="inherit" disabled={performingAction} onClick={this.openMenu}>
-                {user.photoURL &&
-                  <Avatar alt="Avatar" src={user.photoURL} />
-                }
-
-                {!user.photoURL &&
-                  <Avatar alt="Avatar">
-                    {this.getNameInitials()}
-                  </Avatar>
-                }
+                {this.getAvatar()}
               </IconButton>
 
               <Menu anchorEl={menu.anchorEl} open={Boolean(menu.anchorEl)} onClose={this.closeMenu}>
