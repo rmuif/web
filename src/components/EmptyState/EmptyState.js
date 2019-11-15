@@ -28,7 +28,7 @@ class EmptyState extends Component {
       <div className={classes.center}>
         {icon}
         {title && <Typography color="textSecondary" variant="h4">{title}</Typography>}
-        {description && <Typography color="textSecondary" variant="subtitle1">{description}</Typography>}
+        {description && <Typography color="textSecondary" variant="subtitle1" gutterBottom>{description}</Typography>}
         {button}
       </div>
     );
