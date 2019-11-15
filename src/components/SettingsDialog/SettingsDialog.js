@@ -67,14 +67,20 @@ const tabs = [
   }
 ];
 
+const initialState = {
+  selectedTab: 0
+};
+
 class SettingsDialog extends Component {
   constructor(props) {
     super(props);
 
-    this.state = {
-      selectedTab: 0
-    };
+    this.state = initialState;
   }
+
+  handleExited = () => {
+    this.setState(initialState);
+  };
 
   handleTabChange = (event, value) => {
     this.setState({
@@ -115,7 +121,7 @@ class SettingsDialog extends Component {
     const { selectedTab } = this.state;
 
     return (
-      <Dialog {...dialogProps}>
+      <Dialog {...dialogProps} onExited={this.handleExited}>
         <DialogTitle disableTypography>
           <Typography variant="h6">
             Settings
