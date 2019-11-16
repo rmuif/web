@@ -664,4 +664,88 @@ authentication.deleteAccount = () => {
   });
 };
 
+authentication.user = {};
+
+authentication.user.getName = (fields) => {
+  if (!fields) {
+    return null;
+  }
+
+  const firstName = fields.firstName;
+  const username = fields.username;
+  const displayName = fields.displayName;
+  const lastName = fields.lastName;
+
+  if (firstName) {
+    return firstName;
+  }
+
+  if (username) {
+    return username;
+  }
+
+  if (displayName) {
+    return displayName;
+  }
+
+  if (lastName) {
+    return lastName;
+  }
+
+  return null;
+};
+
+authentication.user.getFullName = (fields) => {
+  if (!fields) {
+    return null;
+  }
+
+  const firstName = fields.firstName;
+  const lastName = fields.lastName;
+  const displayName = fields.displayName;
+
+  if (firstName && lastName) {
+    return `${firstName} ${lastName}`;
+  }
+
+  if (displayName) {
+    return displayName;
+  }
+
+  return null;
+};
+
+authentication.user.getNameInitials = (fields) => {
+  if (!fields) {
+    return null;
+  }
+
+  const firstName = fields.firstName;
+  const lastName = fields.lastName;
+  const username = fields.username;
+  const displayName = fields.displayName;
+
+  if (firstName && lastName) {
+    return firstName.charAt(0) + lastName.charAt(0);
+  }
+
+  if (firstName) {
+    return firstName.charAt(0);
+  }
+
+  if (username) {
+    return username.charAt(0);
+  }
+
+  if (lastName) {
+    return lastName.charAt(0);
+  }
+
+  if (displayName) {
+    return displayName.charAt(0);
+  }
+
+  return null;
+};
+
 export default authentication;
