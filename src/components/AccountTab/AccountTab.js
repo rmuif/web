@@ -72,6 +72,10 @@ const styles = (theme) => ({
     cursor: 'default'
   },
 
+  personIcon: {
+    fontSize: theme.spacing(7)
+  },
+
   small: {
     width: theme.spacing(4),
     height: theme.spacing(4),
@@ -107,27 +111,29 @@ class AccountTab extends Component {
     this.state = initialState;
   }
 
-  getNameInitials = () => {
-    const { user, userData } = this.props;
+  getNameInitialsOrIcon = () => {
+    const { user } = this.props;
 
-    const firstName = userData.firstName;
-    const lastName = userData.lastName;
-    const username = userData.username;
-    const displayName = user.displayName;
-
-    if (firstName && lastName) {
-      return firstName.charAt(0) + lastName.charAt(0);
-    } else if (firstName) {
-      return firstName.charAt(0)
-    } else if (lastName) {
-      return lastName.charAt(0);
-    } else if (username) {
-      return username.charAt(0);
-    } else if (displayName) {
-      return displayName.charAt(0);
-    } else {
-      return 'NN';
+    if (!user) {
+      return null;
     }
+
+    const { classes, userData } = this.props;
+
+    if (!userData) {
+      return <PersonIcon className={classes.personIcon} />;
+    }
+
+    const nameInitials = authentication.user.getNameInitials({
+      ...user,
+      ...userData
+    });
+
+    if (nameInitials) {
+      return nameInitials;
+    }
+
+    return <PersonIcon className={classes.personIcon} />;
   };
 
   uploadAvatar = () => {
@@ -822,14 +828,18 @@ class AccountTab extends Component {
                                 </Fade>
                               }>
                                 <Avatar className={classes.avatar} alt="Avatar">
-                                  <Typography className={classes.nameInitials} variant="h2">{this.getNameInitials()}</Typography>
+                                  <Typography className={classes.nameInitials} variant="h2">
+                                    {this.getNameInitialsOrIcon()}
+                                  </Typography>
                                 </Avatar>
                               </Badge>
                             }
 
                             {!loadingAvatar &&
                               <Avatar className={classes.avatar} alt="Avatar">
-                                <Typography className={classes.nameInitials} variant="h2">{this.getNameInitials()}</Typography>
+                                <Typography className={classes.nameInitials} variant="h2">
+                                  {this.getNameInitialsOrIcon()}
+                                </Typography>
                               </Avatar>
                             }
                           </>
@@ -969,14 +979,18 @@ class AccountTab extends Component {
                             </Fade>
                           }>
                             <Avatar className={classes.avatar} alt="Avatar">
-                              <Typography className={classes.nameInitials} variant="h2">{this.getNameInitials()}</Typography>
+                              <Typography className={classes.nameInitials} variant="h2">
+                                {this.getNameInitialsOrIcon()}
+                              </Typography>
                             </Avatar>
                           </Badge>
                         }
 
                         {!loadingAvatar &&
                           <Avatar className={classes.avatar} alt="Avatar">
-                            <Typography className={classes.nameInitials} variant="h2">{this.getNameInitials()}</Typography>
+                            <Typography className={classes.nameInitials} variant="h2">
+                              {this.getNameInitialsOrIcon()}
+                            </Typography>
                           </Avatar>
                         }
                       </>

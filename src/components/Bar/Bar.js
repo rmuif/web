@@ -15,6 +15,8 @@ import MenuItem from '@material-ui/core/MenuItem';
 
 import PersonIcon from '@material-ui/icons/Person';
 
+import authentication from '../../services/authentication';
+
 class Bar extends Component {
   constructor(props) {
     super(props);
@@ -45,21 +47,16 @@ class Bar extends Component {
       return <PersonIcon />;
     }
 
-    const firstName = userData.firstName;
-    const lastName = userData.lastName;
-    const username = userData.username;
+    const nameInitials = authentication.user.getNameInitials({
+      ...user,
+      ...userData
+    });
 
-    if (firstName && lastName) {
-      return (<Avatar alt="Avatar">{firstName.charAt(0) + lastName.charAt(0)}</Avatar>);
-    } else if (firstName) {
-      return (<Avatar alt="Avatar">{firstName.charAt(0)}</Avatar>);
-    } else if (lastName) {
-      return (<Avatar alt="Avatar">{lastName.charAt(0)}</Avatar>);
-    } else if (username) {
-      return (<Avatar alt="Avatar">{username.charAt(0)}</Avatar>);
-    } else {
-      return <PersonIcon />;
+    if (nameInitials) {
+      return <Avatar alt="Avatar">{nameInitials}</Avatar>;
     }
+
+    return <PersonIcon />;
   };
 
   openMenu = (event) => {
