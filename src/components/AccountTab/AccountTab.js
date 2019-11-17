@@ -148,7 +148,11 @@ class AccountTab extends Component {
       loadingAvatar: true
     }, () => {
       authentication.changeAvatar(avatar).then((value) => {
-        this.calculateProfileCompletion(() => {
+        const { user, userData } = this.props;
+
+        this.setState({
+          profileCompletion: authentication.user.getProfileCompletion({ ...user, ...userData })
+        }, () => {
           this.props.openSnackbar('Changed avatar');
         });
       }).catch((reason) => {
@@ -195,7 +199,11 @@ class AccountTab extends Component {
         loadingAvatar: true
       }, () => {
         authentication.removeAvatar().then((value) => {
-          this.calculateProfileCompletion(() => {
+          const { user, userData } = this.props;
+
+          this.setState({
+            profileCompletion: authentication.user.getProfileCompletion({ ...user, ...userData })
+          }, () => {
             this.props.openSnackbar('Removed avatar');
           });
         }).catch((reason) => {
@@ -215,82 +223,6 @@ class AccountTab extends Component {
         });
       });
     }
-  };
-
-  calculateProfileCompletion = (callback) => {
-    const { user, userData } = this.props;
-
-    if (!user || !userData) {
-      return;
-    }
-
-    let profileCompletion = 0;
-
-    const fields = [
-      user.photoURL,
-      userData.firstName,
-      userData.lastName,
-      userData.username,
-      user.email,
-      user.email && user.emailVerified
-    ];
-
-    fields.forEach((field) => {
-      if (field) {
-        profileCompletion += 100 / fields.length;
-      }
-    });
-
-    this.setState({
-      profileCompletion: Math.floor(profileCompletion)
-    }, () => {
-      if (callback && typeof callback === 'function') {
-        callback();
-      }
-    });
-  };
-
-  calculateSecurityRating = (callback) => {
-    const { user, userData } = this.props;
-
-    if (!user || !user.metadata || !userData) {
-      return;
-    }
-
-    let creationTime = user.metadata.creationTime;
-
-    if (!creationTime) {
-      return;
-    }
-
-    creationTime = moment(creationTime);
-
-    let lastPasswordChange = userData.lastPasswordChange;
-    let securityRating = 0;
-
-    if (lastPasswordChange) {
-      lastPasswordChange = moment(lastPasswordChange.toDate());
-
-      if (creationTime.diff(lastPasswordChange, 'days') >= 365.242199) {
-        securityRating = 50;
-      } else {
-        securityRating = 100;
-      }
-    } else {
-      if (moment().diff(creationTime, 'days') >= 365.242199) {
-        securityRating = 50;
-      } else {
-        securityRating = 100;
-      }
-    }
-
-    this.setState({
-      securityRating: securityRating
-    }, () => {
-      if (callback && typeof callback === 'function') {
-        callback();
-      }
-    });
   };
 
   showField = (fieldId) => {
@@ -350,7 +282,11 @@ class AccountTab extends Component {
         performingAction: true
       }, () => {
         authentication.changeFirstName(firstName).then(() => {
-          this.calculateProfileCompletion(() => {
+          const { user, userData } = this.props;
+
+          this.setState({
+            profileCompletion: authentication.user.getProfileCompletion({ ...user, ...userData })
+          }, () => {
             this.hideFields(() => {
               this.props.openSnackbar('Changed first name');
             });
@@ -403,7 +339,11 @@ class AccountTab extends Component {
         performingAction: true
       }, () => {
         authentication.changeLastName(lastName).then(() => {
-          this.calculateProfileCompletion(() => {
+          const { user, userData } = this.props;
+
+          this.setState({
+            profileCompletion: authentication.user.getProfileCompletion({ ...user, ...userData })
+          }, () => {
             this.hideFields(() => {
               this.props.openSnackbar('Changed last name');
             });
@@ -456,7 +396,11 @@ class AccountTab extends Component {
         performingAction: true
       }, () => {
         authentication.changeUsername(username).then(() => {
-          this.calculateProfileCompletion(() => {
+          const { user, userData } = this.props;
+
+          this.setState({
+            profileCompletion: authentication.user.getProfileCompletion({ ...user, ...userData })
+          }, () => {
             this.hideFields(() => {
               this.props.openSnackbar('Changed username');
             });
@@ -509,7 +453,11 @@ class AccountTab extends Component {
         performingAction: true
       }, () => {
         authentication.changeEmailAddress(emailAddress).then(() => {
-          this.calculateProfileCompletion(() => {
+          const { user, userData } = this.props;
+
+          this.setState({
+            profileCompletion: authentication.user.getProfileCompletion({ ...user, ...userData })
+          }, () => {
             this.hideFields(() => {
               this.props.openSnackbar('Changed e-mail address');
             });
@@ -1422,8 +1370,12 @@ class AccountTab extends Component {
   }
 
   componentDidMount() {
-    this.calculateProfileCompletion();
-    this.calculateSecurityRating();
+    const { user, userData } = this.props;
+
+    this.setState({
+      profileCompletion: authentication.user.getProfileCompletion({ ...user, ...userData }),
+      securityRating: authentication.user.getSecurityRating(user, userData)
+    });
   }
 
   componentWillUnmount() {
