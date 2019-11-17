@@ -89,7 +89,7 @@ class Bar extends Component {
 
   render() {
     // Properties
-    const { performingAction, signedIn, user } = this.props;
+    const { performingAction, signedIn } = this.props;
 
     // Events
     const { onSignUpClick, onSignInClick } = this.props;
