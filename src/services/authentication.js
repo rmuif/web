@@ -1,5 +1,7 @@
 import firebase, { analytics, auth, firestore, storage } from '../firebase';
 
+import moment from 'moment';
+
 const avatarFileTypes = [
   'image/gif',
   'image/jpeg',
@@ -746,6 +748,70 @@ authentication.user.getNameInitials = (fields) => {
   }
 
   return null;
+};
+
+authentication.user.getProfileCompletion = (fields) => {
+  if (!fields) {
+    return null;
+  }
+
+  fields = [
+    fields.photoURL,
+    fields.firstName,
+    fields.lastName,
+    fields.username,
+    fields.email,
+    fields.email && fields.emailVerified
+  ];
+
+  if (!fields) {
+    return null;
+  }
+
+  let profileCompletion = 0;
+
+  fields.forEach((field) => {
+    if (field) {
+      profileCompletion += 100 / fields.length;
+    }
+  });
+
+  return Math.floor(profileCompletion);
+};
+
+authentication.user.getSecurityRating = (user, userData) => {
+  if (!user || !user.metadata || !userData) {
+    return null;
+  }
+
+  let creationTime = user.metadata.creationTime;
+
+  if (!creationTime) {
+    return null;
+  }
+
+  creationTime = moment(creationTime);
+
+  let lastPasswordChange = userData.lastPasswordChange;
+  let securityRating = 0;
+
+  if (lastPasswordChange) {
+    lastPasswordChange = moment(lastPasswordChange.toDate());
+
+    if (creationTime.diff(lastPasswordChange, 'days') >= 365.242199) {
+      securityRating = 50;
+    } else {
+      securityRating = 100;
+    }
+  } else {
+    if (moment().diff(creationTime, 'days') >= 365.242199) {
+      securityRating = 50;
+    } else {
+      securityRating = 100;
+    }
+  }
+
+  return securityRating;
 };
 
 export default authentication;
