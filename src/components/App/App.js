@@ -340,7 +340,7 @@ class App extends Component {
 
         if (this.mounted) {
           this.setState({
-            user: null,
+            user: user,
             userData: null,
             theme: theming.defaultTheme,
 
@@ -360,7 +360,7 @@ class App extends Component {
 
         if (this.mounted) {
           this.setState({
-            user: null,
+            user: user,
             userData: null,
             theme: theming.defaultTheme,
 
@@ -379,7 +379,7 @@ class App extends Component {
 
           if (this.mounted) {
             this.setState({
-              user: null,
+              user: user,
               userData: null,
               theme: theming.defaultTheme,
 
@@ -399,7 +399,7 @@ class App extends Component {
 
           if (this.mounted) {
             this.setState({
-              user: null,
+              user: user,
               userData: null,
               theme: theming.defaultTheme,
 
@@ -435,7 +435,7 @@ class App extends Component {
 
         if (this.mounted) {
           this.setState({
-            user: null,
+            user: user,
             userData: null,
             theme: theming.defaultTheme,
 
