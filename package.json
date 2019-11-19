@@ -6,9 +6,8 @@
     "@material-ui/core": "^4.6.1",
     "@material-ui/icons": "^4.5.1",
     "@material-ui/styles": "^4.4.3",
-    "lodash": "^4.17.15",
     "firebase": "^7.4.0",
-    "gh-pages": "^2.1.1",
+    "lodash": "^4.17.15",
     "mdi-material-ui": "^6.8.0",
     "moment": "^2.24.0",
     "numeral": "^2.0.6",
@@ -38,5 +37,8 @@
     "not ie <= 11",
     "not op_mini all"
   ],
-  "homepage": "https://phoqe.me/react-material-ui-firebase"
+  "homepage": "https://phoqe.me/react-material-ui-firebase",
+  "devDependencies": {
+    "gh-pages": "^2.1.1"
+  }
 }
