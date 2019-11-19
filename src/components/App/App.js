@@ -28,7 +28,6 @@ class App extends Component {
       userData: null,
       theme: theming.defaultTheme,
 
-      signedIn: false,
       ready: false,
       performingAction: false,
 
@@ -164,7 +163,6 @@ class App extends Component {
       user,
       userData,
       theme,
-      signedIn,
       ready,
       performingAction,
     } = this.state;
@@ -190,7 +188,6 @@ class App extends Component {
         {ready &&
           <>
             <Bar
-              signedIn={signedIn}
               performingAction={performingAction}
 
               user={user}
@@ -203,10 +200,10 @@ class App extends Component {
               onSignOutClick={() => this.openDialog('signOutDialog')}
             />
 
-            <Router signedIn={signedIn} />
+            <Router user={user} />
 
             <DialogHost
-              signedIn={signedIn}
+              user={user}
               dialogs={
                 {
                   signUpDialog: {
@@ -327,7 +324,6 @@ class App extends Component {
             userData: null,
             theme: theming.defaultTheme,
 
-            signedIn: false,
             ready: true
           });
         }
@@ -348,7 +344,6 @@ class App extends Component {
             userData: null,
             theme: theming.defaultTheme,
 
-            signedIn: false,
             ready: true
           });
         }
@@ -369,7 +364,6 @@ class App extends Component {
             userData: null,
             theme: theming.defaultTheme,
 
-            signedIn: false,
             ready: true
           });
         }
@@ -389,7 +383,6 @@ class App extends Component {
               userData: null,
               theme: theming.defaultTheme,
 
-              signedIn: false,
               ready: true
             });
           }
@@ -410,7 +403,6 @@ class App extends Component {
               userData: null,
               theme: theming.defaultTheme,
 
-              signedIn: false,
               ready: true
             });
           }
@@ -433,7 +425,6 @@ class App extends Component {
             user: user,
             userData: data,
 
-            signedIn: true,
             ready: true
           });
         }
@@ -448,7 +439,6 @@ class App extends Component {
             userData: null,
             theme: theming.defaultTheme,
 
-            signedIn: false,
             ready: true
           }, () => {
             const code = error.code;

@@ -29,9 +29,9 @@ class Bar extends Component {
   }
 
   getAvatar = () => {
-    const { signedIn, user } = this.props;
+    const { user } = this.props;
 
-    if (!signedIn || !user) {
+    if (!user) {
       return null;
     }
 
@@ -89,7 +89,7 @@ class Bar extends Component {
 
   render() {
     // Properties
-    const { performingAction, signedIn } = this.props;
+    const { performingAction, user } = this.props;
 
     // Events
     const { onSignUpClick, onSignInClick } = this.props;
@@ -103,7 +103,7 @@ class Bar extends Component {
             <Typography color="inherit" variant="h6">{process.env.REACT_APP_NAME}</Typography>
           </Box>
 
-          {signedIn &&
+          {user &&
             <>
               <IconButton color="inherit" disabled={performingAction} onClick={this.openMenu}>
                 {this.getAvatar()}
@@ -116,7 +116,7 @@ class Bar extends Component {
             </>
           }
 
-          {!signedIn &&
+          {!user &&
             <>
               <Box mr={1}>
                 <Button color="secondary" disabled={performingAction} variant="contained" onClick={onSignUpClick}>Sign Up</Button>
@@ -132,14 +132,12 @@ class Bar extends Component {
 }
 
 Bar.defaultProps = {
-  performingAction: false,
-  signedIn: false
+  performingAction: false
 };
 
 Bar.propTypes = {
   // Properties
   performingAction: PropTypes.bool.isRequired,
-  signedIn: PropTypes.bool.isRequired,
   user: PropTypes.object,
   userData: PropTypes.object,
 

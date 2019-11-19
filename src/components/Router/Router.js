@@ -10,13 +10,13 @@ import NotFoundContent from '../NotFoundContent';
 class Router extends Component {
   render() {
     // Properties
-    const { signedIn } = this.props;
+    const { user } = this.props;
 
     return (
       <BrowserRouter basename={process.env.REACT_APP_BASENAME}>
         <Switch>
           <Route path="/" exact>
-            <HomeContent signedIn={signedIn} />
+            <HomeContent user={user} />
           </Route>
 
           <Route>
@@ -28,13 +28,9 @@ class Router extends Component {
   }
 }
 
-Router.defaultProps = {
-  signedIn: false
-};
-
 Router.propTypes = {
   // Properties
-  signedIn: PropTypes.bool.isRequired
+  user: PropTypes.object
 };
 
 export default Router;
