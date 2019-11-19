@@ -9,9 +9,7 @@ it('renders without crashing', () => {
 
   ReactDOM.render(
     (
-      <Router
-        signedIn={false}
-      />
+      <Router />
     ),
     div
   );

@@ -14,7 +14,7 @@ class DialogHost extends Component {
   render() {
     // Properties
     const {
-      signedIn,
+      user,
       dialogs
     } = this.props;
 
@@ -27,7 +27,7 @@ class DialogHost extends Component {
     return (
       <>
         <Hidden xsDown>
-          {signedIn &&
+          {user &&
             <>
               <DeleteAccountDialog
                 dialogProps={deleteAccountDialog.dialogProps}
@@ -37,7 +37,7 @@ class DialogHost extends Component {
             </>
           }
 
-          {!signedIn &&
+          {!user &&
             <>
               <SignUpDialog
                 dialogProps={signUpDialog.dialogProps}
@@ -55,7 +55,7 @@ class DialogHost extends Component {
         </Hidden>
 
         <Hidden smDown>
-          {signedIn &&
+          {user &&
             <>
               <SettingsDialog
                 dialogProps={settingsDialog.dialogProps}
@@ -67,7 +67,7 @@ class DialogHost extends Component {
         </Hidden>
 
         <Hidden smUp>
-          {signedIn &&
+          {user &&
             <>
               <DeleteAccountDialog
                 dialogProps={{
@@ -81,7 +81,7 @@ class DialogHost extends Component {
             </>
           }
 
-          {!signedIn &&
+          {!user &&
             <>
               <SignUpDialog
                 dialogProps={{
@@ -107,7 +107,7 @@ class DialogHost extends Component {
         </Hidden>
 
         <Hidden mdUp>
-          {signedIn &&
+          {user &&
             <>
               <SettingsDialog
                 dialogProps={{
@@ -122,7 +122,7 @@ class DialogHost extends Component {
           }
         </Hidden>
 
-        {signedIn &&
+        {user &&
           <>
             <AlertDialog
               dialogProps={signOutDialog.dialogProps}
@@ -136,13 +136,9 @@ class DialogHost extends Component {
   }
 }
 
-DialogHost.defaultProps = {
-  signedIn: false
-};
-
 DialogHost.propTypes = {
   // Properties
-  signedIn: PropTypes.bool.isRequired,
+  user: PropTypes.object,
   dialogs: PropTypes.object.isRequired
 };
 
