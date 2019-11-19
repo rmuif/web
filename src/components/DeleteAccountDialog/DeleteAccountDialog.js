@@ -74,6 +74,8 @@ class DeleteAccountDialog extends Component {
 
     const { username } = this.state;
 
+    const hasUsername = userData && userData.username;
+
     return (
       <Dialog {...dialogProps} onKeyPress={this.handleKeyPress} onExited={this.handleExited}>
         <DialogTitle>
@@ -81,13 +83,13 @@ class DeleteAccountDialog extends Component {
         </DialogTitle>
 
         <DialogContent>
-          <Box mb={userData.username && 2}>
+          <Box mb={hasUsername && 2}>
             <DialogContentText>
               Deleted accounts can’t be recovered.
               All data associated with your account will be deleted.
             </DialogContentText>
 
-            {userData.username &&
+            {hasUsername &&
               <DialogContentText>
                 Type your username and <Hidden xsDown>click</Hidden><Hidden smUp>tap</Hidden> Delete to delete your account.
                 This action is irreversible.
@@ -95,7 +97,7 @@ class DeleteAccountDialog extends Component {
             }
           </Box>
 
-          {userData.username &&
+          {hasUsername &&
             <TextField
               autoComplete="username"
               autoFocus
@@ -116,7 +118,7 @@ class DeleteAccountDialog extends Component {
 
         <DialogActions>
           <Button color="secondary" disabled={performingAction} onClick={dialogProps.onClose}>Cancel</Button>
-          <Button color="secondary" disabled={performingAction || (userData.username && username !== userData.username)} variant="contained" onClick={deleteAccount}>Delete</Button>
+          <Button color="secondary" disabled={performingAction || (hasUsername && username !== userData.username)} variant="contained" onClick={deleteAccount}>Delete</Button>
         </DialogActions>
       </Dialog>
     );
