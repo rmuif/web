@@ -131,7 +131,7 @@ DeleteAccountDialog.propTypes = {
 
   // Custom Properties
   performingAction: PropTypes.bool.isRequired,
-  userData: PropTypes.object.isRequired,
+  userData: PropTypes.object,
 
   // Custom Functions
   deleteAccount: PropTypes.func.isRequired

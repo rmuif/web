@@ -210,6 +210,8 @@ class SecurityTab extends Component {
       errors
     } = this.state;
 
+    const hasChangedPassword = userData && userData.lastPasswordChange;
+
     return (
       <DialogContent>
         <List disablePadding>
@@ -267,14 +269,14 @@ class SecurityTab extends Component {
                 <Hidden xsDown>
                   <ListItemText
                     primary="Password"
-                    secondary={userData.lastPasswordChange ? `Last changed ${moment(userData.lastPasswordChange.toDate()).format('LL')}` : 'Never changed'}
+                    secondary={hasChangedPassword ? `Last changed ${moment(userData.lastPasswordChange.toDate()).format('LL')}` : 'Never changed'}
                   />
                 </Hidden>
 
                 <Hidden smUp>
                   <ListItemText
                     primary="Password"
-                    secondary={userData.lastPasswordChange ? `Last changed ${moment(userData.lastPasswordChange.toDate()).format('ll')}` : 'Never changed'}
+                    secondary={hasChangedPassword ? `Last changed ${moment(userData.lastPasswordChange.toDate()).format('ll')}` : 'Never changed'}
                   />
                 </Hidden>
 
@@ -298,7 +300,7 @@ class SecurityTab extends Component {
 
 SecurityTab.propTypes = {
   // Properties
-  userData: PropTypes.object.isRequired,
+  userData: PropTypes.object,
 
   // Functions
   openSnackbar: PropTypes.func.isRequired
