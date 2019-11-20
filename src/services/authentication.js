@@ -780,7 +780,7 @@ authentication.user.getProfileCompletion = (fields) => {
 };
 
 authentication.user.getSecurityRating = (user, userData) => {
-  if (!user || !user.metadata || !userData) {
+  if (!user || !user.metadata) {
     return null;
   }
 
@@ -792,16 +792,19 @@ authentication.user.getSecurityRating = (user, userData) => {
 
   creationTime = moment(creationTime);
 
-  let lastPasswordChange = userData.lastPasswordChange;
   let securityRating = 0;
 
-  if (lastPasswordChange) {
-    lastPasswordChange = moment(lastPasswordChange.toDate());
+  if (userData) {
+    let lastPasswordChange = userData.lastPasswordChange;
 
-    if (creationTime.diff(lastPasswordChange, 'days') >= 365.242199) {
-      securityRating = 50;
-    } else {
-      securityRating = 100;
+    if (lastPasswordChange) {
+      lastPasswordChange = moment(lastPasswordChange.toDate());
+
+      if (creationTime.diff(lastPasswordChange, 'days') >= 365.242199) {
+        securityRating = 50;
+      } else {
+        securityRating = 100;
+      }
     }
   } else {
     if (moment().diff(creationTime, 'days') >= 365.242199) {
