@@ -23,10 +23,6 @@ import constraints from '../../constraints';
 import authentication from '../../services/authentication';
 
 const styles = (theme) => ({
-  dialogContent: {
-    overflowY: 'hidden'
-  },
-
   icon: {
     marginRight: theme.spacing(0.5)
   },
@@ -119,9 +115,8 @@ class SignUpDialog extends Component {
     this.setState({
       performingAction: true
     }, () => {
-      authentication.signInWithAuthProvider(providerId).then((value) => {
+      authentication.signInWithAuthProvider(providerId).then((user) => {
         this.props.dialogProps.onClose(() => {
-          const user = value.user;
           const displayName = user.displayName;
           const emailAddress = user.email;
 
@@ -241,8 +236,8 @@ class SignUpDialog extends Component {
           Sign up for an account
         </DialogTitle>
 
-        <Hidden smDown>
-          <DialogContent className={classes.dialogContent}>
+        <Hidden xsDown>
+          <DialogContent>
             <Grid container direction="row">
               <Grid item xs={4}>
                 <AuthProviderList
@@ -335,7 +330,7 @@ class SignUpDialog extends Component {
           </DialogContent>
         </Hidden>
 
-        <Hidden mdUp>
+        <Hidden smUp>
           <DialogContent>
             <AuthProviderList
               gutterBottom
