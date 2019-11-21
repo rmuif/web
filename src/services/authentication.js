@@ -101,11 +101,39 @@ authentication.signUpWithEmailAddressAndPassword = (emailAddress, password) => {
     }
 
     auth.createUserWithEmailAndPassword(emailAddress, password).then((value) => {
-      analytics.logEvent('sign_up', {
-        method: 'password'
-      });
+      const user = value.user;
 
-      resolve(value);
+      if (!user) {
+        reject();
+
+        return;
+      }
+
+      const uid = user.uid;
+
+      if (!uid) {
+        reject();
+
+        return;
+      }
+
+      const reference = firestore.collection('users').doc(uid);
+
+      if (!reference) {
+        reject();
+
+        return;
+      }
+
+      reference.set({}, { merge: true }).then((value) => {
+        analytics.logEvent('sign_up', {
+          method: 'password'
+        });
+
+        resolve(value);
+      }).catch((reason) => {
+        reject(reason);
+      });
     }).catch((reason) => {
       reject(reason);
     });
@@ -129,11 +157,51 @@ authentication.signIn = (emailAddress, password) => {
     }
 
     auth.signInWithEmailAndPassword(emailAddress, password).then((value) => {
-      analytics.logEvent('login', {
-        method: 'password'
-      });
+      const user = value.user;
 
-      resolve(value);
+      if (!user) {
+        reject();
+
+        return;
+      }
+
+      const uid = user.uid;
+
+      if (!uid) {
+        reject();
+
+        return;
+      }
+
+      const reference = firestore.collection('users').doc(uid);
+
+      if (!reference) {
+        reject();
+
+        return;
+      }
+
+      reference.get({ source: 'server' }).then((value) => {
+        if (value.exists) {
+          analytics.logEvent('login', {
+            method: 'password'
+          });
+
+          resolve(user);
+        } else {
+          reference.set({}, { merge: true }).then((value) => {
+            analytics.logEvent('login', {
+              method: 'password'
+            });
+
+            resolve(user);
+          }).catch((reason) => {
+            reject(reason);
+          });
+        }
+      }).catch((reason => {
+        reject(reason);
+      }));
     }).catch((reason) => {
       reject(reason);
     });
@@ -165,11 +233,51 @@ authentication.signInWithAuthProvider = (providerId) => {
     }
 
     auth.signInWithPopup(provider).then((value) => {
-      analytics.logEvent('login', {
-        method: providerId
-      });
+      const user = value.user;
 
-      resolve(value);
+      if (!user) {
+        reject();
+
+        return;
+      }
+
+      const uid = user.uid;
+
+      if (!uid) {
+        reject();
+
+        return;
+      }
+
+      const reference = firestore.collection('users').doc(uid);
+
+      if (!reference) {
+        reject();
+
+        return;
+      }
+
+      reference.get({ source: 'server' }).then((value) => {
+        if (value.exists) {
+          analytics.logEvent('login', {
+            method: providerId
+          });
+
+          resolve(user);
+        } else {
+          reference.set({}, { merge: true }).then((value) => {
+            analytics.logEvent('login', {
+              method: providerId
+            });
+
+            resolve(user);
+          }).catch((reason) => {
+            reject(reason);
+          });
+        }
+      }).catch((reason => {
+        reject(reason);
+      }));
     }).catch((reason) => {
       reject(reason);
     });
@@ -794,7 +902,7 @@ authentication.user.getSecurityRating = (user, userData) => {
 
   let securityRating = 0;
 
-  if (userData) {
+  if (userData && userData.lastPasswordChange) {
     let lastPasswordChange = userData.lastPasswordChange;
 
     if (lastPasswordChange) {
