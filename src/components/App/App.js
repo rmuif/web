@@ -324,7 +324,27 @@ class App extends Component {
             userData: null,
             theme: theming.defaultTheme,
 
-            ready: true
+            ready: true,
+
+            signUpDialog: {
+              open: false
+            },
+
+            signInDialog: {
+              open: false
+            },
+
+            settingsDialog: {
+              open: false
+            },
+
+            deleteAccountDialog: {
+              open: false
+            },
+
+            signOutDialog: {
+              open: false
+            }
           });
         }
 
@@ -344,7 +364,27 @@ class App extends Component {
             userData: null,
             theme: theming.defaultTheme,
 
-            ready: true
+            ready: true,
+
+            signUpDialog: {
+              open: false
+            },
+
+            signInDialog: {
+              open: false
+            },
+
+            settingsDialog: {
+              open: false
+            },
+
+            deleteAccountDialog: {
+              open: false
+            },
+
+            signOutDialog: {
+              open: false
+            }
           });
         }
 
@@ -364,7 +404,27 @@ class App extends Component {
             userData: null,
             theme: theming.defaultTheme,
 
-            ready: true
+            ready: true,
+
+            signUpDialog: {
+              open: false
+            },
+
+            signInDialog: {
+              open: false
+            },
+
+            settingsDialog: {
+              open: false
+            },
+
+            deleteAccountDialog: {
+              open: false
+            },
+
+            signOutDialog: {
+              open: false
+            }
           });
         }
 
@@ -379,7 +439,27 @@ class App extends Component {
               userData: null,
               theme: theming.defaultTheme,
 
-              ready: true
+              ready: true,
+
+              signUpDialog: {
+                open: false
+              },
+
+              signInDialog: {
+                open: false
+              },
+
+              settingsDialog: {
+                open: false
+              },
+
+              deleteAccountDialog: {
+                open: false
+              },
+
+              signOutDialog: {
+                open: false
+              }
             });
           }
 
@@ -395,7 +475,27 @@ class App extends Component {
               userData: null,
               theme: theming.defaultTheme,
 
-              ready: true
+              ready: true,
+
+              signUpDialog: {
+                open: false
+              },
+
+              signInDialog: {
+                open: false
+              },
+
+              settingsDialog: {
+                open: false
+              },
+
+              deleteAccountDialog: {
+                open: false
+              },
+
+              signOutDialog: {
+                open: false
+              }
             });
           }
 
@@ -417,7 +517,27 @@ class App extends Component {
             user: user,
             userData: data,
 
-            ready: true
+            ready: true,
+
+            signUpDialog: {
+              open: false
+            },
+
+            signInDialog: {
+              open: false
+            },
+
+            settingsDialog: {
+              open: false
+            },
+
+            deleteAccountDialog: {
+              open: false
+            },
+
+            signOutDialog: {
+              open: false
+            }
           });
         }
       }, (error) => {
@@ -427,7 +547,27 @@ class App extends Component {
             userData: null,
             theme: theming.defaultTheme,
 
-            ready: true
+            ready: true,
+
+            signUpDialog: {
+              open: false
+            },
+
+            signInDialog: {
+              open: false
+            },
+
+            settingsDialog: {
+              open: false
+            },
+
+            deleteAccountDialog: {
+              open: false
+            },
+
+            signOutDialog: {
+              open: false
+            }
           }, () => {
             const code = error.code;
             const message = error.message;
