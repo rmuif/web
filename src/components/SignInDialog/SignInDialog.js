@@ -124,9 +124,8 @@ class SignInDialog extends Component {
 
         errors: null
       }, () => {
-        authentication.signIn(emailAddress, password).then((value) => {
+        authentication.signIn(emailAddress, password).then((user) => {
           this.props.dialogProps.onClose(() => {
-            const user = value.user;
             const displayName = user.displayName;
             const emailAddress = user.email;
 
@@ -161,9 +160,8 @@ class SignInDialog extends Component {
     this.setState({
       performingAction: true
     }, () => {
-      authentication.signInWithAuthProvider(providerId).then((value) => {
+      authentication.signInWithAuthProvider(providerId).then((user) => {
         this.props.dialogProps.onClose(() => {
-          const user = value.user;
           const displayName = user.displayName;
           const emailAddress = user.email;
 
