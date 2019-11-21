@@ -340,7 +340,7 @@ class App extends Component {
 
         if (this.mounted) {
           this.setState({
-            user: user,
+            user: null,
             userData: null,
             theme: theming.defaultTheme,
 
@@ -360,7 +360,7 @@ class App extends Component {
 
         if (this.mounted) {
           this.setState({
-            user: user,
+            user: null,
             userData: null,
             theme: theming.defaultTheme,
 
@@ -373,13 +373,9 @@ class App extends Component {
 
       this.removeReferenceListener = reference.onSnapshot((snapshot) => {
         if (!snapshot.exists) {
-          if (this.removeReferenceListener) {
-            this.removeReferenceListener();
-          }
-
           if (this.mounted) {
             this.setState({
-              user: user,
+              user: null,
               userData: null,
               theme: theming.defaultTheme,
 
@@ -393,13 +389,9 @@ class App extends Component {
         const data = snapshot.data();
 
         if (!data) {
-          if (this.removeReferenceListener) {
-            this.removeReferenceListener();
-          }
-
           if (this.mounted) {
             this.setState({
-              user: user,
+              user: null,
               userData: null,
               theme: theming.defaultTheme,
 
@@ -429,13 +421,9 @@ class App extends Component {
           });
         }
       }, (error) => {
-        if (this.removeReferenceListener) {
-          this.removeReferenceListener();
-        }
-
         if (this.mounted) {
           this.setState({
-            user: user,
+            user: null,
             userData: null,
             theme: theming.defaultTheme,
 
