@@ -83,12 +83,36 @@ class App extends Component {
     this.setState({ dialog }, callback);
   };
 
+  closeAllDialogs = (callback) => {
+    this.setState({
+      signUpDialog: {
+        open: false
+      },
+
+      signInDialog: {
+        open: false
+      },
+
+      settingsDialog: {
+        open: false
+      },
+
+      deleteAccountDialog: {
+        open: false
+      },
+
+      signOutDialog: {
+        open: false
+      }
+    }, callback);
+  };
+
   deleteAccount = () => {
     this.setState({
       performingAction: true
     }, () => {
       authentication.deleteAccount().then(() => {
-        this.closeDialog('deleteAccountDialog', () => {
+        this.closeAllDialogs(() => {
           this.openSnackbar('Deleted account');
         });
       }).catch((reason) => {
@@ -113,7 +137,7 @@ class App extends Component {
       performingAction: true
     }, () => {
       authentication.signOut().then(() => {
-        this.closeDialog('signOutDialog', () => {
+        this.closeAllDialogs(() => {
           this.openSnackbar('Signed out');
         });
       }).catch((reason) => {
