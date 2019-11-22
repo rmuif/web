@@ -17,7 +17,7 @@ There’s already a bunch of features included for instant web development grati
 
 - Bootstrapped with Create React App, the same tooling works out-of-the-box
 - Scaffolding incorporates Google Material Design principles through Material-UI
-- Built on top of Firebase with Authentication, Cloud Firestore, Cloud Functions, Storage, and Performance Monitoring working from the start
+- Built on top of Firebase with Analytics, Authentication, Cloud Firestore, Cloud Functions, Storage, and Performance Monitoring working from the start
 - Robust routing with React Router including error handling
 - Extensive mobile support with full-screen dialogs and [react-swipeable-views](https://react-swipeable-views.com) for tabs
 
