@@ -17,6 +17,7 @@ import IconButton from '@material-ui/core/IconButton';
 import LinkIcon from '@material-ui/icons/Link';
 import LinkOffIcon from '@material-ui/icons/LinkOff';
 
+import AppleIcon from 'mdi-material-ui/Apple';
 import FacebookBoxIcon from 'mdi-material-ui/FacebookBox';
 import GitHubCircleIcon from 'mdi-material-ui/GithubCircle';
 import GoogleIcon from 'mdi-material-ui/Google';
@@ -89,6 +90,12 @@ class LinksTab extends Component {
     const { performingAction } = this.state;
 
     const authProviders = [
+      {
+        providerId: 'apple.com',
+        color: '#000000',
+        icon: <AppleIcon />,
+        name: 'Apple'
+      },
       {
         providerId: 'facebook.com',
         color: '#3c5a99',
