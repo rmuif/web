@@ -11,6 +11,11 @@ it('renders without crashing', () => {
     (
       <DialogHost
         dialogs={{
+          aboutDialog: {
+            dialogProps: {
+              open: false
+            }
+          },
           signUpDialog: {},
           signInDialog: {},
           settingsDialog: {},
