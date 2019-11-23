@@ -31,6 +31,10 @@ class App extends Component {
       ready: false,
       performingAction: false,
 
+      aboutDialog: {
+        open: false
+      },
+
       signUpDialog: {
         open: false
       },
@@ -85,6 +89,10 @@ class App extends Component {
 
   closeAllDialogs = (callback) => {
     this.setState({
+      aboutDialog: {
+        open: false
+      },
+
       signUpDialog: {
         open: false
       },
@@ -192,6 +200,7 @@ class App extends Component {
     } = this.state;
 
     const {
+      aboutDialog,
       signUpDialog,
       signInDialog,
       settingsDialog,
@@ -217,6 +226,8 @@ class App extends Component {
               user={user}
               userData={userData}
 
+              onTitleClick={() => this.openDialog('aboutDialog')}
+
               onSignUpClick={() => this.openDialog('signUpDialog')}
               onSignInClick={() => this.openDialog('signInDialog')}
 
@@ -230,6 +241,18 @@ class App extends Component {
               user={user}
               dialogs={
                 {
+                  aboutDialog: {
+                    dialogProps: {
+                      open: aboutDialog.open,
+
+                      onClose: () => this.closeDialog('aboutDialog')
+                    },
+
+                    props: {
+                      user: user
+                    }
+                  },
+
                   signUpDialog: {
                     dialogProps: {
                       open: signUpDialog.open,
