@@ -92,15 +92,19 @@ class Bar extends Component {
     const { performingAction, user } = this.props;
 
     // Events
-    const { onSignUpClick, onSignInClick } = this.props;
+    const {
+      onTitleClick,
+      onSignUpClick,
+      onSignInClick
+    } = this.props;
 
     const { menu } = this.state;
 
     return (
       <AppBar color="primary" position="static">
         <Toolbar variant="regular">
-          <Box flexGrow={1}>
-            <Typography color="inherit" variant="h6">{process.env.REACT_APP_NAME}</Typography>
+          <Box display="flex" flexGrow={1}>
+            <Typography style={{ cursor: 'pointer' }} color="inherit" variant="h6" onClick={onTitleClick}>{process.env.REACT_APP_NAME}</Typography>
           </Box>
 
           {user &&
@@ -142,6 +146,7 @@ Bar.propTypes = {
   userData: PropTypes.object,
 
   // Events
+  onTitleClick: PropTypes.func.isRequired,
   onSettingsClick: PropTypes.func.isRequired,
   onSignOutClick: PropTypes.func.isRequired
 };
