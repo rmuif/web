@@ -131,6 +131,15 @@ You need to create a Firebase project to connect to your app.
 
 Firebase automatically provisions resources for your Firebase project. When the process completes, you’ll be taken to the overview page for your Firebase project in the Firebase console.
 
+### Register the app with Firebase
+
+After you have a Firebase project, you can add your web app to it.
+
+1. In the center of the [Firebase console’s project overview page](https://console.firebase.google.com), click the **Web** icon to launch the setup workflow. If you've already added an app to your Firebase project, click **Add app** to display the platform options.
+2. Enter your app's nickname. This nickname is an internal, convenience identifier and is only visible to you in the Firebase console.
+3. *(Optional)* Set up Firebase Hosting for your web app. You can set up Firebase Hosting now or [later](https://firebase.google.com/docs/hosting/quickstart). You can also link your Firebase Web App to a Hosting site at any time in your [Project settings](https://console.firebase.google.com/project/_/settings/general). If you choose to set up Hosting up now, select a site from the dropdown list to link to your Firebase Web App. This list displays your project's default Hosting site and any [other sites](https://firebase.google.com/docs/hosting/multisites) that you've set up in your project. Any site that you've already linked to a Firebase Web App is unavailable for additional linking. Each Hosting site can only be linked to a single Firebase Web App.
+4. Click **Register app**.
+
 ### Deploy Firebase rules
 
 The command `npm install` is an [npm](https://www.npmjs.com) command-line utility which is used to install the dependencies in the local `node_modules` folder.
