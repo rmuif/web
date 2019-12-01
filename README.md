@@ -7,10 +7,10 @@
 
 This project is an application skeleton for a typical [React](https://reactjs.org) project.
 With [Create React App](https://facebook.github.io/create-react-app) at its core, you can use it to bootstrap your projects and development environment with the same tooling.
-It comes bundled with [Material-UI](https://material-ui.com), [Firebase](https://firebase.google.com), and [React Router](https://reacttraining.com/react-router) and is aimed towards developers making dynamic web applications.
+It comes bundled with [Material-UI](https://material-ui.com), [Firebase](https://firebase.google.com), and [React Router](https://reacttraining.com/react-router) and is aimed towards developers creating dynamic web applications.
 
 <p align="center">
-  <img src="https://user-images.githubusercontent.com/7033377/62852357-794cf800-bce9-11e9-8e0c-08774c616970.png">
+  <img src="https://user-images.githubusercontent.com/7033377/62852357-794cf800-bce9-11e9-8e0c-08774c616970.png" alt="Preview">
 </p>
 
 ## Features
@@ -29,9 +29,6 @@ https://phoqe.me/react-material-ui-firebase
 
 The demo is using the `master` branch, which houses the latest version of the template.
 There are some minor changes applied during deployment, e.g. `REACT_APP_BASENAME` getting set instead of being `null`.
-It’s also using its own Firebase project, it is not recommended to use it for anything else than testing.
-Using it in your own project is advised against due to you not having access to it or the data.
-It gets cleared from time to time.
 
 ## Get started
 
@@ -40,7 +37,7 @@ The project is up and running after just 4 commands.
 ### Clone the repository
 
 The command `git clone` is a [Git](https://www.git-scm.com) command-line utility which is used to target an existing repository and create a clone, or copy of the target repository.
-The `<directory>` option is the name of a new directory to clone into, you can replace it with your project’s name.
+The `<directory>` option is the name of a new directory to clone into, replace it with your project’s name.
 The “humanish” part of the source repository is used if no directory is explicitly given (`repo` for `/path/to/repo.git` and `foo` for `host.xz:foo/.git`).
 
 ```
@@ -50,6 +47,7 @@ git clone https://github.com/Phoqe/react-material-ui-firebase.git <directory>
 ### Install the dependencies
 
 The command `cd`, also known as `chdir` (**ch**ange **dir**ectory), is a command-line OS shell command used to change the current working directory.
+Replace `<directory>` with your project name.
 
 ```
 cd <directory>
@@ -120,6 +118,18 @@ The command `git push` is yet another Git command-line utility which is used to 
 ```
 git push -u origin master
 ```
+
+### Create Firebase project
+
+You need to create a Firebase project to connect to your app.
+
+1. In the [Firebase console](https://console.firebase.google.com), click **Add project**, then select or enter a **Project name**. If you have an existing Google Cloud Platform (GCP) project, you can select the project from the dropdown menu to add Firebase resources to that project.
+2. *(Optional)* If you created a new project, you can edit the **Project ID**. Firebase automatically assigns a unique ID to your Firebase project. Visit [Understand Firebase Projects](https://firebase.google.com/docs/projects/learn-more#project-id) to learn about how Firebase uses the project ID.
+3. Click **Continue**.
+4. *(Optional)* Set up Google Analytics for your project. When prompted, select to use an existing [Google Analytics account](https://support.google.com/analytics/answer/1009618?ref_topic=3544906&authuser=0) or to create a new account. If you choose to create a new account, select your [Analytics reporting location](https://firebase.google.com/docs/projects/locations), then accept the data sharing settings and Google Analytics terms for your project.
+5. Click **Create project** (or **Add Firebase**, if you’re using an existing GCP project).
+
+Firebase automatically provisions resources for your Firebase project. When the process completes, you’ll be taken to the overview page for your Firebase project in the Firebase console.
 
 ### Deploy Firebase rules
 
