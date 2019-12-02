@@ -32,3 +32,5 @@ const deleteAllUsers = (nextPageToken) => {
     console.log(reason);
   });
 };
+
+deleteAllUsers();
