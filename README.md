@@ -80,19 +80,34 @@ It wouldn’t make sense if you couldn’t customize it to the core.
 
 You need to create a Firebase project to connect to your app.
 
-1. In the [Firebase console](https://console.firebase.google.com), click **Add project**, then select or enter a **Project name**. If you have an existing Google Cloud Platform (GCP) project, you can select the project from the dropdown menu to add Firebase resources to that project.
-2. *(Optional)* If you created a new project, you can edit the **Project ID**. Firebase automatically assigns a unique ID to your Firebase project. Visit [Understand Firebase Projects](https://firebase.google.com/docs/projects/learn-more#project-id) to learn about how Firebase uses the project ID.
+1. In the [Firebase console](https://console.firebase.google.com), click **Add project**, then select or enter a **Project name**.
+If you have an existing Google Cloud Platform (GCP) project, you can select the project from the dropdown menu to add Firebase resources to that project.
+2. *(Optional)* If you created a new project, you can edit the **Project ID**.
+Firebase automatically assigns a unique ID to your Firebase project.
+Visit [Understand Firebase Projects](https://firebase.google.com/docs/projects/learn-more#project-id) to learn about how Firebase uses the project ID.
 3. Click **Continue**.
-4. *(Optional)* Set up Google Analytics for your project. When prompted, select to use an existing [Google Analytics account](https://support.google.com/analytics/answer/1009618?ref_topic=3544906&authuser=0) or to create a new account. If you choose to create a new account, select your [Analytics reporting location](https://firebase.google.com/docs/projects/locations), then accept the data sharing settings and Google Analytics terms for your project.
+4. *(Optional)* Set up Google Analytics for your project.
+When prompted, select to use an existing [Google Analytics account](https://support.google.com/analytics/answer/1009618?ref_topic=3544906&authuser=0) or to create a new account.
+If you choose to create a new account, select your [Analytics reporting location](https://firebase.google.com/docs/projects/locations), then accept the data sharing settings and Google Analytics terms for your project.
 5. Click **Create project** (or **Add Firebase**, if you’re using an existing GCP project).
 
-Firebase automatically provisions resources for your Firebase project. When the process completes, you’ll be taken to the overview page for your Firebase project in the Firebase console.
+Firebase automatically provisions resources for your Firebase project.
+When the process completes, you’ll be taken to the overview page for your Firebase project in the Firebase console.
 
 ### Create a Cloud Firestore database
 
 1. From the console’s navigation pane, select **Database**, then click **Create database** for Cloud Firestore.
-2. Select a starting mode for your Cloud Firestore Security Rules. **Test mode** is good for getting started with the mobile and web client libraries, but allows anyone to read and overwrite your data. After testing, **make sure to review the [Secure your data](https://firebase.google.com/docs/firestore/quickstart#secure_your_data) section**. **Locked mode** denies all reads and writes from mobile and web clients. Your authenticated application servers (C#, Go, Java, Node.js, PHP, Python, or Ruby) can still access your database. To get started with the C#, Go, Java, Node.js, PHP, Python, or Ruby server client library, select locked mode.
-3. Select a [location](https://firebase.google.com/docs/firestore/locations#types) for your database. This location setting is your project’s [default Google Cloud Platform (GCP) resource location](https://firebase.google.com/docs/firestore/locations#default-cloud-location). Note that this location will be used for GCP services in your project that require a location setting, specifically, your default [Cloud Storage](https://firebase.google.com/docs/storage) bucket and your [App Engine](https://cloud.google.com/appengine/docs) app (which is required if you use Cloud Scheduler). If you aren’t able to select a location, then your project already has a default GCP resource location. It was set either during project creation or when setting up another service that requires a location setting.
+2. Select a starting mode for your Cloud Firestore Security Rules.
+**Test mode** is good for getting started with the mobile and web client libraries, but allows anyone to read and overwrite your data.
+After testing, **make sure to review the [Secure your data](https://firebase.google.com/docs/firestore/quickstart#secure_your_data) section**.
+**Locked mode** denies all reads and writes from mobile and web clients.
+Your authenticated application servers (C#, Go, Java, Node.js, PHP, Python, or Ruby) can still access your database.
+To get started with the C#, Go, Java, Node.js, PHP, Python, or Ruby server client library, select locked mode.
+3. Select a [location](https://firebase.google.com/docs/firestore/locations#types) for your database.
+This location setting is your project’s [default Google Cloud Platform (GCP) resource location](https://firebase.google.com/docs/firestore/locations#default-cloud-location).
+Note that this location will be used for GCP services in your project that require a location setting, specifically, your default [Cloud Storage](https://firebase.google.com/docs/storage) bucket and your [App Engine](https://cloud.google.com/appengine/docs) app (which is required if you use Cloud Scheduler).
+If you aren’t able to select a location, then your project already has a default GCP resource location.
+It was set either during project creation or when setting up another service that requires a location setting.
 4. Click **Done**.
 
 #### Deploying rules
@@ -103,8 +118,14 @@ Copy the contents of the `firestore.rules` file in your project into the online 
 ### Create a default Storage bucket
 
 1. From the navigation pane of the [Firebase console](https://console.firebase.google.com), select **Storage**, then click **Get started**.
-2. Review the messaging about securing your Storage data using security rules. During development, consider [setting up your rules for public access](https://firebase.google.com/docs/storage/web/start#set_up_public_access).
-3. Select a [location](https://firebase.google.com/docs/projects/locations#types) for your default Storage bucket. This location setting is your project’s [default Google Cloud Platform (GCP) resource location](https://firebase.google.com/docs/firestore/locations#default-cloud-location). Note that this location will be used for GCP services in your project that require a location setting, specifically, your [Cloud Firestore](https://firebase.google.com/docs/firestore) database and your [App Engine](https://cloud.google.com/appengine/docs) app (which is required if you use Cloud Scheduler). If you aren’t able to select a location, then your project already has a default GCP resource location. It was set either during project creation or when setting up another service that requires a location setting. If you’re on the Blaze plan, you can [create multiple buckets](https://firebase.google.com/docs/storage/web/start#use_multiple_storage_buckets), each with its own [location](https://cloud.google.com/storage/docs/bucket-locations).
+2. Review the messaging about securing your Storage data using security rules.
+During development, consider [setting up your rules for public access](https://firebase.google.com/docs/storage/web/start#set_up_public_access).
+3. Select a [location](https://firebase.google.com/docs/projects/locations#types) for your default Storage bucket.
+This location setting is your project’s [default Google Cloud Platform (GCP) resource location](https://firebase.google.com/docs/firestore/locations#default-cloud-location).
+Note that this location will be used for GCP services in your project that require a location setting, specifically, your [Cloud Firestore](https://firebase.google.com/docs/firestore) database and your [App Engine](https://cloud.google.com/appengine/docs) app (which is required if you use Cloud Scheduler).
+If you aren’t able to select a location, then your project already has a default GCP resource location.
+It was set either during project creation or when setting up another service that requires a location setting.
+If you’re on the Blaze plan, you can [create multiple buckets](https://firebase.google.com/docs/storage/web/start#use_multiple_storage_buckets), each with its own [location](https://cloud.google.com/storage/docs/bucket-locations).
 4. Click **Done**.
 
 #### Deploying rules
@@ -116,9 +137,17 @@ Copy the contents of the `storage.rules` file in your project into the online ed
 
 After you have a Firebase project, you can add your web app to it.
 
-1. In the center of the [Firebase console’s project overview page](https://console.firebase.google.com), click the **Web** icon to launch the setup workflow. If you’ve already added an app to your Firebase project, click **Add app** to display the platform options.
-2. Enter your app’s nickname. This nickname is an internal, convenience identifier and is only visible to you in the Firebase console.
-3. *(Optional)* Set up Firebase Hosting for your web app. You can set up Firebase Hosting now or [later](https://firebase.google.com/docs/hosting/quickstart). You can also link your Firebase Web App to a Hosting site at any time in your [Project settings](https://console.firebase.google.com/project/_/settings/general). If you choose to set up Hosting up now, select a site from the dropdown list to link to your Firebase Web App. This list displays your project’s default Hosting site and any [other sites](https://firebase.google.com/docs/hosting/multisites) that you’ve set up in your project. Any site that you’ve already linked to a Firebase Web App is unavailable for additional linking. Each Hosting site can only be linked to a single Firebase Web App.
+1. In the center of the [Firebase console’s project overview page](https://console.firebase.google.com), click the **Web** icon to launch the setup workflow.
+If you’ve already added an app to your Firebase project, click **Add app** to display the platform options.
+2. Enter your app’s nickname.
+This nickname is an internal, convenience identifier and is only visible to you in the Firebase console.
+3. *(Optional)* Set up Firebase Hosting for your web app.
+You can set up Firebase Hosting now or [later](https://firebase.google.com/docs/hosting/quickstart).
+You can also link your Firebase Web App to a Hosting site at any time in your [Project settings](https://console.firebase.google.com/project/_/settings/general).
+If you choose to set up Hosting up now, select a site from the dropdown list to link to your Firebase Web App.
+This list displays your project’s default Hosting site and any [other sites](https://firebase.google.com/docs/hosting/multisites) that you’ve set up in your project.
+Any site that you’ve already linked to a Firebase Web App is unavailable for additional linking.
+Each Hosting site can only be linked to a single Firebase Web App.
 4. Click **Register app**.
 
 ### Configure your project
