@@ -76,49 +76,6 @@ yarn start
 React + Material-UI + Firebase is a boilerplate for your own project.
 It wouldn’t make sense if you couldn’t customize it to the core.
 
-### Change name and URL
-
-Changing your project’s name can be tedious sometimes as it often involves changing the name of both files and directories along with a ton of hard-coded values.
-With this template, you can change your project’s name by modifying 3 files:
-
-- **public/**
-  - manifest.json
-    - `name`
-    - `short_name`
-- .env
-    - `REACT_APP_NAME`
-- package.json
-  - `name`
-  - `homepage`
-
-### Use your own Git repository
-
-The command `git remote` is another Git command-line utility which is used to manage the set of repositories (“remotes”) whose branches you track.
-The options `rm origin` is used to remove the remote named `origin`.
-All remote-tracking branches and configuration settings for the remote are removed.
-
-```
-git remote rm origin
-```
-
-The options `add origin` adds a remote named `origin` for the repository at `<url>`.
-
-```
-git remote add origin <url>
-```
-
-The options `add upstream` adds a remote named `upstream` for the repository at `https://github.com/Phoqe/react-material-ui-firebase.git`.
-
-```
-git remote add upstream https://github.com/Phoqe/react-material-ui-firebase.git
-```
-
-The command `git push` is yet another Git command-line utility which is used to update remote refs using local refs, while sending objects necessary to complete the given refs.
-
-```
-git push -u origin master
-```
-
 ### Create Firebase project
 
 You need to create a Firebase project to connect to your app.
@@ -131,7 +88,21 @@ You need to create a Firebase project to connect to your app.
 
 Firebase automatically provisions resources for your Firebase project. When the process completes, you’ll be taken to the overview page for your Firebase project in the Firebase console.
 
-### Register the app with Firebase
+### Create a Cloud Firestore database
+
+1. From the console's navigation pane, select **Database**, then click **Create database** for Cloud Firestore.
+2. Select a starting mode for your Cloud Firestore Security Rules. **Test mode** is good for getting started with the mobile and web client libraries, but allows anyone to read and overwrite your data. After testing, **make sure to review the [Secure your data](https://firebase.google.com/docs/firestore/quickstart#secure_your_data) section**. **Locked mode** denies all reads and writes from mobile and web clients. Your authenticated application servers (C#, Go, Java, Node.js, PHP, Python, or Ruby) can still access your database. To get started with the C#, Go, Java, Node.js, PHP, Python, or Ruby server client library, select locked mode.
+3. Select a [location](https://firebase.google.com/docs/firestore/locations#types) for your database. This location setting is your project's [default Google Cloud Platform (GCP) resource location](https://firebase.google.com/docs/firestore/locations#default-cloud-location). Note that this location will be used for GCP services in your project that require a location setting, specifically, your default [Cloud Storage](https://firebase.google.com/docs/storage) bucket and your [App Engine](https://cloud.google.com/appengine/docs) app (which is required if you use Cloud Scheduler). If you aren't able to select a location, then your project already has a default GCP resource location. It was set either during project creation or when setting up another service that requires a location setting.
+4. Click **Done**.
+
+### Create a default Storage bucket
+
+1. From the navigation pane of the [Firebase console](https://console.firebase.google.com), select **Storage**, then click **Get started**.
+2. Review the messaging about securing your Storage data using security rules. During development, consider [setting up your rules for public access](https://firebase.google.com/docs/storage/web/start#set_up_public_access).
+3. Select a [location](https://firebase.google.com/docs/projects/locations#types) for your default Storage bucket. This location setting is your project's [default Google Cloud Platform (GCP) resource location](https://firebase.google.com/docs/firestore/locations#default-cloud-location). Note that this location will be used for GCP services in your project that require a location setting, specifically, your [Cloud Firestore](https://firebase.google.com/docs/firestore) database and your [App Engine](https://cloud.google.com/appengine/docs) app (which is required if you use Cloud Scheduler). If you aren't able to select a location, then your project already has a default GCP resource location. It was set either during project creation or when setting up another service that requires a location setting. If you're on the Blaze plan, you can [create multiple buckets](https://firebase.google.com/docs/storage/web/start#use_multiple_storage_buckets), each with its own [location](https://cloud.google.com/storage/docs/bucket-locations).
+4. Click **Done**.
+
+### Register your app with Firebase
 
 After you have a Firebase project, you can add your web app to it.
 
@@ -139,6 +110,10 @@ After you have a Firebase project, you can add your web app to it.
 2. Enter your app’s nickname. This nickname is an internal, convenience identifier and is only visible to you in the Firebase console.
 3. *(Optional)* Set up Firebase Hosting for your web app. You can set up Firebase Hosting now or [later](https://firebase.google.com/docs/hosting/quickstart). You can also link your Firebase Web App to a Hosting site at any time in your [Project settings](https://console.firebase.google.com/project/_/settings/general). If you choose to set up Hosting up now, select a site from the dropdown list to link to your Firebase Web App. This list displays your project’s default Hosting site and any [other sites](https://firebase.google.com/docs/hosting/multisites) that you’ve set up in your project. Any site that you’ve already linked to a Firebase Web App is unavailable for additional linking. Each Hosting site can only be linked to a single Firebase Web App.
 4. Click **Register app**.
+
+### Firebase config object
+
+To initialize Firebase in your app, you need to provide your app's Firebase project configuration. The Firebase config object contains unique, but non-secret identifiers for your Firebase project. At any time, you can [obtain your Firebase config object](http://support.google.com/firebase/answer/7015592). Replace the values beginning with `REACT_APP_FIREBASE` in the `.env` file in the project.
 
 ### Deploy Firebase rules
 
@@ -183,13 +158,57 @@ The extension called [Delete User Data](https://firebase.google.com/products/ext
 
 Use `users/{UID}` for Cloud Firestore paths and `{DEFAULT}/images/avatars/{UID}` for Cloud Storage paths.
 
+### Change name and URL
+
+Changing your project’s name can be tedious sometimes as it often involves changing the name of both files and directories along with a ton of hard-coded values.
+With this template, you can change your project’s name by modifying 3 files:
+
+- **public/**
+  - manifest.json
+    - `name`
+    - `short_name`
+- .env
+    - `REACT_APP_NAME`
+- package.json
+  - `name`
+  - `homepage`
+
+### Use your own Git repository
+
+The command `git remote` is another Git command-line utility which is used to manage the set of repositories (“remotes”) whose branches you track.
+The options `rm origin` is used to remove the remote named `origin`.
+All remote-tracking branches and configuration settings for the remote are removed.
+
+```
+git remote rm origin
+```
+
+The options `add origin` adds a remote named `origin` for the repository at `<url>`.
+
+```
+git remote add origin <url>
+```
+
+The options `add upstream` adds a remote named `upstream` for the repository at `https://github.com/Phoqe/react-material-ui-firebase.git`.
+
+```
+git remote add upstream https://github.com/Phoqe/react-material-ui-firebase.git
+```
+
+The command `git push` is yet another Git command-line utility which is used to update remote refs using local refs, while sending objects necessary to complete the given refs.
+
+```
+git push -u origin master
+```
+
 ## Attribution
 
 |Image|Company|Attribution|
 |---|---|---|
 |<a href="https://jetbrains.com"><img src="https://user-images.githubusercontent.com/7033377/64803713-a7925180-d58d-11e9-94a4-54bcdd9023e6.png" width="300"></a>|JetBrains|The maintainers use [JetBrains](https://www.jetbrains.com)’ tools to maintain and develop new features for the project. Their [Open Source Support Program](https://www.jetbrains.com/community/opensource) gives us the ability to use their tools for free to improve upon this project.|
 |<a href="https://browserstack.com"><img src="https://p14.zdusercontent.com/attachment/1015988/w1rTv9BV42bGKWAEdOOH0jyWu?token=eyJhbGciOiJkaXIiLCJlbmMiOiJBMTI4Q0JDLUhTMjU2In0..1j02V7lb9BSm4tAQIuOOMw.FFMfm49EsVQDC0GxjH8kTd4HpJjURmpA7sATf2zcuN07PZK6DMhREVEEXqgVEwwXfCHmnkpvgv5sYNXpUyiyAOvoO6eE_UcMnXjPC8a3q6fDLjJHzxLVRx93OBr_AFzAf6Gnt5s93rEnN1Fjvqsn7sRItZbgQQLZ_M_7xnl_QHyhpn3zYSFt35mTwObGggMaJ6mBpZNI-72SJKZtzoEPb1hNaM97MTUFEAbdxQL2n_DFieJFyNDkBNeIDHUmG4TFrmHhwucxv9j3V6UIJikDFS97CrueA-jUnkRS_HY-JDA.ti_ZX5qRJwKWcqUewhZGgA" width="300"></a>|BrowserStack|[BrowserStack](https://browserstack.com) is being used for its powerful suite of testing tools. With it we can test the project on multiple devices and browsers in real-time.|
-||Google|Portions of this page are modifications based on work created and [shared by Google](https://developers.google.com/readme/policies) and used according to terms described in the [Creative Commons 4.0 Attribution License](https://creativecommons.org/licenses/by/4.0).|
+
+Portions of this page are modifications based on work created and [shared by Google](https://developers.google.com/readme/policies) and used according to terms described in the [Creative Commons 4.0 Attribution License](https://creativecommons.org/licenses/by/4.0).
 
 ## License
 
