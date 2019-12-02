@@ -90,17 +90,27 @@ Firebase automatically provisions resources for your Firebase project. When the 
 
 ### Create a Cloud Firestore database
 
-1. From the console's navigation pane, select **Database**, then click **Create database** for Cloud Firestore.
+1. From the console’s navigation pane, select **Database**, then click **Create database** for Cloud Firestore.
 2. Select a starting mode for your Cloud Firestore Security Rules. **Test mode** is good for getting started with the mobile and web client libraries, but allows anyone to read and overwrite your data. After testing, **make sure to review the [Secure your data](https://firebase.google.com/docs/firestore/quickstart#secure_your_data) section**. **Locked mode** denies all reads and writes from mobile and web clients. Your authenticated application servers (C#, Go, Java, Node.js, PHP, Python, or Ruby) can still access your database. To get started with the C#, Go, Java, Node.js, PHP, Python, or Ruby server client library, select locked mode.
-3. Select a [location](https://firebase.google.com/docs/firestore/locations#types) for your database. This location setting is your project's [default Google Cloud Platform (GCP) resource location](https://firebase.google.com/docs/firestore/locations#default-cloud-location). Note that this location will be used for GCP services in your project that require a location setting, specifically, your default [Cloud Storage](https://firebase.google.com/docs/storage) bucket and your [App Engine](https://cloud.google.com/appengine/docs) app (which is required if you use Cloud Scheduler). If you aren't able to select a location, then your project already has a default GCP resource location. It was set either during project creation or when setting up another service that requires a location setting.
+3. Select a [location](https://firebase.google.com/docs/firestore/locations#types) for your database. This location setting is your project’s [default Google Cloud Platform (GCP) resource location](https://firebase.google.com/docs/firestore/locations#default-cloud-location). Note that this location will be used for GCP services in your project that require a location setting, specifically, your default [Cloud Storage](https://firebase.google.com/docs/storage) bucket and your [App Engine](https://cloud.google.com/appengine/docs) app (which is required if you use Cloud Scheduler). If you aren’t able to select a location, then your project already has a default GCP resource location. It was set either during project creation or when setting up another service that requires a location setting.
 4. Click **Done**.
+
+#### Deploying rules
+
+To set up and deploy your first set of rules, open the [**Rules** tab](https://console.firebase.google.com/project/_/database/firestore/rules) in the Cloud Firestore section of the Firebase console.
+Copy the contents of the `firestore.rules` file in your project into the online editor, then click **Publish**.
 
 ### Create a default Storage bucket
 
 1. From the navigation pane of the [Firebase console](https://console.firebase.google.com), select **Storage**, then click **Get started**.
 2. Review the messaging about securing your Storage data using security rules. During development, consider [setting up your rules for public access](https://firebase.google.com/docs/storage/web/start#set_up_public_access).
-3. Select a [location](https://firebase.google.com/docs/projects/locations#types) for your default Storage bucket. This location setting is your project's [default Google Cloud Platform (GCP) resource location](https://firebase.google.com/docs/firestore/locations#default-cloud-location). Note that this location will be used for GCP services in your project that require a location setting, specifically, your [Cloud Firestore](https://firebase.google.com/docs/firestore) database and your [App Engine](https://cloud.google.com/appengine/docs) app (which is required if you use Cloud Scheduler). If you aren't able to select a location, then your project already has a default GCP resource location. It was set either during project creation or when setting up another service that requires a location setting. If you're on the Blaze plan, you can [create multiple buckets](https://firebase.google.com/docs/storage/web/start#use_multiple_storage_buckets), each with its own [location](https://cloud.google.com/storage/docs/bucket-locations).
+3. Select a [location](https://firebase.google.com/docs/projects/locations#types) for your default Storage bucket. This location setting is your project’s [default Google Cloud Platform (GCP) resource location](https://firebase.google.com/docs/firestore/locations#default-cloud-location). Note that this location will be used for GCP services in your project that require a location setting, specifically, your [Cloud Firestore](https://firebase.google.com/docs/firestore) database and your [App Engine](https://cloud.google.com/appengine/docs) app (which is required if you use Cloud Scheduler). If you aren’t able to select a location, then your project already has a default GCP resource location. It was set either during project creation or when setting up another service that requires a location setting. If you’re on the Blaze plan, you can [create multiple buckets](https://firebase.google.com/docs/storage/web/start#use_multiple_storage_buckets), each with its own [location](https://cloud.google.com/storage/docs/bucket-locations).
 4. Click **Done**.
+
+#### Deploying rules
+
+To set up and deploy your first set of rules, open the [**Rules** tab](https://console.firebase.google.com/project/_/storage/rules) in the Storage section of the Firebase console.
+Copy the contents of the `storage.rules` file in your project into the online editor, then click **Publish**.
 
 ### Register your app with Firebase
 
@@ -111,44 +121,37 @@ After you have a Firebase project, you can add your web app to it.
 3. *(Optional)* Set up Firebase Hosting for your web app. You can set up Firebase Hosting now or [later](https://firebase.google.com/docs/hosting/quickstart). You can also link your Firebase Web App to a Hosting site at any time in your [Project settings](https://console.firebase.google.com/project/_/settings/general). If you choose to set up Hosting up now, select a site from the dropdown list to link to your Firebase Web App. This list displays your project’s default Hosting site and any [other sites](https://firebase.google.com/docs/hosting/multisites) that you’ve set up in your project. Any site that you’ve already linked to a Firebase Web App is unavailable for additional linking. Each Hosting site can only be linked to a single Firebase Web App.
 4. Click **Register app**.
 
-### Firebase config object
+### Configure your project
 
-To initialize Firebase in your app, you need to provide your app's Firebase project configuration. The Firebase config object contains unique, but non-secret identifiers for your Firebase project. At any time, you can [obtain your Firebase config object](http://support.google.com/firebase/answer/7015592). Replace the values beginning with `REACT_APP_FIREBASE` in the `.env` file in the project.
+To initialize Firebase in your app, you need to provide your app’s Firebase project configuration.
+The Firebase config object contains unique, but non-secret identifiers for your Firebase project.
+At any time, you can [obtain your Firebase config object](http://support.google.com/firebase/answer/7015592).
 
-### Deploy Firebase rules
-
-The command `npm install` is an [npm](https://www.npmjs.com) command-line utility which is used to install the dependencies in the local `node_modules` folder.
-In global mode (i.e., with `-g` or `--global` appended to the command), it installs the current package context as a global package.
-The Firebase CLI provides a variety of tools for managing, viewing, and deploying to Firebase projects.
+Your Firebase config object looks something like this:
 
 ```
-npm install -g firebase-tools
+apiKey: "api-key",
+authDomain: "project-id.firebaseapp.com",
+databaseURL: "https://project-id.firebaseio.com",
+projectId: "project-id",
+storageBucket: "project-id.appspot.com",
+messagingSenderId: "sender-id",
+appId: "app-id",
+measurementId: "G-measurement-id"
 ```
 
-The command `firebase login` is a [Firebase](https://firebase.google.com) command-line utility which is used to sign into Firebase using your Google account and connects your local machine to Firebase and grants you access to your Firebase projects.
+Replace the values of properties beginning with `REACT_APP_FIREBASE` in the `.env` file in your project with the matching Firebase identifier.
+If your Firebase config object looked like the one above, the Firebase section in your `.env` file will look like this:
 
 ```
-firebase login
-```
-
-The command `firebase list` is another Firebase command-line utility which is used to print a list of all of your Firebase projects.
-Use it to test that authentication worked (and to list all of your Firebase projects), the displayed list should be the same as the Firebase projects listed in the [Firebase console](https://console.firebase.google.com).
-
-```
-firebase list
-```
-
-The command `firebase init` is yet another Firebase command-line utility which is used to set up a new Firebase project in the current directory.
-This command will create a `firebase.json` configuration file in the current directory.
-
-```
-firebase init
-```
-
-The command `firebase deploy` is also a Firebase command-line utility which is used to deploy code and assets from your project directory to your Firebase project.
-
-```
-firebase deploy --only firestore:rules,storage
+REACT_APP_FIREBASE_API_KEY=api-key
+REACT_APP_FIREBASE_AUTH_DOMAIN=project-id.firebaseapp.com
+REACT_APP_FIREBASE_DATABASE_URL=https://project-id.firebaseio.com
+REACT_APP_FIREBASE_PROJECT_ID=project-id
+REACT_APP_FIREBASE_STORAGE_BUCKET=project-id.appspot.com
+REACT_APP_FIREBASE_MESSAGING_SENDER_ID=sender-id
+REACT_APP_FIREBASE_APP_ID=app-id
+REACT_APP_FIREBASE_MEASUREMENT_ID=G-measurement-id
 ```
 
 ### Add Firebase Extension
