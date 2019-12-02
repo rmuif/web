@@ -45,7 +45,6 @@
   },
   "homepage": "https://phoqe.me/react-material-ui-firebase",
   "devDependencies": {
-    "firebase-admin": "^8.8.0",
     "gh-pages": "^2.1.1"
   }
 }
