@@ -15,8 +15,6 @@ It comes bundled with [Material-UI](https://material-ui.com), [Firebase](https:/
 
 ## Features
 
-There’s a bunch of features included for instant web development gratification.
-
 - Bootstrapped with Create React App, the same tooling works out-of-the-box
 - Scaffolding incorporates Google Material Design principles through Material-UI
 - Built on top of Firebase with Analytics, Authentication, Cloud Firestore, Cloud Functions, Storage and Performance Monitoring working from the start
@@ -25,10 +23,9 @@ There’s a bunch of features included for instant web development gratification
 
 ## Demo
 
-https://phoqe.me/react-material-ui-firebase
-
 The demo is using the `master` branch, which houses the latest version of the template.
-There are some minor changes applied during deployment, e.g. `REACT_APP_BASENAME` getting set instead of being `null`.
+
+https://phoqe.me/react-material-ui-firebase
 
 ## Get started
 
