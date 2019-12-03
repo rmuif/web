@@ -10,7 +10,7 @@ With [Create React App](https://facebook.github.io/create-react-app) at its core
 It comes bundled with [Material-UI](https://material-ui.com), [Firebase](https://firebase.google.com) and [React Router](https://reacttraining.com/react-router).
 
 <p align="center">
-  <img src="https://user-images.githubusercontent.com/7033377/62852357-794cf800-bce9-11e9-8e0c-08774c616970.png" alt="Preview">
+  <img src="https://user-images.githubusercontent.com/7033377/70048014-96c00d80-15c9-11ea-8039-3c4312f9656c.png" alt="Preview">
 </p>
 
 ## Features
@@ -73,7 +73,7 @@ yarn start
 React + Material-UI + Firebase is a boilerplate for your own project.
 It wouldn’t make sense if you couldn’t customize it to the core.
 
-### Create Firebase project
+### Create a Firebase project
 
 You need to create a Firebase project to connect to your app.
 
