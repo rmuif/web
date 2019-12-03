@@ -68,14 +68,7 @@ You will see the build errors and lint warnings in the console.
 yarn start
 ```
 
-## Make it yours
-
-React + Material-UI + Firebase is a boilerplate for your own project.
-It wouldn’t make sense if you couldn’t customize it to the core.
-
 ### Create a Firebase project
-
-You need to create a Firebase project to connect to your app.
 
 1. In the [Firebase console](https://console.firebase.google.com), click **Add project**, then select or enter a **Project name**.
 If you have an existing Google Cloud Platform (GCP) project, you can select the project from the dropdown menu to add Firebase resources to that project.
@@ -87,9 +80,6 @@ Visit [Understand Firebase Projects](https://firebase.google.com/docs/projects/l
 When prompted, select to use an existing [Google Analytics account](https://support.google.com/analytics/answer/1009618?ref_topic=3544906&authuser=0) or to create a new account.
 If you choose to create a new account, select your [Analytics reporting location](https://firebase.google.com/docs/projects/locations), then accept the data sharing settings and Google Analytics terms for your project.
 5. Click **Create project** (or **Add Firebase**, if you’re using an existing GCP project).
-
-Firebase automatically provisions resources for your Firebase project.
-When the process completes, you’ll be taken to the overview page for your Firebase project in the Firebase console.
 
 ### Create a Cloud Firestore database
 
@@ -107,10 +97,11 @@ If you aren’t able to select a location, then your project already has a defau
 It was set either during project creation or when setting up another service that requires a location setting.
 4. Click **Done**.
 
-#### Deploying rules
+#### Deploying Cloud Firestore Security Rules
 
-To set up and deploy your first set of rules, open the [**Rules** tab](https://console.firebase.google.com/project/_/database/firestore/rules) in the Cloud Firestore section of the Firebase console.
-Copy the contents of the `firestore.rules` file in your project into the online editor, then click **Publish**.
+1. Open the [**Rules** tab](https://console.firebase.google.com/project/_/database/firestore/rules) in the Cloud Firestore section of the Firebase console.
+2. Copy the contents of the `firestore.rules` file in your project and paste it into the online editor.
+3. Click **Publish**.
 
 ### Create a default Storage bucket
 
@@ -125,14 +116,13 @@ It was set either during project creation or when setting up another service tha
 If you’re on the Blaze plan, you can [create multiple buckets](https://firebase.google.com/docs/storage/web/start#use_multiple_storage_buckets), each with its own [location](https://cloud.google.com/storage/docs/bucket-locations).
 4. Click **Done**.
 
-#### Deploying rules
+#### Deploying Storage Security Rules
 
-To set up and deploy your first set of rules, open the [**Rules** tab](https://console.firebase.google.com/project/_/storage/rules) in the Storage section of the Firebase console.
-Copy the contents of the `storage.rules` file in your project into the online editor, then click **Publish**.
+1. Open the [**Rules** tab](https://console.firebase.google.com/project/_/storage/rules) in the Storage section of the Firebase console.
+2. Copy the contents of the `storage.rules` file in your project and paste it into the online editor.
+3. Click **Publish**.
 
 ### Register your app with Firebase
-
-After you have a Firebase project, you can add your web app to it.
 
 1. In the center of the [Firebase console’s project overview page](https://console.firebase.google.com), click the **Web** icon to launch the setup workflow.
 If you’ve already added an app to your Firebase project, click **Add app** to display the platform options.
@@ -146,89 +136,6 @@ This list displays your project’s default Hosting site and any [other sites](h
 Any site that you’ve already linked to a Firebase Web App is unavailable for additional linking.
 Each Hosting site can only be linked to a single Firebase Web App.
 4. Click **Register app**.
-
-### Configure your project
-
-To initialize Firebase in your app, you need to provide your app’s Firebase project configuration.
-The Firebase config object contains unique, but non-secret identifiers for your Firebase project.
-At any time, you can [obtain your Firebase config object](http://support.google.com/firebase/answer/7015592).
-
-Your Firebase config object looks something like this:
-
-```
-apiKey: "api-key",
-authDomain: "project-id.firebaseapp.com",
-databaseURL: "https://project-id.firebaseio.com",
-projectId: "project-id",
-storageBucket: "project-id.appspot.com",
-messagingSenderId: "sender-id",
-appId: "app-id",
-measurementId: "G-measurement-id"
-```
-
-Replace the values of properties beginning with `REACT_APP_FIREBASE` in the `.env` file in your project with the matching Firebase identifier.
-If your Firebase config object looked like the one above, the Firebase section in your `.env` file will look like this:
-
-```
-REACT_APP_FIREBASE_API_KEY=api-key
-REACT_APP_FIREBASE_AUTH_DOMAIN=project-id.firebaseapp.com
-REACT_APP_FIREBASE_DATABASE_URL=https://project-id.firebaseio.com
-REACT_APP_FIREBASE_PROJECT_ID=project-id
-REACT_APP_FIREBASE_STORAGE_BUCKET=project-id.appspot.com
-REACT_APP_FIREBASE_MESSAGING_SENDER_ID=sender-id
-REACT_APP_FIREBASE_APP_ID=app-id
-REACT_APP_FIREBASE_MEASUREMENT_ID=G-measurement-id
-```
-
-### Add Firebase Extension
-
-For account deletion to fully work you need to add a Firebase Extension to your Firebase project.
-The extension called [Delete User Data](https://firebase.google.com/products/extensions/delete-user-data) will remove any references to the deleted account, i.e. Cloud Firestore and Storage references.
-
-Use `users/{UID}` for Cloud Firestore paths and `{DEFAULT}/images/avatars/{UID}` for Cloud Storage paths.
-
-### Change name and URL
-
-Changing your project’s name can be tedious sometimes as it often involves changing the name of both files and directories along with a ton of hard-coded values.
-With this template, you can change your project’s name by modifying 3 files:
-
-- **public/**
-  - manifest.json
-    - `name`
-    - `short_name`
-- .env
-    - `REACT_APP_NAME`
-- package.json
-  - `name`
-  - `homepage`
-
-### Use your own Git repository
-
-The command `git remote` is another Git command-line utility which is used to manage the set of repositories (“remotes”) whose branches you track.
-The options `rm origin` is used to remove the remote named `origin`.
-All remote-tracking branches and configuration settings for the remote are removed.
-
-```
-git remote rm origin
-```
-
-The options `add origin` adds a remote named `origin` for the repository at `<url>`.
-
-```
-git remote add origin <url>
-```
-
-The options `add upstream` adds a remote named `upstream` for the repository at `https://github.com/Phoqe/react-material-ui-firebase.git`.
-
-```
-git remote add upstream https://github.com/Phoqe/react-material-ui-firebase.git
-```
-
-The command `git push` is yet another Git command-line utility which is used to update remote refs using local refs, while sending objects necessary to complete the given refs.
-
-```
-git push -u origin master
-```
 
 ## Attribution
 
