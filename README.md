@@ -97,7 +97,7 @@ If you aren’t able to select a location, then your project already has a defau
 It was set either during project creation or when setting up another service that requires a location setting.
 4. Click **Done**.
 
-#### Deploying Cloud Firestore Security Rules
+### Deploying Cloud Firestore Security Rules
 
 1. Open the [**Rules** tab](https://console.firebase.google.com/project/_/database/firestore/rules) in the Cloud Firestore section of the Firebase console.
 2. Copy the contents of the `firestore.rules` file in your project and paste it into the online editor.
@@ -116,7 +116,7 @@ It was set either during project creation or when setting up another service tha
 If you’re on the Blaze plan, you can [create multiple buckets](https://firebase.google.com/docs/storage/web/start#use_multiple_storage_buckets), each with its own [location](https://cloud.google.com/storage/docs/bucket-locations).
 4. Click **Done**.
 
-#### Deploying Storage Security Rules
+### Deploying Storage Security Rules
 
 1. Open the [**Rules** tab](https://console.firebase.google.com/project/_/storage/rules) in the Storage section of the Firebase console.
 2. Copy the contents of the `storage.rules` file in your project and paste it into the online editor.
