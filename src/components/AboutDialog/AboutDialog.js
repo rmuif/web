@@ -23,7 +23,7 @@ class AboutDialog extends Component {
 
     return (
       <Dialog {...dialogProps}>
-        <DialogTitle>{process.env.REACT_APP_NAME}</DialogTitle>
+        <DialogTitle>{process.env.REACT_APP_TITLE}</DialogTitle>
 
         <DialogContent>
           <List disablePadding>
