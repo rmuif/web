@@ -104,7 +104,7 @@ class Bar extends Component {
       <AppBar color="primary" position="static">
         <Toolbar variant="regular">
           <Box display="flex" flexGrow={1}>
-            <Typography style={{ cursor: 'pointer' }} color="inherit" variant="h6" onClick={onTitleClick}>{process.env.REACT_APP_NAME}</Typography>
+            <Typography style={{ cursor: 'pointer' }} color="inherit" variant="h6" onClick={onTitleClick}>{process.env.REACT_APP_TITLE}</Typography>
           </Box>
 
           {user &&
