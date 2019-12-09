@@ -14,14 +14,6 @@ import HomeIcon from '@material-ui/icons/Home';
 import EmptyState from '../EmptyState';
 
 const styles = (theme) => ({
-  emptyStateIcon: {
-    fontSize: theme.spacing(12)
-  },
-
-  button: {
-    marginTop: theme.spacing(1)
-  },
-
   buttonIcon: {
     marginRight: theme.spacing(1)
   }
@@ -34,11 +26,11 @@ class NotFoundContent extends Component {
 
     return (
       <EmptyState
-        icon={<FindIcon className={classes.emptyStateIcon} color="action" />}
+        icon={<FindIcon />}
         title="Content Not Found"
         description="The requested URL was not found on this server"
         button={
-          <Fab className={classes.button} color="secondary" component={Link} to="/" variant="extended">
+          <Fab color="secondary" component={Link} to="/" variant="extended">
             <HomeIcon className={classes.buttonIcon} /> Go Home
           </Fab>
         }
