@@ -13,14 +13,6 @@ import GitHubCircleIcon from 'mdi-material-ui/GithubCircle';
 import EmptyState from '../EmptyState';
 
 const styles = (theme) => ({
-  emptyStateIcon: {
-    fontSize: theme.spacing(12)
-  },
-
-  button: {
-    marginTop: theme.spacing(1)
-  },
-
   buttonIcon: {
     marginRight: theme.spacing(1)
   }
@@ -37,7 +29,7 @@ class HomeContent extends Component {
     if (user) {
       return (
         <EmptyState
-          icon={<HomeIcon className={classes.emptyStateIcon} color="action" />}
+          icon={<HomeIcon />}
           title="Home"
         />
       );
@@ -48,7 +40,7 @@ class HomeContent extends Component {
         title={process.env.REACT_APP_TITLE}
         description="The three musketeers, all in one pack in the form of a boilerplate app"
         button={
-          <Fab className={classes.button} color="secondary" href="https://github.com/Phoqe/react-material-ui-firebase" rel="noopener noreferrer" target="_blank" variant="extended">
+          <Fab color="secondary" href="https://github.com/Phoqe/react-material-ui-firebase" rel="noopener noreferrer" target="_blank" variant="extended">
             <GitHubCircleIcon className={classes.buttonIcon} />
             GitHub
           </Fab>
