@@ -210,10 +210,10 @@ class App extends Component {
     const { snackbar } = this.state;
 
     return (
-      <ErrorBoundary>
-        <MuiThemeProvider theme={theme}>
-          <CssBaseline />
+      <MuiThemeProvider theme={theme}>
+        <CssBaseline />
 
+        <ErrorBoundary>
           {!ready &&
             <LaunchScreen />
           }
@@ -352,8 +352,8 @@ class App extends Component {
               />
             </>
           }
-        </MuiThemeProvider>
-      </ErrorBoundary>
+        </ErrorBoundary>
+      </MuiThemeProvider>
     );
   }
 

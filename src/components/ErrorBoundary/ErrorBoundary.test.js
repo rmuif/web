@@ -9,7 +9,7 @@ it('renders without crashing', () => {
 
   ReactDOM.render(
     <ErrorBoundary
-      children={<p></p>}
+      children={[]}
     />,
     div
   );
