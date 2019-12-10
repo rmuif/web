@@ -5,7 +5,7 @@ service cloud.firestore {
       allow list: if request.auth.uid != null;
       
       allow create: if request.auth.uid != null &&
-                    request.auth.uid == uid &&;
+                    request.auth.uid == uid;
 
       allow update: if request.auth.uid != null &&
                        request.auth.uid == uid;
