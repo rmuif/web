@@ -77,6 +77,11 @@ class Bar extends Component {
     });
   };
 
+  handleAboutClick = () => {
+    this.closeMenu();
+    this.props.onAboutClick();
+  };
+
   handleSettingsClick = () => {
     this.closeMenu();
     this.props.onSettingsClick();
@@ -93,7 +98,6 @@ class Bar extends Component {
 
     // Events
     const {
-      onTitleClick,
       onSignUpClick,
       onSignInClick
     } = this.props;
@@ -104,7 +108,7 @@ class Bar extends Component {
       <AppBar color="primary" position="static">
         <Toolbar variant="regular">
           <Box display="flex" flexGrow={1}>
-            <Typography style={{ cursor: 'pointer' }} color="inherit" variant="h6" onClick={onTitleClick}>{process.env.REACT_APP_TITLE}</Typography>
+            <Typography color="inherit" variant="h6">{process.env.REACT_APP_TITLE}</Typography>
           </Box>
 
           {user &&
@@ -114,6 +118,7 @@ class Bar extends Component {
               </IconButton>
 
               <Menu anchorEl={menu.anchorEl} open={Boolean(menu.anchorEl)} onClose={this.closeMenu}>
+                <MenuItem disabled={performingAction} onClick={this.handleAboutClick}>About</MenuItem>
                 <MenuItem disabled={performingAction} onClick={this.handleSettingsClick}>Settings</MenuItem>
                 <MenuItem disabled={performingAction} onClick={this.handleSignOutClick}>Sign out</MenuItem>
               </Menu>
@@ -146,7 +151,7 @@ Bar.propTypes = {
   userData: PropTypes.object,
 
   // Events
-  onTitleClick: PropTypes.func.isRequired,
+  onAboutClick: PropTypes.func.isRequired,
   onSettingsClick: PropTypes.func.isRequired,
   onSignOutClick: PropTypes.func.isRequired
 };

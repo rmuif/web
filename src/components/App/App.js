@@ -226,11 +226,10 @@ class App extends Component {
                 user={user}
                 userData={userData}
 
-                onTitleClick={() => this.openDialog('aboutDialog')}
-
                 onSignUpClick={() => this.openDialog('signUpDialog')}
                 onSignInClick={() => this.openDialog('signInDialog')}
 
+                onAboutClick={() => this.openDialog('aboutDialog')}
                 onSettingsClick={() => this.openDialog('settingsDialog')}
                 onSignOutClick={() => this.openDialog('signOutDialog')}
               />
