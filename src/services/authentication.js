@@ -208,6 +208,29 @@ authentication.signIn = (emailAddress, password) => {
   });
 };
 
+authentication.sendSignInLinkToEmail = (emailAddress) => {
+  return new Promise((resolve, reject) => {
+    if (!emailAddress) {
+      reject();
+
+      return;
+    }
+
+    const actionCodeSettings = {
+      url: 'http://localhost:3000',
+      handleCodeInApp: true
+    };
+
+    auth.sendSignInLinkToEmail(emailAddress, actionCodeSettings).then((value) => {
+      localStorage.setItem('emailAddress', emailAddress);
+
+      resolve(value);
+    }).catch((reason) => {
+      reject(reason);
+    });
+  });
+};
+
 authentication.signInWithAuthProvider = (providerId) => {
   return new Promise((resolve, reject) => {
     if (!providerId) {
