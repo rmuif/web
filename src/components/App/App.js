@@ -114,6 +114,45 @@ class App extends Component {
     }, callback);
   };
 
+  signInWithEmailLink = () => {
+    const emailLink = window.location.href;
+
+    if (!emailLink) {
+      return;
+    }
+
+    if (auth.isSignInWithEmailLink(emailLink)) {
+      let emailAddress = localStorage.getItem('emailAddress');
+
+      if (!emailAddress) {
+        return;
+      }
+
+      authentication.signInWithEmailLink(emailAddress, emailLink).then((value) => {
+        const user = value.user;
+        const displayName = user.displayName;
+        const emailAddress = user.email;
+
+        this.openSnackbar(`Signed in as ${displayName || emailAddress}`);
+      }).catch((reason) => {
+        const code = reason.code;
+        const message = reason.message;
+
+        switch (code) {
+          case 'auth/expired-action-code':
+          case 'auth/invalid-email':
+          case 'auth/user-disabled':
+            this.openSnackbar(message);
+            break;
+
+          default:
+            this.openSnackbar(message);
+            return;
+        }
+      });
+    }
+  };
+
   deleteAccount = () => {
     this.setState({
       performingAction: true
@@ -358,6 +397,8 @@ class App extends Component {
 
   componentDidMount() {
     this.mounted = true;
+
+    this.signInWithEmailLink();
 
     this.removeAuthStateChangedObserver = auth.onAuthStateChanged((user) => {
       if (!user) {
