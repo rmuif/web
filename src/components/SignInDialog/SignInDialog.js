@@ -52,6 +52,34 @@ class SignInDialog extends Component {
     this.state = initialState;
   }
 
+  getSignInButton = () => {
+    const { emailAddress, password, performingAction } = this.state;
+
+    if (emailAddress && !password) {
+      return (
+        <Button
+          color="primary"
+          disabled={!emailAddress || performingAction}
+          variant="contained"
+
+          onClick={() => this.signIn(true)}>
+          Sign in with e-mail
+        </Button>
+      );
+    }
+
+    return (
+      <Button
+        color="primary"
+        disabled={!emailAddress || performingAction}
+        variant="contained"
+
+        onClick={() => this.signIn(false)}>
+        Sign in
+      </Button>
+    );
+  };
+
   resetPassword = () => {
     const { emailAddress } = this.state;
 
@@ -103,8 +131,59 @@ class SignInDialog extends Component {
     }
   };
 
-  signIn = () => {
+  signIn = (emailLink) => {
     const { emailAddress, password } = this.state;
+
+    if (emailLink) {
+      const errors = validate({
+        emailAddress: emailAddress
+      }, {
+        emailAddress: constraints.emailAddress
+      });
+
+      if (errors) {
+        this.setState({
+          errors: errors
+        });
+
+        return;
+      }
+
+      this.setState({
+        performingAction: true,
+
+        errors: null
+      }, () => {
+        authentication.sendSignInLinkToEmail(emailAddress).then(() => {
+          this.props.openSnackbar(`Sent sign-in e-mail to ${emailAddress}`);
+        }).catch((reason) => {
+          const code = reason.code;
+          const message = reason.message;
+
+          switch (code) {
+            case 'auth/argument-error':
+            case 'auth/invalid-email':
+            case 'auth/missing-android-pkg-name':
+            case 'auth/missing-continue-uri':
+            case 'auth/missing-ios-bundle-id':
+            case 'auth/invalid-continue-uri':
+            case 'auth/unauthorized-continue-uri':
+              this.props.openSnackbar(message);
+              return;
+
+            default:
+              this.props.openSnackbar(message);
+              return;
+          }
+        }).finally(() => {
+          this.setState({
+            performingAction: false
+          });
+        });
+      });
+
+      return;
+    }
 
     const errors = validate({
       emailAddress: emailAddress,
@@ -198,7 +277,7 @@ class SignInDialog extends Component {
   handleKeyPress = (event) => {
     const { emailAddress, password } = this.state;
 
-    if (!emailAddress || !password) {
+    if (!emailAddress && !password) {
       return;
     }
 
@@ -209,7 +288,7 @@ class SignInDialog extends Component {
     }
 
     if (key === 'Enter') {
-      this.signIn();
+      this.signIn(emailAddress && !password);
     }
   };
 
@@ -372,14 +451,7 @@ class SignInDialog extends Component {
             Reset password
           </Button>
 
-          <Button
-            color="primary"
-            disabled={(!emailAddress || !password) || performingAction}
-            variant="contained"
-
-            onClick={this.signIn}>
-            Sign in
-          </Button>
+          {this.getSignInButton()}
         </DialogActions>
       </Dialog>
     );
