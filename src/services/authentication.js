@@ -231,6 +231,24 @@ authentication.sendSignInLinkToEmail = (emailAddress) => {
   });
 };
 
+authentication.signInWithEmailLink = (emailAddress, emailLink) => {
+  return new Promise((resolve, reject) => {
+    if (!emailAddress || !emailLink) {
+      reject();
+
+      return;
+    }
+
+    auth.signInWithEmailLink(emailAddress, emailLink).then((value) => {
+      localStorage.removeItem('emailAddress');
+
+      resolve(value);
+    }).catch((reason) => {
+      reject(reason);
+    });
+  });
+};
+
 authentication.signInWithAuthProvider = (providerId) => {
   return new Promise((resolve, reject) => {
     if (!providerId) {
