@@ -8,14 +8,10 @@ import DialogContent from '@material-ui/core/DialogContent';
 import DialogActions from '@material-ui/core/DialogActions';
 
 import List from '@material-ui/core/List';
-import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
 
 import Button from '@material-ui/core/Button';
-
-import LabelIcon from '@material-ui/icons/Label';
-import PersonIcon from '@material-ui/icons/Person';
 
 class AboutDialog extends Component {
   render() {
@@ -31,11 +27,16 @@ class AboutDialog extends Component {
 
         <DialogContent>
           <List disablePadding>
-            <ListItem>
-              <ListItemIcon>
-                <LabelIcon />
-              </ListItemIcon>
+            {process.env.NODE_ENV === 'development' &&
+              <ListItem>
+                <ListItemText
+                  primary="Name"
+                  secondary={process.env.REACT_APP_NAME}
+                />
+              </ListItem>
+            }
 
+            <ListItem>
               <ListItemText
                 primary="Version"
                 secondary={process.env.REACT_APP_VERSION}
@@ -44,10 +45,6 @@ class AboutDialog extends Component {
 
             {user &&
               <ListItem>
-                <ListItemIcon>
-                  <PersonIcon />
-                </ListItemIcon>
-
                 <ListItemText
                   primary="UID"
                   secondary={user.uid}
