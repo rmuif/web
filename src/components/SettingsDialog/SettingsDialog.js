@@ -158,10 +158,9 @@ class SettingsDialog extends Component {
             style={{ overflow: 'initial', minHeight: 'initial' }}
 
             indicatorColor="primary"
-            scrollButtons="off"
             textColor="primary"
             value={selectedTab}
-            variant="scrollable"
+            variant="fullWidth"
             onChange={this.handleTabChange}>
             {tabs.map((tab) => {
               return (
