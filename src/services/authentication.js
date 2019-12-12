@@ -225,7 +225,7 @@ authentication.sendSignInLinkToEmail = (emailAddress) => {
     }
 
     const actionCodeSettings = {
-      url: 'http://localhost:3000',
+      url: 'http://192.168.1.242:3000',
       handleCodeInApp: true
     };
 
