@@ -12,11 +12,18 @@ class Router extends Component {
     // Properties
     const { user } = this.props;
 
+    // Functions
+    const { openSnackbar } = this.props;
+
     return (
       <BrowserRouter basename={process.env.REACT_APP_BASENAME}>
         <Switch>
           <Route path="/" exact>
-            <HomeContent user={user} />
+            <HomeContent
+              user={user}
+
+              openSnackbar={openSnackbar}
+            />
           </Route>
 
           <Route>
@@ -30,7 +37,10 @@ class Router extends Component {
 
 Router.propTypes = {
   // Properties
-  user: PropTypes.object
+  user: PropTypes.object,
+
+  // Functions
+  openSnackbar: PropTypes.func.isRequired
 };
 
 export default Router;
