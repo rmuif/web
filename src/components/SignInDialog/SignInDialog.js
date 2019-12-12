@@ -62,8 +62,8 @@ class SignInDialog extends Component {
           disabled={!emailAddress || performingAction}
           variant="contained"
 
-          onClick={() => this.signIn(true)}>
-          Sign in with e-mail
+          onClick={() => this.sendSignInLinkToEmail()}>
+          Send sign in link
         </Button>
       );
     }
@@ -74,7 +74,7 @@ class SignInDialog extends Component {
         disabled={!emailAddress || performingAction}
         variant="contained"
 
-        onClick={() => this.signIn(false)}>
+        onClick={() => this.signIn()}>
         Sign in
       </Button>
     );
@@ -131,61 +131,8 @@ class SignInDialog extends Component {
     }
   };
 
-  signIn = (emailLink) => {
+  signIn = () => {
     const { emailAddress, password } = this.state;
-
-    if (emailLink) {
-      const errors = validate({
-        emailAddress: emailAddress
-      }, {
-        emailAddress: constraints.emailAddress
-      });
-
-      if (errors) {
-        this.setState({
-          errors: errors
-        });
-
-        return;
-      }
-
-      this.setState({
-        performingAction: true,
-
-        errors: null
-      }, () => {
-        authentication.sendSignInLinkToEmail(emailAddress).then(() => {
-          this.props.dialogProps.onClose(() => {
-            this.props.openSnackbar(`Sent sign-in e-mail to ${emailAddress}`);
-          });
-        }).catch((reason) => {
-          const code = reason.code;
-          const message = reason.message;
-
-          switch (code) {
-            case 'auth/argument-error':
-            case 'auth/invalid-email':
-            case 'auth/missing-android-pkg-name':
-            case 'auth/missing-continue-uri':
-            case 'auth/missing-ios-bundle-id':
-            case 'auth/invalid-continue-uri':
-            case 'auth/unauthorized-continue-uri':
-              this.props.openSnackbar(message);
-              return;
-
-            default:
-              this.props.openSnackbar(message);
-              return;
-          }
-        }).finally(() => {
-          this.setState({
-            performingAction: false
-          });
-        });
-      });
-
-      return;
-    }
 
     const errors = validate({
       emailAddress: emailAddress,
@@ -235,6 +182,59 @@ class SignInDialog extends Component {
         });
       });
     }
+  };
+
+  sendSignInLinkToEmail = () => {
+    const { emailAddress } = this.state;
+
+    const errors = validate({
+      emailAddress: emailAddress
+    }, {
+      emailAddress: constraints.emailAddress
+    });
+
+    if (errors) {
+      this.setState({
+        errors: errors
+      });
+
+      return;
+    }
+
+    this.setState({
+      performingAction: true,
+
+      errors: null
+    }, () => {
+      authentication.sendSignInLinkToEmail(emailAddress).then(() => {
+        this.props.dialogProps.onClose(() => {
+          this.props.openSnackbar(`Sent sign-in e-mail to ${emailAddress}`);
+        });
+      }).catch((reason) => {
+        const code = reason.code;
+        const message = reason.message;
+
+        switch (code) {
+          case 'auth/argument-error':
+          case 'auth/invalid-email':
+          case 'auth/missing-android-pkg-name':
+          case 'auth/missing-continue-uri':
+          case 'auth/missing-ios-bundle-id':
+          case 'auth/invalid-continue-uri':
+          case 'auth/unauthorized-continue-uri':
+            this.props.openSnackbar(message);
+            return;
+
+          default:
+            this.props.openSnackbar(message);
+            return;
+        }
+      }).finally(() => {
+        this.setState({
+          performingAction: false
+        });
+      });
+    });
   };
 
   signInWithAuthProvider = (providerId) => {
@@ -290,7 +290,11 @@ class SignInDialog extends Component {
     }
 
     if (key === 'Enter') {
-      this.signIn(emailAddress && !password);
+      if (emailAddress && !password) {
+        this.sendSignInLinkToEmail();
+      } else {
+        this.signIn();
+      }
     }
   };
 
