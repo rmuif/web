@@ -216,6 +216,14 @@ authentication.sendSignInLinkToEmail = (emailAddress) => {
       return;
     }
 
+    const currentUser = auth.currentUser;
+
+    if (currentUser) {
+      reject();
+
+      return;
+    }
+
     const actionCodeSettings = {
       url: 'http://localhost:3000',
       handleCodeInApp: true
@@ -234,6 +242,14 @@ authentication.sendSignInLinkToEmail = (emailAddress) => {
 authentication.signInWithEmailLink = (emailAddress, emailLink) => {
   return new Promise((resolve, reject) => {
     if (!emailAddress || !emailLink) {
+      reject();
+
+      return;
+    }
+
+    const currentUser = auth.currentUser;
+
+    if (currentUser) {
       reject();
 
       return;
