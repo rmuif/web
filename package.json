@@ -7,7 +7,7 @@
     "@material-ui/icons": "^4.5.1",
     "@material-ui/styles": "^4.7.1",
     "@sentry/browser": "^5.10.2",
-    "firebase": "^7.5.2",
+    "firebase": "^7.6.0",
     "lodash": "^4.17.15",
     "mdi-material-ui": "^6.9.0",
     "moment": "^2.24.0",
