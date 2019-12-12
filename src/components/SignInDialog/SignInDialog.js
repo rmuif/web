@@ -155,7 +155,9 @@ class SignInDialog extends Component {
         errors: null
       }, () => {
         authentication.sendSignInLinkToEmail(emailAddress).then(() => {
-          this.props.openSnackbar(`Sent sign-in e-mail to ${emailAddress}`);
+          this.props.dialogProps.onClose(() => {
+            this.props.openSnackbar(`Sent sign-in e-mail to ${emailAddress}`);
+          });
         }).catch((reason) => {
           const code = reason.code;
           const message = reason.message;
