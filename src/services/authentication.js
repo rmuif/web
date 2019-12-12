@@ -225,7 +225,7 @@ authentication.sendSignInLinkToEmail = (emailAddress) => {
     }
 
     const actionCodeSettings = {
-      url: 'http://192.168.1.242:3000',
+      url: process.env.REACT_APP_HOMEPAGE,
       handleCodeInApp: true
     };
 
