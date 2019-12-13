@@ -392,6 +392,10 @@ class App extends Component {
     this.onAuthStateChangedObserver = auth.onAuthStateChanged((user) => {
       // The user is not signed in or doesn’t have a user ID.
       if (!user || !user.uid) {
+        if (this.userDocumentSnapshotListener) {
+          this.userDocumentSnapshotListener();
+        }
+
         this.resetState();
 
         return;
@@ -403,6 +407,10 @@ class App extends Component {
 
         // The user doesn’t have a data point, equivalent to not signed in.
         if (!snapshot.exists || !data) {
+          if (this.userDocumentSnapshotListener) {
+            this.userDocumentSnapshotListener();
+          }
+
           this.resetState();
 
           return;
