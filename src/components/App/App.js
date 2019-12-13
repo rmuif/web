@@ -18,49 +18,77 @@ import Bar from '../Bar';
 import Router from '../Router';
 import DialogHost from '../DialogHost';
 
+const initialState = {
+  ready: false,
+  performingAction: false,
+
+  theme: theming.defaultTheme,
+
+  user: null,
+  userData: null,
+
+  aboutDialog: {
+    open: false
+  },
+
+  signUpDialog: {
+    open: false
+  },
+
+  signInDialog: {
+    open: false
+  },
+
+  settingsDialog: {
+    open: false
+  },
+
+  deleteAccountDialog: {
+    open: false
+  },
+
+  signOutDialog: {
+    open: false
+  },
+
+  snackbar: {
+    autoHideDuration: 0,
+    message: '',
+    open: false
+  }
+};
+
 class App extends Component {
   constructor(props) {
     super(props);
 
-    this.state = {
-      user: null,
-      userData: null,
+    this.state = initialState;
+  }
+
+  resetState = (callback) => {
+    this.setState({
+      ready: true,
+
       theme: theming.defaultTheme,
 
-      ready: false,
-      performingAction: false,
+      user: null,
+      userData: null
+    }, callback);
+  };
 
-      aboutDialog: {
-        open: false
-      },
+  setTheme = (theme, callback) => {
+    if (!theme) {
+      this.setState({
+        theme: theming.defaultTheme
+      }, callback);
 
-      signUpDialog: {
-        open: false
-      },
+      return;
+    }
 
-      signInDialog: {
-        open: false
-      },
-
-      settingsDialog: {
-        open: false
-      },
-
-      deleteAccountDialog: {
-        open: false
-      },
-
-      signOutDialog: {
-        open: false
-      },
-
-      snackbar: {
-        autoHideDuration: 0,
-        message: '',
-        open: false
-      }
-    };
-  }
+    this.setState({
+      theme: theming.createTheme(theme)
+    }, callback);
+  };
 
   openDialog = (dialogId, callback) => {
     const dialog = this.state[dialogId];
@@ -361,149 +389,67 @@ class App extends Component {
   }
 
   componentDidMount() {
-    this.mounted = true;
-
-    this.removeAuthStateChangedObserver = auth.onAuthStateChanged((user) => {
-      if (!user) {
-        if (this.removeReferenceListener) {
-          this.removeReferenceListener();
-        }
-
-        if (this.mounted) {
-          this.setState({
-            user: null,
-            userData: null,
-            theme: theming.defaultTheme,
-
-            ready: true
-          });
-        }
+    this.onAuthStateChangedObserver = auth.onAuthStateChanged((user) => {
+      // The user is not signed in or doesn’t have a user ID.
+      if (!user || !user.uid) {
+        this.resetState();
 
         return;
       }
 
-      const uid = user.uid;
-
-      if (!uid) {
-        if (this.removeReferenceListener) {
-          this.removeReferenceListener();
-        }
-
-        if (this.mounted) {
-          this.setState({
-            user: null,
-            userData: null,
-            theme: theming.defaultTheme,
-
-            ready: true
-          });
-        }
-
-        return;
-      }
-
-      const reference = firestore.collection('users').doc(uid);
-
-      if (!reference) {
-        if (this.removeReferenceListener) {
-          this.removeReferenceListener();
-        }
-
-        if (this.mounted) {
-          this.setState({
-            user: null,
-            userData: null,
-            theme: theming.defaultTheme,
-
-            ready: true
-          });
-        }
-
-        return;
-      }
-
-      this.removeReferenceListener = reference.onSnapshot((snapshot) => {
-        if (!snapshot.exists) {
-          if (this.mounted) {
-            this.setState({
-              user: null,
-              userData: null,
-              theme: theming.defaultTheme,
-
-              ready: true
-            });
-          }
-
-          return;
-        }
-
+      // The user is signed in, begin retrieval of external user data.
+      this.userDocumentSnapshotListener = firestore.collection('users').doc(user.uid).onSnapshot((snapshot) => {
         const data = snapshot.data();
 
-        if (!data) {
-          if (this.mounted) {
-            this.setState({
-              user: null,
-              userData: null,
-              theme: theming.defaultTheme,
-
-              ready: true
-            });
-          }
+        // The user doesn’t have a data point, equivalent to not signed in.
+        if (!snapshot.exists || !data) {
+          this.resetState();
 
           return;
         }
 
-        if (data.theme) {
+        this.setTheme(data.theme, () => {
           this.setState({
-            theme: theming.createTheme(data.theme)
-          });
-        } else {
-          this.setState({
-            theme: theming.defaultTheme
-          });
-        }
+            ready: true,
 
-        if (this.mounted) {
-          this.setState({
             user: user,
-            userData: data,
-
-            ready: true
+            userData: data
           });
-        }
+        });
       }, (error) => {
-        if (this.mounted) {
-          this.setState({
-            user: null,
-            userData: null,
-            theme: theming.defaultTheme,
+        this.resetState(() => {
+          const code = error.code;
+          const message = error.message;
 
-            ready: true
-          }, () => {
-            const code = error.code;
-            const message = error.message;
+          switch (code) {
+            default:
+              this.openSnackbar(message);
+              return;
+          }
+        });
+      });
+    }, (error) => {
+      this.resetState(() => {
+        const code = error.code;
+        const message = error.message;
 
-            switch (code) {
-              default:
-                this.openSnackbar(message);
-                return;
-            }
-          });
+        switch (code) {
+          default:
+            this.openSnackbar(message);
+            return;
         }
       });
     });
   }
 
   componentWillUnmount() {
-    if (this.removeAuthStateChangedObserver) {
-      this.removeAuthStateChangedObserver();
+    if (this.onAuthStateChangedObserver) {
+      this.onAuthStateChangedObserver();
     }
 
-    if (this.removeReferenceListener) {
-      this.removeReferenceListener();
+    if (this.userDocumentSnapshotListener) {
+      this.userDocumentSnapshotListener();
     }
-
-    this.mounted = false;
   }
 }
 
