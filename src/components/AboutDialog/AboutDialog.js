@@ -27,15 +27,6 @@ class AboutDialog extends Component {
 
         <DialogContent>
           <List disablePadding>
-            {process.env.NODE_ENV === 'development' &&
-              <ListItem>
-                <ListItemText
-                  primary="Name"
-                  secondary={process.env.REACT_APP_NAME}
-                />
-              </ListItem>
-            }
-
             <ListItem>
               <ListItemText
                 primary="Version"
