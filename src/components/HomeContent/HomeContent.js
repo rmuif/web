@@ -93,7 +93,7 @@ class HomeContent extends Component {
     return (
       <EmptyState
         title={process.env.REACT_APP_TITLE}
-        description="The three musketeers, all in one pack in the form of a boilerplate app"
+        description={process.env.REACT_APP_DESCRIPTION}
         button={
           <Fab color="secondary" href="https://github.com/Phoqe/react-material-ui-firebase" rel="noopener noreferrer" target="_blank" variant="extended">
             <GitHubCircleIcon className={classes.buttonIcon} />
