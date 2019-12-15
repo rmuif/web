@@ -1,7 +1,41 @@
 {
   "name": "react-material-ui-firebase",
   "version": "2.1.3",
-  "private": true,
+  "description": "The three musketeers, all in one pack in the form of a boilerplate app",
+  "homepage": "https://phoqe.me/react-material-ui-firebase",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Phoqe/react-material-ui-firebase.git"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject",
+    "predeploy": "react-scripts build",
+    "deploy": "gh-pages -d build"
+  },
+  "config": {
+    "title": "React + Material-UI + Firebase",
+
+    "theme": {
+      "primaryColor": "blue",
+      "secondaryColor": "red",
+      "type": "light"
+    },
+
+    "firebase": {
+      "apiKey": "AIzaSyDYZOrZVpXkPQD6J31mb9t2eIIxmGEJK-Q",
+      "authDomain": "react-material-ui-firebase.firebaseapp.com",
+      "databaseUrl": "https://react-material-ui-firebase.firebaseio.com",
+      "projectId": "react-material-ui-firebase",
+      "storageBucket": "react-material-ui-firebase.appspot.com",
+      "messagingSenderId": "552659850812",
+      "appId": "1:552659850812:web:d685f74f72161d96",
+      "measurementId": "G-LYJ69M3CEC"
+    }
+  },
   "dependencies": {
     "@material-ui/core": "^4.8.0",
     "@material-ui/icons": "^4.5.1",
@@ -21,14 +55,11 @@
     "typeface-roboto": "^0.0.75",
     "validate.js": "^0.13.1"
   },
-  "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject",
-    "predeploy": "react-scripts build",
-    "deploy": "gh-pages -d build"
+  "devDependencies": {
+    "gh-pages": "^2.1.1"
   },
+  "private": true,
+
   "eslintConfig": {
     "extends": "react-app"
   },
@@ -43,9 +74,5 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
-  },
-  "homepage": "https://phoqe.me/react-material-ui-firebase",
-  "devDependencies": {
-    "gh-pages": "^2.1.1"
   }
 }
