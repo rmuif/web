@@ -63,7 +63,7 @@ class SignInDialog extends Component {
           variant="contained"
 
           onClick={() => this.sendSignInLinkToEmail()}>
-          Send sign in link
+          Send sign-in link
         </Button>
       );
     }
