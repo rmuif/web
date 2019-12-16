@@ -2,14 +2,6 @@ import firebase, { analytics, auth, firestore, storage } from '../firebase';
 
 import moment from 'moment';
 
-const avatarFileTypes = [
-  'image/gif',
-  'image/jpeg',
-  'image/png',
-  'image/webp',
-  'image/svg+xml'
-];
-
 const authentication = {};
 
 authentication.signUp = (fields) => {
@@ -484,6 +476,14 @@ authentication.changeAvatar = (avatar) => {
 
       return;
     }
+
+    const avatarFileTypes = [
+      'image/gif',
+      'image/jpeg',
+      'image/png',
+      'image/webp',
+      'image/svg+xml'
+    ];
 
     if (!avatarFileTypes.includes(avatar.type)) {
       reject();
