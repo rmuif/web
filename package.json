@@ -43,7 +43,7 @@
     "@sentry/browser": "^5.10.2",
     "firebase": "^7.6.0",
     "lodash": "^4.17.15",
-    "mdi-material-ui": "^6.9.0",
+    "mdi-material-ui": "^6.10.0",
     "moment": "^2.24.0",
     "numeral": "^2.0.6",
     "react": "^16.12.0",
