@@ -223,7 +223,7 @@ authentication.sendSignInLinkToEmail = (emailAddress) => {
 
     auth.sendSignInLinkToEmail(emailAddress, actionCodeSettings).then((value) => {
       analytics.logEvent('send_sign_in_link_to_email');
-
+      
       localStorage.setItem('emailAddress', emailAddress);
 
       resolve(value);
