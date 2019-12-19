@@ -4,12 +4,16 @@ import PropTypes from 'prop-types';
 
 import * as Sentry from '@sentry/browser';
 
+import ErrorIcon from '@material-ui/icons/Error';
+
+import EmptyState from '../EmptyState';
+
 class ErrorBoundary extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      hasError: false,
+      hasError: true,
       eventId: null
     };
   }
@@ -37,7 +41,12 @@ class ErrorBoundary extends Component {
     const { hasError } = this.state;
 
     if (hasError) {
-      return <h1>Something went wrong.</h1>;
+      return (
+        <EmptyState
+          icon={<ErrorIcon />}
+          title="Something went wrong"
+        />
+      );
     }
 
     return children;
