@@ -13,7 +13,7 @@ class ErrorBoundary extends Component {
     super(props);
 
     this.state = {
-      hasError: true,
+      hasError: false,
       eventId: null
     };
   }
