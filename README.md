@@ -38,7 +38,7 @@ The `<directory>` option is the name of a new directory to clone into, replace i
 The “humanish” part of the source repository is used if no directory is explicitly given (`repo` for `/path/to/repo.git` and `foo` for `host.xz:foo/.git`).
 
 ```
-git clone https://github.com/Phoqe/react-material-ui-firebase.git <directory>
+git clone https://github.com/phoqe/react-material-ui-firebase.git <directory>
 ```
 
 ### Install the dependencies
@@ -150,4 +150,4 @@ Portions of this page are modifications based on work created and [shared by Goo
 
 ## License
 
-React + Material-UI + Firebase is open-source software [licensed as MIT](https://github.com/Phoqe/react-material-ui-firebase/blob/master/LICENSE.md).
+React + Material-UI + Firebase is open-source software [licensed as MIT](https://github.com/phoqe/react-material-ui-firebase/blob/master/LICENSE.md).

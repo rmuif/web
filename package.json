@@ -6,7 +6,7 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/Phoqe/react-material-ui-firebase.git"
+    "url": "https://github.com/phoqe/react-material-ui-firebase.git"
   },
   "scripts": {
     "start": "react-scripts start",
