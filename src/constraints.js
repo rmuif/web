@@ -81,7 +81,7 @@ const constraints = {
     },
 
     type: 'string'
-  },
+  }
 };
 
 export default constraints;
