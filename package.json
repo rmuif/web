@@ -3,6 +3,10 @@
   "version": "2.1.6",
   "description": "The three musketeers, all in one pack in the form of a boilerplate app",
   "homepage": "https://phoqe.me/react-material-ui-firebase",
+  "bugs": {
+    "url": "https://github.com/phoqe/react-material-ui-firebase/issues",
+    "email": "phoqe@phoqe.dev"
+  },
   "license": "MIT",
   "repository": {
     "type": "git",
