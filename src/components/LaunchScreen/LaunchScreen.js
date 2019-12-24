@@ -1,18 +1,37 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 
-import Box from '@material-ui/core/Box';
+import PropTypes from 'prop-types';
+
+import { withStyles } from '@material-ui/core/styles';
+
 import CircularProgress from '@material-ui/core/CircularProgress';
+
+const styles = (theme) => ({
+  center: {
+    position: 'absolute',
+    top: '50%',
+    left: '50%',
+    transform: 'translate(-50%, -50%)',
+    textAlign: 'center'
+  }
+});
 
 class LaunchScreen extends Component {
   render() {
+    // Styling
+    const { classes } = this.props;
+
     return (
-      <Box position="absolute" top="50%" left="50%">
+      <div className={classes.center}>
         <CircularProgress />
-      </Box>
+      </div>
     );
   }
 }
 
-LaunchScreen.propTypes = {};
+LaunchScreen.propTypes = {
+  // Styling
+  classes: PropTypes.object.isRequired
+};
 
-export default LaunchScreen;
+export default withStyles(styles)(LaunchScreen);
