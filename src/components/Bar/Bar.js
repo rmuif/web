@@ -128,10 +128,10 @@ class Bar extends Component {
           {!user &&
             <>
               <Box mr={1}>
-                <Button color="secondary" disabled={performingAction} variant="contained" onClick={onSignUpClick}>Sign Up</Button>
+                <Button color="secondary" disabled={performingAction} variant="contained" onClick={onSignUpClick}>Sign up</Button>
               </Box>
 
-              <Button color="secondary" disabled={performingAction} variant="contained" onClick={onSignInClick}>Sign In</Button>
+              <Button color="secondary" disabled={performingAction} variant="contained" onClick={onSignInClick}>Sign in</Button>
             </>
           }
         </Toolbar>
