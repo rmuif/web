@@ -1968,7 +1968,7 @@
   dependencies:
     "@babel/runtime" "^7.4.4"
 
-"@material-ui/styles@^4.7.1", "@material-ui/styles@^4.8.2":
+"@material-ui/styles@^4.8.2":
   version "4.8.2"
   resolved "https://registry.yarnpkg.com/@material-ui/styles/-/styles-4.8.2.tgz#841acbc4314accbe82a45cb1feb758d47448c802"
   integrity sha512-r5U+93pkpwQOmHTmwyn2sqTio6PHd873xvSHiKP6fdybAXXX6CZgVvh3W8saZNbYr/QXsS8OHmFv7sYJLt5Yfg==
