@@ -77,21 +77,6 @@ class Bar extends Component {
     });
   };
 
-  handleAboutClick = () => {
-    this.closeMenu();
-    this.props.onAboutClick();
-  };
-
-  handleSettingsClick = () => {
-    this.closeMenu();
-    this.props.onSettingsClick();
-  };
-
-  handleSignOutClick = () => {
-    this.closeMenu();
-    this.props.onSignOutClick();
-  };
-
   render() {
     // Properties
     const {
@@ -110,6 +95,33 @@ class Bar extends Component {
 
     const { menu } = this.state;
 
+    const menuItems = [
+      {
+        children: 'About',
+        onClick: () => {
+          this.closeMenu();
+
+          this.props.onAboutClick();
+        }
+      },
+      {
+        children: 'Settings',
+        onClick: () => {
+          this.closeMenu();
+
+          this.props.onSettingsClick();
+        }
+      },
+      {
+        children: 'Sign out',
+        onClick: () => {
+          this.closeMenu();
+
+          this.props.onSignOutClick();
+        }
+      }
+    ];
+
     return (
       <AppBar color="primary" position="static">
         <Toolbar variant={theme.dense ? 'dense' : 'regular'}>
@@ -124,9 +136,13 @@ class Bar extends Component {
               </IconButton>
 
               <Menu anchorEl={menu.anchorEl} open={Boolean(menu.anchorEl)} onClose={this.closeMenu}>
-                <MenuItem dense={theme.dense} disabled={performingAction} onClick={this.handleAboutClick}>About</MenuItem>
-                <MenuItem dense={theme.dense} disabled={performingAction} onClick={this.handleSettingsClick}>Settings</MenuItem>
-                <MenuItem dense={theme.dense} disabled={performingAction} onClick={this.handleSignOutClick}>Sign out</MenuItem>
+                {menuItems.map((menuItem, index) => {
+                  return (
+                    <MenuItem key={index} dense={theme.dense} disabled={performingAction} onClick={menuItem.onClick}>
+                      {menuItem.children}
+                    </MenuItem>
+                  );
+                })}
               </Menu>
             </>
           }
