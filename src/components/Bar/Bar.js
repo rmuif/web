@@ -94,7 +94,13 @@ class Bar extends Component {
 
   render() {
     // Properties
-    const { performingAction, user } = this.props;
+    const {
+      performingAction,
+
+      theme,
+
+      user
+    } = this.props;
 
     // Events
     const {
@@ -106,7 +112,7 @@ class Bar extends Component {
 
     return (
       <AppBar color="primary" position="static">
-        <Toolbar variant="regular">
+        <Toolbar variant={theme.dense ? 'dense' : 'regular'}>
           <Box display="flex" flexGrow={1}>
             <Typography color="inherit" variant="h6">{process.env.REACT_APP_TITLE}</Typography>
           </Box>
@@ -118,9 +124,9 @@ class Bar extends Component {
               </IconButton>
 
               <Menu anchorEl={menu.anchorEl} open={Boolean(menu.anchorEl)} onClose={this.closeMenu}>
-                <MenuItem disabled={performingAction} onClick={this.handleAboutClick}>About</MenuItem>
-                <MenuItem disabled={performingAction} onClick={this.handleSettingsClick}>Settings</MenuItem>
-                <MenuItem disabled={performingAction} onClick={this.handleSignOutClick}>Sign out</MenuItem>
+                <MenuItem dense={theme.dense} disabled={performingAction} onClick={this.handleAboutClick}>About</MenuItem>
+                <MenuItem dense={theme.dense} disabled={performingAction} onClick={this.handleSettingsClick}>Settings</MenuItem>
+                <MenuItem dense={theme.dense} disabled={performingAction} onClick={this.handleSignOutClick}>Sign out</MenuItem>
               </Menu>
             </>
           }
@@ -147,6 +153,9 @@ Bar.defaultProps = {
 Bar.propTypes = {
   // Properties
   performingAction: PropTypes.bool.isRequired,
+
+  theme: PropTypes.object.isRequired,
+
   user: PropTypes.object,
   userData: PropTypes.object,
 

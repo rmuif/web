@@ -670,6 +670,7 @@ class AccountTab extends Component {
 
     // Properties
     const {
+      theme,
       user,
       userData
     } = this.props;
@@ -1017,7 +1018,7 @@ class AccountTab extends Component {
           </Hidden>
         </Box>
 
-        <List disablePadding>
+        <List dense={theme.dense} disablePadding>
           <ListItem>
             <Hidden xsDown>
               <ListItemIcon>
@@ -1400,6 +1401,8 @@ AccountTab.propTypes = {
   classes: PropTypes.object.isRequired,
 
   // Properties
+  theme: PropTypes.object.isRequired,
+
   user: PropTypes.object.isRequired,
   userData: PropTypes.object,
 

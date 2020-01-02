@@ -35,7 +35,11 @@ class AboutDialog extends Component {
     const { dialogProps } = this.props;
 
     // Custom Properties
-    const { user } = this.props;
+    const {
+      theme,
+
+      user
+    } = this.props;
 
     return (
       <Dialog {...dialogProps}>
@@ -50,7 +54,7 @@ class AboutDialog extends Component {
         </DialogTitle>
 
         <DialogContent>
-          <List disablePadding>
+          <List dense={theme.dense} disablePadding>
             <ListItem>
               <ListItemText
                 primary="Version"
@@ -81,6 +85,8 @@ AboutDialog.propTypes = {
   dialogProps: PropTypes.object.isRequired,
 
   // Custom Properties
+  theme: PropTypes.object.isRequired,
+
   user: PropTypes.object,
 };
 

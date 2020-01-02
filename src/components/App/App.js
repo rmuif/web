@@ -251,6 +251,8 @@ class App extends Component {
               <Bar
                 performingAction={performingAction}
 
+                theme={theme}
+
                 user={user}
                 userData={userData}
 
@@ -280,6 +282,8 @@ class App extends Component {
                       },
 
                       props: {
+                        theme: theme,
+
                         user: user
                       }
                     },
@@ -332,9 +336,10 @@ class App extends Component {
                       },
 
                       props: {
+                        theme: theme,
+
                         user: user,
                         userData: userData,
-                        theme: theme,
 
                         openSnackbar: this.openSnackbar,
 

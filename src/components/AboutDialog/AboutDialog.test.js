@@ -16,6 +16,8 @@ it('renders without crashing', () => {
           onClose: () => {}
         }
       }
+
+      theme={{}}
     />,
     div
   );
