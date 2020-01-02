@@ -173,6 +173,7 @@ const getType = (typeId) => {
 const defaultPrimaryColor = getColor(process.env.REACT_APP_THEME_PRIMARY_COLOR);
 const defaultSecondaryColor = getColor(process.env.REACT_APP_THEME_SECONDARY_COLOR);
 const defaultType = getType(process.env.REACT_APP_THEME_TYPE);
+const defaultDense = process.env.REACT_APP_THEME_DENSE === 'true';
 
 const defaultTheme = createMuiTheme({
   palette: {
@@ -183,7 +184,8 @@ const defaultTheme = createMuiTheme({
 
   primaryColor: defaultPrimaryColor,
   secondaryColor: defaultSecondaryColor,
-  type: defaultType
+  type: defaultType,
+  dense: defaultDense
 });
 
 const theming = {};
@@ -194,6 +196,7 @@ theming.types = types;
 theming.defaultPrimaryColor = defaultPrimaryColor;
 theming.defaultSecondaryColor = defaultSecondaryColor;
 theming.defaultType = defaultType;
+theming.defaultDense = defaultDense;
 
 theming.defaultTheme = defaultTheme;
 
@@ -209,7 +212,8 @@ theming.isDefaultTheme = (theme) => {
 
   if (theme.primaryColor.id === defaultPrimaryColor.id &&
       theme.secondaryColor.id === defaultSecondaryColor.id &&
-      theme.type.id === defaultType.id) {
+      theme.type.id === defaultType.id &&
+      theme.dense === defaultDense) {
     return true;
   }
 
@@ -229,6 +233,7 @@ theming.createTheme = (theme) => {
   let primaryColor = theme.primaryColor;
   let secondaryColor = theme.secondaryColor;
   let type = theme.type;
+  let dense = theme.dense;
 
   if (!primaryColor || !secondaryColor || !type) {
     return null;
@@ -251,7 +256,8 @@ theming.createTheme = (theme) => {
 
     primaryColor: primaryColor,
     secondaryColor: secondaryColor,
-    type: type
+    type: type,
+    dense: dense
   });
 
   return theme;
@@ -269,10 +275,11 @@ theming.changeTheme = (theme) => {
 
       return;
     }
-
+    
     let primaryColor = theme.primaryColor;
     let secondaryColor = theme.secondaryColor;
     let type = theme.type;
+    let dense = theme.dense;
 
     if (!primaryColor || !secondaryColor || !type) {
       reject();
@@ -318,14 +325,16 @@ theming.changeTheme = (theme) => {
       theme: {
         primaryColor: primaryColor.id,
         secondaryColor: secondaryColor.id,
-        type: type.id
+        type: type.id,
+        dense: dense
       }
     }).then((value) => {
       analytics.logEvent('change_theme', {
         value: {
           primaryColor: primaryColor.id,
           secondaryColor: secondaryColor.id,
-          type: type.id
+          type: type.id,
+          dense: dense
         }
       });
 
@@ -504,6 +513,51 @@ theming.changeType = (type) => {
     }).then((value) => {
       analytics.logEvent('change_type', {
         value: type.id
+      });
+
+      resolve(value);
+    }).catch((reason) => {
+      reject(reason);
+    });
+  });
+};
+
+/**
+ * Change the dense for the current user.
+ * @param dense
+ * @returns {Promise<unknown>}
+ */
+theming.changeDense = (dense) => {
+  return new Promise((resolve, reject) => {
+    const currentUser = auth.currentUser;
+
+    if (!currentUser) {
+      reject();
+
+      return;
+    }
+
+    const uid = currentUser.uid;
+
+    if (!uid) {
+      reject();
+
+      return;
+    }
+
+    const reference = firestore.collection('users').doc(uid);
+
+    if (!reference) {
+      reject();
+
+      return;
+    }
+
+    reference.update({
+      'theme.dense': dense
+    }).then((value) => {
+      analytics.logEvent('change_dense', {
+        value: dense
       });
 
       resolve(value);

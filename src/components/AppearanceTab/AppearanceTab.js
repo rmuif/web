@@ -18,10 +18,13 @@ import Select from '@material-ui/core/Select';
 import MenuItem from '@material-ui/core/MenuItem';
 import Divider from '@material-ui/core/Divider';
 import Hidden from '@material-ui/core/Hidden';
+import Checkbox from '@material-ui/core/Checkbox';
+import Switch from '@material-ui/core/Switch';
 import Button from '@material-ui/core/Button';
 
 import FiberManualRecord from '@material-ui/icons/FiberManualRecord';
 import InvertColorsIcon from '@material-ui/icons/InvertColors';
+import FormatSizeIcon from '@material-ui/icons/FormatSize';
 import FormatColorResetIcon from '@material-ui/icons/FormatColorReset';
 
 import theming from '../../services/theming';
@@ -62,7 +65,8 @@ class AppearanceTab extends Component {
       theming.changeTheme({
         primaryColor: primaryColor,
         secondaryColor: theme.secondaryColor.id,
-        type: theme.type.id
+        type: theme.type.id,
+        dense: theme.dense
       }).then((value) => {
         this.props.openSnackbar('Changed primary color');
       }).catch((reason) => {
@@ -109,7 +113,8 @@ class AppearanceTab extends Component {
       theming.changeTheme({
         primaryColor: theme.primaryColor.id,
         secondaryColor: secondaryColor,
-        type: theme.type.id
+        type: theme.type.id,
+        dense: theme.dense
       }).then((value) => {
         this.props.openSnackbar('Changed secondary color');
       }).catch((reason) => {
@@ -156,9 +161,54 @@ class AppearanceTab extends Component {
       theming.changeTheme({
         primaryColor: theme.primaryColor.id,
         secondaryColor: theme.secondaryColor.id,
-        type: type
+        type: type,
+        dense: theme.dense
       }).then((value) => {
         this.props.openSnackbar('Changed type');
+      }).catch((reason) => {
+        const code = reason.code;
+        const message = reason.message;
+
+        switch (code) {
+          default:
+            this.props.openSnackbar(message);
+            return;
+        }
+      }).finally(() => {
+        this.setState({
+          performingAction: false
+        });
+      });
+    });
+  };
+
+  handleDenseChange = (event) => {
+    if (!event) {
+      return;
+    }
+
+    const dense = event.target.checked;
+
+    const { theme } = this.props;
+
+    if (!theme) {
+      return;
+    }
+
+    if (theme.dense === dense) {
+      return;
+    }
+
+    this.setState({
+      performingAction: true
+    }, () => {
+      theming.changeTheme({
+        primaryColor: theme.primaryColor.id,
+        secondaryColor: theme.secondaryColor.id,
+        type: theme.type.id,
+        dense: dense
+      }).then((value) => {
+        this.props.openSnackbar('Changed dense');
       }).catch((reason) => {
         const code = reason.code;
         const message = reason.message;
@@ -221,7 +271,7 @@ class AppearanceTab extends Component {
 
     return (
       <DialogContent>
-        <List disablePadding>
+        <List dense={theme.dense} disablePadding>
           <Box mb={1}>
             <ListItem>
               <ListItemIcon>
@@ -354,6 +404,37 @@ class AppearanceTab extends Component {
           <Box mt={2} mb={1}>
             <Divider light />
           </Box>
+
+          <ListItem>
+            <Hidden xsDown>
+              <ListItemIcon>
+                <FormatSizeIcon />
+              </ListItemIcon>
+            </Hidden>
+
+            <ListItemText
+              primary="Dense"
+              secondary="Compact vertical padding"
+            />
+
+            <ListItemSecondaryAction>
+              <Hidden xsDown>
+                <Checkbox
+                  checked={theme.dense}
+
+                  onChange={this.handleDenseChange}
+                />
+              </Hidden>
+
+              <Hidden smUp>
+                <Switch
+                  checked={theme.dense}
+
+                  onChange={this.handleDenseChange}
+                />
+              </Hidden>
+            </ListItemSecondaryAction>
+          </ListItem>
 
           <ListItem>
             <Hidden xsDown>

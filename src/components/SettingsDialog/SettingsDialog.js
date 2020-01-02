@@ -172,6 +172,8 @@ class SettingsDialog extends Component {
 
         <SwipeableViews index={selectedTab} onChangeIndex={this.handleIndexChange}>
           <AccountTab
+            theme={theme}
+
             user={user}
             userData={userData}
 
@@ -193,6 +195,8 @@ class SettingsDialog extends Component {
           />
 
           <SecurityTab
+            theme={theme}
+
             user={user}
             userData={userData}
 
@@ -212,9 +216,10 @@ SettingsDialog.propTypes = {
   dialogProps: PropTypes.object.isRequired,
 
   // Custom Properties
+  theme: PropTypes.object.isRequired,
+
   user: PropTypes.object.isRequired,
   userData: PropTypes.object,
-  theme: PropTypes.object.isRequired,
 
   // Custom Functions
   openSnackbar: PropTypes.func.isRequired,
