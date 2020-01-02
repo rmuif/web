@@ -8,14 +8,11 @@ import Typography from '@material-ui/core/Typography';
 import Box from '@material-ui/core/Box';
 import Button from '@material-ui/core/Button';
 import IconButton from '@material-ui/core/IconButton';
-import Avatar from '@material-ui/core/Avatar';
 
 import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
 
-import PersonIcon from '@material-ui/icons/Person';
-
-import authentication from '../../services/authentication';
+import UserAvatar from '../UserAvatar';
 
 class Bar extends Component {
   constructor(props) {
@@ -27,37 +24,6 @@ class Bar extends Component {
       }
     };
   }
-
-  getAvatar = () => {
-    const { user } = this.props;
-
-    if (!user) {
-      return null;
-    }
-
-    const photoUrl = user.photoURL;
-
-    if (photoUrl) {
-      return (<Avatar alt="Avatar" src={photoUrl} />);
-    }
-
-    const { userData } = this.props;
-
-    if (!userData) {
-      return <PersonIcon />;
-    }
-
-    const nameInitials = authentication.user.getNameInitials({
-      ...user,
-      ...userData
-    });
-
-    if (nameInitials) {
-      return <Avatar alt="Avatar">{nameInitials}</Avatar>;
-    }
-
-    return <PersonIcon />;
-  };
 
   openMenu = (event) => {
     const anchorEl = event.currentTarget;
@@ -84,7 +50,8 @@ class Bar extends Component {
 
       theme,
 
-      user
+      user,
+      userData
     } = this.props;
 
     // Events
@@ -132,7 +99,7 @@ class Bar extends Component {
           {user &&
             <>
               <IconButton color="inherit" disabled={performingAction} onClick={this.openMenu}>
-                {this.getAvatar()}
+                <UserAvatar user={Object.assign(user, userData)} />
               </IconButton>
 
               <Menu anchorEl={menu.anchorEl} open={Boolean(menu.anchorEl)} onClose={this.closeMenu}>
