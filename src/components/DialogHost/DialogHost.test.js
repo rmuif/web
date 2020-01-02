@@ -14,6 +14,10 @@ it('renders without crashing', () => {
           aboutDialog: {
             dialogProps: {
               open: false
+            },
+
+            props: {
+              theme: {}
             }
           },
           signUpDialog: {},
