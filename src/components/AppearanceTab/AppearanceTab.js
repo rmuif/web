@@ -413,7 +413,7 @@ class AppearanceTab extends Component {
             </Hidden>
 
             <ListItemText
-              primary="Dense"
+              primary="Dense mode"
               secondary="Compact vertical padding"
             />
 
