@@ -37,7 +37,6 @@ class AboutDialog extends Component {
     // Custom Properties
     const {
       theme,
-
       user
     } = this.props;
 
@@ -86,7 +85,6 @@ AboutDialog.propTypes = {
 
   // Custom Properties
   theme: PropTypes.object.isRequired,
-
   user: PropTypes.object,
 };
 

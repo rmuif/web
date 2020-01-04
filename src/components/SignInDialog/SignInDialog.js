@@ -38,10 +38,8 @@ const styles = (theme) => ({
 
 const initialState = {
   performingAction: false,
-
   emailAddress: '',
   password: '',
-
   errors: null
 };
 
@@ -149,7 +147,6 @@ class SignInDialog extends Component {
     } else {
       this.setState({
         performingAction: true,
-
         errors: null
       }, () => {
         authentication.signIn(emailAddress, password).then((user) => {
@@ -203,7 +200,6 @@ class SignInDialog extends Component {
 
     this.setState({
       performingAction: true,
-
       errors: null
     }, () => {
       authentication.sendSignInLinkToEmail(emailAddress).then(() => {
@@ -327,10 +323,8 @@ class SignInDialog extends Component {
 
     const {
       performingAction,
-
       emailAddress,
       password,
-
       errors
     } = this.state;
 

@@ -87,20 +87,16 @@ const styles = (theme) => ({
 const initialState = {
   profileCompletion: 0,
   securityRating: 0,
-
   showingField: '',
-
   avatar: null,
   avatarUrl: '',
   firstName: '',
   lastName: '',
   username: '',
   emailAddress: '',
-
   performingAction: false,
   loadingAvatar: false,
   sentVerificationEmail: false,
-
   errors: null
 };
 
@@ -168,7 +164,6 @@ class AccountTab extends Component {
         this.setState({
           performingAction: false,
           loadingAvatar: false,
-
           avatar: null,
           avatarUrl: ''
         });
@@ -238,12 +233,10 @@ class AccountTab extends Component {
   hideFields = (callback) => {
     this.setState({
       showingField: '',
-
       firstName: '',
       lastName: '',
       username: '',
       emailAddress: '',
-
       errors: null
     }, () => {
       if (callback && typeof callback === 'function') {
@@ -507,29 +500,6 @@ class AccountTab extends Component {
     });
   };
 
-  deleteAccount = () => {
-    this.setState({
-      performingAction: true
-    }, () => {
-      authentication.deleteAccount().then(() => {
-        this.props.openSnackbar('Deleted account');
-      }).catch((reason) => {
-        const code = reason.code;
-        const message = reason.message;
-
-        switch (code) {
-          default:
-            this.props.openSnackbar(message);
-            return;
-        }
-      }).finally(() => {
-        this.setState({
-          performingAction: false
-        });
-      });
-    });
-  };
-
   changeField = (fieldId) => {
     switch (fieldId) {
       case 'first-name':
@@ -683,21 +653,16 @@ class AccountTab extends Component {
     const {
       profileCompletion,
       securityRating,
-
       showingField,
-
       performingAction,
       loadingAvatar,
-
       avatar,
       avatarUrl,
       firstName,
       lastName,
       username,
       emailAddress,
-
       sentVerificationEmail,
-
       errors
     } = this.state;
 
@@ -1402,7 +1367,6 @@ AccountTab.propTypes = {
 
   // Properties
   theme: PropTypes.object.isRequired,
-
   user: PropTypes.object.isRequired,
   userData: PropTypes.object,
 

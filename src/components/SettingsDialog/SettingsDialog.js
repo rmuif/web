@@ -217,7 +217,6 @@ SettingsDialog.propTypes = {
 
   // Custom Properties
   theme: PropTypes.object.isRequired,
-
   user: PropTypes.object.isRequired,
   userData: PropTypes.object,
 

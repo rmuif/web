@@ -26,12 +26,9 @@ import authentication from '../../services/authentication';
 
 const initialState = {
   showingField: '',
-
   password: '',
   passwordConfirmation: '',
-
   performingAction: false,
-
   errors: null
 };
 
@@ -55,10 +52,8 @@ class SecurityTab extends Component {
   hideFields = (callback) => {
     this.setState({
       showingField: '',
-
       password: '',
       passwordConfirmation: '',
-
       errors: null
     }, () => {
       if (callback && typeof callback === 'function') {
@@ -204,12 +199,9 @@ class SecurityTab extends Component {
 
     const {
       showingField,
-
       password,
       passwordConfirmation,
-
       performingAction,
-
       errors
     } = this.state;
 

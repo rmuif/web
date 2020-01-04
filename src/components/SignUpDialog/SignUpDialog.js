@@ -38,12 +38,10 @@ const styles = (theme) => ({
 
 const initialState = {
   performingAction: false,
-
   emailAddress: '',
   emailAddressConfirmation: '',
   password: '',
   passwordConfirmation: '',
-
   errors: null
 };
 
@@ -81,7 +79,6 @@ class SignUpDialog extends Component {
     } else {
       this.setState({
         performingAction: true,
-
         errors: null
       }, () => {
         authentication.signUpWithEmailAddressAndPassword(emailAddress, password).then((value) => {
@@ -221,12 +218,10 @@ class SignUpDialog extends Component {
 
     const {
       performingAction,
-
       emailAddress,
       emailAddressConfirmation,
       password,
       passwordConfirmation,
-
       errors
     } = this.state;
 

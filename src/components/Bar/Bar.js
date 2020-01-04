@@ -47,9 +47,7 @@ class Bar extends Component {
     // Properties
     const {
       performingAction,
-
       theme,
-
       user,
       userData
     } = this.props;
@@ -136,9 +134,7 @@ Bar.defaultProps = {
 Bar.propTypes = {
   // Properties
   performingAction: PropTypes.bool.isRequired,
-
   theme: PropTypes.object.isRequired,
-
   user: PropTypes.object,
   userData: PropTypes.object,
 

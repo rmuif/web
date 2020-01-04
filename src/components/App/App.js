@@ -21,9 +21,7 @@ import DialogHost from '../DialogHost';
 const initialState = {
   ready: false,
   performingAction: false,
-
   theme: theming.defaultTheme,
-
   user: null,
   userData: null,
 
@@ -68,9 +66,7 @@ class App extends Component {
   resetState = (callback) => {
     this.setState({
       ready: true,
-
       theme: theming.defaultTheme,
-
       user: null,
       userData: null
     }, callback);
@@ -250,9 +246,7 @@ class App extends Component {
             <>
               <Bar
                 performingAction={performingAction}
-
                 theme={theme}
-
                 user={user}
                 userData={userData}
 
@@ -272,6 +266,7 @@ class App extends Component {
 
               <DialogHost
                 user={user}
+
                 dialogs={
                   {
                     aboutDialog: {
@@ -283,7 +278,6 @@ class App extends Component {
 
                       props: {
                         theme: theme,
-
                         user: user
                       }
                     },
@@ -337,7 +331,6 @@ class App extends Component {
 
                       props: {
                         theme: theme,
-
                         user: user,
                         userData: userData,
 
@@ -384,6 +377,7 @@ class App extends Component {
                 autoHideDuration={snackbar.autoHideDuration}
                 message={snackbar.message}
                 open={snackbar.open}
+
                 onClose={this.closeSnackbar}
               />
             </>
@@ -424,7 +418,6 @@ class App extends Component {
         this.setTheme(data.theme, () => {
           this.setState({
             ready: true,
-
             user: user,
             userData: data
           });
