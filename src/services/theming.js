@@ -1,4 +1,4 @@
-import _ from 'lodash';
+import camelCase from 'lodash.camelcase';
 
 import { createMuiTheme } from '@material-ui/core/styles';
 
@@ -157,7 +157,7 @@ const getColor = (colorId) => {
     return null;
   }
 
-  colorId = _.camelCase(colorId);
+  colorId = camelCase(colorId);
 
   return colors[colorId];
 };
@@ -275,7 +275,7 @@ theming.changeTheme = (theme) => {
 
       return;
     }
-    
+
     let primaryColor = theme.primaryColor;
     let secondaryColor = theme.secondaryColor;
     let type = theme.type;

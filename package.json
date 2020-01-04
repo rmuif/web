@@ -22,14 +22,12 @@
   },
   "config": {
     "title": "React + Material-UI + Firebase",
-
     "theme": {
       "primaryColor": "blue",
       "secondaryColor": "red",
       "type": "light",
       "dense": false
     },
-
     "firebase": {
       "apiKey": "AIzaSyDYZOrZVpXkPQD6J31mb9t2eIIxmGEJK-Q",
       "authDomain": "react-material-ui-firebase.firebaseapp.com",
@@ -40,7 +38,6 @@
       "appId": "1:552659850812:web:d685f74f72161d96",
       "measurementId": "G-LYJ69M3CEC"
     },
-
     "sentry": {
       "dsn": "https://78536326e6524916b6f44b4ea510b7a4@sentry.io/1846624"
     }
@@ -51,7 +48,7 @@
     "@material-ui/styles": "^4.8.2",
     "@sentry/browser": "^5.10.2",
     "firebase": "^7.6.1",
-    "lodash": "^4.17.15",
+    "lodash.camelcase": "^4.3.0",
     "mdi-material-ui": "^6.10.0",
     "moment": "^2.24.0",
     "react": "^16.12.0",
@@ -67,7 +64,6 @@
     "gh-pages": "^2.1.1"
   },
   "private": true,
-
   "eslintConfig": {
     "extends": "react-app"
   },
