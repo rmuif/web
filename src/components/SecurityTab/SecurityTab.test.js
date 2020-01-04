@@ -17,7 +17,6 @@ it('renders without crashing', () => {
         }}
 
         theme={{}}
-
         user={{}}
         userData={{}}
 

@@ -13,7 +13,7 @@ it('renders without crashing', () => {
     (
       <MemoryRouter>
         <HomeContent
-          title="q"
+          title=""
         />
       </MemoryRouter>
     ),

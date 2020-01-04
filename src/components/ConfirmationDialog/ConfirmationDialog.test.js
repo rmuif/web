@@ -20,7 +20,6 @@ it('renders without crashing', () => {
       }
 
       content={<div></div>}
-
       dismissiveAction={<Button color="primary">Cancel</Button>}
       confirmingAction={<Button color="primary">OK</Button>}
     />,

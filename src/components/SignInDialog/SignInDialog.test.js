@@ -18,9 +18,9 @@ it('renders without crashing', () => {
 
         resetPassword={() => {}}
         signIn={() => {}}
+        openSnackbar={() => {}}
 
         onAuthProviderClick={() => {}}
-        openSnackbar={() => {}}
       />
     ),
     div
