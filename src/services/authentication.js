@@ -837,6 +837,24 @@ authentication.deleteAccount = () => {
   });
 };
 
+authentication.isAdmin = () => {
+  return new Promise((resolve, reject) => {
+    const currentUser = auth.currentUser;
+
+    if (!currentUser) {
+      reject();
+
+      return;
+    }
+
+    currentUser.getIdTokenResult().then((idTokenResult) => {
+      resolve(!!idTokenResult.claims.admin);
+    }).catch((reason) => {
+      reject(reason);
+    });
+  });
+};
+
 authentication.user = {};
 
 authentication.user.getName = (fields) => {
