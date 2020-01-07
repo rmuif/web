@@ -4,6 +4,7 @@
 [![Discord](https://img.shields.io/discord/567707014361513995.svg)](https://discord.gg/y3EMyrN)
 ![GitHub repo size](https://img.shields.io/github/repo-size/Phoqe/react-material-ui-firebase.svg)
 [![Website](https://img.shields.io/website/https/phoqe.me/react-material-ui-firebase.svg)](https://phoqe.me/react-material-ui-firebase)
+[![Run on Repl.it](https://repl.it/badge/github/yogeshparte/react-material-ui-firebase)](https://repl.it/github/yogeshparte/react-material-ui-firebase)
 
 This project is an application skeleton for a typical [React](https://reactjs.org) project.
 With [Create React App](https://facebook.github.io/create-react-app) at its core, you can use it to bootstrap your projects and development environment with the same tooling.
