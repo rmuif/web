@@ -24,6 +24,7 @@ const initialState = {
   theme: theming.defaultTheme,
   user: null,
   userData: null,
+  isAdmin: false,
 
   aboutDialog: {
     open: false
@@ -68,7 +69,8 @@ class App extends Component {
       ready: true,
       theme: theming.defaultTheme,
       user: null,
-      userData: null
+      userData: null,
+      isAdmin: false
     }, callback);
   };
 
@@ -219,7 +221,7 @@ class App extends Component {
       userData,
       theme,
       ready,
-      performingAction,
+      performingAction
     } = this.state;
 
     const {
@@ -231,7 +233,9 @@ class App extends Component {
       signOutDialog
     } = this.state;
 
-    const { snackbar } = this.state;
+    const {
+      snackbar
+    } = this.state;
 
     return (
       <MuiThemeProvider theme={theme}>
@@ -415,11 +419,27 @@ class App extends Component {
           return;
         }
 
-        this.setTheme(data.theme, () => {
-          this.setState({
-            ready: true,
-            user: user,
-            userData: data
+        authentication.isAdmin().then((value) => {
+          console.log(value);
+
+          this.setTheme(data.theme, () => {
+            this.setState({
+              ready: true,
+              user: user,
+              userData: data,
+              isAdmin: value
+            });
+          });
+        }).catch((reason) => {
+          this.resetState(() => {
+            const code = reason.code;
+            const message = reason.message;
+
+            switch (code) {
+              default:
+                this.openSnackbar(message);
+                return;
+            }
           });
         });
       }, (error) => {
