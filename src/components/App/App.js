@@ -205,7 +205,9 @@ class App extends Component {
   };
 
   closeSnackbar = (clearMessage = false) => {
-    const { snackbar } = this.state;
+    const {
+      snackbar
+    } = this.state;
 
     this.setState({
       snackbar: {

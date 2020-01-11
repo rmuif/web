@@ -85,9 +85,13 @@ class LinksTab extends Component {
 
   render() {
     // Properties
-    const { theme } = this.props;
+    const {
+      theme
+    } = this.props;
 
-    const { performingAction } = this.state;
+    const {
+      performingAction
+    } = this.state;
 
     const authProviders = [
       {

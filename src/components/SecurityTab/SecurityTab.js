@@ -65,7 +65,9 @@ class SecurityTab extends Component {
   changeField = (fieldId) => {
     switch (fieldId) {
       case 'password':
-        const { password } = this.state;
+        const {
+          password
+        } = this.state;
 
         const errors = validate({
           password: password
@@ -98,7 +100,10 @@ class SecurityTab extends Component {
   };
 
   changePassword = () => {
-    const { password, passwordConfirmation } = this.state;
+    const {
+      password,
+      passwordConfirmation
+    } = this.state;
 
     const errors = validate({
       password: password,

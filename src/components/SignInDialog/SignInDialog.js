@@ -51,7 +51,11 @@ class SignInDialog extends Component {
   }
 
   getSignInButton = () => {
-    const { emailAddress, password, performingAction } = this.state;
+    const {
+      emailAddress,
+      password,
+      performingAction
+    } = this.state;
 
     if (emailAddress && !password) {
       return (
@@ -79,7 +83,9 @@ class SignInDialog extends Component {
   };
 
   resetPassword = () => {
-    const { emailAddress } = this.state;
+    const {
+      emailAddress
+    } = this.state;
 
     const errors = validate({
       emailAddress: emailAddress
@@ -130,7 +136,10 @@ class SignInDialog extends Component {
   };
 
   signIn = () => {
-    const { emailAddress, password } = this.state;
+    const {
+      emailAddress,
+      password
+    } = this.state;
 
     const errors = validate({
       emailAddress: emailAddress,
@@ -182,7 +191,9 @@ class SignInDialog extends Component {
   };
 
   sendSignInLinkToEmail = () => {
-    const { emailAddress } = this.state;
+    const {
+      emailAddress
+    } = this.state;
 
     const errors = validate({
       emailAddress: emailAddress
@@ -273,7 +284,10 @@ class SignInDialog extends Component {
   };
 
   handleKeyPress = (event) => {
-    const { emailAddress, password } = this.state;
+    const {
+      emailAddress,
+      password
+    } = this.state;
 
     if (!emailAddress && !password) {
       return;
@@ -316,10 +330,14 @@ class SignInDialog extends Component {
 
   render() {
     // Styling
-    const { classes } = this.props;
+    const {
+      classes
+    } = this.props;
 
     // Dialog Properties
-    const { dialogProps } = this.props;
+    const {
+      dialogProps
+    } = this.props;
 
     const {
       performingAction,

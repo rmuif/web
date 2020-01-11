@@ -96,10 +96,14 @@ class SettingsDialog extends Component {
 
   render() {
     // Styling
-    const { classes } = this.props;
+    const {
+      classes
+    } = this.props;
 
     // Dialog Properties
-    const { dialogProps } = this.props;
+    const {
+      dialogProps
+    } = this.props;
 
     // Custom Properties
     const {
@@ -118,7 +122,9 @@ class SettingsDialog extends Component {
       onDeleteAccountClick
     } = this.props;
 
-    const { selectedTab } = this.state;
+    const {
+      selectedTab
+    } = this.state;
 
     return (
       <Dialog {...dialogProps} onExited={this.handleExited}>

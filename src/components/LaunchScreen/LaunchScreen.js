@@ -19,7 +19,9 @@ const styles = (theme) => ({
 class LaunchScreen extends Component {
   render() {
     // Styling
-    const { classes } = this.props;
+    const {
+      classes
+    } = this.props;
 
     return (
       <div className={classes.center}>

@@ -58,7 +58,9 @@ class Bar extends Component {
       onSignInClick
     } = this.props;
 
-    const { menu } = this.state;
+    const {
+      menu
+    } = this.state;
 
     const menuItems = [
       {

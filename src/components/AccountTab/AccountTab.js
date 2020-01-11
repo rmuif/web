@@ -108,13 +108,18 @@ class AccountTab extends Component {
   }
 
   getNameInitialsOrIcon = () => {
-    const { user } = this.props;
+    const {
+      user
+    } = this.props;
 
     if (!user) {
       return null;
     }
 
-    const { classes, userData } = this.props;
+    const {
+      classes,
+      userData
+    } = this.props;
 
     if (!userData) {
       return <PersonIcon className={classes.personIcon} />;
@@ -133,7 +138,9 @@ class AccountTab extends Component {
   };
 
   uploadAvatar = () => {
-    const { avatar } = this.state;
+    const {
+      avatar
+    } = this.state;
 
     if (!avatar) {
       return;
@@ -144,7 +151,10 @@ class AccountTab extends Component {
       loadingAvatar: true
     }, () => {
       authentication.changeAvatar(avatar).then((value) => {
-        const { user, userData } = this.props;
+        const {
+          user,
+          userData
+        } = this.props;
 
         this.setState({
           profileCompletion: authentication.user.getProfileCompletion({ ...user, ...userData })
@@ -172,8 +182,14 @@ class AccountTab extends Component {
   };
 
   removeAvatar = () => {
-    const { user } = this.props;
-    const { avatar, avatarUrl } = this.state;
+    const {
+      user
+    } = this.props;
+
+    const {
+      avatar,
+      avatarUrl
+    } = this.state;
 
     if (!user.photoURL && !avatar && !avatarUrl) {
       return;
@@ -194,7 +210,10 @@ class AccountTab extends Component {
         loadingAvatar: true
       }, () => {
         authentication.removeAvatar().then((value) => {
-          const { user, userData } = this.props;
+          const {
+            user,
+            userData
+          } = this.props;
 
           this.setState({
             profileCompletion: authentication.user.getProfileCompletion({ ...user, ...userData })
@@ -246,7 +265,9 @@ class AccountTab extends Component {
   };
 
   changeFirstName = () => {
-    const { firstName } = this.state;
+    const {
+      firstName
+    } = this.state;
 
     const errors = validate({
       firstName: firstName
@@ -265,7 +286,9 @@ class AccountTab extends Component {
     this.setState({
       errors: null
     }, () => {
-      const { userData } = this.props;
+      const {
+        userData
+      } = this.props;
 
       if (firstName === userData.firstName) {
         return;
@@ -275,7 +298,10 @@ class AccountTab extends Component {
         performingAction: true
       }, () => {
         authentication.changeFirstName(firstName).then(() => {
-          const { user, userData } = this.props;
+          const {
+            user,
+            userData
+          } = this.props;
 
           this.setState({
             profileCompletion: authentication.user.getProfileCompletion({ ...user, ...userData })
@@ -303,7 +329,9 @@ class AccountTab extends Component {
   };
 
   changeLastName = () => {
-    const { lastName } = this.state;
+    const {
+      lastName
+    } = this.state;
 
     const errors = validate({
       lastName: lastName
@@ -322,7 +350,9 @@ class AccountTab extends Component {
     this.setState({
       errors: null
     }, () => {
-      const { userData } = this.props;
+      const {
+        userData
+      } = this.props;
 
       if (lastName === userData.lastName) {
         return;
@@ -332,7 +362,10 @@ class AccountTab extends Component {
         performingAction: true
       }, () => {
         authentication.changeLastName(lastName).then(() => {
-          const { user, userData } = this.props;
+          const {
+            user,
+            userData
+          } = this.props;
 
           this.setState({
             profileCompletion: authentication.user.getProfileCompletion({ ...user, ...userData })
@@ -360,7 +393,9 @@ class AccountTab extends Component {
   };
 
   changeUsername = () => {
-    const { username } = this.state;
+    const {
+      username
+    } = this.state;
 
     const errors = validate({
       username: username
@@ -379,7 +414,9 @@ class AccountTab extends Component {
     this.setState({
       errors: null
     }, () => {
-      const { userData } = this.props;
+      const {
+        userData
+      } = this.props;
 
       if (username === userData.username) {
         return;
@@ -389,7 +426,10 @@ class AccountTab extends Component {
         performingAction: true
       }, () => {
         authentication.changeUsername(username).then(() => {
-          const { user, userData } = this.props;
+          const {
+            user,
+            userData
+          } = this.props;
 
           this.setState({
             profileCompletion: authentication.user.getProfileCompletion({ ...user, ...userData })
@@ -417,7 +457,9 @@ class AccountTab extends Component {
   };
 
   changeEmailAddress = () => {
-    const { emailAddress } = this.state;
+    const {
+      emailAddress
+    } = this.state;
 
     const errors = validate({
       emailAddress: emailAddress
@@ -436,7 +478,9 @@ class AccountTab extends Component {
     this.setState({
       errors: null
     }, () => {
-      const { user } = this.props;
+      const {
+        user
+      } = this.props;
 
       if (emailAddress === user.email) {
         return;
@@ -446,7 +490,10 @@ class AccountTab extends Component {
         performingAction: true
       }, () => {
         authentication.changeEmailAddress(emailAddress).then(() => {
-          const { user, userData } = this.props;
+          const {
+            user,
+            userData
+          } = this.props;
 
           this.setState({
             profileCompletion: authentication.user.getProfileCompletion({ ...user, ...userData })
@@ -636,7 +683,9 @@ class AccountTab extends Component {
 
   render() {
     // Styling
-    const { classes } = this.props;
+    const {
+      classes
+    } = this.props;
 
     // Properties
     const {
@@ -1340,7 +1389,10 @@ class AccountTab extends Component {
   }
 
   componentDidMount() {
-    const { user, userData } = this.props;
+    const {
+      user,
+      userData
+    } = this.props;
 
     this.setState({
       profileCompletion: authentication.user.getProfileCompletion({ ...user, ...userData }),
@@ -1349,7 +1401,9 @@ class AccountTab extends Component {
   }
 
   componentWillUnmount() {
-    const { avatarUrl } = this.state;
+    const {
+      avatarUrl
+    } = this.state;
 
     if (avatarUrl) {
       URL.revokeObjectURL(avatarUrl);

@@ -24,13 +24,20 @@ const styles = (theme) => ({
 class AuthProviderList extends Component {
   render() {
     // Styling
-    const { classes } = this.props;
+    const {
+      classes
+    } = this.props;
 
     // Properties
-    const { gutterBottom, performingAction } = this.props;
+    const {
+      gutterBottom,
+      performingAction
+    } = this.props;
 
     // Events
-    const { onAuthProviderClick } = this.props;
+    const {
+      onAuthProviderClick
+    } = this.props;
 
     const authProviders = [
       {
