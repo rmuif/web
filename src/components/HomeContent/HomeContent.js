@@ -6,23 +6,11 @@ import { withRouter } from 'react-router-dom';
 
 import { auth } from '../../firebase';
 
-import { withStyles } from '@material-ui/core/styles';
-
-import Fab from '@material-ui/core/Fab';
-
 import HomeIcon from '@material-ui/icons/Home';
-
-import GitHubCircleIcon from 'mdi-material-ui/GithubCircle';
 
 import authentication from '../../services/authentication';
 
 import EmptyState from '../EmptyState';
-
-const styles = (theme) => ({
-  buttonIcon: {
-    marginRight: theme.spacing(1)
-  }
-});
 
 class HomeContent extends Component {
   signInWithEmailLink = () => {
@@ -77,11 +65,6 @@ class HomeContent extends Component {
   };
 
   render() {
-    // Styling
-    const {
-      classes
-    } = this.props;
-
     // Properties
     const {
       user
@@ -100,12 +83,6 @@ class HomeContent extends Component {
       <EmptyState
         title={process.env.REACT_APP_TITLE}
         description={process.env.REACT_APP_DESCRIPTION}
-        button={
-          <Fab color="secondary" href="https://github.com/phoqe/react-material-ui-firebase" rel="noopener noreferrer" target="_blank" variant="extended">
-            <GitHubCircleIcon className={classes.buttonIcon} />
-            GitHub
-          </Fab>
-        }
       />
     );
   }
@@ -116,11 +93,8 @@ class HomeContent extends Component {
 }
 
 HomeContent.propTypes = {
-  // Styling
-  classes: PropTypes.object.isRequired,
-
   // Properties
   user: PropTypes.object
 };
 
-export default withRouter(withStyles(styles)(HomeContent));
+export default withRouter(HomeContent);
