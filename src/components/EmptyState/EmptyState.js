@@ -11,6 +11,7 @@ class EmptyState extends Component {
     const {
       type,
       size,
+      padding,
       icon,
       title,
       description
@@ -61,7 +62,7 @@ class EmptyState extends Component {
 
     if (type === 'card') {
       return (
-        <Box padding={3} textAlign="center">
+        <Box padding={padding} textAlign="center">
           {icon &&
             <Box clone color="text.secondary" fontSize={fontSize}>
               {icon}
@@ -89,13 +90,15 @@ class EmptyState extends Component {
 
 EmptyState.defaultProps = {
   type: 'content',
-  size: 'medium'
+  size: 'medium',
+  padding: 2
 };
 
 EmptyState.propTypes = {
   // Properties
   type: PropTypes.string.isRequired,
   size: PropTypes.string,
+  padding: PropTypes.number,
   icon: PropTypes.element,
   title: PropTypes.string,
   description: PropTypes.string
