@@ -219,11 +219,11 @@ class App extends Component {
 
   render() {
     const {
-      user,
-      userData,
-      theme,
       ready,
-      performingAction
+      performingAction,
+      theme,
+      user,
+      userData
     } = this.state;
 
     const {
@@ -272,7 +272,6 @@ class App extends Component {
 
               <DialogHost
                 user={user}
-
                 dialogs={
                   {
                     aboutDialog: {
