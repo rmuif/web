@@ -28,7 +28,11 @@ class EmptyState extends Component {
       return 0;
     }
 
-    const { title, description, button } = this.props;
+    const {
+      title,
+      description,
+      button
+    } = this.props;
 
     switch (section) {
       case 'icon':
@@ -67,10 +71,17 @@ class EmptyState extends Component {
 
   render() {
     // Styling
-    const { classes } = this.props;
+    const {
+      classes
+    } = this.props;
 
     // Properties
-    const { icon, title, description, button } = this.props;
+    const {
+      icon,
+      title,
+      description,
+      button
+    } = this.props;
 
     return (
       <div className={classes.center}>

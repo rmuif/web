@@ -25,10 +25,14 @@ class DeleteAccountDialog extends Component {
   }
 
   handleKeyPress = (event) => {
-    const { userData } = this.props;
+    const {
+      userData
+    } = this.props;
 
     if (userData && userData.username) {
-      const { username } = this.state;
+      const {
+        username
+      } = this.state;
 
       if (!username) {
         return;
@@ -64,15 +68,24 @@ class DeleteAccountDialog extends Component {
 
   render() {
     // Dialog Properties
-    const { dialogProps } = this.props;
+    const {
+      dialogProps
+    } = this.props;
 
     // Custom Properties
-    const { performingAction, userData } = this.props;
+    const {
+      performingAction,
+      userData
+    } = this.props;
 
     // Custom Functions
-    const { deleteAccount } = this.props;
+    const {
+      deleteAccount
+    } = this.props;
 
-    const { username } = this.state;
+    const {
+      username
+    } = this.state;
 
     const hasUsername = userData && userData.username;
 

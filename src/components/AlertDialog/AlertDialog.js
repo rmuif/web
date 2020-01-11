@@ -19,10 +19,14 @@ const styles = (theme) => ({
 class AlertDialog extends Component {
   render() {
     // Styling
-    const { classes } = this.props;
+    const {
+      classes
+    } = this.props;
 
     // Dialog Properties
-    const { dialogProps } = this.props;
+    const {
+      dialogProps
+    } = this.props;
 
     // Custom Properties
     const {

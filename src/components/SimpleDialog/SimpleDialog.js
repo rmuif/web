@@ -8,7 +8,9 @@ import DialogTitle from '@material-ui/core/DialogTitle';
 class SimpleDialog extends Component {
   render() {
     // Dialog Properties
-    const { dialogProps } = this.props;
+    const {
+      dialogProps
+    } = this.props;
 
     // Custom Properties
     const {

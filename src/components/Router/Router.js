@@ -10,10 +10,14 @@ import NotFoundContent from '../NotFoundContent';
 class Router extends Component {
   render() {
     // Properties
-    const { user } = this.props;
+    const {
+      user
+    } = this.props;
 
     // Functions
-    const { openSnackbar } = this.props;
+    const {
+      openSnackbar
+    } = this.props;
 
     return (
       <BrowserRouter basename={process.env.REACT_APP_BASENAME}>

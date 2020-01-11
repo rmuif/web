@@ -9,7 +9,9 @@ import DialogActions from '@material-ui/core/DialogActions';
 class ConfirmationDialog extends Component {
   render() {
     // Dialog Properties
-    const { dialogProps } = this.props;
+    const {
+      dialogProps
+    } = this.props;
 
     // Custom Properties
     const {

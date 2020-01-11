@@ -26,7 +26,9 @@ const styles = (theme) => ({
 
 class HomeContent extends Component {
   signInWithEmailLink = () => {
-    const { user } = this.props;
+    const {
+      user
+    } = this.props;
 
     if (user) {
       return;
@@ -76,10 +78,14 @@ class HomeContent extends Component {
 
   render() {
     // Styling
-    const { classes } = this.props;
+    const {
+      classes
+    } = this.props;
 
     // Properties
-    const { user } = this.props;
+    const {
+      user
+    } = this.props;
 
     if (user) {
       return (

@@ -49,7 +49,9 @@ class AppearanceTab extends Component {
       return;
     }
 
-    const { theme } = this.props;
+    const {
+      theme
+    } = this.props;
 
     if (!theme) {
       return;
@@ -97,7 +99,9 @@ class AppearanceTab extends Component {
       return;
     }
 
-    const { theme } = this.props;
+    const {
+      theme
+    } = this.props;
 
     if (!theme) {
       return;
@@ -145,7 +149,9 @@ class AppearanceTab extends Component {
       return;
     }
 
-    const { theme } = this.props;
+    const {
+      theme
+    } = this.props;
 
     if (!theme) {
       return;
@@ -189,7 +195,9 @@ class AppearanceTab extends Component {
 
     const dense = event.target.checked;
 
-    const { theme } = this.props;
+    const {
+      theme
+    } = this.props;
 
     if (!theme) {
       return;
@@ -227,7 +235,9 @@ class AppearanceTab extends Component {
   };
 
   handleResetClick = () => {
-    const { theme } = this.props;
+    const {
+      theme
+    } = this.props;
 
     if (!theme) {
       return;
@@ -261,13 +271,17 @@ class AppearanceTab extends Component {
 
   render() {
     // Properties
-    const { theme } = this.props;
+    const {
+      theme
+    } = this.props;
 
     if (!theme) {
       return null;
     }
 
-    const { performingAction } = this.state;
+    const {
+      performingAction
+    } = this.state;
 
     return (
       <DialogContent>
