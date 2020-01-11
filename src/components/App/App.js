@@ -422,8 +422,6 @@ class App extends Component {
         }
 
         authentication.isAdmin().then((value) => {
-          console.log(value);
-
           this.setTheme(data.theme, () => {
             this.setState({
               ready: true,
