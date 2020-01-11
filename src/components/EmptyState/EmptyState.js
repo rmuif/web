@@ -61,7 +61,7 @@ class EmptyState extends Component {
 
     if (type === 'card') {
       return (
-        <Box padding={2} textAlign="center">
+        <Box padding={3} textAlign="center">
           {icon &&
             <Box clone color="text.secondary" fontSize={fontSize}>
               {icon}
