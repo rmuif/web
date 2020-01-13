@@ -1,17 +1,14 @@
 service cloud.firestore {
   match /databases/{database}/documents {
-    match /users/{uid} {
-      allow get: if request.auth.uid != null;
-      allow list: if request.auth.uid != null;
-      
-      allow create: if request.auth.uid != null &&
-                       request.auth.uid == uid;
+    match /users/{userId} {
+      allow get: if request.auth.uid != null || request.auth.token.admin == true;
+      allow list: if request.auth.uid != null || request.auth.token.admin == true;
 
-      allow update: if request.auth.uid != null &&
-                       request.auth.uid == uid;
+      allow create: if request.auth.uid != null && (request.auth.uid == userId || request.auth.token.admin == true);
 
-      allow delete: if request.auth.uid != null &&
-                       request.auth.uid == uid;
+      allow update: if request.auth.uid != null && (request.auth.uid == userId || request.auth.token.admin == true);
+
+      allow delete: if request.auth.uid != null && (request.auth.uid == userId || request.auth.token.admin == true);
     }
   }
 }
