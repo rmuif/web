@@ -1,10 +1,8 @@
 service cloud.firestore {
   match /databases/{database}/documents {
     match /users/{userId} {
-      allow get: if request.auth.uid != null ||
-                    request.auth.token.admin == true;
-      allow list: if request.auth.uid != null ||
-                     request.auth.token.admin == true;
+      allow get: if request.auth.uid != null;
+      allow list: if request.auth.uid != null;
 
       allow create: if request.auth.uid != null &&
                        (request.auth.uid == userId ||
