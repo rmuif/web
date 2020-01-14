@@ -131,7 +131,11 @@ class AccountTab extends Component {
     });
 
     if (nameInitials) {
-      return nameInitials;
+      return (
+        <Typography className={classes.nameInitials} variant="h2">
+          {nameInitials}
+        </Typography>
+      );
     }
 
     return <PersonIcon className={classes.personIcon} />;
@@ -795,18 +799,14 @@ class AccountTab extends Component {
                                 </Fade>
                               }>
                                 <Avatar className={classes.avatar} alt="Avatar">
-                                  <Typography className={classes.nameInitials} variant="h2">
-                                    {this.getNameInitialsOrIcon()}
-                                  </Typography>
+                                  {this.getNameInitialsOrIcon()}
                                 </Avatar>
                               </Badge>
                             }
 
                             {!loadingAvatar &&
                               <Avatar className={classes.avatar} alt="Avatar">
-                                <Typography className={classes.nameInitials} variant="h2">
-                                  {this.getNameInitialsOrIcon()}
-                                </Typography>
+                                {this.getNameInitialsOrIcon()}
                               </Avatar>
                             }
                           </>
@@ -946,18 +946,14 @@ class AccountTab extends Component {
                             </Fade>
                           }>
                             <Avatar className={classes.avatar} alt="Avatar">
-                              <Typography className={classes.nameInitials} variant="h2">
-                                {this.getNameInitialsOrIcon()}
-                              </Typography>
+                              {this.getNameInitialsOrIcon()}
                             </Avatar>
                           </Badge>
                         }
 
                         {!loadingAvatar &&
                           <Avatar className={classes.avatar} alt="Avatar">
-                            <Typography className={classes.nameInitials} variant="h2">
-                              {this.getNameInitialsOrIcon()}
-                            </Typography>
+                            {this.getNameInitialsOrIcon()}
                           </Avatar>
                         }
                       </>
