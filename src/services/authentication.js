@@ -837,7 +837,7 @@ authentication.deleteAccount = () => {
   });
 };
 
-authentication.isAdmin = () => {
+authentication.getRoles = () => {
   return new Promise((resolve, reject) => {
     const currentUser = auth.currentUser;
 
@@ -848,7 +848,7 @@ authentication.isAdmin = () => {
     }
 
     currentUser.getIdTokenResult().then((idTokenResult) => {
-      resolve(!!idTokenResult.claims.admin);
+      resolve(idTokenResult.claims.roles);
     }).catch((reason) => {
       reject(reason);
     });

@@ -24,7 +24,7 @@ const initialState = {
   theme: appearance.defaultTheme,
   user: null,
   userData: null,
-  isAdmin: false,
+  roles: [],
 
   aboutDialog: {
     open: false
@@ -70,7 +70,7 @@ class App extends Component {
       theme: appearance.defaultTheme,
       user: null,
       userData: null,
-      isAdmin: false
+      roles: []
     }, callback);
   };
 
@@ -420,13 +420,13 @@ class App extends Component {
           return;
         }
 
-        authentication.isAdmin().then((value) => {
+        authentication.getRoles().then((value) => {
           this.setTheme(data.theme, () => {
             this.setState({
               ready: true,
               user: user,
               userData: data,
-              isAdmin: value
+              roles: value
             });
           });
         }).catch((reason) => {
