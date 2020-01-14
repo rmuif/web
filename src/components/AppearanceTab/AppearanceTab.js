@@ -27,7 +27,7 @@ import InvertColorsIcon from '@material-ui/icons/InvertColors';
 import FormatSizeIcon from '@material-ui/icons/FormatSize';
 import FormatColorResetIcon from '@material-ui/icons/FormatColorReset';
 
-import theming from '../../services/theming';
+import appearance from '../../services/appearance';
 
 class AppearanceTab extends Component {
   constructor(props) {
@@ -64,7 +64,7 @@ class AppearanceTab extends Component {
     this.setState({
       performingAction: true
     }, () => {
-      theming.changeTheme({
+      appearance.changeTheme({
         primaryColor: primaryColor,
         secondaryColor: theme.secondaryColor.id,
         type: theme.type.id,
@@ -114,7 +114,7 @@ class AppearanceTab extends Component {
     this.setState({
       performingAction: true
     }, () => {
-      theming.changeTheme({
+      appearance.changeTheme({
         primaryColor: theme.primaryColor.id,
         secondaryColor: secondaryColor,
         type: theme.type.id,
@@ -164,7 +164,7 @@ class AppearanceTab extends Component {
     this.setState({
       performingAction: true
     }, () => {
-      theming.changeTheme({
+      appearance.changeTheme({
         primaryColor: theme.primaryColor.id,
         secondaryColor: theme.secondaryColor.id,
         type: type,
@@ -210,7 +210,7 @@ class AppearanceTab extends Component {
     this.setState({
       performingAction: true
     }, () => {
-      theming.changeTheme({
+      appearance.changeTheme({
         primaryColor: theme.primaryColor.id,
         secondaryColor: theme.secondaryColor.id,
         type: theme.type.id,
@@ -243,14 +243,14 @@ class AppearanceTab extends Component {
       return;
     }
 
-    if (theming.isDefaultTheme(theme)) {
+    if (appearance.isDefaultTheme(theme)) {
       return;
     }
 
     this.setState({
       performingAction: true
     }, () => {
-      theming.resetTheme().then((value) => {
+      appearance.resetTheme().then((value) => {
         this.props.openSnackbar('Reset theme');
       }).catch((reason) => {
         const code = reason.code;
@@ -301,8 +301,8 @@ class AppearanceTab extends Component {
                     value={theme.primaryColor.id}
 
                     onChange={this.handlePrimaryColorChange}>
-                    {Object.keys(theming.colors).map((color) => {
-                      color = theming.colors[color];
+                    {Object.keys(appearance.colors).map((color) => {
+                      color = appearance.colors[color];
 
                       return (
                         <option key={color.id} value={color.id}>{color.name}</option>
@@ -316,8 +316,8 @@ class AppearanceTab extends Component {
                     value={theme.primaryColor.id}
 
                     onChange={this.handlePrimaryColorChange}>
-                    {Object.keys(theming.colors).map((color) => {
-                      color = theming.colors[color];
+                    {Object.keys(appearance.colors).map((color) => {
+                      color = appearance.colors[color];
 
                       return (
                         <MenuItem key={color.id} value={color.id}>{color.name}</MenuItem>
@@ -344,8 +344,8 @@ class AppearanceTab extends Component {
                     value={theme.secondaryColor.id}
 
                     onChange={this.handleSecondaryColorChange}>
-                    {Object.keys(theming.colors).map((color) => {
-                      color = theming.colors[color];
+                    {Object.keys(appearance.colors).map((color) => {
+                      color = appearance.colors[color];
 
                       return (
                         <option key={color.id} value={color.id}>{color.name}</option>
@@ -359,8 +359,8 @@ class AppearanceTab extends Component {
                     value={theme.secondaryColor.id}
 
                     onChange={this.handleSecondaryColorChange}>
-                    {Object.keys(theming.colors).map((color) => {
-                      color = theming.colors[color];
+                    {Object.keys(appearance.colors).map((color) => {
+                      color = appearance.colors[color];
 
                       return (
                         <MenuItem key={color.id} value={color.id}>{color.name}</MenuItem>
@@ -387,8 +387,8 @@ class AppearanceTab extends Component {
                     value={theme.type.id}
 
                     onChange={this.handleTypeChange}>
-                    {Object.keys(theming.types).map((type) => {
-                      type = theming.types[type];
+                    {Object.keys(appearance.types).map((type) => {
+                      type = appearance.types[type];
 
                       return (
                         <option key={type.id} value={type.id}>{type.name}</option>
@@ -402,8 +402,8 @@ class AppearanceTab extends Component {
                     value={theme.type.id}
 
                     onChange={this.handleTypeChange}>
-                    {Object.keys(theming.types).map((type) => {
-                      type = theming.types[type];
+                    {Object.keys(appearance.types).map((type) => {
+                      type = appearance.types[type];
 
                       return (
                         <MenuItem key={type.id} value={type.id}>{type.name}</MenuItem>
@@ -459,13 +459,13 @@ class AppearanceTab extends Component {
 
             <ListItemText
               primary="Reset theme"
-              secondary={theming.isDefaultTheme(theme) ? 'No changes made' : 'Changes will be reset'}
+              secondary={appearance.isDefaultTheme(theme) ? 'No changes made' : 'Changes will be reset'}
             />
 
             <ListItemSecondaryAction>
               <Button
                 color="secondary"
-                disabled={theming.isDefaultTheme(theme) || performingAction}
+                disabled={appearance.isDefaultTheme(theme) || performingAction}
                 variant="contained"
 
                 onClick={this.handleResetClick}>

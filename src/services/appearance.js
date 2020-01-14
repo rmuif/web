@@ -188,24 +188,24 @@ const defaultTheme = createMuiTheme({
   dense: defaultDense
 });
 
-const theming = {};
+const appearance = {};
 
-theming.colors = colors;
-theming.types = types;
+appearance.colors = colors;
+appearance.types = types;
 
-theming.defaultPrimaryColor = defaultPrimaryColor;
-theming.defaultSecondaryColor = defaultSecondaryColor;
-theming.defaultType = defaultType;
-theming.defaultDense = defaultDense;
+appearance.defaultPrimaryColor = defaultPrimaryColor;
+appearance.defaultSecondaryColor = defaultSecondaryColor;
+appearance.defaultType = defaultType;
+appearance.defaultDense = defaultDense;
 
-theming.defaultTheme = defaultTheme;
+appearance.defaultTheme = defaultTheme;
 
 /**
  * Returns whether a theme is the default theme.
  * @param theme
  * @returns {boolean}
  */
-theming.isDefaultTheme = (theme) => {
+appearance.isDefaultTheme = (theme) => {
   if (!theme) {
     return false;
   }
@@ -225,7 +225,7 @@ theming.isDefaultTheme = (theme) => {
  * @param theme
  * @returns {null|Theme}
  */
-theming.createTheme = (theme) => {
+appearance.createTheme = (theme) => {
   if (!theme) {
     return null;
   }
@@ -268,7 +268,7 @@ theming.createTheme = (theme) => {
  * @param theme
  * @returns {Promise<unknown>}
  */
-theming.changeTheme = (theme) => {
+appearance.changeTheme = (theme) => {
   return new Promise((resolve, reject) => {
     if (!theme) {
       reject();
@@ -350,7 +350,7 @@ theming.changeTheme = (theme) => {
  * @param primaryColor
  * @returns {Promise<unknown>}
  */
-theming.changePrimaryColor = (primaryColor) => {
+appearance.changePrimaryColor = (primaryColor) => {
   return new Promise((resolve, reject) => {
     if (!primaryColor) {
       reject();
@@ -409,7 +409,7 @@ theming.changePrimaryColor = (primaryColor) => {
  * @param secondaryColor
  * @returns {Promise<unknown>}
  */
-theming.changeSecondaryColor = (secondaryColor) => {
+appearance.changeSecondaryColor = (secondaryColor) => {
   return new Promise((resolve, reject) => {
     if (!secondaryColor) {
       reject();
@@ -468,7 +468,7 @@ theming.changeSecondaryColor = (secondaryColor) => {
  * @param type
  * @returns {Promise<unknown>}
  */
-theming.changeType = (type) => {
+appearance.changeType = (type) => {
   return new Promise((resolve, reject) => {
     if (!type) {
       reject();
@@ -527,7 +527,7 @@ theming.changeType = (type) => {
  * @param dense
  * @returns {Promise<unknown>}
  */
-theming.changeDense = (dense) => {
+appearance.changeDense = (dense) => {
   return new Promise((resolve, reject) => {
     const currentUser = auth.currentUser;
 
@@ -571,7 +571,7 @@ theming.changeDense = (dense) => {
  * Resets the theme for the current user.
  * @returns {Promise<unknown>}
  */
-theming.resetTheme = () => {
+appearance.resetTheme = () => {
   return new Promise((resolve, reject) => {
     const currentUser = auth.currentUser;
 
@@ -609,4 +609,4 @@ theming.resetTheme = () => {
   });
 };
 
-export default theming;
+export default appearance;

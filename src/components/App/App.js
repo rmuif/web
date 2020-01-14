@@ -10,7 +10,7 @@ import Snackbar from '@material-ui/core/Snackbar';
 
 import { auth, firestore } from '../../firebase';
 import authentication from '../../services/authentication';
-import theming from '../../services/theming';
+import appearance from '../../services/appearance';
 
 import ErrorBoundary from '../ErrorBoundary';
 import LaunchScreen from '../LaunchScreen';
@@ -21,7 +21,7 @@ import DialogHost from '../DialogHost';
 const initialState = {
   ready: false,
   performingAction: false,
-  theme: theming.defaultTheme,
+  theme: appearance.defaultTheme,
   user: null,
   userData: null,
   isAdmin: false,
@@ -67,7 +67,7 @@ class App extends Component {
   resetState = (callback) => {
     this.setState({
       ready: true,
-      theme: theming.defaultTheme,
+      theme: appearance.defaultTheme,
       user: null,
       userData: null,
       isAdmin: false
@@ -77,14 +77,14 @@ class App extends Component {
   setTheme = (theme, callback) => {
     if (!theme) {
       this.setState({
-        theme: theming.defaultTheme
+        theme: appearance.defaultTheme
       }, callback);
 
       return;
     }
 
     this.setState({
-      theme: theming.createTheme(theme)
+      theme: appearance.createTheme(theme)
     }, callback);
   };
 
