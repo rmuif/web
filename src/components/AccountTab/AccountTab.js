@@ -125,7 +125,7 @@ class AccountTab extends Component {
       return <PersonIcon className={classes.personIcon} />;
     }
 
-    const nameInitials = authentication.user.getNameInitials({
+    const nameInitials = authentication.getNameInitials({
       ...user,
       ...userData
     });
@@ -161,7 +161,7 @@ class AccountTab extends Component {
         } = this.props;
 
         this.setState({
-          profileCompletion: authentication.user.getProfileCompletion({ ...user, ...userData })
+          profileCompletion: authentication.getProfileCompletion({ ...user, ...userData })
         }, () => {
           this.props.openSnackbar('Changed avatar');
         });
@@ -220,7 +220,7 @@ class AccountTab extends Component {
           } = this.props;
 
           this.setState({
-            profileCompletion: authentication.user.getProfileCompletion({ ...user, ...userData })
+            profileCompletion: authentication.getProfileCompletion({ ...user, ...userData })
           }, () => {
             this.props.openSnackbar('Removed avatar');
           });
@@ -308,7 +308,7 @@ class AccountTab extends Component {
           } = this.props;
 
           this.setState({
-            profileCompletion: authentication.user.getProfileCompletion({ ...user, ...userData })
+            profileCompletion: authentication.getProfileCompletion({ ...user, ...userData })
           }, () => {
             this.hideFields(() => {
               this.props.openSnackbar('Changed first name');
@@ -372,7 +372,7 @@ class AccountTab extends Component {
           } = this.props;
 
           this.setState({
-            profileCompletion: authentication.user.getProfileCompletion({ ...user, ...userData })
+            profileCompletion: authentication.getProfileCompletion({ ...user, ...userData })
           }, () => {
             this.hideFields(() => {
               this.props.openSnackbar('Changed last name');
@@ -436,7 +436,7 @@ class AccountTab extends Component {
           } = this.props;
 
           this.setState({
-            profileCompletion: authentication.user.getProfileCompletion({ ...user, ...userData })
+            profileCompletion: authentication.getProfileCompletion({ ...user, ...userData })
           }, () => {
             this.hideFields(() => {
               this.props.openSnackbar('Changed username');
@@ -500,7 +500,7 @@ class AccountTab extends Component {
           } = this.props;
 
           this.setState({
-            profileCompletion: authentication.user.getProfileCompletion({ ...user, ...userData })
+            profileCompletion: authentication.getProfileCompletion({ ...user, ...userData })
           }, () => {
             this.hideFields(() => {
               this.props.openSnackbar('Changed e-mail address');
@@ -1395,8 +1395,8 @@ class AccountTab extends Component {
     } = this.props;
 
     this.setState({
-      profileCompletion: authentication.user.getProfileCompletion({ ...user, ...userData }),
-      securityRating: authentication.user.getSecurityRating(user, userData)
+      profileCompletion: authentication.getProfileCompletion({ ...user, ...userData }),
+      securityRating: authentication.getSecurityRating(user, userData)
     });
   }
 

@@ -46,7 +46,7 @@ class UserAvatar extends Component {
         );
       }
 
-      const nameInitials = authentication.user.getNameInitials({
+      const nameInitials = authentication.getNameInitials({
         ...user
       });
 
@@ -82,7 +82,7 @@ class UserAvatar extends Component {
         );
       }
 
-      const nameInitials = authentication.user.getNameInitials({
+      const nameInitials = authentication.getNameInitials({
         ...user
       });
 

@@ -855,9 +855,7 @@ authentication.isAdmin = () => {
   });
 };
 
-authentication.user = {};
-
-authentication.user.getName = (fields) => {
+authentication.getName = (fields) => {
   if (!fields) {
     return null;
   }
@@ -886,7 +884,7 @@ authentication.user.getName = (fields) => {
   return null;
 };
 
-authentication.user.getFullName = (fields) => {
+authentication.getFullName = (fields) => {
   if (!fields) {
     return null;
   }
@@ -906,7 +904,7 @@ authentication.user.getFullName = (fields) => {
   return null;
 };
 
-authentication.user.getNameInitials = (fields) => {
+authentication.getNameInitials = (fields) => {
   if (!fields) {
     return null;
   }
@@ -939,7 +937,7 @@ authentication.user.getNameInitials = (fields) => {
   return null;
 };
 
-authentication.user.getProfileCompletion = (fields) => {
+authentication.getProfileCompletion = (fields) => {
   if (!fields) {
     return null;
   }
@@ -968,7 +966,7 @@ authentication.user.getProfileCompletion = (fields) => {
   return Math.floor(profileCompletion);
 };
 
-authentication.user.getSecurityRating = (user, userData) => {
+authentication.getSecurityRating = (user, userData) => {
   if (!user || !user.metadata) {
     return null;
   }
