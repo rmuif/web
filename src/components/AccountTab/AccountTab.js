@@ -1055,6 +1055,7 @@ class AccountTab extends Component {
                 label="First name"
                 placeholder={hasFirstName && userData.firstName}
                 required
+                size={theme.dense ? 'small' : 'medium'}
                 type="text"
                 value={firstName}
                 variant="filled"
@@ -1124,6 +1125,7 @@ class AccountTab extends Component {
                 label="Last name"
                 placeholder={hasLastName && userData.lastName}
                 required
+                size={theme.dense ? 'small' : 'medium'}
                 type="text"
                 value={lastName}
                 variant="filled"
@@ -1193,6 +1195,7 @@ class AccountTab extends Component {
                 label="Username"
                 placeholder={hasUsername && userData.username}
                 required
+                size={theme.dense ? 'small' : 'medium'}
                 type="text"
                 value={username}
                 variant="filled"
@@ -1280,6 +1283,7 @@ class AccountTab extends Component {
                 label="E-mail address"
                 placeholder={user.email}
                 required
+                size={theme.dense ? 'small' : 'medium'}
                 type="email"
                 value={emailAddress}
                 variant="filled"
