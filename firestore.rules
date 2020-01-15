@@ -1,17 +1,25 @@
 service cloud.firestore {
+  function isOwner(userId) {
+    return request.auth.uid == userId;
+  }
+
+  function hasRole(role) {
+  	return role in request.auth.token.roles;
+  }
+
+  function isAdmin() {
+  	return hasRole('admin');
+  }
+
+  function isPremium() {
+  	return hasRole('premium');
+  }
+
+  function authorized(userId) {
+    return isOwner(userId) || isAdmin();
+  }
+
   match /databases/{database}/documents {
-  	function owner(userId) {
-    	return request.auth.uid == userId;
-    }
-
-  	function admin() {
-    	return 'admin' in request.auth.token.roles;
-    }
-
-    function authorized(userId) {
-    	return owner() || admin();
-    }
-
     match /users/{userId} {
       allow get: if request.auth.uid != null;
       allow list: if request.auth.uid != null;
