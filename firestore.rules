@@ -16,7 +16,7 @@ service cloud.firestore {
   }
 
   function authorized(userId) {
-    return isOwner(userId) || isAdmin();
+    return request.auth.uid != null && (isOwner(userId) || isAdmin());
   }
 
   match /databases/{database}/documents {
@@ -24,11 +24,11 @@ service cloud.firestore {
       allow get: if request.auth.uid != null;
       allow list: if request.auth.uid != null;
 
-      allow create: if request.auth.uid != null && authorized(userId);
+      allow create: if authorized(userId);
 
-      allow update: if request.auth.uid != null && authorized(userId);
+      allow update: if authorized(userId);
 
-      allow delete: if request.auth.uid != null && authorized(userId);
+      allow delete: if authorized(userId);
     }
   }
 }
