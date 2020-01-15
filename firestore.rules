@@ -1,10 +1,10 @@
 service cloud.firestore {
   function isOwner(userId) {
-    return request.auth.uid == userId;
+    return (request.auth.uid == userId);
   }
 
   function hasRole(role) {
-  	return role in request.auth.token.roles;
+  	return (role in request.auth.token.roles);
   }
 
   function isAdmin() {
@@ -16,7 +16,11 @@ service cloud.firestore {
   }
 
   function authorized(userId) {
-    return request.auth.uid != null && (isOwner(userId) || isAdmin());
+    return (request.auth.uid != null && (isOwner(userId) || isAdmin()));
+  }
+
+  function isUsernameValid(username) {
+    return (username.size() >= 2 && username.size() <= 20);
   }
 
   match /databases/{database}/documents {
@@ -26,7 +30,7 @@ service cloud.firestore {
 
       allow create: if authorized(userId);
 
-      allow update: if authorized(userId);
+      allow update: if authorized(userId) && isUsernameValid(request.resource.data.username);
 
       allow delete: if authorized(userId);
     }
