@@ -15,8 +15,16 @@ service firebase.storage {
   	return hasRole('premium');
   }
 
-  function authorized(userId) {
-    return request.auth.uid != null && (isOwner(userId) || isAdmin());
+  function isAuthorized(userId) {
+    return (request.auth.uid != null && (isOwner(userId) || isAdmin()));
+  }
+
+  function isAvatarValid() {
+  	return (
+    	request.resource.contentType.matches('image/.*') &&
+      request.resource.size <= 20 * 1024 * 1024 &&
+      (resource == null || request.resource.md5Hash != resource.md5Hash)
+    );
   }
 
   match /b/{bucket}/o {
@@ -24,13 +32,9 @@ service firebase.storage {
       match /avatars/{userId} {
         allow get: if request.auth != null;
 
-        allow create: if authorized(userId) &&
-                         request.resource.contentType.matches('image/.*') &&
-                         request.resource.size <= 20 * 1024 * 1024 &&
-                         (resource == null ||
-                         request.resource.md5Hash != resource.md5Hash);
+        allow create: if isAuthorized(userId) && isAvatarValid();
 
-        allow delete: if authorized(userId);
+        allow delete: if isAuthorized(userId);
       }
     }
   }
