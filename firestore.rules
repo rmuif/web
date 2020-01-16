@@ -1,4 +1,8 @@
 service cloud.firestore {
+	function isAuthenticated() {
+  	return request.auth.uid != null;
+  }
+
   function isOwner(userId) {
     return request.auth.uid == userId;
   }
@@ -16,20 +20,19 @@ service cloud.firestore {
   }
 
   function isAuthorized(userId) {
-    return (request.auth.uid != null && (isOwner(userId) || isAdmin()));
+    return isOwner(userId) || isAdmin();
   }
 
   match /databases/{database}/documents {
     match /users/{userId} {
-      allow get: if request.auth.uid != null;
+      allow get: if isAuthenticated();
+      allow list: if isAuthenticated() && isAdmin();
+    }
 
-      allow list: if request.auth.uid != null;
-
-      allow create: if isAuthorized(userId);
-
-      allow update: if isAuthorized(userId);
-
-      allow delete: if isAuthorized(userId);
+    match /users/{userId} {
+      allow create: if isAuthenticated() && isAuthorized(userId);
+      allow update: if isAuthenticated() && isAuthorized(userId);
+      allow delete: if isAuthenticated() && isAuthorized(userId);
     }
   }
 }
