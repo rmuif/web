@@ -855,6 +855,26 @@ authentication.getRoles = () => {
   });
 };
 
+authentication.isAdmin = () => {
+  return new Promise((resolve, reject) => {
+    authentication.getRoles().then((value) => {
+      resolve(value.includes('admin'));
+    }).catch((reason) => {
+      reject(reason);
+    });
+  });
+};
+
+authentication.isPremium = () => {
+  return new Promise((resolve, reject) => {
+    authentication.getRoles().then((value) => {
+      resolve(value.includes('premium'));
+    }).catch((reason) => {
+      reject(reason);
+    });
+  });
+};
+
 authentication.getName = (fields) => {
   if (!fields) {
     return null;
