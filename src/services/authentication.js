@@ -24,9 +24,7 @@ authentication.signUp = (fields) => {
       return;
     }
 
-    const currentUser = auth.currentUser;
-
-    if (currentUser) {
+    if (auth.currentUser) {
       reject();
 
       return;
@@ -49,15 +47,9 @@ authentication.signUp = (fields) => {
         return;
       }
 
-      const reference = firestore.collection('users').doc(uid);
+      const userDocumentReference = firestore.collection('users').doc(uid);
 
-      if (!reference) {
-        reject();
-
-        return;
-      }
-
-      reference.set({
+      userDocumentReference.set({
         firstName: firstName,
         lastName: lastName,
         username: username
@@ -84,9 +76,7 @@ authentication.signUpWithEmailAddressAndPassword = (emailAddress, password) => {
       return;
     }
 
-    const currentUser = auth.currentUser;
-
-    if (currentUser) {
+    if (auth.currentUser) {
       reject();
 
       return;
@@ -109,15 +99,9 @@ authentication.signUpWithEmailAddressAndPassword = (emailAddress, password) => {
         return;
       }
 
-      const reference = firestore.collection('users').doc(uid);
+      const userDocumentReference = firestore.collection('users').doc(uid);
 
-      if (!reference) {
-        reject();
-
-        return;
-      }
-
-      reference.set({}, { merge: true }).then((value) => {
+      userDocumentReference.set({}, { merge: true }).then((value) => {
         analytics.logEvent('sign_up', {
           method: 'password'
         });
@@ -140,9 +124,7 @@ authentication.signIn = (emailAddress, password) => {
       return;
     }
 
-    const currentUser = auth.currentUser;
-
-    if (currentUser) {
+    if (auth.currentUser) {
       reject();
 
       return;
@@ -165,15 +147,9 @@ authentication.signIn = (emailAddress, password) => {
         return;
       }
 
-      const reference = firestore.collection('users').doc(uid);
+      const userDocumentReference = firestore.collection('users').doc(uid);
 
-      if (!reference) {
-        reject();
-
-        return;
-      }
-
-      reference.get({ source: 'server' }).then((value) => {
+      userDocumentReference.get({ source: 'server' }).then((value) => {
         if (value.exists) {
           analytics.logEvent('login', {
             method: 'password'
@@ -181,7 +157,7 @@ authentication.signIn = (emailAddress, password) => {
 
           resolve(user);
         } else {
-          reference.set({}, { merge: true }).then((value) => {
+          userDocumentReference.set({}, { merge: true }).then((value) => {
             analytics.logEvent('login', {
               method: 'password'
             });
@@ -208,9 +184,7 @@ authentication.sendSignInLinkToEmail = (emailAddress) => {
       return;
     }
 
-    const currentUser = auth.currentUser;
-
-    if (currentUser) {
+    if (auth.currentUser) {
       reject();
 
       return;
@@ -241,9 +215,7 @@ authentication.signInWithEmailLink = (emailAddress, emailLink) => {
       return;
     }
 
-    const currentUser = auth.currentUser;
-
-    if (currentUser) {
+    if (auth.currentUser) {
       reject();
 
       return;
@@ -279,9 +251,7 @@ authentication.signInWithAuthProvider = (providerId) => {
       return;
     }
 
-    const currentUser = auth.currentUser;
-
-    if (currentUser) {
+    if (auth.currentUser) {
       reject();
 
       return;
@@ -304,15 +274,9 @@ authentication.signInWithAuthProvider = (providerId) => {
         return;
       }
 
-      const reference = firestore.collection('users').doc(uid);
+      const userDocumentReference = firestore.collection('users').doc(uid);
 
-      if (!reference) {
-        reject();
-
-        return;
-      }
-
-      reference.get({ source: 'server' }).then((value) => {
+      userDocumentReference.get({ source: 'server' }).then((value) => {
         if (value.exists) {
           analytics.logEvent('login', {
             method: providerId
@@ -320,7 +284,7 @@ authentication.signInWithAuthProvider = (providerId) => {
 
           resolve(user);
         } else {
-          reference.set({}, { merge: true }).then((value) => {
+          userDocumentReference.set({}, { merge: true }).then((value) => {
             analytics.logEvent('login', {
               method: providerId
             });
@@ -451,9 +415,7 @@ authentication.resetPassword = (emailAddress) => {
       return;
     }
 
-    const currentUser = auth.currentUser;
-
-    if (currentUser) {
+    if (auth.currentUser) {
       reject();
 
       return;
@@ -513,16 +475,10 @@ authentication.changeAvatar = (avatar) => {
       return;
     }
 
-    const reference = storage.ref().child('images').child('avatars').child(uid);
+    const avatarReference = storage.ref().child('images').child('avatars').child(uid);
 
-    if (!reference) {
-      reject();
-
-      return;
-    }
-
-    reference.put(avatar).then((uploadTaskSnapshot) => {
-      reference.getDownloadURL().then((value) => {
+    avatarReference.put(avatar).then((uploadTaskSnapshot) => {
+      avatarReference.getDownloadURL().then((value) => {
         currentUser.updateProfile({
           photoURL: value
         }).then((value) => {
@@ -562,15 +518,9 @@ authentication.removeAvatar = () => {
     currentUser.updateProfile({
       photoURL: null
     }).then((value) => {
-      const reference = storage.ref().child('images').child('avatars').child(uid);
+      const avatarReference = storage.ref().child('images').child('avatars').child(uid);
 
-      if (!reference) {
-        reject();
-
-        return;
-      }
-
-      reference.delete().then((value) => {
+      avatarReference.delete().then((value) => {
         analytics.logEvent('remove_avatar');
 
         resolve(value);
@@ -607,15 +557,9 @@ authentication.changeFirstName = (firstName) => {
       return;
     }
 
-    const reference = firestore.collection('users').doc(uid);
+    const userDocumentReference = firestore.collection('users').doc(uid);
 
-    if (!reference) {
-      reject();
-
-      return;
-    }
-
-    reference.update({
+    userDocumentReference.update({
       firstName: firstName
     }).then((value) => {
       analytics.logEvent('change_first_name');
@@ -651,15 +595,9 @@ authentication.changeLastName = (lastName) => {
       return;
     }
 
-    const reference = firestore.collection('users').doc(uid);
+    const userDocumentReference = firestore.collection('users').doc(uid);
 
-    if (!reference) {
-      reject();
-
-      return;
-    }
-
-    reference.update({
+    userDocumentReference.update({
       lastName: lastName
     }).then((value) => {
       analytics.logEvent('change_last_name');
@@ -695,15 +633,9 @@ authentication.changeUsername = (username) => {
       return;
     }
 
-    const reference = firestore.collection('users').doc(uid);
+    const userDocumentReference = firestore.collection('users').doc(uid);
 
-    if (!reference) {
-      reject();
-
-      return;
-    }
-
-    reference.update({
+    userDocumentReference.update({
       username: username
     }).then((value) => {
       analytics.logEvent('change_username');
@@ -774,15 +706,9 @@ authentication.changePassword = (password) => {
     }
 
     currentUser.updatePassword(password).then((value) => {
-      const reference = firestore.collection('users').doc(uid);
+      const userDocumentReference = firestore.collection('users').doc(uid);
 
-      if (!reference) {
-        reject();
-
-        return;
-      }
-
-      reference.update({
+      userDocumentReference.update({
         lastPasswordChange: firebase.firestore.FieldValue.serverTimestamp()
       }).then((value) => {
         analytics.logEvent('change_password');
