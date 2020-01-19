@@ -302,6 +302,7 @@ class App extends Component {
 
                       props: {
                         performingAction: performingAction,
+                        theme: theme,
 
                         openSnackbar: this.openSnackbar
                       }
@@ -355,6 +356,7 @@ class App extends Component {
                       props: {
                         performingAction: performingAction,
                         userData: userData,
+                        theme: theme,
 
                         deleteAccount: this.deleteAccount
                       }

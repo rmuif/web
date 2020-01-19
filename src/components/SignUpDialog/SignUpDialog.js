@@ -220,6 +220,11 @@ class SignUpDialog extends Component {
       dialogProps
     } = this.props;
 
+    // Custom Properties
+    const {
+      theme
+    } = this.props;
+
     const {
       performingAction,
       emailAddress,
@@ -262,6 +267,7 @@ class SignUpDialog extends Component {
                       label="E-mail address"
                       placeholder="john@doe.com"
                       required
+                      size={theme.dense ? 'small' : 'medium'}
                       type="email"
                       value={emailAddress}
                       variant="outlined"
@@ -280,6 +286,7 @@ class SignUpDialog extends Component {
                       label="E-mail address confirmation"
                       placeholder="john@doe.com"
                       required
+                      size={theme.dense ? 'small' : 'medium'}
                       type="email"
                       value={emailAddressConfirmation}
                       variant="outlined"
@@ -298,6 +305,7 @@ class SignUpDialog extends Component {
                       label="Password"
                       placeholder="&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;"
                       required
+                      size={theme.dense ? 'small' : 'medium'}
                       type="password"
                       value={password}
                       variant="outlined"
@@ -316,6 +324,7 @@ class SignUpDialog extends Component {
                       label="Password confirmation"
                       placeholder="&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;"
                       required
+                      size={theme.dense ? 'small' : 'medium'}
                       type="password"
                       value={passwordConfirmation}
                       variant="outlined"
@@ -349,6 +358,7 @@ class SignUpDialog extends Component {
                   label="E-mail address"
                   placeholder="john@doe.com"
                   required
+                  size={theme.dense ? 'small' : 'medium'}
                   type="email"
                   value={emailAddress}
                   variant="outlined"
@@ -367,6 +377,7 @@ class SignUpDialog extends Component {
                   label="E-mail address confirmation"
                   placeholder="john@doe.com"
                   required
+                  size={theme.dense ? 'small' : 'medium'}
                   type="email"
                   value={emailAddressConfirmation}
                   variant="outlined"
@@ -385,6 +396,7 @@ class SignUpDialog extends Component {
                   label="Password"
                   placeholder="&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;"
                   required
+                  size={theme.dense ? 'small' : 'medium'}
                   type="password"
                   value={password}
                   variant="outlined"
@@ -403,6 +415,7 @@ class SignUpDialog extends Component {
                   label="Password confirmation"
                   placeholder="&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;"
                   required
+                  size={theme.dense ? 'small' : 'medium'}
                   type="password"
                   value={passwordConfirmation}
                   variant="outlined"
@@ -443,6 +456,9 @@ SignUpDialog.propTypes = {
 
   // Dialog Properties
   dialogProps: PropTypes.object.isRequired,
+
+  // Custom Properties
+  theme: PropTypes.object.isRequired,
 
   // Custom Functions
   openSnackbar: PropTypes.func.isRequired

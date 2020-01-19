@@ -17,8 +17,9 @@ it('renders without crashing', () => {
         }
       }
 
-      userData={{}}
       performingAction={false}
+      userData={{}}
+      theme={{}}
 
       deleteAccount={() => {}}
     />,

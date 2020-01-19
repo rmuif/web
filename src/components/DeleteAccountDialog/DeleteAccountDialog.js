@@ -75,7 +75,8 @@ class DeleteAccountDialog extends Component {
     // Custom Properties
     const {
       performingAction,
-      userData
+      userData,
+      theme
     } = this.props;
 
     // Custom Functions
@@ -120,6 +121,7 @@ class DeleteAccountDialog extends Component {
               label="Username"
               placeholder={userData.username}
               required
+              size={theme.dense ? 'small' : 'medium'}
               type="text"
               value={username}
               variant="outlined"
@@ -145,6 +147,7 @@ DeleteAccountDialog.propTypes = {
   // Custom Properties
   performingAction: PropTypes.bool.isRequired,
   userData: PropTypes.object,
+  theme: PropTypes.object.isRequired,
 
   // Custom Functions
   deleteAccount: PropTypes.func.isRequired

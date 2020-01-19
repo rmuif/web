@@ -339,6 +339,11 @@ class SignInDialog extends Component {
       dialogProps
     } = this.props;
 
+    // Custom Properties
+    const {
+      theme
+    } = this.props;
+
     const {
       performingAction,
       emailAddress,
@@ -379,6 +384,7 @@ class SignInDialog extends Component {
                       label="E-mail address"
                       placeholder="john@doe.com"
                       required
+                      size={theme.dense ? 'small' : 'medium'}
                       type="email"
                       value={emailAddress}
                       variant="outlined"
@@ -397,6 +403,7 @@ class SignInDialog extends Component {
                       label="Password"
                       placeholder="&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;"
                       required
+                      size={theme.dense ? 'small' : 'medium'}
                       type="password"
                       value={password}
                       variant="outlined"
@@ -428,6 +435,7 @@ class SignInDialog extends Component {
                   label="E-mail address"
                   placeholder="john@doe.com"
                   required
+                  size={theme.dense ? 'small' : 'medium'}
                   type="email"
                   value={emailAddress}
                   variant="outlined"
@@ -446,6 +454,7 @@ class SignInDialog extends Component {
                   label="Password"
                   placeholder="&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;"
                   required
+                  size={theme.dense ? 'small' : 'medium'}
                   type="password"
                   value={password}
                   variant="outlined"
@@ -482,6 +491,9 @@ SignInDialog.propTypes = {
 
   // Dialog Properties
   dialogProps: PropTypes.object.isRequired,
+
+  // Custom Properties
+  theme: PropTypes.object.isRequired,
 
   // Custom Functions
   openSnackbar: PropTypes.func.isRequired
