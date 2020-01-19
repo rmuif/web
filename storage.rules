@@ -1,26 +1,26 @@
 service firebase.storage {
-	function isAuthenticated() {
-  	return request.auth.uid != null;
+  function isUserAuthenticated() {
+    return request.auth != null;
   }
 
-  function isOwner(userId) {
+  function isUserOwner(userId) {
     return request.auth.uid == userId;
   }
 
-  function hasRole(role) {
-  	return role in request.auth.token.roles;
+  function hasUserRole(role) {
+    return role in request.auth.token.roles;
   }
 
-  function isAdmin() {
-  	return hasRole('admin');
+  function isUserAdmin() {
+    return hasUserRole('admin');
   }
 
-  function isPremium() {
-  	return hasRole('premium');
+  function isUserPremium() {
+    return hasUserRole('premium');
   }
 
-  function isAuthorized(userId) {
-    return isOwner(userId) || isAdmin();
+  function isUserAuthorized(userId) {
+    return isUserOwner(userId) || isUserAdmin();
   }
 
   function isAvatarValid() {
@@ -34,14 +34,14 @@ service firebase.storage {
   match /b/{bucket}/o {
     match /images {
     	match /avatars/{userId} {
-        allow get: if isAuthenticated();
-        allow list: if isAuthenticated() && isAdmin();
+        allow get: if isUserAuthenticated();
+        allow list: if isUserAuthenticated() && isUserAdmin();
       }
 
       match /avatars/{userId} {
-        allow create: if isAuthenticated() && isAuthorized(userId) && isAvatarValid();
-        allow update: if isAuthenticated() && isAuthorized(userId) && isAvatarValid();
-        allow delete: if isAuthenticated() && isAuthorized(userId);
+        allow create: if isUserAuthenticated() && isUserAuthorized(userId) && isAvatarValid();
+        allow update: if isUserAuthenticated() && isUserAuthorized(userId) && isAvatarValid();
+        allow delete: if isUserAuthenticated() && isUserAuthorized(userId);
       }
     }
   }
