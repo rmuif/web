@@ -1,38 +1,38 @@
 service cloud.firestore {
-	function isAuthenticated() {
-  	return request.auth.uid != null;
+  function isUserAuthenticated() {
+    return request.auth != null;
   }
 
-  function isOwner(userId) {
+  function isUserOwner(userId) {
     return request.auth.uid == userId;
   }
 
-  function hasRole(role) {
-  	return role in request.auth.token.roles;
+  function hasUserRole(role) {
+    return role in request.auth.token.roles;
   }
 
-  function isAdmin() {
-  	return hasRole('admin');
+  function isUserAdmin() {
+    return hasUserRole('admin');
   }
 
-  function isPremium() {
-  	return hasRole('premium');
+  function isUserPremium() {
+    return hasUserRole('premium');
   }
 
-  function isAuthorized(userId) {
-    return isOwner(userId) || isAdmin();
+  function isUserAuthorized(userId) {
+    return isUserOwner(userId) || isUserAdmin();
   }
 
   match /databases/{database}/documents {
     match /users/{userId} {
-      allow get: if isAuthenticated();
-      allow list: if isAuthenticated() && isAdmin();
+      allow get: if isUserAuthenticated();
+      allow list: if isUserAuthenticated() && isUserAdmin();
     }
 
     match /users/{userId} {
-      allow create: if isAuthenticated() && isAuthorized(userId);
-      allow update: if isAuthenticated() && isAuthorized(userId);
-      allow delete: if isAuthenticated() && isAuthorized(userId);
+      allow create: if isUserAuthenticated() && isUserAuthorized(userId);
+      allow update: if isUserAuthenticated() && isUserAuthorized(userId);
+      allow delete: if isUserAuthenticated() && isUserAuthorized(userId);
     }
   }
 }
