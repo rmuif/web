@@ -15,6 +15,7 @@ class DialogHost extends Component {
   render() {
     // Properties
     const {
+      theme,
       user,
       dialogs
     } = this.props;
@@ -30,6 +31,8 @@ class DialogHost extends Component {
       <>
         <AboutDialog
           dialogProps={aboutDialog.dialogProps}
+
+          theme={theme}
 
           {...aboutDialog.props}
         />
@@ -50,6 +53,8 @@ class DialogHost extends Component {
               <DeleteAccountDialog
                 dialogProps={deleteAccountDialog.dialogProps}
 
+                theme={theme}
+
                 {...deleteAccountDialog.props}
               />
             </>
@@ -60,11 +65,15 @@ class DialogHost extends Component {
               <SignUpDialog
                 dialogProps={signUpDialog.dialogProps}
 
+                theme={theme}
+
                 {...signUpDialog.props}
               />
 
               <SignInDialog
                 dialogProps={signInDialog.dialogProps}
+
+                theme={theme}
 
                 {...signInDialog.props}
               />
@@ -77,6 +86,8 @@ class DialogHost extends Component {
             <>
               <SettingsDialog
                 dialogProps={settingsDialog.dialogProps}
+
+                theme={theme}
 
                 {...settingsDialog.props}
               />
@@ -94,6 +105,8 @@ class DialogHost extends Component {
                   ...deleteAccountDialog.dialogProps
                 }}
 
+                theme={theme}
+
                 {...deleteAccountDialog.props}
               />
             </>
@@ -108,6 +121,8 @@ class DialogHost extends Component {
                   ...signUpDialog.dialogProps
                 }}
 
+                theme={theme}
+
                 {...signUpDialog.props}
               />
 
@@ -117,6 +132,8 @@ class DialogHost extends Component {
 
                   ...signInDialog.dialogProps
                 }}
+
+                theme={theme}
 
                 {...signInDialog.props}
               />
@@ -134,6 +151,8 @@ class DialogHost extends Component {
                   ...settingsDialog.dialogProps
                 }}
 
+                theme={theme}
+
                 {...settingsDialog.props}
               />
             </>
@@ -146,6 +165,7 @@ class DialogHost extends Component {
 
 DialogHost.propTypes = {
   // Properties
+  theme: PropTypes.object.isRequired,
   user: PropTypes.object,
   dialogs: PropTypes.object.isRequired
 };

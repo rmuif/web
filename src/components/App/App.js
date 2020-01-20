@@ -271,6 +271,7 @@ class App extends Component {
               />
 
               <DialogHost
+                theme={theme}
                 user={user}
                 dialogs={
                   {
@@ -282,7 +283,6 @@ class App extends Component {
                       },
 
                       props: {
-                        theme: theme,
                         user: user
                       }
                     },
@@ -302,7 +302,6 @@ class App extends Component {
 
                       props: {
                         performingAction: performingAction,
-                        theme: theme,
 
                         openSnackbar: this.openSnackbar
                       }
@@ -336,7 +335,6 @@ class App extends Component {
                       },
 
                       props: {
-                        theme: theme,
                         user: user,
                         userData: userData,
 
@@ -356,7 +354,6 @@ class App extends Component {
                       props: {
                         performingAction: performingAction,
                         userData: userData,
-                        theme: theme,
 
                         deleteAccount: this.deleteAccount
                       }
