@@ -200,11 +200,6 @@ appearance.defaultDense = defaultDense;
 
 appearance.defaultTheme = defaultTheme;
 
-/**
- * Returns whether a theme is the default theme.
- * @param theme
- * @returns {boolean}
- */
 appearance.isDefaultTheme = (theme) => {
   if (!theme) {
     return false;
@@ -220,11 +215,6 @@ appearance.isDefaultTheme = (theme) => {
   return false;
 };
 
-/**
- * Creates a Material-UI theme from a JSON theme object.
- * @param theme
- * @returns {null|Theme}
- */
 appearance.createTheme = (theme) => {
   if (!theme) {
     return null;
@@ -263,11 +253,6 @@ appearance.createTheme = (theme) => {
   return theme;
 };
 
-/**
- * Changes the theme for the current user.
- * @param theme
- * @returns {Promise<unknown>}
- */
 appearance.changeTheme = (theme) => {
   return new Promise((resolve, reject) => {
     if (!theme) {
@@ -339,11 +324,6 @@ appearance.changeTheme = (theme) => {
   });
 };
 
-/**
- * Changes the primary color for the current user.
- * @param primaryColor
- * @returns {Promise<unknown>}
- */
 appearance.changePrimaryColor = (primaryColor) => {
   return new Promise((resolve, reject) => {
     if (!primaryColor) {
@@ -392,11 +372,6 @@ appearance.changePrimaryColor = (primaryColor) => {
   });
 };
 
-/**
- * Changes the secondary color for the current user.
- * @param secondaryColor
- * @returns {Promise<unknown>}
- */
 appearance.changeSecondaryColor = (secondaryColor) => {
   return new Promise((resolve, reject) => {
     if (!secondaryColor) {
@@ -445,11 +420,6 @@ appearance.changeSecondaryColor = (secondaryColor) => {
   });
 };
 
-/**
- * Changes the type for the current user.
- * @param type
- * @returns {Promise<unknown>}
- */
 appearance.changeType = (type) => {
   return new Promise((resolve, reject) => {
     if (!type) {
@@ -498,11 +468,6 @@ appearance.changeType = (type) => {
   });
 };
 
-/**
- * Change the dense for the current user.
- * @param dense
- * @returns {Promise<unknown>}
- */
 appearance.changeDense = (dense) => {
   return new Promise((resolve, reject) => {
     const currentUser = auth.currentUser;
@@ -537,10 +502,6 @@ appearance.changeDense = (dense) => {
   });
 };
 
-/**
- * Resets the theme for the current user.
- * @returns {Promise<unknown>}
- */
 appearance.resetTheme = () => {
   return new Promise((resolve, reject) => {
     const currentUser = auth.currentUser;
