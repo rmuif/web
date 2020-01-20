@@ -313,15 +313,9 @@ appearance.changeTheme = (theme) => {
       return;
     }
 
-    const reference = firestore.collection('users').doc(uid);
+    const userDocumentReference = firestore.collection('users').doc(uid);
 
-    if (!reference) {
-      reject();
-
-      return;
-    }
-
-    reference.update({
+    userDocumentReference.update({
       theme: {
         primaryColor: primaryColor.id,
         secondaryColor: secondaryColor.id,
@@ -382,15 +376,9 @@ appearance.changePrimaryColor = (primaryColor) => {
       return;
     }
 
-    const reference = firestore.collection('users').doc(uid);
+    const userDocumentReference = firestore.collection('users').doc(uid);
 
-    if (!reference) {
-      reject();
-
-      return;
-    }
-
-    reference.update({
+    userDocumentReference.update({
       'theme.primaryColor': primaryColor.id
     }).then((value) => {
       analytics.logEvent('change_primary_color', {
@@ -441,15 +429,9 @@ appearance.changeSecondaryColor = (secondaryColor) => {
       return;
     }
 
-    const reference = firestore.collection('users').doc(uid);
+    const userDocumentReference = firestore.collection('users').doc(uid);
 
-    if (!reference) {
-      reject();
-
-      return;
-    }
-
-    reference.update({
+    userDocumentReference.update({
       'theme.secondaryColor': secondaryColor.id
     }).then((value) => {
       analytics.logEvent('change_secondary_color', {
@@ -500,15 +482,9 @@ appearance.changeType = (type) => {
       return;
     }
 
-    const reference = firestore.collection('users').doc(uid);
+    const userDocumentReference = firestore.collection('users').doc(uid);
 
-    if (!reference) {
-      reject();
-
-      return;
-    }
-
-    reference.update({
+    userDocumentReference.update({
       'theme.type': type.id
     }).then((value) => {
       analytics.logEvent('change_type', {
@@ -545,15 +521,9 @@ appearance.changeDense = (dense) => {
       return;
     }
 
-    const reference = firestore.collection('users').doc(uid);
+    const userDocumentReference = firestore.collection('users').doc(uid);
 
-    if (!reference) {
-      reject();
-
-      return;
-    }
-
-    reference.update({
+    userDocumentReference.update({
       'theme.dense': dense
     }).then((value) => {
       analytics.logEvent('change_dense', {
@@ -589,15 +559,9 @@ appearance.resetTheme = () => {
       return;
     }
 
-    const reference = firestore.collection('users').doc(uid);
+    const userDocumentReference = firestore.collection('users').doc(uid);
 
-    if (!reference) {
-      reject();
-
-      return;
-    }
-
-    reference.update({
+    userDocumentReference.update({
       theme: firebase.firestore.FieldValue.delete()
     }).then((value) => {
       analytics.logEvent('reset_theme');
