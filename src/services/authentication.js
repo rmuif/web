@@ -329,7 +329,7 @@ authentication.linkAuthProvider = (providerId) => {
 
     currentUser.linkWithPopup(provider).then((value) => {
       analytics.logEvent('link_auth_provider', {
-        value: providerId
+        providerId: providerId
       });
 
       resolve(value);
@@ -357,7 +357,7 @@ authentication.unlinkAuthProvider = (providerId) => {
 
     currentUser.unlink(providerId).then((value) => {
       analytics.logEvent('unlink_auth_provider', {
-        value: providerId
+        providerId: providerId
       });
 
       resolve(value);

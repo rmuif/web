@@ -309,12 +309,7 @@ appearance.changeTheme = (theme) => {
       }
     }).then((value) => {
       analytics.logEvent('change_theme', {
-        value: {
-          primaryColor: primaryColor.id,
-          secondaryColor: secondaryColor.id,
-          type: type.id,
-          dense: dense
-        }
+        theme: theme
       });
 
       resolve(value);
@@ -362,7 +357,7 @@ appearance.changePrimaryColor = (primaryColor) => {
       'theme.primaryColor': primaryColor.id
     }).then((value) => {
       analytics.logEvent('change_primary_color', {
-        value: primaryColor.id
+        primaryColor: primaryColor.id
       });
 
       resolve(value);
@@ -410,7 +405,7 @@ appearance.changeSecondaryColor = (secondaryColor) => {
       'theme.secondaryColor': secondaryColor.id
     }).then((value) => {
       analytics.logEvent('change_secondary_color', {
-        value: secondaryColor.id
+        secondaryColor: secondaryColor.id
       });
 
       resolve(value);
@@ -458,7 +453,7 @@ appearance.changeType = (type) => {
       'theme.type': type.id
     }).then((value) => {
       analytics.logEvent('change_type', {
-        value: type.id
+        type: type.id
       });
 
       resolve(value);
@@ -492,7 +487,41 @@ appearance.changeDense = (dense) => {
       'theme.dense': dense
     }).then((value) => {
       analytics.logEvent('change_dense', {
-        value: dense
+        dense: dense
+      });
+
+      resolve(value);
+    }).catch((reason) => {
+      reject(reason);
+    });
+  });
+};
+
+appearance.changeSyncAppearance = (syncAppearance) => {
+  return new Promise((resolve, reject) => {
+    const currentUser = auth.currentUser;
+
+    if (!currentUser) {
+      reject();
+
+      return;
+    }
+
+    const uid = currentUser.uid;
+
+    if (!uid) {
+      reject();
+
+      return;
+    }
+
+    const userDocumentReference = firestore.collection('users').doc(uid);
+
+    userDocumentReference.update({
+      'theme.syncAppearance': syncAppearance
+    }).then((value) => {
+      analytics.logEvent('change_sync_appearance', {
+        syncAppearance: syncAppearance
       });
 
       resolve(value);
