@@ -62,7 +62,9 @@
   },
   "devDependencies": {
     "gh-pages": "^2.2.0",
-    "prettier": "1.19.1"
+    "husky": "^4.0.10",
+    "prettier": "1.19.1",
+    "pretty-quick": "^2.0.1"
   },
   "private": true,
   "eslintConfig": {
