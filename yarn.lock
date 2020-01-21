@@ -10177,6 +10177,13 @@ react-swipeable-views-core@^0.13.5:
     "@babel/runtime" "^7.0.0"
     warning "^4.0.1"
 
+react-swipeable-views@^0.13.5:
+  version "0.13.5"
+  resolved "https://registry.yarnpkg.com/react-swipeable-views/-/react-swipeable-views-0.13.5.tgz#4a040aac5db2c7e655f6de2241c6777f774188cf"
+  integrity sha512-pAkpJS4mHrEODJ0Ou0XtX5dYo0dpEjReMuNyImhHJBvaALu9Qy6Ei/bgnUMYtD9cDgHpsD3qYC2eTfHg1/MHLA==
+  dependencies:
+    react-swipeable-views-core "^0.13.5"
+
 react-transition-group@^4.3.0:
   version "4.3.0"
   resolved "https://registry.yarnpkg.com/react-transition-group/-/react-transition-group-4.3.0.tgz#fea832e386cf8796c58b61874a3319704f5ce683"
