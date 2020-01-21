@@ -1,26 +1,26 @@
-import React, { Component } from 'react';
+import React, { Component } from "react";
 
-import PropTypes from 'prop-types';
+import PropTypes from "prop-types";
 
-import { withStyles } from '@material-ui/core/styles';
+import { withStyles } from "@material-ui/core/styles";
 
-import Dialog from '@material-ui/core/Dialog';
-import DialogTitle from '@material-ui/core/DialogTitle';
-import DialogContent from '@material-ui/core/DialogContent';
+import Dialog from "@material-ui/core/Dialog";
+import DialogTitle from "@material-ui/core/DialogTitle";
+import DialogContent from "@material-ui/core/DialogContent";
 
-import Typography from '@material-ui/core/Typography';
-import Tooltip from '@material-ui/core/Tooltip';
-import IconButton from '@material-ui/core/IconButton';
+import Typography from "@material-ui/core/Typography";
+import Tooltip from "@material-ui/core/Tooltip";
+import IconButton from "@material-ui/core/IconButton";
 
-import List from '@material-ui/core/List';
-import ListItem from '@material-ui/core/ListItem';
-import ListItemText from '@material-ui/core/ListItemText';
+import List from "@material-ui/core/List";
+import ListItem from "@material-ui/core/ListItem";
+import ListItemText from "@material-ui/core/ListItemText";
 
-import CloseIcon from '@material-ui/icons/Close';
+import CloseIcon from "@material-ui/icons/Close";
 
-const styles = (theme) => ({
+const styles = theme => ({
   closeButton: {
-    position: 'absolute',
+    position: "absolute",
     right: theme.spacing(1),
     top: theme.spacing(1)
   }
@@ -29,20 +29,13 @@ const styles = (theme) => ({
 class AboutDialog extends Component {
   render() {
     // Styling
-    const {
-      classes
-    } = this.props;
+    const { classes } = this.props;
 
     // Dialog Properties
-    const {
-      dialogProps
-    } = this.props;
+    const { dialogProps } = this.props;
 
     // Custom Properties
-    const {
-      theme,
-      user
-    } = this.props;
+    const { theme, user } = this.props;
 
     return (
       <Dialog {...dialogProps}>
@@ -50,7 +43,10 @@ class AboutDialog extends Component {
           <Typography variant="h6">About</Typography>
 
           <Tooltip title="Close">
-            <IconButton className={classes.closeButton} onClick={dialogProps.onClose}>
+            <IconButton
+              className={classes.closeButton}
+              onClick={dialogProps.onClose}
+            >
               <CloseIcon />
             </IconButton>
           </Tooltip>
@@ -65,14 +61,11 @@ class AboutDialog extends Component {
               />
             </ListItem>
 
-            {user &&
+            {user && (
               <ListItem>
-                <ListItemText
-                  primary="UID"
-                  secondary={user.uid}
-                />
+                <ListItemText primary="UID" secondary={user.uid} />
               </ListItem>
-            }
+            )}
           </List>
         </DialogContent>
       </Dialog>
@@ -89,7 +82,7 @@ AboutDialog.propTypes = {
 
   // Custom Properties
   theme: PropTypes.object.isRequired,
-  user: PropTypes.object,
+  user: PropTypes.object
 };
 
 export default withStyles(styles)(AboutDialog);

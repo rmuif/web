@@ -1,33 +1,33 @@
-import React, { Component } from 'react';
+import React, { Component } from "react";
 
-import PropTypes from 'prop-types';
+import PropTypes from "prop-types";
 
-import DialogContent from '@material-ui/core/DialogContent';
+import DialogContent from "@material-ui/core/DialogContent";
 
-import Box from '@material-ui/core/Box';
+import Box from "@material-ui/core/Box";
 
-import List from '@material-ui/core/List';
-import ListItem from '@material-ui/core/ListItem';
-import ListItemIcon from '@material-ui/core/ListItemIcon';
-import ListItemText from '@material-ui/core/ListItemText';
-import ListItemSecondaryAction from '@material-ui/core/ListItemSecondaryAction';
+import List from "@material-ui/core/List";
+import ListItem from "@material-ui/core/ListItem";
+import ListItemIcon from "@material-ui/core/ListItemIcon";
+import ListItemText from "@material-ui/core/ListItemText";
+import ListItemSecondaryAction from "@material-ui/core/ListItemSecondaryAction";
 
-import FormControl from '@material-ui/core/FormControl';
-import InputLabel from '@material-ui/core/InputLabel';
-import Select from '@material-ui/core/Select';
-import MenuItem from '@material-ui/core/MenuItem';
-import Divider from '@material-ui/core/Divider';
-import Hidden from '@material-ui/core/Hidden';
-import Checkbox from '@material-ui/core/Checkbox';
-import Switch from '@material-ui/core/Switch';
-import Button from '@material-ui/core/Button';
+import FormControl from "@material-ui/core/FormControl";
+import InputLabel from "@material-ui/core/InputLabel";
+import Select from "@material-ui/core/Select";
+import MenuItem from "@material-ui/core/MenuItem";
+import Divider from "@material-ui/core/Divider";
+import Hidden from "@material-ui/core/Hidden";
+import Checkbox from "@material-ui/core/Checkbox";
+import Switch from "@material-ui/core/Switch";
+import Button from "@material-ui/core/Button";
 
-import FiberManualRecord from '@material-ui/icons/FiberManualRecord';
-import InvertColorsIcon from '@material-ui/icons/InvertColors';
-import FormatSizeIcon from '@material-ui/icons/FormatSize';
-import FormatColorResetIcon from '@material-ui/icons/FormatColorReset';
+import FiberManualRecord from "@material-ui/icons/FiberManualRecord";
+import InvertColorsIcon from "@material-ui/icons/InvertColors";
+import FormatSizeIcon from "@material-ui/icons/FormatSize";
+import FormatColorResetIcon from "@material-ui/icons/FormatColorReset";
 
-import appearance from '../../services/appearance';
+import appearance from "../../services/appearance";
 
 class AppearanceTab extends Component {
   constructor(props) {
@@ -38,7 +38,7 @@ class AppearanceTab extends Component {
     };
   }
 
-  handlePrimaryColorChange = (event) => {
+  handlePrimaryColorChange = event => {
     if (!event) {
       return;
     }
@@ -49,9 +49,7 @@ class AppearanceTab extends Component {
       return;
     }
 
-    const {
-      theme
-    } = this.props;
+    const { theme } = this.props;
 
     if (!theme) {
       return;
@@ -61,34 +59,41 @@ class AppearanceTab extends Component {
       return;
     }
 
-    this.setState({
-      performingAction: true
-    }, () => {
-      appearance.changeTheme({
-        primaryColor: primaryColor,
-        secondaryColor: theme.secondaryColor.id,
-        type: theme.type.id,
-        dense: theme.dense
-      }).then((value) => {
-        this.props.openSnackbar('Changed primary color');
-      }).catch((reason) => {
-        const code = reason.code;
-        const message = reason.message;
+    this.setState(
+      {
+        performingAction: true
+      },
+      () => {
+        appearance
+          .changeTheme({
+            primaryColor: primaryColor,
+            secondaryColor: theme.secondaryColor.id,
+            type: theme.type.id,
+            dense: theme.dense
+          })
+          .then(value => {
+            this.props.openSnackbar("Changed primary color");
+          })
+          .catch(reason => {
+            const code = reason.code;
+            const message = reason.message;
 
-        switch (code) {
-          default:
-            this.props.openSnackbar(message);
-            return;
-        }
-      }).finally(() => {
-        this.setState({
-          performingAction: false
-        });
-      });
-    });
+            switch (code) {
+              default:
+                this.props.openSnackbar(message);
+                return;
+            }
+          })
+          .finally(() => {
+            this.setState({
+              performingAction: false
+            });
+          });
+      }
+    );
   };
 
-  handleSecondaryColorChange = (event) => {
+  handleSecondaryColorChange = event => {
     if (!event) {
       return;
     }
@@ -99,9 +104,7 @@ class AppearanceTab extends Component {
       return;
     }
 
-    const {
-      theme
-    } = this.props;
+    const { theme } = this.props;
 
     if (!theme) {
       return;
@@ -111,34 +114,41 @@ class AppearanceTab extends Component {
       return;
     }
 
-    this.setState({
-      performingAction: true
-    }, () => {
-      appearance.changeTheme({
-        primaryColor: theme.primaryColor.id,
-        secondaryColor: secondaryColor,
-        type: theme.type.id,
-        dense: theme.dense
-      }).then((value) => {
-        this.props.openSnackbar('Changed secondary color');
-      }).catch((reason) => {
-        const code = reason.code;
-        const message = reason.message;
+    this.setState(
+      {
+        performingAction: true
+      },
+      () => {
+        appearance
+          .changeTheme({
+            primaryColor: theme.primaryColor.id,
+            secondaryColor: secondaryColor,
+            type: theme.type.id,
+            dense: theme.dense
+          })
+          .then(value => {
+            this.props.openSnackbar("Changed secondary color");
+          })
+          .catch(reason => {
+            const code = reason.code;
+            const message = reason.message;
 
-        switch (code) {
-          default:
-            this.props.openSnackbar(message);
-            return;
-        }
-      }).finally(() => {
-        this.setState({
-          performingAction: false
-        });
-      });
-    });
+            switch (code) {
+              default:
+                this.props.openSnackbar(message);
+                return;
+            }
+          })
+          .finally(() => {
+            this.setState({
+              performingAction: false
+            });
+          });
+      }
+    );
   };
 
-  handleTypeChange = (event) => {
+  handleTypeChange = event => {
     if (!event) {
       return;
     }
@@ -149,9 +159,7 @@ class AppearanceTab extends Component {
       return;
     }
 
-    const {
-      theme
-    } = this.props;
+    const { theme } = this.props;
 
     if (!theme) {
       return;
@@ -161,43 +169,48 @@ class AppearanceTab extends Component {
       return;
     }
 
-    this.setState({
-      performingAction: true
-    }, () => {
-      appearance.changeTheme({
-        primaryColor: theme.primaryColor.id,
-        secondaryColor: theme.secondaryColor.id,
-        type: type,
-        dense: theme.dense
-      }).then((value) => {
-        this.props.openSnackbar('Changed type');
-      }).catch((reason) => {
-        const code = reason.code;
-        const message = reason.message;
+    this.setState(
+      {
+        performingAction: true
+      },
+      () => {
+        appearance
+          .changeTheme({
+            primaryColor: theme.primaryColor.id,
+            secondaryColor: theme.secondaryColor.id,
+            type: type,
+            dense: theme.dense
+          })
+          .then(value => {
+            this.props.openSnackbar("Changed type");
+          })
+          .catch(reason => {
+            const code = reason.code;
+            const message = reason.message;
 
-        switch (code) {
-          default:
-            this.props.openSnackbar(message);
-            return;
-        }
-      }).finally(() => {
-        this.setState({
-          performingAction: false
-        });
-      });
-    });
+            switch (code) {
+              default:
+                this.props.openSnackbar(message);
+                return;
+            }
+          })
+          .finally(() => {
+            this.setState({
+              performingAction: false
+            });
+          });
+      }
+    );
   };
 
-  handleDenseChange = (event) => {
+  handleDenseChange = event => {
     if (!event) {
       return;
     }
 
     const dense = event.target.checked;
 
-    const {
-      theme
-    } = this.props;
+    const { theme } = this.props;
 
     if (!theme) {
       return;
@@ -207,37 +220,42 @@ class AppearanceTab extends Component {
       return;
     }
 
-    this.setState({
-      performingAction: true
-    }, () => {
-      appearance.changeTheme({
-        primaryColor: theme.primaryColor.id,
-        secondaryColor: theme.secondaryColor.id,
-        type: theme.type.id,
-        dense: dense
-      }).then((value) => {
-        this.props.openSnackbar('Changed dense');
-      }).catch((reason) => {
-        const code = reason.code;
-        const message = reason.message;
+    this.setState(
+      {
+        performingAction: true
+      },
+      () => {
+        appearance
+          .changeTheme({
+            primaryColor: theme.primaryColor.id,
+            secondaryColor: theme.secondaryColor.id,
+            type: theme.type.id,
+            dense: dense
+          })
+          .then(value => {
+            this.props.openSnackbar("Changed dense");
+          })
+          .catch(reason => {
+            const code = reason.code;
+            const message = reason.message;
 
-        switch (code) {
-          default:
-            this.props.openSnackbar(message);
-            return;
-        }
-      }).finally(() => {
-        this.setState({
-          performingAction: false
-        });
-      });
-    });
+            switch (code) {
+              default:
+                this.props.openSnackbar(message);
+                return;
+            }
+          })
+          .finally(() => {
+            this.setState({
+              performingAction: false
+            });
+          });
+      }
+    );
   };
 
   handleResetClick = () => {
-    const {
-      theme
-    } = this.props;
+    const { theme } = this.props;
 
     if (!theme) {
       return;
@@ -247,41 +265,44 @@ class AppearanceTab extends Component {
       return;
     }
 
-    this.setState({
-      performingAction: true
-    }, () => {
-      appearance.resetTheme().then((value) => {
-        this.props.openSnackbar('Reset theme');
-      }).catch((reason) => {
-        const code = reason.code;
-        const message = reason.message;
+    this.setState(
+      {
+        performingAction: true
+      },
+      () => {
+        appearance
+          .resetTheme()
+          .then(value => {
+            this.props.openSnackbar("Reset theme");
+          })
+          .catch(reason => {
+            const code = reason.code;
+            const message = reason.message;
 
-        switch (code) {
-          default:
-            this.props.openSnackbar(message);
-            return;
-        }
-      }).finally(() => {
-        this.setState({
-          performingAction: false
-        });
-      });
-    });
+            switch (code) {
+              default:
+                this.props.openSnackbar(message);
+                return;
+            }
+          })
+          .finally(() => {
+            this.setState({
+              performingAction: false
+            });
+          });
+      }
+    );
   };
 
   render() {
     // Properties
-    const {
-      theme
-    } = this.props;
+    const { theme } = this.props;
 
     if (!theme) {
       return null;
     }
 
-    const {
-      performingAction
-    } = this.state;
+    const { performingAction } = this.state;
 
     return (
       <DialogContent>
@@ -299,13 +320,15 @@ class AppearanceTab extends Component {
                   <Select
                     native
                     value={theme.primaryColor.id}
-
-                    onChange={this.handlePrimaryColorChange}>
-                    {Object.keys(appearance.colors).map((color) => {
+                    onChange={this.handlePrimaryColorChange}
+                  >
+                    {Object.keys(appearance.colors).map(color => {
                       color = appearance.colors[color];
 
                       return (
-                        <option key={color.id} value={color.id}>{color.name}</option>
+                        <option key={color.id} value={color.id}>
+                          {color.name}
+                        </option>
                       );
                     })}
                   </Select>
@@ -314,13 +337,15 @@ class AppearanceTab extends Component {
                 <Hidden xsDown>
                   <Select
                     value={theme.primaryColor.id}
-
-                    onChange={this.handlePrimaryColorChange}>
-                    {Object.keys(appearance.colors).map((color) => {
+                    onChange={this.handlePrimaryColorChange}
+                  >
+                    {Object.keys(appearance.colors).map(color => {
                       color = appearance.colors[color];
 
                       return (
-                        <MenuItem key={color.id} value={color.id}>{color.name}</MenuItem>
+                        <MenuItem key={color.id} value={color.id}>
+                          {color.name}
+                        </MenuItem>
                       );
                     })}
                   </Select>
@@ -342,13 +367,15 @@ class AppearanceTab extends Component {
                   <Select
                     native
                     value={theme.secondaryColor.id}
-
-                    onChange={this.handleSecondaryColorChange}>
-                    {Object.keys(appearance.colors).map((color) => {
+                    onChange={this.handleSecondaryColorChange}
+                  >
+                    {Object.keys(appearance.colors).map(color => {
                       color = appearance.colors[color];
 
                       return (
-                        <option key={color.id} value={color.id}>{color.name}</option>
+                        <option key={color.id} value={color.id}>
+                          {color.name}
+                        </option>
                       );
                     })}
                   </Select>
@@ -357,13 +384,15 @@ class AppearanceTab extends Component {
                 <Hidden xsDown>
                   <Select
                     value={theme.secondaryColor.id}
-
-                    onChange={this.handleSecondaryColorChange}>
-                    {Object.keys(appearance.colors).map((color) => {
+                    onChange={this.handleSecondaryColorChange}
+                  >
+                    {Object.keys(appearance.colors).map(color => {
                       color = appearance.colors[color];
 
                       return (
-                        <MenuItem key={color.id} value={color.id}>{color.name}</MenuItem>
+                        <MenuItem key={color.id} value={color.id}>
+                          {color.name}
+                        </MenuItem>
                       );
                     })}
                   </Select>
@@ -385,13 +414,15 @@ class AppearanceTab extends Component {
                   <Select
                     native
                     value={theme.type.id}
-
-                    onChange={this.handleTypeChange}>
-                    {Object.keys(appearance.types).map((type) => {
+                    onChange={this.handleTypeChange}
+                  >
+                    {Object.keys(appearance.types).map(type => {
                       type = appearance.types[type];
 
                       return (
-                        <option key={type.id} value={type.id}>{type.name}</option>
+                        <option key={type.id} value={type.id}>
+                          {type.name}
+                        </option>
                       );
                     })}
                   </Select>
@@ -400,13 +431,15 @@ class AppearanceTab extends Component {
                 <Hidden xsDown>
                   <Select
                     value={theme.type.id}
-
-                    onChange={this.handleTypeChange}>
-                    {Object.keys(appearance.types).map((type) => {
+                    onChange={this.handleTypeChange}
+                  >
+                    {Object.keys(appearance.types).map(type => {
                       type = appearance.types[type];
 
                       return (
-                        <MenuItem key={type.id} value={type.id}>{type.name}</MenuItem>
+                        <MenuItem key={type.id} value={type.id}>
+                          {type.name}
+                        </MenuItem>
                       );
                     })}
                   </Select>
@@ -435,7 +468,6 @@ class AppearanceTab extends Component {
               <Hidden xsDown>
                 <Checkbox
                   checked={theme.dense}
-
                   onChange={this.handleDenseChange}
                 />
               </Hidden>
@@ -443,7 +475,6 @@ class AppearanceTab extends Component {
               <Hidden smUp>
                 <Switch
                   checked={theme.dense}
-
                   onChange={this.handleDenseChange}
                 />
               </Hidden>
@@ -459,7 +490,11 @@ class AppearanceTab extends Component {
 
             <ListItemText
               primary="Reset theme"
-              secondary={appearance.isDefaultTheme(theme) ? 'No changes made' : 'Changes will be reset'}
+              secondary={
+                appearance.isDefaultTheme(theme)
+                  ? "No changes made"
+                  : "Changes will be reset"
+              }
             />
 
             <ListItemSecondaryAction>
@@ -467,15 +502,15 @@ class AppearanceTab extends Component {
                 color="secondary"
                 disabled={appearance.isDefaultTheme(theme) || performingAction}
                 variant="contained"
-
-                onClick={this.handleResetClick}>
+                onClick={this.handleResetClick}
+              >
                 Reset
               </Button>
             </ListItemSecondaryAction>
           </ListItem>
         </List>
       </DialogContent>
-    )
+    );
   }
 }
 

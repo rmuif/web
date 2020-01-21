@@ -1,1 +1,1 @@
-export { default } from './DeleteAccountDialog';
+export { default } from "./DeleteAccountDialog";

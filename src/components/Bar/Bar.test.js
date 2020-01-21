@@ -1,24 +1,21 @@
-import React from 'react';
+import React from "react";
 
-import ReactDOM from 'react-dom';
+import ReactDOM from "react-dom";
 
-import Bar from './Bar';
+import Bar from "./Bar";
 
-it('renders without crashing', () => {
-  const div = document.createElement('div');
+it("renders without crashing", () => {
+  const div = document.createElement("div");
 
   ReactDOM.render(
-    (
-      <Bar
-        title=""
-        performingAction={false}
-        theme={{}}
-
-        onAboutClick={() => {}}
-        onSettingsClick={() => {}}
-        onSignOutClick={() => {}}
-      />
-    ),
+    <Bar
+      title=""
+      performingAction={false}
+      theme={{}}
+      onAboutClick={() => {}}
+      onSettingsClick={() => {}}
+      onSignOutClick={() => {}}
+    />,
     div
   );
 

@@ -1,39 +1,33 @@
-import React, { Component } from 'react';
+import React, { Component } from "react";
 
-import PropTypes from 'prop-types';
+import PropTypes from "prop-types";
 
-import { withStyles } from '@material-ui/core/styles';
+import { withStyles } from "@material-ui/core/styles";
 
-import Avatar from '@material-ui/core/Avatar';
+import Avatar from "@material-ui/core/Avatar";
 
-import ListItemAvatar from '@material-ui/core/ListItemAvatar';
+import ListItemAvatar from "@material-ui/core/ListItemAvatar";
 
-import AccountCircleIcon from '@material-ui/icons/AccountCircle';
-import PersonIcon from '@material-ui/icons/Person';
+import AccountCircleIcon from "@material-ui/icons/AccountCircle";
+import PersonIcon from "@material-ui/icons/Person";
 
-import authentication from '../../services/authentication';
+import authentication from "../../services/authentication";
 
-const styles = (theme) => ({
+const styles = theme => ({
   nameInitials: {
-    cursor: 'default'
+    cursor: "default"
   }
 });
 
 class UserAvatar extends Component {
   render() {
     // Styling
-    const {
-      classes
-    } = this.props;
+    const { classes } = this.props;
 
     // Properties
-    const {
-      context,
-      user,
-      defaultCursor
-    } = this.props;
+    const { context, user, defaultCursor } = this.props;
 
-    if (context === 'standalone') {
+    if (context === "standalone") {
       if (!user) {
         return <AccountCircleIcon />;
       }
@@ -41,9 +35,7 @@ class UserAvatar extends Component {
       const photoUrl = user.photoURL;
 
       if (photoUrl) {
-        return (
-          <Avatar alt="Avatar" src={photoUrl} />
-        );
+        return <Avatar alt="Avatar" src={photoUrl} />;
       }
 
       const nameInitials = authentication.getNameInitials({
@@ -53,7 +45,9 @@ class UserAvatar extends Component {
       if (nameInitials) {
         return (
           <Avatar alt="Avatar">
-            <span className={defaultCursor && classes.nameInitials}>{nameInitials}</span>
+            <span className={defaultCursor && classes.nameInitials}>
+              {nameInitials}
+            </span>
           </Avatar>
         );
       }
@@ -61,7 +55,7 @@ class UserAvatar extends Component {
       return <AccountCircleIcon />;
     }
 
-    if (context === 'list') {
+    if (context === "list") {
       if (!user) {
         return (
           <ListItemAvatar>
@@ -90,7 +84,9 @@ class UserAvatar extends Component {
         return (
           <ListItemAvatar>
             <Avatar alt="Avatar">
-              <span className={defaultCursor && classes.nameInitials}>{nameInitials}</span>
+              <span className={defaultCursor && classes.nameInitials}>
+                {nameInitials}
+              </span>
             </Avatar>
           </ListItemAvatar>
         );
@@ -110,7 +106,7 @@ class UserAvatar extends Component {
 }
 
 UserAvatar.defaultProps = {
-  context: 'standalone'
+  context: "standalone"
 };
 
 UserAvatar.propTypes = {

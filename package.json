@@ -61,7 +61,10 @@
     "validate.js": "^0.13.1"
   },
   "devDependencies": {
-    "gh-pages": "^2.2.0"
+    "gh-pages": "^2.2.0",
+    "husky": "^4.0.10",
+    "lint-staged": "^10.0.1",
+    "prettier": "^1.19.1"
   },
   "private": true,
   "eslintConfig": {
@@ -77,6 +80,17 @@
       "last 1 chrome version",
       "last 1 firefox version",
       "last 1 safari version"
+    ]
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "lint-staged": {
+    "src/**/*.{js,jsx,ts,tsx,json,css,scss,md}": [
+      "prettier --write",
+      "git add"
     ]
   }
 }

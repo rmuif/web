@@ -1,1 +1,1 @@
-export { default } from './LaunchScreen';
+export { default } from "./LaunchScreen";

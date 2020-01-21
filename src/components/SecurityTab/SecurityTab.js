@@ -1,33 +1,33 @@
-import React, { Component } from 'react'
+import React, { Component } from "react";
 
-import PropTypes from 'prop-types'
+import PropTypes from "prop-types";
 
-import validate from 'validate.js';
-import moment from 'moment';
+import validate from "validate.js";
+import moment from "moment";
 
-import DialogContent from '@material-ui/core/DialogContent';
+import DialogContent from "@material-ui/core/DialogContent";
 
-import List from '@material-ui/core/List';
-import ListItem from '@material-ui/core/ListItem';
-import ListItemIcon from '@material-ui/core/ListItemIcon';
-import ListItemText from '@material-ui/core/ListItemText';
-import ListItemSecondaryAction from '@material-ui/core/ListItemSecondaryAction';
+import List from "@material-ui/core/List";
+import ListItem from "@material-ui/core/ListItem";
+import ListItemIcon from "@material-ui/core/ListItemIcon";
+import ListItemText from "@material-ui/core/ListItemText";
+import ListItemSecondaryAction from "@material-ui/core/ListItemSecondaryAction";
 
-import Hidden from '@material-ui/core/Hidden';
-import TextField from '@material-ui/core/TextField';
-import Tooltip from '@material-ui/core/Tooltip';
-import IconButton from '@material-ui/core/IconButton';
+import Hidden from "@material-ui/core/Hidden";
+import TextField from "@material-ui/core/TextField";
+import Tooltip from "@material-ui/core/Tooltip";
+import IconButton from "@material-ui/core/IconButton";
 
-import LockIcon from '@material-ui/icons/Lock';
-import EditIcon from '@material-ui/icons/Edit';
+import LockIcon from "@material-ui/icons/Lock";
+import EditIcon from "@material-ui/icons/Edit";
 
-import constraints from '../../constraints';
-import authentication from '../../services/authentication';
+import constraints from "../../constraints";
+import authentication from "../../services/authentication";
 
 const initialState = {
-  showingField: '',
-  password: '',
-  passwordConfirmation: '',
+  showingField: "",
+  password: "",
+  passwordConfirmation: "",
   performingAction: false,
   errors: null
 };
@@ -39,7 +39,7 @@ class SecurityTab extends Component {
     this.state = initialState;
   }
 
-  showField = (fieldId) => {
+  showField = fieldId => {
     if (!fieldId) {
       return;
     }
@@ -49,31 +49,35 @@ class SecurityTab extends Component {
     });
   };
 
-  hideFields = (callback) => {
-    this.setState({
-      showingField: '',
-      password: '',
-      passwordConfirmation: '',
-      errors: null
-    }, () => {
-      if (callback && typeof callback === 'function') {
-        callback();
+  hideFields = callback => {
+    this.setState(
+      {
+        showingField: "",
+        password: "",
+        passwordConfirmation: "",
+        errors: null
+      },
+      () => {
+        if (callback && typeof callback === "function") {
+          callback();
+        }
       }
-    });
+    );
   };
 
-  changeField = (fieldId) => {
+  changeField = fieldId => {
     switch (fieldId) {
-      case 'password':
-        const {
-          password
-        } = this.state;
+      case "password":
+        const { password } = this.state;
 
-        const errors = validate({
-          password: password
-        }, {
-          password: constraints.password
-        });
+        const errors = validate(
+          {
+            password: password
+          },
+          {
+            password: constraints.password
+          }
+        );
 
         if (errors) {
           this.setState({
@@ -83,14 +87,17 @@ class SecurityTab extends Component {
           return;
         }
 
-        this.setState({
-          errors: null
-        }, () => {
-          this.showField('password-confirmation');
-        });
+        this.setState(
+          {
+            errors: null
+          },
+          () => {
+            this.showField("password-confirmation");
+          }
+        );
         return;
 
-      case 'password-confirmation':
+      case "password-confirmation":
         this.changePassword();
         return;
 
@@ -100,18 +107,18 @@ class SecurityTab extends Component {
   };
 
   changePassword = () => {
-    const {
-      password,
-      passwordConfirmation
-    } = this.state;
+    const { password, passwordConfirmation } = this.state;
 
-    const errors = validate({
-      password: password,
-      passwordConfirmation: passwordConfirmation
-    }, {
-      password: constraints.password,
-      passwordConfirmation: constraints.passwordConfirmation
-    });
+    const errors = validate(
+      {
+        password: password,
+        passwordConfirmation: passwordConfirmation
+      },
+      {
+        password: constraints.password,
+        passwordConfirmation: constraints.passwordConfirmation
+      }
+    );
 
     if (errors) {
       this.setState({
@@ -121,32 +128,42 @@ class SecurityTab extends Component {
       return;
     }
 
-    this.setState({
-      errors: null
-    }, () => {
-      this.setState({
-        performingAction: true
-      }, () => {
-        authentication.changePassword(password).then(() => {
-          this.hideFields(() => {
-            this.props.openSnackbar('Changed password');
-          });
-        }).catch((reason) => {
-          const code = reason.code;
-          const message = reason.message;
+    this.setState(
+      {
+        errors: null
+      },
+      () => {
+        this.setState(
+          {
+            performingAction: true
+          },
+          () => {
+            authentication
+              .changePassword(password)
+              .then(() => {
+                this.hideFields(() => {
+                  this.props.openSnackbar("Changed password");
+                });
+              })
+              .catch(reason => {
+                const code = reason.code;
+                const message = reason.message;
 
-          switch (code) {
-            default:
-              this.props.openSnackbar(message);
-              return;
+                switch (code) {
+                  default:
+                    this.props.openSnackbar(message);
+                    return;
+                }
+              })
+              .finally(() => {
+                this.setState({
+                  performingAction: false
+                });
+              });
           }
-        }).finally(() => {
-          this.setState({
-            performingAction: false
-          });
-        });
-      });
-    });
+        );
+      }
+    );
   };
 
   handleKeyDown = (event, fieldId) => {
@@ -164,14 +181,14 @@ class SecurityTab extends Component {
       return;
     }
 
-    if (key === 'Escape') {
+    if (key === "Escape") {
       this.hideFields();
-    } else if (key === 'Enter') {
+    } else if (key === "Enter") {
       this.changeField(fieldId);
     }
   };
 
-  handlePasswordChange = (event) => {
+  handlePasswordChange = event => {
     if (!event) {
       return;
     }
@@ -183,7 +200,7 @@ class SecurityTab extends Component {
     });
   };
 
-  handlePasswordConfirmationChange = (event) => {
+  handlePasswordConfirmationChange = event => {
     if (!event) {
       return;
     }
@@ -197,10 +214,7 @@ class SecurityTab extends Component {
 
   render() {
     // Properties
-    const {
-      theme,
-      userData
-    } = this.props;
+    const { theme, userData } = this.props;
 
     const {
       showingField,
@@ -222,81 +236,103 @@ class SecurityTab extends Component {
               </ListItemIcon>
             </Hidden>
 
-            {showingField === 'password' &&
+            {showingField === "password" && (
               <TextField
                 autoComplete="new-password"
                 autoFocus
                 disabled={performingAction}
                 error={!!(errors && errors.password)}
                 fullWidth
-                helperText={(errors && errors.password) ? errors.password[0] : 'Press Enter to change your password'}
+                helperText={
+                  errors && errors.password
+                    ? errors.password[0]
+                    : "Press Enter to change your password"
+                }
                 label="Password"
                 required
-                size={theme.dense ? 'small' : 'medium'}
+                size={theme.dense ? "small" : "medium"}
                 type="password"
                 value={password}
                 variant="filled"
-
                 onBlur={this.hideFields}
-                onKeyDown={(event) => this.handleKeyDown(event, 'password')}
-
+                onKeyDown={event => this.handleKeyDown(event, "password")}
                 onChange={this.handlePasswordChange}
               />
-            }
+            )}
 
-            {showingField === 'password-confirmation' &&
+            {showingField === "password-confirmation" && (
               <TextField
                 autoComplete="new-password"
                 autoFocus
                 disabled={performingAction}
                 error={!!(errors && errors.passwordConfirmation)}
                 fullWidth
-                helperText={(errors && errors.passwordConfirmation) ? errors.passwordConfirmation[0] : 'Press Enter to change your password'}
+                helperText={
+                  errors && errors.passwordConfirmation
+                    ? errors.passwordConfirmation[0]
+                    : "Press Enter to change your password"
+                }
                 label="Password confirmation"
                 required
-                size={theme.dense ? 'small' : 'medium'}
+                size={theme.dense ? "small" : "medium"}
                 type="password"
                 value={passwordConfirmation}
                 variant="filled"
-
                 onBlur={this.hideFields}
-                onKeyDown={(event) => this.handleKeyDown(event, 'password-confirmation')}
-
+                onKeyDown={event =>
+                  this.handleKeyDown(event, "password-confirmation")
+                }
                 onChange={this.handlePasswordConfirmationChange}
               />
-            }
+            )}
 
-            {(showingField !== 'password' && showingField !== 'password-confirmation') &&
-              <>
-                <Hidden xsDown>
-                  <ListItemText
-                    primary="Password"
-                    secondary={hasChangedPassword ? `Last changed ${moment(userData.lastPasswordChange.toDate()).format('LL')}` : 'Never changed'}
-                  />
-                </Hidden>
+            {showingField !== "password" &&
+              showingField !== "password-confirmation" && (
+                <>
+                  <Hidden xsDown>
+                    <ListItemText
+                      primary="Password"
+                      secondary={
+                        hasChangedPassword
+                          ? `Last changed ${moment(
+                              userData.lastPasswordChange.toDate()
+                            ).format("LL")}`
+                          : "Never changed"
+                      }
+                    />
+                  </Hidden>
 
-                <Hidden smUp>
-                  <ListItemText
-                    primary="Password"
-                    secondary={hasChangedPassword ? `Last changed ${moment(userData.lastPasswordChange.toDate()).format('ll')}` : 'Never changed'}
-                  />
-                </Hidden>
+                  <Hidden smUp>
+                    <ListItemText
+                      primary="Password"
+                      secondary={
+                        hasChangedPassword
+                          ? `Last changed ${moment(
+                              userData.lastPasswordChange.toDate()
+                            ).format("ll")}`
+                          : "Never changed"
+                      }
+                    />
+                  </Hidden>
 
-                <ListItemSecondaryAction>
-                  <Tooltip title="Change">
-                    <div>
-                      <IconButton disabled={performingAction} onClick={() => this.showField('password')}>
-                        <EditIcon />
-                      </IconButton>
-                    </div>
-                  </Tooltip>
-                </ListItemSecondaryAction>
-              </>
-            }
+                  <ListItemSecondaryAction>
+                    <Tooltip title="Change">
+                      <div>
+                        <IconButton
+                          disabled={performingAction}
+                          onClick={() => this.showField("password")}
+                        >
+                          <EditIcon />
+                        </IconButton>
+                      </div>
+                    </Tooltip>
+                  </ListItemSecondaryAction>
+                </>
+              )}
           </ListItem>
         </List>
       </DialogContent>
-    )
+    );
   }
 }
 

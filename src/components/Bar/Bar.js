@@ -1,18 +1,18 @@
-import React, { Component } from 'react';
+import React, { Component } from "react";
 
-import PropTypes from 'prop-types';
+import PropTypes from "prop-types";
 
-import AppBar from '@material-ui/core/AppBar';
-import Toolbar from '@material-ui/core/Toolbar';
-import Typography from '@material-ui/core/Typography';
-import Box from '@material-ui/core/Box';
-import Button from '@material-ui/core/Button';
-import IconButton from '@material-ui/core/IconButton';
+import AppBar from "@material-ui/core/AppBar";
+import Toolbar from "@material-ui/core/Toolbar";
+import Typography from "@material-ui/core/Typography";
+import Box from "@material-ui/core/Box";
+import Button from "@material-ui/core/Button";
+import IconButton from "@material-ui/core/IconButton";
 
-import Menu from '@material-ui/core/Menu';
-import MenuItem from '@material-ui/core/MenuItem';
+import Menu from "@material-ui/core/Menu";
+import MenuItem from "@material-ui/core/MenuItem";
 
-import UserAvatar from '../UserAvatar';
+import UserAvatar from "../UserAvatar";
 
 class Bar extends Component {
   constructor(props) {
@@ -25,7 +25,7 @@ class Bar extends Component {
     };
   }
 
-  openMenu = (event) => {
+  openMenu = event => {
     const anchorEl = event.currentTarget;
 
     this.setState({
@@ -45,26 +45,16 @@ class Bar extends Component {
 
   render() {
     // Properties
-    const {
-      performingAction,
-      theme,
-      user,
-      userData
-    } = this.props;
+    const { performingAction, theme, user, userData } = this.props;
 
     // Events
-    const {
-      onSignUpClick,
-      onSignInClick
-    } = this.props;
+    const { onSignUpClick, onSignInClick } = this.props;
 
-    const {
-      menu
-    } = this.state;
+    const { menu } = this.state;
 
     const menuItems = [
       {
-        children: 'About',
+        children: "About",
         onClick: () => {
           this.closeMenu();
 
@@ -72,7 +62,7 @@ class Bar extends Component {
         }
       },
       {
-        children: 'Settings',
+        children: "Settings",
         onClick: () => {
           this.closeMenu();
 
@@ -80,7 +70,7 @@ class Bar extends Component {
         }
       },
       {
-        children: 'Sign out',
+        children: "Sign out",
         onClick: () => {
           this.closeMenu();
 
@@ -91,38 +81,67 @@ class Bar extends Component {
 
     return (
       <AppBar color="primary" position="static">
-        <Toolbar variant={theme.dense ? 'dense' : 'regular'}>
+        <Toolbar variant={theme.dense ? "dense" : "regular"}>
           <Box display="flex" flexGrow={1}>
-            <Typography color="inherit" variant="h6">{process.env.REACT_APP_TITLE}</Typography>
+            <Typography color="inherit" variant="h6">
+              {process.env.REACT_APP_TITLE}
+            </Typography>
           </Box>
 
-          {user &&
+          {user && (
             <>
-              <IconButton color="inherit" disabled={performingAction} onClick={this.openMenu}>
+              <IconButton
+                color="inherit"
+                disabled={performingAction}
+                onClick={this.openMenu}
+              >
                 <UserAvatar user={Object.assign(user, userData)} />
               </IconButton>
 
-              <Menu anchorEl={menu.anchorEl} open={Boolean(menu.anchorEl)} onClose={this.closeMenu}>
+              <Menu
+                anchorEl={menu.anchorEl}
+                open={Boolean(menu.anchorEl)}
+                onClose={this.closeMenu}
+              >
                 {menuItems.map((menuItem, index) => {
                   return (
-                    <MenuItem key={index} dense={theme.dense} disabled={performingAction} onClick={menuItem.onClick}>
+                    <MenuItem
+                      key={index}
+                      dense={theme.dense}
+                      disabled={performingAction}
+                      onClick={menuItem.onClick}
+                    >
                       {menuItem.children}
                     </MenuItem>
                   );
                 })}
               </Menu>
             </>
-          }
+          )}
 
-          {!user &&
+          {!user && (
             <>
               <Box mr={1}>
-                <Button color="secondary" disabled={performingAction} variant="contained" onClick={onSignUpClick}>Sign up</Button>
+                <Button
+                  color="secondary"
+                  disabled={performingAction}
+                  variant="contained"
+                  onClick={onSignUpClick}
+                >
+                  Sign up
+                </Button>
               </Box>
 
-              <Button color="secondary" disabled={performingAction} variant="contained" onClick={onSignInClick}>Sign in</Button>
+              <Button
+                color="secondary"
+                disabled={performingAction}
+                variant="contained"
+                onClick={onSignInClick}
+              >
+                Sign in
+              </Button>
             </>
-          }
+          )}
         </Toolbar>
       </AppBar>
     );

@@ -1,21 +1,25 @@
-import React, { Component } from 'react';
+import React, { Component } from "react";
 
-import PropTypes from 'prop-types';
+import PropTypes from "prop-types";
 
-import { createMuiTheme, withStyles, MuiThemeProvider } from '@material-ui/core/styles';
+import {
+  createMuiTheme,
+  withStyles,
+  MuiThemeProvider
+} from "@material-ui/core/styles";
 
-import Grid from '@material-ui/core/Grid';
-import Button from '@material-ui/core/Button';
+import Grid from "@material-ui/core/Grid";
+import Button from "@material-ui/core/Button";
 
-import AppleIcon from 'mdi-material-ui/Apple';
-import FacebookBoxIcon from 'mdi-material-ui/FacebookBox';
-import GitHubCircleIcon from 'mdi-material-ui/GithubCircle';
-import GoogleIcon from 'mdi-material-ui/Google';
-import MicrosoftIcon from 'mdi-material-ui/Microsoft';
-import TwitterIcon from 'mdi-material-ui/Twitter';
-import YahooIcon from 'mdi-material-ui/Yahoo';
+import AppleIcon from "mdi-material-ui/Apple";
+import FacebookBoxIcon from "mdi-material-ui/FacebookBox";
+import GitHubCircleIcon from "mdi-material-ui/GithubCircle";
+import GoogleIcon from "mdi-material-ui/Google";
+import MicrosoftIcon from "mdi-material-ui/Microsoft";
+import TwitterIcon from "mdi-material-ui/Twitter";
+import YahooIcon from "mdi-material-ui/Yahoo";
 
-const styles = (theme) => ({
+const styles = theme => ({
   grid: {
     marginBottom: theme.spacing(2)
   }
@@ -24,119 +28,112 @@ const styles = (theme) => ({
 class AuthProviderList extends Component {
   render() {
     // Styling
-    const {
-      classes
-    } = this.props;
+    const { classes } = this.props;
 
     // Properties
-    const {
-      gutterBottom,
-      performingAction
-    } = this.props;
+    const { gutterBottom, performingAction } = this.props;
 
     // Events
-    const {
-      onAuthProviderClick
-    } = this.props;
+    const { onAuthProviderClick } = this.props;
 
     const authProviders = [
       {
-        providerId: 'apple.com',
+        providerId: "apple.com",
         theme: createMuiTheme({
           palette: {
             primary: {
-              main: '#000000',
-              contrastText: '#ffffff'
+              main: "#000000",
+              contrastText: "#ffffff"
             }
           }
         }),
         icon: <AppleIcon />,
-        name: 'Apple'
+        name: "Apple"
       },
       {
-        providerId: 'facebook.com',
+        providerId: "facebook.com",
         theme: createMuiTheme({
           palette: {
             primary: {
-              main: '#3c5a99',
-              contrastText: '#ffffff'
+              main: "#3c5a99",
+              contrastText: "#ffffff"
             }
           }
         }),
         icon: <FacebookBoxIcon />,
-        name: 'Facebook'
+        name: "Facebook"
       },
       {
-        providerId: 'github.com',
+        providerId: "github.com",
         theme: createMuiTheme({
           palette: {
             primary: {
-              main: '#24292e',
-              contrastText: '#ffffff'
+              main: "#24292e",
+              contrastText: "#ffffff"
             }
           }
         }),
         icon: <GitHubCircleIcon />,
-        name: 'GitHub'
+        name: "GitHub"
       },
       {
-        providerId: 'google.com',
+        providerId: "google.com",
         theme: createMuiTheme({
           palette: {
             primary: {
-              main: '#4285f4',
-              contrastText: '#ffffff'
+              main: "#4285f4",
+              contrastText: "#ffffff"
             }
           }
         }),
         icon: <GoogleIcon />,
-        name: 'Google'
+        name: "Google"
       },
       {
-        providerId: 'microsoft.com',
+        providerId: "microsoft.com",
         theme: createMuiTheme({
           palette: {
             primary: {
-              main: '#f65314',
-              contrastText: '#ffffff'
+              main: "#f65314",
+              contrastText: "#ffffff"
             }
           }
         }),
         icon: <MicrosoftIcon />,
-        name: 'Microsoft'
+        name: "Microsoft"
       },
       {
-        providerId: 'twitter.com',
+        providerId: "twitter.com",
         theme: createMuiTheme({
           palette: {
             primary: {
-              main: '#1da1f2',
-              contrastText: '#ffffff'
+              main: "#1da1f2",
+              contrastText: "#ffffff"
             }
           }
         }),
         icon: <TwitterIcon />,
-        name: 'Twitter'
+        name: "Twitter"
       },
       {
-        providerId: 'yahoo.com',
+        providerId: "yahoo.com",
         theme: createMuiTheme({
           palette: {
             primary: {
-              main: '#410093',
-              contrastText: '#ffffff'
+              main: "#410093",
+              contrastText: "#ffffff"
             }
           }
         }),
         icon: <YahooIcon />,
-        name: 'Yahoo'
+        name: "Yahoo"
       }
     ];
 
     if (gutterBottom) {
       return (
         <Grid className={classes.grid} container direction="column" spacing={1}>
-          {authProviders.map((authProvider) => {
+          {authProviders.map(authProvider => {
             return (
               <Grid key={authProvider.providerId} item>
                 <MuiThemeProvider theme={authProvider.theme}>
@@ -146,7 +143,8 @@ class AuthProviderList extends Component {
                     fullWidth
                     startIcon={authProvider.icon}
                     variant="contained"
-                    onClick={() => onAuthProviderClick(authProvider.providerId)}>
+                    onClick={() => onAuthProviderClick(authProvider.providerId)}
+                  >
                     {authProvider.name}
                   </Button>
                 </MuiThemeProvider>
@@ -159,7 +157,7 @@ class AuthProviderList extends Component {
 
     return (
       <Grid container direction="column" spacing={1}>
-        {authProviders.map((authProvider) => {
+        {authProviders.map(authProvider => {
           return (
             <Grid key={authProvider.providerId} item>
               <MuiThemeProvider theme={authProvider.theme}>
@@ -169,7 +167,8 @@ class AuthProviderList extends Component {
                   fullWidth
                   startIcon={authProvider.icon}
                   variant="contained"
-                  onClick={() => onAuthProviderClick(authProvider.providerId)}>
+                  onClick={() => onAuthProviderClick(authProvider.providerId)}
+                >
                   {authProvider.name}
                 </Button>
               </MuiThemeProvider>
