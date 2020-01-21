@@ -69,7 +69,7 @@ class AboutDialog extends Component {
                   </ListItem>
                 )}
 
-                {roles && (
+                {roles.length !== 0 && (
                   <ListItem>
                     <ListItemText
                       primary="Roles"
@@ -99,7 +99,7 @@ AboutDialog.propTypes = {
 
   // Custom Properties
   theme: PropTypes.object.isRequired,
-  user: PropTypes.object.isRequired,
+  user: PropTypes.object,
   roles: PropTypes.array.isRequired
 };
 
