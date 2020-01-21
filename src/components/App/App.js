@@ -282,18 +282,17 @@ class App extends Component {
               <Router user={user} openSnackbar={this.openSnackbar} />
 
               <DialogHost
+                performingAction={performingAction}
                 theme={theme}
                 user={user}
+                userData={userData}
+                openSnackbar={this.openSnackbar}
                 dialogs={{
                   aboutDialog: {
                     dialogProps: {
                       open: aboutDialog.open,
 
                       onClose: () => this.closeDialog("aboutDialog")
-                    },
-
-                    props: {
-                      user: user
                     }
                   },
 
@@ -308,12 +307,6 @@ class App extends Component {
                           callback();
                         }
                       }
-                    },
-
-                    props: {
-                      performingAction: performingAction,
-
-                      openSnackbar: this.openSnackbar
                     }
                   },
 
@@ -328,12 +321,6 @@ class App extends Component {
                           callback();
                         }
                       }
-                    },
-
-                    props: {
-                      performingAction: performingAction,
-
-                      openSnackbar: this.openSnackbar
                     }
                   },
 
@@ -345,11 +332,6 @@ class App extends Component {
                     },
 
                     props: {
-                      user: user,
-                      userData: userData,
-
-                      openSnackbar: this.openSnackbar,
-
                       onDeleteAccountClick: () =>
                         this.openDialog("deleteAccountDialog")
                     }
@@ -363,9 +345,6 @@ class App extends Component {
                     },
 
                     props: {
-                      performingAction: performingAction,
-                      userData: userData,
-
                       deleteAccount: this.deleteAccount
                     }
                   },

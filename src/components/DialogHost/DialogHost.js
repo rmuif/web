@@ -14,7 +14,10 @@ import AlertDialog from "../AlertDialog";
 class DialogHost extends Component {
   render() {
     // Properties
-    const { theme, user, dialogs } = this.props;
+    const { performingAction, theme, user, userData, dialogs } = this.props;
+
+    // Functions
+    const { openSnackbar } = this.props;
 
     const aboutDialog = dialogs.aboutDialog;
     const signUpDialog = dialogs.signUpDialog;
@@ -27,7 +30,11 @@ class DialogHost extends Component {
       <>
         <AboutDialog
           dialogProps={aboutDialog.dialogProps}
+          performingAction={performingAction}
           theme={theme}
+          user={user}
+          userData={userData}
+          openSnackbar={openSnackbar}
           {...aboutDialog.props}
         />
 
@@ -35,6 +42,11 @@ class DialogHost extends Component {
           <>
             <AlertDialog
               dialogProps={signOutDialog.dialogProps}
+              performingAction={performingAction}
+              theme={theme}
+              user={user}
+              userData={userData}
+              openSnackbar={openSnackbar}
               {...signOutDialog.props}
             />
           </>
@@ -45,7 +57,11 @@ class DialogHost extends Component {
             <>
               <DeleteAccountDialog
                 dialogProps={deleteAccountDialog.dialogProps}
+                performingAction={performingAction}
                 theme={theme}
+                user={user}
+                userData={userData}
+                openSnackbar={openSnackbar}
                 {...deleteAccountDialog.props}
               />
             </>
@@ -55,13 +71,21 @@ class DialogHost extends Component {
             <>
               <SignUpDialog
                 dialogProps={signUpDialog.dialogProps}
+                performingAction={performingAction}
                 theme={theme}
+                user={user}
+                userData={userData}
+                openSnackbar={openSnackbar}
                 {...signUpDialog.props}
               />
 
               <SignInDialog
                 dialogProps={signInDialog.dialogProps}
+                performingAction={performingAction}
                 theme={theme}
+                user={user}
+                userData={userData}
+                openSnackbar={openSnackbar}
                 {...signInDialog.props}
               />
             </>
@@ -73,7 +97,11 @@ class DialogHost extends Component {
             <>
               <SettingsDialog
                 dialogProps={settingsDialog.dialogProps}
+                performingAction={performingAction}
                 theme={theme}
+                user={user}
+                userData={userData}
+                openSnackbar={openSnackbar}
                 {...settingsDialog.props}
               />
             </>
@@ -89,7 +117,11 @@ class DialogHost extends Component {
 
                   ...deleteAccountDialog.dialogProps
                 }}
+                performingAction={performingAction}
                 theme={theme}
+                user={user}
+                userData={userData}
+                openSnackbar={openSnackbar}
                 {...deleteAccountDialog.props}
               />
             </>
@@ -103,7 +135,11 @@ class DialogHost extends Component {
 
                   ...signUpDialog.dialogProps
                 }}
+                performingAction={performingAction}
                 theme={theme}
+                user={user}
+                userData={userData}
+                openSnackbar={openSnackbar}
                 {...signUpDialog.props}
               />
 
@@ -113,7 +149,11 @@ class DialogHost extends Component {
 
                   ...signInDialog.dialogProps
                 }}
+                performingAction={performingAction}
                 theme={theme}
+                user={user}
+                userData={userData}
+                openSnackbar={openSnackbar}
                 {...signInDialog.props}
               />
             </>
@@ -129,7 +169,11 @@ class DialogHost extends Component {
 
                   ...settingsDialog.dialogProps
                 }}
+                performingAction={performingAction}
                 theme={theme}
+                user={user}
+                userData={userData}
+                openSnackbar={openSnackbar}
                 {...settingsDialog.props}
               />
             </>
@@ -144,6 +188,7 @@ DialogHost.propTypes = {
   // Properties
   theme: PropTypes.object.isRequired,
   user: PropTypes.object,
+  userData: PropTypes.object,
   dialogs: PropTypes.object.isRequired
 };
 
