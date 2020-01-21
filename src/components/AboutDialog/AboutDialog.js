@@ -35,7 +35,7 @@ class AboutDialog extends Component {
     const { dialogProps } = this.props;
 
     // Custom Properties
-    const { theme, user } = this.props;
+    const { theme, user, roles } = this.props;
 
     return (
       <Dialog {...dialogProps}>
@@ -61,10 +61,27 @@ class AboutDialog extends Component {
               />
             </ListItem>
 
-            {user && (
-              <ListItem>
-                <ListItemText primary="UID" secondary={user.uid} />
-              </ListItem>
+            {process.env.NODE_ENV === "development" && (
+              <>
+                {user && (
+                  <ListItem>
+                    <ListItemText primary="UID" secondary={user.uid} />
+                  </ListItem>
+                )}
+
+                {roles && (
+                  <ListItem>
+                    <ListItemText
+                      primary="Roles"
+                      secondary={roles.map((role, index) => {
+                        return `${role}${
+                          index === roles.length - 1 ? "" : ", "
+                        }`;
+                      })}
+                    />
+                  </ListItem>
+                )}
+              </>
             )}
           </List>
         </DialogContent>
@@ -82,7 +99,8 @@ AboutDialog.propTypes = {
 
   // Custom Properties
   theme: PropTypes.object.isRequired,
-  user: PropTypes.object
+  user: PropTypes.object.isRequired,
+  roles: PropTypes.array.isRequired
 };
 
 export default withStyles(styles)(AboutDialog);

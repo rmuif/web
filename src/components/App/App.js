@@ -245,7 +245,14 @@ class App extends Component {
   };
 
   render() {
-    const { ready, performingAction, theme, user, userData } = this.state;
+    const {
+      ready,
+      performingAction,
+      theme,
+      user,
+      userData,
+      roles
+    } = this.state;
 
     const {
       aboutDialog,
@@ -293,6 +300,10 @@ class App extends Component {
                       open: aboutDialog.open,
 
                       onClose: () => this.closeDialog("aboutDialog")
+                    },
+
+                    props: {
+                      roles: roles
                     }
                   },
 
