@@ -313,7 +313,11 @@ class AppearanceTab extends Component {
                 <FiberManualRecord color="primary" />
               </ListItemIcon>
 
-              <FormControl disabled={performingAction} fullWidth>
+              <FormControl
+                disabled={performingAction}
+                fullWidth
+                variant="outlined"
+              >
                 <InputLabel>Primary color</InputLabel>
 
                 <Hidden smUp>
@@ -360,7 +364,11 @@ class AppearanceTab extends Component {
                 <FiberManualRecord color="secondary" />
               </ListItemIcon>
 
-              <FormControl disabled={performingAction} fullWidth>
+              <FormControl
+                disabled={performingAction}
+                fullWidth
+                variant="outlined"
+              >
                 <InputLabel>Secondary color</InputLabel>
 
                 <Hidden smUp>
@@ -407,7 +415,11 @@ class AppearanceTab extends Component {
                 <InvertColorsIcon />
               </ListItemIcon>
 
-              <FormControl disabled={performingAction} fullWidth>
+              <FormControl
+                disabled={performingAction}
+                fullWidth
+                variant="outlined"
+              >
                 <InputLabel>Type</InputLabel>
 
                 <Hidden smUp>
