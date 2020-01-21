@@ -61,6 +61,7 @@
     "validate.js": "^0.13.1"
   },
   "devDependencies": {
+    "eslint-config-prettier": "^6.9.0",
     "gh-pages": "^2.2.0",
     "husky": "^4.0.10",
     "lint-staged": "^10.0.1",
