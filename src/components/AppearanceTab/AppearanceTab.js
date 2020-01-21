@@ -309,9 +309,11 @@ class AppearanceTab extends Component {
         <List dense={theme.dense} disablePadding>
           <Box mb={1}>
             <ListItem>
-              <ListItemIcon>
-                <FiberManualRecord color="primary" />
-              </ListItemIcon>
+              <Hidden xsDown>
+                <ListItemIcon>
+                  <FiberManualRecord color="primary" />
+                </ListItemIcon>
+              </Hidden>
 
               <FormControl
                 disabled={performingAction}
@@ -360,9 +362,11 @@ class AppearanceTab extends Component {
 
           <Box mb={1}>
             <ListItem>
-              <ListItemIcon>
-                <FiberManualRecord color="secondary" />
-              </ListItemIcon>
+              <Hidden xsDown>
+                <ListItemIcon>
+                  <FiberManualRecord color="secondary" />
+                </ListItemIcon>
+              </Hidden>
 
               <FormControl
                 disabled={performingAction}
@@ -411,9 +415,11 @@ class AppearanceTab extends Component {
 
           <Box mb={1}>
             <ListItem>
-              <ListItemIcon>
-                <InvertColorsIcon />
-              </ListItemIcon>
+              <Hidden xsDown>
+                <ListItemIcon>
+                  <InvertColorsIcon />
+                </ListItemIcon>
+              </Hidden>
 
               <FormControl
                 disabled={performingAction}
