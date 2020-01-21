@@ -1,12 +1,12 @@
-import React, { Component } from 'react';
+import React, { Component } from "react";
 
-import PropTypes from 'prop-types';
+import PropTypes from "prop-types";
 
-import * as Sentry from '@sentry/browser';
+import * as Sentry from "@sentry/browser";
 
-import ErrorIcon from '@material-ui/icons/Error';
+import ErrorIcon from "@material-ui/icons/Error";
 
-import EmptyState from '../EmptyState';
+import EmptyState from "../EmptyState";
 
 class ErrorBoundary extends Component {
   constructor(props) {
@@ -23,7 +23,7 @@ class ErrorBoundary extends Component {
   }
 
   componentDidCatch(error, errorInfo) {
-    Sentry.withScope((scope) => {
+    Sentry.withScope(scope => {
       scope.setExtras(errorInfo);
 
       const eventId = Sentry.captureException(error);
@@ -36,21 +36,12 @@ class ErrorBoundary extends Component {
 
   render() {
     // Properties
-    const {
-      children
-    } = this.props;
+    const { children } = this.props;
 
-    const {
-      hasError
-    } = this.state;
+    const { hasError } = this.state;
 
     if (hasError) {
-      return (
-        <EmptyState
-          icon={<ErrorIcon />}
-          title="Something went wrong"
-        />
-      );
+      return <EmptyState icon={<ErrorIcon />} title="Something went wrong" />;
     }
 
     return children;

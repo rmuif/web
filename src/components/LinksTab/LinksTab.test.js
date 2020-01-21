@@ -1,36 +1,32 @@
-import React from 'react';
+import React from "react";
 
-import ReactDOM from 'react-dom';
+import ReactDOM from "react-dom";
 
-import LinksTab from './LinksTab';
+import LinksTab from "./LinksTab";
 
-it('renders without crashing', () => {
-  const div = document.createElement('div');
+it("renders without crashing", () => {
+  const div = document.createElement("div");
 
   ReactDOM.render(
-    (
-      <LinksTab
-        dialogProps={{
-          open: true,
+    <LinksTab
+      dialogProps={{
+        open: true,
 
-          onClose: () => {}
-        }}
-
-        theme={{
-          primaryColor: {
-            id: 'blue'
-          },
-          secondaryColor: {
-            id: 'red'
-          },
-          type: {
-            id: 'dark'
-          }
-        }}
-
-        openSnackbar={() => {}}
-      />
-    ),
+        onClose: () => {}
+      }}
+      theme={{
+        primaryColor: {
+          id: "blue"
+        },
+        secondaryColor: {
+          id: "red"
+        },
+        type: {
+          id: "dark"
+        }
+      }}
+      openSnackbar={() => {}}
+    />,
     div
   );
 

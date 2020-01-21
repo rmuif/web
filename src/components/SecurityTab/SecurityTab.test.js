@@ -1,28 +1,24 @@
-import React from 'react';
+import React from "react";
 
-import ReactDOM from 'react-dom';
+import ReactDOM from "react-dom";
 
-import SecurityTab from './SecurityTab';
+import SecurityTab from "./SecurityTab";
 
-it('renders without crashing', () => {
-  const div = document.createElement('div');
+it("renders without crashing", () => {
+  const div = document.createElement("div");
 
   ReactDOM.render(
-    (
-      <SecurityTab
-        dialogProps={{
-          open: true,
+    <SecurityTab
+      dialogProps={{
+        open: true,
 
-          onClose: () => {}
-        }}
-
-        theme={{}}
-        user={{}}
-        userData={{}}
-
-        openSnackbar={() => {}}
-      />
-    ),
+        onClose: () => {}
+      }}
+      theme={{}}
+      user={{}}
+      userData={{}}
+      openSnackbar={() => {}}
+    />,
     div
   );
 

@@ -1,51 +1,51 @@
-import React, { Component } from 'react';
+import React, { Component } from "react";
 
-import PropTypes from 'prop-types';
+import PropTypes from "prop-types";
 
-import validate from 'validate.js';
-import moment from 'moment';
+import validate from "validate.js";
+import moment from "moment";
 
-import { withStyles } from '@material-ui/core/styles';
+import { withStyles } from "@material-ui/core/styles";
 
-import DialogContent from '@material-ui/core/DialogContent';
-import Grid from '@material-ui/core/Grid';
-import Typography from '@material-ui/core/Typography';
-import Box from '@material-ui/core/Box';
-import Fade from '@material-ui/core/Fade';
-import CircularProgress from '@material-ui/core/CircularProgress';
-import Badge from '@material-ui/core/Badge';
-import Avatar from '@material-ui/core/Avatar';
-import Fab from '@material-ui/core/Fab';
-import Button from '@material-ui/core/Button';
+import DialogContent from "@material-ui/core/DialogContent";
+import Grid from "@material-ui/core/Grid";
+import Typography from "@material-ui/core/Typography";
+import Box from "@material-ui/core/Box";
+import Fade from "@material-ui/core/Fade";
+import CircularProgress from "@material-ui/core/CircularProgress";
+import Badge from "@material-ui/core/Badge";
+import Avatar from "@material-ui/core/Avatar";
+import Fab from "@material-ui/core/Fab";
+import Button from "@material-ui/core/Button";
 
-import List from '@material-ui/core/List';
-import ListItem from '@material-ui/core/ListItem';
-import ListItemIcon from '@material-ui/core/ListItemIcon';
-import ListItemText from '@material-ui/core/ListItemText';
-import ListItemSecondaryAction from '@material-ui/core/ListItemSecondaryAction';
+import List from "@material-ui/core/List";
+import ListItem from "@material-ui/core/ListItem";
+import ListItemIcon from "@material-ui/core/ListItemIcon";
+import ListItemText from "@material-ui/core/ListItemText";
+import ListItemSecondaryAction from "@material-ui/core/ListItemSecondaryAction";
 
-import Hidden from '@material-ui/core/Hidden';
-import TextField from '@material-ui/core/TextField';
-import Tooltip from '@material-ui/core/Tooltip';
-import IconButton from '@material-ui/core/IconButton';
-import Divider from '@material-ui/core/Divider';
+import Hidden from "@material-ui/core/Hidden";
+import TextField from "@material-ui/core/TextField";
+import Tooltip from "@material-ui/core/Tooltip";
+import IconButton from "@material-ui/core/IconButton";
+import Divider from "@material-ui/core/Divider";
 
-import CloseIcon from '@material-ui/icons/Close';
-import PhotoIcon from '@material-ui/icons/Photo';
-import CloudUploadIcon from '@material-ui/icons/CloudUpload';
-import PersonIcon from '@material-ui/icons/Person';
-import EditIcon from '@material-ui/icons/Edit';
-import PersonOutlineIcon from '@material-ui/icons/PersonOutline';
-import EmailIcon from '@material-ui/icons/Email';
-import WarningIcon from '@material-ui/icons/Warning';
-import CheckIcon from '@material-ui/icons/Check';
-import AccessTimeIcon from '@material-ui/icons/AccessTime';
-import DeleteForeverIcon from '@material-ui/icons/DeleteForever';
+import CloseIcon from "@material-ui/icons/Close";
+import PhotoIcon from "@material-ui/icons/Photo";
+import CloudUploadIcon from "@material-ui/icons/CloudUpload";
+import PersonIcon from "@material-ui/icons/Person";
+import EditIcon from "@material-ui/icons/Edit";
+import PersonOutlineIcon from "@material-ui/icons/PersonOutline";
+import EmailIcon from "@material-ui/icons/Email";
+import WarningIcon from "@material-ui/icons/Warning";
+import CheckIcon from "@material-ui/icons/Check";
+import AccessTimeIcon from "@material-ui/icons/AccessTime";
+import DeleteForeverIcon from "@material-ui/icons/DeleteForever";
 
-import constraints from '../../constraints';
-import authentication from '../../services/authentication';
+import constraints from "../../constraints";
+import authentication from "../../services/authentication";
 
-const styles = (theme) => ({
+const styles = theme => ({
   dialogContent: {
     paddingTop: theme.spacing(2)
   },
@@ -56,20 +56,20 @@ const styles = (theme) => ({
   },
 
   loadingBadge: {
-    top: '50%',
-    right: '50%'
+    top: "50%",
+    right: "50%"
   },
 
   avatar: {
-    marginRight: 'auto',
-    marginLeft: 'auto',
+    marginRight: "auto",
+    marginLeft: "auto",
 
     width: theme.spacing(14),
     height: theme.spacing(14)
   },
 
   nameInitials: {
-    cursor: 'default'
+    cursor: "default"
   },
 
   personIcon: {
@@ -80,20 +80,20 @@ const styles = (theme) => ({
     width: theme.spacing(4),
     height: theme.spacing(4),
 
-    minHeight: 'initial'
+    minHeight: "initial"
   }
 });
 
 const initialState = {
   profileCompletion: 0,
   securityRating: 0,
-  showingField: '',
+  showingField: "",
   avatar: null,
-  avatarUrl: '',
-  firstName: '',
-  lastName: '',
-  username: '',
-  emailAddress: '',
+  avatarUrl: "",
+  firstName: "",
+  lastName: "",
+  username: "",
+  emailAddress: "",
   performingAction: false,
   loadingAvatar: false,
   sentVerificationEmail: false,
@@ -108,18 +108,13 @@ class AccountTab extends Component {
   }
 
   getNameInitialsOrIcon = () => {
-    const {
-      user
-    } = this.props;
+    const { user } = this.props;
 
     if (!user) {
       return null;
     }
 
-    const {
-      classes,
-      userData
-    } = this.props;
+    const { classes, userData } = this.props;
 
     if (!userData) {
       return <PersonIcon className={classes.personIcon} />;
@@ -142,108 +137,127 @@ class AccountTab extends Component {
   };
 
   uploadAvatar = () => {
-    const {
-      avatar
-    } = this.state;
+    const { avatar } = this.state;
 
     if (!avatar) {
       return;
     }
 
-    this.setState({
-      performingAction: true,
-      loadingAvatar: true
-    }, () => {
-      authentication.changeAvatar(avatar).then((value) => {
-        const {
-          user,
-          userData
-        } = this.props;
+    this.setState(
+      {
+        performingAction: true,
+        loadingAvatar: true
+      },
+      () => {
+        authentication
+          .changeAvatar(avatar)
+          .then(value => {
+            const { user, userData } = this.props;
 
-        this.setState({
-          profileCompletion: authentication.getProfileCompletion({ ...user, ...userData })
-        }, () => {
-          this.props.openSnackbar('Changed avatar');
-        });
-      }).catch((reason) => {
-        const code = reason.code;
-        const message = reason.message;
+            this.setState(
+              {
+                profileCompletion: authentication.getProfileCompletion({
+                  ...user,
+                  ...userData
+                })
+              },
+              () => {
+                this.props.openSnackbar("Changed avatar");
+              }
+            );
+          })
+          .catch(reason => {
+            const code = reason.code;
+            const message = reason.message;
 
-        switch (code) {
-          default:
-            this.props.openSnackbar(message);
-            return;
-        }
-      }).finally(() => {
-        this.setState({
-          performingAction: false,
-          loadingAvatar: false,
-          avatar: null,
-          avatarUrl: ''
-        });
-      });
-    });
+            switch (code) {
+              default:
+                this.props.openSnackbar(message);
+                return;
+            }
+          })
+          .finally(() => {
+            this.setState({
+              performingAction: false,
+              loadingAvatar: false,
+              avatar: null,
+              avatarUrl: ""
+            });
+          });
+      }
+    );
   };
 
   removeAvatar = () => {
-    const {
-      user
-    } = this.props;
+    const { user } = this.props;
 
-    const {
-      avatar,
-      avatarUrl
-    } = this.state;
+    const { avatar, avatarUrl } = this.state;
 
     if (!user.photoURL && !avatar && !avatarUrl) {
       return;
     }
 
-    if ((!user.photoURL && avatar && avatarUrl) || (user.photoURL && avatar && avatarUrl)) {
+    if (
+      (!user.photoURL && avatar && avatarUrl) ||
+      (user.photoURL && avatar && avatarUrl)
+    ) {
       URL.revokeObjectURL(avatarUrl);
 
-      this.setState({
-        avatar: null,
-        avatarUrl: ''
-      }, () => {
-        this.props.openSnackbar(`Removed image “${avatar.name}”`, 5);
-      });
+      this.setState(
+        {
+          avatar: null,
+          avatarUrl: ""
+        },
+        () => {
+          this.props.openSnackbar(`Removed image “${avatar.name}”`, 5);
+        }
+      );
     } else if (user.photoURL && !avatar && !avatarUrl) {
-      this.setState({
-        performingAction: true,
-        loadingAvatar: true
-      }, () => {
-        authentication.removeAvatar().then((value) => {
-          const {
-            user,
-            userData
-          } = this.props;
+      this.setState(
+        {
+          performingAction: true,
+          loadingAvatar: true
+        },
+        () => {
+          authentication
+            .removeAvatar()
+            .then(value => {
+              const { user, userData } = this.props;
 
-          this.setState({
-            profileCompletion: authentication.getProfileCompletion({ ...user, ...userData })
-          }, () => {
-            this.props.openSnackbar('Removed avatar');
-          });
-        }).catch((reason) => {
-          const code = reason.code;
-          const message = reason.message;
+              this.setState(
+                {
+                  profileCompletion: authentication.getProfileCompletion({
+                    ...user,
+                    ...userData
+                  })
+                },
+                () => {
+                  this.props.openSnackbar("Removed avatar");
+                }
+              );
+            })
+            .catch(reason => {
+              const code = reason.code;
+              const message = reason.message;
 
-          switch (code) {
-            default:
-              this.props.openSnackbar(message);
-              return;
-          }
-        }).finally(() => {
-          this.setState({
-            performingAction: false,
-            loadingAvatar: false
-          });
-        });
-      });
+              switch (code) {
+                default:
+                  this.props.openSnackbar(message);
+                  return;
+              }
+            })
+            .finally(() => {
+              this.setState({
+                performingAction: false,
+                loadingAvatar: false
+              });
+            });
+        }
+      );
     }
   };
 
-  showField = (fieldId) => {
+  showField = fieldId => {
     if (!fieldId) {
       return;
     }
@@ -253,31 +267,35 @@ class AccountTab extends Component {
     });
   };
 
-  hideFields = (callback) => {
-    this.setState({
-      showingField: '',
-      firstName: '',
-      lastName: '',
-      username: '',
-      emailAddress: '',
-      errors: null
-    }, () => {
-      if (callback && typeof callback === 'function') {
-        callback();
+  hideFields = callback => {
+    this.setState(
+      {
+        showingField: "",
+        firstName: "",
+        lastName: "",
+        username: "",
+        emailAddress: "",
+        errors: null
+      },
+      () => {
+        if (callback && typeof callback === "function") {
+          callback();
+        }
       }
-    });
+    );
   };
 
   changeFirstName = () => {
-    const {
-      firstName
-    } = this.state;
+    const { firstName } = this.state;
 
-    const errors = validate({
-      firstName: firstName
-    }, {
-      firstName: constraints.firstName
-    });
+    const errors = validate(
+      {
+        firstName: firstName
+      },
+      {
+        firstName: constraints.firstName
+      }
+    );
 
     if (errors) {
       this.setState({
@@ -287,61 +305,73 @@ class AccountTab extends Component {
       return;
     }
 
-    this.setState({
-      errors: null
-    }, () => {
-      const {
-        userData
-      } = this.props;
+    this.setState(
+      {
+        errors: null
+      },
+      () => {
+        const { userData } = this.props;
 
-      if (firstName === userData.firstName) {
-        return;
-      }
+        if (firstName === userData.firstName) {
+          return;
+        }
 
-      this.setState({
-        performingAction: true
-      }, () => {
-        authentication.changeFirstName(firstName).then(() => {
-          const {
-            user,
-            userData
-          } = this.props;
+        this.setState(
+          {
+            performingAction: true
+          },
+          () => {
+            authentication
+              .changeFirstName(firstName)
+              .then(() => {
+                const { user, userData } = this.props;
 
-          this.setState({
-            profileCompletion: authentication.getProfileCompletion({ ...user, ...userData })
-          }, () => {
-            this.hideFields(() => {
-              this.props.openSnackbar('Changed first name');
-            });
-          });
-        }).catch((reason) => {
-          const code = reason.code;
-          const message = reason.message;
+                this.setState(
+                  {
+                    profileCompletion: authentication.getProfileCompletion({
+                      ...user,
+                      ...userData
+                    })
+                  },
+                  () => {
+                    this.hideFields(() => {
+                      this.props.openSnackbar("Changed first name");
+                    });
+                  }
+                );
+              })
+              .catch(reason => {
+                const code = reason.code;
+                const message = reason.message;
 
-          switch (code) {
-            default:
-              this.props.openSnackbar(message);
-              return;
+                switch (code) {
+                  default:
+                    this.props.openSnackbar(message);
+                    return;
+                }
+              })
+              .finally(() => {
+                this.setState({
+                  performingAction: false
+                });
+              });
           }
-        }).finally(() => {
-          this.setState({
-            performingAction: false
-          });
-        });
-      });
-    });
+        );
+      }
+    );
   };
 
   changeLastName = () => {
-    const {
-      lastName
-    } = this.state;
+    const { lastName } = this.state;
 
-    const errors = validate({
-      lastName: lastName
-    }, {
-      lastName: constraints.lastName
-    });
+    const errors = validate(
+      {
+        lastName: lastName
+      },
+      {
+        lastName: constraints.lastName
+      }
+    );
 
     if (errors) {
       this.setState({
@@ -351,61 +381,73 @@ class AccountTab extends Component {
       return;
     }
 
-    this.setState({
-      errors: null
-    }, () => {
-      const {
-        userData
-      } = this.props;
+    this.setState(
+      {
+        errors: null
+      },
+      () => {
+        const { userData } = this.props;
 
-      if (lastName === userData.lastName) {
-        return;
-      }
+        if (lastName === userData.lastName) {
+          return;
+        }
 
-      this.setState({
-        performingAction: true
-      }, () => {
-        authentication.changeLastName(lastName).then(() => {
-          const {
-            user,
-            userData
-          } = this.props;
+        this.setState(
+          {
+            performingAction: true
+          },
+          () => {
+            authentication
+              .changeLastName(lastName)
+              .then(() => {
+                const { user, userData } = this.props;
 
-          this.setState({
-            profileCompletion: authentication.getProfileCompletion({ ...user, ...userData })
-          }, () => {
-            this.hideFields(() => {
-              this.props.openSnackbar('Changed last name');
-            });
-          });
-        }).catch((reason) => {
-          const code = reason.code;
-          const message = reason.message;
+                this.setState(
+                  {
+                    profileCompletion: authentication.getProfileCompletion({
+                      ...user,
+                      ...userData
+                    })
+                  },
+                  () => {
+                    this.hideFields(() => {
+                      this.props.openSnackbar("Changed last name");
+                    });
+                  }
+                );
+              })
+              .catch(reason => {
+                const code = reason.code;
+                const message = reason.message;
 
-          switch (code) {
-            default:
-              this.props.openSnackbar(message);
-              return;
+                switch (code) {
+                  default:
+                    this.props.openSnackbar(message);
+                    return;
+                }
+              })
+              .finally(() => {
+                this.setState({
+                  performingAction: false
+                });
+              });
           }
-        }).finally(() => {
-          this.setState({
-            performingAction: false
-          });
-        });
-      });
-    });
+        );
+      }
+    );
   };
 
   changeUsername = () => {
-    const {
-      username
-    } = this.state;
+    const { username } = this.state;
 
-    const errors = validate({
-      username: username
-    }, {
-      username: constraints.username
-    });
+    const errors = validate(
+      {
+        username: username
+      },
+      {
+        username: constraints.username
+      }
+    );
 
     if (errors) {
       this.setState({
@@ -415,61 +457,73 @@ class AccountTab extends Component {
       return;
     }
 
-    this.setState({
-      errors: null
-    }, () => {
-      const {
-        userData
-      } = this.props;
+    this.setState(
+      {
+        errors: null
+      },
+      () => {
+        const { userData } = this.props;
 
-      if (username === userData.username) {
-        return;
-      }
+        if (username === userData.username) {
+          return;
+        }
 
-      this.setState({
-        performingAction: true
-      }, () => {
-        authentication.changeUsername(username).then(() => {
-          const {
-            user,
-            userData
-          } = this.props;
+        this.setState(
+          {
+            performingAction: true
+          },
+          () => {
+            authentication
+              .changeUsername(username)
+              .then(() => {
+                const { user, userData } = this.props;
 
-          this.setState({
-            profileCompletion: authentication.getProfileCompletion({ ...user, ...userData })
-          }, () => {
-            this.hideFields(() => {
-              this.props.openSnackbar('Changed username');
-            });
-          });
-        }).catch((reason) => {
-          const code = reason.code;
-          const message = reason.message;
+                this.setState(
+                  {
+                    profileCompletion: authentication.getProfileCompletion({
+                      ...user,
+                      ...userData
+                    })
+                  },
+                  () => {
+                    this.hideFields(() => {
+                      this.props.openSnackbar("Changed username");
+                    });
+                  }
+                );
+              })
+              .catch(reason => {
+                const code = reason.code;
+                const message = reason.message;
 
-          switch (code) {
-            default:
-              this.props.openSnackbar(message);
-              return;
+                switch (code) {
+                  default:
+                    this.props.openSnackbar(message);
+                    return;
+                }
+              })
+              .finally(() => {
+                this.setState({
+                  performingAction: false
+                });
+              });
           }
-        }).finally(() => {
-          this.setState({
-            performingAction: false
-          });
-        });
-      });
-    });
+        );
+      }
+    );
   };
 
   changeEmailAddress = () => {
-    const {
-      emailAddress
-    } = this.state;
+    const { emailAddress } = this.state;
 
-    const errors = validate({
-      emailAddress: emailAddress
-    }, {
-      emailAddress: constraints.emailAddress
-    });
+    const errors = validate(
+      {
+        emailAddress: emailAddress
+      },
+      {
+        emailAddress: constraints.emailAddress
+      }
+    );
 
     if (errors) {
       this.setState({
@@ -479,93 +533,114 @@ class AccountTab extends Component {
       return;
     }
 
-    this.setState({
-      errors: null
-    }, () => {
-      const {
-        user
-      } = this.props;
+    this.setState(
+      {
+        errors: null
+      },
+      () => {
+        const { user } = this.props;
 
-      if (emailAddress === user.email) {
-        return;
-      }
+        if (emailAddress === user.email) {
+          return;
+        }
 
-      this.setState({
-        performingAction: true
-      }, () => {
-        authentication.changeEmailAddress(emailAddress).then(() => {
-          const {
-            user,
-            userData
-          } = this.props;
+        this.setState(
+          {
+            performingAction: true
+          },
+          () => {
+            authentication
+              .changeEmailAddress(emailAddress)
+              .then(() => {
+                const { user, userData } = this.props;
 
-          this.setState({
-            profileCompletion: authentication.getProfileCompletion({ ...user, ...userData })
-          }, () => {
-            this.hideFields(() => {
-              this.props.openSnackbar('Changed e-mail address');
-            });
-          });
-        }).catch((reason) => {
-          const code = reason.code;
-          const message = reason.message;
+                this.setState(
+                  {
+                    profileCompletion: authentication.getProfileCompletion({
+                      ...user,
+                      ...userData
+                    })
+                  },
+                  () => {
+                    this.hideFields(() => {
+                      this.props.openSnackbar("Changed e-mail address");
+                    });
+                  }
+                );
+              })
+              .catch(reason => {
+                const code = reason.code;
+                const message = reason.message;
 
-          switch (code) {
-            default:
-              this.props.openSnackbar(message);
-              return;
+                switch (code) {
+                  default:
+                    this.props.openSnackbar(message);
+                    return;
+                }
+              })
+              .finally(() => {
+                this.setState({
+                  performingAction: false
+                });
+              });
           }
-        }).finally(() => {
-          this.setState({
-            performingAction: false
-          });
-        });
-      });
-    });
+        );
+      }
+    );
   };
 
   verifyEmailAddress = () => {
-    this.setState({
-      performingAction: true
-    }, () => {
-      authentication.verifyEmailAddress().then(() => {
-        this.setState({
-          sentVerificationEmail: true
-        }, () => {
-          this.props.openSnackbar('Sent verification e-mail');
-        });
-      }).catch((reason) => {
-        const code = reason.code;
-        const message = reason.message;
+    this.setState(
+      {
+        performingAction: true
+      },
+      () => {
+        authentication
+          .verifyEmailAddress()
+          .then(() => {
+            this.setState(
+              {
+                sentVerificationEmail: true
+              },
+              () => {
+                this.props.openSnackbar("Sent verification e-mail");
+              }
+            );
+          })
+          .catch(reason => {
+            const code = reason.code;
+            const message = reason.message;
 
-        switch (code) {
-          default:
-            this.props.openSnackbar(message);
-            return;
-        }
-      }).finally(() => {
-        this.setState({
-          performingAction: false
-        });
-      });
-    });
+            switch (code) {
+              default:
+                this.props.openSnackbar(message);
+                return;
+            }
+          })
+          .finally(() => {
+            this.setState({
+              performingAction: false
+            });
+          });
+      }
+    );
   };
 
-  changeField = (fieldId) => {
+  changeField = fieldId => {
     switch (fieldId) {
-      case 'first-name':
+      case "first-name":
         this.changeFirstName();
         return;
 
-      case 'last-name':
+      case "last-name":
         this.changeLastName();
         return;
 
-      case 'username':
+      case "username":
         this.changeUsername();
         return;
 
-      case 'email-address':
+      case "email-address":
         this.changeEmailAddress();
         return;
 
@@ -589,14 +664,14 @@ class AccountTab extends Component {
       return;
     }
 
-    if (key === 'Escape') {
+    if (key === "Escape") {
       this.hideFields();
-    } else if (key === 'Enter') {
+    } else if (key === "Enter") {
       this.changeField(fieldId);
     }
   };
 
-  handleAvatarChange = (event) => {
+  handleAvatarChange = event => {
     if (!event) {
       return;
     }
@@ -614,30 +689,33 @@ class AccountTab extends Component {
     }
 
     const fileTypes = [
-      'image/gif',
-      'image/jpeg',
-      'image/png',
-      'image/webp',
-      'image/svg+xml'
+      "image/gif",
+      "image/jpeg",
+      "image/png",
+      "image/webp",
+      "image/svg+xml"
     ];
 
     if (!fileTypes.includes(avatar.type)) {
       return;
     }
 
-    if (avatar.size > (20 * 1024 * 1024)) {
+    if (avatar.size > 20 * 1024 * 1024) {
       return;
     }
 
-    this.setState({
-      avatar: avatar,
-      avatarUrl: URL.createObjectURL(avatar)
-    }, () => {
-      this.props.openSnackbar(`Selected image “${avatar.name}”`, 5);
-    });
+    this.setState(
+      {
+        avatar: avatar,
+        avatarUrl: URL.createObjectURL(avatar)
+      },
+      () => {
+        this.props.openSnackbar(`Selected image “${avatar.name}”`, 5);
+      }
+    );
   };
 
-  handleFirstNameChange = (event) => {
+  handleFirstNameChange = event => {
     if (!event) {
       return;
     }
@@ -649,7 +727,7 @@ class AccountTab extends Component {
     });
   };
 
-  handleLastNameChange = (event) => {
+  handleLastNameChange = event => {
     if (!event) {
       return;
     }
@@ -661,7 +739,7 @@ class AccountTab extends Component {
     });
   };
 
-  handleUsernameChange = (event) => {
+  handleUsernameChange = event => {
     if (!event) {
       return;
     }
@@ -673,7 +751,7 @@ class AccountTab extends Component {
     });
   };
 
-  handleEmailAddressChange = (event) => {
+  handleEmailAddressChange = event => {
     if (!event) {
       return;
     }
@@ -687,21 +765,13 @@ class AccountTab extends Component {
 
   render() {
     // Styling
-    const {
-      classes
-    } = this.props;
+    const { classes } = this.props;
 
     // Properties
-    const {
-      theme,
-      user,
-      userData
-    } = this.props;
+    const { theme, user, userData } = this.props;
 
     // Events
-    const {
-      onDeleteAccountClick
-    } = this.props;
+    const { onDeleteAccountClick } = this.props;
 
     const {
       profileCompletion,
@@ -731,114 +801,177 @@ class AccountTab extends Component {
               <Grid item xs>
                 <Box textAlign="center">
                   <Box mb={1.5}>
-                    {(avatar && avatarUrl) &&
-                      <Badge classes={{ badge: classes.badge }} badgeContent={
-                        <Tooltip title="Remove">
-                          <Fab classes={{ sizeSmall: classes.small }} color="secondary" disabled={performingAction} size="small" onClick={this.removeAvatar}>
-                            <CloseIcon fontSize="small" />
-                          </Fab>
-                        </Tooltip>
-                      }>
-                        {loadingAvatar &&
-                          <Badge classes={{ badge: classes.loadingBadge }} badgeContent={
-                            <Fade
-                              style={{ transitionDelay: '1s' }}
-                              in={loadingAvatar}
-                              unmountOnExit>
-                              <CircularProgress size={120} thickness={1.8} />
-                            </Fade>
-                          }>
-                            <Avatar className={classes.avatar} alt="Avatar" src={avatarUrl} />
+                    {avatar && avatarUrl && (
+                      <Badge
+                        classes={{ badge: classes.badge }}
+                        badgeContent={
+                          <Tooltip title="Remove">
+                            <Fab
+                              classes={{ sizeSmall: classes.small }}
+                              color="secondary"
+                              disabled={performingAction}
+                              size="small"
+                              onClick={this.removeAvatar}
+                            >
+                              <CloseIcon fontSize="small" />
+                            </Fab>
+                          </Tooltip>
+                        }
+                      >
+                        {loadingAvatar && (
+                          <Badge
+                            classes={{ badge: classes.loadingBadge }}
+                            badgeContent={
+                              <Fade
+                                style={{ transitionDelay: "1s" }}
+                                in={loadingAvatar}
+                                unmountOnExit
+                              >
+                                <CircularProgress size={120} thickness={1.8} />
+                              </Fade>
+                            }
+                          >
+                            <Avatar
+                              className={classes.avatar}
+                              alt="Avatar"
+                              src={avatarUrl}
+                            />
                           </Badge>
-                        }
+                        )}
 
-                        {!loadingAvatar &&
-                          <Avatar className={classes.avatar} alt="Avatar" src={avatarUrl} />
-                        }
+                        {!loadingAvatar && (
+                          <Avatar
+                            className={classes.avatar}
+                            alt="Avatar"
+                            src={avatarUrl}
+                          />
+                        )}
                       </Badge>
-                    }
+                    )}
 
-                    {(!avatar && !avatarUrl) &&
+                    {!avatar && !avatarUrl && (
                       <>
-                        {user.photoURL &&
-                          <Badge classes={{ badge: classes.badge }} badgeContent={
-                            <Tooltip title="Remove">
-                              <Fab classes={{ sizeSmall: classes.small }} color="secondary" disabled={performingAction} size="small" onClick={this.removeAvatar}>
-                                <CloseIcon fontSize="small" />
-                              </Fab>
-                            </Tooltip>
-                          }>
-                            {loadingAvatar &&
-                              <Badge classes={{ badge: classes.loadingBadge }} badgeContent={
-                                <Fade
-                                  style={{ transitionDelay: '1s' }}
-                                  in={loadingAvatar}
-                                  unmountOnExit>
-                                  <CircularProgress size={120} thickness={1.8} />
-                                </Fade>
-                              }>
-                                <Avatar className={classes.avatar} alt="Avatar" src={user.photoURL} />
+                        {user.photoURL && (
+                          <Badge
+                            classes={{ badge: classes.badge }}
+                            badgeContent={
+                              <Tooltip title="Remove">
+                                <Fab
+                                  classes={{ sizeSmall: classes.small }}
+                                  color="secondary"
+                                  disabled={performingAction}
+                                  size="small"
+                                  onClick={this.removeAvatar}
+                                >
+                                  <CloseIcon fontSize="small" />
+                                </Fab>
+                              </Tooltip>
+                            }
+                          >
+                            {loadingAvatar && (
+                              <Badge
+                                classes={{ badge: classes.loadingBadge }}
+                                badgeContent={
+                                  <Fade
+                                    style={{ transitionDelay: "1s" }}
+                                    in={loadingAvatar}
+                                    unmountOnExit
+                                  >
+                                    <CircularProgress
+                                      size={120}
+                                      thickness={1.8}
+                                    />
+                                  </Fade>
+                                }
+                              >
+                                <Avatar
+                                  className={classes.avatar}
+                                  alt="Avatar"
+                                  src={user.photoURL}
+                                />
                               </Badge>
-                            }
+                            )}
 
-                            {!loadingAvatar &&
-                              <Avatar className={classes.avatar} alt="Avatar" src={user.photoURL} />
-                            }
+                            {!loadingAvatar && (
+                              <Avatar
+                                className={classes.avatar}
+                                alt="Avatar"
+                                src={user.photoURL}
+                              />
+                            )}
                           </Badge>
-                        }
+                        )}
 
-                        {!user.photoURL &&
+                        {!user.photoURL && (
                           <>
-                            {loadingAvatar &&
-                              <Badge classes={{ badge: classes.loadingBadge }} badgeContent={
-                                <Fade
-                                  style={{ transitionDelay: '1s' }}
-                                  in={loadingAvatar}
-                                  unmountOnExit>
-                                  <CircularProgress size={120} thickness={1.8} />
-                                </Fade>
-                              }>
+                            {loadingAvatar && (
+                              <Badge
+                                classes={{ badge: classes.loadingBadge }}
+                                badgeContent={
+                                  <Fade
+                                    style={{ transitionDelay: "1s" }}
+                                    in={loadingAvatar}
+                                    unmountOnExit
+                                  >
+                                    <CircularProgress
+                                      size={120}
+                                      thickness={1.8}
+                                    />
+                                  </Fade>
+                                }
+                              >
                                 <Avatar className={classes.avatar} alt="Avatar">
                                   {this.getNameInitialsOrIcon()}
                                 </Avatar>
                               </Badge>
-                            }
+                            )}
 
-                            {!loadingAvatar &&
+                            {!loadingAvatar && (
                               <Avatar className={classes.avatar} alt="Avatar">
                                 {this.getNameInitialsOrIcon()}
                               </Avatar>
-                            }
+                            )}
                           </>
-                        }
+                        )}
                       </>
-                    }
+                    )}
                   </Box>
 
-                  {(avatar && avatarUrl) &&
-                    <Button color="primary" disabled={performingAction} startIcon={<CloudUploadIcon />} variant="contained" onClick={this.uploadAvatar}>
+                  {avatar && avatarUrl && (
+                    <Button
+                      color="primary"
+                      disabled={performingAction}
+                      startIcon={<CloudUploadIcon />}
+                      variant="contained"
+                      onClick={this.uploadAvatar}
+                    >
                       Upload
                     </Button>
-                  }
+                  )}
 
-                  {(!avatar && !avatarUrl) &&
+                  {!avatar && !avatarUrl && (
                     <>
                       <input
                         id="avatar-input"
                         type="file"
                         hidden
                         accept="image/*"
-
                         onChange={this.handleAvatarChange}
                       />
 
                       <label htmlFor="avatar-input">
-                        <Button color="primary" component="span" disabled={performingAction} startIcon={<PhotoIcon />} variant="contained">
+                        <Button
+                          color="primary"
+                          component="span"
+                          disabled={performingAction}
+                          startIcon={<PhotoIcon />}
+                          variant="contained"
+                        >
                           Choose...
                         </Button>
                       </label>
                     </>
-                  }
+                  )}
                 </Box>
               </Grid>
 
@@ -846,17 +979,23 @@ class AccountTab extends Component {
                 <Box textAlign="center">
                   <Typography variant="body1">Profile completion</Typography>
 
-                  {profileCompletion === 0 &&
-                    <Typography color="error" variant="h5">{profileCompletion}%</Typography>
-                  }
+                  {profileCompletion === 0 && (
+                    <Typography color="error" variant="h5">
+                      {profileCompletion}%
+                    </Typography>
+                  )}
 
-                  {profileCompletion === 100 &&
-                    <Typography color="primary" variant="h5">{profileCompletion}%</Typography>
-                  }
+                  {profileCompletion === 100 && (
+                    <Typography color="primary" variant="h5">
+                      {profileCompletion}%
+                    </Typography>
+                  )}
 
-                  {(profileCompletion !== 0 && profileCompletion !== 100)  &&
-                    <Typography color="secondary" variant="h5">{profileCompletion}%</Typography>
-                  }
+                  {profileCompletion !== 0 && profileCompletion !== 100 && (
+                    <Typography color="secondary" variant="h5">
+                      {profileCompletion}%
+                    </Typography>
+                  )}
                 </Box>
               </Grid>
 
@@ -864,17 +1003,23 @@ class AccountTab extends Component {
                 <Box textAlign="center">
                   <Typography variant="body1">Security rating</Typography>
 
-                  {securityRating === 0 &&
-                    <Typography color="error" variant="h5">{securityRating}%</Typography>
-                  }
+                  {securityRating === 0 && (
+                    <Typography color="error" variant="h5">
+                      {securityRating}%
+                    </Typography>
+                  )}
 
-                  {securityRating === 100 &&
-                    <Typography color="primary" variant="h5">{securityRating}%</Typography>
-                  }
+                  {securityRating === 100 && (
+                    <Typography color="primary" variant="h5">
+                      {securityRating}%
+                    </Typography>
+                  )}
 
-                  {(securityRating !== 0 && securityRating !== 100) &&
-                    <Typography color="secondary" variant="h5">{securityRating}%</Typography>
-                  }
+                  {securityRating !== 0 && securityRating !== 100 && (
+                    <Typography color="secondary" variant="h5">
+                      {securityRating}%
+                    </Typography>
+                  )}
                 </Box>
               </Grid>
             </Grid>
@@ -883,109 +1028,165 @@ class AccountTab extends Component {
           <Hidden smUp>
             <Box textAlign="center" mb={3}>
               <Box mb={1.5}>
-                {(avatar && avatarUrl) &&
-                  <Badge classes={{ badge: classes.badge }} badgeContent={
-                    <Tooltip title="Remove">
-                      <Fab classes={{ sizeSmall: classes.small }} color="secondary" disabled={performingAction} size="small" onClick={this.removeAvatar}>
-                        <CloseIcon fontSize="small" />
-                      </Fab>
-                    </Tooltip>
-                  }>
-                    {loadingAvatar &&
-                      <Badge classes={{ badge: classes.loadingBadge }} badgeContent={
-                        <Fade
-                          style={{ transitionDelay: '1s' }}
-                          in={loadingAvatar}
-                          unmountOnExit>
-                          <CircularProgress size={120} thickness={1.8} />
-                        </Fade>
-                      }>
-                        <Avatar className={classes.avatar} alt="Avatar" src={avatarUrl} />
-                      </Badge>
+                {avatar && avatarUrl && (
+                  <Badge
+                    classes={{ badge: classes.badge }}
+                    badgeContent={
+                      <Tooltip title="Remove">
+                        <Fab
+                          classes={{ sizeSmall: classes.small }}
+                          color="secondary"
+                          disabled={performingAction}
+                          size="small"
+                          onClick={this.removeAvatar}
+                        >
+                          <CloseIcon fontSize="small" />
+                        </Fab>
+                      </Tooltip>
                     }
-
-                    {!loadingAvatar &&
-                      <Avatar className={classes.avatar} alt="Avatar" src={avatarUrl} />
-                    }
-                  </Badge>
-                }
-
-                {(!avatar && !avatarUrl) &&
-                  <>
-                    {user.photoURL &&
-                      <Badge classes={{ badge: classes.badge }} badgeContent={
-                        <Tooltip title="Remove">
-                          <Fab classes={{ sizeSmall: classes.small }} color="secondary" disabled={performingAction} size="small" onClick={this.removeAvatar}>
-                            <CloseIcon fontSize="small" />
-                          </Fab>
-                        </Tooltip>
-                      }>
-                        {loadingAvatar &&
-                          <Badge classes={{ badge: classes.loadingBadge }} badgeContent={
+                  >
+                    {loadingAvatar && (
+                      <Badge
+                        classes={{ badge: classes.loadingBadge }}
+                        badgeContent={
+                          <Fade
+                            style={{ transitionDelay: "1s" }}
+                            in={loadingAvatar}
+                            unmountOnExit
+                          >
                             <CircularProgress size={120} thickness={1.8} />
-                          }>
-                            <Avatar className={classes.avatar} alt="Avatar" src={user.photoURL} />
-                          </Badge>
+                          </Fade>
                         }
-
-                        {!loadingAvatar &&
-                          <Avatar className={classes.avatar} alt="Avatar" src={user.photoURL} />
-                        }
+                      >
+                        <Avatar
+                          className={classes.avatar}
+                          alt="Avatar"
+                          src={avatarUrl}
+                        />
                       </Badge>
-                    }
+                    )}
 
-                    {!user.photoURL &&
-                      <>
-                        {loadingAvatar &&
-                          <Badge classes={{ badge: classes.loadingBadge }} badgeContent={
-                            <Fade
-                              style={{ transitionDelay: '1s' }}
-                              in={loadingAvatar}
-                              unmountOnExit>
+                    {!loadingAvatar && (
+                      <Avatar
+                        className={classes.avatar}
+                        alt="Avatar"
+                        src={avatarUrl}
+                      />
+                    )}
+                  </Badge>
+                )}
+
+                {!avatar && !avatarUrl && (
+                  <>
+                    {user.photoURL && (
+                      <Badge
+                        classes={{ badge: classes.badge }}
+                        badgeContent={
+                          <Tooltip title="Remove">
+                            <Fab
+                              classes={{ sizeSmall: classes.small }}
+                              color="secondary"
+                              disabled={performingAction}
+                              size="small"
+                              onClick={this.removeAvatar}
+                            >
+                              <CloseIcon fontSize="small" />
+                            </Fab>
+                          </Tooltip>
+                        }
+                      >
+                        {loadingAvatar && (
+                          <Badge
+                            classes={{ badge: classes.loadingBadge }}
+                            badgeContent={
                               <CircularProgress size={120} thickness={1.8} />
-                            </Fade>
-                          }>
+                            }
+                          >
+                            <Avatar
+                              className={classes.avatar}
+                              alt="Avatar"
+                              src={user.photoURL}
+                            />
+                          </Badge>
+                        )}
+
+                        {!loadingAvatar && (
+                          <Avatar
+                            className={classes.avatar}
+                            alt="Avatar"
+                            src={user.photoURL}
+                          />
+                        )}
+                      </Badge>
+                    )}
+
+                    {!user.photoURL && (
+                      <>
+                        {loadingAvatar && (
+                          <Badge
+                            classes={{ badge: classes.loadingBadge }}
+                            badgeContent={
+                              <Fade
+                                style={{ transitionDelay: "1s" }}
+                                in={loadingAvatar}
+                                unmountOnExit
+                              >
+                                <CircularProgress size={120} thickness={1.8} />
+                              </Fade>
+                            }
+                          >
                             <Avatar className={classes.avatar} alt="Avatar">
                               {this.getNameInitialsOrIcon()}
                             </Avatar>
                           </Badge>
-                        }
+                        )}
 
-                        {!loadingAvatar &&
+                        {!loadingAvatar && (
                           <Avatar className={classes.avatar} alt="Avatar">
                             {this.getNameInitialsOrIcon()}
                           </Avatar>
-                        }
+                        )}
                       </>
-                    }
+                    )}
                   </>
-                }
+                )}
               </Box>
 
-              {(avatar && avatarUrl) &&
-                <Button color="primary" disabled={performingAction} startIcon={<CloudUploadIcon />} variant="contained" onClick={this.uploadAvatar}>
+              {avatar && avatarUrl && (
+                <Button
+                  color="primary"
+                  disabled={performingAction}
+                  startIcon={<CloudUploadIcon />}
+                  variant="contained"
+                  onClick={this.uploadAvatar}
+                >
                   Upload
                 </Button>
-              }
+              )}
 
-              {(!avatar && !avatarUrl) &&
+              {!avatar && !avatarUrl && (
                 <>
                   <input
                     id="avatar-input"
                     type="file"
                     hidden
                     accept="image/*"
-
                     onChange={this.handleAvatarChange}
                   />
 
                   <label htmlFor="avatar-input">
-                    <Button color="primary" component="span" disabled={performingAction} startIcon={<PhotoIcon />} variant="contained">
+                    <Button
+                      color="primary"
+                      component="span"
+                      disabled={performingAction}
+                      startIcon={<PhotoIcon />}
+                      variant="contained"
+                    >
                       Choose...
                     </Button>
                   </label>
                 </>
-              }
+              )}
             </Box>
 
             <Grid container>
@@ -993,17 +1194,23 @@ class AccountTab extends Component {
                 <Box textAlign="center">
                   <Typography variant="body1">Profile completion</Typography>
 
-                  {profileCompletion === 0 &&
-                    <Typography color="error" variant="h5">{profileCompletion}%</Typography>
-                  }
+                  {profileCompletion === 0 && (
+                    <Typography color="error" variant="h5">
+                      {profileCompletion}%
+                    </Typography>
+                  )}
 
-                  {profileCompletion === 100 &&
-                    <Typography color="primary" variant="h5">{profileCompletion}%</Typography>
-                  }
+                  {profileCompletion === 100 && (
+                    <Typography color="primary" variant="h5">
+                      {profileCompletion}%
+                    </Typography>
+                  )}
 
-                  {(profileCompletion !== 0 && profileCompletion !== 100)  &&
-                    <Typography color="secondary" variant="h5">{profileCompletion}%</Typography>
-                  }
+                  {profileCompletion !== 0 && profileCompletion !== 100 && (
+                    <Typography color="secondary" variant="h5">
+                      {profileCompletion}%
+                    </Typography>
+                  )}
                 </Box>
               </Grid>
 
@@ -1011,17 +1218,23 @@ class AccountTab extends Component {
                 <Box textAlign="center">
                   <Typography variant="body1">Security rating</Typography>
 
-                  {securityRating === 0 &&
-                    <Typography color="error" variant="h5">{securityRating}%</Typography>
-                  }
+                  {securityRating === 0 && (
+                    <Typography color="error" variant="h5">
+                      {securityRating}%
+                    </Typography>
+                  )}
 
-                  {securityRating === 100 &&
-                    <Typography color="primary" variant="h5">{securityRating}%</Typography>
-                  }
+                  {securityRating === 100 && (
+                    <Typography color="primary" variant="h5">
+                      {securityRating}%
+                    </Typography>
+                  )}
 
-                  {(securityRating !== 0 && securityRating !== 100) &&
-                    <Typography color="secondary" variant="h5">{securityRating}%</Typography>
-                  }
+                  {securityRating !== 0 && securityRating !== 100 && (
+                    <Typography color="secondary" variant="h5">
+                      {securityRating}%
+                    </Typography>
+                  )}
                 </Box>
               </Grid>
             </Grid>
@@ -1036,67 +1249,77 @@ class AccountTab extends Component {
               </ListItemIcon>
             </Hidden>
 
-            {!hasFirstName &&
+            {!hasFirstName && (
               <ListItemIcon>
                 <Tooltip title="No first name">
                   <WarningIcon color="error" />
                 </Tooltip>
               </ListItemIcon>
-            }
+            )}
 
-            {showingField === 'first-name' &&
+            {showingField === "first-name" && (
               <TextField
                 autoComplete="given-name"
                 autoFocus
                 disabled={performingAction}
                 error={!!(errors && errors.firstName)}
                 fullWidth
-                helperText={(errors && errors.firstName) ? errors.firstName[0] : 'Press Enter to change your first name'}
+                helperText={
+                  errors && errors.firstName
+                    ? errors.firstName[0]
+                    : "Press Enter to change your first name"
+                }
                 label="First name"
                 placeholder={hasFirstName && userData.firstName}
                 required
-                size={theme.dense ? 'small' : 'medium'}
+                size={theme.dense ? "small" : "medium"}
                 type="text"
                 value={firstName}
                 variant="filled"
-
                 onBlur={this.hideFields}
-                onKeyDown={(event) => this.handleKeyDown(event, 'first-name')}
-
+                onKeyDown={event => this.handleKeyDown(event, "first-name")}
                 onChange={this.handleFirstNameChange}
               />
-            }
+            )}
 
-            {showingField !== 'first-name' &&
+            {showingField !== "first-name" && (
               <>
                 <ListItemText
                   primary="First name"
-                  secondary={hasFirstName ? userData.firstName : 'You don’t have a first name'}
+                  secondary={
+                    hasFirstName
+                      ? userData.firstName
+                      : "You don’t have a first name"
+                  }
                 />
 
                 <ListItemSecondaryAction>
-                  {hasFirstName &&
+                  {hasFirstName && (
                     <Tooltip title="Change">
                       <div>
-                        <IconButton disabled={performingAction} onClick={() => this.showField('first-name')}>
+                        <IconButton
+                          disabled={performingAction}
+                          onClick={() => this.showField("first-name")}
+                        >
                           <EditIcon />
                         </IconButton>
                       </div>
                     </Tooltip>
-                  }
+                  )}
 
-                  {!hasFirstName &&
+                  {!hasFirstName && (
                     <Button
                       color="primary"
                       disabled={performingAction}
                       variant="contained"
-                      onClick={() => this.showField('first-name')}>
+                      onClick={() => this.showField("first-name")}
+                    >
                       Add
                     </Button>
-                  }
+                  )}
                 </ListItemSecondaryAction>
               </>
-            }
+            )}
           </ListItem>
 
           <ListItem>
@@ -1106,67 +1329,77 @@ class AccountTab extends Component {
               </ListItemIcon>
             </Hidden>
 
-            {!hasLastName &&
+            {!hasLastName && (
               <ListItemIcon>
                 <Tooltip title="No last name">
                   <WarningIcon color="error" />
                 </Tooltip>
               </ListItemIcon>
-            }
+            )}
 
-            {showingField === 'last-name' &&
+            {showingField === "last-name" && (
               <TextField
                 autoComplete="family-name"
                 autoFocus
                 disabled={performingAction}
                 error={!!(errors && errors.lastName)}
                 fullWidth
-                helperText={(errors && errors.lastName) ? errors.lastName[0] : 'Press Enter to change your last name'}
+                helperText={
+                  errors && errors.lastName
+                    ? errors.lastName[0]
+                    : "Press Enter to change your last name"
+                }
                 label="Last name"
                 placeholder={hasLastName && userData.lastName}
                 required
-                size={theme.dense ? 'small' : 'medium'}
+                size={theme.dense ? "small" : "medium"}
                 type="text"
                 value={lastName}
                 variant="filled"
-
                 onBlur={this.hideFields}
-                onKeyDown={(event) => this.handleKeyDown(event, 'last-name')}
-
+                onKeyDown={event => this.handleKeyDown(event, "last-name")}
                 onChange={this.handleLastNameChange}
               />
-            }
+            )}
 
-            {showingField !== 'last-name' &&
+            {showingField !== "last-name" && (
               <>
                 <ListItemText
                   primary="Last name"
-                  secondary={hasLastName ? userData.lastName : 'You don’t have a last name'}
+                  secondary={
+                    hasLastName
+                      ? userData.lastName
+                      : "You don’t have a last name"
+                  }
                 />
 
                 <ListItemSecondaryAction>
-                  {hasLastName &&
+                  {hasLastName && (
                     <Tooltip title="Change">
                       <div>
-                        <IconButton disabled={performingAction} onClick={() => this.showField('last-name')}>
+                        <IconButton
+                          disabled={performingAction}
+                          onClick={() => this.showField("last-name")}
+                        >
                           <EditIcon />
                         </IconButton>
                       </div>
                     </Tooltip>
-                  }
+                  )}
 
-                  {!hasLastName &&
+                  {!hasLastName && (
                     <Button
                       color="primary"
                       disabled={performingAction}
                       variant="contained"
-                      onClick={() => this.showField('last-name')}>
+                      onClick={() => this.showField("last-name")}
+                    >
                       Add
                     </Button>
-                  }
+                  )}
                 </ListItemSecondaryAction>
               </>
-            }
+            )}
           </ListItem>
 
           <ListItem>
@@ -1176,67 +1409,77 @@ class AccountTab extends Component {
               </ListItemIcon>
             </Hidden>
 
-            {!hasUsername &&
+            {!hasUsername && (
               <ListItemIcon>
                 <Tooltip title="No username">
                   <WarningIcon color="error" />
                 </Tooltip>
               </ListItemIcon>
-            }
+            )}
 
-            {showingField === 'username' &&
+            {showingField === "username" && (
               <TextField
                 autoComplete="username"
                 autoFocus
                 disabled={performingAction}
                 error={!!(errors && errors.username)}
                 fullWidth
-                helperText={(errors && errors.username) ? errors.username[0] : 'Press Enter to change your username'}
+                helperText={
+                  errors && errors.username
+                    ? errors.username[0]
+                    : "Press Enter to change your username"
+                }
                 label="Username"
                 placeholder={hasUsername && userData.username}
                 required
-                size={theme.dense ? 'small' : 'medium'}
+                size={theme.dense ? "small" : "medium"}
                 type="text"
                 value={username}
                 variant="filled"
-
                 onBlur={this.hideFields}
-                onKeyDown={(event) => this.handleKeyDown(event, 'username')}
-
+                onKeyDown={event => this.handleKeyDown(event, "username")}
                 onChange={this.handleUsernameChange}
               />
-            }
+            )}
 
-            {showingField !== 'username' &&
+            {showingField !== "username" && (
               <>
                 <ListItemText
                   primary="Username"
-                  secondary={hasUsername ? userData.username : 'You don’t have a username'}
+                  secondary={
+                    hasUsername
+                      ? userData.username
+                      : "You don’t have a username"
+                  }
                 />
 
                 <ListItemSecondaryAction>
-                  {hasUsername &&
+                  {hasUsername && (
                     <Tooltip title="Change">
                       <div>
-                        <IconButton disabled={performingAction} onClick={() => this.showField('username')}>
+                        <IconButton
+                          disabled={performingAction}
+                          onClick={() => this.showField("username")}
+                        >
                           <EditIcon />
                         </IconButton>
                       </div>
                     </Tooltip>
-                  }
+                  )}
 
-                  {!hasUsername &&
+                  {!hasUsername && (
                     <Button
                       color="primary"
                       disabled={performingAction}
                       variant="contained"
-                      onClick={() => this.showField('username')}>
+                      onClick={() => this.showField("username")}
+                    >
                       Add
                     </Button>
-                  }
+                  )}
                 </ListItemSecondaryAction>
               </>
-            }
+            )}
           </ListItem>
 
           <ListItem>
@@ -1246,99 +1489,111 @@ class AccountTab extends Component {
               </ListItemIcon>
             </Hidden>
 
-            {user.email &&
+            {user.email && (
               <ListItemIcon>
                 <>
-                  {user.emailVerified &&
+                  {user.emailVerified && (
                     <Tooltip title="Verified">
                       <CheckIcon color="primary" />
                     </Tooltip>
-                  }
+                  )}
 
-                  {!user.emailVerified &&
+                  {!user.emailVerified && (
                     <Tooltip title="Not verified">
                       <WarningIcon color="error" />
                     </Tooltip>
-                  }
+                  )}
                 </>
               </ListItemIcon>
-            }
+            )}
 
-            {!user.email &&
+            {!user.email && (
               <ListItemIcon>
                 <Tooltip title="No e-mail address">
                   <WarningIcon color="error" />
                 </Tooltip>
               </ListItemIcon>
-            }
+            )}
 
-            {showingField === 'email-address' &&
+            {showingField === "email-address" && (
               <TextField
                 autoComplete="email"
                 autoFocus
                 disabled={performingAction}
                 error={!!(errors && errors.emailAddress)}
                 fullWidth
-                helperText={(errors && errors.emailAddress) ? errors.emailAddress[0] : 'Press Enter to change your e-mail address'}
+                helperText={
+                  errors && errors.emailAddress
+                    ? errors.emailAddress[0]
+                    : "Press Enter to change your e-mail address"
+                }
                 label="E-mail address"
                 placeholder={user.email}
                 required
-                size={theme.dense ? 'small' : 'medium'}
+                size={theme.dense ? "small" : "medium"}
                 type="email"
                 value={emailAddress}
                 variant="filled"
-
                 onBlur={this.hideFields}
-                onKeyDown={(event) => this.handleKeyDown(event, 'email-address')}
-
+                onKeyDown={event => this.handleKeyDown(event, "email-address")}
                 onChange={this.handleEmailAddressChange}
               />
-            }
+            )}
 
-            {showingField !== 'email-address' &&
+            {showingField !== "email-address" && (
               <>
                 <ListItemText
                   primary="E-mail address"
-                  secondary={user.email ? user.email : 'You don’t have an e-mail address'}
+                  secondary={
+                    user.email ? user.email : "You don’t have an e-mail address"
+                  }
                 />
 
-                {(user.email && !user.emailVerified) &&
+                {user.email && !user.emailVerified && (
                   <Box clone mr={7}>
                     <ListItemSecondaryAction>
                       <Tooltip title="Verify">
                         <div>
-                          <IconButton color="secondary" disabled={performingAction || sentVerificationEmail} onClick={this.verifyEmailAddress}>
+                          <IconButton
+                            color="secondary"
+                            disabled={performingAction || sentVerificationEmail}
+                            onClick={this.verifyEmailAddress}
+                          >
                             <CheckIcon />
                           </IconButton>
                         </div>
                       </Tooltip>
                     </ListItemSecondaryAction>
                   </Box>
-                }
+                )}
 
                 <ListItemSecondaryAction>
-                  {user.email &&
+                  {user.email && (
                     <Tooltip title="Change">
                       <div>
-                        <IconButton disabled={performingAction} onClick={() => this.showField('email-address')}>
+                        <IconButton
+                          disabled={performingAction}
+                          onClick={() => this.showField("email-address")}
+                        >
                           <EditIcon />
                         </IconButton>
                       </div>
                     </Tooltip>
-                  }
+                  )}
 
-                  {!user.email &&
+                  {!user.email && (
                     <Button
                       color="primary"
                       disabled={performingAction}
                       variant="contained"
-                      onClick={() => this.showField('email-address')}>
+                      onClick={() => this.showField("email-address")}
+                    >
                       Add
                     </Button>
-                  }
+                  )}
                 </ListItemSecondaryAction>
               </>
-            }
+            )}
           </ListItem>
 
           <ListItem>
@@ -1351,14 +1606,14 @@ class AccountTab extends Component {
             <Hidden xsDown>
               <ListItemText
                 primary="Signed in"
-                secondary={moment(user.metadata.lastSignInTime).format('LLLL')}
+                secondary={moment(user.metadata.lastSignInTime).format("LLLL")}
               />
             </Hidden>
 
             <Hidden smUp>
               <ListItemText
                 primary="Signed in"
-                secondary={moment(user.metadata.lastSignInTime).format('llll')}
+                secondary={moment(user.metadata.lastSignInTime).format("llll")}
               />
             </Hidden>
           </ListItem>
@@ -1380,7 +1635,14 @@ class AccountTab extends Component {
             />
 
             <ListItemSecondaryAction>
-              <Button color="secondary" disabled={performingAction} variant="contained" onClick={onDeleteAccountClick}>Delete</Button>
+              <Button
+                color="secondary"
+                disabled={performingAction}
+                variant="contained"
+                onClick={onDeleteAccountClick}
+              >
+                Delete
+              </Button>
             </ListItemSecondaryAction>
           </ListItem>
         </List>
@@ -1389,27 +1651,25 @@ class AccountTab extends Component {
   }
 
   componentDidMount() {
-    const {
-      user,
-      userData
-    } = this.props;
+    const { user, userData } = this.props;
 
     this.setState({
-      profileCompletion: authentication.getProfileCompletion({ ...user, ...userData }),
+      profileCompletion: authentication.getProfileCompletion({
+        ...user,
+        ...userData
+      }),
       securityRating: authentication.getSecurityRating(user, userData)
     });
   }
 
   componentWillUnmount() {
-    const {
-      avatarUrl
-    } = this.state;
+    const { avatarUrl } = this.state;
 
     if (avatarUrl) {
       URL.revokeObjectURL(avatarUrl);
 
       this.setState({
-        avatarUrl: ''
+        avatarUrl: ""
       });
     }
   }

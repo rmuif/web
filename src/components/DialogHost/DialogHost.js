@@ -1,24 +1,20 @@
-import React, { Component } from 'react';
+import React, { Component } from "react";
 
-import PropTypes from 'prop-types';
+import PropTypes from "prop-types";
 
-import Hidden from '@material-ui/core/Hidden';
+import Hidden from "@material-ui/core/Hidden";
 
-import AboutDialog from '../AboutDialog';
-import SignUpDialog from '../SignUpDialog';
-import SignInDialog from '../SignInDialog';
-import SettingsDialog from '../SettingsDialog';
-import DeleteAccountDialog from '../DeleteAccountDialog';
-import AlertDialog from '../AlertDialog';
+import AboutDialog from "../AboutDialog";
+import SignUpDialog from "../SignUpDialog";
+import SignInDialog from "../SignInDialog";
+import SettingsDialog from "../SettingsDialog";
+import DeleteAccountDialog from "../DeleteAccountDialog";
+import AlertDialog from "../AlertDialog";
 
 class DialogHost extends Component {
   render() {
     // Properties
-    const {
-      theme,
-      user,
-      dialogs
-    } = this.props;
+    const { theme, user, dialogs } = this.props;
 
     const aboutDialog = dialogs.aboutDialog;
     const signUpDialog = dialogs.signUpDialog;
@@ -31,72 +27,61 @@ class DialogHost extends Component {
       <>
         <AboutDialog
           dialogProps={aboutDialog.dialogProps}
-
           theme={theme}
-
           {...aboutDialog.props}
         />
 
-        {user &&
+        {user && (
           <>
             <AlertDialog
               dialogProps={signOutDialog.dialogProps}
-
               {...signOutDialog.props}
             />
           </>
-        }
+        )}
 
         <Hidden xsDown>
-          {user &&
+          {user && (
             <>
               <DeleteAccountDialog
                 dialogProps={deleteAccountDialog.dialogProps}
-
                 theme={theme}
-
                 {...deleteAccountDialog.props}
               />
             </>
-          }
+          )}
 
-          {!user &&
+          {!user && (
             <>
               <SignUpDialog
                 dialogProps={signUpDialog.dialogProps}
-
                 theme={theme}
-
                 {...signUpDialog.props}
               />
 
               <SignInDialog
                 dialogProps={signInDialog.dialogProps}
-
                 theme={theme}
-
                 {...signInDialog.props}
               />
             </>
-          }
+          )}
         </Hidden>
 
         <Hidden smDown>
-          {user &&
+          {user && (
             <>
               <SettingsDialog
                 dialogProps={settingsDialog.dialogProps}
-
                 theme={theme}
-
                 {...settingsDialog.props}
               />
             </>
-          }
+          )}
         </Hidden>
 
         <Hidden smUp>
-          {user &&
+          {user && (
             <>
               <DeleteAccountDialog
                 dialogProps={{
@@ -104,15 +89,13 @@ class DialogHost extends Component {
 
                   ...deleteAccountDialog.dialogProps
                 }}
-
                 theme={theme}
-
                 {...deleteAccountDialog.props}
               />
             </>
-          }
+          )}
 
-          {!user &&
+          {!user && (
             <>
               <SignUpDialog
                 dialogProps={{
@@ -120,9 +103,7 @@ class DialogHost extends Component {
 
                   ...signUpDialog.dialogProps
                 }}
-
                 theme={theme}
-
                 {...signUpDialog.props}
               />
 
@@ -132,17 +113,15 @@ class DialogHost extends Component {
 
                   ...signInDialog.dialogProps
                 }}
-
                 theme={theme}
-
                 {...signInDialog.props}
               />
             </>
-          }
+          )}
         </Hidden>
 
         <Hidden mdUp>
-          {user &&
+          {user && (
             <>
               <SettingsDialog
                 dialogProps={{
@@ -150,13 +129,11 @@ class DialogHost extends Component {
 
                   ...settingsDialog.dialogProps
                 }}
-
                 theme={theme}
-
                 {...settingsDialog.props}
               />
             </>
-          }
+          )}
         </Hidden>
       </>
     );

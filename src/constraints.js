@@ -4,7 +4,7 @@ const constraints = {
       allowEmpty: false
     },
 
-    type: 'string'
+    type: "string"
   },
 
   lastName: {
@@ -12,7 +12,7 @@ const constraints = {
       allowEmpty: false
     },
 
-    type: 'string'
+    type: "string"
   },
 
   username: {
@@ -25,36 +25,36 @@ const constraints = {
       allowEmpty: false
     },
 
-    type: 'string'
+    type: "string"
   },
 
   emailAddress: {
     email: {
-      message: '^E-mail address is invalid'
+      message: "^E-mail address is invalid"
     },
 
     presence: {
       allowEmpty: false
     },
 
-    type: 'string'
+    type: "string"
   },
 
   emailAddressConfirmation: {
     email: {
-      message: '^E-mail address confirmation is invalid'
+      message: "^E-mail address confirmation is invalid"
     },
 
     equality: {
-      attribute: 'emailAddress',
-      message: '^E-mail address confirmation is not equal to e-mail address'
+      attribute: "emailAddress",
+      message: "^E-mail address confirmation is not equal to e-mail address"
     },
 
     presence: {
       allowEmpty: false
     },
 
-    type: 'string'
+    type: "string"
   },
 
   password: {
@@ -66,11 +66,11 @@ const constraints = {
       allowEmpty: false
     },
 
-    type: 'string'
+    type: "string"
   },
 
   passwordConfirmation: {
-    equality: 'password',
+    equality: "password",
 
     length: {
       minimum: 6
@@ -80,7 +80,7 @@ const constraints = {
       allowEmpty: false
     },
 
-    type: 'string'
+    type: "string"
   }
 };
 

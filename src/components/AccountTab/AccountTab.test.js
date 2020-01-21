@@ -1,34 +1,29 @@
-import React from 'react';
+import React from "react";
 
-import ReactDOM from 'react-dom';
+import ReactDOM from "react-dom";
 
-import AccountTab from './AccountTab';
+import AccountTab from "./AccountTab";
 
-it('renders without crashing', () => {
-  const div = document.createElement('div');
+it("renders without crashing", () => {
+  const div = document.createElement("div");
 
   ReactDOM.render(
-    (
-      <AccountTab
-        dialogProps={{
-          open: true,
+    <AccountTab
+      dialogProps={{
+        open: true,
 
-          onClose: () => {}
-        }}
-
-        theme={{}}
-        user={{
-          metadata: {
-            lastSignInTime: 0
-          }
-        }}
-        userData={{}}
-
-        openSnackbar={() => {}}
-
-        onDeleteAccountClick={() => {}}
-      />
-    ),
+        onClose: () => {}
+      }}
+      theme={{}}
+      user={{
+        metadata: {
+          lastSignInTime: 0
+        }
+      }}
+      userData={{}}
+      openSnackbar={() => {}}
+      onDeleteAccountClick={() => {}}
+    />,
     div
   );
 
