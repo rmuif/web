@@ -48,7 +48,6 @@
     "@material-ui/styles": "^4.8.2",
     "@sentry/browser": "^5.11.1",
     "firebase": "^7.7.0",
-    "lint-staged": "^10.0.1",
     "lodash.camelcase": "^4.3.0",
     "mdi-material-ui": "^6.11.0",
     "moment": "^2.24.0",
@@ -64,6 +63,7 @@
   "devDependencies": {
     "gh-pages": "^2.2.0",
     "husky": "^4.0.10",
+    "lint-staged": "^10.0.1",
     "prettier": "^1.19.1"
   },
   "private": true,
