@@ -9,6 +9,8 @@ it("renders without crashing", () => {
 
   ReactDOM.render(
     <DialogHost
+      performingAction={false}
+      theme={{}}
       dialogs={{
         aboutDialog: {
           dialogProps: {
@@ -24,6 +26,7 @@ it("renders without crashing", () => {
         settingsDialog: {},
         signOutDialog: {}
       }}
+      openSnackbar={() => {}}
     />,
     div
   );

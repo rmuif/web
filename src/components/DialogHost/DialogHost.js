@@ -186,10 +186,14 @@ class DialogHost extends Component {
 
 DialogHost.propTypes = {
   // Properties
+  performingAction: PropTypes.bool.isRequired,
   theme: PropTypes.object.isRequired,
   user: PropTypes.object,
   userData: PropTypes.object,
-  dialogs: PropTypes.object.isRequired
+  dialogs: PropTypes.object.isRequired,
+
+  // Functions
+  openSnackbar: PropTypes.func.isRequired
 };
 
 export default DialogHost;
