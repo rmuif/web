@@ -24,7 +24,6 @@ import Button from "@material-ui/core/Button";
 
 import FiberManualRecord from "@material-ui/icons/FiberManualRecord";
 import Brightness4Icon from "@material-ui/icons/Brightness4";
-import FormatSizeIcon from "@material-ui/icons/FormatSize";
 import FormatColorResetIcon from "@material-ui/icons/FormatColorReset";
 
 import appearance from "../../services/appearance";
@@ -170,54 +169,6 @@ class AppearanceTab extends Component {
             secondaryColor: theme.secondaryColor.id,
             dark: dark,
             dense: theme.dense
-          })
-          .catch(reason => {
-            const code = reason.code;
-            const message = reason.message;
-
-            switch (code) {
-              default:
-                this.props.openSnackbar(message);
-                return;
-            }
-          })
-          .finally(() => {
-            this.setState({
-              performingAction: false
-            });
-          });
-      }
-    );
-  };
-
-  handleDenseChange = event => {
-    if (!event) {
-      return;
-    }
-
-    const dense = event.target.checked;
-
-    const { theme } = this.props;
-
-    if (!theme) {
-      return;
-    }
-
-    if (theme.dense === dense) {
-      return;
-    }
-
-    this.setState(
-      {
-        performingAction: true
-      },
-      () => {
-        appearance
-          .changeTheme({
-            primaryColor: theme.primaryColor.id,
-            secondaryColor: theme.secondaryColor.id,
-            dark: theme.dark,
-            dense: dense
           })
           .catch(reason => {
             const code = reason.code;
@@ -420,35 +371,6 @@ class AppearanceTab extends Component {
 
               <Hidden smUp>
                 <Switch checked={theme.dark} onChange={this.handleDarkChange} />
-              </Hidden>
-            </ListItemSecondaryAction>
-          </ListItem>
-
-          <ListItem>
-            <Hidden xsDown>
-              <ListItemIcon>
-                <FormatSizeIcon />
-              </ListItemIcon>
-            </Hidden>
-
-            <ListItemText
-              primary="Dense"
-              secondary="Compact vertical padding"
-            />
-
-            <ListItemSecondaryAction>
-              <Hidden xsDown>
-                <Checkbox
-                  checked={theme.dense}
-                  onChange={this.handleDenseChange}
-                />
-              </Hidden>
-
-              <Hidden smUp>
-                <Switch
-                  checked={theme.dense}
-                  onChange={this.handleDenseChange}
-                />
               </Hidden>
             </ListItemSecondaryAction>
           </ListItem>
