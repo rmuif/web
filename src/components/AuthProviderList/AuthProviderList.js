@@ -61,7 +61,7 @@ class AuthProviderList extends Component {
     ];
 
     return (
-      <Box mb={gutterBottom ? 2 : 0}>
+      <Box mb={gutterBottom ? 3 : 0}>
         <ButtonGroup
           disabled={performingAction}
           fullWidth
