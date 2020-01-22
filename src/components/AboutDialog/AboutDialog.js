@@ -69,7 +69,7 @@ class AboutDialog extends Component {
                   </ListItem>
                 )}
 
-                {roles.length !== 0 && (
+                {roles && roles.length !== 0 && (
                   <ListItem>
                     <ListItemText
                       primary="Roles"

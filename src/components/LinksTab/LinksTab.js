@@ -167,11 +167,7 @@ class LinksTab extends Component {
             return (
               <ListItem key={authProvider.providerId}>
                 <ListItemIcon>
-                  <Box
-                    color={
-                      theme.type.id === "light" ? authProvider.color : null
-                    }
-                  >
+                  <Box color={theme.dark ? null : authProvider.color}>
                     {authProvider.icon}
                   </Box>
                 </ListItemIcon>

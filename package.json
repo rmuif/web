@@ -25,7 +25,7 @@
     "theme": {
       "primaryColor": "blue",
       "secondaryColor": "red",
-      "type": "light",
+      "dark": false,
       "dense": false
     },
     "firebase": {

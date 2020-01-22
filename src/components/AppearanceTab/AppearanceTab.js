@@ -23,7 +23,7 @@ import Switch from "@material-ui/core/Switch";
 import Button from "@material-ui/core/Button";
 
 import FiberManualRecord from "@material-ui/icons/FiberManualRecord";
-import InvertColorsIcon from "@material-ui/icons/InvertColors";
+import Brightness4Icon from "@material-ui/icons/Brightness4";
 import FormatSizeIcon from "@material-ui/icons/FormatSize";
 import FormatColorResetIcon from "@material-ui/icons/FormatColorReset";
 
@@ -68,11 +68,8 @@ class AppearanceTab extends Component {
           .changeTheme({
             primaryColor: primaryColor,
             secondaryColor: theme.secondaryColor.id,
-            type: theme.type.id,
+            dark: theme.dark,
             dense: theme.dense
-          })
-          .then(value => {
-            this.props.openSnackbar("Changed primary color");
           })
           .catch(reason => {
             const code = reason.code;
@@ -123,11 +120,8 @@ class AppearanceTab extends Component {
           .changeTheme({
             primaryColor: theme.primaryColor.id,
             secondaryColor: secondaryColor,
-            type: theme.type.id,
+            dark: theme.dark,
             dense: theme.dense
-          })
-          .then(value => {
-            this.props.openSnackbar("Changed secondary color");
           })
           .catch(reason => {
             const code = reason.code;
@@ -148,16 +142,12 @@ class AppearanceTab extends Component {
     );
   };
 
-  handleTypeChange = event => {
+  handleDarkChange = event => {
     if (!event) {
       return;
     }
 
-    const type = event.target.value;
-
-    if (!type) {
-      return;
-    }
+    const dark = event.target.checked;
 
     const { theme } = this.props;
 
@@ -165,7 +155,7 @@ class AppearanceTab extends Component {
       return;
     }
 
-    if (theme.type.id === type) {
+    if (theme.dark === dark) {
       return;
     }
 
@@ -178,11 +168,8 @@ class AppearanceTab extends Component {
           .changeTheme({
             primaryColor: theme.primaryColor.id,
             secondaryColor: theme.secondaryColor.id,
-            type: type,
+            dark: dark,
             dense: theme.dense
-          })
-          .then(value => {
-            this.props.openSnackbar("Changed type");
           })
           .catch(reason => {
             const code = reason.code;
@@ -229,11 +216,8 @@ class AppearanceTab extends Component {
           .changeTheme({
             primaryColor: theme.primaryColor.id,
             secondaryColor: theme.secondaryColor.id,
-            type: theme.type.id,
+            dark: theme.dark,
             dense: dense
-          })
-          .then(value => {
-            this.props.openSnackbar("Changed dense");
           })
           .catch(reason => {
             const code = reason.code;
@@ -272,9 +256,6 @@ class AppearanceTab extends Component {
       () => {
         appearance
           .resetTheme()
-          .then(value => {
-            this.props.openSnackbar("Reset theme");
-          })
           .catch(reason => {
             const code = reason.code;
             const message = reason.message;
@@ -413,62 +394,35 @@ class AppearanceTab extends Component {
             </ListItem>
           </Box>
 
-          <Box mb={1}>
-            <ListItem>
-              <Hidden xsDown>
-                <ListItemIcon>
-                  <InvertColorsIcon />
-                </ListItemIcon>
-              </Hidden>
-
-              <FormControl
-                disabled={performingAction}
-                fullWidth
-                variant="outlined"
-              >
-                <InputLabel>Type</InputLabel>
-
-                <Hidden smUp>
-                  <Select
-                    native
-                    value={theme.type.id}
-                    onChange={this.handleTypeChange}
-                  >
-                    {Object.keys(appearance.types).map(type => {
-                      type = appearance.types[type];
-
-                      return (
-                        <option key={type.id} value={type.id}>
-                          {type.name}
-                        </option>
-                      );
-                    })}
-                  </Select>
-                </Hidden>
-
-                <Hidden xsDown>
-                  <Select
-                    value={theme.type.id}
-                    onChange={this.handleTypeChange}
-                  >
-                    {Object.keys(appearance.types).map(type => {
-                      type = appearance.types[type];
-
-                      return (
-                        <MenuItem key={type.id} value={type.id}>
-                          {type.name}
-                        </MenuItem>
-                      );
-                    })}
-                  </Select>
-                </Hidden>
-              </FormControl>
-            </ListItem>
-          </Box>
-
           <Box mt={2} mb={1}>
             <Divider light />
           </Box>
+
+          <ListItem>
+            <Hidden xsDown>
+              <ListItemIcon>
+                <Brightness4Icon />
+              </ListItemIcon>
+            </Hidden>
+
+            <ListItemText
+              primary="Dark"
+              secondary="Displays mostly dark surfaces"
+            />
+
+            <ListItemSecondaryAction>
+              <Hidden xsDown>
+                <Checkbox
+                  checked={theme.dark}
+                  onChange={this.handleDarkChange}
+                />
+              </Hidden>
+
+              <Hidden smUp>
+                <Switch checked={theme.dark} onChange={this.handleDarkChange} />
+              </Hidden>
+            </ListItemSecondaryAction>
+          </ListItem>
 
           <ListItem>
             <Hidden xsDown>
@@ -478,7 +432,7 @@ class AppearanceTab extends Component {
             </Hidden>
 
             <ListItemText
-              primary="Dense mode"
+              primary="Dense"
               secondary="Compact vertical padding"
             />
 

@@ -140,18 +140,6 @@ const colors = {
   }
 };
 
-const types = {
-  light: {
-    id: "light",
-    name: "Light"
-  },
-
-  dark: {
-    id: "dark",
-    name: "Dark"
-  }
-};
-
 const getColor = colorId => {
   if (!colorId) {
     return null;
@@ -162,42 +150,33 @@ const getColor = colorId => {
   return colors[colorId];
 };
 
-const getType = typeId => {
-  if (!typeId) {
-    return null;
-  }
-
-  return types[typeId];
-};
-
 const defaultPrimaryColor = getColor(process.env.REACT_APP_THEME_PRIMARY_COLOR);
 const defaultSecondaryColor = getColor(
   process.env.REACT_APP_THEME_SECONDARY_COLOR
 );
-const defaultType = getType(process.env.REACT_APP_THEME_TYPE);
+const defaultDark = process.env.REACT_APP_THEME_DARK === "true";
 const defaultDense = process.env.REACT_APP_THEME_DENSE === "true";
 
 const defaultTheme = createMuiTheme({
   palette: {
     primary: defaultPrimaryColor.import,
     secondary: defaultSecondaryColor.import,
-    type: defaultType.id
+    type: defaultDark ? "dark" : "light"
   },
 
   primaryColor: defaultPrimaryColor,
   secondaryColor: defaultSecondaryColor,
-  type: defaultType,
+  dark: defaultDark,
   dense: defaultDense
 });
 
 const appearance = {};
 
 appearance.colors = colors;
-appearance.types = types;
 
 appearance.defaultPrimaryColor = defaultPrimaryColor;
 appearance.defaultSecondaryColor = defaultSecondaryColor;
-appearance.defaultType = defaultType;
+appearance.defaultDark = defaultDark;
 appearance.defaultDense = defaultDense;
 
 appearance.defaultTheme = defaultTheme;
@@ -210,7 +189,7 @@ appearance.isDefaultTheme = theme => {
   if (
     theme.primaryColor.id === defaultPrimaryColor.id &&
     theme.secondaryColor.id === defaultSecondaryColor.id &&
-    theme.type.id === defaultType.id &&
+    theme.dark === defaultDark &&
     theme.dense === defaultDense
   ) {
     return true;
@@ -226,18 +205,17 @@ appearance.createTheme = theme => {
 
   let primaryColor = theme.primaryColor;
   let secondaryColor = theme.secondaryColor;
-  let type = theme.type;
+  let dark = theme.dark;
   let dense = theme.dense;
 
-  if (!primaryColor || !secondaryColor || !type) {
+  if (!primaryColor || !secondaryColor) {
     return null;
   }
 
   primaryColor = getColor(primaryColor);
   secondaryColor = getColor(secondaryColor);
-  type = getType(type);
 
-  if (!primaryColor || !secondaryColor || !type) {
+  if (!primaryColor || !secondaryColor) {
     return null;
   }
 
@@ -245,12 +223,12 @@ appearance.createTheme = theme => {
     palette: {
       primary: primaryColor.import,
       secondary: secondaryColor.import,
-      type: type.id
+      type: dark ? "dark" : "light"
     },
 
     primaryColor: primaryColor,
     secondaryColor: secondaryColor,
-    type: type,
+    dark: dark,
     dense: dense
   });
 
@@ -267,10 +245,10 @@ appearance.changeTheme = theme => {
 
     let primaryColor = theme.primaryColor;
     let secondaryColor = theme.secondaryColor;
-    let type = theme.type;
+    let dark = theme.dark;
     let dense = theme.dense;
 
-    if (!primaryColor || !secondaryColor || !type) {
+    if (!primaryColor || !secondaryColor) {
       reject();
 
       return;
@@ -278,9 +256,8 @@ appearance.changeTheme = theme => {
 
     primaryColor = getColor(primaryColor);
     secondaryColor = getColor(secondaryColor);
-    type = getType(type);
 
-    if (!primaryColor || !secondaryColor || !type) {
+    if (!primaryColor || !secondaryColor) {
       reject();
 
       return;
@@ -309,7 +286,7 @@ appearance.changeTheme = theme => {
         theme: {
           primaryColor: primaryColor.id,
           secondaryColor: secondaryColor.id,
-          type: type.id,
+          dark: dark,
           dense: dense
         }
       })
@@ -428,22 +405,8 @@ appearance.changeSecondaryColor = secondaryColor => {
   });
 };
 
-appearance.changeType = type => {
+appearance.changeDark = dark => {
   return new Promise((resolve, reject) => {
-    if (!type) {
-      reject();
-
-      return;
-    }
-
-    type = getType(type);
-
-    if (!type) {
-      reject();
-
-      return;
-    }
-
     const currentUser = auth.currentUser;
 
     if (!currentUser) {
@@ -464,11 +427,11 @@ appearance.changeType = type => {
 
     userDocumentReference
       .update({
-        "theme.type": type.id
+        "theme.dark": dark
       })
       .then(value => {
-        analytics.logEvent("change_type", {
-          type: type.id
+        analytics.logEvent("change_dark", {
+          dark: dark
         });
 
         resolve(value);

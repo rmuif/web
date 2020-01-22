@@ -448,7 +448,7 @@ class App extends Component {
                       ready: true,
                       user: user,
                       userData: data,
-                      roles: value
+                      roles: value || []
                     });
                   });
                 })
