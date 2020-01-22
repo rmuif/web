@@ -19,7 +19,7 @@
     "analyze": "source-map-explorer 'build/static/js/*.js'",
     "eject": "react-scripts eject",
     "predeploy": "react-scripts build",
-    "deploy": "gh-pages -d build"
+    "deploy": "firebase deploy"
   },
   "config": {
     "title": "React + Material-UI + Firebase",
