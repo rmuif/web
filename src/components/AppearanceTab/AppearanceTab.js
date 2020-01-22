@@ -362,10 +362,6 @@ class AppearanceTab extends Component {
             </ListItem>
           </Box>
 
-          <Box mt={2} mb={1}>
-            <Divider light />
-          </Box>
-
           <ListItem>
             <Hidden xsDown>
               <ListItemIcon>
@@ -394,6 +390,10 @@ class AppearanceTab extends Component {
               </Hidden>
             </ListItemSecondaryAction>
           </ListItem>
+
+          <Box mt={2} mb={1}>
+            <Divider light />
+          </Box>
 
           <ListItem>
             <Hidden xsDown>
