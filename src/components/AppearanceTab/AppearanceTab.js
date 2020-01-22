@@ -146,7 +146,7 @@ class AppearanceTab extends Component {
     );
   };
 
-  handleDarkChange = event => {
+  handleDarkModeChange = event => {
     if (!event) {
       return;
     }
@@ -194,7 +194,7 @@ class AppearanceTab extends Component {
     );
   };
 
-  handleResetClick = () => {
+  handleResetThemeClick = () => {
     const { theme } = this.props;
 
     if (!theme) {
@@ -374,7 +374,7 @@ class AppearanceTab extends Component {
             </Hidden>
 
             <ListItemText
-              primary="Dark"
+              primary="Dark mode"
               secondary="Displays mostly dark surfaces"
             />
 
@@ -382,12 +382,15 @@ class AppearanceTab extends Component {
               <Hidden xsDown>
                 <Checkbox
                   checked={theme.dark}
-                  onChange={this.handleDarkChange}
+                  onChange={this.handleDarkModeChange}
                 />
               </Hidden>
 
               <Hidden smUp>
-                <Switch checked={theme.dark} onChange={this.handleDarkChange} />
+                <Switch
+                  checked={theme.dark}
+                  onChange={this.handleDarkModeChange}
+                />
               </Hidden>
             </ListItemSecondaryAction>
           </ListItem>
@@ -413,7 +416,7 @@ class AppearanceTab extends Component {
                 color="secondary"
                 disabled={appearance.isDefaultTheme(theme) || performingAction}
                 variant="contained"
-                onClick={this.handleResetClick}
+                onClick={this.handleResetThemeClick}
               >
                 Reset
               </Button>
