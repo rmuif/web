@@ -33,8 +33,13 @@ class AppearanceTab extends Component {
     super(props);
 
     this.state = {
-      performingAction: false
+      performingAction: false,
+      primaryColorLabelWidth: 0,
+      secondaryColorLabelWidth: 0
     };
+
+    this.primaryColorLabel = React.createRef();
+    this.secondaryColorLabel = React.createRef();
   }
 
   handlePrimaryColorChange = event => {
@@ -234,7 +239,11 @@ class AppearanceTab extends Component {
       return null;
     }
 
-    const { performingAction } = this.state;
+    const {
+      performingAction,
+      primaryColorLabelWidth,
+      secondaryColorLabelWidth
+    } = this.state;
 
     return (
       <DialogContent>
@@ -252,12 +261,15 @@ class AppearanceTab extends Component {
                 fullWidth
                 variant="outlined"
               >
-                <InputLabel>Primary color</InputLabel>
+                <InputLabel ref={this.primaryColorLabel}>
+                  Primary color
+                </InputLabel>
 
                 <Hidden smUp>
                   <Select
                     native
                     value={theme.primaryColor.id}
+                    labelWidth={primaryColorLabelWidth}
                     onChange={this.handlePrimaryColorChange}
                   >
                     {Object.keys(appearance.colors).map(color => {
@@ -275,6 +287,7 @@ class AppearanceTab extends Component {
                 <Hidden xsDown>
                   <Select
                     value={theme.primaryColor.id}
+                    labelWidth={primaryColorLabelWidth}
                     onChange={this.handlePrimaryColorChange}
                   >
                     {Object.keys(appearance.colors).map(color => {
@@ -305,12 +318,15 @@ class AppearanceTab extends Component {
                 fullWidth
                 variant="outlined"
               >
-                <InputLabel>Secondary color</InputLabel>
+                <InputLabel ref={this.secondaryColorLabel}>
+                  Secondary color
+                </InputLabel>
 
                 <Hidden smUp>
                   <Select
                     native
                     value={theme.secondaryColor.id}
+                    labelWidth={secondaryColorLabelWidth}
                     onChange={this.handleSecondaryColorChange}
                   >
                     {Object.keys(appearance.colors).map(color => {
@@ -328,6 +344,7 @@ class AppearanceTab extends Component {
                 <Hidden xsDown>
                   <Select
                     value={theme.secondaryColor.id}
+                    labelWidth={secondaryColorLabelWidth}
                     onChange={this.handleSecondaryColorChange}
                   >
                     {Object.keys(appearance.colors).map(color => {
@@ -405,6 +422,13 @@ class AppearanceTab extends Component {
         </List>
       </DialogContent>
     );
+  }
+
+  componentDidMount() {
+    this.setState({
+      primaryColorLabelWidth: this.primaryColorLabel.current.offsetWidth,
+      secondaryColorLabelWidth: this.secondaryColorLabel.current.offsetWidth
+    });
   }
 }
 
