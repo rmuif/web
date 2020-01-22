@@ -6,6 +6,7 @@ import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
 import Typography from "@material-ui/core/Typography";
 import Box from "@material-ui/core/Box";
+import ButtonGroup from "@material-ui/core/ButtonGroup";
 import Button from "@material-ui/core/Button";
 import IconButton from "@material-ui/core/IconButton";
 
@@ -120,27 +121,14 @@ class Bar extends Component {
           )}
 
           {!user && (
-            <>
-              <Box mr={1}>
-                <Button
-                  color="secondary"
-                  disabled={performingAction}
-                  variant="contained"
-                  onClick={onSignUpClick}
-                >
-                  Sign up
-                </Button>
-              </Box>
-
-              <Button
-                color="secondary"
-                disabled={performingAction}
-                variant="contained"
-                onClick={onSignInClick}
-              >
-                Sign in
-              </Button>
-            </>
+            <ButtonGroup
+              color="secondary"
+              disabled={performingAction}
+              variant="contained"
+            >
+              <Button onClick={onSignUpClick}>Sign up</Button>
+              <Button onClick={onSignInClick}>Sign in</Button>
+            </ButtonGroup>
           )}
         </Toolbar>
       </AppBar>
