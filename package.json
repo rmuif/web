@@ -16,6 +16,7 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
+    "analyze": "source-map-explorer 'build/static/js/*.js'",
     "eject": "react-scripts eject",
     "predeploy": "react-scripts build",
     "deploy": "gh-pages -d build"
@@ -69,7 +70,8 @@
     "gh-pages": "^2.2.0",
     "husky": "^4.2.0",
     "lint-staged": "^10.0.2",
-    "prettier": "^1.19.1"
+    "prettier": "^1.19.1",
+    "source-map-explorer": "^2.2.2"
   },
   "private": true,
   "eslintConfig": {
