@@ -1,4 +1,4 @@
-# React + Material-UI + Firebase
+# React + Material-UI + Firebase (RMUIF)
 
 [![Build Status](https://travis-ci.org/Phoqe/react-material-ui-firebase.svg?branch=master)](https://travis-ci.org/Phoqe/react-material-ui-firebase)
 [![Discord](https://img.shields.io/discord/567707014361513995.svg)](https://discord.gg/y3EMyrN)

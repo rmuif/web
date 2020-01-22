@@ -1,5 +1,5 @@
 {
-  "name": "react-material-ui-firebase",
+  "name": "rmuif",
   "version": "2.2.0",
   "description": "The three musketeers, all in one pack in the form of a boilerplate app",
   "homepage": "https://rmuif.com",
@@ -22,7 +22,7 @@
     "deploy": "firebase deploy"
   },
   "config": {
-    "title": "React + Material-UI + Firebase",
+    "title": "RMUIF",
     "theme": {
       "primaryColor": "blue",
       "secondaryColor": "red",
