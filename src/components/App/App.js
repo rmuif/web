@@ -245,7 +245,14 @@ class App extends Component {
   };
 
   render() {
-    const { ready, performingAction, theme, user, userData } = this.state;
+    const {
+      ready,
+      performingAction,
+      theme,
+      user,
+      userData,
+      roles
+    } = this.state;
 
     const {
       aboutDialog,
@@ -279,7 +286,11 @@ class App extends Component {
                 onSignOutClick={() => this.openDialog("signOutDialog")}
               />
 
-              <Router user={user} openSnackbar={this.openSnackbar} />
+              <Router
+                user={user}
+                roles={roles}
+                openSnackbar={this.openSnackbar}
+              />
 
               <DialogHost
                 performingAction={performingAction}

@@ -2,12 +2,12 @@ import React from "react";
 
 import ReactDOM from "react-dom";
 
-import Router from "./Router";
+import AdminContent from "./AdminContent";
 
 it("renders without crashing", () => {
   const div = document.createElement("div");
 
-  ReactDOM.render(<Router roles={[]} openSnackbar={() => {}} />, div);
+  ReactDOM.render(<AdminContent />, div);
 
   ReactDOM.unmountComponentAtNode(div);
 });
