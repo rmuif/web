@@ -29,7 +29,11 @@ class Router extends Component {
           </Route>
 
           <Route path="/admin">
-            {roles.includes("admin") ? <AdminContent /> : <Redirect to="/" />}
+            {user && roles.includes("admin") ? (
+              <AdminContent />
+            ) : (
+              <Redirect to="/" />
+            )}
           </Route>
 
           <Route>
