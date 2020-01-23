@@ -36,7 +36,7 @@ The easiest way is to use Git to clone the `master` branch of the repository.
 Replace `<directory>` with your project’s name, e.g. `rmuif` or `react-material-ui-firebase`.
 
 ```
-git clone https://github.com/phoqe/react-material-ui-firebase.git <directory>
+git clone https://github.com/phoqe/rmuif.git <directory>
 ```
 
 ### Install dependencies
@@ -269,4 +269,4 @@ service firebase.storage {
 
 ## License
 
-RMUIF is open-source software [licensed as MIT](https://github.com/phoqe/react-material-ui-firebase/blob/master/LICENSE.md).
+RMUIF is open-source software [licensed as MIT](https://github.com/phoqe/rmuif/blob/master/LICENSE.md).
