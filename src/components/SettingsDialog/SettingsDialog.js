@@ -14,8 +14,6 @@ import IconButton from "@material-ui/core/IconButton";
 import Tabs from "@material-ui/core/Tabs";
 import Tab from "@material-ui/core/Tab";
 
-import Hidden from "@material-ui/core/Hidden";
-
 import CloseIcon from "@material-ui/icons/Close";
 import AccountCircleIcon from "@material-ui/icons/AccountCircle";
 import PaletteIcon from "@material-ui/icons/Palette";
