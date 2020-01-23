@@ -127,37 +127,19 @@ class SettingsDialog extends Component {
           </Tooltip>
         </DialogTitle>
 
-        <Hidden xsDown>
-          <Tabs
-            classes={{ root: classes.tabs }}
-            style={{ overflow: "initial", minHeight: "initial" }}
-            indicatorColor="primary"
-            textColor="primary"
-            value={selectedTab}
-            variant="fullWidth"
-            onChange={this.handleTabChange}
-          >
-            {tabs.map(tab => {
-              return <Tab key={tab.key} icon={tab.icon} label={tab.label} />;
-            })}
-          </Tabs>
-        </Hidden>
-
-        <Hidden smUp>
-          <Tabs
-            classes={{ root: classes.tabs }}
-            style={{ overflow: "initial", minHeight: "initial" }}
-            indicatorColor="primary"
-            textColor="primary"
-            value={selectedTab}
-            variant="fullWidth"
-            onChange={this.handleTabChange}
-          >
-            {tabs.map(tab => {
-              return <Tab key={tab.key} icon={tab.icon} label={tab.label} />;
-            })}
-          </Tabs>
-        </Hidden>
+        <Tabs
+          classes={{ root: classes.tabs }}
+          style={{ overflow: "initial", minHeight: "initial" }}
+          indicatorColor="primary"
+          textColor="primary"
+          value={selectedTab}
+          variant="fullWidth"
+          onChange={this.handleTabChange}
+        >
+          {tabs.map(tab => {
+            return <Tab key={tab.key} icon={tab.icon} label={tab.label} />;
+          })}
+        </Tabs>
 
         <SwipeableViews
           index={selectedTab}
