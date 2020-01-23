@@ -2,6 +2,8 @@ import React, { Component } from "react";
 
 import PropTypes from "prop-types";
 
+import { withStyles } from "@material-ui/core/styles";
+
 import Box from "@material-ui/core/Box";
 import ButtonGroup from "@material-ui/core/ButtonGroup";
 import Button from "@material-ui/core/Button";
@@ -25,14 +27,20 @@ class AuthProviderList extends Component {
           variant="outlined"
         >
           {authProviders.map(authProvider => {
+            const AuthProviderButton = withStyles({
+              root: {
+                color: authProvider.color
+              }
+            })(Button);
+
             return (
-              <Button
+              <AuthProviderButton
                 key={authProvider.providerId}
                 startIcon={authProvider.icon}
                 onClick={() => onAuthProviderClick(authProvider.providerId)}
               >
                 {authProvider.name}
-              </Button>
+              </AuthProviderButton>
             );
           })}
         </ButtonGroup>
