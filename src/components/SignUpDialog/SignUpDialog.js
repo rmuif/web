@@ -11,11 +11,16 @@ import DialogTitle from "@material-ui/core/DialogTitle";
 import DialogContent from "@material-ui/core/DialogContent";
 import DialogActions from "@material-ui/core/DialogActions";
 
+import Typography from "@material-ui/core/Typography";
+import Tooltip from "@material-ui/core/Tooltip";
+import IconButton from "@material-ui/core/IconButton";
 import Hidden from "@material-ui/core/Hidden";
 import Grid from "@material-ui/core/Grid";
 import Button from "@material-ui/core/Button";
 import Divider from "@material-ui/core/Divider";
 import TextField from "@material-ui/core/TextField";
+
+import CloseIcon from "@material-ui/icons/Close";
 
 import AuthProviderList from "../AuthProviderList";
 
@@ -23,6 +28,12 @@ import constraints from "../../constraints";
 import authentication from "../../services/authentication";
 
 const styles = theme => ({
+  closeButton: {
+    position: "absolute",
+    right: theme.spacing(1),
+    top: theme.spacing(1)
+  },
+
   icon: {
     marginRight: theme.spacing(0.5)
   },
@@ -257,7 +268,18 @@ class SignUpDialog extends Component {
         onKeyPress={this.handleKeyPress}
         onExited={this.handleExited}
       >
-        <DialogTitle>Sign up for an account</DialogTitle>
+        <DialogTitle disableTypography>
+          <Typography variant="h6">Sign up for an account</Typography>
+
+          <Tooltip title="Close">
+            <IconButton
+              className={classes.closeButton}
+              onClick={dialogProps.onClose}
+            >
+              <CloseIcon />
+            </IconButton>
+          </Tooltip>
+        </DialogTitle>
 
         <Hidden xsDown>
           <DialogContent>
@@ -463,10 +485,6 @@ class SignUpDialog extends Component {
         </Hidden>
 
         <DialogActions>
-          <Button color="primary" onClick={dialogProps.onClose}>
-            Cancel
-          </Button>
-
           <Button
             color="primary"
             disabled={
