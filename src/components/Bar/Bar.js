@@ -9,6 +9,7 @@ import Box from "@material-ui/core/Box";
 import ButtonGroup from "@material-ui/core/ButtonGroup";
 import Button from "@material-ui/core/Button";
 import IconButton from "@material-ui/core/IconButton";
+import Divider from "@material-ui/core/Divider";
 
 import Menu from "@material-ui/core/Menu";
 import MenuItem from "@material-ui/core/MenuItem";
@@ -49,34 +50,29 @@ class Bar extends Component {
     const { performingAction, theme, user, userData } = this.props;
 
     // Events
-    const { onSignUpClick, onSignInClick } = this.props;
+    const {
+      onAboutClick,
+      onSettingsClick,
+      onSignOutClick,
+      onSignUpClick,
+      onSignInClick
+    } = this.props;
 
     const { menu } = this.state;
 
     const menuItems = [
       {
-        children: "About",
-        onClick: () => {
-          this.closeMenu();
-
-          this.props.onAboutClick();
-        }
+        name: "About",
+        onClick: onAboutClick
       },
       {
-        children: "Settings",
-        onClick: () => {
-          this.closeMenu();
-
-          this.props.onSettingsClick();
-        }
+        name: "Settings",
+        onClick: onSettingsClick
       },
       {
-        children: "Sign out",
-        onClick: () => {
-          this.closeMenu();
-
-          this.props.onSignOutClick();
-        }
+        name: "Sign out",
+        divide: true,
+        onClick: onSignOutClick
       }
     ];
 
@@ -105,14 +101,43 @@ class Bar extends Component {
                 onClose={this.closeMenu}
               >
                 {menuItems.map((menuItem, index) => {
+                  if (
+                    menuItem.hasOwnProperty("condition") &&
+                    !menuItem.condition
+                  ) {
+                    return null;
+                  }
+
+                  if (menuItem.divide) {
+                    return (
+                      <span key={index}>
+                        <Divider />
+
+                        <MenuItem
+                          dense={theme.dense}
+                          onClick={() => {
+                            this.closeMenu();
+
+                            menuItem.onClick();
+                          }}
+                        >
+                          {menuItem.name}
+                        </MenuItem>
+                      </span>
+                    );
+                  }
+
                   return (
                     <MenuItem
                       key={index}
                       dense={theme.dense}
-                      disabled={performingAction}
-                      onClick={menuItem.onClick}
+                      onClick={() => {
+                        this.closeMenu();
+
+                        menuItem.onClick();
+                      }}
                     >
-                      {menuItem.children}
+                      {menuItem.name}
                     </MenuItem>
                   );
                 })}
