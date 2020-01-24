@@ -44,7 +44,7 @@ git clone https://github.com/phoqe/rmuif.git <directory>
 
 ### Install dependencies
 
-Make sure you’re inside your project’s root directory, replace `<directory>` with your project’s name.
+Let’s make sure you’re inside your project’s root directory, replace `<directory>` with your project’s name.
 
 ```
 cd <directory>
