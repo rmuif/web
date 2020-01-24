@@ -19,7 +19,8 @@
     "analyze": "source-map-explorer 'build/static/js/*.js'",
     "eject": "react-scripts eject",
     "predeploy": "react-scripts build",
-    "deploy": "firebase deploy"
+    "deploy": "firebase deploy",
+    "prettier": "prettier --write '**/*.{js,jsx,ts,tsx,json,css,scss,md}'"
   },
   "config": {
     "title": "RMUIF",
