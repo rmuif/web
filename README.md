@@ -14,13 +14,6 @@ There are lots of features included in the template, some of the most prominent 
 - Extensive mobile support with full-screen dialogs and react-swipeable-views for tabs
 - Cross-platform application monitoring with a focus on error reporting with Sentry
 
-The list goes on and on, but what really stands out are these unique features:
-
-- Upload an image as avatar
-- Manage profiles with fields like first and last names
-- Synchronize the app’s theme on all devices signed in to an account
-- Change the password for an account
-
 As you will see, there are a lot more features and more is included in every release.
 Your project can take advantage of new releases by configuring Git to use this repository as an upstream origin.
 You can learn more about this later.
