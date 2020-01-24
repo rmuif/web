@@ -1,7 +1,7 @@
 {
   "name": "rmuif",
   "version": "2.2.0",
-  "description": "The three musketeers, all in one pack in the form of a boilerplate app",
+  "description": "Supercharged version of CRA with all the  bells and whistles",
   "homepage": "https://rmuif.com",
   "bugs": {
     "url": "https://github.com/phoqe/rmuif/issues",
