@@ -154,17 +154,12 @@ class AccountTab extends Component {
           .then(value => {
             const { user, userData } = this.props;
 
-            this.setState(
-              {
-                profileCompletion: authentication.getProfileCompletion({
-                  ...user,
-                  ...userData
-                })
-              },
-              () => {
-                this.props.openSnackbar("Changed avatar");
-              }
-            );
+            this.setState({
+              profileCompletion: authentication.getProfileCompletion({
+                ...user,
+                ...userData
+              })
+            });
           })
           .catch(reason => {
             const code = reason.code;
@@ -203,15 +198,10 @@ class AccountTab extends Component {
     ) {
       URL.revokeObjectURL(avatarUrl);
 
-      this.setState(
-        {
-          avatar: null,
-          avatarUrl: ""
-        },
-        () => {
-          this.props.openSnackbar(`Removed image “${avatar.name}”`, 5);
-        }
-      );
+      this.setState({
+        avatar: null,
+        avatarUrl: ""
+      });
     } else if (user.photoURL && !avatar && !avatarUrl) {
       this.setState(
         {
@@ -224,17 +214,12 @@ class AccountTab extends Component {
             .then(value => {
               const { user, userData } = this.props;
 
-              this.setState(
-                {
-                  profileCompletion: authentication.getProfileCompletion({
-                    ...user,
-                    ...userData
-                  })
-                },
-                () => {
-                  this.props.openSnackbar("Removed avatar");
-                }
-              );
+              this.setState({
+                profileCompletion: authentication.getProfileCompletion({
+                  ...user,
+                  ...userData
+                })
+              });
             })
             .catch(reason => {
               const code = reason.code;
@@ -334,9 +319,7 @@ class AccountTab extends Component {
                     })
                   },
                   () => {
-                    this.hideFields(() => {
-                      this.props.openSnackbar("Changed first name");
-                    });
+                    this.hideFields();
                   }
                 );
               })
@@ -410,9 +393,7 @@ class AccountTab extends Component {
                     })
                   },
                   () => {
-                    this.hideFields(() => {
-                      this.props.openSnackbar("Changed last name");
-                    });
+                    this.hideFields();
                   }
                 );
               })
@@ -486,9 +467,7 @@ class AccountTab extends Component {
                     })
                   },
                   () => {
-                    this.hideFields(() => {
-                      this.props.openSnackbar("Changed username");
-                    });
+                    this.hideFields();
                   }
                 );
               })
@@ -562,9 +541,7 @@ class AccountTab extends Component {
                     })
                   },
                   () => {
-                    this.hideFields(() => {
-                      this.props.openSnackbar("Changed e-mail address");
-                    });
+                    this.hideFields();
                   }
                 );
               })
@@ -704,15 +681,10 @@ class AccountTab extends Component {
       return;
     }
 
-    this.setState(
-      {
-        avatar: avatar,
-        avatarUrl: URL.createObjectURL(avatar)
-      },
-      () => {
-        this.props.openSnackbar(`Selected image “${avatar.name}”`, 5);
-      }
-    );
+    this.setState({
+      avatar: avatar,
+      avatarUrl: URL.createObjectURL(avatar)
+    });
   };
 
   handleFirstNameChange = event => {
