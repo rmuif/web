@@ -1,7 +1,7 @@
 # RMUIF
 
 RMUIF is the acronym for [React](https://reactjs.org) [Material-UI](https://material-ui.com) [Firebase](https://firebase.google.com) which are the three musketeers that make up this template.
-With [Create React App](https://create-react-app.dev) at its core you can expect the same tooling to work out of the box, it is essentially a ”supercharged“ version of CRA, with all the bells and whistles.
+With [Create React App](https://create-react-app.dev) at its core you can expect the same tooling to work out of the box, it is essentially a ”supercharged“ version of CRA with all the bells and whistles.
 
 ## Features
 
@@ -37,8 +37,6 @@ The demo is using the `master` branch, which always contains the latest released
 Development takes place in the `develop` branch as per the Gitflow workflow.
 
 The Firebase project for the demo is cleared from time to time, your account may be deleted.
-
-## Community
 
 ## License
 
