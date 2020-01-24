@@ -16,7 +16,7 @@ There are lots of features included in the template, some of the most prominent 
 - Extensive mobile support with full-screen dialogs and react-swipeable-views for tabs
 - Cross-platform application monitoring with a focus on error reporting with Sentry
 
-As you will see, there are a lot more features and more is included in every release.
+There are a lot more features and more is included in every release.
 Your project can take advantage of new releases by configuring Git to use this repository as an upstream origin.
 You can learn more about this later.
 
