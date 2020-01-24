@@ -264,6 +264,8 @@ class SignUpDialog extends Component {
       <Dialog
         fullWidth
         maxWidth="sm"
+        disableBackdropClick={performingAction}
+        disableEscapeKeyDown={performingAction}
         {...dialogProps}
         onKeyPress={this.handleKeyPress}
         onExited={this.handleExited}
@@ -274,6 +276,7 @@ class SignUpDialog extends Component {
           <Tooltip title="Close">
             <IconButton
               className={classes.closeButton}
+              disabled={performingAction}
               onClick={dialogProps.onClose}
             >
               <CloseIcon />
