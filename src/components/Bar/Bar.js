@@ -122,9 +122,9 @@ class Bar extends Component {
 
           {!user && (
             <ButtonGroup
-              color="secondary"
+              color="inherit"
               disabled={performingAction}
-              variant="contained"
+              variant="outlined"
             >
               <Button onClick={onSignUpClick}>Sign up</Button>
               <Button onClick={onSignInClick}>Sign in</Button>
