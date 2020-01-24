@@ -29,6 +29,83 @@ Development takes place in the `develop` branch as per the Gitflow workflow.
 
 The Firebase project for the demo is cleared from time to time, your account may be deleted.
 
+## Setup
+
+It’s easy to setup RMUIF but can be time consuming if you want to go all the way, like setting up Firebase and Sentry.
+
+### Clone repository
+
+The first step is to get the files, you can do that by cloning the repository using Git.
+Replace `<directory>` with your project’s name, e.g. `rmuif` or `react-material-ui-firebase`.
+
+```
+git clone https://github.com/phoqe/rmuif.git <directory>
+```
+
+### Install dependencies
+
+Make sure you’re inside your project’s root directory, replace `<directory>` with your project’s name.
+
+```
+cd <directory>
+```
+
+Now that you’re inside your project, you can use Yarn, which is the default package manager for this project, to install the dependencies:
+
+```
+yarn
+```
+
+### Test template
+
+That’s basically it, for the base template.
+Run this command to get it up and running to make sure everything’s working:
+
+```
+yarn start
+```
+
+### Configure template
+
+The home for your project’s configuration lies in the `package.json` file.
+Look for the `config` object, it houses properties that are self-explanatory.
+You can add your own properties by modifying the `package.json` and `.env` files.
+
+Remember that updates to the configuration requires restarting the development server!
+
+### Create a Firebase project
+
+https://firebase.google.com/docs/web/setup#create-firebase-project
+
+### Register your app with Firebase
+
+https://firebase.google.com/docs/web/setup#register-app
+
+### Firebase config object
+
+https://firebase.google.com/docs/web/setup#config-object
+
+Place your Firebase config object in the `firebase` object in the `package.json` file.
+Your Firebase credentials are meant to be public, access to your project is controlled through security rules, we’ve got you covered with those as well.
+
+### Create a Cloud Firestore database
+
+https://firebase.google.com/docs/firestore/quickstart#create
+
+### Create a default Storage bucket
+
+https://firebase.google.com/docs/storage/web/start#create-default-bucket
+
+## Support
+
+If you are experiencing an issue directly related to the project itself, you should create an issue using the bug report template.
+However if you have any issues setting up the template you are welcome to either send an e-mail to [phoqe@phoqe.dev](mailto:phoqe@phoqe.dev) or join the [Discord channel](https://discord.gg/TPYPNs).
+Please keep discussions regarding this project in the #rmuif channel, thank you.
+
+## Sponsor
+
+https://github.com/sponsors/phoqe
+
 ## Attribution
 
 | Image                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      | Name         | Description                                                                                                                                                                                     |
