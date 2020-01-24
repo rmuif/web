@@ -18,9 +18,9 @@ As you will see, there are a lot more features and more is included in every rel
 Your project can take advantage of new releases by configuring Git to use this repository as an upstream origin.
 You can learn more about this later.
 
-## Screenshots
+## Screenshot
 
-TODO: Add screenshots
+<img src="https://user-images.githubusercontent.com/7033377/73071460-13c58000-3eb3-11ea-9ed2-f5d9b5e8fc5b.png">
 
 ## Demo
 
