@@ -71,7 +71,7 @@ The home for your project’s configuration lies in the `package.json` file.
 Look for the `config` object, it houses properties that are self-explanatory.
 You can add your own properties by modifying the `package.json` and `.env` files.
 
-Remember that updates to the configuration requires restarting the development server!
+Remember that updates to the configuration requires restarting the development server.
 
 ### Create a Firebase project
 
@@ -85,8 +85,8 @@ https://firebase.google.com/docs/web/setup#register-app
 
 https://firebase.google.com/docs/web/setup#config-object
 
-Place your Firebase config object in the `firebase` object in the `package.json` file.
-Your Firebase credentials are meant to be public, access to your project is controlled through security rules, we’ve got you covered with those as well.
+Place your Firebase config object under the `firebase` object in the `package.json` file.
+Your Firebase credentials are public, access to your project is controlled through security rules.
 
 ### Create a Cloud Firestore database
 
@@ -103,6 +103,9 @@ However if you have any issues setting up the template you are welcome to either
 Please keep discussions regarding this project in the #rmuif channel, thank you.
 
 ## Sponsor
+
+If you want to provide monetary support, you’re welcome to do so. It is never required but greatly appreciated.
+You can use my GitHub Sponsors link to donate directly via GitHub or you can contact me at [phoqe@phoqe.dev](mailto:phoqe@phoqe.dev) if you want to use another way.
 
 https://github.com/sponsors/phoqe
 
