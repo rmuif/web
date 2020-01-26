@@ -1429,13 +1429,6 @@
     "@babel/helper-plugin-utils" "^7.0.0"
     "@babel/plugin-transform-typescript" "^7.7.4"
 
-"@babel/runtime@7.0.0":
-  version "7.0.0"
-  resolved "https://registry.yarnpkg.com/@babel/runtime/-/runtime-7.0.0.tgz#adeb78fedfc855aa05bc041640f3f6f98e85424c"
-  integrity sha512-7hGhzlcmg01CvH1EHdSPVXYX1aJ8KCEyz6I9xYIi/asDtzBPMyMhVibhM/K6g/5qnKBwjZtp10bNZIEFTRW1MA==
-  dependencies:
-    regenerator-runtime "^0.12.0"
-
 "@babel/runtime@7.7.4":
   version "7.7.4"
   resolved "https://registry.yarnpkg.com/@babel/runtime/-/runtime-7.7.4.tgz#b23a856751e4bf099262f867767889c0e3fe175b"
@@ -4706,14 +4699,7 @@ dom-converter@^0.2:
   dependencies:
     utila "~0.4"
 
-dom-helpers@^3.2.1:
-  version "3.4.0"
-  resolved "https://registry.yarnpkg.com/dom-helpers/-/dom-helpers-3.4.0.tgz#e9b369700f959f62ecde5a6babde4bccd9169af8"
-  integrity sha512-LnuPJ+dwqKDIyotW1VzmOZ5TONUN7CwkCR5hrgawTUbkBGYdeoNLZo6nNfGkCrjtE1nXXaj7iMMpDa8/d9WoIA==
-  dependencies:
-    "@babel/runtime" "^7.1.2"
-
-dom-helpers@^5.0.1:
+dom-helpers@^5.0.1, dom-helpers@^5.1.3:
   version "5.1.3"
   resolved "https://registry.yarnpkg.com/dom-helpers/-/dom-helpers-5.1.3.tgz#7233248eb3a2d1f74aafca31e52c5299cc8ce821"
   integrity sha512-nZD1OtwfWGRBWlpANxacBEZrEuLa16o1nh7YopFWeoF68Zt8GGEmzHu6Xv4F3XaFIC+YXtTLrzgqKxFgLEe4jw==
@@ -10385,36 +10371,36 @@ react-scripts@3.3.0:
   optionalDependencies:
     fsevents "2.1.2"
 
-react-swipeable-views-core@^0.13.1, react-swipeable-views-core@^0.13.5:
-  version "0.13.5"
-  resolved "https://registry.yarnpkg.com/react-swipeable-views-core/-/react-swipeable-views-core-0.13.5.tgz#a8ab55cbeba554c0c958211db8155d9d12bdc488"
-  integrity sha512-uGbjrI72XszlZCWiCiTTItmi19ltbPbLp6Qcx+WJEopDNUmE3m/9zH2KEbjA/I8Y5xnUYJRmmBXPoMUA2rAE6w==
+react-swipeable-views-core@^0.13.6:
+  version "0.13.6"
+  resolved "https://registry.yarnpkg.com/react-swipeable-views-core/-/react-swipeable-views-core-0.13.6.tgz#361f432ab33e22fec0c3576fe034b864ac60c015"
+  integrity sha512-Bb+0UE/ufvmUuxiscMStCp8LiJJF7GGJY6soFnqS+Jolm8CgUWFqBn61BKhsI3wytlmwkuafXo1dtvSramwCVA==
   dependencies:
     "@babel/runtime" "^7.0.0"
     warning "^4.0.1"
 
-react-swipeable-views-utils@^0.13.3:
-  version "0.13.5"
-  resolved "https://registry.yarnpkg.com/react-swipeable-views-utils/-/react-swipeable-views-utils-0.13.5.tgz#99109b18736b72ce213af47095afa42b77129153"
-  integrity sha512-JXz4flp8zhEaLZNeLlUjuMIQtJpZkPJyXdSw3M4GW8ANwa5MU09/SkFQanjkTc7T3oLMfzjFjwLHsTZM0tGJ3A==
+react-swipeable-views-utils@^0.13.6:
+  version "0.13.6"
+  resolved "https://registry.yarnpkg.com/react-swipeable-views-utils/-/react-swipeable-views-utils-0.13.6.tgz#1b93185087aa87128e8c5d8f8c8924630e785333"
+  integrity sha512-svjPTIxr4/LiuxGWv5xTNSlas6zUZEskSQ/6adUxwFpKUwjBe9oY4iRj8TGXSPNMNBsv+fxzFsy1ofeHuhTsKA==
   dependencies:
     "@babel/runtime" "^7.0.0"
     fbjs "^0.8.4"
     keycode "^2.1.7"
     prop-types "^15.6.0"
     react-event-listener "^0.6.0"
-    react-swipeable-views-core "^0.13.5"
+    react-swipeable-views-core "^0.13.6"
 
-react-swipeable-views@0.13.3:
-  version "0.13.3"
-  resolved "https://registry.yarnpkg.com/react-swipeable-views/-/react-swipeable-views-0.13.3.tgz#2ad886767c6b2de88000606a14bedde12156e6d0"
-  integrity sha512-LBHRA5ZouipmoLLwi0cqB8qc7NHLskbXmT1I+ZztC9JfmgKrfichw5R+7q4igQ+5VbaP6jL1vn8BtHW96WYNFQ==
+react-swipeable-views@0.13.6:
+  version "0.13.6"
+  resolved "https://registry.yarnpkg.com/react-swipeable-views/-/react-swipeable-views-0.13.6.tgz#6e7170987ead332aeda7f7e4dd6c8b24b524c5ed"
+  integrity sha512-Hj9KsSxKpW52qYOWk+/C0jk/tidMiFy1H1fHSAkd/KkXn5gWlqOCAs3eXwIjTRNrrySsyTqgnik7U/HNEPiqOA==
   dependencies:
-    "@babel/runtime" "7.0.0"
-    dom-helpers "^3.2.1"
+    "@babel/runtime" "^7.0.0"
+    dom-helpers "^5.1.3"
     prop-types "^15.5.4"
-    react-swipeable-views-core "^0.13.1"
-    react-swipeable-views-utils "^0.13.3"
+    react-swipeable-views-core "^0.13.6"
+    react-swipeable-views-utils "^0.13.6"
     warning "^4.0.1"
 
 react-transition-group@^4.3.0:
@@ -10544,11 +10530,6 @@ regenerator-runtime@^0.11.0:
   version "0.11.1"
   resolved "https://registry.yarnpkg.com/regenerator-runtime/-/regenerator-runtime-0.11.1.tgz#be05ad7f9bf7d22e056f9726cee5017fbf19e2e9"
   integrity sha512-MguG95oij0fC3QV3URf4V2SDYGJhJnJGqvIIgdECeODCT98wSWDAJ94SSuVpYQUoTcGUIL6L4yNB7j1DFFHSBg==
-
-regenerator-runtime@^0.12.0:
-  version "0.12.1"
-  resolved "https://registry.yarnpkg.com/regenerator-runtime/-/regenerator-runtime-0.12.1.tgz#fa1a71544764c036f8c49b13a08b2594c9f8a0de"
-  integrity sha512-odxIc1/vDlo4iZcfXqRYFj0vpXFNoGdKMAUieAlFYO6m/nl5e9KR/beGf41z4a1FI+aQgtjhuaSlDxQ0hmkrHg==
 
 regenerator-runtime@^0.13.2, regenerator-runtime@^0.13.3:
   version "0.13.3"
