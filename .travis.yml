@@ -1,7 +1,7 @@
 language: node_js
-cache:
-  directories:
-    - node_modules
+node_js:
+  - lts/*
+cache: yarn
 script:
   - yarn build
   - yarn test
