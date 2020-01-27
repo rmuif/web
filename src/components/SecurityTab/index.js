@@ -1,1 +1,1 @@
-export { default } from './SecurityTab';
+export { default } from "./SecurityTab";

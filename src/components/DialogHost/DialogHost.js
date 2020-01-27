@@ -1,23 +1,23 @@
-import React, { Component } from 'react';
+import React, { Component } from "react";
 
-import PropTypes from 'prop-types';
+import PropTypes from "prop-types";
 
-import Hidden from '@material-ui/core/Hidden';
+import Hidden from "@material-ui/core/Hidden";
 
-import AboutDialog from '../AboutDialog';
-import SignUpDialog from '../SignUpDialog';
-import SignInDialog from '../SignInDialog';
-import SettingsDialog from '../SettingsDialog';
-import DeleteAccountDialog from '../DeleteAccountDialog';
-import AlertDialog from '../AlertDialog';
+import AboutDialog from "../AboutDialog";
+import SignUpDialog from "../SignUpDialog";
+import SignInDialog from "../SignInDialog";
+import SettingsDialog from "../SettingsDialog";
+import DeleteAccountDialog from "../DeleteAccountDialog";
+import AlertDialog from "../AlertDialog";
 
 class DialogHost extends Component {
   render() {
     // Properties
-    const {
-      user,
-      dialogs
-    } = this.props;
+    const { performingAction, theme, user, userData, dialogs } = this.props;
+
+    // Functions
+    const { openSnackbar } = this.props;
 
     const aboutDialog = dialogs.aboutDialog;
     const signUpDialog = dialogs.signUpDialog;
@@ -30,62 +30,86 @@ class DialogHost extends Component {
       <>
         <AboutDialog
           dialogProps={aboutDialog.dialogProps}
-
+          performingAction={performingAction}
+          theme={theme}
+          user={user}
+          userData={userData}
+          openSnackbar={openSnackbar}
           {...aboutDialog.props}
         />
 
-        {user &&
+        {user && (
           <>
             <AlertDialog
               dialogProps={signOutDialog.dialogProps}
-
+              performingAction={performingAction}
+              theme={theme}
+              user={user}
+              userData={userData}
+              openSnackbar={openSnackbar}
               {...signOutDialog.props}
             />
           </>
-        }
+        )}
 
         <Hidden xsDown>
-          {user &&
+          {user && (
             <>
               <DeleteAccountDialog
                 dialogProps={deleteAccountDialog.dialogProps}
-
+                performingAction={performingAction}
+                theme={theme}
+                user={user}
+                userData={userData}
+                openSnackbar={openSnackbar}
                 {...deleteAccountDialog.props}
               />
             </>
-          }
+          )}
 
-          {!user &&
+          {!user && (
             <>
               <SignUpDialog
                 dialogProps={signUpDialog.dialogProps}
-
+                performingAction={performingAction}
+                theme={theme}
+                user={user}
+                userData={userData}
+                openSnackbar={openSnackbar}
                 {...signUpDialog.props}
               />
 
               <SignInDialog
                 dialogProps={signInDialog.dialogProps}
-
+                performingAction={performingAction}
+                theme={theme}
+                user={user}
+                userData={userData}
+                openSnackbar={openSnackbar}
                 {...signInDialog.props}
               />
             </>
-          }
+          )}
         </Hidden>
 
         <Hidden smDown>
-          {user &&
+          {user && (
             <>
               <SettingsDialog
                 dialogProps={settingsDialog.dialogProps}
-
+                performingAction={performingAction}
+                theme={theme}
+                user={user}
+                userData={userData}
+                openSnackbar={openSnackbar}
                 {...settingsDialog.props}
               />
             </>
-          }
+          )}
         </Hidden>
 
         <Hidden smUp>
-          {user &&
+          {user && (
             <>
               <DeleteAccountDialog
                 dialogProps={{
@@ -93,13 +117,17 @@ class DialogHost extends Component {
 
                   ...deleteAccountDialog.dialogProps
                 }}
-
+                performingAction={performingAction}
+                theme={theme}
+                user={user}
+                userData={userData}
+                openSnackbar={openSnackbar}
                 {...deleteAccountDialog.props}
               />
             </>
-          }
+          )}
 
-          {!user &&
+          {!user && (
             <>
               <SignUpDialog
                 dialogProps={{
@@ -107,7 +135,11 @@ class DialogHost extends Component {
 
                   ...signUpDialog.dialogProps
                 }}
-
+                performingAction={performingAction}
+                theme={theme}
+                user={user}
+                userData={userData}
+                openSnackbar={openSnackbar}
                 {...signUpDialog.props}
               />
 
@@ -117,15 +149,19 @@ class DialogHost extends Component {
 
                   ...signInDialog.dialogProps
                 }}
-
+                performingAction={performingAction}
+                theme={theme}
+                user={user}
+                userData={userData}
+                openSnackbar={openSnackbar}
                 {...signInDialog.props}
               />
             </>
-          }
+          )}
         </Hidden>
 
         <Hidden mdUp>
-          {user &&
+          {user && (
             <>
               <SettingsDialog
                 dialogProps={{
@@ -133,11 +169,15 @@ class DialogHost extends Component {
 
                   ...settingsDialog.dialogProps
                 }}
-
+                performingAction={performingAction}
+                theme={theme}
+                user={user}
+                userData={userData}
+                openSnackbar={openSnackbar}
                 {...settingsDialog.props}
               />
             </>
-          }
+          )}
         </Hidden>
       </>
     );
@@ -146,8 +186,14 @@ class DialogHost extends Component {
 
 DialogHost.propTypes = {
   // Properties
+  performingAction: PropTypes.bool.isRequired,
+  theme: PropTypes.object.isRequired,
   user: PropTypes.object,
-  dialogs: PropTypes.object.isRequired
+  userData: PropTypes.object,
+  dialogs: PropTypes.object.isRequired,
+
+  // Functions
+  openSnackbar: PropTypes.func.isRequired
 };
 
 export default DialogHost;

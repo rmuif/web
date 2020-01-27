@@ -1,69 +1,67 @@
-import React, { Component } from 'react';
+import React, { Component } from "react";
 
-import PropTypes from 'prop-types';
+import PropTypes from "prop-types";
 
-import { withStyles } from '@material-ui/core/styles';
+import { withStyles } from "@material-ui/core/styles";
 
-import Dialog from '@material-ui/core/Dialog';
-import DialogTitle from '@material-ui/core/DialogTitle';
+import Dialog from "@material-ui/core/Dialog";
+import DialogTitle from "@material-ui/core/DialogTitle";
 
-import Typography from '@material-ui/core/Typography';
-import Tooltip from '@material-ui/core/Tooltip';
-import IconButton from '@material-ui/core/IconButton';
+import Typography from "@material-ui/core/Typography";
+import Tooltip from "@material-ui/core/Tooltip";
+import IconButton from "@material-ui/core/IconButton";
 
-import Tabs from '@material-ui/core/Tabs';
-import Tab from '@material-ui/core/Tab';
+import Tabs from "@material-ui/core/Tabs";
+import Tab from "@material-ui/core/Tab";
 
-import Hidden from '@material-ui/core/Hidden';
+import CloseIcon from "@material-ui/icons/Close";
+import AccountCircleIcon from "@material-ui/icons/AccountCircle";
+import PaletteIcon from "@material-ui/icons/Palette";
+import LinkIcon from "@material-ui/icons/Link";
+import SecurityIcon from "@material-ui/icons/Security";
 
-import CloseIcon from '@material-ui/icons/Close';
-import AccountCircleIcon from '@material-ui/icons/AccountCircle';
-import PaletteIcon from '@material-ui/icons/Palette';
-import LinkIcon from '@material-ui/icons/Link';
-import SecurityIcon from '@material-ui/icons/Security';
+import SwipeableViews from "react-swipeable-views";
 
-import SwipeableViews from 'react-swipeable-views';
+import AccountTab from "../AccountTab";
+import AppearanceTab from "../AppearanceTab";
+import LinksTab from "../LinksTab";
+import SecurityTab from "../SecurityTab";
 
-import AccountTab from '../AccountTab';
-import AppearanceTab from '../AppearanceTab';
-import LinksTab from '../LinksTab';
-import SecurityTab from '../SecurityTab';
-
-const styles = (theme) => ({
+const styles = theme => ({
   closeButton: {
-    position: 'absolute',
+    position: "absolute",
     right: theme.spacing(1),
     top: theme.spacing(1)
   },
 
   tabs: {
-    display: 'initial'
+    display: "initial"
   }
 });
 
 const tabs = [
   {
-    key: 'account',
+    key: "account",
     icon: <AccountCircleIcon />,
-    label: 'Account'
+    label: "Account"
   },
 
   {
-    key: 'appearance',
+    key: "appearance",
     icon: <PaletteIcon />,
-    label: 'Appearance'
+    label: "Appearance"
   },
 
   {
-    key: 'links',
+    key: "links",
     icon: <LinkIcon />,
-    label: 'Links'
+    label: "Links"
   },
 
   {
-    key: 'security',
+    key: "security",
     icon: <SecurityIcon />,
-    label: 'Security'
+    label: "Security"
   }
 ];
 
@@ -88,7 +86,7 @@ class SettingsDialog extends Component {
     });
   };
 
-  handleIndexChange = (index) => {
+  handleIndexChange = index => {
     this.setState({
       selectedTab: index
     });
@@ -96,116 +94,71 @@ class SettingsDialog extends Component {
 
   render() {
     // Styling
-    const {
-      classes
-    } = this.props;
+    const { classes } = this.props;
 
     // Dialog Properties
-    const {
-      dialogProps
-    } = this.props;
+    const { dialogProps } = this.props;
 
     // Custom Properties
-    const {
-      user,
-      userData,
-      theme
-    } = this.props;
+    const { user, userData, theme } = this.props;
 
     // Custom Functions
-    const {
-      openSnackbar
-    } = this.props;
+    const { openSnackbar } = this.props;
 
     // Custom Functions
-    const {
-      onDeleteAccountClick
-    } = this.props;
+    const { onDeleteAccountClick } = this.props;
 
-    const {
-      selectedTab
-    } = this.state;
+    const { selectedTab } = this.state;
 
     return (
       <Dialog {...dialogProps} onExited={this.handleExited}>
         <DialogTitle disableTypography>
-          <Typography variant="h6">
-            Settings
-          </Typography>
+          <Typography variant="h6">Settings</Typography>
 
           <Tooltip title="Close">
-            <IconButton className={classes.closeButton} onClick={dialogProps.onClose}>
+            <IconButton
+              className={classes.closeButton}
+              onClick={dialogProps.onClose}
+            >
               <CloseIcon />
             </IconButton>
           </Tooltip>
         </DialogTitle>
 
-        <Hidden xsDown>
-          <Tabs
-            classes={{ root: classes.tabs }}
-            style={{ overflow: 'initial', minHeight: 'initial' }}
+        <Tabs
+          classes={{ root: classes.tabs }}
+          style={{ overflow: "initial", minHeight: "initial" }}
+          indicatorColor="primary"
+          textColor="primary"
+          value={selectedTab}
+          variant="fullWidth"
+          onChange={this.handleTabChange}
+        >
+          {tabs.map(tab => {
+            return <Tab key={tab.key} icon={tab.icon} label={tab.label} />;
+          })}
+        </Tabs>
 
-            indicatorColor="primary"
-            textColor="primary"
-            value={selectedTab}
-            variant="fullWidth"
-            onChange={this.handleTabChange}>
-            {tabs.map((tab) => {
-              return (
-                <Tab key={tab.key} icon={tab.icon} label={tab.label} />
-              );
-            })}
-          </Tabs>
-        </Hidden>
-
-        <Hidden smUp>
-          <Tabs
-            classes={{ root: classes.tabs }}
-            style={{ overflow: 'initial', minHeight: 'initial' }}
-
-            indicatorColor="primary"
-            textColor="primary"
-            value={selectedTab}
-            variant="fullWidth"
-            onChange={this.handleTabChange}>
-            {tabs.map((tab) => {
-              return (
-                <Tab key={tab.key} icon={tab.icon} label={tab.label} />
-              );
-            })}
-          </Tabs>
-        </Hidden>
-
-        <SwipeableViews index={selectedTab} onChangeIndex={this.handleIndexChange}>
+        <SwipeableViews
+          index={selectedTab}
+          onChangeIndex={this.handleIndexChange}
+        >
           <AccountTab
             theme={theme}
-
             user={user}
             userData={userData}
-
             openSnackbar={openSnackbar}
-
             onDeleteAccountClick={onDeleteAccountClick}
           />
 
-          <AppearanceTab
-            theme={theme}
+          <AppearanceTab theme={theme} openSnackbar={openSnackbar} />
 
-            openSnackbar={openSnackbar}
-          />
-
-          <LinksTab
-            theme={theme}
-
-            openSnackbar={openSnackbar}
-          />
+          <LinksTab theme={theme} openSnackbar={openSnackbar} />
 
           <SecurityTab
             theme={theme}
-
             user={user}
             userData={userData}
-
             openSnackbar={openSnackbar}
           />
         </SwipeableViews>

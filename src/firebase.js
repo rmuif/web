@@ -1,10 +1,10 @@
-import * as firebase from 'firebase/app';
+import * as firebase from "firebase/app";
 
-import 'firebase/analytics';
-import 'firebase/auth';
-import 'firebase/firestore';
-import 'firebase/storage';
-import 'firebase/performance';
+import "firebase/analytics";
+import "firebase/auth";
+import "firebase/firestore";
+import "firebase/storage";
+import "firebase/performance";
 
 firebase.initializeApp({
   apiKey: process.env.REACT_APP_FIREBASE_API_KEY,

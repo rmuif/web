@@ -1,67 +1,120 @@
-import React, { Component } from 'react';
+import React, { Component } from "react";
 
-import PropTypes from 'prop-types';
+import PropTypes from "prop-types";
 
-import { withStyles } from '@material-ui/core/styles';
+import { withStyles } from "@material-ui/core/styles";
 
-import Avatar from '@material-ui/core/Avatar';
+import Avatar from "@material-ui/core/Avatar";
 
-import PersonIcon from '@material-ui/icons/Person';
+import ListItemAvatar from "@material-ui/core/ListItemAvatar";
 
-import authentication from '../../services/authentication';
+import AccountCircleIcon from "@material-ui/icons/AccountCircle";
+import PersonIcon from "@material-ui/icons/Person";
 
-const styles = (theme) => ({
+import authentication from "../../services/authentication";
+
+const styles = theme => ({
   nameInitials: {
-    cursor: 'default'
+    cursor: "default"
   }
 });
 
 class UserAvatar extends Component {
   render() {
     // Styling
-    const {
-      classes
-    } = this.props;
+    const { classes } = this.props;
 
     // Properties
-    const {
-      user,
-      defaultCursor
-    } = this.props;
+    const { context, user, defaultCursor } = this.props;
 
-    if (!user) {
-      return <PersonIcon />;
+    if (context === "standalone") {
+      if (!user) {
+        return <AccountCircleIcon />;
+      }
+
+      const photoUrl = user.photoURL;
+
+      if (photoUrl) {
+        return <Avatar alt="Avatar" src={photoUrl} />;
+      }
+
+      const nameInitials = authentication.getNameInitials({
+        ...user
+      });
+
+      if (nameInitials) {
+        return (
+          <Avatar alt="Avatar">
+            <span className={defaultCursor && classes.nameInitials}>
+              {nameInitials}
+            </span>
+          </Avatar>
+        );
+      }
+
+      return <AccountCircleIcon />;
     }
 
-    const photoUrl = user.photoURL;
+    if (context === "list") {
+      if (!user) {
+        return (
+          <ListItemAvatar>
+            <Avatar>
+              <PersonIcon />
+            </Avatar>
+          </ListItemAvatar>
+        );
+      }
 
-    if (photoUrl) {
+      const photoUrl = user.photoURL;
+
+      if (photoUrl) {
+        return (
+          <ListItemAvatar>
+            <Avatar alt="Avatar" src={photoUrl} />
+          </ListItemAvatar>
+        );
+      }
+
+      const nameInitials = authentication.getNameInitials({
+        ...user
+      });
+
+      if (nameInitials) {
+        return (
+          <ListItemAvatar>
+            <Avatar alt="Avatar">
+              <span className={defaultCursor && classes.nameInitials}>
+                {nameInitials}
+              </span>
+            </Avatar>
+          </ListItemAvatar>
+        );
+      }
+
       return (
-        <Avatar alt="Avatar" src={photoUrl} />
+        <ListItemAvatar>
+          <Avatar>
+            <PersonIcon />
+          </Avatar>
+        </ListItemAvatar>
       );
     }
 
-    const nameInitials = authentication.user.getNameInitials({
-      ...user
-    });
-
-    if (nameInitials) {
-      return (
-        <Avatar alt="Avatar">
-          <span className={defaultCursor && classes.nameInitials}>{nameInitials}</span>
-        </Avatar>
-      );
-    }
-
-    return <PersonIcon />;
+    return null;
   }
 }
+
+UserAvatar.defaultProps = {
+  context: "standalone"
+};
 
 UserAvatar.propTypes = {
   // Styling
   classes: PropTypes.object.isRequired,
 
   // Properties
+  context: PropTypes.string,
   user: PropTypes.object.isRequired,
   defaultCursor: PropTypes.bool
 };

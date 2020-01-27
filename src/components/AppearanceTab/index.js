@@ -1,1 +1,1 @@
-export { default } from './AppearanceTab';
+export { default } from "./AppearanceTab";

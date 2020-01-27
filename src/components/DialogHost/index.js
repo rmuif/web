@@ -1,1 +1,1 @@
-export { default } from './DialogHost';
+export { default } from "./DialogHost";

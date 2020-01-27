@@ -1,20 +1,20 @@
-import React, { Component } from 'react';
+import React, { Component } from "react";
 
-import PropTypes from 'prop-types';
+import PropTypes from "prop-types";
 
-import Dialog from '@material-ui/core/Dialog';
-import DialogTitle from '@material-ui/core/DialogTitle';
-import DialogContent from '@material-ui/core/DialogContent';
-import DialogContentText from '@material-ui/core/DialogContentText';
-import DialogActions from '@material-ui/core/DialogActions';
+import Dialog from "@material-ui/core/Dialog";
+import DialogTitle from "@material-ui/core/DialogTitle";
+import DialogContent from "@material-ui/core/DialogContent";
+import DialogContentText from "@material-ui/core/DialogContentText";
+import DialogActions from "@material-ui/core/DialogActions";
 
-import Hidden from '@material-ui/core/Hidden';
-import Box from '@material-ui/core/Box';
-import TextField from '@material-ui/core/TextField';
-import Button from '@material-ui/core/Button';
+import Hidden from "@material-ui/core/Hidden";
+import Box from "@material-ui/core/Box";
+import TextField from "@material-ui/core/TextField";
+import Button from "@material-ui/core/Button";
 
 const initialState = {
-  username: ''
+  username: ""
 };
 
 class DeleteAccountDialog extends Component {
@@ -24,15 +24,11 @@ class DeleteAccountDialog extends Component {
     this.state = initialState;
   }
 
-  handleKeyPress = (event) => {
-    const {
-      userData
-    } = this.props;
+  handleKeyPress = event => {
+    const { userData } = this.props;
 
     if (userData && userData.username) {
-      const {
-        username
-      } = this.state;
+      const { username } = this.state;
 
       if (!username) {
         return;
@@ -49,7 +45,7 @@ class DeleteAccountDialog extends Component {
       return;
     }
 
-    if (key === 'Enter') {
+    if (key === "Enter") {
       this.props.deleteAccount();
     }
   };
@@ -58,7 +54,7 @@ class DeleteAccountDialog extends Component {
     this.setState(initialState);
   };
 
-  handleUsernameChange = (event) => {
+  handleUsernameChange = event => {
     const username = event.target.value;
 
     this.setState({
@@ -68,49 +64,43 @@ class DeleteAccountDialog extends Component {
 
   render() {
     // Dialog Properties
-    const {
-      dialogProps
-    } = this.props;
+    const { dialogProps } = this.props;
 
     // Custom Properties
-    const {
-      performingAction,
-      userData
-    } = this.props;
+    const { performingAction, userData, theme } = this.props;
 
     // Custom Functions
-    const {
-      deleteAccount
-    } = this.props;
+    const { deleteAccount } = this.props;
 
-    const {
-      username
-    } = this.state;
+    const { username } = this.state;
 
     const hasUsername = userData && userData.username;
 
     return (
-      <Dialog {...dialogProps} onKeyPress={this.handleKeyPress} onExited={this.handleExited}>
-        <DialogTitle>
-          Delete account?
-        </DialogTitle>
+      <Dialog
+        {...dialogProps}
+        onKeyPress={this.handleKeyPress}
+        onExited={this.handleExited}
+      >
+        <DialogTitle>Delete account?</DialogTitle>
 
         <DialogContent>
           <Box mb={hasUsername ? 2 : 0}>
             <DialogContentText>
-              Deleted accounts can’t be recovered.
-              All data associated with your account will be deleted.
+              Deleted accounts can’t be recovered. All data associated with your
+              account will be deleted.
             </DialogContentText>
 
-            {hasUsername &&
+            {hasUsername && (
               <DialogContentText>
-                Type your username and <Hidden xsDown>click</Hidden><Hidden smUp>tap</Hidden> Delete to delete your account.
-                This action is irreversible.
+                Type your username and <Hidden xsDown>click</Hidden>
+                <Hidden smUp>tap</Hidden> Delete to delete your account. This
+                action is irreversible.
               </DialogContentText>
-            }
+            )}
           </Box>
 
-          {hasUsername &&
+          {hasUsername && (
             <TextField
               autoComplete="username"
               autoFocus
@@ -120,18 +110,34 @@ class DeleteAccountDialog extends Component {
               label="Username"
               placeholder={userData.username}
               required
+              size={theme.dense ? "small" : "medium"}
               type="text"
               value={username}
               variant="outlined"
-
               onChange={this.handleUsernameChange}
             />
-          }
+          )}
         </DialogContent>
 
         <DialogActions>
-          <Button color="secondary" disabled={performingAction} onClick={dialogProps.onClose}>Cancel</Button>
-          <Button color="secondary" disabled={performingAction || (hasUsername && username !== userData.username)} variant="contained" onClick={deleteAccount}>Delete</Button>
+          <Button
+            color="secondary"
+            disabled={performingAction}
+            onClick={dialogProps.onClose}
+          >
+            Cancel
+          </Button>
+          <Button
+            color="secondary"
+            disabled={
+              performingAction ||
+              (hasUsername && username !== userData.username)
+            }
+            variant="contained"
+            onClick={deleteAccount}
+          >
+            Delete
+          </Button>
         </DialogActions>
       </Dialog>
     );
@@ -145,6 +151,7 @@ DeleteAccountDialog.propTypes = {
   // Custom Properties
   performingAction: PropTypes.bool.isRequired,
   userData: PropTypes.object,
+  theme: PropTypes.object.isRequired,
 
   // Custom Functions
   deleteAccount: PropTypes.func.isRequired

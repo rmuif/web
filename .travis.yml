@@ -1,17 +1,14 @@
 language: node_js
 node_js:
-  - 8
-cache:
-  directories:
-    - node_modules
+- lts/*
+cache: yarn
 script:
-  - yarn build
-  - yarn test
+- yarn build
+- yarn test
 deploy:
-  provider: pages
   skip_cleanup: true
-  github_token: $GITHUB_TOKEN
-  keep_history: true
   on:
     branch: master
-  local_dir: ./build
+  provider: firebase
+  token:
+    secure: 5OdzQcBK7YEH4+b1XoZkxPJ/zW4u4I5jSmdawGXwYH/lMWrVtrA2y4oGitia7ZzrN43qePKDm5WfVP2sC96XlBlDqTyEbiAA7Qd06SN8wizNrTz45rmiESIP43FxS3Vj+fgGd9vD6POizNI5y9hUH2zKWFjQOFSZN8Qb6a0Hu8rc+ZcnXdBV/Aqe1LobYmFRLKq+8PinuBcr7ba5hRnS0pGuLy8NK/ajQCp30nOx+5Ac1663WxL3izjwZDSmqCnqDAjqkfEsloseHkNDf4TwCi1RZXXgRHaAbQg7lwxwX8zHRYisCovZPHPo2E0g6q7RwHC3Mmr1pCjrHsiPDLkI3Agke/AZINzQZSNETpzkrSaEJCmqvg2mlEvmkJCB8v3XWqnIwjQjXpNzQhVZPYyVHpne3uLxmCGh/3go3VJ73YoO5zU4ieP13LgRTrBLNqMRb0YKmLN1anU1SEKdlaiG6+YLEX/bufnrkxDo1PX+uRDF8hVtO775FAxjH0kVjDG/pPPwRAAfS/rgcePB5qgWy0KosyfPA4sZpmotJcAGUofysn9pY+D0fCn5mEEq8m6NShYrnc6NkLCu92Sxz5lHHcGAWmjtQbtvto/1VnUegdR1PQ6M0nZ0kHUUjbOexNo8z9HmYepAfS92dKwKzA6hizSdScQlps5LL0bCeLZ9zAc=

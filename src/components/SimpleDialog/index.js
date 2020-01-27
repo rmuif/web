@@ -1,1 +1,1 @@
-export { default } from './SimpleDialog';
+export { default } from "./SimpleDialog";
