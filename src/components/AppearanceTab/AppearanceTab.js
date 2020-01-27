@@ -377,6 +377,7 @@ class AppearanceTab extends Component {
             <ListItemSecondaryAction>
               <Hidden xsDown>
                 <Checkbox
+                  color="primary"
                   checked={theme.dark}
                   onChange={this.handleDarkModeChange}
                 />
@@ -384,6 +385,7 @@ class AppearanceTab extends Component {
 
               <Hidden smUp>
                 <Switch
+                  color="primary"
                   checked={theme.dark}
                   onChange={this.handleDarkModeChange}
                 />
