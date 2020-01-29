@@ -99,7 +99,7 @@ https://firebase.google.com/docs/storage/web/start#create-default-bucket
 ## Support
 
 If you are experiencing an issue directly related to the project itself, you should create an issue using the bug report template.
-However if you have any issues setting up the template you are welcome to either send an e-mail to [phoqe@phoqe.dev](mailto:phoqe@phoqe.dev) or join the [Discord channel](https://discord.gg/TPYPNs).
+However if you have any issues setting up the template you are welcome to either send an e-mail to [phoqe@phoqe.dev](mailto:phoqe@phoqe.dev) or join the [Discord channel](https://discord.gg/PdRYuHW).
 Please keep discussions regarding this project in the #rmuif channel, thank you.
 
 ## Sponsor
