@@ -8,6 +8,11 @@
     "email": "phoqe@phoqe.dev"
   },
   "license": "MIT",
+  "author": {
+    "name": "Linus Långberg",
+    "email": "phoqe@phoqe.dev",
+    "url": "https://phoqe.me"
+  },
   "repository": {
     "type": "git",
     "url": "https://github.com/phoqe/rmuif.git"
