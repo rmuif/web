@@ -73,41 +73,29 @@ You can add your own properties by modifying the `package.json` and `.env` files
 
 Remember that updates to the configuration requires restarting the development server.
 
-### Create a Firebase project
+### [Create a Firebase project](https://firebase.google.com/docs/web/setup#create-firebase-project)
 
-https://firebase.google.com/docs/web/setup#create-firebase-project
+### [Register your app with Firebase](https://firebase.google.com/docs/web/setup#register-app)
 
-### Register your app with Firebase
-
-https://firebase.google.com/docs/web/setup#register-app
-
-### Firebase config object
-
-https://firebase.google.com/docs/web/setup#config-object
+### [Firebase config object](https://firebase.google.com/docs/web/setup#config-object)
 
 Place your Firebase config object under the `firebase` object in the `package.json` file.
 Your Firebase credentials are public, access to your project is controlled through security rules.
 
-### Create a Cloud Firestore database
+### [Create a Cloud Firestore database](https://firebase.google.com/docs/firestore/quickstart#create)
 
-https://firebase.google.com/docs/firestore/quickstart#create
-
-### Create a default Storage bucket
-
-https://firebase.google.com/docs/storage/web/start#create-default-bucket
+### [Create a default Storage bucket](https://firebase.google.com/docs/storage/web/start#create-default-bucket)
 
 ## Support
 
 If you are experiencing an issue directly related to the project itself, you should create an issue using the bug report template.
-However if you have any issues setting up the template you are welcome to either send an e-mail to [phoqe@phoqe.dev](mailto:phoqe@phoqe.dev) or join the [Discord channel](https://discord.gg/TPYPNs).
+However if you have any issues setting up the template you are welcome to either send an e-mail to [phoqe@phoqe.dev](mailto:phoqe@phoqe.dev) or join the [Discord channel](https://discord.gg/PdRYuHW).
 Please keep discussions regarding this project in the #rmuif channel, thank you.
 
 ## Sponsor
 
 If you want to provide monetary support, you’re welcome to do so. It is never required but greatly appreciated.
-You can use my GitHub Sponsors link to donate directly via GitHub or you can contact me at [phoqe@phoqe.dev](mailto:phoqe@phoqe.dev) if you want to use another way.
-
-https://github.com/sponsors/phoqe
+You can use my [GitHub Sponsors link](https://github.com/sponsors/phoqe) to donate directly via GitHub or you can contact me at [phoqe@phoqe.dev](mailto:phoqe@phoqe.dev) if you want to use another way.
 
 ## Attribution
 

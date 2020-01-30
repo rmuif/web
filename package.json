@@ -18,8 +18,6 @@
     "test": "react-scripts test",
     "analyze": "source-map-explorer 'build/static/js/*.js'",
     "eject": "react-scripts eject",
-    "predeploy": "react-scripts build",
-    "deploy": "firebase deploy",
     "prettier": "prettier --write '**/*.{js,jsx,ts,tsx,json,css,scss,md}'"
   },
   "config": {
@@ -48,7 +46,7 @@
     "@material-ui/core": "^4.9.0",
     "@material-ui/icons": "^4.5.1",
     "@material-ui/styles": "^4.9.0",
-    "@sentry/browser": "^5.11.1",
+    "@sentry/browser": "^5.11.2",
     "firebase": "^7.7.0",
     "lodash.camelcase": "^4.3.0",
     "mdi-material-ui": "^6.11.0",
@@ -65,11 +63,11 @@
   "devDependencies": {
     "@testing-library/jest-dom": "^5.0.2",
     "@testing-library/react": "^9.3.2",
-    "@testing-library/user-event": "^8.0.4",
-    "eslint-config-prettier": "^6.9.0",
+    "@testing-library/user-event": "^8.1.0",
+    "eslint-config-prettier": "^6.10.0",
     "eslint-plugin-prettier": "^3.1.2",
     "husky": "^4.2.1",
-    "lint-staged": "^10.0.3",
+    "lint-staged": "^10.0.5",
     "prettier": "^1.19.1",
     "source-map-explorer": "^2.2.2"
   },
