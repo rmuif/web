@@ -65,7 +65,7 @@
     "validate.js": "^0.13.1"
   },
   "devDependencies": {
-    "@testing-library/jest-dom": "^5.0.2",
+    "@testing-library/jest-dom": "^5.1.0",
     "@testing-library/react": "^9.3.2",
     "@testing-library/user-event": "^8.1.0",
     "eslint-config-prettier": "^6.10.0",
