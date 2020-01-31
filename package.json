@@ -5,12 +5,12 @@
   "homepage": "https://rmuif.com",
   "bugs": {
     "url": "https://github.com/phoqe/rmuif/issues",
-    "email": "phoqe@phoqe.dev"
+    "email": "dev@phoqe.me"
   },
   "license": "MIT",
   "author": {
     "name": "Linus Långberg",
-    "email": "phoqe@phoqe.dev",
+    "email": "dev@phoqe.me",
     "url": "https://phoqe.me"
   },
   "repository": {
