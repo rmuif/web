@@ -155,7 +155,6 @@ const defaultSecondaryColor = getColor(
   process.env.REACT_APP_THEME_SECONDARY_COLOR
 );
 const defaultDark = process.env.REACT_APP_THEME_DARK === "true";
-const defaultDense = process.env.REACT_APP_THEME_DENSE === "true";
 
 const defaultTheme = createMuiTheme({
   palette: {
@@ -166,8 +165,7 @@ const defaultTheme = createMuiTheme({
 
   primaryColor: defaultPrimaryColor,
   secondaryColor: defaultSecondaryColor,
-  dark: defaultDark,
-  dense: defaultDense
+  dark: defaultDark
 });
 
 const appearance = {};
@@ -177,7 +175,6 @@ appearance.colors = colors;
 appearance.defaultPrimaryColor = defaultPrimaryColor;
 appearance.defaultSecondaryColor = defaultSecondaryColor;
 appearance.defaultDark = defaultDark;
-appearance.defaultDense = defaultDense;
 
 appearance.defaultTheme = defaultTheme;
 
@@ -189,8 +186,7 @@ appearance.isDefaultTheme = theme => {
   if (
     theme.primaryColor.id === defaultPrimaryColor.id &&
     theme.secondaryColor.id === defaultSecondaryColor.id &&
-    theme.dark === defaultDark &&
-    theme.dense === defaultDense
+    theme.dark === defaultDark
   ) {
     return true;
   }
@@ -206,7 +202,6 @@ appearance.createTheme = theme => {
   let primaryColor = theme.primaryColor;
   let secondaryColor = theme.secondaryColor;
   let dark = theme.dark;
-  let dense = theme.dense;
 
   if (!primaryColor || !secondaryColor) {
     return null;
@@ -228,8 +223,7 @@ appearance.createTheme = theme => {
 
     primaryColor: primaryColor,
     secondaryColor: secondaryColor,
-    dark: dark,
-    dense: dense
+    dark: dark
   });
 
   return theme;
@@ -246,7 +240,6 @@ appearance.changeTheme = theme => {
     let primaryColor = theme.primaryColor;
     let secondaryColor = theme.secondaryColor;
     let dark = theme.dark;
-    let dense = theme.dense;
 
     if (!primaryColor || !secondaryColor) {
       reject();
@@ -286,8 +279,7 @@ appearance.changeTheme = theme => {
         theme: {
           primaryColor: primaryColor.id,
           secondaryColor: secondaryColor.id,
-          dark: dark,
-          dense: dense
+          dark: dark
         }
       })
       .then(value => {
@@ -432,43 +424,6 @@ appearance.changeDark = dark => {
       .then(value => {
         analytics.logEvent("change_dark", {
           dark: dark
-        });
-
-        resolve(value);
-      })
-      .catch(reason => {
-        reject(reason);
-      });
-  });
-};
-
-appearance.changeDense = dense => {
-  return new Promise((resolve, reject) => {
-    const currentUser = auth.currentUser;
-
-    if (!currentUser) {
-      reject();
-
-      return;
-    }
-
-    const uid = currentUser.uid;
-
-    if (!uid) {
-      reject();
-
-      return;
-    }
-
-    const userDocumentReference = firestore.collection("users").doc(uid);
-
-    userDocumentReference
-      .update({
-        "theme.dense": dense
-      })
-      .then(value => {
-        analytics.logEvent("change_dense", {
-          dense: dense
         });
 
         resolve(value);

@@ -740,7 +740,7 @@ class AccountTab extends Component {
     const { classes } = this.props;
 
     // Properties
-    const { theme, user, userData } = this.props;
+    const { user, userData } = this.props;
 
     // Events
     const { onDeleteAccountClick } = this.props;
@@ -1213,7 +1213,7 @@ class AccountTab extends Component {
           </Hidden>
         </Box>
 
-        <List dense={theme.dense} disablePadding>
+        <List disablePadding>
           <ListItem>
             <Hidden xsDown>
               <ListItemIcon>
@@ -1244,7 +1244,6 @@ class AccountTab extends Component {
                 label="First name"
                 placeholder={hasFirstName && userData.firstName}
                 required
-                size={theme.dense ? "small" : "medium"}
                 type="text"
                 value={firstName}
                 variant="filled"
@@ -1324,7 +1323,6 @@ class AccountTab extends Component {
                 label="Last name"
                 placeholder={hasLastName && userData.lastName}
                 required
-                size={theme.dense ? "small" : "medium"}
                 type="text"
                 value={lastName}
                 variant="filled"
@@ -1404,7 +1402,6 @@ class AccountTab extends Component {
                 label="Username"
                 placeholder={hasUsername && userData.username}
                 required
-                size={theme.dense ? "small" : "medium"}
                 type="text"
                 value={username}
                 variant="filled"
@@ -1502,7 +1499,6 @@ class AccountTab extends Component {
                 label="E-mail address"
                 placeholder={user.email}
                 required
-                size={theme.dense ? "small" : "medium"}
                 type="email"
                 value={emailAddress}
                 variant="filled"
@@ -1652,7 +1648,6 @@ AccountTab.propTypes = {
   classes: PropTypes.object.isRequired,
 
   // Properties
-  theme: PropTypes.object.isRequired,
   user: PropTypes.object.isRequired,
   userData: PropTypes.object,
 

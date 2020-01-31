@@ -47,7 +47,7 @@ class Bar extends Component {
 
   render() {
     // Properties
-    const { performingAction, theme, user, userData } = this.props;
+    const { performingAction, user, userData } = this.props;
 
     // Events
     const {
@@ -78,7 +78,7 @@ class Bar extends Component {
 
     return (
       <AppBar color="primary" position="static">
-        <Toolbar variant={theme.dense ? "dense" : "regular"}>
+        <Toolbar>
           <Box display="flex" flexGrow={1}>
             <Typography color="inherit" variant="h6">
               {process.env.REACT_APP_TITLE}
@@ -114,7 +114,6 @@ class Bar extends Component {
                         <Divider />
 
                         <MenuItem
-                          dense={theme.dense}
                           onClick={() => {
                             this.closeMenu();
 
@@ -130,7 +129,6 @@ class Bar extends Component {
                   return (
                     <MenuItem
                       key={index}
-                      dense={theme.dense}
                       onClick={() => {
                         this.closeMenu();
 
@@ -168,7 +166,6 @@ Bar.defaultProps = {
 Bar.propTypes = {
   // Properties
   performingAction: PropTypes.bool.isRequired,
-  theme: PropTypes.object.isRequired,
   user: PropTypes.object,
   userData: PropTypes.object,
 

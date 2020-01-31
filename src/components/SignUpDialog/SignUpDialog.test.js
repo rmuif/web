@@ -14,7 +14,6 @@ it("renders without crashing", () => {
 
         onClose: () => {}
       }}
-      theme={{}}
       signUp={() => {}}
       openSnackbar={() => {}}
       onAuthProviderClick={() => {}}

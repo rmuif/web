@@ -144,7 +144,6 @@ class SettingsDialog extends Component {
           onChangeIndex={this.handleIndexChange}
         >
           <AccountTab
-            theme={theme}
             user={user}
             userData={userData}
             openSnackbar={openSnackbar}
@@ -156,7 +155,6 @@ class SettingsDialog extends Component {
           <LinksTab theme={theme} openSnackbar={openSnackbar} />
 
           <SecurityTab
-            theme={theme}
             user={user}
             userData={userData}
             openSnackbar={openSnackbar}

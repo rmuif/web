@@ -98,7 +98,7 @@ class LinksTab extends Component {
 
     return (
       <DialogContent>
-        <List dense={theme.dense} disablePadding>
+        <List disablePadding>
           {authProviders.map(authProvider => {
             const authProviderData = authentication.authProviderData(
               authProvider.providerId

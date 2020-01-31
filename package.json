@@ -30,8 +30,7 @@
     "theme": {
       "primaryColor": "blue",
       "secondaryColor": "red",
-      "dark": false,
-      "dense": false
+      "dark": false
     },
     "firebase": {
       "apiKey": "AIzaSyDYZOrZVpXkPQD6J31mb9t2eIIxmGEJK-Q",

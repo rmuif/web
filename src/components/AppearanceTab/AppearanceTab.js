@@ -72,8 +72,7 @@ class AppearanceTab extends Component {
           .changeTheme({
             primaryColor: primaryColor,
             secondaryColor: theme.secondaryColor.id,
-            dark: theme.dark,
-            dense: theme.dense
+            dark: theme.dark
           })
           .catch(reason => {
             const code = reason.code;
@@ -124,8 +123,7 @@ class AppearanceTab extends Component {
           .changeTheme({
             primaryColor: theme.primaryColor.id,
             secondaryColor: secondaryColor,
-            dark: theme.dark,
-            dense: theme.dense
+            dark: theme.dark
           })
           .catch(reason => {
             const code = reason.code;
@@ -172,8 +170,7 @@ class AppearanceTab extends Component {
           .changeTheme({
             primaryColor: theme.primaryColor.id,
             secondaryColor: theme.secondaryColor.id,
-            dark: dark,
-            dense: theme.dense
+            dark: dark
           })
           .catch(reason => {
             const code = reason.code;
@@ -247,7 +244,7 @@ class AppearanceTab extends Component {
 
     return (
       <DialogContent>
-        <List dense={theme.dense} disablePadding>
+        <List disablePadding>
           <Box mb={1}>
             <ListItem>
               <Hidden xsDown>

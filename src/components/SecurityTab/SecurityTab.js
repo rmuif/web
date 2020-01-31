@@ -214,7 +214,7 @@ class SecurityTab extends Component {
 
   render() {
     // Properties
-    const { theme, userData } = this.props;
+    const { userData } = this.props;
 
     const {
       showingField,
@@ -228,7 +228,7 @@ class SecurityTab extends Component {
 
     return (
       <DialogContent>
-        <List dense={theme.dense} disablePadding>
+        <List disablePadding>
           <ListItem>
             <Hidden xsDown>
               <ListItemIcon>
@@ -250,7 +250,6 @@ class SecurityTab extends Component {
                 }
                 label="Password"
                 required
-                size={theme.dense ? "small" : "medium"}
                 type="password"
                 value={password}
                 variant="filled"
@@ -274,7 +273,6 @@ class SecurityTab extends Component {
                 }
                 label="Password confirmation"
                 required
-                size={theme.dense ? "small" : "medium"}
                 type="password"
                 value={passwordConfirmation}
                 variant="filled"
@@ -338,7 +336,6 @@ class SecurityTab extends Component {
 
 SecurityTab.propTypes = {
   // Properties
-  theme: PropTypes.object.isRequired,
   userData: PropTypes.object,
 
   // Functions
