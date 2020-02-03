@@ -84,7 +84,103 @@ Your Firebase credentials are public, access to your project is controlled throu
 
 ### [Create a Cloud Firestore database](https://firebase.google.com/docs/firestore/quickstart#create)
 
+### Cloud Firestore Security Rules
+
+```
+service cloud.firestore {
+  function isUserAuthenticated() {
+    return request.auth != null;
+  }
+
+  function isUserOwner(userId) {
+    return request.auth.uid == userId;
+  }
+
+  function hasUserRole(role) {
+    return role in request.auth.token.roles;
+  }
+
+  function isUserAdmin() {
+    return hasUserRole('admin');
+  }
+
+  function isUserPremium() {
+    return hasUserRole('premium');
+  }
+
+  function isUserAuthorized(userId) {
+    return isUserOwner(userId) || isUserAdmin();
+  }
+
+  match /databases/{database}/documents {
+    match /users/{userId} {
+      allow get: if isUserAuthenticated();
+      allow list: if isUserAuthenticated() && isUserAdmin();
+    }
+    
+    match /users/{userId} {
+      allow create: if isUserAuthenticated() && isUserAuthorized(userId);
+      allow update: if isUserAuthenticated() && isUserAuthorized(userId);
+      allow delete: if isUserAuthenticated() && isUserAuthorized(userId);
+    }
+  }
+}
+```
+
 ### [Create a default Storage bucket](https://firebase.google.com/docs/storage/web/start#create-default-bucket)
+
+### Cloud Storage Security Rules
+
+```
+service firebase.storage {
+  function isUserAuthenticated() {
+    return request.auth != null;
+  }
+
+  function isUserOwner(userId) {
+    return request.auth.uid == userId;
+  }
+
+  function hasUserRole(role) {
+    return role in request.auth.token.roles;
+  }
+
+  function isUserAdmin() {
+    return hasUserRole('admin');
+  }
+
+  function isUserPremium() {
+    return hasUserRole('premium');
+  }
+
+  function isUserAuthorized(userId) {
+    return isUserOwner(userId) || isUserAdmin();
+  }
+  
+  function isAvatarValid() {
+  	return (
+    	request.resource.contentType.matches('image/.*') &&
+      request.resource.size <= 20 * 1024 * 1024 &&
+      (resource == null || request.resource.md5Hash != resource.md5Hash)
+    );
+  }
+  
+  match /b/{bucket}/o {
+    match /images {
+    	match /avatars/{userId} {
+        allow get: if isUserAuthenticated();
+        allow list: if isUserAuthenticated() && isUserAdmin();
+      }
+    
+      match /avatars/{userId} {
+        allow create: if isUserAuthenticated() && isUserAuthorized(userId) && isAvatarValid();
+        allow update: if isUserAuthenticated() && isUserAuthorized(userId) && isAvatarValid();
+        allow delete: if isUserAuthenticated() && isUserAuthorized(userId);
+      }
+    }
+  }
+}
+```
 
 ## Support
 
