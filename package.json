@@ -51,7 +51,7 @@
     "@material-ui/icons": "^4.9.1",
     "@material-ui/styles": "^4.9.0",
     "@sentry/browser": "^5.12.1",
-    "firebase": "^7.8.0",
+    "firebase": "^7.8.1",
     "lodash.camelcase": "^4.3.0",
     "mdi-material-ui": "^6.11.0",
     "moment": "^2.24.0",
