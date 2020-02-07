@@ -128,7 +128,7 @@ service cloud.firestore {
       allow get: if isUserAuthenticated();
       allow list: if isUserAuthenticated() && isUserAdmin();
     }
-    
+
     match /users/{userId} {
       allow create: if isUserAuthenticated() && isUserAuthorized(userId);
       allow update: if isUserAuthenticated() && isUserAuthorized(userId);
@@ -167,7 +167,7 @@ service firebase.storage {
   function isUserAuthorized(userId) {
     return isUserOwner(userId) || isUserAdmin();
   }
-  
+
   function isAvatarValid() {
   	return (
     	request.resource.contentType.matches('image/.*') &&
@@ -175,14 +175,14 @@ service firebase.storage {
       (resource == null || request.resource.md5Hash != resource.md5Hash)
     );
   }
-  
+
   match /b/{bucket}/o {
     match /images {
     	match /avatars/{userId} {
         allow get: if isUserAuthenticated();
         allow list: if isUserAuthenticated() && isUserAdmin();
       }
-    
+
       match /avatars/{userId} {
         allow create: if isUserAuthenticated() && isUserAuthorized(userId) && isAvatarValid();
         allow update: if isUserAuthenticated() && isUserAuthorized(userId) && isAvatarValid();
