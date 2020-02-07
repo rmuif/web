@@ -49,8 +49,16 @@ You can use this repository as a template for your own repository on GitHub:
 
 You can clone this repository using Git to get all the files you need, replace `<directory>` with your project’s name, e.g. `rmuif` or `react-material-ui-firebase`:
 
+##### git
+
 ```
 git clone https://github.com/phoqe/rmuif.git <directory>
+```
+
+##### degit
+
+```
+npx degit phoqe/rmuif <directory>
 ```
 
 ### Install required dependencies
@@ -63,8 +71,16 @@ cd <directory>
 
 Now that you’re inside your project, you can use Yarn, which is the default package manager for this project, to install the dependencies:
 
+#### yarn
+
 ```
-yarn
+yarn install
+```
+
+#### npm
+
+```
+npm install
 ```
 
 ### Test the template
@@ -72,8 +88,16 @@ yarn
 That’s basically it, for the base template.
 Run this command to get it up and running to make sure everything’s working:
 
+#### yarn
+
 ```
 yarn start
+```
+
+#### npm
+
+```
+npm start
 ```
 
 ### Configure the template
