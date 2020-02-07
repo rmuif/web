@@ -47,7 +47,7 @@ You can use this repository as a template for your own repository on GitHub:
 
 #### Clone this repository
 
-You can clone this repository using Git to get all the files you need, replace `<directory>` with your project’s name, e.g. `rmuif` or `react-material-ui-firebase`:
+You can clone this repository using git to get all the files you need, replace `<directory>` with your project’s name, e.g. `rmuif` or `react-material-ui-firebase`:
 
 ##### git
 
@@ -69,7 +69,7 @@ Let’s make sure you’re inside your project’s root directory, replace `<dir
 cd <directory>
 ```
 
-Now that you’re inside your project, you can use Yarn, which is the default package manager for this project, to install the dependencies:
+Now that you’re inside your project, you can use yarn or npm to install the dependencies:
 
 #### yarn
 
