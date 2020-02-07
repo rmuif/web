@@ -40,6 +40,9 @@ Replace `<directory>` with your project’s name, e.g. `rmuif` or `react-materia
 
 ```
 git clone https://github.com/phoqe/rmuif.git <directory>
+
+// Or, use degit command
+npx degit phoqe/rmuif <directory>
 ```
 
 ### Install dependencies
