@@ -33,16 +33,27 @@ The Firebase project for the demo is cleared from time to time, your account may
 
 It’s easy to setup RMUIF but can be time consuming if you want to go all the way, like setting up Firebase and Sentry.
 
-### Clone repository
+### Get the files
 
-The first step is to get the files, you can do that by cloning the repository using Git.
-Replace `<directory>` with your project’s name, e.g. `rmuif` or `react-material-ui-firebase`.
+The first step is to get the files for this template, there are multiple ways to accomplish this.
+
+#### Use your own GitHub respository
+
+You can use this repository as a template for your own repository on GitHub:
+
+1. Click ”Use this template“ on this repository’s page on GitHub.
+2. Fill in your repository name and description.
+3. Proceed with the ”Clone this repository“ method but replace `https://github.com/phoqe/rmuif.git` with your repository’s URL.
+
+#### Clone this repository
+
+You can clone this repository using Git to get all the files you need, replace `<directory>` with your project’s name, e.g. `rmuif` or `react-material-ui-firebase`:
 
 ```
 git clone https://github.com/phoqe/rmuif.git <directory>
 ```
 
-### Install dependencies
+### Install required dependencies
 
 Let’s make sure you’re inside your project’s root directory, replace `<directory>` with your project’s name.
 
@@ -56,7 +67,7 @@ Now that you’re inside your project, you can use Yarn, which is the default pa
 yarn
 ```
 
-### Test template
+### Test the template
 
 That’s basically it, for the base template.
 Run this command to get it up and running to make sure everything’s working:
@@ -65,7 +76,7 @@ Run this command to get it up and running to make sure everything’s working:
 yarn start
 ```
 
-### Configure template
+### Configure the template
 
 The home for your project’s configuration lies in the `package.json` file.
 Look for the `config` object, it houses properties that are self-explanatory.
