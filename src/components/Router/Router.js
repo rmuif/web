@@ -7,6 +7,7 @@ import { BrowserRouter, Switch, Redirect, Route } from "react-router-dom";
 import HomeContent from "../HomeContent";
 import AuthContent from "../AuthContent";
 import AdminContent from "../AdminContent";
+import UserContent from "../UserContent";
 import NotFoundContent from "../NotFoundContent";
 
 class Router extends Component {
@@ -34,6 +35,10 @@ class Router extends Component {
             ) : (
               <Redirect to="/" />
             )}
+          </Route>
+
+          <Route path="/user/:userId">
+            {user ? <UserContent /> : <Redirect to="/" />}
           </Route>
 
           <Route>
