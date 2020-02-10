@@ -1,4 +1,4 @@
-# Introduction
+# RMUIF
 
 RMUIF is the acronym for this project’s previous name, [React](https://reactjs.org) + [Material-UI](https://material-ui.com) + [Firebase](https://firebase.google.com), which are the three musketeers that make up this template. With [Create React App](https://create-react-app.dev) at its core, you can expect the same tooling to work out of the box. It is essentially a “supercharged” version of CRA with all the bells and whistles.
 
