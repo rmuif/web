@@ -9,7 +9,7 @@ class NotFoundContent extends Component {
     return (
       <EmptyState
         icon={<FindIcon />}
-        title="Content Not Found"
+        title="Content not found"
         description="The requested URL was not found on this server"
       />
     );
