@@ -274,21 +274,22 @@ class App extends Component {
 
           {ready && (
             <>
-              <Bar
-                performingAction={performingAction}
-                theme={theme}
-                user={user}
-                userData={userData}
-                onSignUpClick={() => this.openDialog("signUpDialog")}
-                onSignInClick={() => this.openDialog("signInDialog")}
-                onAboutClick={() => this.openDialog("aboutDialog")}
-                onSettingsClick={() => this.openDialog("settingsDialog")}
-                onSignOutClick={() => this.openDialog("signOutDialog")}
-              />
-
               <Router
                 user={user}
                 roles={roles}
+                bar={
+                  <Bar
+                    performingAction={performingAction}
+                    theme={theme}
+                    user={user}
+                    userData={userData}
+                    onSignUpClick={() => this.openDialog("signUpDialog")}
+                    onSignInClick={() => this.openDialog("signInDialog")}
+                    onAboutClick={() => this.openDialog("aboutDialog")}
+                    onSettingsClick={() => this.openDialog("settingsDialog")}
+                    onSignOutClick={() => this.openDialog("signOutDialog")}
+                  />
+                }
                 openSnackbar={this.openSnackbar}
               />
 

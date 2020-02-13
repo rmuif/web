@@ -13,13 +13,15 @@ import NotFoundContent from "../NotFoundContent";
 class Router extends Component {
   render() {
     // Properties
-    const { user, roles } = this.props;
+    const { user, roles, bar } = this.props;
 
     // Functions
     const { openSnackbar } = this.props;
 
     return (
       <BrowserRouter basename={process.env.REACT_APP_BASENAME}>
+        {bar}
+
         <Switch>
           <Route path="/" exact>
             <HomeContent user={user} openSnackbar={openSnackbar} />
@@ -54,6 +56,7 @@ Router.propTypes = {
   // Properties
   user: PropTypes.object,
   roles: PropTypes.array.isRequired,
+  bar: PropTypes.element,
 
   // Functions
   openSnackbar: PropTypes.func.isRequired
