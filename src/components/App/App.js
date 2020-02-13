@@ -283,6 +283,7 @@ class App extends Component {
                     theme={theme}
                     user={user}
                     userData={userData}
+                    roles={roles}
                     onSignUpClick={() => this.openDialog("signUpDialog")}
                     onSignInClick={() => this.openDialog("signInDialog")}
                     onAboutClick={() => this.openDialog("aboutDialog")}

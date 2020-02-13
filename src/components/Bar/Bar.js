@@ -49,12 +49,11 @@ class Bar extends Component {
 
   render() {
     // Properties
-    const { performingAction, user, userData } = this.props;
+    const { performingAction, user, userData, roles } = this.props;
 
     // Events
     const {
       onAboutClick,
-      onProfileClick,
       onSettingsClick,
       onSignOutClick,
       onSignUpClick,
@@ -70,7 +69,7 @@ class Bar extends Component {
       },
       {
         name: "Profile",
-        to: `/user/${user.uid}`
+        to: user ? `/user/${user.uid}` : null
       },
       {
         name: "Settings",
@@ -94,6 +93,19 @@ class Bar extends Component {
 
           {user && (
             <>
+              {roles.includes("admin") && (
+                <Box mr={1}>
+                  <Button
+                    color="inherit"
+                    component={Link}
+                    to="/admin"
+                    variant="outlined"
+                  >
+                    Admin
+                  </Button>
+                </Box>
+              )}
+
               <IconButton
                 color="inherit"
                 disabled={performingAction}
