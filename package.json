@@ -1,8 +1,8 @@
 {
   "name": "rmuif",
-  "version": "2.2.1",
+  "version": "2.2.2",
   "description": "Supercharged version of CRA with all the  bells and whistles",
-  "homepage": "https://rmuif.com",
+  "homepage": "https://demo.rmuif.com",
   "bugs": {
     "url": "https://github.com/phoqe/rmuif/issues",
     "email": "phoqe@phoqe.dev"
