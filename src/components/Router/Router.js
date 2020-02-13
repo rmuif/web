@@ -5,7 +5,6 @@ import PropTypes from "prop-types";
 import { BrowserRouter, Switch, Redirect, Route } from "react-router-dom";
 
 import HomeContent from "../HomeContent";
-import AuthContent from "../AuthContent";
 import AdminContent from "../AdminContent";
 import UserContent from "../UserContent";
 import NotFoundContent from "../NotFoundContent";
@@ -25,10 +24,6 @@ class Router extends Component {
         <Switch>
           <Route path="/" exact>
             <HomeContent user={user} openSnackbar={openSnackbar} />
-          </Route>
-
-          <Route path="/auth">
-            {user ? <AuthContent /> : <Redirect to="/" />}
           </Route>
 
           <Route path="/admin">
