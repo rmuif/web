@@ -39,6 +39,7 @@ function UserContent() {
           setUser(snapshot.data());
         },
         error => {
+          setLoading(false);
           setError(error);
         }
       );
