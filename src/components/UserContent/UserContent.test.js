@@ -2,7 +2,7 @@ import React from "react";
 
 import ReactDOM from "react-dom";
 
-import { MemoryRouter } from "react-router-dom";
+import { MemoryRouter, Route } from "react-router-dom";
 
 import UserContent from "./UserContent";
 
@@ -11,7 +11,9 @@ it("renders without crashing", () => {
 
   ReactDOM.render(
     <MemoryRouter>
-      <UserContent />
+      <Route path="/user/test">
+        <UserContent />
+      </Route>
     </MemoryRouter>,
     div
   );
