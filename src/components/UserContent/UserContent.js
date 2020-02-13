@@ -2,14 +2,14 @@ import React, { useState, useEffect } from "react";
 
 import { useParams } from "react-router-dom";
 
-import { firestore } from "../../firebase";
-
 import { makeStyles } from "@material-ui/core/styles";
 
 import Grid from "@material-ui/core/Grid";
 
 import ErrorIcon from "@material-ui/icons/Error";
 import PersonOutlineIcon from "@material-ui/icons/PersonOutline";
+
+import { firestore } from "../../firebase";
 
 import EmptyState from "../EmptyState";
 import Loader from "../Loader";
