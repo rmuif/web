@@ -5,15 +5,12 @@ import CardHeader from "@material-ui/core/CardHeader";
 
 import PropTypes from "prop-types";
 
-import UserAvatar from "../UserAvatar";
-
 function UserCard(props) {
   const user = props.user;
 
   return (
     <Card>
       <CardHeader
-        avatar={<UserAvatar user={user} />}
         title={`${user.firstName} ${user.lastName}`}
         subheader={user.username}
       />
