@@ -1,4 +1,4 @@
-import camelCase from "lodash.camelcase";
+import camelCase from "camelcase";
 
 import { createMuiTheme } from "@material-ui/core/styles";
 
