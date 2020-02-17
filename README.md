@@ -19,9 +19,11 @@ This is just a small taste of what RMUIF has to offer, you should check out the 
 
 ## [Demo](https://demo.rmuif.com)
 
+The demo is using the `master` branch which always contains the latest version. Development takes place in the `develop` branch as per the Gitflow workflow.
+
 ## [Documentation](https://docs.rmuif.com)
 
-The demo is using the `master` branch which always contains the latest version. Development takes place in the `develop` branch as per the Gitflow workflow.
+The documentation for RMUIF contains instructions on how to setup and configure the template. It also houses more advanced sections such as routing and roles.
 
 ## Support
 
