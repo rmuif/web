@@ -1,7 +1,16 @@
 {
   "name": "rmuif",
   "version": "2.2.2",
-  "description": "Supercharged version of CRA with all the  bells and whistles",
+  "description": "Supercharged version of Create React App with all the  bells and whistles",
+  "keywords": [
+    "react",
+    "create-react-app",
+    "template",
+    "rmuif",
+    "material-ui",
+    "firebase",
+    "react-router"
+  ],
   "homepage": "https://demo.rmuif.com",
   "bugs": {
     "url": "https://github.com/phoqe/rmuif/issues",
