@@ -17,9 +17,9 @@ There are lots of features included in this template by default, some of the mos
 
 This is just a small taste of what RMUIF has to offer, you should check out the demo if you want to experience it yourself before using it for your project.
 
-## [Documentation](https://docs.rmuif.com)
-
 ## [Demo](https://demo.rmuif.com)
+
+## [Documentation](https://docs.rmuif.com)
 
 The demo is using the `master` branch which always contains the latest version. Development takes place in the `develop` branch as per the Gitflow workflow.
 
