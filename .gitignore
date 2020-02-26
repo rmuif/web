@@ -4,6 +4,7 @@
 
 ### dotenv ###
 .env
+.env.local
 
 ### Firebase ###
 .idea
