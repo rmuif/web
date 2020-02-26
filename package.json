@@ -74,6 +74,7 @@
     "validate.js": "^0.13.1"
   },
   "devDependencies": {
+    "@material-ui/codemod": "^4.5.0",
     "@testing-library/jest-dom": "^5.1.1",
     "@testing-library/react": "^9.4.1",
     "@testing-library/user-event": "^10.0.0",
