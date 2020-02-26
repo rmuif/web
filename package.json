@@ -56,12 +56,12 @@
     }
   },
   "dependencies": {
-    "@material-ui/core": "^4.9.3",
+    "@material-ui/core": "^4.9.4",
     "@material-ui/icons": "^4.9.1",
     "@material-ui/styles": "^4.9.0",
-    "@sentry/browser": "^5.12.1",
+    "@sentry/browser": "^5.12.4",
     "camelcase": "^5.3.1",
-    "firebase": "^7.8.2",
+    "firebase": "^7.9.1",
     "mdi-material-ui": "^6.12.0",
     "moment": "^2.24.0",
     "react": "^16.12.0",
@@ -75,14 +75,14 @@
   },
   "devDependencies": {
     "@testing-library/jest-dom": "^5.1.1",
-    "@testing-library/react": "^9.3.2",
+    "@testing-library/react": "^9.4.1",
     "@testing-library/user-event": "^10.0.0",
     "eslint-config-prettier": "^6.10.0",
     "eslint-plugin-prettier": "^3.1.2",
     "husky": "^4.2.1",
-    "lint-staged": "^10.0.7",
+    "lint-staged": "^10.0.8",
     "prettier": "^1.19.1",
-    "source-map-explorer": "^2.2.2"
+    "source-map-explorer": "^2.3.1"
   },
   "private": true,
   "eslintConfig": {
