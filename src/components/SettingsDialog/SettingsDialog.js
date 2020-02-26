@@ -4,15 +4,15 @@ import PropTypes from "prop-types";
 
 import { withStyles } from "@material-ui/core/styles";
 
-import Dialog from "@material-ui/core/Dialog";
-import DialogTitle from "@material-ui/core/DialogTitle";
-
-import Typography from "@material-ui/core/Typography";
-import Tooltip from "@material-ui/core/Tooltip";
-import IconButton from "@material-ui/core/IconButton";
-
-import Tabs from "@material-ui/core/Tabs";
-import Tab from "@material-ui/core/Tab";
+import {
+  Dialog,
+  DialogTitle,
+  Typography,
+  Tooltip,
+  IconButton,
+  Tabs,
+  Tab
+} from "@material-ui/core";
 
 import CloseIcon from "@material-ui/icons/Close";
 import AccountCircleIcon from "@material-ui/icons/AccountCircle";

@@ -4,7 +4,7 @@ import { useParams } from "react-router-dom";
 
 import { makeStyles } from "@material-ui/core/styles";
 
-import Grid from "@material-ui/core/Grid";
+import { Grid } from "@material-ui/core";
 
 import ErrorIcon from "@material-ui/icons/Error";
 import PersonOutlineIcon from "@material-ui/icons/PersonOutline";
@@ -12,6 +12,7 @@ import PersonOutlineIcon from "@material-ui/icons/PersonOutline";
 import { firestore } from "../../firebase";
 
 import EmptyState from "../EmptyState";
+
 import Loader from "../Loader";
 import UserCard from "../UserCard";
 

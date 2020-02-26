@@ -4,7 +4,7 @@ import ReactDOM from "react-dom";
 
 import ConfirmationDialog from "./ConfirmationDialog";
 
-import Button from "@material-ui/core/Button";
+import { Button } from "@material-ui/core";
 
 it("renders without crashing", () => {
   const div = document.createElement("div");

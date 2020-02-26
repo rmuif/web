@@ -2,25 +2,24 @@ import React, { Component } from "react";
 
 import PropTypes from "prop-types";
 
-import DialogContent from "@material-ui/core/DialogContent";
-
-import Box from "@material-ui/core/Box";
-
-import List from "@material-ui/core/List";
-import ListItem from "@material-ui/core/ListItem";
-import ListItemIcon from "@material-ui/core/ListItemIcon";
-import ListItemText from "@material-ui/core/ListItemText";
-import ListItemSecondaryAction from "@material-ui/core/ListItemSecondaryAction";
-
-import FormControl from "@material-ui/core/FormControl";
-import InputLabel from "@material-ui/core/InputLabel";
-import Select from "@material-ui/core/Select";
-import MenuItem from "@material-ui/core/MenuItem";
-import Divider from "@material-ui/core/Divider";
-import Hidden from "@material-ui/core/Hidden";
-import Checkbox from "@material-ui/core/Checkbox";
-import Switch from "@material-ui/core/Switch";
-import Button from "@material-ui/core/Button";
+import {
+  DialogContent,
+  Box,
+  List,
+  ListItem,
+  ListItemIcon,
+  ListItemText,
+  ListItemSecondaryAction,
+  FormControl,
+  InputLabel,
+  Select,
+  MenuItem,
+  Divider,
+  Hidden,
+  Checkbox,
+  Switch,
+  Button
+} from "@material-ui/core";
 
 import FiberManualRecord from "@material-ui/icons/FiberManualRecord";
 import Brightness4Icon from "@material-ui/icons/Brightness4";

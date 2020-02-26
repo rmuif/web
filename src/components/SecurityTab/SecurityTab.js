@@ -5,18 +5,18 @@ import PropTypes from "prop-types";
 import validate from "validate.js";
 import moment from "moment";
 
-import DialogContent from "@material-ui/core/DialogContent";
-
-import List from "@material-ui/core/List";
-import ListItem from "@material-ui/core/ListItem";
-import ListItemIcon from "@material-ui/core/ListItemIcon";
-import ListItemText from "@material-ui/core/ListItemText";
-import ListItemSecondaryAction from "@material-ui/core/ListItemSecondaryAction";
-
-import Hidden from "@material-ui/core/Hidden";
-import TextField from "@material-ui/core/TextField";
-import Tooltip from "@material-ui/core/Tooltip";
-import IconButton from "@material-ui/core/IconButton";
+import {
+  DialogContent,
+  List,
+  ListItem,
+  ListItemIcon,
+  ListItemText,
+  ListItemSecondaryAction,
+  Hidden,
+  TextField,
+  Tooltip,
+  IconButton
+} from "@material-ui/core";
 
 import LockIcon from "@material-ui/icons/Lock";
 import EditIcon from "@material-ui/icons/Edit";

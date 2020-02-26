@@ -1,9 +1,8 @@
 import React from "react";
 
-import Card from "@material-ui/core/Card";
-import CardHeader from "@material-ui/core/CardHeader";
-
 import PropTypes from "prop-types";
+
+import { Card, CardHeader } from "@material-ui/core";
 
 function UserCard(props) {
   const user = props.user;

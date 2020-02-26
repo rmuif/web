@@ -2,19 +2,20 @@ import React, { Component } from "react";
 
 import PropTypes from "prop-types";
 
-import AppBar from "@material-ui/core/AppBar";
-import Toolbar from "@material-ui/core/Toolbar";
-import Typography from "@material-ui/core/Typography";
-import Box from "@material-ui/core/Box";
-import ButtonGroup from "@material-ui/core/ButtonGroup";
-import Button from "@material-ui/core/Button";
-import IconButton from "@material-ui/core/IconButton";
-import Divider from "@material-ui/core/Divider";
-
-import Menu from "@material-ui/core/Menu";
-import MenuItem from "@material-ui/core/MenuItem";
-
 import { Link } from "react-router-dom";
+
+import {
+  AppBar,
+  Toolbar,
+  Typography,
+  Box,
+  ButtonGroup,
+  Button,
+  IconButton,
+  Divider,
+  Menu,
+  MenuItem
+} from "@material-ui/core";
 
 import UserAvatar from "../UserAvatar";
 

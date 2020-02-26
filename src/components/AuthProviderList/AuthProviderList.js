@@ -4,9 +4,7 @@ import PropTypes from "prop-types";
 
 import { withStyles } from "@material-ui/core/styles";
 
-import Box from "@material-ui/core/Box";
-import ButtonGroup from "@material-ui/core/ButtonGroup";
-import Button from "@material-ui/core/Button";
+import { Box, ButtonGroup, Button } from "@material-ui/core";
 
 import authProviders from "../../authProviders";
 

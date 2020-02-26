@@ -2,9 +2,10 @@ import React, { Component } from "react";
 
 import PropTypes from "prop-types";
 
-import Hidden from "@material-ui/core/Hidden";
+import { Hidden } from "@material-ui/core";
 
 import AboutDialog from "../AboutDialog";
+
 import SignUpDialog from "../SignUpDialog";
 import SignInDialog from "../SignInDialog";
 import SettingsDialog from "../SettingsDialog";

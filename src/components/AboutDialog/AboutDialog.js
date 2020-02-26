@@ -4,17 +4,17 @@ import PropTypes from "prop-types";
 
 import { withStyles } from "@material-ui/core/styles";
 
-import Dialog from "@material-ui/core/Dialog";
-import DialogTitle from "@material-ui/core/DialogTitle";
-import DialogContent from "@material-ui/core/DialogContent";
-
-import Typography from "@material-ui/core/Typography";
-import Tooltip from "@material-ui/core/Tooltip";
-import IconButton from "@material-ui/core/IconButton";
-
-import List from "@material-ui/core/List";
-import ListItem from "@material-ui/core/ListItem";
-import ListItemText from "@material-ui/core/ListItemText";
+import {
+  Dialog,
+  DialogTitle,
+  DialogContent,
+  Typography,
+  Tooltip,
+  IconButton,
+  List,
+  ListItem,
+  ListItemText
+} from "@material-ui/core";
 
 import CloseIcon from "@material-ui/icons/Close";
 

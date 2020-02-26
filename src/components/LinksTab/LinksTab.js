@@ -2,17 +2,17 @@ import React, { Component } from "react";
 
 import PropTypes from "prop-types";
 
-import DialogContent from "@material-ui/core/DialogContent";
-
-import List from "@material-ui/core/List";
-import ListItem from "@material-ui/core/ListItem";
-import ListItemIcon from "@material-ui/core/ListItemIcon";
-import ListItemText from "@material-ui/core/ListItemText";
-import ListItemSecondaryAction from "@material-ui/core/ListItemSecondaryAction";
-
-import Box from "@material-ui/core/Box";
-import Tooltip from "@material-ui/core/Tooltip";
-import IconButton from "@material-ui/core/IconButton";
+import {
+  DialogContent,
+  List,
+  ListItem,
+  ListItemIcon,
+  ListItemText,
+  ListItemSecondaryAction,
+  Box,
+  Tooltip,
+  IconButton
+} from "@material-ui/core";
 
 import LinkIcon from "@material-ui/icons/Link";
 import LinkOffIcon from "@material-ui/icons/LinkOff";

@@ -4,9 +4,7 @@ import PropTypes from "prop-types";
 
 import { withStyles } from "@material-ui/core/styles";
 
-import Avatar from "@material-ui/core/Avatar";
-
-import ListItemAvatar from "@material-ui/core/ListItemAvatar";
+import { Avatar, ListItemAvatar } from "@material-ui/core";
 
 import AccountCircleIcon from "@material-ui/icons/AccountCircle";
 import PersonIcon from "@material-ui/icons/Person";
