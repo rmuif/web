@@ -14,11 +14,11 @@ import {
   Tab
 } from "@material-ui/core";
 
-import CloseIcon from "@material-ui/icons/Close";
-import AccountCircleIcon from "@material-ui/icons/AccountCircle";
-import PaletteIcon from "@material-ui/icons/Palette";
-import LinkIcon from "@material-ui/icons/Link";
-import SecurityIcon from "@material-ui/icons/Security";
+import { Close as CloseIcon } from "@material-ui/icons";
+import { AccountCircle as AccountCircleIcon } from "@material-ui/icons";
+import { Palette as PaletteIcon } from "@material-ui/icons";
+import { Link as LinkIcon } from "@material-ui/icons";
+import { Security as SecurityIcon } from "@material-ui/icons";
 
 import SwipeableViews from "react-swipeable-views";
 

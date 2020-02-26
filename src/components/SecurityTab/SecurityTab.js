@@ -18,8 +18,8 @@ import {
   IconButton
 } from "@material-ui/core";
 
-import LockIcon from "@material-ui/icons/Lock";
-import EditIcon from "@material-ui/icons/Edit";
+import { Lock as LockIcon } from "@material-ui/icons";
+import { Edit as EditIcon } from "@material-ui/icons";
 
 import constraints from "../../constraints";
 import authentication from "../../services/authentication";

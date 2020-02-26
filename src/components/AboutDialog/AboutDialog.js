@@ -16,7 +16,7 @@ import {
   ListItemText
 } from "@material-ui/core";
 
-import CloseIcon from "@material-ui/icons/Close";
+import { Close as CloseIcon } from "@material-ui/icons";
 
 const styles = theme => ({
   closeButton: {

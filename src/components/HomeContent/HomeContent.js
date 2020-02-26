@@ -6,7 +6,7 @@ import { withRouter } from "react-router-dom";
 
 import { auth } from "../../firebase";
 
-import HomeIcon from "@material-ui/icons/Home";
+import { Home as HomeIcon } from "@material-ui/icons";
 
 import authentication from "../../services/authentication";
 

@@ -6,8 +6,8 @@ import { withStyles } from "@material-ui/core/styles";
 
 import { Avatar, ListItemAvatar } from "@material-ui/core";
 
-import AccountCircleIcon from "@material-ui/icons/AccountCircle";
-import PersonIcon from "@material-ui/icons/Person";
+import { AccountCircle as AccountCircleIcon } from "@material-ui/icons";
+import { Person as PersonIcon } from "@material-ui/icons";
 
 import authentication from "../../services/authentication";
 

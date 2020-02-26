@@ -1,12 +1,12 @@
 import React from "react";
 
-import AppleIcon from "mdi-material-ui/Apple";
-import FacebookBoxIcon from "mdi-material-ui/FacebookBox";
-import GitHubCircleIcon from "mdi-material-ui/GithubCircle";
-import GoogleIcon from "mdi-material-ui/Google";
-import MicrosoftIcon from "mdi-material-ui/Microsoft";
-import TwitterIcon from "mdi-material-ui/Twitter";
-import YahooIcon from "mdi-material-ui/Yahoo";
+import { Apple as AppleIcon } from "mdi-material-ui";
+import { FacebookBox as FacebookBoxIcon } from "mdi-material-ui";
+import { GithubCircle as GitHubCircleIcon } from "mdi-material-ui";
+import { Google as GoogleIcon } from "mdi-material-ui";
+import { Microsoft as MicrosoftIcon } from "mdi-material-ui";
+import { Twitter as TwitterIcon } from "mdi-material-ui";
+import { Yahoo as YahooIcon } from "mdi-material-ui";
 
 const authProviders = [
   {

@@ -21,9 +21,9 @@ import {
   Button
 } from "@material-ui/core";
 
-import FiberManualRecord from "@material-ui/icons/FiberManualRecord";
-import Brightness4Icon from "@material-ui/icons/Brightness4";
-import FormatColorResetIcon from "@material-ui/icons/FormatColorReset";
+import { FiberManualRecord as FiberManualRecordIcon } from "@material-ui/icons";
+import { Brightness4 as Brightness4Icon } from "@material-ui/icons";
+import { FormatColorReset as FormatColorResetIcon } from "@material-ui/icons";
 
 import appearance from "../../services/appearance";
 
@@ -248,7 +248,7 @@ class AppearanceTab extends Component {
             <ListItem>
               <Hidden xsDown>
                 <ListItemIcon>
-                  <FiberManualRecord color="primary" />
+                  <FiberManualRecordIcon color="primary" />
                 </ListItemIcon>
               </Hidden>
 
@@ -305,7 +305,7 @@ class AppearanceTab extends Component {
             <ListItem>
               <Hidden xsDown>
                 <ListItemIcon>
-                  <FiberManualRecord color="secondary" />
+                  <FiberManualRecordIcon color="secondary" />
                 </ListItemIcon>
               </Hidden>
 

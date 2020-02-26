@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 
-import FindIcon from "@material-ui/icons/FindInPage";
+import { FindInPage as FindInPageIcon } from "@material-ui/icons";
 
 import EmptyState from "../EmptyState";
 
@@ -8,7 +8,7 @@ class NotFoundContent extends Component {
   render() {
     return (
       <EmptyState
-        icon={<FindIcon />}
+        icon={<FindInPageIcon />}
         title="Content not found"
         description="The requested URL was not found on this server"
       />

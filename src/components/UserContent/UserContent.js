@@ -6,8 +6,8 @@ import { makeStyles } from "@material-ui/core/styles";
 
 import { Grid } from "@material-ui/core";
 
-import ErrorIcon from "@material-ui/icons/Error";
-import PersonOutlineIcon from "@material-ui/icons/PersonOutline";
+import { Error as ErrorIcon } from "@material-ui/icons";
+import { PersonOutline as PersonOutlineIcon } from "@material-ui/icons";
 
 import { firestore } from "../../firebase";
 
