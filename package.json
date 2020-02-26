@@ -78,6 +78,7 @@
     "@testing-library/jest-dom": "^5.1.1",
     "@testing-library/react": "^9.4.1",
     "@testing-library/user-event": "^10.0.0",
+    "babel-plugin-import": "^1.13.0",
     "customize-cra": "^0.9.1",
     "eslint-config-prettier": "^6.10.0",
     "eslint-plugin-prettier": "^3.1.2",
