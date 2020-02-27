@@ -80,7 +80,8 @@ deleteAllUsers = (initial, nextPageToken) => {
 // Commands
 program
   .command("list [max-results] [next-page-token]")
-  .description("lists users")
+  .alias("get")
+  .description("lists users in a range")
   .action((maxResults, nextPageToken) => {
     if (maxResults) {
       maxResults = parseInt(maxResults);
@@ -141,7 +142,10 @@ program
 
 program
   .command("delete")
-  .description("deletes all users")
+  .alias("purge")
+  .description(
+    "deletes all users, this action is irreversible, it will delete all users"
+  )
   .action(() => {
     inquirer
       .prompt([

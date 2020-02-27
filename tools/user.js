@@ -16,12 +16,16 @@ program.name("user");
 program.version("0.1.0");
 
 // Options
-program.option("-e, --email", "use email instead of uid");
+program.option(
+  "-e, --email",
+  "uses an e-mail address instead of a uid, i.e. replaces <uid> with <email>"
+);
 
 // Commands
 program
   .command("create")
-  .description("creates a user")
+  .alias("add")
+  .description("prompts a wizard to create a user")
   .action(() => {
     inquirer
       .prompt([
@@ -81,7 +85,7 @@ program
           .prompt([
             {
               type: "confirm",
-              name: "correct"
+              name: "create"
             }
           ])
           .then(value => {
@@ -90,7 +94,7 @@ program
               process.exit(1);
             }
 
-            if (!value.correct) {
+            if (!value.create) {
               process.exit(1);
             }
 
@@ -118,7 +122,10 @@ program
 
 program
   .command("get <uid>")
-  .description("gets data from a user")
+  .alias("read")
+  .description(
+    "retreives data from a user, e.g. their e-mail address and display name"
+  )
   .action(uid => {
     if (program.email) {
       const email = uid;
@@ -182,7 +189,8 @@ program
 
 program
   .command("update <uid>")
-  .description("updates a user")
+  .alias("change")
+  .description("runs a wizard to update an existing user")
   .action(uid => {
     if (program.email) {
       const email = uid;
@@ -429,7 +437,8 @@ program
 
 program
   .command("unban <uid>")
-  .description("unbans a user")
+  .alias("enable")
+  .description("unbans a user, allowing them access to the app")
   .action(uid => {
     if (program.email) {
       const email = uid;
@@ -482,7 +491,8 @@ program
 
 program
   .command("ban <uid>")
-  .description("bans a user")
+  .alias("disable")
+  .description("bans a user, restricts their access to the app")
   .action(uid => {
     if (program.email) {
       const email = uid;
@@ -535,7 +545,8 @@ program
 
 program
   .command("delete <uid>")
-  .description("deletes a user")
+  .alias("remove")
+  .description("deletes a user, this command is irreversible")
   .action(uid => {
     if (program.email) {
       const email = uid;

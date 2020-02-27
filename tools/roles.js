@@ -15,12 +15,16 @@ program.name("roles");
 program.version("0.1.0");
 
 // Options
-program.option("-e, --email", "use email instead of uid");
+program.option(
+  "-e, --email",
+  "uses an e-mail address instead of a uid, i.e. replaces <uid> with <email>"
+);
 
 // Commands
 program
   .command("get <uid>")
-  .description("gets the roles for a user")
+  .alias("read")
+  .description("gets the roles for a user, available through custom claims")
   .action(uid => {
     if (program.email) {
       const email = uid;
@@ -99,7 +103,8 @@ program
 
 program
   .command("set <uid> <roles>")
-  .description("sets the roles for a user")
+  .alias("update")
+  .description("sets the roles for a user, will overwrite any existing roles")
   .action((uid, roles) => {
     roles = roles.split(",");
 
@@ -162,7 +167,8 @@ program
 
 program
   .command("remove <uid>")
-  .description("removes all roles from a user")
+  .alias("delete")
+  .description("removes all roles from a user, a clean slate")
   .action(uid => {
     if (program.email) {
       const email = uid;
