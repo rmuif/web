@@ -1,0 +1,16 @@
+{
+  "name": "tools",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "scripts": {
+    "admin": "node admin"
+  },
+  "dependencies": {
+    "cli-table": "^0.3.1",
+    "commander": "^4.1.1",
+    "dotenv": "^8.2.0",
+    "firebase-admin": "^8.9.2",
+    "inquirer": "^7.0.4"
+  }
+}

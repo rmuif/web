@@ -82,7 +82,6 @@
     "customize-cra": "^0.9.1",
     "eslint-config-prettier": "^6.10.0",
     "eslint-plugin-prettier": "^3.1.2",
-    "firebase-admin": "^8.9.2",
     "husky": "^4.2.1",
     "lint-staged": "^10.0.8",
     "prettier": "^1.19.1",
