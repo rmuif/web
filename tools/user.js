@@ -189,25 +189,116 @@ program
 
       auth
         .getUserByEmail(email)
-        .then(value => {
-          if (!value) {
+        .then(currentUser => {
+          if (!currentUser) {
             console.log("The user doesn’t have any data.");
             process.exit(1);
           }
 
-          const table = new Table();
+          inquirer
+            .prompt([
+              {
+                type: "input",
+                name: "email",
+                default: currentUser.email
+              },
+              {
+                type: "confirm",
+                name: "emailVerified",
+                default: currentUser.emailVerified
+              },
+              {
+                type: "input",
+                name: "displayName",
+                default: currentUser.displayName
+              },
+              {
+                type: "input",
+                name: "photoURL",
+                default: currentUser.photoURL
+              },
+              {
+                type: "confirm",
+                name: "disabled",
+                default: currentUser.disabled
+              }
+            ])
+            .then(newUser => {
+              if (!newUser) {
+                console.log("The user is not valid.");
+                process.exit(1);
+              }
 
-          table.push(
-            { uid: value.uid || "N/A" },
-            { email: value.email || "N/A" },
-            { emailVerified: value.emailVerified },
-            { displayName: value.displayName || "N/A" },
-            { photoURL: value.photoURL || "N/A" },
-            { disabled: value.disabled }
-          );
+              const email = newUser.email || undefined;
+              const emailVerified = newUser.emailVerified;
+              const displayName = newUser.displayName || undefined;
+              const photoURL = newUser.photoURL || undefined;
+              const disabled = newUser.disabled;
 
-          console.log(table.toString());
-          process.exit(0);
+              if (
+                currentUser.email === email &&
+                currentUser.emailVerified === emailVerified &&
+                currentUser.displayName === displayName &&
+                currentUser.photoURL === photoURL &&
+                currentUser.disabled === disabled
+              ) {
+                console.log("Nothing changed.");
+                process.exit(1);
+              }
+
+              const table = new Table({
+                head: ["Key", "Current Value", "New Value"]
+              });
+
+              table.push(
+                ["email", currentUser.email || "N/A", email || "N/A"],
+                ["emailVerified", currentUser.emailVerified, emailVerified],
+                [
+                  "displayName",
+                  currentUser.displayName || "N/A",
+                  displayName || "N/A"
+                ],
+                ["photoURL", currentUser.photoURL || "N/A", photoURL || "N/A"],
+                ["disabled", currentUser.disabled, disabled]
+              );
+
+              console.log(table.toString());
+
+              inquirer
+                .prompt([
+                  {
+                    type: "confirm",
+                    name: "update"
+                  }
+                ])
+                .then(value => {
+                  if (!value) {
+                    console.log("The answer is not valid.");
+                    process.exit(1);
+                  }
+
+                  if (!value.update) {
+                    process.exit(1);
+                  }
+
+                  auth
+                    .updateUser(uid, {
+                      email: email,
+                      emailVerified: emailVerified,
+                      displayName: displayName,
+                      photoURL: photoURL,
+                      disabled: disabled
+                    })
+                    .then(() => {
+                      console.log("Updated user");
+                      process.exit(0);
+                    })
+                    .catch(reason => {
+                      console.log(reason.message);
+                      process.exit(1);
+                    });
+                });
+            });
         })
         .catch(reason => {
           console.log(reason.message);
