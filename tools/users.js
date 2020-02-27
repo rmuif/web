@@ -13,7 +13,6 @@ admin.initializeApp({
 const auth = admin.auth();
 
 program.name("users");
-program.version("0.1.0");
 
 deleteAllUsers = (initial, nextPageToken) => {
   if (initial) {
@@ -77,7 +76,6 @@ deleteAllUsers = (initial, nextPageToken) => {
     });
 };
 
-// Commands
 program
   .command("list [max-results] [next-page-token]")
   .alias("get")

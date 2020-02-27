@@ -13,15 +13,12 @@ admin.initializeApp({
 const auth = admin.auth();
 
 program.name("user");
-program.version("0.1.0");
 
-// Options
 program.option(
   "-e, --email",
   "uses an e-mail address instead of a uid, i.e. replaces <uid> with <email>"
 );
 
-// Commands
 program
   .command("create")
   .alias("add")
