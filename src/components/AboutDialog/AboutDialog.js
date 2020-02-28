@@ -38,7 +38,7 @@ class AboutDialog extends Component {
     const { user } = this.props;
 
     return (
-      <Dialog {...dialogProps}>
+      <Dialog fullWidth maxWidth="xs" {...dialogProps}>
         <DialogTitle disableTypography>
           <Typography variant="h6">About</Typography>
 
