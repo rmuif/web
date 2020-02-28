@@ -2,6 +2,8 @@ const program = require("commander");
 const admin = require("firebase-admin");
 const Table = require("cli-table");
 
+require("dotenv").config();
+
 const package = require("../package");
 
 admin.initializeApp({

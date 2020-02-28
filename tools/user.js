@@ -3,6 +3,8 @@ const admin = require("firebase-admin");
 const inquirer = require("inquirer");
 const Table = require("cli-table");
 
+require("dotenv").config();
+
 const package = require("../package");
 
 admin.initializeApp({
