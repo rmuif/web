@@ -61,7 +61,7 @@ program
       ])
       .then(value => {
         if (!value) {
-          console.log("The user is not valid.");
+          console.log("No value.");
           process.exit(1);
         }
 
@@ -69,12 +69,12 @@ program
         const user = value;
 
         table.push(
-          { uid: user.uid || "N/A" },
-          { email: user.email || "N/A" },
+          { uid: user.uid || "" },
+          { email: user.email || "" },
           { emailVerified: user.emailVerified },
-          { password: user.password || "N/A" },
-          { displayName: user.displayName || "N/A" },
-          { photoURL: user.photoURL || "N/A" },
+          { password: user.password || "" },
+          { displayName: user.displayName || "" },
+          { photoURL: user.photoURL || "" },
           { disabled: user.disabled }
         );
 
@@ -89,7 +89,7 @@ program
           ])
           .then(value => {
             if (!value) {
-              console.log("The answer is not valid.");
+              console.log("No value.");
               process.exit(1);
             }
 
@@ -108,7 +108,6 @@ program
                 disabled: user.disabled
               })
               .then(() => {
-                console.log("Created user");
                 process.exit(0);
               })
               .catch(reason => {
@@ -133,18 +132,18 @@ program
         .getUserByEmail(email)
         .then(value => {
           if (!value) {
-            console.log("The user doesn’t have any data.");
+            console.log("No value.");
             process.exit(1);
           }
 
           const table = new Table();
 
           table.push(
-            { uid: value.uid || "N/A" },
-            { email: value.email || "N/A" },
+            { uid: value.uid || "" },
+            { email: value.email || "" },
             { emailVerified: value.emailVerified },
-            { displayName: value.displayName || "N/A" },
-            { photoURL: value.photoURL || "N/A" },
+            { displayName: value.displayName || "" },
+            { photoURL: value.photoURL || "" },
             { disabled: value.disabled }
           );
 
@@ -163,17 +162,18 @@ program
       .getUser(uid)
       .then(value => {
         if (!value) {
-          console.log("The user doesn’t have any data.");
+          console.log("No value.");
           process.exit(1);
         }
+
         const table = new Table();
 
         table.push(
-          { uid: value.uid || "N/A" },
-          { email: value.email || "N/A" },
+          { uid: value.uid || "" },
+          { email: value.email || "" },
           { emailVerified: value.emailVerified },
-          { displayName: value.displayName || "N/A" },
-          { photoURL: value.photoURL || "N/A" },
+          { displayName: value.displayName || "" },
+          { photoURL: value.photoURL || "" },
           { disabled: value.disabled }
         );
 
@@ -198,7 +198,7 @@ program
         .getUserByEmail(email)
         .then(currentUser => {
           if (!currentUser) {
-            console.log("The user doesn’t have any data.");
+            console.log("No value.");
             process.exit(1);
           }
 
@@ -232,7 +232,7 @@ program
             ])
             .then(newUser => {
               if (!newUser) {
-                console.log("The user is not valid.");
+                console.log("No value.");
                 process.exit(1);
               }
 
@@ -249,7 +249,6 @@ program
                 currentUser.photoURL === photoURL &&
                 currentUser.disabled === disabled
               ) {
-                console.log("Nothing changed.");
                 process.exit(1);
               }
 
@@ -258,14 +257,14 @@ program
               });
 
               table.push(
-                ["email", currentUser.email || "N/A", email || "N/A"],
+                ["email", currentUser.email || "", email || ""],
                 ["emailVerified", currentUser.emailVerified, emailVerified],
                 [
                   "displayName",
-                  currentUser.displayName || "N/A",
-                  displayName || "N/A"
+                  currentUser.displayName || "",
+                  displayName || ""
                 ],
-                ["photoURL", currentUser.photoURL || "N/A", photoURL || "N/A"],
+                ["photoURL", currentUser.photoURL || "", photoURL || ""],
                 ["disabled", currentUser.disabled, disabled]
               );
 
@@ -280,16 +279,16 @@ program
                 ])
                 .then(value => {
                   if (!value) {
-                    console.log("The answer is not valid.");
+                    console.log("No value.");
                     process.exit(1);
                   }
 
                   if (!value.update) {
-                    process.exit(1);
+                    process.exit(0);
                   }
 
                   auth
-                    .updateUser(uid, {
+                    .updateUser(currentUser.uid, {
                       email: email,
                       emailVerified: emailVerified,
                       displayName: displayName,
@@ -297,7 +296,6 @@ program
                       disabled: disabled
                     })
                     .then(() => {
-                      console.log("Updated user");
                       process.exit(0);
                     })
                     .catch(reason => {
@@ -319,7 +317,7 @@ program
       .getUser(uid)
       .then(currentUser => {
         if (!currentUser) {
-          console.log("The user doesn’t have any data.");
+          console.log("No value.");
           process.exit(1);
         }
 
@@ -353,7 +351,7 @@ program
           ])
           .then(newUser => {
             if (!newUser) {
-              console.log("The user is not valid.");
+              console.log("No value.");
               process.exit(1);
             }
 
@@ -370,8 +368,7 @@ program
               currentUser.photoURL === photoURL &&
               currentUser.disabled === disabled
             ) {
-              console.log("Nothing changed.");
-              process.exit(1);
+              process.exit(0);
             }
 
             const table = new Table({
@@ -379,14 +376,10 @@ program
             });
 
             table.push(
-              ["email", currentUser.email || "N/A", email || "N/A"],
+              ["email", currentUser.email || "", email || ""],
               ["emailVerified", currentUser.emailVerified, emailVerified],
-              [
-                "displayName",
-                currentUser.displayName || "N/A",
-                displayName || "N/A"
-              ],
-              ["photoURL", currentUser.photoURL || "N/A", photoURL || "N/A"],
+              ["displayName", currentUser.displayName || "", displayName || ""],
+              ["photoURL", currentUser.photoURL || "", photoURL || ""],
               ["disabled", currentUser.disabled, disabled]
             );
 
@@ -401,16 +394,16 @@ program
               ])
               .then(value => {
                 if (!value) {
-                  console.log("The answer is not valid.");
+                  console.log("No value.");
                   process.exit(1);
                 }
 
                 if (!value.update) {
-                  process.exit(1);
+                  process.exit(0);
                 }
 
                 auth
-                  .updateUser(uid, {
+                  .updateUser(currentUser.uid, {
                     email: email,
                     emailVerified: emailVerified,
                     displayName: displayName,
@@ -418,7 +411,6 @@ program
                     disabled: disabled
                   })
                   .then(() => {
-                    console.log("Updated user");
                     process.exit(0);
                   })
                   .catch(reason => {
@@ -446,21 +438,20 @@ program
         .getUserByEmail(email)
         .then(value => {
           if (!value) {
-            console.log("The user doesn’t have any data.");
+            console.log("No value.");
             process.exit(1);
           }
 
           const uid = value.uid;
 
           if (!uid) {
-            console.log("The user doesn’t have a UID.");
+            console.log("No user ID.");
             process.exit(1);
           }
 
           auth
             .updateUser(uid, { disabled: false })
             .then(() => {
-              console.log("Unbanned user");
               process.exit(0);
             })
             .catch(reason => {
@@ -479,7 +470,6 @@ program
     auth
       .updateUser(uid, { disabled: false })
       .then(() => {
-        console.log("Unbanned user");
         process.exit(0);
       })
       .catch(reason => {
@@ -500,21 +490,20 @@ program
         .getUserByEmail(email)
         .then(value => {
           if (!value) {
-            console.log("The user doesn’t have any data.");
+            console.log("No value.");
             process.exit(1);
           }
 
           const uid = value.uid;
 
           if (!uid) {
-            console.log("The user doesn’t have a UID.");
+            console.log("No user ID.");
             process.exit(1);
           }
 
           auth
             .updateUser(uid, { disabled: true })
             .then(() => {
-              console.log("Banned user");
               process.exit(0);
             })
             .catch(reason => {
@@ -533,7 +522,6 @@ program
     auth
       .updateUser(uid, { disabled: true })
       .then(() => {
-        console.log("Banned user");
         process.exit(0);
       })
       .catch(reason => {
@@ -554,21 +542,20 @@ program
         .getUserByEmail(email)
         .then(value => {
           if (!value) {
-            console.log("The user doesn’t have any data.");
+            console.log("No value.");
             process.exit(1);
           }
 
           const uid = value.uid;
 
           if (!uid) {
-            console.log("The user doesn’t have a UID.");
+            console.log("No user ID.");
             process.exit(1);
           }
 
           auth
             .deleteUser(uid)
             .then(() => {
-              console.log("Deleted user");
               process.exit(0);
             })
             .catch(reason => {
@@ -587,7 +574,6 @@ program
     auth
       .deleteUser(uid)
       .then(() => {
-        console.log("Deleted user");
         process.exit(0);
       })
       .catch(reason => {

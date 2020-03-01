@@ -32,22 +32,22 @@ program
         .getUserByEmail(email)
         .then(value => {
           if (!value) {
-            console.log("The user doesn’t have any data.");
+            console.log("No value.");
             process.exit(1);
           }
 
           const customClaims = value.customClaims;
 
           if (!customClaims) {
-            console.log("The user doesn’t have any custom claims.");
-            process.exit(1);
+            console.log("No custom claims.");
+            process.exit(0);
           }
 
           const roles = customClaims.roles;
 
           if (!roles) {
-            console.log("The user doesn’t have any roles.");
-            process.exit(1);
+            console.log("No roles.");
+            process.exit(0);
           }
 
           const table = new Table();
@@ -69,22 +69,22 @@ program
       .getUser(uid)
       .then(value => {
         if (!value) {
-          console.log("The user doesn’t have any data.");
+          console.log("No value.");
           process.exit(1);
         }
 
         const customClaims = value.customClaims;
 
         if (!customClaims) {
-          console.log("The user doesn’t have any custom claims.");
-          process.exit(1);
+          console.log("No custom claims.");
+          process.exit(0);
         }
 
         const roles = customClaims.roles;
 
         if (!roles) {
-          console.log("The user doesn’t have any roles.");
-          process.exit(1);
+          console.log("No roles.");
+          process.exit(0);
         }
 
         const table = new Table();
@@ -114,14 +114,14 @@ program
         .getUserByEmail(email)
         .then(value => {
           if (!value) {
-            console.log("The user doesn’t have any data.");
+            console.log("No value.");
             process.exit(1);
           }
 
           const uid = value.uid;
 
           if (!uid) {
-            console.log("The user doesn’t have a UID.");
+            console.log("No user ID.");
             process.exit(1);
           }
 
@@ -176,21 +176,20 @@ program
         .getUserByEmail(email)
         .then(value => {
           if (!value) {
-            console.log("The user doesn’t have any data.");
+            console.log("No value.");
             process.exit(1);
           }
 
           const uid = value.uid;
 
           if (!uid) {
-            console.log("The user doesn’t have a UID.");
+            console.log("No user ID.");
             process.exit(1);
           }
 
           auth
             .setCustomUserClaims(uid, { roles: null })
             .then(() => {
-              console.log("All roles removed from user");
               process.exit(0);
             })
             .catch(reason => {
@@ -209,7 +208,6 @@ program
     auth
       .setCustomUserClaims(uid, { roles: null })
       .then(() => {
-        console.log("All roles removed from user");
         process.exit(0);
       })
       .catch(reason => {
