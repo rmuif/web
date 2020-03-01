@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React from "react";
 
 import PropTypes from "prop-types";
 
@@ -19,27 +19,21 @@ export default function DialogHost (props) {
     const { openSnackbar } = props;
 
     const { aboutDialog, signUpDialog, signInDialog, settingsDialog, deleteAccountDialog, signOutDialog} = dialogs;
+    
+    const propObj = { performingAction, theme, user, userData, openSnackbar}
 
     return (
       <>
         <AboutDialog
           dialogProps={aboutDialog.dialogProps}
-          performingAction={performingAction}
-          theme={theme}
-          user={user}
-          userData={userData}
-          openSnackbar={openSnackbar}
+          {...propObj}
           {...aboutDialog.props}
         />
 
         {user && (
             <AlertDialog
               dialogProps={signOutDialog.dialogProps}
-              performingAction={performingAction}
-              theme={theme}
-              user={user}
-              userData={userData}
-              openSnackbar={openSnackbar}
+              {...propObj}
               {...signOutDialog.props}
             />
         )}
@@ -48,11 +42,7 @@ export default function DialogHost (props) {
           {user && (
               <DeleteAccountDialog
                 dialogProps={deleteAccountDialog.dialogProps}
-                performingAction={performingAction}
-                theme={theme}
-                user={user}
-                userData={userData}
-                openSnackbar={openSnackbar}
+                {...propObj}
                 {...deleteAccountDialog.props}
               />
           )}
@@ -61,21 +51,13 @@ export default function DialogHost (props) {
             <>
               <SignUpDialog
                 dialogProps={signUpDialog.dialogProps}
-                performingAction={performingAction}
-                theme={theme}
-                user={user}
-                userData={userData}
-                openSnackbar={openSnackbar}
+                {...propObj}
                 {...signUpDialog.props}
               />
 
               <SignInDialog
                 dialogProps={signInDialog.dialogProps}
-                performingAction={performingAction}
-                theme={theme}
-                user={user}
-                userData={userData}
-                openSnackbar={openSnackbar}
+                {...propObj}
                 {...signInDialog.props}
               />
             </>
@@ -86,11 +68,7 @@ export default function DialogHost (props) {
           {user && (
               <SettingsDialog
                 dialogProps={settingsDialog.dialogProps}
-                performingAction={performingAction}
-                theme={theme}
-                user={user}
-                userData={userData}
-                openSnackbar={openSnackbar}
+                {...propObj}
                 {...settingsDialog.props}
               />
           )}
@@ -104,11 +82,7 @@ export default function DialogHost (props) {
 
                   ...deleteAccountDialog.dialogProps
                 }}
-                performingAction={performingAction}
-                theme={theme}
-                user={user}
-                userData={userData}
-                openSnackbar={openSnackbar}
+                {...propObj}
                 {...deleteAccountDialog.props}
               />
           )}
@@ -121,11 +95,7 @@ export default function DialogHost (props) {
 
                   ...signUpDialog.dialogProps
                 }}
-                performingAction={performingAction}
-                theme={theme}
-                user={user}
-                userData={userData}
-                openSnackbar={openSnackbar}
+                {...propObj}
                 {...signUpDialog.props}
               />
 
@@ -135,11 +105,7 @@ export default function DialogHost (props) {
 
                   ...signInDialog.dialogProps
                 }}
-                performingAction={performingAction}
-                theme={theme}
-                user={user}
-                userData={userData}
-                openSnackbar={openSnackbar}
+                {...propObj}
                 {...signInDialog.props}
               />
             </>
@@ -154,11 +120,7 @@ export default function DialogHost (props) {
 
                   ...settingsDialog.dialogProps
                 }}
-                performingAction={performingAction}
-                theme={theme}
-                user={user}
-                userData={userData}
-                openSnackbar={openSnackbar}
+                {...propObj}
                 {...settingsDialog.props}
               />
           )}
