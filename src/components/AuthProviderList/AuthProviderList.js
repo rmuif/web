@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React from "react";
 
 import PropTypes from "prop-types";
 
@@ -10,13 +10,12 @@ import Button from "@material-ui/core/Button";
 
 import authProviders from "../../authProviders";
 
-class AuthProviderList extends Component {
-  render() {
+export default function AuthProviderList (props) {
     // Properties
-    const { gutterBottom, performingAction } = this.props;
+    const { gutterBottom, performingAction } = props;
 
     // Events
-    const { onAuthProviderClick } = this.props;
+    const { onAuthProviderClick } = props;
 
     return (
       <Box mb={gutterBottom ? 3 : 0}>
@@ -62,5 +61,3 @@ AuthProviderList.propTypes = {
   // Events
   onAuthProviderClick: PropTypes.func.isRequired
 };
-
-export default AuthProviderList;
