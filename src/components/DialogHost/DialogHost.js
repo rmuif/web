@@ -11,20 +11,14 @@ import SettingsDialog from "../SettingsDialog";
 import DeleteAccountDialog from "../DeleteAccountDialog";
 import AlertDialog from "../AlertDialog";
 
-class DialogHost extends Component {
-  render() {
+export default function DialogHost (props) {
     // Properties
-    const { performingAction, theme, user, userData, dialogs } = this.props;
+    const { performingAction, theme, user, userData, dialogs } = props;
 
     // Functions
-    const { openSnackbar } = this.props;
+    const { openSnackbar } = props;
 
-    const aboutDialog = dialogs.aboutDialog;
-    const signUpDialog = dialogs.signUpDialog;
-    const signInDialog = dialogs.signInDialog;
-    const settingsDialog = dialogs.settingsDialog;
-    const deleteAccountDialog = dialogs.deleteAccountDialog;
-    const signOutDialog = dialogs.signOutDialog;
+    const { aboutDialog, signUpDialog, signInDialog, settingsDialog, deleteAccountDialog, signOutDialog} = dialogs;
 
     return (
       <>
@@ -39,7 +33,6 @@ class DialogHost extends Component {
         />
 
         {user && (
-          <>
             <AlertDialog
               dialogProps={signOutDialog.dialogProps}
               performingAction={performingAction}
@@ -49,12 +42,10 @@ class DialogHost extends Component {
               openSnackbar={openSnackbar}
               {...signOutDialog.props}
             />
-          </>
         )}
 
         <Hidden xsDown>
           {user && (
-            <>
               <DeleteAccountDialog
                 dialogProps={deleteAccountDialog.dialogProps}
                 performingAction={performingAction}
@@ -64,7 +55,6 @@ class DialogHost extends Component {
                 openSnackbar={openSnackbar}
                 {...deleteAccountDialog.props}
               />
-            </>
           )}
 
           {!user && (
@@ -94,7 +84,6 @@ class DialogHost extends Component {
 
         <Hidden smDown>
           {user && (
-            <>
               <SettingsDialog
                 dialogProps={settingsDialog.dialogProps}
                 performingAction={performingAction}
@@ -104,13 +93,11 @@ class DialogHost extends Component {
                 openSnackbar={openSnackbar}
                 {...settingsDialog.props}
               />
-            </>
           )}
         </Hidden>
 
         <Hidden smUp>
           {user && (
-            <>
               <DeleteAccountDialog
                 dialogProps={{
                   fullScreen: true,
@@ -124,7 +111,6 @@ class DialogHost extends Component {
                 openSnackbar={openSnackbar}
                 {...deleteAccountDialog.props}
               />
-            </>
           )}
 
           {!user && (
@@ -162,7 +148,6 @@ class DialogHost extends Component {
 
         <Hidden mdUp>
           {user && (
-            <>
               <SettingsDialog
                 dialogProps={{
                   fullScreen: true,
@@ -176,12 +161,10 @@ class DialogHost extends Component {
                 openSnackbar={openSnackbar}
                 {...settingsDialog.props}
               />
-            </>
           )}
         </Hidden>
       </>
     );
-  }
 }
 
 DialogHost.propTypes = {
@@ -195,5 +178,3 @@ DialogHost.propTypes = {
   // Functions
   openSnackbar: PropTypes.func.isRequired
 };
-
-export default DialogHost;
