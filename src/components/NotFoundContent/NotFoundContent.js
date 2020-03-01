@@ -1,11 +1,10 @@
-import React, { Component } from "react";
+import React from "react";
 
 import FindIcon from "@material-ui/icons/FindInPage";
 
 import EmptyState from "../EmptyState";
 
-class NotFoundContent extends Component {
-  render() {
+export default function NotFoundContent () {
     return (
       <EmptyState
         icon={<FindIcon />}
@@ -16,4 +15,3 @@ class NotFoundContent extends Component {
   }
 }
 
-export default NotFoundContent;
