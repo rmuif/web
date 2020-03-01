@@ -19,7 +19,6 @@ export default function SimpleDialog (props) {
         {content}
       </Dialog>
     );
-  }
 }
 
 SimpleDialog.propTypes = {
