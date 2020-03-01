@@ -45,7 +45,6 @@ export default function AuthProviderList (props) {
         </ButtonGroup>
       </Box>
     );
-  }
 }
 
 AuthProviderList.defaultProps = {
