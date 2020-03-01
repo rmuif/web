@@ -1,17 +1,16 @@
-import React, { Component } from "react";
+import React from "react";
 
 import PropTypes from "prop-types";
 
 import Dialog from "@material-ui/core/Dialog";
 import DialogTitle from "@material-ui/core/DialogTitle";
 
-class SimpleDialog extends Component {
-  render() {
+export default function SimpleDialog (props) {
     // Dialog Properties
-    const { dialogProps } = this.props;
+    const { dialogProps } = props;
 
     // Custom Properties
-    const { title, content } = this.props;
+    const { title, content } = props;
 
     return (
       <Dialog {...dialogProps}>
@@ -31,5 +30,3 @@ SimpleDialog.propTypes = {
   title: PropTypes.string,
   content: PropTypes.element.isRequired
 };
-
-export default SimpleDialog;
