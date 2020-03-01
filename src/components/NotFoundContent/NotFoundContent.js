@@ -12,6 +12,5 @@ export default function NotFoundContent () {
         description="The requested URL was not found on this server"
       />
     );
-  }
 }
 
