@@ -78,8 +78,8 @@ class HomeContent extends Component {
 
     return (
       <EmptyState
-        title={process.env.REACT_APP_TITLE}
-        description={process.env.REACT_APP_DESCRIPTION}
+        title="RMUIF"
+        description="Supercharged version of Create React App with all the bells and whistles"
       />
     );
   }

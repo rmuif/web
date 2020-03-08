@@ -1,7 +1,7 @@
 {
-  "name": "rmuif",
-  "version": "3.0.0",
-  "description": "Supercharged version of Create React App with all the  bells and whistles",
+  "name": "cra-template-rmuif",
+  "version": "1.1.0",
+  "description": "The RMUIF template for Create React App",
   "keywords": [
     "react",
     "create-react-app",
@@ -11,7 +11,7 @@
     "firebase",
     "react-router"
   ],
-  "homepage": "https://demo.rmuif.com",
+  "homepage": "https://rmuif.com",
   "bugs": {
     "url": "https://github.com/phoqe/rmuif/issues",
     "email": "phoqe@phoqe.dev"
@@ -20,102 +20,18 @@
   "author": {
     "name": "Linus Långberg",
     "email": "phoqe@phoqe.dev",
-    "url": "https://phoqe.me"
+    "url": "https://phoqe.dev"
   },
+  "files": [
+    "template",
+    "template.json"
+  ],
+  "main": "template.json",
   "repository": {
     "type": "git",
     "url": "https://github.com/phoqe/rmuif.git"
   },
-  "scripts": {
-    "start": "react-app-rewired start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "analyze": "source-map-explorer 'build/static/js/*.js'",
-    "eject": "react-scripts eject",
-    "prettier": "prettier --write '**/*.{js,jsx,ts,tsx,json,css,scss,md}'"
-  },
-  "config": {
-    "title": "RMUIF",
-    "theme": {
-      "primaryColor": "blue",
-      "secondaryColor": "red",
-      "dark": false
-    },
-    "firebase": {
-      "apiKey": "AIzaSyDYZOrZVpXkPQD6J31mb9t2eIIxmGEJK-Q",
-      "authDomain": "react-material-ui-firebase.firebaseapp.com",
-      "databaseUrl": "https://react-material-ui-firebase.firebaseio.com",
-      "projectId": "react-material-ui-firebase",
-      "storageBucket": "react-material-ui-firebase.appspot.com",
-      "messagingSenderId": "552659850812",
-      "appId": "1:552659850812:web:d685f74f72161d96",
-      "measurementId": "G-LYJ69M3CEC"
-    },
-    "sentry": {
-      "dsn": "https://78536326e6524916b6f44b4ea510b7a4@sentry.io/1846624"
-    }
-  },
-  "dependencies": {
-    "@material-ui/core": "^4.9.5",
-    "@material-ui/icons": "^4.9.1",
-    "@material-ui/styles": "^4.9.0",
-    "@sentry/browser": "^5.13.2",
-    "camelcase": "^5.3.1",
-    "firebase": "^7.10.0",
-    "mdi-material-ui": "^6.12.0",
-    "moment": "^2.24.0",
-    "react": "^16.13.0",
-    "react-dom": "^16.13.0",
-    "react-router-dom": "^5.1.2",
-    "react-scripts": "3.4.0",
-    "react-swipeable-views": "0.13.9",
-    "reading-time": "^1.1.3",
-    "typeface-roboto": "^0.0.75",
-    "validate.js": "^0.13.1"
-  },
-  "devDependencies": {
-    "@material-ui/codemod": "^4.5.0",
-    "@testing-library/jest-dom": "^5.1.1",
-    "@testing-library/react": "^9.5.0",
-    "@testing-library/user-event": "^10.0.0",
-    "babel-plugin-import": "^1.13.0",
-    "customize-cra": "^0.9.1",
-    "eslint-config-prettier": "^6.10.0",
-    "eslint-plugin-prettier": "^3.1.2",
-    "husky": "^4.2.1",
-    "lint-staged": "^10.0.8",
-    "prettier": "^1.19.1",
-    "react-app-rewired": "^2.1.5",
-    "source-map-explorer": "^2.3.1"
-  },
-  "private": true,
-  "eslintConfig": {
-    "extends": [
-      "react-app",
-      "plugin:prettier/recommended"
-    ]
-  },
-  "browserslist": {
-    "production": [
-      ">0.2%",
-      "not dead",
-      "not op_mini all"
-    ],
-    "development": [
-      "last 1 chrome version",
-      "last 1 firefox version",
-      "last 1 safari version"
-    ]
-  },
-  "husky": {
-    "hooks": {
-      "pre-commit": "lint-staged"
-    }
-  },
-  "lint-staged": {
-    "src/**/*.{js,jsx,ts,tsx,json,css,scss,md}": [
-      "prettier --write",
-      "git add"
-    ]
+  "engines": {
+    "node": ">=8"
   }
 }
