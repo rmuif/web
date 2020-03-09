@@ -1,6 +1,6 @@
 ---
 name: Request a feature
-about: If there’s something missing and you want it added, this is the best way to get your idea out there.
+about: If there’s something missing and you want it added, this is the first step and best way to get it out.
 ---
 
 ## Problem
