@@ -19,15 +19,11 @@ This is just a small taste of what RMUIF has to offer, you should check out the 
 
 ## [Demo](https://demo.rmuif.com)
 
-The demo is using the `master` branch which always contains the latest version. Development takes place in the `develop` branch as per the Gitflow workflow.
-
-## [Documentation](https://docs.rmuif.com)
-
-The documentation for RMUIF contains instructions on how to setup and configure the template. It also houses more advanced sections such as routing and roles.
+## [Getting Started](https://docs.rmuif.com/getting-started)
 
 ## Support
 
-If you are experiencing an issue directly related to the template itself you should create an issue using the bug report template on GitHub. However, if you have any problems setting up the template, you are welcome to join the [Discord channel](https://discord.gg/PdRYuHW) (keep discussions regarding this project in the #rmuif channel) or send an e-mail to [phoqe@phoqe.dev](mailto:phoqe@phoqe.dev).
+If you are experiencing an issue directly related to the template itself you should create an issue using the bug report template on GitHub. However, if you have any problems setting up the template, you are welcome to join the [Discord channel](https://discord.gg/5Ann5C3) (keep discussions regarding this project in the #rmuif channel) or send an e-mail to [phoqe@phoqe.dev](mailto:phoqe@phoqe.dev).
 
 ## Sponsor
 
