@@ -1,4 +1,8 @@
+blank_issues_enabled: false
 contact_links:
-  - name: Join Us on Discord
-    url: https://discord.gg/PdRYuHW
-    about: If you’ve got a question that doesn’t fit a template, use our Discord channel.
+  - name: Discord
+    about: This is the main channel for external communication and the quickest way to get help.
+    url: https://discord.gg/5Ann5C3
+  - name: Stack Overflow
+    about: If you’ve got a broad question that doesn’t necessarily relate to the project, you can ask a question on Stack Overflow.
+    url: https://stackoverflow.com/questions/tagged/rmuif

@@ -5,7 +5,7 @@
   "keywords": [],
   "homepage": "https://rmuif.com",
   "bugs": {
-    "url": "https://github.com/phoqe/rmuif/issues",
+    "url": "https://github.com/rmuif/web/issues",
     "email": "phoqe@phoqe.dev"
   },
   "license": "MIT",
@@ -16,7 +16,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/phoqe/rmuif.git"
+    "url": "https://github.com/rmuif/web.git"
   },
   "scripts": {
     "roles": "node roles",
