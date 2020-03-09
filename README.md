@@ -19,7 +19,11 @@ This is just a small taste of what RMUIF has to offer, you should check out the 
 
 ## [Demo](https://demo.rmuif.com)
 
+The demo is based on the `master` branch.
+
 ## [Getting Started](https://docs.rmuif.com/getting-started)
+
+It’s easy to create an app with RMUIF, follow the [documentation](https://docs.rmuif.com).
 
 ## Support
 
