@@ -4,9 +4,9 @@ import PropTypes from "prop-types";
 
 import * as Sentry from "@sentry/browser";
 
-import { Error as ErrorIcon } from "@material-ui/icons";
-
 import EmptyState from "../EmptyState";
+
+import { ReactComponent as ErrorIllustration } from "../../illustrations/error.svg";
 
 class ErrorBoundary extends Component {
   constructor(props) {
@@ -41,7 +41,13 @@ class ErrorBoundary extends Component {
     const { hasError } = this.state;
 
     if (hasError) {
-      return <EmptyState icon={<ErrorIcon />} title="Something went wrong" />;
+      return (
+        <EmptyState
+          image={<ErrorIllustration />}
+          title="Something went wrong"
+          description="The app failed to load"
+        />
+      );
     }
 
     return children;
