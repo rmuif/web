@@ -4,36 +4,36 @@ import PropTypes from "prop-types";
 import { Box, Typography } from "@material-ui/core";
 
 function EmptyState(props) {
-  let width;
-  let height;
+  let imageWidth;
+  let imageHeight;
   let fontSize;
   let variant;
 
   switch (props.size) {
     case "small":
-      width = 50;
-      height = 50;
+      imageWidth = 50;
+      imageHeight = 50;
       fontSize = "h3.fontSize";
       variant = "h6";
       break;
 
     case "medium":
-      width = 75;
-      height = 75;
+      imageWidth = 75;
+      imageHeight = 75;
       fontSize = "h2.fontSize";
       variant = "h5";
       break;
 
     case "large":
-      width = 100;
-      height = 100;
+      imageWidth = 100;
+      imageHeight = 100;
       fontSize = "h1.fontSize";
       variant = "h4";
       break;
 
     default:
-      width = 0;
-      height = 0;
+      imageWidth = 75;
+      imageHeight = 75;
       fontSize = "h2.fontSize";
       variant = "h5";
       break;
@@ -48,15 +48,20 @@ function EmptyState(props) {
         left="50%"
         textAlign="center"
       >
-        {props.icon && (
+        {!props.image && props.icon && (
           <Box clone color="text.secondary" fontSize={fontSize}>
             {props.icon}
           </Box>
         )}
 
-        {props.illustration && (
-          <Box clone width={`${width}%`} height={`${height}%`}>
-            {props.illustration}
+        {!props.icon && props.image && (
+          <Box
+            clone
+            mb={props.title || props.description ? 2 : 0}
+            width={`${imageWidth}%`}
+            height={`${imageHeight}%`}
+          >
+            {props.image}
           </Box>
         )}
 
@@ -78,9 +83,20 @@ function EmptyState(props) {
   if (props.type === "card") {
     return (
       <Box padding={props.padding} textAlign="center">
-        {props.icon && (
+        {!props.image && props.icon && (
           <Box clone color="text.secondary" fontSize={fontSize}>
             {props.icon}
+          </Box>
+        )}
+
+        {!props.icon && props.image && (
+          <Box
+            clone
+            mb={props.title || props.description ? 2 : 0}
+            width={`${imageWidth}%`}
+            height={`${imageHeight}%`}
+          >
+            {props.image}
           </Box>
         )}
 
@@ -113,7 +129,7 @@ EmptyState.propTypes = {
   size: PropTypes.string,
   padding: PropTypes.number,
 
-  illustration: PropTypes.element,
+  image: PropTypes.element,
   icon: PropTypes.element,
   title: PropTypes.string,
   description: PropTypes.string
