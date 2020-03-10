@@ -4,26 +4,36 @@ import PropTypes from "prop-types";
 import { Box, Typography } from "@material-ui/core";
 
 function EmptyState(props) {
+  let width;
+  let height;
   let fontSize;
   let variant;
 
   switch (props.size) {
     case "small":
+      width = 50;
+      height = 50;
       fontSize = "h3.fontSize";
       variant = "h6";
       break;
 
     case "medium":
+      width = 75;
+      height = 75;
       fontSize = "h2.fontSize";
       variant = "h5";
       break;
 
     case "large":
+      width = 100;
+      height = 100;
       fontSize = "h1.fontSize";
       variant = "h4";
       break;
 
     default:
+      width = 0;
+      height = 0;
       fontSize = "h2.fontSize";
       variant = "h5";
       break;
@@ -41,6 +51,12 @@ function EmptyState(props) {
         {props.icon && (
           <Box clone color="text.secondary" fontSize={fontSize}>
             {props.icon}
+          </Box>
+        )}
+
+        {props.illustration && (
+          <Box clone width={`${width}%`} height={`${height}%`}>
+            {props.illustration}
           </Box>
         )}
 
