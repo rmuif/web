@@ -12,6 +12,8 @@ import authentication from "../../services/authentication";
 
 import EmptyState from "../EmptyState";
 
+import { ReactComponent as HomeIllustration } from "../../illustrations/home.svg";
+
 class HomeContent extends Component {
   signInWithEmailLink = () => {
     const { user } = this.props;
@@ -78,6 +80,7 @@ class HomeContent extends Component {
 
     return (
       <EmptyState
+        image={<HomeIllustration />}
         title="RMUIF"
         description="Supercharged version of Create React App with all the bells and whistles"
       />
