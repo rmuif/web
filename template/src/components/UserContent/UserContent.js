@@ -6,15 +6,15 @@ import { makeStyles } from "@material-ui/core/styles";
 
 import { Grid } from "@material-ui/core";
 
-import { Error as ErrorIcon } from "@material-ui/icons";
-import { PersonOutline as PersonOutlineIcon } from "@material-ui/icons";
-
 import { firestore } from "../../firebase";
 
 import EmptyState from "../EmptyState";
 
 import Loader from "../Loader";
 import UserCard from "../UserCard";
+
+import { ReactComponent as ErrorIllustration } from "../../illustrations/error.svg";
+import { ReactComponent as NoDataIllustration } from "../../illustrations/no-data.svg";
 
 const useStyles = makeStyles({
   grid: {
@@ -49,7 +49,7 @@ function UserContent() {
   if (error) {
     return (
       <EmptyState
-        icon={<ErrorIcon />}
+        image={<ErrorIllustration />}
         title="Something went wrong"
         description="There was an error while trying to fetch the requested user"
       />
@@ -63,7 +63,7 @@ function UserContent() {
   if (!user) {
     return (
       <EmptyState
-        icon={<PersonOutlineIcon />}
+        image={<NoDataIllustration />}
         title="User not found"
         description="The requested user was not found"
       />

@@ -12,7 +12,7 @@ import authentication from "../../services/authentication";
 
 import EmptyState from "../EmptyState";
 
-import { ReactComponent as HomeIllustration } from "../../illustrations/home.svg";
+import { ReactComponent as InsertBlockIllustration } from "../../illustrations/insert-block.svg";
 
 class HomeContent extends Component {
   signInWithEmailLink = () => {
@@ -71,7 +71,6 @@ class HomeContent extends Component {
   };
 
   render() {
-    // Properties
     const { user } = this.props;
 
     if (user) {
@@ -80,7 +79,7 @@ class HomeContent extends Component {
 
     return (
       <EmptyState
-        image={<HomeIllustration />}
+        image={<InsertBlockIllustration />}
         title="RMUIF"
         description="Supercharged version of Create React App with all the bells and whistles"
       />
@@ -93,7 +92,6 @@ class HomeContent extends Component {
 }
 
 HomeContent.propTypes = {
-  // Properties
   user: PropTypes.object
 };
 
