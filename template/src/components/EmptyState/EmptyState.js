@@ -1,97 +1,103 @@
-import React, { Component } from "react";
-
+import React from "react";
 import PropTypes from "prop-types";
 
 import { Box, Typography } from "@material-ui/core";
 
-class EmptyState extends Component {
-  render() {
-    // Properties
-    const { type, size, padding, icon, title, description } = this.props;
+function EmptyState(props) {
+  let fontSize;
+  let variant;
 
-    let fontSize;
-    let variant;
-
-    if (size === "small") {
+  switch (props.size) {
+    case "small":
       fontSize = "h3.fontSize";
       variant = "h6";
-    } else if (size === "medium") {
+      break;
+
+    case "medium":
       fontSize = "h2.fontSize";
       variant = "h5";
-    } else if (size === "big") {
+      break;
+
+    case "large":
       fontSize = "h1.fontSize";
       variant = "h4";
-    }
+      break;
 
-    if (type === "content") {
-      return (
-        <Box
-          style={{ transform: "translate(-50%, -50%)" }}
-          position="absolute"
-          top="50%"
-          left="50%"
-          textAlign="center"
-        >
-          {icon && (
-            <Box clone color="text.secondary" fontSize={fontSize}>
-              {icon}
-            </Box>
-          )}
-
-          {title && (
-            <Typography color="textSecondary" variant={variant}>
-              {title}
-            </Typography>
-          )}
-
-          {description && (
-            <Typography color="textSecondary" variant="body1">
-              {description}
-            </Typography>
-          )}
-        </Box>
-      );
-    }
-
-    if (type === "card") {
-      return (
-        <Box padding={padding} textAlign="center">
-          {icon && (
-            <Box clone color="text.secondary" fontSize={fontSize}>
-              {icon}
-            </Box>
-          )}
-
-          {title && (
-            <Typography color="textSecondary" variant={variant}>
-              {title}
-            </Typography>
-          )}
-
-          {description && (
-            <Typography color="textSecondary" variant="body1">
-              {description}
-            </Typography>
-          )}
-        </Box>
-      );
-    }
-
-    return null;
+    default:
+      fontSize = "h2.fontSize";
+      variant = "h5";
+      break;
   }
+
+  if (props.type === "page") {
+    return (
+      <Box
+        style={{ transform: "translate(-50%, -50%)" }}
+        position="absolute"
+        top="50%"
+        left="50%"
+        textAlign="center"
+      >
+        {props.icon && (
+          <Box clone color="text.secondary" fontSize={fontSize}>
+            {props.icon}
+          </Box>
+        )}
+
+        {props.title && (
+          <Typography color="textSecondary" variant={variant}>
+            {props.title}
+          </Typography>
+        )}
+
+        {props.description && (
+          <Typography color="textSecondary" variant="body1">
+            {props.description}
+          </Typography>
+        )}
+      </Box>
+    );
+  }
+
+  if (props.type === "card") {
+    return (
+      <Box padding={props.padding} textAlign="center">
+        {props.icon && (
+          <Box clone color="text.secondary" fontSize={fontSize}>
+            {props.icon}
+          </Box>
+        )}
+
+        {props.title && (
+          <Typography color="textSecondary" variant={variant}>
+            {props.title}
+          </Typography>
+        )}
+
+        {props.description && (
+          <Typography color="textSecondary" variant="body1">
+            {props.description}
+          </Typography>
+        )}
+      </Box>
+    );
+  }
+
+  return null;
 }
 
 EmptyState.defaultProps = {
-  type: "content",
+  type: "page",
   size: "medium",
   padding: 2
 };
 
 EmptyState.propTypes = {
-  // Properties
-  type: PropTypes.string.isRequired,
+  type: PropTypes.string,
   size: PropTypes.string,
   padding: PropTypes.number,
+
+  illustration: PropTypes.element,
   icon: PropTypes.element,
   title: PropTypes.string,
   description: PropTypes.string
