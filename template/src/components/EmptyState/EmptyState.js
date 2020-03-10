@@ -11,15 +11,15 @@ function EmptyState(props) {
 
   switch (props.size) {
     case "small":
-      imageWidth = 50;
-      imageHeight = 50;
+      imageWidth = 40;
+      imageHeight = 40;
       fontSize = "h3.fontSize";
       variant = "h6";
       break;
 
     case "medium":
-      imageWidth = 75;
-      imageHeight = 75;
+      imageWidth = 60;
+      imageHeight = 60;
       fontSize = "h2.fontSize";
       variant = "h5";
       break;
@@ -32,8 +32,8 @@ function EmptyState(props) {
       break;
 
     default:
-      imageWidth = 75;
-      imageHeight = 75;
+      imageWidth = 60;
+      imageHeight = 60;
       fontSize = "h2.fontSize";
       variant = "h5";
       break;
