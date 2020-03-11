@@ -1,11 +1,11 @@
 ---
-name: Request a feature
-about: If there’s something missing and you want it added, this is the first step and best way to get it out.
+name: Feature request
+about: Use this template if you’ve found something missing that you want to see added.
 ---
 
 ## Problem
 
-<!-- A clear and concise description of what the problem is. Ex. I'm always frustrated when [...] -->
+<!-- A clear and concise description of what the problem is. -->
 
 ## Solution
 
@@ -13,7 +13,7 @@ about: If there’s something missing and you want it added, this is the first s
 
 ## Alternatives
 
-<!-- A clear and concise description of any alternative solutions or features you've considered. -->
+<!-- A clear and concise description of any alternative solutions or features you’ve considered. -->
 
 ## Additional context
 
