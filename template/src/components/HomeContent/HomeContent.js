@@ -12,6 +12,7 @@ import authentication from "../../services/authentication";
 
 import EmptyState from "../EmptyState";
 
+import { ReactComponent as CabinIllustration } from "../../illustrations/cabin.svg";
 import { ReactComponent as InsertBlockIllustration } from "../../illustrations/insert-block.svg";
 
 class HomeContent extends Component {
@@ -74,7 +75,7 @@ class HomeContent extends Component {
     const { user } = this.props;
 
     if (user) {
-      return <EmptyState icon={<HomeIcon />} title="Home" />;
+      return <EmptyState image={<CabinIllustration />} title="Home" />;
     }
 
     return (
