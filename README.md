@@ -8,12 +8,12 @@ RMUIF is the acronym for this project’s previous name, [React](https://reactjs
 
 There are lots of features included in this template by default, some of the most prominent are:
 
-- Bootstrapped with Create React App; the same tooling works out of the box for that instant web development gratification
-- Initial UI scaffolding incorporates Google’s Material Design through the Material-UI framework
+- Bootstrapped with Create React App
+- Initial UI scaffolding incorporates Google’s [Material Design](https://material.io) through the Material-UI framework
 - Built on top of a Firebase back-end with most of their products for the web included, e.g. Authentication and Cloud Firestore
-- Robust routing with React Router including protected routes and error handling
+- Robust routing with [React Router](https://reacttraining.com/react-router/web) including protected routes and error handling
 - Extensive and well-tested mobile support with full-screen dialogs and swipeable tabs
-- Quality assurance through the cross-platform application monitoring tool Sentry
+- Quality assurance through the cross-platform application monitoring tool [Sentry](https://sentry.io)
 
 This is just a small taste of what RMUIF has to offer, you should check out the demo if you want to experience it yourself before using it for your project.
 
@@ -21,9 +21,16 @@ This is just a small taste of what RMUIF has to offer, you should check out the 
 
 The demo is based on the `master` branch.
 
-## [Getting Started](https://docs.rmuif.com/getting-started)
+## Installation
+```bash
+npx create-react-app my-app --template rmuif
+cd my-app
+npm start
+```
 
-It’s easy to create an app with RMUIF, follow the [documentation](https://docs.rmuif.com).
+## Documentation
+
+Documentation is available at [docs.rmuif.com](https://docs.rmuif.com).
 
 ## Support
 
@@ -42,3 +49,4 @@ If you want to sponsor this project or me personally, you’re welcome do so via
 | [unDraw](https://undraw.co)                  | A constantly updated design project with beautiful SVG images that you can use completely free and without attribution.                                                                         |
 
 ## [License](https://github.com/phoqe/react-material-ui-firebase/blob/master/LICENSE.md)
+MIT
