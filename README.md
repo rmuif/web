@@ -10,7 +10,7 @@ There are lots of features included in this template by default, some of the mos
 
 - Bootstrapped with Create React App
 - Initial UI scaffolding incorporates Google’s [Material Design](https://material.io) through the Material-UI framework
-- Built on top of a Firebase back-end with most of their products for the web included, e.g. Authentication and Cloud Firestore
+- Built on top of a Firebase back-end with most of their products for the web included, e.g. [Authentication](https://firebase.google.com/products/auth) and [Cloud Firestore](https://firebase.google.com/products/firestore)
 - Robust routing with [React Router](https://reacttraining.com/react-router/web) including protected routes and error handling
 - Extensive and well-tested mobile support with full-screen dialogs and swipeable tabs
 - Quality assurance through the cross-platform application monitoring tool [Sentry](https://sentry.io)
@@ -23,9 +23,9 @@ The demo is based on the `master` branch.
 
 ## Installation
 ```bash
-npx create-react-app my-app --template rmuif
-cd my-app
-npm start
+$ npx create-react-app my-app --template rmuif
+$ cd my-app
+$ yarn start
 ```
 
 ## Documentation
@@ -34,7 +34,7 @@ Documentation is available at [docs.rmuif.com](https://docs.rmuif.com).
 
 ## Support
 
-If you are experiencing an issue directly related to the template itself you should create an issue using the bug report template on GitHub. However, if you have any problems setting up the template, you are welcome to join the [Discord channel](https://discord.gg/5Ann5C3) (keep discussions regarding this project in the #rmuif channel) or send an e-mail to [phoqe@phoqe.dev](mailto:phoqe@phoqe.dev).
+If you are experiencing an issue directly related to the template itself you should create an issue using the bug report template on GitHub. However, if you have any problems setting up the template, you are welcome to join the [Discord channel](https://discord.gg/5Ann5C3) (keep discussions regarding this project in the #rmuif channel) or send an e-mail to [rmuif@phoqe.dev](mailto:rmuif@phoqe.dev).
 
 ## Sponsor
 
