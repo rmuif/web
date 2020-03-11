@@ -1,6 +1,6 @@
 ---
-name: Report a bug
-about: If you’ve found a bug with the project, you can use this template to create an issue, otherwise use Discord.
+name: Bug report
+about: Use this template if you’ve found a bug with the project itself, otherwise you can contact us on Discord.
 ---
 
 ## Description
