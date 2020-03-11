@@ -6,35 +6,30 @@ import { Box, Typography } from "@material-ui/core";
 function EmptyState(props) {
   let imageWidth;
   let imageHeight;
-  let fontSize;
   let variant;
 
   switch (props.size) {
     case "small":
       imageWidth = 40;
       imageHeight = 40;
-      fontSize = "h3.fontSize";
       variant = "h6";
       break;
 
     case "medium":
       imageWidth = 60;
       imageHeight = 60;
-      fontSize = "h2.fontSize";
       variant = "h5";
       break;
 
     case "large":
       imageWidth = 100;
       imageHeight = 100;
-      fontSize = "h1.fontSize";
       variant = "h4";
       break;
 
     default:
       imageWidth = 60;
       imageHeight = 60;
-      fontSize = "h2.fontSize";
       variant = "h5";
       break;
   }
@@ -48,13 +43,7 @@ function EmptyState(props) {
         left="50%"
         textAlign="center"
       >
-        {!props.image && props.icon && (
-          <Box clone color="text.secondary" fontSize={fontSize}>
-            {props.icon}
-          </Box>
-        )}
-
-        {!props.icon && props.image && (
+        {props.image && (
           <Box
             clone
             mb={props.title || props.description ? 2 : 0}
@@ -83,13 +72,7 @@ function EmptyState(props) {
   if (props.type === "card") {
     return (
       <Box padding={props.padding} textAlign="center">
-        {!props.image && props.icon && (
-          <Box clone color="text.secondary" fontSize={fontSize}>
-            {props.icon}
-          </Box>
-        )}
-
-        {!props.icon && props.image && (
+        {props.image && (
           <Box
             clone
             mb={props.title || props.description ? 2 : 0}
@@ -130,7 +113,6 @@ EmptyState.propTypes = {
   padding: PropTypes.number,
 
   image: PropTypes.element,
-  icon: PropTypes.element,
   title: PropTypes.string,
   description: PropTypes.string
 };
