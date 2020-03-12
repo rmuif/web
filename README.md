@@ -21,12 +21,17 @@ This is just a small taste of what RMUIF has to offer, you should check out the 
 
 The demo is based on the `master` branch.
 
-## Installation
-```bash
-$ npx create-react-app my-app --template rmuif
-$ cd my-app
-$ yarn start
+## Quickstart
+
+If you’ve used RMUIF before or just want to get started quickly, run these commands:
+
+```sh
+npx create-react-app my-app --template rmuif
+cd my-app
+yarn start
 ```
+
+They use sensible defaults and are a great fit for both new and existing users.
 
 ## Documentation
 
