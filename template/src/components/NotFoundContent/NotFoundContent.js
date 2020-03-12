@@ -2,15 +2,15 @@ import React, { Component } from "react";
 
 import EmptyState from "../EmptyState";
 
-import { ReactComponent as PageNotFoundIllustration } from "../../illustrations/page-not-found.svg";
+import { ReactComponent as NotFoundIllustration } from "../../illustrations/not-found.svg";
 
 class NotFoundContent extends Component {
   render() {
     return (
       <EmptyState
-        image={<PageNotFoundIllustration />}
+        image={<NotFoundIllustration />}
         title="Page not found"
-        description="The requested URL was not found on this server"
+        description="The page doesn’t exist"
       />
     );
   }
