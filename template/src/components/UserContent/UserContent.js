@@ -46,12 +46,12 @@ function UserContent() {
       );
   }, [userId]);
 
-  if (error) {
+  if (!error) {
     return (
       <EmptyState
         image={<ErrorIllustration />}
         title="Something went wrong"
-        description="There was an error while trying to fetch the requested user"
+        description="An error occured when retrieving the user"
       />
     );
   }
@@ -65,7 +65,7 @@ function UserContent() {
       <EmptyState
         image={<NoDataIllustration />}
         title="User not found"
-        description="The requested user was not found"
+        description="The user doesn’t exist"
       />
     );
   }
