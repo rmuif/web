@@ -55,15 +55,11 @@ function EmptyState(props) {
         )}
 
         {props.title && (
-          <Typography color="textSecondary" variant={variant}>
-            {props.title}
-          </Typography>
+          <Typography variant={variant}>{props.title}</Typography>
         )}
 
         {props.description && (
-          <Typography color="textSecondary" variant="body1">
-            {props.description}
-          </Typography>
+          <Typography variant="body1">{props.description}</Typography>
         )}
       </Box>
     );
@@ -84,15 +80,11 @@ function EmptyState(props) {
         )}
 
         {props.title && (
-          <Typography color="textSecondary" variant={variant}>
-            {props.title}
-          </Typography>
+          <Typography variant={variant}>{props.title}</Typography>
         )}
 
         {props.description && (
-          <Typography color="textSecondary" variant="body1">
-            {props.description}
-          </Typography>
+          <Typography variant="body1">{props.description}</Typography>
         )}
       </Box>
     );
