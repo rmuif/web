@@ -55,12 +55,18 @@ function EmptyState(props) {
         )}
 
         {props.title && (
-          <Typography variant={variant}>{props.title}</Typography>
+          <Box mb={!props.description && props.button ? 2 : 0}>
+            <Typography variant={variant}>{props.title}</Typography>
+          </Box>
         )}
 
         {props.description && (
-          <Typography variant="body1">{props.description}</Typography>
+          <Box mb={props.button && 2}>
+            <Typography variant="body1">{props.description}</Typography>
+          </Box>
         )}
+
+        {props.button && props.button}
       </Box>
     );
   }
@@ -80,12 +86,18 @@ function EmptyState(props) {
         )}
 
         {props.title && (
-          <Typography variant={variant}>{props.title}</Typography>
+          <Box mb={!props.description && props.button ? 2 : 0}>
+            <Typography variant={variant}>{props.title}</Typography>
+          </Box>
         )}
 
         {props.description && (
-          <Typography variant="body1">{props.description}</Typography>
+          <Box mb={props.button && 2}>
+            <Typography variant="body1">{props.description}</Typography>
+          </Box>
         )}
+
+        {props.button && props.button}
       </Box>
     );
   }
@@ -106,7 +118,8 @@ EmptyState.propTypes = {
 
   image: PropTypes.element,
   title: PropTypes.string,
-  description: PropTypes.string
+  description: PropTypes.string,
+  button: PropTypes.element
 };
 
 export default EmptyState;
