@@ -1,4 +1,4 @@
-# Security
+# Security Policy
 
 The security of RMUIF is incredibly important, not only for the project itself but its users too. The code in this project is meant to be used in production and in the hands of a lot of users. We try to accomodate developers by applying the best security practices to the best of our abilities. Shortcomings in security leaves the app vulnerable to attackers and we want to ensure that this risk is minimized.
 

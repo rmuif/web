@@ -1,4 +1,4 @@
-# Contributing
+# Contribution Guidelines
 
 Welcome to the first step of your journey to become a contributor for RMUIF! This is a big project and we need all the help we can get. The template’s main goal is to provide a starting-point for apps that is secure, fast, and pleasing to the eye. It is important to take these rudimentary points into consideration when contributing to RMUIF.
 
