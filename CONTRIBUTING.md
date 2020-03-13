@@ -2,6 +2,10 @@
 
 Welcome to the first step of your journey to become a contributor for RMUIF! This is a big project and we need all the help we can get. The template’s main goal is to provide a starting-point for apps that is secure, fast, and pleasing to the eye. It is important to take these rudimentary points into consideration when contributing to RMUIF.
 
+## Code of Conduct
+
+There is no Code of Conduct. Use common-sense when interacting with people in this project, there is _really_ nothing else to be said.
+
 ## Creating an issue
 
 There are some rules you need to follow to speed up the process of reporting and triaging issues. For example, if you do not follow the bug report template when reporting a bug, there’s a chance that it will be deprioritized or dismissed.
@@ -30,7 +34,7 @@ The `master` branch contains the production ready version of RMUIF, i.e. the lat
 
 ### Code style
 
-We use [Prettier]() when developing RMUIF. Users of the template can choose whatever coding style they want. It is important that the code you commit follows Prettier, we have setup hooks for styling your code when you create a commit, you should be fine already but if the code is not properly formatted, we will not accept it into RMUIF.
+We use [Prettier]() when developing RMUIF. It is important that the code you commit follows Prettier, we have setup hooks for styling your code when you create a commit, you should be fine already but if the code is not properly formatted, we will not accept it into RMUIF.
 
 ### Peer-reviewed design
 
