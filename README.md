@@ -1,29 +1,21 @@
 # RMUIF
 
-RMUIF is the acronym for this project’s previous name, [React](https://reactjs.org) + [Material-UI](https://material-ui.com) + [Firebase](https://firebase.google.com), which are the three musketeers that make up this template. With [Create React App](https://create-react-app.dev) at its core, you can expect the same tooling to work out of the box. It is essentially a “supercharged” version of CRA with all the bells and whistles.
-
-<img src="https://user-images.githubusercontent.com/7033377/73071460-13c58000-3eb3-11ea-9ed2-f5d9b5e8fc5b.png">
+RMUIF is short for [React](https://reactjs.org), [Material-UI](https://material-ui.com), and [Firebase](https://firebase.google.com); the three musketeers that make up this app. With Create React App at its core, you can expect the same tooling. It is essentially a supercharged version of CRA with all the bells and whistles.
 
 ## Features
-
-There are lots of features included in this template by default, some of the most prominent are:
 
 - Bootstrapped with Create React App
 - Initial UI scaffolding incorporates Google’s [Material Design](https://material.io) through the Material-UI framework
 - Built on top of a Firebase back-end with most of their products for the web included, e.g. [Authentication](https://firebase.google.com/products/auth) and [Cloud Firestore](https://firebase.google.com/products/firestore)
 - Robust routing with [React Router](https://reacttraining.com/react-router/web) including protected routes and error handling
 - Extensive and well-tested mobile support with full-screen dialogs and swipeable tabs
-- Quality assurance through the cross-platform application monitoring tool [Sentry](https://sentry.io)
+- Cross-platform application monitoring with [Sentry](https://sentry.io)
 
-This is just a small taste of what RMUIF has to offer, you should check out the demo if you want to experience it yourself before using it for your project.
+## Demo
 
-## [Demo](https://demo.rmuif.com)
+https://demo.rmuif.com
 
-The demo is based on the `master` branch.
-
-## Quickstart
-
-If you’ve used RMUIF before or just want to get started quickly, run these commands:
+## Getting Started
 
 ```sh
 npx create-react-app my-app --template rmuif
@@ -31,19 +23,17 @@ cd my-app
 yarn start
 ```
 
-They use sensible defaults and are a great fit for both new and existing users.
-
 ## Documentation
 
-Documentation is available at [docs.rmuif.com](https://docs.rmuif.com).
+https://docs.rmuif.com
 
-## Support
+## Contributing
 
-If you are experiencing an issue directly related to the template itself you should create an issue using the bug report template on GitHub. However, if you have any problems setting up the template, you are welcome to join the [Discord channel](https://discord.gg/5Ann5C3) (keep discussions regarding this project in the #rmuif channel) or send an e-mail to [rmuif@phoqe.dev](mailto:rmuif@phoqe.dev).
+All contributions in any form are welcome. Before submitting a new issue or pull request, read the [Contribution Guidelines](CONTRIBUTING.md), faling to do so might result in deprioritization or dismissal.
 
-## Sponsor
+## Security
 
-If you want to sponsor this project or me personally, you’re welcome do so via [GitHub Sponsors](https://github.com/sponsors/phoqe). It’s never required but greatly appreciated.
+Our pledge to security is documented in the [Security Policy](SECURITY.md).
 
 ## Attribution
 
@@ -54,4 +44,5 @@ If you want to sponsor this project or me personally, you’re welcome do so via
 | [unDraw](https://undraw.co)                  | A constantly updated design project with beautiful SVG images that you can use completely free and without attribution.                                                                         |
 
 ## License
+
 MIT
