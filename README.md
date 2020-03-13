@@ -1,5 +1,3 @@
-# RMUIF
-
 RMUIF is short for [React](https://reactjs.org), [Material-UI](https://material-ui.com), and [Firebase](https://firebase.google.com); the three musketeers that make up this app. With Create React App at its core, you can expect the same tooling. It is essentially a supercharged version of CRA with all the bells and whistles.
 
 ## Features
