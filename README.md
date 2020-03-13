@@ -13,7 +13,7 @@ RMUIF is short for [React](https://reactjs.org), [Material-UI](https://material-
 
 https://demo.rmuif.com
 
-## Getting Started
+## Getting started
 
 ```sh
 npx create-react-app my-app --template rmuif
