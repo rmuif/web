@@ -27,7 +27,7 @@ https://docs.rmuif.com
 
 ## Contributing
 
-All contributions in any form are welcome. Before submitting a new issue or pull request, read the [Contribution Guidelines](CONTRIBUTING.md), faling to do so might result in deprioritization or dismissal.
+All contributions are welcome. Before submitting a new issue or pull request, read the [Contribution Guidelines](CONTRIBUTING.md), faling to do so might result in deprioritization or dismissal.
 
 ## Security
 
