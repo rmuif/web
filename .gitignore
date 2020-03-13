@@ -10,7 +10,7 @@
 !.vscode/extensions.json
 
 ### dotenv ###
-.env
+# .env
 
 ### Firebase ###
 .idea
