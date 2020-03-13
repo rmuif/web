@@ -31,7 +31,7 @@ All contributions are welcome. Before submitting a new issue or pull request, re
 
 ## Security
 
-Our pledge to security is documented in the [Security Policy](SECURITY.md).
+Our pledge of security is documented in the [Security Policy](SECURITY.md).
 
 ## Attribution
 
