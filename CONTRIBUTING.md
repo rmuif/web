@@ -26,7 +26,7 @@ Again, following the template is paramount to getting your issue prioritized.
 
 ### Something else
 
-The issue tracker on GitHub is currently only supporting the templates above and not for anything else.
+The issue tracker on GitHub is currently only supporting the templates above and not anything else.
 
 If you’ve got an inquiry that does not fit the template, use the [Discord server](https://discord.gg/5Ann5C3). That is the primary channel for external communication and the quickest way to get help as we’re very active on there.
 
