@@ -1,4 +1,4 @@
-RMUIF is short for [React](https://reactjs.org), [Material-UI](https://material-ui.com), and [Firebase](https://firebase.google.com); the three musketeers that make up this app. With Create React App at its core, you can expect the same tooling. It is essentially a supercharged version of CRA with all the bells and whistles.
+RMUIF is short for [React](https://reactjs.org), [Material-UI](https://material-ui.com), and [Firebase](https://firebase.google.com), the three musketeers that make up this template. With [Create React App](https://create-react-app.dev) at its core, you can expect the same tooling. It is essentially a supercharged version of CRA, with all the bells and whistles.
 
 ## Features
 
@@ -27,11 +27,7 @@ https://docs.rmuif.com
 
 ## Contributing
 
-All contributions to the project are welcome. Before submitting an issue or a pull request, read the [Contribution Guidelines](CONTRIBUTING.md). Failing to follow the guidelines might result in deprioritization or dismissal of your request.
-
-## Security
-
-Our pledge of security is documented in the [Security Policy](SECURITY.md).
+All contributions to the project are welcome. Before submitting an issue or a pull request, read the [Contribution Guidelines](CONTRIBUTING.md). Failing to follow the guidelines might result in deprioritization or dismissal.
 
 ## Attribution
 
