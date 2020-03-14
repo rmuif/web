@@ -1,6 +1,15 @@
 # Support
 
-If you are experiencing an issue or want to get in contact with someone related to the project, there are a couple of channels you can use:
+RMUIF is an organization that maintains an open community that is welcome for newcomers. We are here to help you if you encounter any issues with our projects.
 
-- [Discord](https://discord.gg/5Ann5C3)
-- rmuif@phoqe.dev
+## Help
+
+We have a [Discord](https://discord.gg/5Ann5C3), which is the primary channel for external communication. You can also reach the project team at rmuif@phoqe.dev.
+
+## Security-related inquiries
+
+Consult the [Security Policy](SECURITY.md) before contacting anyone in the project.
+
+## Contact
+
+If you have any other inquiries, contact us at rmuif@phoqe.dev.
