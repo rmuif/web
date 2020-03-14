@@ -20,7 +20,7 @@ Bug reports that don’t follow the template might be dismissed, edited, and dep
 
 ### Requesting a feature
 
-Is something missing from the project that you want to see added in the next version? Create an issue using the [Request a feature](https://github.com/rmuif/web/issues/new?template=feature_request.md) template, and we’ll consider it.
+Is something missing from the project that you want to see added in the next version? Submit an issue using the [Request a feature](https://github.com/rmuif/web/issues/new?template=feature_request.md) template, and we’ll consider it.
 
 Again, following the template is paramount to getting your issue prioritized.
 
