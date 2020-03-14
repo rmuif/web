@@ -1,6 +1,7 @@
 ---
 name: Bug report
-about: Use this template if you’ve found a bug with the project itself, otherwise you can contact us on Discord.
+about: Use this template if you’ve found a bug in the app
+labels: bug, triage
 ---
 
 ## Description
