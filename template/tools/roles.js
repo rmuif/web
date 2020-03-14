@@ -17,7 +17,7 @@ program.name("roles");
 
 program.option(
   "-e, --email",
-  "uses an e-mail address instead of a uid, i.e. replaces <uid> with <email>"
+  "uses an e-mail address instead of a uid, i.e., replaces <uid> with <email>"
 );
 
 program
