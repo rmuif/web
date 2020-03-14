@@ -8,7 +8,7 @@ We offer only the rules necessary for the base app to function securely. Any cus
 
 Previous versions of RMUIF apps supported updates via an upstream repository. With v3.0 and the move to Create React App templates, this is no longer possible. However, all apps using RMUIF, regardless of version, is supported with notifications on security updates.
 
-Projects maintained by RMUIF use Dependabot to keep packages updated. We suggest you do the same for your project. It is easy to set up, and updates come in as pull requests. You also get notifications of vulnerabilities in packages you’re using.
+Projects maintained by RMUIF use [Dependabot](https://dependabot.com) to keep packages updated. We suggest you do the same for your project. It is easy to set up, and updates come in as pull requests. You also get notifications of vulnerabilities in packages you’re using.
 
 ## Reporting a vulnerability
 
