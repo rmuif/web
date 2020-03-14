@@ -8384,7 +8384,7 @@ onetime@^5.1.0:
   dependencies:
     mimic-fn "^2.1.0"
 
-open@^7.0.2:
+open@^7.0.2, open@^7.0.3:
   version "7.0.3"
   resolved "https://registry.yarnpkg.com/open/-/open-7.0.3.tgz#db551a1af9c7ab4c7af664139930826138531c48"
   integrity sha512-sP2ru2v0P290WFfv49Ap8MF6PkzGNnGlAwHweB4WR4mr5d2d0woiCluUeJ218w7/+PmoBy9JmYgD5A4mLcWOFA==
@@ -10879,10 +10879,10 @@ source-list-map@^2.0.0:
   resolved "https://registry.yarnpkg.com/source-list-map/-/source-list-map-2.0.1.tgz#3993bd873bfc48479cca9ea3a547835c7c154b34"
   integrity sha512-qnQ7gVMxGNxsiL4lEuJwe/To8UnK7fAnmbGEEH8RpLouuKbeEm0lhbQVFIrNSuB+G7tVrAlVsZgETT5nljf+Iw==
 
-source-map-explorer@^2.3.1:
-  version "2.3.1"
-  resolved "https://registry.yarnpkg.com/source-map-explorer/-/source-map-explorer-2.3.1.tgz#d91615a19ad1f4e08d05616bee6e30ddb770ae70"
-  integrity sha512-l3WQUCwaqia5x7EBnNp4GYwhXnROMz3NqKM2QMwQ3ADgjekp+enP+PHkjjbjoVX6WJ2G5mbvM6TjeE/q7fnIFw==
+source-map-explorer@^2.4.0:
+  version "2.4.0"
+  resolved "https://registry.yarnpkg.com/source-map-explorer/-/source-map-explorer-2.4.0.tgz#92534a4c016aaa051cc887dca18d7bc568162be1"
+  integrity sha512-gXTmqqMlX1yF9uVZB2p9AvIhgArWvy7V+3NQ2lVgQvyux1eMAgnm3mC+k5mqV+2q7B/uWaFY+RG+fm+1opVkjA==
   dependencies:
     btoa "^1.2.1"
     chalk "^3.0.0"
@@ -10892,10 +10892,10 @@ source-map-explorer@^2.3.1:
     glob "^7.1.6"
     gzip-size "^5.1.1"
     lodash "^4.17.15"
-    open "^7.0.2"
+    open "^7.0.3"
     source-map "^0.7.3"
     temp "^0.9.1"
-    yargs "^15.1.0"
+    yargs "^15.3.0"
 
 source-map-resolve@^0.5.0, source-map-resolve@^0.5.2:
   version "0.5.3"
@@ -12440,7 +12440,7 @@ yargs@^13.3.0:
     y18n "^4.0.0"
     yargs-parser "^13.1.1"
 
-yargs@^15.1.0:
+yargs@^15.3.0:
   version "15.3.0"
   resolved "https://registry.yarnpkg.com/yargs/-/yargs-15.3.0.tgz#403af6edc75b3ae04bf66c94202228ba119f0976"
   integrity sha512-g/QCnmjgOl1YJjGsnUg2SatC7NUYEiLXJqxNOQU9qSpjzGtGXda9b+OKccr1kLTy8BN9yqEyqfq5lxlwdc13TA==
