@@ -13,7 +13,7 @@ import EmptyState from "../EmptyState";
 import { ReactComponent as CabinIllustration } from "../../illustrations/cabin.svg";
 import { ReactComponent as InsertBlockIllustration } from "../../illustrations/insert-block.svg";
 
-class HomeContent extends Component {
+class HomePage extends Component {
   signInWithEmailLink = () => {
     const { user } = this.props;
 
@@ -90,8 +90,8 @@ class HomeContent extends Component {
   }
 }
 
-HomeContent.propTypes = {
+HomePage.propTypes = {
   user: PropTypes.object
 };
 
-export default withRouter(HomeContent);
+export default withRouter(HomePage);

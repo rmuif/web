@@ -4,7 +4,7 @@ import PropTypes from "prop-types";
 
 import { BrowserRouter, Switch, Redirect, Route } from "react-router-dom";
 
-import HomeContent from "../HomeContent";
+import HomePage from "../HomePage";
 import AdminContent from "../AdminContent";
 import UserContent from "../UserContent";
 import NotFoundPage from "../NotFoundPage";
@@ -23,7 +23,7 @@ class Router extends Component {
 
         <Switch>
           <Route path="/" exact>
-            <HomeContent user={user} openSnackbar={openSnackbar} />
+            <HomePage user={user} openSnackbar={openSnackbar} />
           </Route>
 
           <Route path="/admin">
