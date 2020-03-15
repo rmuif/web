@@ -23,7 +23,7 @@ const useStyles = makeStyles({
   }
 });
 
-function UserContent() {
+function UserPage() {
   const [loading, setLoading] = useState(true);
   const [user, setUser] = useState(null);
   const [error, setError] = useState(null);
@@ -79,4 +79,4 @@ function UserContent() {
   );
 }
 
-export default UserContent;
+export default UserPage;
