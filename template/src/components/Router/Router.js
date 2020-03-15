@@ -5,7 +5,7 @@ import PropTypes from "prop-types";
 import { BrowserRouter, Switch, Redirect, Route } from "react-router-dom";
 
 import HomePage from "../HomePage";
-import AdminContent from "../AdminContent";
+import AdminPage from "../AdminPage";
 import UserContent from "../UserContent";
 import NotFoundPage from "../NotFoundPage";
 
@@ -28,7 +28,7 @@ class Router extends Component {
 
           <Route path="/admin">
             {user && roles.includes("admin") ? (
-              <AdminContent />
+              <AdminPage />
             ) : (
               <Redirect to="/" />
             )}
