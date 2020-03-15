@@ -21,9 +21,11 @@ import {
   Button
 } from "@material-ui/core";
 
-import { FiberManualRecord as FiberManualRecordIcon } from "@material-ui/icons";
-import { Brightness4 as Brightness4Icon } from "@material-ui/icons";
-import { FormatColorReset as FormatColorResetIcon } from "@material-ui/icons";
+import {
+  FiberManualRecord as FiberManualRecordIcon,
+  Brightness4 as Brightness4Icon,
+  FormatColorReset as FormatColorResetIcon
+} from "@material-ui/icons";
 
 import appearance from "../../services/appearance";
 
