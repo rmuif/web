@@ -1,6 +1,7 @@
 ---
 name: Feature request
-about: Use this template if you’ve found something missing that you want to see added.
+about: Use this template if you’ve found something missing that you want to see added
+labels: feature, triage
 ---
 
 ## Problem

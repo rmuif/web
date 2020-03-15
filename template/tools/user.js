@@ -18,7 +18,7 @@ program.name("user");
 
 program.option(
   "-e, --email",
-  "uses an e-mail address instead of a uid, i.e. replaces <uid> with <email>"
+  "uses an e-mail address instead of a uid, i.e., replaces <uid> with <email>"
 );
 
 program
@@ -122,7 +122,7 @@ program
   .command("get <uid>")
   .alias("read")
   .description(
-    "retreives data from a user, e.g. their e-mail address and display name"
+    "retreives data from a user, e.g., their e-mail address and display name"
   )
   .action(uid => {
     if (program.email) {
