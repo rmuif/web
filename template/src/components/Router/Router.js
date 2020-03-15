@@ -6,7 +6,7 @@ import { BrowserRouter, Switch, Redirect, Route } from "react-router-dom";
 
 import HomePage from "../HomePage";
 import AdminPage from "../AdminPage";
-import UserContent from "../UserContent";
+import UserPage from "../UserPage";
 import NotFoundPage from "../NotFoundPage";
 
 class Router extends Component {
@@ -35,7 +35,7 @@ class Router extends Component {
           </Route>
 
           <Route path="/user/:userId">
-            {user ? <UserContent /> : <Redirect to="/" />}
+            {user ? <UserPage /> : <Redirect to="/" />}
           </Route>
 
           <Route>

@@ -4,7 +4,7 @@ import ReactDOM from "react-dom";
 
 import { MemoryRouter, Route } from "react-router-dom";
 
-import UserContent from "./UserContent";
+import UserPage from "./UserPage";
 
 it("renders without crashing", () => {
   const div = document.createElement("div");
@@ -12,7 +12,7 @@ it("renders without crashing", () => {
   ReactDOM.render(
     <MemoryRouter>
       <Route path="/user/test">
-        <UserContent />
+        <UserPage />
       </Route>
     </MemoryRouter>,
     div
