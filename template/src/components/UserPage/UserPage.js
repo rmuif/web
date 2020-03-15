@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from "react";
 
-import { useParams } from "react-router-dom";
+import { useParams, Link } from "react-router-dom";
 
 import { Grid, Fab, Box } from "@material-ui/core";
 
 import { makeStyles } from "@material-ui/core/styles";
 
-import { Refresh as RefreshIcon } from "@material-ui/icons";
+import { Refresh as RefreshIcon, Home as HomeIcon } from "@material-ui/icons";
 
 import { firestore } from "../../firebase";
 
@@ -78,8 +78,16 @@ function UserPage() {
     return (
       <EmptyState
         image={<NoDataIllustration />}
-        title="User not found"
-        description="The user doesn’t exist"
+        title="User doesn’t exist"
+        description="The requested user doesn’t exist"
+        button={
+          <Fab variant="extended" color="primary" component={Link} to="/">
+            <Box clone mr={1}>
+              <HomeIcon />
+            </Box>
+            Home
+          </Fab>
+        }
       />
     );
   }

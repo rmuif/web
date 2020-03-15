@@ -30,17 +30,19 @@ import {
   Divider
 } from "@material-ui/core";
 
-import { Close as CloseIcon } from "@material-ui/icons";
-import { Photo as PhotoIcon } from "@material-ui/icons";
-import { CloudUpload as CloudUploadIcon } from "@material-ui/icons";
-import { Person as PersonIcon } from "@material-ui/icons";
-import { Edit as EditIcon } from "@material-ui/icons";
-import { PersonOutline as PersonOutlineIcon } from "@material-ui/icons";
-import { Email as EmailIcon } from "@material-ui/icons";
-import { Warning as WarningIcon } from "@material-ui/icons";
-import { Check as CheckIcon } from "@material-ui/icons";
-import { AccessTime as AccessTimeIcon } from "@material-ui/icons";
-import { DeleteForever as DeleteForeverIcon } from "@material-ui/icons";
+import {
+  Close as CloseIcon,
+  Photo as PhotoIcon,
+  CloudUpload as CloudUploadIcon,
+  Person as PersonIcon,
+  Edit as EditIcon,
+  PersonOutline as PersonOutlineIcon,
+  Email as EmailIcon,
+  Warning as WarningIcon,
+  Check as CheckIcon,
+  AccessTime as AccessTimeIcon,
+  DeleteForever as DeleteForeverIcon
+} from "@material-ui/icons";
 
 import constraints from "../../constraints";
 import authentication from "../../services/authentication";
