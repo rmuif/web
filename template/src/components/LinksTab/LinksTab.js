@@ -14,8 +14,7 @@ import {
   IconButton
 } from "@material-ui/core";
 
-import { Link as LinkIcon } from "@material-ui/icons";
-import { LinkOff as LinkOffIcon } from "@material-ui/icons";
+import { Link as LinkIcon, LinkOff as LinkOffIcon } from "@material-ui/icons";
 
 import authProviders from "../../authProviders";
 
