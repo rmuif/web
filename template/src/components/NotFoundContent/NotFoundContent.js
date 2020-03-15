@@ -15,8 +15,8 @@ class NotFoundContent extends Component {
     return (
       <EmptyState
         image={<NotFoundIllustration />}
-        title="Page not found"
-        description="The page doesn’t exist"
+        title="Page doesn’t exist"
+        description="The page you’re trying to access doesn’t exist"
         button={
           <Fab variant="extended" color="primary" component={Link} to="/">
             <Box clone mr={1}>
