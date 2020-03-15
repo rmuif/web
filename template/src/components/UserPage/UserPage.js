@@ -48,7 +48,7 @@ function UserPage() {
       );
   }, [userId]);
 
-  if (!error) {
+  if (error) {
     return (
       <EmptyState
         image={<ErrorIllustration />}
