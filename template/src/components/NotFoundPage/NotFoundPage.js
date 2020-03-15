@@ -10,7 +10,7 @@ import EmptyState from "../EmptyState";
 
 import { ReactComponent as NotFoundIllustration } from "../../illustrations/not-found.svg";
 
-class NotFoundContent extends Component {
+class NotFoundPage extends Component {
   render() {
     return (
       <EmptyState
@@ -30,4 +30,4 @@ class NotFoundContent extends Component {
   }
 }
 
-export default NotFoundContent;
+export default NotFoundPage;
