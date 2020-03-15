@@ -7,7 +7,7 @@ import { BrowserRouter, Switch, Redirect, Route } from "react-router-dom";
 import HomeContent from "../HomeContent";
 import AdminContent from "../AdminContent";
 import UserContent from "../UserContent";
-import NotFoundContent from "../NotFoundContent";
+import NotFoundPage from "../NotFoundPage";
 
 class Router extends Component {
   render() {
@@ -39,7 +39,7 @@ class Router extends Component {
           </Route>
 
           <Route>
-            <NotFoundContent />
+            <NotFoundPage />
           </Route>
         </Switch>
       </BrowserRouter>
