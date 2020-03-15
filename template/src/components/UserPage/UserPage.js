@@ -2,9 +2,11 @@ import React, { useState, useEffect } from "react";
 
 import { useParams } from "react-router-dom";
 
+import { Grid, Fab, Box } from "@material-ui/core";
+
 import { makeStyles } from "@material-ui/core/styles";
 
-import { Grid } from "@material-ui/core";
+import { Refresh as RefreshIcon } from "@material-ui/icons";
 
 import { firestore } from "../../firebase";
 
@@ -50,8 +52,20 @@ function UserPage() {
     return (
       <EmptyState
         image={<ErrorIllustration />}
-        title="Something went wrong"
-        description="An error occured when retrieving the user"
+        title="Couldn’t retrieve user"
+        description="Something went wrong when trying to retrieve the requested user"
+        button={
+          <Fab
+            variant="extended"
+            color="primary"
+            onClick={() => window.location.reload()}
+          >
+            <Box clone mr={1}>
+              <RefreshIcon />
+            </Box>
+            Retry
+          </Fab>
+        }
       />
     );
   }
