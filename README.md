@@ -2,8 +2,6 @@ RMUIF is short for [React](https://reactjs.org), [Material-UI](https://material-
 
 ## Features
 
-There are lots of goodies packed into the base app; these include:
-
 - Bootstrapped with Create React App
 - Google’s [Material Design](https://material.io) through Material-UI
 - Firebase back-end with most of their products for the web included, e.g., [Authentication](https://firebase.google.com/products/auth) and [Cloud Firestore](https://firebase.google.com/products/firestore)
