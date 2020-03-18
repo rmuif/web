@@ -6,7 +6,7 @@ The app’s primary goal is to provide a starting point for apps that is secure,
 
 ## Code of Conduct
 
-There is none. Use common sense when interacting with people in this project; there is nothing else to be said.
+Use common sense when interacting with people in this project; there is nothing else to be said.
 
 ## Submitting an issue
 
