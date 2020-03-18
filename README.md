@@ -36,6 +36,7 @@ All contributions to the project are welcome. Before submitting an issue or a pu
 | [BrowserStack](https://www.browserstack.com) | Instant access to 2000+ browsers and real iOS and Android devices for cross browser testing.                                                                                                    |
 | [JetBrains](https://www.jetbrains.com)       | JetBrains is a cutting-edge software vendor specializing in the creation of intelligent development tools, including IntelliJ IDEA – the leading Java IDE, and the Kotlin programming language. |
 | [unDraw](https://undraw.co)                  | A constantly updated design project with beautiful SVG images that you can use completely free and without attribution.                                                                         |
+| [Netlify](https://netlify.com)               | All-in-one platform for automating modern web projects.                                                                                                                                         |
 
 ## License
 
