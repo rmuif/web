@@ -19,7 +19,7 @@
     "mdi-material-ui": "^6.12.0",
     "moment": "^2.24.0",
     "prettier": "^1.19.1",
-    "react": "^16.13.0",
+    "react": "^16.13.1",
     "react-app-rewired": "^2.1.5",
     "react-dom": "^16.13.0",
     "react-router-dom": "^5.1.2",
