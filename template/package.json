@@ -21,7 +21,7 @@
     "prettier": "^1.19.1",
     "react": "^16.13.1",
     "react-app-rewired": "^2.1.5",
-    "react-dom": "^16.13.0",
+    "react-dom": "^16.13.1",
     "react-router-dom": "^5.1.2",
     "react-scripts": "3.4.0",
     "react-swipeable-views": "0.13.9",
