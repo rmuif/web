@@ -73,7 +73,7 @@ class HomePage extends Component {
     const { user } = this.props;
 
     if (user) {
-      return <EmptyState image={<CabinIllustration />} title="Home" />;
+      return <EmptyState image={<CabinIllustration />} />;
     }
 
     return (
