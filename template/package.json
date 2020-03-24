@@ -15,7 +15,7 @@
     "eslint-plugin-prettier": "^3.1.2",
     "firebase": "^7.12.0",
     "husky": "^4.2.1",
-    "lint-staged": "^10.0.8",
+    "lint-staged": "^10.0.9",
     "mdi-material-ui": "^6.13.0",
     "moment": "^2.24.0",
     "prettier": "^2.0.1",
