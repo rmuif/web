@@ -13,9 +13,10 @@ RMUIF is short for [React](https://reactjs.org), [Material-UI](https://material-
 - Extensive and well-tested mobile support with full-screen dialogs and swipeable tabs
 - Cross-platform application monitoring with [Sentry](https://sentry.io)
 
-## Demo
+## Demos
 
-https://demo.rmuif.com
+- https://demo.rmuif.com
+- https://dev.rmuif.com
 
 ## Getting started
 
