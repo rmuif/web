@@ -16,7 +16,7 @@ RMUIF is short for [React](https://reactjs.org), [Material-UI](https://material-
 ## Demos
 
 - https://demo.rmuif.com
-- https://dev.rmuif.com
+- https://dev.rmuif.com (based on the `dev` branch)
 
 ## Getting started
 
