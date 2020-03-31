@@ -38,15 +38,15 @@ We recommend submitting an issue before a pull request.
 
 ### Branch your work
 
-The `master` branch contains the latest released version of the template and not used for development. Instead, it would be best if you targeted the `develop` branch. It holds the code for the next version.
+The `master` branch contains the latest released version of the template and not used for development. Instead, it would be best if you targeted the `dev` branch. It holds the code for the next version.
 
-We recommend creating a feature branch based on the develop branch as per the [Gitflow workflow](https://www.atlassian.com/git/tutorials/comparing-workflows/gitflow-workflow).
+We recommend creating a feature branch based on the development branch as per the [Gitflow workflow](https://www.atlassian.com/git/tutorials/comparing-workflows/gitflow-workflow).
 
 ### Code style
 
 All JavaScript projects maintained by RMUIF use the opinionated code formatting tool called [Prettier](https://prettier.io).
 
-Prettier automatically formats commits in the develop branch. We won’t accept code that is not formatted by Prettier.
+Prettier automatically formats commits in the development branch. We won’t accept code that is not formatted by Prettier.
 
 ### Peer-reviewed design
 
