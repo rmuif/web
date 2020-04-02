@@ -4,10 +4,6 @@
 
 RMUIF is short for [React](https://reactjs.org), [Material-UI](https://material-ui.com), and [Firebase](https://firebase.google.com), the three musketeers that make up this template. With [Create React App](https://create-react-app.dev) at its core, you can expect the same tooling to work out of the box. The starting app is essentially a supercharged version of CRA, with all the bells and whistles.
 
-<p align="center">
-  <img src="https://user-images.githubusercontent.com/7033377/78246649-c46e8200-74e9-11ea-8137-c519dd1f7c30.png" alt="Preview">
-</p>
-
 ## Features
 
 - Bootstrapped with Create React App
@@ -18,6 +14,12 @@ RMUIF is short for [React](https://reactjs.org), [Material-UI](https://material-
 - Cross-platform application monitoring with [Sentry](https://sentry.io)
 
 ## Demos
+
+<p align="center">
+  <a href="https://demo.rmuif.com">
+    <img src="https://user-images.githubusercontent.com/7033377/78246649-c46e8200-74e9-11ea-8137-c519dd1f7c30.png" alt="Preview">
+  </a>
+</p>
 
 ### Stable
 
