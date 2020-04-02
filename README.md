@@ -1,8 +1,13 @@
 <p align="center">
   <img width="600" src="https://user-images.githubusercontent.com/7033377/77688568-9399c480-6fa0-11ea-9ee2-424a4a99e2e4.png" alt="Logo">
 </p>
-
-RMUIF is short for [React](https://reactjs.org), [Material-UI](https://material-ui.com), and [Firebase](https://firebase.google.com), the three musketeers that make up this template. With [Create React App](https://create-react-app.dev) at its core, you can expect the same tooling to work out of the box. The starting app is essentially a supercharged version of CRA, with all the bells and whistles.
+<h4 align="center">:zap: Supercharged version of CRA, with all the bells and whistles.</h4>
+<p align="center">
+  <a href="discordapp.com"><img src="https://badgen.net/badge/chat/on%20discord/cyan"></a>  
+  <a href="https://npm.im/cra-template-rmuif"><img src="https://badgen.net/npm/dt/cra-template-rmuif"></a> 
+  <a href="https://npm.im/cra-template-rmuif"><img src="https://badgen.net/npm/v/cra-template-rmuif"></a>  
+  <a href="LICENSE.md"><img src="https://badgen.net/badge/license/MIT/blue"></a>
+</p>
 
 ## Features
 
