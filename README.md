@@ -38,7 +38,7 @@
 
 ## Getting started
 
-``sh
+```sh
 npx create-react-app my-app --template rmuif
 cd my-app
 yarn start
