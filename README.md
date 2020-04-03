@@ -38,7 +38,7 @@
 
 ## Getting started
 
-```sh
+``sh
 npx create-react-app my-app --template rmuif
 cd my-app
 yarn start
@@ -50,7 +50,7 @@ https://docs.rmuif.com
 
 ## Contributing
 
-All contributions to the project are welcome. Before submitting an issue or a pull request, read the [Contribution Guidelines](CONTRIBUTING.md). Failing to follow the guidelines might result in deprioritization or dismissal.
+All contributions to the project are welcome. Before submitting an issue or a pull request, read the [Contribution Guidelines](CONTRIBUTING.md).
 
 ## Attribution
 
