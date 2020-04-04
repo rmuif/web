@@ -11,7 +11,7 @@ import {
   ListItemSecondaryAction,
   Box,
   Tooltip,
-  IconButton
+  IconButton,
 } from "@material-ui/core";
 
 import { Link as LinkIcon, LinkOff as LinkOffIcon } from "@material-ui/icons";
@@ -25,22 +25,22 @@ class LinksTab extends Component {
     super(props);
 
     this.state = {
-      performingAction: false
+      performingAction: false,
     };
   }
 
-  linkAuthProvider = authProvider => {
+  linkAuthProvider = (authProvider) => {
     this.setState(
       {
-        performingAction: true
+        performingAction: true,
       },
       () => {
         authentication
           .linkAuthProvider(authProvider.providerId)
-          .then(value => {
+          .then((value) => {
             this.props.openSnackbar(`${authProvider.name} linked`, 5);
           })
-          .catch(reason => {
+          .catch((reason) => {
             const code = reason.code;
             const message = reason.message;
 
@@ -52,25 +52,25 @@ class LinksTab extends Component {
           })
           .finally(() => {
             this.setState({
-              performingAction: false
+              performingAction: false,
             });
           });
       }
     );
   };
 
-  unlinkAuthProvider = authProvider => {
+  unlinkAuthProvider = (authProvider) => {
     this.setState(
       {
-        performingAction: true
+        performingAction: true,
       },
       () => {
         authentication
           .unlinkAuthProvider(authProvider.providerId)
-          .then(value => {
+          .then((value) => {
             this.props.openSnackbar(`${authProvider.name} unlinked`, 4);
           })
-          .catch(reason => {
+          .catch((reason) => {
             const code = reason.code;
             const message = reason.message;
 
@@ -82,7 +82,7 @@ class LinksTab extends Component {
           })
           .finally(() => {
             this.setState({
-              performingAction: false
+              performingAction: false,
             });
           });
       }
@@ -98,7 +98,7 @@ class LinksTab extends Component {
     return (
       <DialogContent>
         <List disablePadding>
-          {authProviders.map(authProvider => {
+          {authProviders.map((authProvider) => {
             const authProviderData = authentication.authProviderData(
               authProvider.providerId
             );
@@ -172,7 +172,7 @@ LinksTab.propTypes = {
   theme: PropTypes.object.isRequired,
 
   // Functions
-  openSnackbar: PropTypes.func.isRequired
+  openSnackbar: PropTypes.func.isRequired,
 };
 
 export default LinksTab;

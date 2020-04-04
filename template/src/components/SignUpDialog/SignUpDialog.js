@@ -18,7 +18,7 @@ import {
   Grid,
   Button,
   Divider,
-  TextField
+  TextField,
 } from "@material-ui/core";
 
 import { Close as CloseIcon } from "@material-ui/icons";
@@ -28,24 +28,24 @@ import AuthProviderList from "../AuthProviderList";
 import constraints from "../../constraints";
 import authentication from "../../services/authentication";
 
-const styles = theme => ({
+const styles = (theme) => ({
   closeButton: {
     position: "absolute",
     right: theme.spacing(1),
-    top: theme.spacing(1)
+    top: theme.spacing(1),
   },
 
   icon: {
-    marginRight: theme.spacing(0.5)
+    marginRight: theme.spacing(0.5),
   },
 
   divider: {
-    margin: "auto"
+    margin: "auto",
   },
 
   grid: {
-    marginBottom: theme.spacing(2)
-  }
+    marginBottom: theme.spacing(2),
+  },
 });
 
 const initialState = {
@@ -54,7 +54,7 @@ const initialState = {
   emailAddressConfirmation: "",
   password: "",
   passwordConfirmation: "",
-  errors: null
+  errors: null,
 };
 
 class SignUpDialog extends Component {
@@ -69,7 +69,7 @@ class SignUpDialog extends Component {
       emailAddress,
       emailAddressConfirmation,
       password,
-      passwordConfirmation
+      passwordConfirmation,
     } = this.state;
 
     const errors = validate(
@@ -77,33 +77,33 @@ class SignUpDialog extends Component {
         emailAddress: emailAddress,
         emailAddressConfirmation: emailAddressConfirmation,
         password: password,
-        passwordConfirmation: passwordConfirmation
+        passwordConfirmation: passwordConfirmation,
       },
       {
         emailAddress: constraints.emailAddress,
         emailAddressConfirmation: constraints.emailAddressConfirmation,
         password: constraints.password,
-        passwordConfirmation: constraints.passwordConfirmation
+        passwordConfirmation: constraints.passwordConfirmation,
       }
     );
 
     if (errors) {
       this.setState({
-        errors: errors
+        errors: errors,
       });
     } else {
       this.setState(
         {
           performingAction: true,
-          errors: null
+          errors: null,
         },
         () => {
           authentication
             .signUpWithEmailAddressAndPassword(emailAddress, password)
-            .then(value => {
+            .then((value) => {
               this.props.dialogProps.onClose();
             })
-            .catch(reason => {
+            .catch((reason) => {
               const code = reason.code;
               const message = reason.message;
 
@@ -122,7 +122,7 @@ class SignUpDialog extends Component {
             })
             .finally(() => {
               this.setState({
-                performingAction: false
+                performingAction: false,
               });
             });
         }
@@ -130,15 +130,15 @@ class SignUpDialog extends Component {
     }
   };
 
-  signInWithAuthProvider = providerId => {
+  signInWithAuthProvider = (providerId) => {
     this.setState(
       {
-        performingAction: true
+        performingAction: true,
       },
       () => {
         authentication
           .signInWithAuthProvider(providerId)
-          .then(user => {
+          .then((user) => {
             this.props.dialogProps.onClose(() => {
               const displayName = user.displayName;
               const emailAddress = user.email;
@@ -148,7 +148,7 @@ class SignUpDialog extends Component {
               );
             });
           })
-          .catch(reason => {
+          .catch((reason) => {
             const code = reason.code;
             const message = reason.message;
 
@@ -171,19 +171,19 @@ class SignUpDialog extends Component {
           })
           .finally(() => {
             this.setState({
-              performingAction: false
+              performingAction: false,
             });
           });
       }
     );
   };
 
-  handleKeyPress = event => {
+  handleKeyPress = (event) => {
     const {
       emailAddress,
       emailAddressConfirmation,
       password,
-      passwordConfirmation
+      passwordConfirmation,
     } = this.state;
 
     if (
@@ -210,35 +210,35 @@ class SignUpDialog extends Component {
     this.setState(initialState);
   };
 
-  handleEmailAddressChange = event => {
+  handleEmailAddressChange = (event) => {
     const emailAddress = event.target.value;
 
     this.setState({
-      emailAddress: emailAddress
+      emailAddress: emailAddress,
     });
   };
 
-  handleEmailAddressConfirmationChange = event => {
+  handleEmailAddressConfirmationChange = (event) => {
     const emailAddressConfirmation = event.target.value;
 
     this.setState({
-      emailAddressConfirmation: emailAddressConfirmation
+      emailAddressConfirmation: emailAddressConfirmation,
     });
   };
 
-  handlePasswordChange = event => {
+  handlePasswordChange = (event) => {
     const password = event.target.value;
 
     this.setState({
-      password: password
+      password: password,
     });
   };
 
-  handlePasswordConfirmationChange = event => {
+  handlePasswordConfirmationChange = (event) => {
     const passwordConfirmation = event.target.value;
 
     this.setState({
-      passwordConfirmation: passwordConfirmation
+      passwordConfirmation: passwordConfirmation,
     });
   };
 
@@ -255,7 +255,7 @@ class SignUpDialog extends Component {
       emailAddressConfirmation,
       password,
       passwordConfirmation,
-      errors
+      errors,
     } = this.state;
 
     return (
@@ -506,7 +506,7 @@ SignUpDialog.propTypes = {
   dialogProps: PropTypes.object.isRequired,
 
   // Custom Functions
-  openSnackbar: PropTypes.func.isRequired
+  openSnackbar: PropTypes.func.isRequired,
 };
 
 export default withStyles(styles)(SignUpDialog);

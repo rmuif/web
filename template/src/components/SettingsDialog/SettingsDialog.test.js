@@ -12,12 +12,12 @@ it("renders without crashing", () => {
       dialogProps={{
         open: true,
 
-        onClose: () => {}
+        onClose: () => {},
       }}
       user={{
         metadata: {
-          lastSignInTime: 0
-        }
+          lastSignInTime: 0,
+        },
       }}
       userData={{}}
       theme={{}}

@@ -54,7 +54,7 @@ Router.propTypes = {
   bar: PropTypes.element,
 
   // Functions
-  openSnackbar: PropTypes.func.isRequired
+  openSnackbar: PropTypes.func.isRequired,
 };
 
 export default Router;

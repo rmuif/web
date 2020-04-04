@@ -41,7 +41,7 @@ ConfirmationDialog.propTypes = {
   title: PropTypes.string,
   content: PropTypes.element.isRequired,
   dismissiveAction: PropTypes.element.isRequired,
-  confirmingAction: PropTypes.element.isRequired
+  confirmingAction: PropTypes.element.isRequired,
 };
 
 export default ConfirmationDialog;

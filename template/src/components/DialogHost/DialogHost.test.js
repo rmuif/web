@@ -14,17 +14,17 @@ it("renders without crashing", () => {
       dialogs={{
         aboutDialog: {
           dialogProps: {
-            open: false
+            open: false,
           },
 
           props: {
-            theme: {}
-          }
+            theme: {},
+          },
         },
         signUpDialog: {},
         signInDialog: {},
         settingsDialog: {},
-        signOutDialog: {}
+        signOutDialog: {},
       }}
       openSnackbar={() => {}}
     />,

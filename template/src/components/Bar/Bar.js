@@ -14,7 +14,7 @@ import {
   IconButton,
   Divider,
   Menu,
-  MenuItem
+  MenuItem,
 } from "@material-ui/core";
 
 import UserAvatar from "../UserAvatar";
@@ -25,26 +25,26 @@ class Bar extends Component {
 
     this.state = {
       menu: {
-        anchorEl: null
-      }
+        anchorEl: null,
+      },
     };
   }
 
-  openMenu = event => {
+  openMenu = (event) => {
     const anchorEl = event.currentTarget;
 
     this.setState({
       menu: {
-        anchorEl
-      }
+        anchorEl,
+      },
     });
   };
 
   closeMenu = () => {
     this.setState({
       menu: {
-        anchorEl: null
-      }
+        anchorEl: null,
+      },
     });
   };
 
@@ -58,7 +58,7 @@ class Bar extends Component {
       onSettingsClick,
       onSignOutClick,
       onSignUpClick,
-      onSignInClick
+      onSignInClick,
     } = this.props;
 
     const { menu } = this.state;
@@ -66,21 +66,21 @@ class Bar extends Component {
     const menuItems = [
       {
         name: "About",
-        onClick: onAboutClick
+        onClick: onAboutClick,
       },
       {
         name: "Profile",
-        to: user ? `/user/${user.uid}` : null
+        to: user ? `/user/${user.uid}` : null,
       },
       {
         name: "Settings",
-        onClick: onSettingsClick
+        onClick: onSettingsClick,
       },
       {
         name: "Sign out",
         divide: true,
-        onClick: onSignOutClick
-      }
+        onClick: onSignOutClick,
+      },
     ];
 
     return (
@@ -189,7 +189,7 @@ class Bar extends Component {
 }
 
 Bar.defaultProps = {
-  performingAction: false
+  performingAction: false,
 };
 
 Bar.propTypes = {
@@ -201,7 +201,7 @@ Bar.propTypes = {
   // Events
   onAboutClick: PropTypes.func.isRequired,
   onSettingsClick: PropTypes.func.isRequired,
-  onSignOutClick: PropTypes.func.isRequired
+  onSignOutClick: PropTypes.func.isRequired,
 };
 
 export default Bar;

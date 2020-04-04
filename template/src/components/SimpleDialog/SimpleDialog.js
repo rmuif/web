@@ -28,7 +28,7 @@ SimpleDialog.propTypes = {
 
   // Custom Properties
   title: PropTypes.string,
-  content: PropTypes.element.isRequired
+  content: PropTypes.element.isRequired,
 };
 
 export default SimpleDialog;
