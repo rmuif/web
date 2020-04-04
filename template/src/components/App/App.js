@@ -25,34 +25,34 @@ const initialState = {
   roles: [],
 
   aboutDialog: {
-    open: false
+    open: false,
   },
 
   signUpDialog: {
-    open: false
+    open: false,
   },
 
   signInDialog: {
-    open: false
+    open: false,
   },
 
   settingsDialog: {
-    open: false
+    open: false,
   },
 
   deleteAccountDialog: {
-    open: false
+    open: false,
   },
 
   signOutDialog: {
-    open: false
+    open: false,
   },
 
   snackbar: {
     autoHideDuration: 0,
     message: "",
-    open: false
-  }
+    open: false,
+  },
 };
 
 class App extends Component {
@@ -62,14 +62,14 @@ class App extends Component {
     this.state = initialState;
   }
 
-  resetState = callback => {
+  resetState = (callback) => {
     this.setState(
       {
         ready: true,
         theme: appearance.defaultTheme,
         user: null,
         userData: null,
-        roles: []
+        roles: [],
       },
       callback
     );
@@ -79,7 +79,7 @@ class App extends Component {
     if (!theme) {
       this.setState(
         {
-          theme: appearance.defaultTheme
+          theme: appearance.defaultTheme,
         },
         callback
       );
@@ -89,7 +89,7 @@ class App extends Component {
 
     this.setState(
       {
-        theme: appearance.createTheme(theme)
+        theme: appearance.createTheme(theme),
       },
       callback
     );
@@ -119,32 +119,32 @@ class App extends Component {
     this.setState({ dialog }, callback);
   };
 
-  closeAllDialogs = callback => {
+  closeAllDialogs = (callback) => {
     this.setState(
       {
         aboutDialog: {
-          open: false
+          open: false,
         },
 
         signUpDialog: {
-          open: false
+          open: false,
         },
 
         signInDialog: {
-          open: false
+          open: false,
         },
 
         settingsDialog: {
-          open: false
+          open: false,
         },
 
         deleteAccountDialog: {
-          open: false
+          open: false,
         },
 
         signOutDialog: {
-          open: false
-        }
+          open: false,
+        },
       },
       callback
     );
@@ -153,7 +153,7 @@ class App extends Component {
   deleteAccount = () => {
     this.setState(
       {
-        performingAction: true
+        performingAction: true,
       },
       () => {
         authentication
@@ -163,7 +163,7 @@ class App extends Component {
               this.openSnackbar("Deleted account");
             });
           })
-          .catch(reason => {
+          .catch((reason) => {
             const code = reason.code;
             const message = reason.message;
 
@@ -175,7 +175,7 @@ class App extends Component {
           })
           .finally(() => {
             this.setState({
-              performingAction: false
+              performingAction: false,
             });
           });
       }
@@ -185,7 +185,7 @@ class App extends Component {
   signOut = () => {
     this.setState(
       {
-        performingAction: true
+        performingAction: true,
       },
       () => {
         authentication
@@ -195,7 +195,7 @@ class App extends Component {
               this.openSnackbar("Signed out");
             });
           })
-          .catch(reason => {
+          .catch((reason) => {
             const code = reason.code;
             const message = reason.message;
 
@@ -207,7 +207,7 @@ class App extends Component {
           })
           .finally(() => {
             this.setState({
-              performingAction: false
+              performingAction: false,
             });
           });
       }
@@ -220,8 +220,8 @@ class App extends Component {
         snackbar: {
           autoHideDuration: readingTime(message).time * autoHideDuration,
           message,
-          open: true
-        }
+          open: true,
+        },
       },
       () => {
         if (callback && typeof callback === "function") {
@@ -237,8 +237,8 @@ class App extends Component {
     this.setState({
       snackbar: {
         message: clearMessage ? "" : snackbar.message,
-        open: false
-      }
+        open: false,
+      },
     });
   };
 
@@ -249,7 +249,7 @@ class App extends Component {
       theme,
       user,
       userData,
-      roles
+      roles,
     } = this.state;
 
     const {
@@ -258,7 +258,7 @@ class App extends Component {
       signInDialog,
       settingsDialog,
       deleteAccountDialog,
-      signOutDialog
+      signOutDialog,
     } = this.state;
 
     const { snackbar } = this.state;
@@ -303,68 +303,68 @@ class App extends Component {
                     dialogProps: {
                       open: aboutDialog.open,
 
-                      onClose: () => this.closeDialog("aboutDialog")
-                    }
+                      onClose: () => this.closeDialog("aboutDialog"),
+                    },
                   },
 
                   signUpDialog: {
                     dialogProps: {
                       open: signUpDialog.open,
 
-                      onClose: callback => {
+                      onClose: (callback) => {
                         this.closeDialog("signUpDialog");
 
                         if (callback && typeof callback === "function") {
                           callback();
                         }
-                      }
-                    }
+                      },
+                    },
                   },
 
                   signInDialog: {
                     dialogProps: {
                       open: signInDialog.open,
 
-                      onClose: callback => {
+                      onClose: (callback) => {
                         this.closeDialog("signInDialog");
 
                         if (callback && typeof callback === "function") {
                           callback();
                         }
-                      }
-                    }
+                      },
+                    },
                   },
 
                   settingsDialog: {
                     dialogProps: {
                       open: settingsDialog.open,
 
-                      onClose: () => this.closeDialog("settingsDialog")
+                      onClose: () => this.closeDialog("settingsDialog"),
                     },
 
                     props: {
                       onDeleteAccountClick: () =>
-                        this.openDialog("deleteAccountDialog")
-                    }
+                        this.openDialog("deleteAccountDialog"),
+                    },
                   },
 
                   deleteAccountDialog: {
                     dialogProps: {
                       open: deleteAccountDialog.open,
 
-                      onClose: () => this.closeDialog("deleteAccountDialog")
+                      onClose: () => this.closeDialog("deleteAccountDialog"),
                     },
 
                     props: {
-                      deleteAccount: this.deleteAccount
-                    }
+                      deleteAccount: this.deleteAccount,
+                    },
                   },
 
                   signOutDialog: {
                     dialogProps: {
                       open: signOutDialog.open,
 
-                      onClose: () => this.closeDialog("signOutDialog")
+                      onClose: () => this.closeDialog("signOutDialog"),
                     },
 
                     props: {
@@ -388,9 +388,9 @@ class App extends Component {
                         >
                           Sign Out
                         </Button>
-                      )
-                    }
-                  }
+                      ),
+                    },
+                  },
                 }}
               />
 
@@ -409,7 +409,7 @@ class App extends Component {
 
   componentDidMount() {
     this.onAuthStateChangedObserver = auth.onAuthStateChanged(
-      user => {
+      (user) => {
         // The user is not signed in or doesn’t have a user ID.
         if (!user || !user.uid) {
           if (this.userDocumentSnapshotListener) {
@@ -426,7 +426,7 @@ class App extends Component {
           .collection("users")
           .doc(user.uid)
           .onSnapshot(
-            snapshot => {
+            (snapshot) => {
               const data = snapshot.data();
 
               // The user doesn’t have a data point, equivalent to not signed in.
@@ -442,17 +442,17 @@ class App extends Component {
 
               authentication
                 .getRoles()
-                .then(value => {
+                .then((value) => {
                   this.setTheme(data.theme, () => {
                     this.setState({
                       ready: true,
                       user: user,
                       userData: data,
-                      roles: value || []
+                      roles: value || [],
                     });
                   });
                 })
-                .catch(reason => {
+                .catch((reason) => {
                   this.resetState(() => {
                     const code = reason.code;
                     const message = reason.message;
@@ -465,7 +465,7 @@ class App extends Component {
                   });
                 });
             },
-            error => {
+            (error) => {
               this.resetState(() => {
                 const code = error.code;
                 const message = error.message;
@@ -479,7 +479,7 @@ class App extends Component {
             }
           );
       },
-      error => {
+      (error) => {
         this.resetState(() => {
           const code = error.code;
           const message = error.message;

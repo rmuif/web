@@ -38,7 +38,7 @@ class HomePage extends Component {
 
       authentication
         .signInWithEmailLink(emailAddress, emailLink)
-        .then(value => {
+        .then((value) => {
           const user = value.user;
           const displayName = user.displayName;
           const emailAddress = user.email;
@@ -47,7 +47,7 @@ class HomePage extends Component {
             `Signed in as ${displayName || emailAddress}`
           );
         })
-        .catch(reason => {
+        .catch((reason) => {
           const code = reason.code;
           const message = reason.message;
 
@@ -91,7 +91,7 @@ class HomePage extends Component {
 }
 
 HomePage.propTypes = {
-  user: PropTypes.object
+  user: PropTypes.object,
 };
 
 export default withRouter(HomePage);

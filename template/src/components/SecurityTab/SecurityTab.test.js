@@ -12,7 +12,7 @@ it("renders without crashing", () => {
       dialogProps={{
         open: true,
 
-        onClose: () => {}
+        onClose: () => {},
       }}
       user={{}}
       userData={{}}

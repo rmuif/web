@@ -12,18 +12,18 @@ it("renders without crashing", () => {
       dialogProps={{
         open: true,
 
-        onClose: () => {}
+        onClose: () => {},
       }}
       theme={{
         primaryColor: {
-          id: "blue"
+          id: "blue",
         },
         secondaryColor: {
-          id: "red"
+          id: "red",
         },
         type: {
-          id: "dark"
-        }
+          id: "dark",
+        },
       }}
       openSnackbar={() => {}}
     />,

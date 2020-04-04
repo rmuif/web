@@ -8,7 +8,7 @@ import * as serviceWorker from "./serviceWorker";
 
 Sentry.init({
   dsn: process.env.REACT_APP_SENTRY_DSN,
-  release: `${process.env.REACT_APP_NAME}@${process.env.REACT_APP_VERSION}`
+  release: `${process.env.REACT_APP_NAME}@${process.env.REACT_APP_VERSION}`,
 });
 
 ReactDOM.render(<App />, document.getElementById("root"));
