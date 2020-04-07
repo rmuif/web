@@ -2,13 +2,12 @@
   <img width="600" src="https://user-images.githubusercontent.com/7033377/77688568-9399c480-6fa0-11ea-9ee2-424a4a99e2e4.png" alt="Logo">
 </p>
 
-<h4 align="center">⚡️Supercharged version of Create React App with all the bells and whistles</h4>
+<h3 align="center">⚡ Supercharged version of Create React App with all the bells and whistles</h3>
 
 <p align="center">
-  <a href="discordapp.com"><img src="https://badgen.net/badge/chat/on%20discord/cyan"></a>  
-  <a href="https://npm.im/cra-template-rmuif"><img src="https://badgen.net/npm/dt/cra-template-rmuif"></a> 
-  <a href="https://npm.im/cra-template-rmuif"><img src="https://badgen.net/npm/v/cra-template-rmuif"></a>  
-  <a href="LICENSE.md"><img src="https://badgen.net/badge/license/MIT/blue"></a>
+  <a href="https://discord.gg/5Ann5C3"><img alt="Discord" src="https://img.shields.io/discord/685891805258055732?color=%237289da&label=discord&logo=discord&logoColor=%23ffffff"></a>
+  <a href="https://www.npmjs.com/package/cra-template-rmuif"><img alt="npm" src="https://img.shields.io/npm/v/cra-template-rmuif?color=%23cb3837&logo=npm"></a>
+  <a href="LICENSE.md"><img alt="GitHub" src="https://img.shields.io/github/license/rmuif/web"></a>
 </p>
 
 ## Features
