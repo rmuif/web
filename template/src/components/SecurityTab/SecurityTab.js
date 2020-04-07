@@ -252,6 +252,7 @@ class SecurityTab extends Component {
                 type="password"
                 value={password}
                 variant="filled"
+                InputLabelProps={{ required: false }}
                 onBlur={this.hideFields}
                 onKeyDown={(event) => this.handleKeyDown(event, "password")}
                 onChange={this.handlePasswordChange}
@@ -275,6 +276,7 @@ class SecurityTab extends Component {
                 type="password"
                 value={passwordConfirmation}
                 variant="filled"
+                InputLabelProps={{ required: false }}
                 onBlur={this.hideFields}
                 onKeyDown={(event) =>
                   this.handleKeyDown(event, "password-confirmation")
