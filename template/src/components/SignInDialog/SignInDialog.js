@@ -438,6 +438,7 @@ class SignInDialog extends Component {
                       type="email"
                       value={emailAddress}
                       variant="outlined"
+                      InputLabelProps={{ required: false }}
                       onChange={this.handleEmailAddressChange}
                     />
                   </Grid>
@@ -457,6 +458,7 @@ class SignInDialog extends Component {
                       type="password"
                       value={password}
                       variant="outlined"
+                      InputLabelProps={{ required: false }}
                       onChange={this.handlePasswordChange}
                     />
                   </Grid>
@@ -488,6 +490,7 @@ class SignInDialog extends Component {
                   type="email"
                   value={emailAddress}
                   variant="outlined"
+                  InputLabelProps={{ required: false }}
                   onChange={this.handleEmailAddressChange}
                 />
               </Grid>
@@ -507,6 +510,7 @@ class SignInDialog extends Component {
                   type="password"
                   value={password}
                   variant="outlined"
+                  InputLabelProps={{ required: false }}
                   onChange={this.handlePasswordChange}
                 />
               </Grid>
