@@ -1249,6 +1249,7 @@ class AccountTab extends Component {
                 type="text"
                 value={firstName}
                 variant="filled"
+                InputLabelProps={{ required: false }}
                 onBlur={this.hideFields}
                 onKeyDown={(event) => this.handleKeyDown(event, "first-name")}
                 onChange={this.handleFirstNameChange}
@@ -1328,6 +1329,7 @@ class AccountTab extends Component {
                 type="text"
                 value={lastName}
                 variant="filled"
+                InputLabelProps={{ required: false }}
                 onBlur={this.hideFields}
                 onKeyDown={(event) => this.handleKeyDown(event, "last-name")}
                 onChange={this.handleLastNameChange}
@@ -1407,6 +1409,7 @@ class AccountTab extends Component {
                 type="text"
                 value={username}
                 variant="filled"
+                InputLabelProps={{ required: false }}
                 onBlur={this.hideFields}
                 onKeyDown={(event) => this.handleKeyDown(event, "username")}
                 onChange={this.handleUsernameChange}
@@ -1504,6 +1507,7 @@ class AccountTab extends Component {
                 type="email"
                 value={emailAddress}
                 variant="filled"
+                InputLabelProps={{ required: false }}
                 onBlur={this.hideFields}
                 onKeyDown={(event) =>
                   this.handleKeyDown(event, "email-address")
