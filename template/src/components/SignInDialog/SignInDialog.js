@@ -18,7 +18,7 @@ import {
   Grid,
   Button,
   Divider,
-  TextField
+  TextField,
 } from "@material-ui/core";
 
 import { Close as CloseIcon } from "@material-ui/icons";
@@ -28,31 +28,31 @@ import AuthProviderList from "../AuthProviderList";
 import constraints from "../../constraints";
 import authentication from "../../services/authentication";
 
-const styles = theme => ({
+const styles = (theme) => ({
   closeButton: {
     position: "absolute",
     right: theme.spacing(1),
-    top: theme.spacing(1)
+    top: theme.spacing(1),
   },
 
   icon: {
-    marginRight: theme.spacing(0.5)
+    marginRight: theme.spacing(0.5),
   },
 
   divider: {
-    margin: "auto"
+    margin: "auto",
   },
 
   grid: {
-    marginBottom: theme.spacing(2)
-  }
+    marginBottom: theme.spacing(2),
+  },
 });
 
 const initialState = {
   performingAction: false,
   emailAddress: "",
   password: "",
-  errors: null
+  errors: null,
 };
 
 class SignInDialog extends Component {
@@ -95,36 +95,36 @@ class SignInDialog extends Component {
 
     const errors = validate(
       {
-        emailAddress: emailAddress
+        emailAddress: emailAddress,
       },
       {
-        emailAddress: constraints.emailAddress
+        emailAddress: constraints.emailAddress,
       }
     );
 
     if (errors) {
       this.setState({
-        errors: errors
+        errors: errors,
       });
     } else {
       this.setState(
         {
-          errors: null
+          errors: null,
         },
         () => {
           this.setState(
             {
-              performingAction: true
+              performingAction: true,
             },
             () => {
               authentication
                 .resetPassword(emailAddress)
-                .then(value => {
+                .then((value) => {
                   this.props.openSnackbar(
                     `Sent password reset e-mail to ${emailAddress}`
                   );
                 })
-                .catch(reason => {
+                .catch((reason) => {
                   const code = reason.code;
                   const message = reason.message;
 
@@ -146,7 +146,7 @@ class SignInDialog extends Component {
                 })
                 .finally(() => {
                   this.setState({
-                    performingAction: false
+                    performingAction: false,
                   });
                 });
             }
@@ -162,28 +162,28 @@ class SignInDialog extends Component {
     const errors = validate(
       {
         emailAddress: emailAddress,
-        password: password
+        password: password,
       },
       {
         emailAddress: constraints.emailAddress,
-        password: constraints.password
+        password: constraints.password,
       }
     );
 
     if (errors) {
       this.setState({
-        errors: errors
+        errors: errors,
       });
     } else {
       this.setState(
         {
           performingAction: true,
-          errors: null
+          errors: null,
         },
         () => {
           authentication
             .signIn(emailAddress, password)
-            .then(user => {
+            .then((user) => {
               this.props.dialogProps.onClose(() => {
                 const displayName = user.displayName;
                 const emailAddress = user.email;
@@ -193,7 +193,7 @@ class SignInDialog extends Component {
                 );
               });
             })
-            .catch(reason => {
+            .catch((reason) => {
               const code = reason.code;
               const message = reason.message;
 
@@ -212,7 +212,7 @@ class SignInDialog extends Component {
             })
             .finally(() => {
               this.setState({
-                performingAction: false
+                performingAction: false,
               });
             });
         }
@@ -225,16 +225,16 @@ class SignInDialog extends Component {
 
     const errors = validate(
       {
-        emailAddress: emailAddress
+        emailAddress: emailAddress,
       },
       {
-        emailAddress: constraints.emailAddress
+        emailAddress: constraints.emailAddress,
       }
     );
 
     if (errors) {
       this.setState({
-        errors: errors
+        errors: errors,
       });
 
       return;
@@ -243,7 +243,7 @@ class SignInDialog extends Component {
     this.setState(
       {
         performingAction: true,
-        errors: null
+        errors: null,
       },
       () => {
         authentication
@@ -253,7 +253,7 @@ class SignInDialog extends Component {
               this.props.openSnackbar(`Sent sign-in e-mail to ${emailAddress}`);
             });
           })
-          .catch(reason => {
+          .catch((reason) => {
             const code = reason.code;
             const message = reason.message;
 
@@ -275,22 +275,22 @@ class SignInDialog extends Component {
           })
           .finally(() => {
             this.setState({
-              performingAction: false
+              performingAction: false,
             });
           });
       }
     );
   };
 
-  signInWithAuthProvider = providerId => {
+  signInWithAuthProvider = (providerId) => {
     this.setState(
       {
-        performingAction: true
+        performingAction: true,
       },
       () => {
         authentication
           .signInWithAuthProvider(providerId)
-          .then(user => {
+          .then((user) => {
             this.props.dialogProps.onClose(() => {
               const displayName = user.displayName;
               const emailAddress = user.email;
@@ -300,7 +300,7 @@ class SignInDialog extends Component {
               );
             });
           })
-          .catch(reason => {
+          .catch((reason) => {
             const code = reason.code;
             const message = reason.message;
 
@@ -323,14 +323,14 @@ class SignInDialog extends Component {
           })
           .finally(() => {
             this.setState({
-              performingAction: false
+              performingAction: false,
             });
           });
       }
     );
   };
 
-  handleKeyPress = event => {
+  handleKeyPress = (event) => {
     const { emailAddress, password } = this.state;
 
     if (!emailAddress && !password) {
@@ -356,19 +356,19 @@ class SignInDialog extends Component {
     this.setState(initialState);
   };
 
-  handleEmailAddressChange = event => {
+  handleEmailAddressChange = (event) => {
     const emailAddress = event.target.value;
 
     this.setState({
-      emailAddress: emailAddress
+      emailAddress: emailAddress,
     });
   };
 
-  handlePasswordChange = event => {
+  handlePasswordChange = (event) => {
     const password = event.target.value;
 
     this.setState({
-      password: password
+      password: password,
     });
   };
 
@@ -438,6 +438,7 @@ class SignInDialog extends Component {
                       type="email"
                       value={emailAddress}
                       variant="outlined"
+                      InputLabelProps={{ required: false }}
                       onChange={this.handleEmailAddressChange}
                     />
                   </Grid>
@@ -457,6 +458,7 @@ class SignInDialog extends Component {
                       type="password"
                       value={password}
                       variant="outlined"
+                      InputLabelProps={{ required: false }}
                       onChange={this.handlePasswordChange}
                     />
                   </Grid>
@@ -488,6 +490,7 @@ class SignInDialog extends Component {
                   type="email"
                   value={emailAddress}
                   variant="outlined"
+                  InputLabelProps={{ required: false }}
                   onChange={this.handleEmailAddressChange}
                 />
               </Grid>
@@ -507,6 +510,7 @@ class SignInDialog extends Component {
                   type="password"
                   value={password}
                   variant="outlined"
+                  InputLabelProps={{ required: false }}
                   onChange={this.handlePasswordChange}
                 />
               </Grid>
@@ -539,7 +543,7 @@ SignInDialog.propTypes = {
   dialogProps: PropTypes.object.isRequired,
 
   // Custom Functions
-  openSnackbar: PropTypes.func.isRequired
+  openSnackbar: PropTypes.func.isRequired,
 };
 
 export default withStyles(styles)(SignInDialog);

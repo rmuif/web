@@ -27,7 +27,7 @@ import {
   TextField,
   Tooltip,
   IconButton,
-  Divider
+  Divider,
 } from "@material-ui/core";
 
 import {
@@ -41,25 +41,25 @@ import {
   Warning as WarningIcon,
   Check as CheckIcon,
   AccessTime as AccessTimeIcon,
-  DeleteForever as DeleteForeverIcon
+  DeleteForever as DeleteForeverIcon,
 } from "@material-ui/icons";
 
 import constraints from "../../constraints";
 import authentication from "../../services/authentication";
 
-const styles = theme => ({
+const styles = (theme) => ({
   dialogContent: {
-    paddingTop: theme.spacing(2)
+    paddingTop: theme.spacing(2),
   },
 
   badge: {
     top: theme.spacing(2),
-    right: -theme.spacing(2)
+    right: -theme.spacing(2),
   },
 
   loadingBadge: {
     top: "50%",
-    right: "50%"
+    right: "50%",
   },
 
   avatar: {
@@ -67,23 +67,23 @@ const styles = theme => ({
     marginLeft: "auto",
 
     width: theme.spacing(14),
-    height: theme.spacing(14)
+    height: theme.spacing(14),
   },
 
   nameInitials: {
-    cursor: "default"
+    cursor: "default",
   },
 
   personIcon: {
-    fontSize: theme.spacing(7)
+    fontSize: theme.spacing(7),
   },
 
   small: {
     width: theme.spacing(4),
     height: theme.spacing(4),
 
-    minHeight: "initial"
-  }
+    minHeight: "initial",
+  },
 });
 
 const initialState = {
@@ -99,7 +99,7 @@ const initialState = {
   performingAction: false,
   loadingAvatar: false,
   sentVerificationEmail: false,
-  errors: null
+  errors: null,
 };
 
 class AccountTab extends Component {
@@ -124,7 +124,7 @@ class AccountTab extends Component {
 
     const nameInitials = authentication.getNameInitials({
       ...user,
-      ...userData
+      ...userData,
     });
 
     if (nameInitials) {
@@ -148,22 +148,22 @@ class AccountTab extends Component {
     this.setState(
       {
         performingAction: true,
-        loadingAvatar: true
+        loadingAvatar: true,
       },
       () => {
         authentication
           .changeAvatar(avatar)
-          .then(value => {
+          .then((value) => {
             const { user, userData } = this.props;
 
             this.setState({
               profileCompletion: authentication.getProfileCompletion({
                 ...user,
-                ...userData
-              })
+                ...userData,
+              }),
             });
           })
-          .catch(reason => {
+          .catch((reason) => {
             const code = reason.code;
             const message = reason.message;
 
@@ -178,7 +178,7 @@ class AccountTab extends Component {
               performingAction: false,
               loadingAvatar: false,
               avatar: null,
-              avatarUrl: ""
+              avatarUrl: "",
             });
           });
       }
@@ -202,28 +202,28 @@ class AccountTab extends Component {
 
       this.setState({
         avatar: null,
-        avatarUrl: ""
+        avatarUrl: "",
       });
     } else if (user.photoURL && !avatar && !avatarUrl) {
       this.setState(
         {
           performingAction: true,
-          loadingAvatar: true
+          loadingAvatar: true,
         },
         () => {
           authentication
             .removeAvatar()
-            .then(value => {
+            .then((value) => {
               const { user, userData } = this.props;
 
               this.setState({
                 profileCompletion: authentication.getProfileCompletion({
                   ...user,
-                  ...userData
-                })
+                  ...userData,
+                }),
               });
             })
-            .catch(reason => {
+            .catch((reason) => {
               const code = reason.code;
               const message = reason.message;
 
@@ -236,7 +236,7 @@ class AccountTab extends Component {
             .finally(() => {
               this.setState({
                 performingAction: false,
-                loadingAvatar: false
+                loadingAvatar: false,
               });
             });
         }
@@ -244,17 +244,17 @@ class AccountTab extends Component {
     }
   };
 
-  showField = fieldId => {
+  showField = (fieldId) => {
     if (!fieldId) {
       return;
     }
 
     this.setState({
-      showingField: fieldId
+      showingField: fieldId,
     });
   };
 
-  hideFields = callback => {
+  hideFields = (callback) => {
     this.setState(
       {
         showingField: "",
@@ -262,7 +262,7 @@ class AccountTab extends Component {
         lastName: "",
         username: "",
         emailAddress: "",
-        errors: null
+        errors: null,
       },
       () => {
         if (callback && typeof callback === "function") {
@@ -277,16 +277,16 @@ class AccountTab extends Component {
 
     const errors = validate(
       {
-        firstName: firstName
+        firstName: firstName,
       },
       {
-        firstName: constraints.firstName
+        firstName: constraints.firstName,
       }
     );
 
     if (errors) {
       this.setState({
-        errors: errors
+        errors: errors,
       });
 
       return;
@@ -294,7 +294,7 @@ class AccountTab extends Component {
 
     this.setState(
       {
-        errors: null
+        errors: null,
       },
       () => {
         const { userData } = this.props;
@@ -305,7 +305,7 @@ class AccountTab extends Component {
 
         this.setState(
           {
-            performingAction: true
+            performingAction: true,
           },
           () => {
             authentication
@@ -317,15 +317,15 @@ class AccountTab extends Component {
                   {
                     profileCompletion: authentication.getProfileCompletion({
                       ...user,
-                      ...userData
-                    })
+                      ...userData,
+                    }),
                   },
                   () => {
                     this.hideFields();
                   }
                 );
               })
-              .catch(reason => {
+              .catch((reason) => {
                 const code = reason.code;
                 const message = reason.message;
 
@@ -337,7 +337,7 @@ class AccountTab extends Component {
               })
               .finally(() => {
                 this.setState({
-                  performingAction: false
+                  performingAction: false,
                 });
               });
           }
@@ -351,16 +351,16 @@ class AccountTab extends Component {
 
     const errors = validate(
       {
-        lastName: lastName
+        lastName: lastName,
       },
       {
-        lastName: constraints.lastName
+        lastName: constraints.lastName,
       }
     );
 
     if (errors) {
       this.setState({
-        errors: errors
+        errors: errors,
       });
 
       return;
@@ -368,7 +368,7 @@ class AccountTab extends Component {
 
     this.setState(
       {
-        errors: null
+        errors: null,
       },
       () => {
         const { userData } = this.props;
@@ -379,7 +379,7 @@ class AccountTab extends Component {
 
         this.setState(
           {
-            performingAction: true
+            performingAction: true,
           },
           () => {
             authentication
@@ -391,15 +391,15 @@ class AccountTab extends Component {
                   {
                     profileCompletion: authentication.getProfileCompletion({
                       ...user,
-                      ...userData
-                    })
+                      ...userData,
+                    }),
                   },
                   () => {
                     this.hideFields();
                   }
                 );
               })
-              .catch(reason => {
+              .catch((reason) => {
                 const code = reason.code;
                 const message = reason.message;
 
@@ -411,7 +411,7 @@ class AccountTab extends Component {
               })
               .finally(() => {
                 this.setState({
-                  performingAction: false
+                  performingAction: false,
                 });
               });
           }
@@ -425,16 +425,16 @@ class AccountTab extends Component {
 
     const errors = validate(
       {
-        username: username
+        username: username,
       },
       {
-        username: constraints.username
+        username: constraints.username,
       }
     );
 
     if (errors) {
       this.setState({
-        errors: errors
+        errors: errors,
       });
 
       return;
@@ -442,7 +442,7 @@ class AccountTab extends Component {
 
     this.setState(
       {
-        errors: null
+        errors: null,
       },
       () => {
         const { userData } = this.props;
@@ -453,7 +453,7 @@ class AccountTab extends Component {
 
         this.setState(
           {
-            performingAction: true
+            performingAction: true,
           },
           () => {
             authentication
@@ -465,15 +465,15 @@ class AccountTab extends Component {
                   {
                     profileCompletion: authentication.getProfileCompletion({
                       ...user,
-                      ...userData
-                    })
+                      ...userData,
+                    }),
                   },
                   () => {
                     this.hideFields();
                   }
                 );
               })
-              .catch(reason => {
+              .catch((reason) => {
                 const code = reason.code;
                 const message = reason.message;
 
@@ -485,7 +485,7 @@ class AccountTab extends Component {
               })
               .finally(() => {
                 this.setState({
-                  performingAction: false
+                  performingAction: false,
                 });
               });
           }
@@ -499,16 +499,16 @@ class AccountTab extends Component {
 
     const errors = validate(
       {
-        emailAddress: emailAddress
+        emailAddress: emailAddress,
       },
       {
-        emailAddress: constraints.emailAddress
+        emailAddress: constraints.emailAddress,
       }
     );
 
     if (errors) {
       this.setState({
-        errors: errors
+        errors: errors,
       });
 
       return;
@@ -516,7 +516,7 @@ class AccountTab extends Component {
 
     this.setState(
       {
-        errors: null
+        errors: null,
       },
       () => {
         const { user } = this.props;
@@ -527,7 +527,7 @@ class AccountTab extends Component {
 
         this.setState(
           {
-            performingAction: true
+            performingAction: true,
           },
           () => {
             authentication
@@ -539,15 +539,15 @@ class AccountTab extends Component {
                   {
                     profileCompletion: authentication.getProfileCompletion({
                       ...user,
-                      ...userData
-                    })
+                      ...userData,
+                    }),
                   },
                   () => {
                     this.hideFields();
                   }
                 );
               })
-              .catch(reason => {
+              .catch((reason) => {
                 const code = reason.code;
                 const message = reason.message;
 
@@ -559,7 +559,7 @@ class AccountTab extends Component {
               })
               .finally(() => {
                 this.setState({
-                  performingAction: false
+                  performingAction: false,
                 });
               });
           }
@@ -571,7 +571,7 @@ class AccountTab extends Component {
   verifyEmailAddress = () => {
     this.setState(
       {
-        performingAction: true
+        performingAction: true,
       },
       () => {
         authentication
@@ -579,14 +579,14 @@ class AccountTab extends Component {
           .then(() => {
             this.setState(
               {
-                sentVerificationEmail: true
+                sentVerificationEmail: true,
               },
               () => {
                 this.props.openSnackbar("Sent verification e-mail");
               }
             );
           })
-          .catch(reason => {
+          .catch((reason) => {
             const code = reason.code;
             const message = reason.message;
 
@@ -598,14 +598,14 @@ class AccountTab extends Component {
           })
           .finally(() => {
             this.setState({
-              performingAction: false
+              performingAction: false,
             });
           });
       }
     );
   };
 
-  changeField = fieldId => {
+  changeField = (fieldId) => {
     switch (fieldId) {
       case "first-name":
         this.changeFirstName();
@@ -650,7 +650,7 @@ class AccountTab extends Component {
     }
   };
 
-  handleAvatarChange = event => {
+  handleAvatarChange = (event) => {
     if (!event) {
       return;
     }
@@ -672,7 +672,7 @@ class AccountTab extends Component {
       "image/jpeg",
       "image/png",
       "image/webp",
-      "image/svg+xml"
+      "image/svg+xml",
     ];
 
     if (!fileTypes.includes(avatar.type)) {
@@ -685,11 +685,11 @@ class AccountTab extends Component {
 
     this.setState({
       avatar: avatar,
-      avatarUrl: URL.createObjectURL(avatar)
+      avatarUrl: URL.createObjectURL(avatar),
     });
   };
 
-  handleFirstNameChange = event => {
+  handleFirstNameChange = (event) => {
     if (!event) {
       return;
     }
@@ -697,11 +697,11 @@ class AccountTab extends Component {
     const firstName = event.target.value;
 
     this.setState({
-      firstName: firstName
+      firstName: firstName,
     });
   };
 
-  handleLastNameChange = event => {
+  handleLastNameChange = (event) => {
     if (!event) {
       return;
     }
@@ -709,11 +709,11 @@ class AccountTab extends Component {
     const lastName = event.target.value;
 
     this.setState({
-      lastName: lastName
+      lastName: lastName,
     });
   };
 
-  handleUsernameChange = event => {
+  handleUsernameChange = (event) => {
     if (!event) {
       return;
     }
@@ -721,11 +721,11 @@ class AccountTab extends Component {
     const username = event.target.value;
 
     this.setState({
-      username: username
+      username: username,
     });
   };
 
-  handleEmailAddressChange = event => {
+  handleEmailAddressChange = (event) => {
     if (!event) {
       return;
     }
@@ -733,7 +733,7 @@ class AccountTab extends Component {
     const emailAddress = event.target.value;
 
     this.setState({
-      emailAddress: emailAddress
+      emailAddress: emailAddress,
     });
   };
 
@@ -760,7 +760,7 @@ class AccountTab extends Component {
       username,
       emailAddress,
       sentVerificationEmail,
-      errors
+      errors,
     } = this.state;
 
     const hasFirstName = userData && userData.firstName;
@@ -1249,8 +1249,9 @@ class AccountTab extends Component {
                 type="text"
                 value={firstName}
                 variant="filled"
+                InputLabelProps={{ required: false }}
                 onBlur={this.hideFields}
-                onKeyDown={event => this.handleKeyDown(event, "first-name")}
+                onKeyDown={(event) => this.handleKeyDown(event, "first-name")}
                 onChange={this.handleFirstNameChange}
               />
             )}
@@ -1328,8 +1329,9 @@ class AccountTab extends Component {
                 type="text"
                 value={lastName}
                 variant="filled"
+                InputLabelProps={{ required: false }}
                 onBlur={this.hideFields}
-                onKeyDown={event => this.handleKeyDown(event, "last-name")}
+                onKeyDown={(event) => this.handleKeyDown(event, "last-name")}
                 onChange={this.handleLastNameChange}
               />
             )}
@@ -1407,8 +1409,9 @@ class AccountTab extends Component {
                 type="text"
                 value={username}
                 variant="filled"
+                InputLabelProps={{ required: false }}
                 onBlur={this.hideFields}
-                onKeyDown={event => this.handleKeyDown(event, "username")}
+                onKeyDown={(event) => this.handleKeyDown(event, "username")}
                 onChange={this.handleUsernameChange}
               />
             )}
@@ -1504,8 +1507,11 @@ class AccountTab extends Component {
                 type="email"
                 value={emailAddress}
                 variant="filled"
+                InputLabelProps={{ required: false }}
                 onBlur={this.hideFields}
-                onKeyDown={event => this.handleKeyDown(event, "email-address")}
+                onKeyDown={(event) =>
+                  this.handleKeyDown(event, "email-address")
+                }
                 onChange={this.handleEmailAddressChange}
               />
             )}
@@ -1626,9 +1632,9 @@ class AccountTab extends Component {
     this.setState({
       profileCompletion: authentication.getProfileCompletion({
         ...user,
-        ...userData
+        ...userData,
       }),
-      securityRating: authentication.getSecurityRating(user, userData)
+      securityRating: authentication.getSecurityRating(user, userData),
     });
   }
 
@@ -1639,7 +1645,7 @@ class AccountTab extends Component {
       URL.revokeObjectURL(avatarUrl);
 
       this.setState({
-        avatarUrl: ""
+        avatarUrl: "",
       });
     }
   }
@@ -1657,7 +1663,7 @@ AccountTab.propTypes = {
   openSnackbar: PropTypes.func.isRequired,
 
   // Events
-  onDeleteAccountClick: PropTypes.func.isRequired
+  onDeleteAccountClick: PropTypes.func.isRequired,
 };
 
 export default withStyles(styles)(AccountTab);

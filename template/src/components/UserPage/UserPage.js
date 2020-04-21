@@ -21,8 +21,8 @@ import { ReactComponent as NoDataIllustration } from "../../illustrations/no-dat
 const useStyles = makeStyles({
   grid: {
     margin: 0,
-    width: "100%"
-  }
+    width: "100%",
+  },
 });
 
 function UserPage() {
@@ -37,11 +37,11 @@ function UserPage() {
       .collection("users")
       .doc(userId)
       .onSnapshot(
-        snapshot => {
+        (snapshot) => {
           setLoading(false);
           setUser(snapshot.data());
         },
-        error => {
+        (error) => {
           setLoading(false);
           setError(error);
         }

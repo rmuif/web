@@ -14,7 +14,7 @@ There are some rules you need to abide by to speed up the process of reporting a
 
 ### Reporting a bug
 
-If you’ve found a bug within the project, use the [Report a bug](https://github.com/rmuif/web/issues/new?template=bug_report.md) template when submitting an issue on GitHub. Following the template helps contributors to identify the bug and fix it more easily.
+If you’ve found a bug within the project, use the [Bug report](https://github.com/rmuif/web/issues/new?template=bug_report.md) template when submitting an issue on GitHub. Following the template helps contributors to identify the bug and fix it more easily.
 
 Bug reports that don’t follow the template might be dismissed, edited, and deprioritized.
 

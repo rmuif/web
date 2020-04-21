@@ -1,8 +1,14 @@
 <p align="center">
-  <img width="600" src="https://user-images.githubusercontent.com/7033377/77688568-9399c480-6fa0-11ea-9ee2-424a4a99e2e4.png" alt="Logo">
+  <img width="400" src="https://user-images.githubusercontent.com/7033377/77688568-9399c480-6fa0-11ea-9ee2-424a4a99e2e4.png" alt="Logo">
 </p>
 
-RMUIF is short for [React](https://reactjs.org), [Material-UI](https://material-ui.com), and [Firebase](https://firebase.google.com), the three musketeers that make up this template. With [Create React App](https://create-react-app.dev) at its core, you can expect the same tooling to work out of the box. The starting app is essentially a supercharged version of CRA, with all the bells and whistles.
+<h3 align="center">⚡ Supercharged version of Create React App with all the bells and whistles</h3>
+
+<p align="center">
+  <a href="https://discord.gg/5Ann5C3"><img alt="Discord" src="https://img.shields.io/discord/685891805258055732?color=%237289da&label=discord&logo=discord&logoColor=%23ffffff"></a>
+  <a href="https://www.npmjs.com/package/cra-template-rmuif"><img alt="npm" src="https://img.shields.io/npm/v/cra-template-rmuif?color=%23cb3837&logo=npm"></a>
+  <a href="LICENSE.md"><img alt="GitHub" src="https://img.shields.io/github/license/rmuif/web"></a>
+</p>
 
 ## Features
 
@@ -15,8 +21,21 @@ RMUIF is short for [React](https://reactjs.org), [Material-UI](https://material-
 
 ## Demos
 
+<p align="center">
+  <a href="https://demo.rmuif.com">
+    <img src="https://user-images.githubusercontent.com/7033377/78246649-c46e8200-74e9-11ea-8137-c519dd1f7c30.png" alt="Preview">
+  </a>
+</p>
+
+### Stable
+
 - https://demo.rmuif.com
-- https://dev.rmuif.com (based on the `dev` branch)
+- https://rmuif-web-demo.now.sh (mirror)
+
+### Development
+
+- https://dev.rmuif.com
+- https://rmuif-web-dev.now.sh (mirror)
 
 ## Getting started
 
@@ -32,7 +51,7 @@ https://docs.rmuif.com
 
 ## Contributing
 
-All contributions to the project are welcome. Before submitting an issue or a pull request, read the [Contribution Guidelines](CONTRIBUTING.md). Failing to follow the guidelines might result in deprioritization or dismissal.
+All contributions to the project are welcome. Before submitting an issue or a pull request, read the [Contribution Guidelines](CONTRIBUTING.md).
 
 ## Attribution
 

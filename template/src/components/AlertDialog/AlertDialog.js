@@ -9,13 +9,13 @@ import {
   DialogTitle,
   DialogContent,
   DialogContentText,
-  DialogActions
+  DialogActions,
 } from "@material-ui/core";
 
-const styles = theme => ({
+const styles = (theme) => ({
   noTitlePadding: {
-    paddingTop: theme.spacing(3)
-  }
+    paddingTop: theme.spacing(3),
+  },
 });
 
 class AlertDialog extends Component {
@@ -32,7 +32,7 @@ class AlertDialog extends Component {
       contentText,
       dismissiveAction,
       confirmingAction,
-      acknowledgementAction
+      acknowledgementAction,
     } = this.props;
 
     if ((dismissiveAction || confirmingAction) && acknowledgementAction) {
@@ -79,7 +79,7 @@ AlertDialog.propTypes = {
   contentText: PropTypes.string.isRequired,
   dismissiveAction: PropTypes.element,
   confirmingAction: PropTypes.element,
-  acknowledgementAction: PropTypes.element
+  acknowledgementAction: PropTypes.element,
 };
 
 export default withStyles(styles)(AlertDialog);

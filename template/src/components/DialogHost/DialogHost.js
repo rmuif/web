@@ -116,7 +116,7 @@ class DialogHost extends Component {
                 dialogProps={{
                   fullScreen: true,
 
-                  ...deleteAccountDialog.dialogProps
+                  ...deleteAccountDialog.dialogProps,
                 }}
                 performingAction={performingAction}
                 theme={theme}
@@ -134,7 +134,7 @@ class DialogHost extends Component {
                 dialogProps={{
                   fullScreen: true,
 
-                  ...signUpDialog.dialogProps
+                  ...signUpDialog.dialogProps,
                 }}
                 performingAction={performingAction}
                 theme={theme}
@@ -148,7 +148,7 @@ class DialogHost extends Component {
                 dialogProps={{
                   fullScreen: true,
 
-                  ...signInDialog.dialogProps
+                  ...signInDialog.dialogProps,
                 }}
                 performingAction={performingAction}
                 theme={theme}
@@ -168,7 +168,7 @@ class DialogHost extends Component {
                 dialogProps={{
                   fullScreen: true,
 
-                  ...settingsDialog.dialogProps
+                  ...settingsDialog.dialogProps,
                 }}
                 performingAction={performingAction}
                 theme={theme}
@@ -194,7 +194,7 @@ DialogHost.propTypes = {
   dialogs: PropTypes.object.isRequired,
 
   // Functions
-  openSnackbar: PropTypes.func.isRequired
+  openSnackbar: PropTypes.func.isRequired,
 };
 
 export default DialogHost;

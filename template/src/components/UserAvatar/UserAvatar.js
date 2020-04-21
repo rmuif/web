@@ -8,15 +8,15 @@ import { Avatar, ListItemAvatar } from "@material-ui/core";
 
 import {
   AccountCircle as AccountCircleIcon,
-  Person as PersonIcon
+  Person as PersonIcon,
 } from "@material-ui/icons";
 
 import authentication from "../../services/authentication";
 
-const styles = theme => ({
+const styles = (theme) => ({
   nameInitials: {
-    cursor: "default"
-  }
+    cursor: "default",
+  },
 });
 
 class UserAvatar extends Component {
@@ -39,7 +39,7 @@ class UserAvatar extends Component {
       }
 
       const nameInitials = authentication.getNameInitials({
-        ...user
+        ...user,
       });
 
       if (nameInitials) {
@@ -77,7 +77,7 @@ class UserAvatar extends Component {
       }
 
       const nameInitials = authentication.getNameInitials({
-        ...user
+        ...user,
       });
 
       if (nameInitials) {
@@ -106,7 +106,7 @@ class UserAvatar extends Component {
 }
 
 UserAvatar.defaultProps = {
-  context: "standalone"
+  context: "standalone",
 };
 
 UserAvatar.propTypes = {
@@ -116,7 +116,7 @@ UserAvatar.propTypes = {
   // Properties
   context: PropTypes.string,
   user: PropTypes.object.isRequired,
-  defaultCursor: PropTypes.bool
+  defaultCursor: PropTypes.bool,
 };
 
 export default withStyles(styles)(UserAvatar);

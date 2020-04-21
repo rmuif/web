@@ -4,7 +4,7 @@ import moment from "moment";
 
 const authentication = {};
 
-authentication.signUp = fields => {
+authentication.signUp = (fields) => {
   return new Promise((resolve, reject) => {
     if (!fields) {
       reject();
@@ -32,7 +32,7 @@ authentication.signUp = fields => {
 
     auth
       .createUserWithEmailAndPassword(emailAddress, password)
-      .then(value => {
+      .then((value) => {
         const user = value.user;
 
         if (!user) {
@@ -55,20 +55,20 @@ authentication.signUp = fields => {
           .set({
             firstName: firstName,
             lastName: lastName,
-            username: username
+            username: username,
           })
-          .then(value => {
+          .then((value) => {
             analytics.logEvent("sign_up", {
-              method: "password"
+              method: "password",
             });
 
             resolve(value);
           })
-          .catch(reason => {
+          .catch((reason) => {
             reject(reason);
           });
       })
-      .catch(reason => {
+      .catch((reason) => {
         reject(reason);
       });
   });
@@ -90,7 +90,7 @@ authentication.signUpWithEmailAddressAndPassword = (emailAddress, password) => {
 
     auth
       .createUserWithEmailAndPassword(emailAddress, password)
-      .then(value => {
+      .then((value) => {
         const user = value.user;
 
         if (!user) {
@@ -111,18 +111,18 @@ authentication.signUpWithEmailAddressAndPassword = (emailAddress, password) => {
 
         userDocumentReference
           .set({}, { merge: true })
-          .then(value => {
+          .then((value) => {
             analytics.logEvent("sign_up", {
-              method: "password"
+              method: "password",
             });
 
             resolve(value);
           })
-          .catch(reason => {
+          .catch((reason) => {
             reject(reason);
           });
       })
-      .catch(reason => {
+      .catch((reason) => {
         reject(reason);
       });
   });
@@ -144,7 +144,7 @@ authentication.signIn = (emailAddress, password) => {
 
     auth
       .signInWithEmailAndPassword(emailAddress, password)
-      .then(value => {
+      .then((value) => {
         const user = value.user;
 
         if (!user) {
@@ -165,39 +165,39 @@ authentication.signIn = (emailAddress, password) => {
 
         userDocumentReference
           .get({ source: "server" })
-          .then(value => {
+          .then((value) => {
             if (value.exists) {
               analytics.logEvent("login", {
-                method: "password"
+                method: "password",
               });
 
               resolve(user);
             } else {
               userDocumentReference
                 .set({}, { merge: true })
-                .then(value => {
+                .then((value) => {
                   analytics.logEvent("login", {
-                    method: "password"
+                    method: "password",
                   });
 
                   resolve(user);
                 })
-                .catch(reason => {
+                .catch((reason) => {
                   reject(reason);
                 });
             }
           })
-          .catch(reason => {
+          .catch((reason) => {
             reject(reason);
           });
       })
-      .catch(reason => {
+      .catch((reason) => {
         reject(reason);
       });
   });
 };
 
-authentication.sendSignInLinkToEmail = emailAddress => {
+authentication.sendSignInLinkToEmail = (emailAddress) => {
   return new Promise((resolve, reject) => {
     if (!emailAddress) {
       reject();
@@ -213,19 +213,19 @@ authentication.sendSignInLinkToEmail = emailAddress => {
 
     const actionCodeSettings = {
       url: process.env.REACT_APP_HOMEPAGE,
-      handleCodeInApp: true
+      handleCodeInApp: true,
     };
 
     auth
       .sendSignInLinkToEmail(emailAddress, actionCodeSettings)
-      .then(value => {
+      .then((value) => {
         analytics.logEvent("send_sign_in_link_to_email");
 
         localStorage.setItem("emailAddress", emailAddress);
 
         resolve(value);
       })
-      .catch(reason => {
+      .catch((reason) => {
         reject(reason);
       });
   });
@@ -247,22 +247,22 @@ authentication.signInWithEmailLink = (emailAddress, emailLink) => {
 
     auth
       .signInWithEmailLink(emailAddress, emailLink)
-      .then(value => {
+      .then((value) => {
         analytics.logEvent("login", {
-          method: "email-link"
+          method: "email-link",
         });
 
         localStorage.removeItem("emailAddress");
 
         resolve(value);
       })
-      .catch(reason => {
+      .catch((reason) => {
         reject(reason);
       });
   });
 };
 
-authentication.signInWithAuthProvider = providerId => {
+authentication.signInWithAuthProvider = (providerId) => {
   return new Promise((resolve, reject) => {
     if (!providerId) {
       reject();
@@ -286,7 +286,7 @@ authentication.signInWithAuthProvider = providerId => {
 
     auth
       .signInWithPopup(provider)
-      .then(value => {
+      .then((value) => {
         const user = value.user;
 
         if (!user) {
@@ -307,39 +307,39 @@ authentication.signInWithAuthProvider = providerId => {
 
         userDocumentReference
           .get({ source: "server" })
-          .then(value => {
+          .then((value) => {
             if (value.exists) {
               analytics.logEvent("login", {
-                method: providerId
+                method: providerId,
               });
 
               resolve(user);
             } else {
               userDocumentReference
                 .set({}, { merge: true })
-                .then(value => {
+                .then((value) => {
                   analytics.logEvent("login", {
-                    method: providerId
+                    method: providerId,
                   });
 
                   resolve(user);
                 })
-                .catch(reason => {
+                .catch((reason) => {
                   reject(reason);
                 });
             }
           })
-          .catch(reason => {
+          .catch((reason) => {
             reject(reason);
           });
       })
-      .catch(reason => {
+      .catch((reason) => {
         reject(reason);
       });
   });
 };
 
-authentication.linkAuthProvider = providerId => {
+authentication.linkAuthProvider = (providerId) => {
   return new Promise((resolve, reject) => {
     if (!providerId) {
       reject();
@@ -365,20 +365,20 @@ authentication.linkAuthProvider = providerId => {
 
     currentUser
       .linkWithPopup(provider)
-      .then(value => {
+      .then((value) => {
         analytics.logEvent("link_auth_provider", {
-          providerId: providerId
+          providerId: providerId,
         });
 
         resolve(value);
       })
-      .catch(reason => {
+      .catch((reason) => {
         reject(reason);
       });
   });
 };
 
-authentication.unlinkAuthProvider = providerId => {
+authentication.unlinkAuthProvider = (providerId) => {
   return new Promise((resolve, reject) => {
     if (!providerId) {
       reject();
@@ -396,20 +396,20 @@ authentication.unlinkAuthProvider = providerId => {
 
     currentUser
       .unlink(providerId)
-      .then(value => {
+      .then((value) => {
         analytics.logEvent("unlink_auth_provider", {
-          providerId: providerId
+          providerId: providerId,
         });
 
         resolve(value);
       })
-      .catch(reason => {
+      .catch((reason) => {
         reject(reason);
       });
   });
 };
 
-authentication.authProviderData = providerId => {
+authentication.authProviderData = (providerId) => {
   if (!providerId) {
     return;
   }
@@ -427,7 +427,7 @@ authentication.authProviderData = providerId => {
   }
 
   return providerData.find(
-    authProvider => authProvider.providerId === providerId
+    (authProvider) => authProvider.providerId === providerId
   );
 };
 
@@ -443,18 +443,18 @@ authentication.signOut = () => {
 
     auth
       .signOut()
-      .then(value => {
+      .then((value) => {
         analytics.logEvent("sign_out");
 
         resolve(value);
       })
-      .catch(reason => {
+      .catch((reason) => {
         reject(reason);
       });
   });
 };
 
-authentication.resetPassword = emailAddress => {
+authentication.resetPassword = (emailAddress) => {
   return new Promise((resolve, reject) => {
     if (!emailAddress) {
       reject();
@@ -470,18 +470,18 @@ authentication.resetPassword = emailAddress => {
 
     auth
       .sendPasswordResetEmail(emailAddress)
-      .then(value => {
+      .then((value) => {
         analytics.logEvent("reset_password");
 
         resolve(value);
       })
-      .catch(reason => {
+      .catch((reason) => {
         reject(reason);
       });
   });
 };
 
-authentication.changeAvatar = avatar => {
+authentication.changeAvatar = (avatar) => {
   return new Promise((resolve, reject) => {
     if (!avatar) {
       reject();
@@ -494,7 +494,7 @@ authentication.changeAvatar = avatar => {
       "image/jpeg",
       "image/png",
       "image/webp",
-      "image/svg+xml"
+      "image/svg+xml",
     ];
 
     if (!avatarFileTypes.includes(avatar.type)) {
@@ -533,28 +533,28 @@ authentication.changeAvatar = avatar => {
 
     avatarReference
       .put(avatar)
-      .then(uploadTaskSnapshot => {
+      .then((uploadTaskSnapshot) => {
         avatarReference
           .getDownloadURL()
-          .then(value => {
+          .then((value) => {
             currentUser
               .updateProfile({
-                photoURL: value
+                photoURL: value,
               })
-              .then(value => {
+              .then((value) => {
                 analytics.logEvent("change_avatar");
 
                 resolve(value);
               })
-              .catch(reason => {
+              .catch((reason) => {
                 reject(reason);
               });
           })
-          .catch(reason => {
+          .catch((reason) => {
             reject(reason);
           });
       })
-      .catch(reason => {
+      .catch((reason) => {
         reject(reason);
       });
   });
@@ -580,9 +580,9 @@ authentication.removeAvatar = () => {
 
     currentUser
       .updateProfile({
-        photoURL: null
+        photoURL: null,
       })
-      .then(value => {
+      .then((value) => {
         const avatarReference = storage
           .ref()
           .child("images")
@@ -591,22 +591,22 @@ authentication.removeAvatar = () => {
 
         avatarReference
           .delete()
-          .then(value => {
+          .then((value) => {
             analytics.logEvent("remove_avatar");
 
             resolve(value);
           })
-          .catch(reason => {
+          .catch((reason) => {
             reject(reason);
           });
       })
-      .catch(reason => {
+      .catch((reason) => {
         reject(reason);
       });
   });
 };
 
-authentication.changeFirstName = firstName => {
+authentication.changeFirstName = (firstName) => {
   return new Promise((resolve, reject) => {
     if (!firstName) {
       reject();
@@ -634,20 +634,20 @@ authentication.changeFirstName = firstName => {
 
     userDocumentReference
       .update({
-        firstName: firstName
+        firstName: firstName,
       })
-      .then(value => {
+      .then((value) => {
         analytics.logEvent("change_first_name");
 
         resolve(value);
       })
-      .catch(reason => {
+      .catch((reason) => {
         reject(reason);
       });
   });
 };
 
-authentication.changeLastName = lastName => {
+authentication.changeLastName = (lastName) => {
   return new Promise((resolve, reject) => {
     if (!lastName) {
       reject();
@@ -675,20 +675,20 @@ authentication.changeLastName = lastName => {
 
     userDocumentReference
       .update({
-        lastName: lastName
+        lastName: lastName,
       })
-      .then(value => {
+      .then((value) => {
         analytics.logEvent("change_last_name");
 
         resolve(value);
       })
-      .catch(reason => {
+      .catch((reason) => {
         reject(reason);
       });
   });
 };
 
-authentication.changeUsername = username => {
+authentication.changeUsername = (username) => {
   return new Promise((resolve, reject) => {
     if (!username) {
       reject();
@@ -716,20 +716,20 @@ authentication.changeUsername = username => {
 
     userDocumentReference
       .update({
-        username: username
+        username: username,
       })
-      .then(value => {
+      .then((value) => {
         analytics.logEvent("change_username");
 
         resolve(value);
       })
-      .catch(reason => {
+      .catch((reason) => {
         reject(reason);
       });
   });
 };
 
-authentication.changeEmailAddress = emailAddress => {
+authentication.changeEmailAddress = (emailAddress) => {
   return new Promise((resolve, reject) => {
     if (!emailAddress) {
       reject();
@@ -755,18 +755,18 @@ authentication.changeEmailAddress = emailAddress => {
 
     currentUser
       .updateEmail(emailAddress)
-      .then(value => {
+      .then((value) => {
         analytics.logEvent("change_email_address");
 
         resolve(value);
       })
-      .catch(reason => {
+      .catch((reason) => {
         reject(reason);
       });
   });
 };
 
-authentication.changePassword = password => {
+authentication.changePassword = (password) => {
   return new Promise((resolve, reject) => {
     if (!password) {
       reject();
@@ -792,23 +792,23 @@ authentication.changePassword = password => {
 
     currentUser
       .updatePassword(password)
-      .then(value => {
+      .then((value) => {
         const userDocumentReference = firestore.collection("users").doc(uid);
 
         userDocumentReference
           .update({
-            lastPasswordChange: firebase.firestore.FieldValue.serverTimestamp()
+            lastPasswordChange: firebase.firestore.FieldValue.serverTimestamp(),
           })
-          .then(value => {
+          .then((value) => {
             analytics.logEvent("change_password");
 
             resolve(value);
           })
-          .catch(reason => {
+          .catch((reason) => {
             reject(reason);
           });
       })
-      .catch(reason => {
+      .catch((reason) => {
         reject(reason);
       });
   });
@@ -826,12 +826,12 @@ authentication.verifyEmailAddress = () => {
 
     currentUser
       .sendEmailVerification()
-      .then(value => {
+      .then((value) => {
         analytics.logEvent("verify_email_address");
 
         resolve(value);
       })
-      .catch(reason => {
+      .catch((reason) => {
         reject(reason);
       });
   });
@@ -849,12 +849,12 @@ authentication.deleteAccount = () => {
 
     currentUser
       .delete()
-      .then(value => {
+      .then((value) => {
         analytics.logEvent("delete_account");
 
         resolve(value);
       })
-      .catch(reason => {
+      .catch((reason) => {
         reject(reason);
       });
   });
@@ -872,10 +872,10 @@ authentication.getRoles = () => {
 
     currentUser
       .getIdTokenResult()
-      .then(idTokenResult => {
+      .then((idTokenResult) => {
         resolve(idTokenResult.claims.roles);
       })
-      .catch(reason => {
+      .catch((reason) => {
         reject(reason);
       });
   });
@@ -885,10 +885,10 @@ authentication.isAdmin = () => {
   return new Promise((resolve, reject) => {
     authentication
       .getRoles()
-      .then(value => {
+      .then((value) => {
         resolve(value.includes("admin"));
       })
-      .catch(reason => {
+      .catch((reason) => {
         reject(reason);
       });
   });
@@ -898,16 +898,16 @@ authentication.isPremium = () => {
   return new Promise((resolve, reject) => {
     authentication
       .getRoles()
-      .then(value => {
+      .then((value) => {
         resolve(value.includes("premium"));
       })
-      .catch(reason => {
+      .catch((reason) => {
         reject(reason);
       });
   });
 };
 
-authentication.getName = fields => {
+authentication.getName = (fields) => {
   if (!fields) {
     return null;
   }
@@ -936,7 +936,7 @@ authentication.getName = fields => {
   return null;
 };
 
-authentication.getFullName = fields => {
+authentication.getFullName = (fields) => {
   if (!fields) {
     return null;
   }
@@ -956,7 +956,7 @@ authentication.getFullName = fields => {
   return null;
 };
 
-authentication.getNameInitials = fields => {
+authentication.getNameInitials = (fields) => {
   if (!fields) {
     return null;
   }
@@ -989,7 +989,7 @@ authentication.getNameInitials = fields => {
   return null;
 };
 
-authentication.getProfileCompletion = fields => {
+authentication.getProfileCompletion = (fields) => {
   if (!fields) {
     return null;
   }
@@ -1000,7 +1000,7 @@ authentication.getProfileCompletion = fields => {
     fields.lastName,
     fields.username,
     fields.email,
-    fields.email && fields.emailVerified
+    fields.email && fields.emailVerified,
   ];
 
   if (!fields) {
@@ -1009,7 +1009,7 @@ authentication.getProfileCompletion = fields => {
 
   let profileCompletion = 0;
 
-  fields.forEach(field => {
+  fields.forEach((field) => {
     if (field) {
       profileCompletion += 100 / fields.length;
     }
