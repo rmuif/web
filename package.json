@@ -1,6 +1,6 @@
 {
   "name": "cra-template-rmuif",
-  "version": "3.1.0",
+  "version": "3.1.1",
   "description": "Supercharged version of Create React App with all the bells and whistles",
   "keywords": [
     "react",
@@ -9,7 +9,9 @@
     "rmuif",
     "material-ui",
     "firebase",
-    "react-router"
+    "react-router",
+    "authentication",
+    "authorization"
   ],
   "homepage": "https://rmuif.com",
   "bugs": {
