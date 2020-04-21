@@ -14,7 +14,7 @@ class ErrorBoundary extends Component {
 
     this.state = {
       hasError: false,
-      eventId: null
+      eventId: null,
     };
   }
 
@@ -23,13 +23,13 @@ class ErrorBoundary extends Component {
   }
 
   componentDidCatch(error, errorInfo) {
-    Sentry.withScope(scope => {
+    Sentry.withScope((scope) => {
       scope.setExtras(errorInfo);
 
       const eventId = Sentry.captureException(error);
 
       this.setState({
-        eventId: eventId
+        eventId: eventId,
       });
     });
   }
@@ -56,7 +56,7 @@ class ErrorBoundary extends Component {
 
 ErrorBoundary.propTypes = {
   // Properties
-  children: PropTypes.array.isRequired
+  children: PropTypes.array.isRequired,
 };
 
 export default ErrorBoundary;

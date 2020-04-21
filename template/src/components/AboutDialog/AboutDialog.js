@@ -10,19 +10,19 @@ import {
   IconButton,
   List,
   ListItem,
-  ListItemText
+  ListItemText,
 } from "@material-ui/core";
 
 import { makeStyles } from "@material-ui/core/styles";
 
 import { Close as CloseIcon } from "@material-ui/icons";
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles((theme) => ({
   closeButton: {
     position: "absolute",
     right: theme.spacing(1),
-    top: theme.spacing(1)
-  }
+    top: theme.spacing(1),
+  },
 }));
 
 function AboutDialog(props) {
@@ -38,7 +38,9 @@ function AboutDialog(props) {
   return (
     <Dialog fullWidth maxWidth="xs" {...dialogProps}>
       <DialogTitle disableTypography>
-        <Typography variant="h6">About</Typography>
+        <Typography variant="h6">
+          About {process.env.REACT_APP_TITLE}
+        </Typography>
 
         <Tooltip title="Close">
           <IconButton
@@ -71,7 +73,7 @@ function AboutDialog(props) {
 
 AboutDialog.propTypes = {
   dialogProps: PropTypes.object.isRequired,
-  user: PropTypes.object
+  user: PropTypes.object,
 };
 
 export default AboutDialog;

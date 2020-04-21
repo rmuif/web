@@ -18,7 +18,7 @@ function UserCard(props) {
 }
 
 UserCard.propTypes = {
-  user: PropTypes.object.isRequired
+  user: PropTypes.object.isRequired,
 };
 
 export default UserCard;

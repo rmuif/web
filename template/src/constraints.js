@@ -1,87 +1,87 @@
 const constraints = {
   firstName: {
     presence: {
-      allowEmpty: false
+      allowEmpty: false,
     },
 
-    type: "string"
+    type: "string",
   },
 
   lastName: {
     presence: {
-      allowEmpty: false
+      allowEmpty: false,
     },
 
-    type: "string"
+    type: "string",
   },
 
   username: {
     length: {
       minimum: 2,
-      maximum: 20
+      maximum: 20,
     },
 
     presence: {
-      allowEmpty: false
+      allowEmpty: false,
     },
 
-    type: "string"
+    type: "string",
   },
 
   emailAddress: {
     email: {
-      message: "^E-mail address is invalid"
+      message: "^E-mail address is invalid",
     },
 
     presence: {
-      allowEmpty: false
+      allowEmpty: false,
     },
 
-    type: "string"
+    type: "string",
   },
 
   emailAddressConfirmation: {
     email: {
-      message: "^E-mail address confirmation is invalid"
+      message: "^E-mail address confirmation is invalid",
     },
 
     equality: {
       attribute: "emailAddress",
-      message: "^E-mail address confirmation is not equal to e-mail address"
+      message: "^E-mail address confirmation is not equal to e-mail address",
     },
 
     presence: {
-      allowEmpty: false
+      allowEmpty: false,
     },
 
-    type: "string"
+    type: "string",
   },
 
   password: {
     length: {
-      minimum: 6
+      minimum: 6,
     },
 
     presence: {
-      allowEmpty: false
+      allowEmpty: false,
     },
 
-    type: "string"
+    type: "string",
   },
 
   passwordConfirmation: {
     equality: "password",
 
     length: {
-      minimum: 6
+      minimum: 6,
     },
 
     presence: {
-      allowEmpty: false
+      allowEmpty: false,
     },
 
-    type: "string"
-  }
+    type: "string",
+  },
 };
 
 export default constraints;

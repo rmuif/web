@@ -6,14 +6,14 @@ import { withStyles } from "@material-ui/core/styles";
 
 import { CircularProgress } from "@material-ui/core";
 
-const styles = theme => ({
+const styles = (theme) => ({
   center: {
     position: "absolute",
     top: "50%",
     left: "50%",
     transform: "translate(-50%, -50%)",
-    textAlign: "center"
-  }
+    textAlign: "center",
+  },
 });
 
 class LaunchScreen extends Component {
@@ -31,7 +31,7 @@ class LaunchScreen extends Component {
 
 LaunchScreen.propTypes = {
   // Styling
-  classes: PropTypes.object.isRequired
+  classes: PropTypes.object.isRequired,
 };
 
 export default withStyles(styles)(LaunchScreen);

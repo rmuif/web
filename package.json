@@ -1,6 +1,6 @@
 {
   "name": "cra-template-rmuif",
-  "version": "3.1.0",
+  "version": "3.1.1",
   "description": "Supercharged version of Create React App with all the bells and whistles",
   "keywords": [
     "react",
@@ -9,12 +9,14 @@
     "rmuif",
     "material-ui",
     "firebase",
-    "react-router"
+    "react-router",
+    "authentication",
+    "authorization"
   ],
   "homepage": "https://rmuif.com",
   "bugs": {
     "url": "https://github.com/rmuif/web/issues",
-    "email": "phoqe@phoqe.dev"
+    "email": "rmuif@phoqe.dev"
   },
   "license": "MIT",
   "author": {
@@ -33,5 +35,20 @@
   },
   "engines": {
     "node": ">=8"
+  },
+  "devDependencies": {
+    "husky": "^4.2.3",
+    "lint-staged": "^10.1.1",
+    "prettier": "^2.0.2"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "lint-staged": {
+    "**/*.{js,jsx,ts,tsx,json,css,scss,md}": [
+      "prettier --write"
+    ]
   }
 }

@@ -14,7 +14,7 @@ it("renders without crashing", () => {
       dialogProps={{
         open: true,
 
-        onClose: () => {}
+        onClose: () => {},
       }}
       content={<div></div>}
       dismissiveAction={<Button color="primary">Cancel</Button>}

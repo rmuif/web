@@ -23,126 +23,126 @@ import {
   deepOrange,
   brown,
   grey as gray,
-  blueGrey as blueGray
+  blueGrey as blueGray,
 } from "@material-ui/core/colors";
 
 const colors = {
   red: {
     id: "red",
     name: "Red",
-    import: red
+    import: red,
   },
 
   pink: {
     id: "pink",
     name: "Pink",
-    import: pink
+    import: pink,
   },
 
   purple: {
     id: "purple",
     name: "Purple",
-    import: purple
+    import: purple,
   },
 
   deepPurple: {
     id: "deep-purple",
     name: "Deep Purple",
-    import: deepPurple
+    import: deepPurple,
   },
 
   indigo: {
     id: "indigo",
     name: "Indigo",
-    import: indigo
+    import: indigo,
   },
 
   blue: {
     id: "blue",
     name: "Blue",
-    import: blue
+    import: blue,
   },
 
   lightBlue: {
     id: "light-blue",
     name: "Light Blue",
-    import: lightBlue
+    import: lightBlue,
   },
 
   cyan: {
     id: "cyan",
     name: "Cyan",
-    import: cyan
+    import: cyan,
   },
 
   teal: {
     id: "teal",
     name: "Teal",
-    import: teal
+    import: teal,
   },
 
   green: {
     id: "green",
     name: "Green",
-    import: green
+    import: green,
   },
 
   lightGreen: {
     id: "light-green",
     name: "Light Green",
-    import: lightGreen
+    import: lightGreen,
   },
 
   lime: {
     id: "lime",
     name: "Lime",
-    import: lime
+    import: lime,
   },
 
   yellow: {
     id: "yellow",
     name: "Yellow",
-    import: yellow
+    import: yellow,
   },
 
   amber: {
     id: "amber",
     name: "Amber",
-    import: amber
+    import: amber,
   },
 
   orange: {
     id: "orange",
     name: "Orange",
-    import: orange
+    import: orange,
   },
 
   deepOrange: {
     id: "deep-orange",
     name: "Deep Orange",
-    import: deepOrange
+    import: deepOrange,
   },
 
   brown: {
     id: "brown",
     name: "Brown",
-    import: brown
+    import: brown,
   },
 
   gray: {
     id: "gray",
     name: "Gray",
-    import: gray
+    import: gray,
   },
 
   blueGray: {
     id: "blue-gray",
     name: "Blue Gray",
-    import: blueGray
-  }
+    import: blueGray,
+  },
 };
 
-const getColor = colorId => {
+const getColor = (colorId) => {
   if (!colorId) {
     return null;
   }
@@ -162,12 +162,12 @@ const defaultTheme = createMuiTheme({
   palette: {
     primary: defaultPrimaryColor.import,
     secondary: defaultSecondaryColor.import,
-    type: defaultDark ? "dark" : "light"
+    type: defaultDark ? "dark" : "light",
   },
 
   primaryColor: defaultPrimaryColor,
   secondaryColor: defaultSecondaryColor,
-  dark: defaultDark
+  dark: defaultDark,
 });
 
 const appearance = {};
@@ -180,7 +180,7 @@ appearance.defaultDark = defaultDark;
 
 appearance.defaultTheme = defaultTheme;
 
-appearance.isDefaultTheme = theme => {
+appearance.isDefaultTheme = (theme) => {
   if (!theme) {
     return false;
   }
@@ -196,7 +196,7 @@ appearance.isDefaultTheme = theme => {
   return false;
 };
 
-appearance.createTheme = theme => {
+appearance.createTheme = (theme) => {
   if (!theme) {
     return null;
   }
@@ -220,18 +220,18 @@ appearance.createTheme = theme => {
     palette: {
       primary: primaryColor.import,
       secondary: secondaryColor.import,
-      type: dark ? "dark" : "light"
+      type: dark ? "dark" : "light",
     },
 
     primaryColor: primaryColor,
     secondaryColor: secondaryColor,
-    dark: dark
+    dark: dark,
   });
 
   return theme;
 };
 
-appearance.changeTheme = theme => {
+appearance.changeTheme = (theme) => {
   return new Promise((resolve, reject) => {
     if (!theme) {
       reject();
@@ -281,23 +281,23 @@ appearance.changeTheme = theme => {
         theme: {
           primaryColor: primaryColor.id,
           secondaryColor: secondaryColor.id,
-          dark: dark
-        }
+          dark: dark,
+        },
       })
-      .then(value => {
+      .then((value) => {
         analytics.logEvent("change_theme", {
-          theme: theme
+          theme: theme,
         });
 
         resolve(value);
       })
-      .catch(reason => {
+      .catch((reason) => {
         reject(reason);
       });
   });
 };
 
-appearance.changePrimaryColor = primaryColor => {
+appearance.changePrimaryColor = (primaryColor) => {
   return new Promise((resolve, reject) => {
     if (!primaryColor) {
       reject();
@@ -333,22 +333,22 @@ appearance.changePrimaryColor = primaryColor => {
 
     userDocumentReference
       .update({
-        "theme.primaryColor": primaryColor.id
+        "theme.primaryColor": primaryColor.id,
       })
-      .then(value => {
+      .then((value) => {
         analytics.logEvent("change_primary_color", {
-          primaryColor: primaryColor.id
+          primaryColor: primaryColor.id,
         });
 
         resolve(value);
       })
-      .catch(reason => {
+      .catch((reason) => {
         reject(reason);
       });
   });
 };
 
-appearance.changeSecondaryColor = secondaryColor => {
+appearance.changeSecondaryColor = (secondaryColor) => {
   return new Promise((resolve, reject) => {
     if (!secondaryColor) {
       reject();
@@ -384,22 +384,22 @@ appearance.changeSecondaryColor = secondaryColor => {
 
     userDocumentReference
       .update({
-        "theme.secondaryColor": secondaryColor.id
+        "theme.secondaryColor": secondaryColor.id,
       })
-      .then(value => {
+      .then((value) => {
         analytics.logEvent("change_secondary_color", {
-          secondaryColor: secondaryColor.id
+          secondaryColor: secondaryColor.id,
         });
 
         resolve(value);
       })
-      .catch(reason => {
+      .catch((reason) => {
         reject(reason);
       });
   });
 };
 
-appearance.changeDark = dark => {
+appearance.changeDark = (dark) => {
   return new Promise((resolve, reject) => {
     const currentUser = auth.currentUser;
 
@@ -421,22 +421,22 @@ appearance.changeDark = dark => {
 
     userDocumentReference
       .update({
-        "theme.dark": dark
+        "theme.dark": dark,
       })
-      .then(value => {
+      .then((value) => {
         analytics.logEvent("change_dark", {
-          dark: dark
+          dark: dark,
         });
 
         resolve(value);
       })
-      .catch(reason => {
+      .catch((reason) => {
         reject(reason);
       });
   });
 };
 
-appearance.changeSyncAppearance = syncAppearance => {
+appearance.changeSyncAppearance = (syncAppearance) => {
   return new Promise((resolve, reject) => {
     const currentUser = auth.currentUser;
 
@@ -458,16 +458,16 @@ appearance.changeSyncAppearance = syncAppearance => {
 
     userDocumentReference
       .update({
-        "theme.syncAppearance": syncAppearance
+        "theme.syncAppearance": syncAppearance,
       })
-      .then(value => {
+      .then((value) => {
         analytics.logEvent("change_sync_appearance", {
-          syncAppearance: syncAppearance
+          syncAppearance: syncAppearance,
         });
 
         resolve(value);
       })
-      .catch(reason => {
+      .catch((reason) => {
         reject(reason);
       });
   });
@@ -495,14 +495,14 @@ appearance.resetTheme = () => {
 
     userDocumentReference
       .update({
-        theme: firebase.firestore.FieldValue.delete()
+        theme: firebase.firestore.FieldValue.delete(),
       })
-      .then(value => {
+      .then((value) => {
         analytics.logEvent("reset_theme");
 
         resolve(value);
       })
-      .catch(reason => {
+      .catch((reason) => {
         reject(reason);
       });
   });
