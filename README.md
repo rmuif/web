@@ -1,8 +1,8 @@
 <p align="center">
-  <img width="400" src="https://user-images.githubusercontent.com/7033377/77688568-9399c480-6fa0-11ea-9ee2-424a4a99e2e4.png" alt="Logo">
+  <img width="300" src="https://user-images.githubusercontent.com/7033377/77688568-9399c480-6fa0-11ea-9ee2-424a4a99e2e4.png" alt="Logo">
 </p>
 
-<h3 align="center">⚡ Supercharged version of Create React App with all the bells and whistles</h3>
+<p align="center">:zap: Supercharged version of Create React App with all the bells and whistles</p>
 
 <p align="center">
   <a href="https://discord.gg/5Ann5C3"><img alt="Discord" src="https://img.shields.io/discord/685891805258055732?color=%237289da&label=discord&logo=discord&logoColor=%23ffffff"></a>
