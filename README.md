@@ -62,7 +62,6 @@ All contributions to the project are welcome. Before submitting an issue or a pu
 | [unDraw](https://undraw.co)                  | A constantly updated design project with beautiful SVG images that you can use completely free and without attribution.                                                                         |
 | [Netlify](https://netlify.com)               | All-in-one platform for automating modern web projects.                                                                                                                                         |
 | [Vercel](https://vercel.com)                 | Vercel is the easiest way to deploy websites. Host your web projects with zero configuration, automatic SSL, and global CDN.                                                                    |
-|                                              |
 
 ## License
 
