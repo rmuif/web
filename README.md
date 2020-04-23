@@ -4,12 +4,6 @@
 
 <p align="center">:zap: Supercharged version of Create React App with all the bells and whistles</p>
 
-<p align="center">
-  <a href="https://discord.gg/5Ann5C3"><img alt="Discord" src="https://img.shields.io/discord/685891805258055732?color=%237289da&label=discord&logo=discord&logoColor=%23ffffff"></a>
-  <a href="https://www.npmjs.com/package/cra-template-rmuif"><img alt="npm" src="https://img.shields.io/npm/v/cra-template-rmuif?color=%23cb3837&logo=npm"></a>
-  <a href="LICENSE.md"><img alt="GitHub" src="https://img.shields.io/github/license/rmuif/web"></a>
-</p>
-
 ## Features
 
 - Bootstrapped with Create React App
