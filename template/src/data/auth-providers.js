@@ -26,6 +26,7 @@ const authProviders = [
     color: "#24292e",
     icon: <GitHubIcon />,
     name: "GitHub",
+    scopes: ["repo"],
   },
   {
     id: "google.com",
