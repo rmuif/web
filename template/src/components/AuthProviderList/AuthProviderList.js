@@ -6,7 +6,7 @@ import { withStyles } from "@material-ui/core/styles";
 
 import { Box, ButtonGroup, Button } from "@material-ui/core";
 
-import authProviders from "../../authProviders";
+import authProviders from "../../data/auth-providers";
 
 class AuthProviderList extends Component {
   render() {
