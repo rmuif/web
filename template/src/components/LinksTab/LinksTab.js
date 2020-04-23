@@ -36,7 +36,7 @@ class LinksTab extends Component {
       },
       () => {
         authentication
-          .linkAuthProvider(authProvider.id)
+          .linkAuthProvider(authProvider)
           .then((value) => {
             this.props.openSnackbar(`${authProvider.name} linked`, 5);
           })

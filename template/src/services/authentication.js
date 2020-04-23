@@ -271,7 +271,6 @@ authentication.signInWithAuthProvider = (provider) => {
     }
 
     const authProvider = new firebase.auth.OAuthProvider(provider.id);
-
     const scopes = provider.scopes;
 
     if (scopes) {
@@ -341,20 +340,21 @@ authentication.signInWithAuthProvider = (provider) => {
   });
 };
 
-authentication.linkAuthProvider = (providerId) => {
+authentication.linkAuthProvider = (provider) => {
   return new Promise((resolve, reject) => {
-    if (!providerId) {
+    if (!provider) {
       reject();
 
       return;
     }
 
-    const provider = new firebase.auth.OAuthProvider(providerId);
+    const authProvider = new firebase.auth.OAuthProvider(provider.id);
+    const scopes = provider.scopes;
 
-    if (!provider) {
-      reject();
-
-      return;
+    if (scopes) {
+      scopes.forEach((scope) => {
+        authProvider.addScope(scope);
+      });
     }
 
     const currentUser = auth.currentUser;
@@ -366,10 +366,10 @@ authentication.linkAuthProvider = (providerId) => {
     }
 
     currentUser
-      .linkWithPopup(provider)
+      .linkWithPopup(authProvider)
       .then((value) => {
         analytics.logEvent("link_auth_provider", {
-          providerId: providerId,
+          providerId: authProvider.id,
         });
 
         resolve(value);
