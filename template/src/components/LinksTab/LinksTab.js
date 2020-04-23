@@ -36,7 +36,7 @@ class LinksTab extends Component {
       },
       () => {
         authentication
-          .linkAuthProvider(authProvider.providerId)
+          .linkAuthProvider(authProvider.id)
           .then((value) => {
             this.props.openSnackbar(`${authProvider.name} linked`, 5);
           })
@@ -66,7 +66,7 @@ class LinksTab extends Component {
       },
       () => {
         authentication
-          .unlinkAuthProvider(authProvider.providerId)
+          .unlinkAuthProvider(authProvider.id)
           .then((value) => {
             this.props.openSnackbar(`${authProvider.name} unlinked`, 4);
           })
@@ -100,7 +100,7 @@ class LinksTab extends Component {
         <List disablePadding>
           {authProviders.map((authProvider) => {
             const authProviderData = authentication.authProviderData(
-              authProvider.providerId
+              authProvider.id
             );
             let identifier = null;
 
@@ -113,7 +113,7 @@ class LinksTab extends Component {
             }
 
             return (
-              <ListItem key={authProvider.providerId}>
+              <ListItem key={authProvider.id}>
                 <ListItemIcon>
                   <Box color={theme.dark ? null : authProvider.color}>
                     {authProvider.icon}

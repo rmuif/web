@@ -33,9 +33,9 @@ class AuthProviderList extends Component {
 
             return (
               <AuthProviderButton
-                key={authProvider.providerId}
+                key={authProvider.id}
                 startIcon={authProvider.icon}
-                onClick={() => onAuthProviderClick(authProvider.providerId)}
+                onClick={() => onAuthProviderClick(authProvider)}
               >
                 {authProvider.name}
               </AuthProviderButton>
