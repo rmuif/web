@@ -25,7 +25,7 @@ import { Close as CloseIcon } from "@material-ui/icons";
 
 import AuthProviderList from "../AuthProviderList";
 
-import constraints from "../../constraints";
+import constraints from "../../data/constraints";
 import authentication from "../../services/authentication";
 
 const styles = (theme) => ({

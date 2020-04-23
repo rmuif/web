@@ -20,7 +20,7 @@ import {
 
 import { Lock as LockIcon, Edit as EditIcon } from "@material-ui/icons";
 
-import constraints from "../../constraints";
+import constraints from "../../data/constraints";
 import authentication from "../../services/authentication";
 
 const initialState = {

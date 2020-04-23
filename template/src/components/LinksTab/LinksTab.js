@@ -16,7 +16,7 @@ import {
 
 import { Link as LinkIcon, LinkOff as LinkOffIcon } from "@material-ui/icons";
 
-import authProviders from "../../authProviders";
+import authProviders from "../../data/auth-providers";
 
 import authentication from "../../services/authentication";
 
