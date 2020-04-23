@@ -10,43 +10,43 @@ import { Yahoo as YahooIcon } from "mdi-material-ui";
 
 const authProviders = [
   {
-    providerId: "apple.com",
+    id: "apple.com",
     color: "#000000",
     icon: <AppleIcon />,
     name: "Apple",
   },
   {
-    providerId: "facebook.com",
+    id: "facebook.com",
     color: "#3c5a99",
     icon: <FacebookIcon />,
     name: "Facebook",
   },
   {
-    providerId: "github.com",
+    id: "github.com",
     color: "#24292e",
     icon: <GitHubIcon />,
     name: "GitHub",
   },
   {
-    providerId: "google.com",
+    id: "google.com",
     color: "#4285f4",
     icon: <GoogleIcon />,
     name: "Google",
   },
   {
-    providerId: "microsoft.com",
+    id: "microsoft.com",
     color: "#f65314",
     icon: <MicrosoftIcon />,
     name: "Microsoft",
   },
   {
-    providerId: "twitter.com",
+    id: "twitter.com",
     color: "#1da1f2",
     icon: <TwitterIcon />,
     name: "Twitter",
   },
   {
-    providerId: "yahoo.com",
+    id: "yahoo.com",
     color: "#410093",
     icon: <YahooIcon />,
     name: "Yahoo",

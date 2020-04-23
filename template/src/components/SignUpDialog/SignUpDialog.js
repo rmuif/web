@@ -130,14 +130,14 @@ class SignUpDialog extends Component {
     }
   };
 
-  signInWithAuthProvider = (providerId) => {
+  signInWithAuthProvider = (provider) => {
     this.setState(
       {
         performingAction: true,
       },
       () => {
         authentication
-          .signInWithAuthProvider(providerId)
+          .signInWithAuthProvider(provider)
           .then((user) => {
             this.props.dialogProps.onClose(() => {
               const displayName = user.displayName;

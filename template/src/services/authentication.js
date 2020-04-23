@@ -262,20 +262,22 @@ authentication.signInWithEmailLink = (emailAddress, emailLink) => {
   });
 };
 
-authentication.signInWithAuthProvider = (providerId) => {
+authentication.signInWithAuthProvider = (provider) => {
   return new Promise((resolve, reject) => {
-    if (!providerId) {
+    if (!provider) {
       reject();
 
       return;
     }
 
-    const provider = new firebase.auth.OAuthProvider(providerId);
+    const authProvider = new firebase.auth.OAuthProvider(provider.id);
 
-    if (!provider) {
-      reject();
+    const scopes = provider.scopes;
 
-      return;
+    if (scopes) {
+      scopes.forEach((scope) => {
+        authProvider.addScope(scope);
+      });
     }
 
     if (auth.currentUser) {
@@ -285,7 +287,7 @@ authentication.signInWithAuthProvider = (providerId) => {
     }
 
     auth
-      .signInWithPopup(provider)
+      .signInWithPopup(authProvider)
       .then((value) => {
         const user = value.user;
 
@@ -310,7 +312,7 @@ authentication.signInWithAuthProvider = (providerId) => {
           .then((value) => {
             if (value.exists) {
               analytics.logEvent("login", {
-                method: providerId,
+                method: provider.id,
               });
 
               resolve(user);
@@ -319,7 +321,7 @@ authentication.signInWithAuthProvider = (providerId) => {
                 .set({}, { merge: true })
                 .then((value) => {
                   analytics.logEvent("login", {
-                    method: providerId,
+                    method: provider.id,
                   });
 
                   resolve(user);
@@ -426,9 +428,7 @@ authentication.authProviderData = (providerId) => {
     return;
   }
 
-  return providerData.find(
-    (authProvider) => authProvider.providerId === providerId
-  );
+  return providerData.find((authProvider) => authProvider.id === providerId);
 };
 
 authentication.signOut = () => {
