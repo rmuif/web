@@ -7326,10 +7326,10 @@ md5.js@^1.3.4:
     inherits "^2.0.1"
     safe-buffer "^5.1.2"
 
-mdi-material-ui@^6.15.0:
-  version "6.15.0"
-  resolved "https://registry.yarnpkg.com/mdi-material-ui/-/mdi-material-ui-6.15.0.tgz#809ac24073b0265956c1ed482af626aac8e54d4e"
-  integrity sha512-7LJQdu4QP17bRdqVebvV/NiLMCLnCMEkSwzmPXGiQIK14SDYz9dNqvCbaYZEKzZXAEDmxkHYelDehzrPngbsWQ==
+mdi-material-ui@^6.16.0:
+  version "6.16.0"
+  resolved "https://registry.yarnpkg.com/mdi-material-ui/-/mdi-material-ui-6.16.0.tgz#8ed39f43259c14040fa5298d8da5c051bbc437d3"
+  integrity sha512-i22DW95kady0ty5QylixkEa9h40YTt2KETvAd1OdrXkfnKkDH4RCXNtONw2KGsK6pANH+M2Oqh2SfG98UjcX8g==
 
 mdn-data@2.0.4:
   version "2.0.4"
