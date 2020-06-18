@@ -10,7 +10,7 @@
     "@testing-library/user-event": "^11.4.2",
     "babel-plugin-import": "^1.13.0",
     "camelcase": "^6.0.0",
-    "customize-cra": "^0.9.1",
+    "customize-cra": "^1.0.0",
     "firebase": "^7.15.1",
     "mdi-material-ui": "^6.16.0",
     "moment": "^2.26.0",
