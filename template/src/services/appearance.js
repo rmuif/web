@@ -234,7 +234,7 @@ appearance.createTheme = (theme) => {
 appearance.changeTheme = (theme) => {
   return new Promise((resolve, reject) => {
     if (!theme) {
-      reject();
+      reject(new Error("No theme"));
 
       return;
     }
@@ -244,7 +244,7 @@ appearance.changeTheme = (theme) => {
     let dark = theme.dark;
 
     if (!primaryColor || !secondaryColor) {
-      reject();
+      reject(new Error("No primary color or secondary color"));
 
       return;
     }
@@ -253,7 +253,7 @@ appearance.changeTheme = (theme) => {
     secondaryColor = getColor(secondaryColor);
 
     if (!primaryColor || !secondaryColor) {
-      reject();
+      reject(new Error("No primary color or secondary color"));
 
       return;
     }
@@ -261,7 +261,7 @@ appearance.changeTheme = (theme) => {
     const currentUser = auth.currentUser;
 
     if (!currentUser) {
-      reject();
+      reject(new Error("No current user"));
 
       return;
     }
@@ -269,7 +269,7 @@ appearance.changeTheme = (theme) => {
     const uid = currentUser.uid;
 
     if (!uid) {
-      reject();
+      reject(new Error("No UID"));
 
       return;
     }
@@ -300,7 +300,7 @@ appearance.changeTheme = (theme) => {
 appearance.changePrimaryColor = (primaryColor) => {
   return new Promise((resolve, reject) => {
     if (!primaryColor) {
-      reject();
+      reject(new Error("No primary color"));
 
       return;
     }
@@ -308,7 +308,7 @@ appearance.changePrimaryColor = (primaryColor) => {
     primaryColor = getColor(primaryColor);
 
     if (!primaryColor) {
-      reject();
+      reject(new Error("No primary color"));
 
       return;
     }
@@ -316,7 +316,7 @@ appearance.changePrimaryColor = (primaryColor) => {
     const currentUser = auth.currentUser;
 
     if (!currentUser) {
-      reject();
+      reject(new Error("No current user"));
 
       return;
     }
@@ -324,7 +324,7 @@ appearance.changePrimaryColor = (primaryColor) => {
     const uid = currentUser.uid;
 
     if (!uid) {
-      reject();
+      reject(new Error("No current user"));
 
       return;
     }
@@ -351,7 +351,7 @@ appearance.changePrimaryColor = (primaryColor) => {
 appearance.changeSecondaryColor = (secondaryColor) => {
   return new Promise((resolve, reject) => {
     if (!secondaryColor) {
-      reject();
+      reject(new Error("No secondary color"));
 
       return;
     }
@@ -359,7 +359,7 @@ appearance.changeSecondaryColor = (secondaryColor) => {
     secondaryColor = getColor(secondaryColor);
 
     if (!secondaryColor) {
-      reject();
+      reject(new Error("No secondary color"));
 
       return;
     }
@@ -367,7 +367,7 @@ appearance.changeSecondaryColor = (secondaryColor) => {
     const currentUser = auth.currentUser;
 
     if (!currentUser) {
-      reject();
+      reject(new Error("No current user"));
 
       return;
     }
@@ -375,7 +375,7 @@ appearance.changeSecondaryColor = (secondaryColor) => {
     const uid = currentUser.uid;
 
     if (!uid) {
-      reject();
+      reject(new Error("No UID"));
 
       return;
     }
@@ -404,7 +404,7 @@ appearance.changeDark = (dark) => {
     const currentUser = auth.currentUser;
 
     if (!currentUser) {
-      reject();
+      reject(new Error("No current user"));
 
       return;
     }
@@ -412,7 +412,7 @@ appearance.changeDark = (dark) => {
     const uid = currentUser.uid;
 
     if (!uid) {
-      reject();
+      reject(new Error("No UID"));
 
       return;
     }
@@ -441,7 +441,7 @@ appearance.changeSyncAppearance = (syncAppearance) => {
     const currentUser = auth.currentUser;
 
     if (!currentUser) {
-      reject();
+      reject(new Error("No current user"));
 
       return;
     }
@@ -449,7 +449,7 @@ appearance.changeSyncAppearance = (syncAppearance) => {
     const uid = currentUser.uid;
 
     if (!uid) {
-      reject();
+      reject(new Error("No UID"));
 
       return;
     }
@@ -478,7 +478,7 @@ appearance.resetTheme = () => {
     const currentUser = auth.currentUser;
 
     if (!currentUser) {
-      reject();
+      reject(new Error("No current user"));
 
       return;
     }
@@ -486,7 +486,7 @@ appearance.resetTheme = () => {
     const uid = currentUser.uid;
 
     if (!uid) {
-      reject();
+      reject(new Error("No UID"));
 
       return;
     }
