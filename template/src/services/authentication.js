@@ -7,7 +7,7 @@ const authentication = {};
 authentication.signUp = (fields) => {
   return new Promise((resolve, reject) => {
     if (!fields) {
-      reject();
+      reject(new Error("No fields"));
 
       return;
     }
@@ -19,13 +19,17 @@ authentication.signUp = (fields) => {
     const password = fields.password;
 
     if (!firstName || !lastName || !username || !emailAddress || !password) {
-      reject();
+      reject(
+        new Error(
+          "No first name, last name, username, e-mail address, or password"
+        )
+      );
 
       return;
     }
 
     if (auth.currentUser) {
-      reject();
+      reject(new Error("No current user"));
 
       return;
     }
@@ -36,7 +40,7 @@ authentication.signUp = (fields) => {
         const user = value.user;
 
         if (!user) {
-          reject();
+          reject(new Error("No user"));
 
           return;
         }
@@ -44,7 +48,7 @@ authentication.signUp = (fields) => {
         const uid = user.uid;
 
         if (!uid) {
-          reject();
+          reject(new Error("No UID"));
 
           return;
         }
@@ -77,13 +81,13 @@ authentication.signUp = (fields) => {
 authentication.signUpWithEmailAddressAndPassword = (emailAddress, password) => {
   return new Promise((resolve, reject) => {
     if (!emailAddress || !password) {
-      reject();
+      reject(new Error("No e-mail address or password"));
 
       return;
     }
 
     if (auth.currentUser) {
-      reject();
+      reject(new Error("No current user"));
 
       return;
     }
@@ -94,7 +98,7 @@ authentication.signUpWithEmailAddressAndPassword = (emailAddress, password) => {
         const user = value.user;
 
         if (!user) {
-          reject();
+          reject(new Error("No user"));
 
           return;
         }
@@ -102,7 +106,7 @@ authentication.signUpWithEmailAddressAndPassword = (emailAddress, password) => {
         const uid = user.uid;
 
         if (!uid) {
-          reject();
+          reject(new Error("No UID"));
 
           return;
         }
@@ -131,13 +135,13 @@ authentication.signUpWithEmailAddressAndPassword = (emailAddress, password) => {
 authentication.signIn = (emailAddress, password) => {
   return new Promise((resolve, reject) => {
     if (!emailAddress || !password) {
-      reject();
+      reject(new Error("No e-mail address or password"));
 
       return;
     }
 
     if (auth.currentUser) {
-      reject();
+      reject(new Error("No current user"));
 
       return;
     }
@@ -148,7 +152,7 @@ authentication.signIn = (emailAddress, password) => {
         const user = value.user;
 
         if (!user) {
-          reject();
+          reject(new Error("No user"));
 
           return;
         }
@@ -156,7 +160,7 @@ authentication.signIn = (emailAddress, password) => {
         const uid = user.uid;
 
         if (!uid) {
-          reject();
+          reject(new Error("No UID"));
 
           return;
         }
@@ -200,13 +204,13 @@ authentication.signIn = (emailAddress, password) => {
 authentication.sendSignInLinkToEmail = (emailAddress) => {
   return new Promise((resolve, reject) => {
     if (!emailAddress) {
-      reject();
+      reject(new Error("No e-mail address"));
 
       return;
     }
 
     if (auth.currentUser) {
-      reject();
+      reject(new Error("No current user"));
 
       return;
     }
@@ -234,13 +238,13 @@ authentication.sendSignInLinkToEmail = (emailAddress) => {
 authentication.signInWithEmailLink = (emailAddress, emailLink) => {
   return new Promise((resolve, reject) => {
     if (!emailAddress || !emailLink) {
-      reject();
+      reject(new Error("No e-mail address or e-mail link"));
 
       return;
     }
 
     if (auth.currentUser) {
-      reject();
+      reject(new Error("No current user"));
 
       return;
     }
@@ -265,7 +269,7 @@ authentication.signInWithEmailLink = (emailAddress, emailLink) => {
 authentication.signInWithAuthProvider = (provider) => {
   return new Promise((resolve, reject) => {
     if (!provider) {
-      reject();
+      reject(new Error("No provider"));
 
       return;
     }
@@ -280,7 +284,7 @@ authentication.signInWithAuthProvider = (provider) => {
     }
 
     if (auth.currentUser) {
-      reject();
+      reject(new Error("No current user"));
 
       return;
     }
@@ -291,7 +295,7 @@ authentication.signInWithAuthProvider = (provider) => {
         const user = value.user;
 
         if (!user) {
-          reject();
+          reject(new Error("No user"));
 
           return;
         }
@@ -299,7 +303,7 @@ authentication.signInWithAuthProvider = (provider) => {
         const uid = user.uid;
 
         if (!uid) {
-          reject();
+          reject(new Error("No UID"));
 
           return;
         }
@@ -343,7 +347,7 @@ authentication.signInWithAuthProvider = (provider) => {
 authentication.linkAuthProvider = (provider) => {
   return new Promise((resolve, reject) => {
     if (!provider) {
-      reject();
+      reject(new Error("No provider"));
 
       return;
     }
@@ -360,7 +364,7 @@ authentication.linkAuthProvider = (provider) => {
     const currentUser = auth.currentUser;
 
     if (!currentUser) {
-      reject();
+      reject(new Error("No current user"));
 
       return;
     }
@@ -383,7 +387,7 @@ authentication.linkAuthProvider = (provider) => {
 authentication.unlinkAuthProvider = (providerId) => {
   return new Promise((resolve, reject) => {
     if (!providerId) {
-      reject();
+      reject(new Error("No provider ID"));
 
       return;
     }
@@ -391,7 +395,7 @@ authentication.unlinkAuthProvider = (providerId) => {
     const currentUser = auth.currentUser;
 
     if (!currentUser) {
-      reject();
+      reject(new Error("No current user"));
 
       return;
     }
@@ -436,7 +440,7 @@ authentication.signOut = () => {
     const currentUser = auth.currentUser;
 
     if (!currentUser) {
-      reject();
+      reject(new Error("No current user"));
 
       return;
     }
@@ -457,13 +461,13 @@ authentication.signOut = () => {
 authentication.resetPassword = (emailAddress) => {
   return new Promise((resolve, reject) => {
     if (!emailAddress) {
-      reject();
+      reject(new Error("No e-mail address"));
 
       return;
     }
 
     if (auth.currentUser) {
-      reject();
+      reject(new Error("No current user"));
 
       return;
     }
@@ -484,7 +488,7 @@ authentication.resetPassword = (emailAddress) => {
 authentication.changeAvatar = (avatar) => {
   return new Promise((resolve, reject) => {
     if (!avatar) {
-      reject();
+      reject(new Error("No avatar"));
 
       return;
     }
@@ -498,13 +502,13 @@ authentication.changeAvatar = (avatar) => {
     ];
 
     if (!avatarFileTypes.includes(avatar.type)) {
-      reject();
+      reject(new Error("Invalid file type"));
 
       return;
     }
 
     if (avatar.size > 20 * 1024 * 1024) {
-      reject();
+      reject(new Error("Invalid size"));
 
       return;
     }
@@ -512,7 +516,7 @@ authentication.changeAvatar = (avatar) => {
     const currentUser = auth.currentUser;
 
     if (!currentUser) {
-      reject();
+      reject(new Error("No current user"));
 
       return;
     }
@@ -520,7 +524,7 @@ authentication.changeAvatar = (avatar) => {
     const uid = currentUser.uid;
 
     if (!uid) {
-      reject();
+      reject(new Error("No UID"));
 
       return;
     }
@@ -565,7 +569,7 @@ authentication.removeAvatar = () => {
     const currentUser = auth.currentUser;
 
     if (!currentUser) {
-      reject();
+      reject(new Error("No current user"));
 
       return;
     }
@@ -573,7 +577,7 @@ authentication.removeAvatar = () => {
     const uid = currentUser.uid;
 
     if (!uid) {
-      reject();
+      reject(new Error("No UID"));
 
       return;
     }
@@ -609,7 +613,7 @@ authentication.removeAvatar = () => {
 authentication.changeFirstName = (firstName) => {
   return new Promise((resolve, reject) => {
     if (!firstName) {
-      reject();
+      reject(new Error("No first name"));
 
       return;
     }
@@ -617,7 +621,7 @@ authentication.changeFirstName = (firstName) => {
     const currentUser = auth.currentUser;
 
     if (!currentUser) {
-      reject();
+      reject(new Error("No current user"));
 
       return;
     }
@@ -625,7 +629,7 @@ authentication.changeFirstName = (firstName) => {
     const uid = currentUser.uid;
 
     if (!uid) {
-      reject();
+      reject(new Error("No UID"));
 
       return;
     }
@@ -650,7 +654,7 @@ authentication.changeFirstName = (firstName) => {
 authentication.changeLastName = (lastName) => {
   return new Promise((resolve, reject) => {
     if (!lastName) {
-      reject();
+      reject(new Error("No last name"));
 
       return;
     }
@@ -658,7 +662,7 @@ authentication.changeLastName = (lastName) => {
     const currentUser = auth.currentUser;
 
     if (!currentUser) {
-      reject();
+      reject(new Error("No current user"));
 
       return;
     }
@@ -666,7 +670,7 @@ authentication.changeLastName = (lastName) => {
     const uid = currentUser.uid;
 
     if (!uid) {
-      reject();
+      reject(new Error("No UID"));
 
       return;
     }
@@ -691,7 +695,7 @@ authentication.changeLastName = (lastName) => {
 authentication.changeUsername = (username) => {
   return new Promise((resolve, reject) => {
     if (!username) {
-      reject();
+      reject(new Error("No username"));
 
       return;
     }
@@ -699,7 +703,7 @@ authentication.changeUsername = (username) => {
     const currentUser = auth.currentUser;
 
     if (!currentUser) {
-      reject();
+      reject(new Error("No current user"));
 
       return;
     }
@@ -707,7 +711,7 @@ authentication.changeUsername = (username) => {
     const uid = currentUser.uid;
 
     if (!uid) {
-      reject();
+      reject(new Error("No UID"));
 
       return;
     }
@@ -732,7 +736,7 @@ authentication.changeUsername = (username) => {
 authentication.changeEmailAddress = (emailAddress) => {
   return new Promise((resolve, reject) => {
     if (!emailAddress) {
-      reject();
+      reject(new Error("No e-mail address"));
 
       return;
     }
@@ -740,7 +744,7 @@ authentication.changeEmailAddress = (emailAddress) => {
     const currentUser = auth.currentUser;
 
     if (!currentUser) {
-      reject();
+      reject(new Error("No current user"));
 
       return;
     }
@@ -748,7 +752,7 @@ authentication.changeEmailAddress = (emailAddress) => {
     const uid = currentUser.uid;
 
     if (!uid) {
-      reject();
+      reject(new Error("No UID"));
 
       return;
     }
@@ -769,7 +773,7 @@ authentication.changeEmailAddress = (emailAddress) => {
 authentication.changePassword = (password) => {
   return new Promise((resolve, reject) => {
     if (!password) {
-      reject();
+      reject(new Error("No password"));
 
       return;
     }
@@ -777,7 +781,7 @@ authentication.changePassword = (password) => {
     const currentUser = auth.currentUser;
 
     if (!currentUser) {
-      reject();
+      reject(new Error("No current user"));
 
       return;
     }
@@ -785,7 +789,7 @@ authentication.changePassword = (password) => {
     const uid = currentUser.uid;
 
     if (!uid) {
-      reject();
+      reject(new Error("No UID"));
 
       return;
     }
@@ -819,7 +823,7 @@ authentication.verifyEmailAddress = () => {
     const currentUser = auth.currentUser;
 
     if (!currentUser) {
-      reject();
+      reject(new Error("No current user"));
 
       return;
     }
@@ -842,7 +846,7 @@ authentication.deleteAccount = () => {
     const currentUser = auth.currentUser;
 
     if (!currentUser) {
-      reject();
+      reject(new Error("No current user"));
 
       return;
     }
@@ -865,7 +869,7 @@ authentication.getRoles = () => {
     const currentUser = auth.currentUser;
 
     if (!currentUser) {
-      reject();
+      reject(new Error("No current user"));
 
       return;
     }
