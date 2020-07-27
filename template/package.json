@@ -12,7 +12,7 @@
     "camelcase": "^6.0.0",
     "customize-cra": "^1.0.0",
     "firebase": "^7.16.1",
-    "mdi-material-ui": "^6.16.0",
+    "mdi-material-ui": "^6.17.0",
     "moment": "^2.26.0",
     "react": "^16.13.1",
     "react-app-rewired": "^2.1.6",
