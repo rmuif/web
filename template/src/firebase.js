@@ -18,7 +18,11 @@ firebase.initializeApp({
 });
 
 export default firebase;
-export const analytics = firebase.analytics();
+
+if (process.env.NODE_ENV !== "test") {
+  export const analytics = firebase.analytics();
+}
+
 export const auth = firebase.auth();
 export const firestore = firebase.firestore();
 export const storage = firebase.storage();
