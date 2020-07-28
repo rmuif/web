@@ -19,10 +19,13 @@ firebase.initializeApp({
 
 export default firebase;
 
+let analytics = null;
+
 if (process.env.NODE_ENV !== "test") {
-  export const analytics = firebase.analytics();
+  analytics = firebase.analytics();
 }
 
+export const analytics = analytics;
 export const auth = firebase.auth();
 export const firestore = firebase.firestore();
 export const storage = firebase.storage();
