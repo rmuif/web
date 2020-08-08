@@ -1,0 +1,11 @@
+version: 2
+updates:
+- package-ecosystem: npm
+  directory: "/template"
+  schedule:
+    interval: weekly
+    timezone: Europe/Stockholm
+  open-pull-requests-limit: 99
+  target-branch: dev
+  reviewers:
+    - "phoqe"
