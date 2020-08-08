@@ -24,8 +24,8 @@ export const firestore = firebase.firestore();
 export const storage = firebase.storage();
 export const performance = firebase.performance();
 
-if (process.env.NODE_ENV === "test") {
-  return;
-}
+export let analytics;
 
-export const analytics = firebase.analytics();
+if (process.env.NODE_ENV !== "test") {
+  analytics = firebase.analytics();
+}
