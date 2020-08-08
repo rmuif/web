@@ -7,12 +7,23 @@ import { Card, CardHeader } from "@material-ui/core";
 function UserCard(props) {
   const user = props.user;
 
+  const hasProfile = user.firstName && user.lastName && user.username;
+
   return (
     <Card>
-      <CardHeader
-        title={`${user.firstName} ${user.lastName}`}
-        subheader={user.username}
-      />
+      {hasProfile && (
+        <CardHeader
+          title={`${user.firstName} ${user.lastName}`}
+          subheader={user.username}
+        />
+      )}
+
+      {!hasProfile && (
+        <CardHeader
+          title="No profile"
+          subheader="You can setup your profile in Settings."
+        />
+      )}
     </Card>
   );
 }
