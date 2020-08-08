@@ -29,7 +29,7 @@
 
 - https://dev.rmuif.com
 
-## Getting started
+## Quickstart
 
 ```sh
 npx create-react-app my-app --template rmuif
