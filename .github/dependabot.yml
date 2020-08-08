@@ -4,7 +4,8 @@ updates:
   directory: "/template"
   schedule:
     interval: weekly
-    time: "00:00"
     timezone: Europe/Stockholm
   open-pull-requests-limit: 99
   target-branch: dev
+  reviewers:
+    - "phoqe"
