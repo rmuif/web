@@ -951,7 +951,7 @@ class AccountTab extends Component {
 
               <Grid item xs>
                 <Box textAlign="center">
-                  <Typography variant="body1">Profile completion</Typography>
+                  <Typography variant="body1">Profile Completion</Typography>
 
                   {profileCompletion === 0 && (
                     <Typography color="error" variant="h5">
@@ -975,7 +975,7 @@ class AccountTab extends Component {
 
               <Grid item xs>
                 <Box textAlign="center">
-                  <Typography variant="body1">Security rating</Typography>
+                  <Typography variant="body1">Security Rating</Typography>
 
                   {securityRating === 0 && (
                     <Typography color="error" variant="h5">
@@ -1166,7 +1166,7 @@ class AccountTab extends Component {
             <Grid container>
               <Grid item xs>
                 <Box textAlign="center">
-                  <Typography variant="body1">Profile completion</Typography>
+                  <Typography variant="body1">Profile Completion</Typography>
 
                   {profileCompletion === 0 && (
                     <Typography color="error" variant="h5">
@@ -1190,7 +1190,7 @@ class AccountTab extends Component {
 
               <Grid item xs>
                 <Box textAlign="center">
-                  <Typography variant="body1">Security rating</Typography>
+                  <Typography variant="body1">Security Rating</Typography>
 
                   {securityRating === 0 && (
                     <Typography color="error" variant="h5">
