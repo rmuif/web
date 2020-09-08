@@ -30,13 +30,13 @@ const authProviders = [
   },
   {
     id: "google.com",
-    color: "#4285f4",
+    color: "#DB4437",
     icon: <GoogleIcon />,
     name: "Google",
   },
   {
     id: "microsoft.com",
-    color: "#f65314",
+    color: "#0078d7",
     icon: <MicrosoftIcon />,
     name: "Microsoft",
   },
