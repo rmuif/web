@@ -2,7 +2,7 @@ import React, { Component } from "react";
 
 import PropTypes from "prop-types";
 
-import { Link } from "react-router-dom";
+import { Link as RouterLink } from "react-router-dom";
 
 import {
   AppBar,
@@ -15,6 +15,7 @@ import {
   Divider,
   Menu,
   MenuItem,
+  Link,
 } from "@material-ui/core";
 
 import UserAvatar from "../UserAvatar";
@@ -88,7 +89,14 @@ class Bar extends Component {
         <Toolbar>
           <Box display="flex" flexGrow={1}>
             <Typography color="inherit" variant="h6">
-              {process.env.REACT_APP_TITLE}
+              <Link
+                color="inherit"
+                component={RouterLink}
+                to="/"
+                underline="none"
+              >
+                {process.env.REACT_APP_TITLE}
+              </Link>
             </Typography>
           </Box>
 
@@ -98,7 +106,7 @@ class Bar extends Component {
                 <Box mr={1}>
                   <Button
                     color="inherit"
-                    component={Link}
+                    component={RouterLink}
                     to="/admin"
                     variant="outlined"
                   >
@@ -134,7 +142,7 @@ class Bar extends Component {
                     component = (
                       <MenuItem
                         key={index}
-                        component={Link}
+                        component={RouterLink}
                         to={menuItem.to}
                         onClick={this.closeMenu}
                       >

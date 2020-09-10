@@ -92,12 +92,24 @@ function UserPage() {
     );
   }
 
-  return (
-    <Grid className={classes.grid} container justify="center" spacing={5}>
-      <Grid item xs={6}>
-        <UserCard user={user} />
+  const hasProfile = user.firstName && user.lastName && user.username;
+
+  if (hasProfile) {
+    return (
+      <Grid className={classes.grid} container justify="center" spacing={5}>
+        <Grid item xs={6}>
+          <UserCard user={user} />
+        </Grid>
       </Grid>
-    </Grid>
+    );
+  }
+
+  return (
+    <EmptyState
+      image={<NoDataIllustration />}
+      title="No profile"
+      description="The user hasn‘t setup their profile"
+    />
   );
 }
 
