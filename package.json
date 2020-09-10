@@ -39,7 +39,8 @@
   "devDependencies": {
     "husky": "^4.2.3",
     "lint-staged": "^10.1.1",
-    "prettier": "^2.0.2"
+    "prettier": "^2.0.2",
+    "release": "^6.3.0"
   },
   "husky": {
     "hooks": {
