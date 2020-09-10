@@ -1,10 +1,10 @@
 {
   "build": {
     "env": {
-      "REACT_APP_NAME": "dev",
+      "REACT_APP_NAME": "demo",
       "REACT_APP_VERSION": "3.3.0",
       "REACT_APP_DESCRIPTION": "Supercharged version of Create React App with all the bells and whistles.",
-      "REACT_APP_HOMEPAGE": "https://dev.rmuif.com",
+      "REACT_APP_HOMEPAGE": "https://demo.rmuif.com",
 
       "REACT_APP_TITLE": "RMUIF",
 
