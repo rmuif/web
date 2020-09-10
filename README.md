@@ -1,5 +1,7 @@
 <p align="center">
-  <img width="300" src="https://user-images.githubusercontent.com/7033377/77688568-9399c480-6fa0-11ea-9ee2-424a4a99e2e4.png" alt="Logo">
+  <a href="https://demo.rmuif.com">
+    <img width="300" src="https://user-images.githubusercontent.com/7033377/77688568-9399c480-6fa0-11ea-9ee2-424a4a99e2e4.png" alt="Logo">
+  </a>
 </p>
 
 <p align="center">:zap: Supercharged version of Create React App with all the bells and whistles</p>
@@ -24,14 +26,12 @@
 ### Stable
 
 - https://demo.rmuif.com
-- https://rmuif-web-demo.now.sh (mirror)
 
 ### Development
 
 - https://dev.rmuif.com
-- https://rmuif-web-dev.now.sh (mirror)
 
-## Getting started
+## Quickstart
 
 ```sh
 npx create-react-app my-app --template rmuif
@@ -53,8 +53,7 @@ All contributions to the project are welcome. Before submitting an issue or a pu
 | -------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | [BrowserStack](https://www.browserstack.com) | Instant access to 2000+ browsers and real iOS and Android devices for cross browser testing.                                                                                                    |
 | [JetBrains](https://www.jetbrains.com)       | JetBrains is a cutting-edge software vendor specializing in the creation of intelligent development tools, including IntelliJ IDEA – the leading Java IDE, and the Kotlin programming language. |
-| [unDraw](https://undraw.co)                  | A constantly updated design project with beautiful SVG images that you can use completely free and without attribution.                                                                         |
-| [Netlify](https://netlify.com)               | All-in-one platform for automating modern web projects.                                                                                                                                         |
+| [unDraw](https://undraw.co)                  | A constantly updated design project with beautiful SVG images that you can use completely free and without attribution.                                                                         |  |
 | [Vercel](https://vercel.com)                 | Vercel is the easiest way to deploy websites. Host your web projects with zero configuration, automatic SSL, and global CDN.                                                                    |
 
 ## License
