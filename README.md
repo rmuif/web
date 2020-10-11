@@ -4,7 +4,7 @@
   </a>
 </p>
 
-<p align="center">:zap: Supercharged version of Create React App with all the bells and whistles</p>
+<p align="center">:zap: Supercharged version of Create React App with all the bells and whistles.</p>
 
 ## Features
 
