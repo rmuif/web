@@ -14,7 +14,7 @@
     "firebase": "^7.24.0",
     "mdi-material-ui": "^6.19.0",
     "moment": "^2.29.1",
-    "react": "^16.13.1",
+    "react": "^16.14.0",
     "react-app-rewired": "^2.1.6",
     "react-dom": "^16.13.1",
     "react-router-dom": "^5.2.0",
