@@ -9,7 +9,7 @@
     "@testing-library/react": "^11.1.0",
     "@testing-library/user-event": "^12.1.10",
     "babel-plugin-import": "^1.13.1",
-    "camelcase": "^6.1.0",
+    "camelcase": "^6.2.0",
     "customize-cra": "^1.0.0",
     "firebase": "^7.24.0",
     "mdi-material-ui": "^6.19.0",
