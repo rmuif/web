@@ -18,7 +18,7 @@ function EmptyState(props) {
     case "medium":
       imageWidth = 60;
       imageHeight = 60;
-      variant = "h5";
+      variant = "h6";
       break;
 
     case "large":
