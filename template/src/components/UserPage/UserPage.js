@@ -97,7 +97,7 @@ function UserPage() {
   if (hasProfile) {
     return (
       <Grid className={classes.grid} container justify="center" spacing={5}>
-        <Grid item xs={6}>
+        <Grid item xs={4}>
           <UserCard user={user} />
         </Grid>
       </Grid>
