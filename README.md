@@ -8,18 +8,19 @@
 
 ## Features
 
-- Bootstrapped with Create React App
-- Google’s [Material Design](https://material.io) through Material-UI
-- Firebase back-end with most of their products for the web included, e.g., [Authentication](https://firebase.google.com/products/auth) and [Cloud Firestore](https://firebase.google.com/products/firestore)
-- Routing with [React Router](https://reacttraining.com/react-router/web), including protected routes and error handling
-- Extensive and well-tested mobile support with full-screen dialogs and swipeable tabs
-- Cross-platform application monitoring with [Sentry](https://sentry.io)
+- Bootstrapped with Create React App.
+- Google’s [Material Design](https://material.io) through Material-UI.
+- Firebase back-end with most of their products for the web included, e.g., [Authentication](https://firebase.google.com/products/auth) and [Cloud Firestore](https://firebase.google.com/products/firestore).
+- Routing with [React Router](https://reacttraining.com/react-router/web), including protected routes and error handling.
+- Extensive and well-tested mobile support with full-screen dialogs and swipeable tabs.
+- Cross-platform application monitoring with [Sentry](https://sentry.io).
 
 ## Demos
 
 <p align="center">
   <a href="https://demo.rmuif.com">
-    <img src="https://user-images.githubusercontent.com/7033377/78246649-c46e8200-74e9-11ea-8137-c519dd1f7c30.png" alt="Preview">
+    <img src="https://user-images.githubusercontent.com/7033377/101923139-524d5180-3bcf-11eb-8b81-b2e5ad9f6b8d.png" alt="Preview">
+    <img src="https://user-images.githubusercontent.com/7033377/101923127-4feaf780-3bcf-11eb-9d65-f56fed2ec8e6.png" alt="Preview">
   </a>
 </p>
 

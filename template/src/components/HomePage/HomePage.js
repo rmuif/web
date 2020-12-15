@@ -73,14 +73,20 @@ class HomePage extends Component {
     const { user } = this.props;
 
     if (user) {
-      return <EmptyState image={<CabinIllustration />} />;
+      return (
+        <EmptyState
+          image={<CabinIllustration />}
+          title="Home"
+          description="This is the home page. You can edit it from HomePage.js."
+        />
+      );
     }
 
     return (
       <EmptyState
         image={<InsertBlockIllustration />}
         title="RMUIF"
-        description="Supercharged version of Create React App with all the bells and whistles"
+        description="Supercharged version of Create React App with all the bells and whistles."
       />
     );
   }

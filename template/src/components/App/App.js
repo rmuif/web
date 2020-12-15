@@ -431,12 +431,6 @@ class App extends Component {
 
               // The user doesn’t have a data point, equivalent to not signed in.
               if (!snapshot.exists || !data) {
-                if (this.userDocumentSnapshotListener) {
-                  this.userDocumentSnapshotListener();
-                }
-
-                this.resetState();
-
                 return;
               }
 
