@@ -52,8 +52,8 @@ function UserPage() {
     return (
       <EmptyState
         image={<ErrorIllustration />}
-        title="Couldn’t retrieve user"
-        description="Something went wrong when trying to retrieve the requested user"
+        title="Couldn’t retrieve user."
+        description="Something went wrong when trying to retrieve the requested user."
         button={
           <Fab
             variant="extended"
@@ -78,8 +78,8 @@ function UserPage() {
     return (
       <EmptyState
         image={<NoDataIllustration />}
-        title="User doesn’t exist"
-        description="The requested user doesn’t exist"
+        title="User doesn’t exist."
+        description="The requested user doesn’t exist."
         button={
           <Fab variant="extended" color="primary" component={Link} to="/">
             <Box clone mr={1}>
@@ -97,7 +97,7 @@ function UserPage() {
   if (hasProfile) {
     return (
       <Grid className={classes.grid} container justify="center" spacing={5}>
-        <Grid item xs={6}>
+        <Grid item xs={4}>
           <UserCard user={user} />
         </Grid>
       </Grid>
@@ -107,8 +107,8 @@ function UserPage() {
   return (
     <EmptyState
       image={<NoDataIllustration />}
-      title="No profile"
-      description="The user hasn‘t setup their profile"
+      title="No profile."
+      description="The user hasn‘t setup their profile."
     />
   );
 }
