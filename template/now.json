@@ -1,0 +1,27 @@
+{
+  "build": {
+    "env": {
+      "REACT_APP_NAME": "dev",
+      "REACT_APP_VERSION": "3.4.1",
+      "REACT_APP_DESCRIPTION": "Supercharged version of Create React App with all the bells and whistles.",
+      "REACT_APP_HOMEPAGE": "https://dev.rmuif.com",
+
+      "REACT_APP_TITLE": "RMUIF",
+
+      "REACT_APP_THEME_PRIMARY_COLOR": "blue",
+      "REACT_APP_THEME_SECONDARY_COLOR": "red",
+      "REACT_APP_THEME_DARK": "false",
+
+      "REACT_APP_FIREBASE_API_KEY": "AIzaSyDYZOrZVpXkPQD6J31mb9t2eIIxmGEJK-Q",
+      "REACT_APP_FIREBASE_AUTH_DOMAIN": "react-material-ui-firebase.firebaseapp.com",
+      "REACT_APP_FIREBASE_DATABASE_URL": "https://react-material-ui-firebase.firebaseio.com",
+      "REACT_APP_FIREBASE_PROJECT_ID": "react-material-ui-firebase",
+      "REACT_APP_FIREBASE_STORAGE_BUCKET": "react-material-ui-firebase.appspot.com",
+      "REACT_APP_FIREBASE_MESSAGING_SENDER_ID": "552659850812",
+      "REACT_APP_FIREBASE_APP_ID": "1:552659850812:web:d685f74f72161d96",
+      "REACT_APP_FIREBASE_MEASUREMENT_ID": "G-LYJ69M3CEC",
+
+      "REACT_APP_SENTRY_DSN": "https://78536326e6524916b6f44b4ea510b7a4@sentry.io/1846624"
+    }
+  }
+}
