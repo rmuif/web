@@ -432,7 +432,7 @@ authentication.authProviderData = (providerId) => {
     return;
   }
 
-  return providerData.find((authProvider) => authProvider.id === providerId);
+  return providerData.find((authProvider) => authProvider.providerId === providerId);
 };
 
 authentication.signOut = () => {
