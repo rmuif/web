@@ -11,7 +11,7 @@
     "babel-plugin-import": "^1.13.3",
     "camelcase": "^6.2.0",
     "customize-cra": "^1.0.0",
-    "firebase": "^8.6.3",
+    "firebase": "^8.8.1",
     "mdi-material-ui": "^6.22.1",
     "moment": "^2.29.1",
     "react": "^16.14.0",
