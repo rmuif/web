@@ -6,6 +6,10 @@
 
 <p align="center">:zap: Supercharged version of Create React App with all the bells and whistles.</p>
 
+## End of Maintenance
+
+This project has not seen much activity lately and is being abandoned. We’ll still answer any queries you have on [Discord](https://discord.gg/5Ann5C3) but will not add any more features or fix bugs. If you want to maintain this project you can contact [rmuif@phoqe.dev](mailto:rmuif@phoqe.dev).
+
 ## Features
 
 - Bootstrapped with Create React App.
