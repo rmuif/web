@@ -3,9 +3,7 @@ updates:
 - package-ecosystem: npm
   directory: "/template"
   schedule:
-    interval: weekly
+    interval: monthly
     timezone: Europe/Stockholm
   open-pull-requests-limit: 99
   target-branch: dev
-  reviewers:
-    - "phoqe"

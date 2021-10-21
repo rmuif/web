@@ -667,13 +667,7 @@ class AccountTab extends Component {
       return;
     }
 
-    const fileTypes = [
-      "image/gif",
-      "image/jpeg",
-      "image/png",
-      "image/webp",
-      "image/svg+xml",
-    ];
+    const fileTypes = ["image/gif", "image/jpeg", "image/png", "image/webp"];
 
     if (!fileTypes.includes(avatar.type)) {
       return;
