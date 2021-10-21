@@ -1,6 +1,6 @@
 {
   "name": "cra-template-rmuif",
-  "version": "3.5.0",
+  "version": "3.6.1",
   "description": "Supercharged version of Create React App with all the bells and whistles.",
   "keywords": [
     "react",
@@ -37,11 +37,12 @@
     "node": ">=8"
   },
   "devDependencies": {
+    "@commitlint/cli": "^11.0.0",
+    "@commitlint/config-conventional": "^11.0.0",
+    "@semantic-release/git": "^9.0.0",
     "husky": "^4.2.3",
     "lint-staged": "^10.1.1",
-    "prettier": "^2.0.2",
-    "@commitlint/cli": "^11.0.0",
-    "@commitlint/config-conventional": "^11.0.0"
+    "prettier": "^2.0.2"
   },
   "husky": {
     "hooks": {
