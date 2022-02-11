@@ -12,9 +12,9 @@ import {
   Box,
   Tooltip,
   IconButton,
-} from "@material-ui/core";
+} from "@mui/material";
 
-import { Link as LinkIcon, LinkOff as LinkOffIcon } from "@material-ui/icons";
+import { Link as LinkIcon, LinkOff as LinkOffIcon } from "@mui/icons-material";
 
 import authProviders from "../../data/auth-providers";
 
@@ -138,6 +138,7 @@ class LinksTab extends Component {
                         <IconButton
                           disabled={performingAction}
                           onClick={() => this.unlinkAuthProvider(authProvider)}
+                          size="large"
                         >
                           <LinkOffIcon />
                         </IconButton>
@@ -151,6 +152,7 @@ class LinksTab extends Component {
                         <IconButton
                           disabled={performingAction}
                           onClick={() => this.linkAuthProvider(authProvider)}
+                          size="large"
                         >
                           <LinkIcon />
                         </IconButton>

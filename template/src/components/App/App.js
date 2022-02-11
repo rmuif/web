@@ -2,24 +2,23 @@ import React, { Component } from "react";
 
 import readingTime from "reading-time";
 
-import { MuiThemeProvider } from "@material-ui/core/styles";
+import { ThemeProvider, StyledEngineProvider } from "@mui/material/styles";
 
-import { CssBaseline, Button, Snackbar } from "@material-ui/core";
+import { CssBaseline, Button, Snackbar } from "@mui/material";
 
 import { auth, firestore } from "../../firebase";
 import authentication from "../../services/authentication";
-import appearance from "../../services/appearance";
 
 import ErrorBoundary from "../ErrorBoundary";
 import LaunchScreen from "../LaunchScreen";
 import Bar from "../Bar";
 import Router from "../Router";
 import DialogHost from "../DialogHost";
+import { appearance, ThemeContext } from "../../context/ThemeContext";
 
 const initialState = {
   ready: false,
   performingAction: false,
-  theme: appearance.defaultTheme,
   user: null,
   userData: null,
   roles: [],
@@ -56,17 +55,22 @@ const initialState = {
 };
 
 class App extends Component {
-  constructor(props) {
+  constructor(props, context) {
     super(props);
 
-    this.state = initialState;
+    this.state = {
+      ...initialState,
+      theme: context.defaultTheme,
+    };
   }
 
   resetState = (callback) => {
+    let { defaultTheme } = this.context;
+
     this.setState(
       {
         ready: true,
-        theme: appearance.defaultTheme,
+        theme: defaultTheme,
         user: null,
         userData: null,
         roles: [],
@@ -75,24 +79,48 @@ class App extends Component {
     );
   };
 
-  setTheme = (theme, callback) => {
-    if (!theme) {
-      this.setState(
-        {
-          theme: appearance.defaultTheme,
-        },
-        callback
-      );
+  setTheme = (theme, updateData = true) => {
+    const { createTheme, defaultTheme, changeTheme } = this.context;
 
-      return;
-    }
+    return new Promise((resolve, reject) => {
+      if (!theme) {
+        this.setState({ theme: defaultTheme }, () => {
+          resolve();
+        });
 
-    this.setState(
-      {
-        theme: appearance.createTheme(theme),
-      },
-      callback
-    );
+        return;
+      }
+
+      this.setState({ theme: createTheme(theme) }, () => {
+        if (updateData) {
+          changeTheme(theme)
+            .then(() => {
+              resolve();
+            })
+            .catch((reason) => {
+              reject(reason);
+            });
+        } else {
+          resolve();
+        }
+      });
+    });
+  };
+
+  resetTheme = () => {
+    const { resetTheme: process, defaultTheme } = this.context;
+
+    return new Promise((resolve, reject) => {
+      process()
+        .then(() => {
+          this.setState({ theme: defaultTheme }, () => {
+            resolve();
+          });
+        })
+        .catch((reason) => {
+          reject(reason);
+        });
+    });
   };
 
   openDialog = (dialogId, callback) => {
@@ -264,146 +292,164 @@ class App extends Component {
     const { snackbar } = this.state;
 
     return (
-      <MuiThemeProvider theme={theme}>
-        <CssBaseline />
+      <StyledEngineProvider injectFirst>
+        <ThemeContext.Provider
+          value={{
+            ...appearance,
+            theme,
+            setTheme: this.setTheme,
+            resetTheme: this.resetTheme,
+          }}
+        >
+          <ThemeProvider theme={theme}>
+            <CssBaseline />
 
-        <ErrorBoundary>
-          {!ready && <LaunchScreen />}
+            <ErrorBoundary>
+              {!ready && <LaunchScreen />}
 
-          {ready && (
-            <>
-              <Router
-                user={user}
-                roles={roles}
-                bar={
-                  <Bar
+              {ready && (
+                <>
+                  <Router
+                    user={user}
+                    roles={roles}
+                    bar={
+                      <Bar
+                        performingAction={performingAction}
+                        theme={theme}
+                        user={user}
+                        userData={userData}
+                        roles={roles}
+                        onSignUpClick={() => this.openDialog("signUpDialog")}
+                        onSignInClick={() => this.openDialog("signInDialog")}
+                        onAboutClick={() => this.openDialog("aboutDialog")}
+                        onSettingsClick={() =>
+                          this.openDialog("settingsDialog")
+                        }
+                        onSignOutClick={() => this.openDialog("signOutDialog")}
+                      />
+                    }
+                    openSnackbar={this.openSnackbar}
+                  />
+
+                  <DialogHost
                     performingAction={performingAction}
                     theme={theme}
                     user={user}
                     userData={userData}
-                    roles={roles}
-                    onSignUpClick={() => this.openDialog("signUpDialog")}
-                    onSignInClick={() => this.openDialog("signInDialog")}
-                    onAboutClick={() => this.openDialog("aboutDialog")}
-                    onSettingsClick={() => this.openDialog("settingsDialog")}
-                    onSignOutClick={() => this.openDialog("signOutDialog")}
+                    openSnackbar={this.openSnackbar}
+                    dialogs={{
+                      aboutDialog: {
+                        dialogProps: {
+                          open: aboutDialog.open,
+
+                          onClose: () => this.closeDialog("aboutDialog"),
+                        },
+                      },
+
+                      signUpDialog: {
+                        dialogProps: {
+                          open: signUpDialog.open,
+
+                          onClose: (callback) => {
+                            this.closeDialog("signUpDialog");
+
+                            if (callback && typeof callback === "function") {
+                              callback();
+                            }
+                          },
+                        },
+                      },
+
+                      signInDialog: {
+                        dialogProps: {
+                          open: signInDialog.open,
+
+                          onClose: (callback) => {
+                            this.closeDialog("signInDialog");
+
+                            if (callback && typeof callback === "function") {
+                              callback();
+                            }
+                          },
+                        },
+                      },
+
+                      settingsDialog: {
+                        dialogProps: {
+                          open: settingsDialog.open,
+
+                          onClose: () => this.closeDialog("settingsDialog"),
+                        },
+
+                        props: {
+                          onDeleteAccountClick: () =>
+                            this.openDialog("deleteAccountDialog"),
+                        },
+                      },
+
+                      deleteAccountDialog: {
+                        dialogProps: {
+                          open: deleteAccountDialog.open,
+
+                          onClose: () =>
+                            this.closeDialog("deleteAccountDialog"),
+                        },
+
+                        props: {
+                          deleteAccount: this.deleteAccount,
+                        },
+                      },
+
+                      signOutDialog: {
+                        dialogProps: {
+                          open: signOutDialog.open,
+
+                          onClose: () => this.closeDialog("signOutDialog"),
+                        },
+
+                        props: {
+                          title: "Sign out?",
+                          contentText:
+                            "While signed out you are unable to manage your profile and conduct other activities that require you to be signed in.",
+                          dismissiveAction: (
+                            <Button
+                              color="primary"
+                              onClick={() => this.closeDialog("signOutDialog")}
+                            >
+                              Cancel
+                            </Button>
+                          ),
+                          confirmingAction: (
+                            <Button
+                              color="primary"
+                              disabled={performingAction}
+                              variant="contained"
+                              onClick={this.signOut}
+                            >
+                              Sign Out
+                            </Button>
+                          ),
+                        },
+                      },
+                    }}
                   />
-                }
-                openSnackbar={this.openSnackbar}
-              />
 
-              <DialogHost
-                performingAction={performingAction}
-                theme={theme}
-                user={user}
-                userData={userData}
-                openSnackbar={this.openSnackbar}
-                dialogs={{
-                  aboutDialog: {
-                    dialogProps: {
-                      open: aboutDialog.open,
-
-                      onClose: () => this.closeDialog("aboutDialog"),
-                    },
-                  },
-
-                  signUpDialog: {
-                    dialogProps: {
-                      open: signUpDialog.open,
-
-                      onClose: (callback) => {
-                        this.closeDialog("signUpDialog");
-
-                        if (callback && typeof callback === "function") {
-                          callback();
-                        }
-                      },
-                    },
-                  },
-
-                  signInDialog: {
-                    dialogProps: {
-                      open: signInDialog.open,
-
-                      onClose: (callback) => {
-                        this.closeDialog("signInDialog");
-
-                        if (callback && typeof callback === "function") {
-                          callback();
-                        }
-                      },
-                    },
-                  },
-
-                  settingsDialog: {
-                    dialogProps: {
-                      open: settingsDialog.open,
-
-                      onClose: () => this.closeDialog("settingsDialog"),
-                    },
-
-                    props: {
-                      onDeleteAccountClick: () =>
-                        this.openDialog("deleteAccountDialog"),
-                    },
-                  },
-
-                  deleteAccountDialog: {
-                    dialogProps: {
-                      open: deleteAccountDialog.open,
-
-                      onClose: () => this.closeDialog("deleteAccountDialog"),
-                    },
-
-                    props: {
-                      deleteAccount: this.deleteAccount,
-                    },
-                  },
-
-                  signOutDialog: {
-                    dialogProps: {
-                      open: signOutDialog.open,
-
-                      onClose: () => this.closeDialog("signOutDialog"),
-                    },
-
-                    props: {
-                      title: "Sign out?",
-                      contentText:
-                        "While signed out you are unable to manage your profile and conduct other activities that require you to be signed in.",
-                      dismissiveAction: (
-                        <Button
-                          color="primary"
-                          onClick={() => this.closeDialog("signOutDialog")}
-                        >
-                          Cancel
-                        </Button>
-                      ),
-                      confirmingAction: (
-                        <Button
-                          color="primary"
-                          disabled={performingAction}
-                          variant="contained"
-                          onClick={this.signOut}
-                        >
-                          Sign Out
-                        </Button>
-                      ),
-                    },
-                  },
-                }}
-              />
-
-              <Snackbar
-                autoHideDuration={snackbar.autoHideDuration}
-                message={snackbar.message}
-                open={snackbar.open}
-                onClose={this.closeSnackbar}
-              />
-            </>
-          )}
-        </ErrorBoundary>
-      </MuiThemeProvider>
+                  <Snackbar
+                    anchorOrigin={{
+                      vertical: "bottom",
+                      horizontal: "center",
+                    }}
+                    autoHideDuration={snackbar.autoHideDuration}
+                    message={snackbar.message}
+                    open={snackbar.open}
+                    onClose={this.closeSnackbar}
+                  />
+                </>
+              )}
+            </ErrorBoundary>
+          </ThemeProvider>
+        </ThemeContext.Provider>
+      </StyledEngineProvider>
     );
   }
 
@@ -437,7 +483,7 @@ class App extends Component {
               authentication
                 .getRoles()
                 .then((value) => {
-                  this.setTheme(data.theme, () => {
+                  this.setTheme(data.theme, false).then(() => {
                     this.setState({
                       ready: true,
                       user: user,
@@ -498,5 +544,7 @@ class App extends Component {
     }
   }
 }
+
+App.contextType = ThemeContext;
 
 export default App;

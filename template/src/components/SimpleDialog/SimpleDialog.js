@@ -2,7 +2,7 @@ import React, { Component } from "react";
 
 import PropTypes from "prop-types";
 
-import { Dialog, DialogTitle } from "@material-ui/core";
+import { Dialog, DialogTitle } from "@mui/material";
 
 class SimpleDialog extends Component {
   render() {

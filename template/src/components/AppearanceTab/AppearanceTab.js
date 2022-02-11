@@ -19,15 +19,15 @@ import {
   Checkbox,
   Switch,
   Button,
-} from "@material-ui/core";
+} from "@mui/material";
 
 import {
   FiberManualRecord as FiberManualRecordIcon,
   Brightness4 as Brightness4Icon,
   FormatColorReset as FormatColorResetIcon,
-} from "@material-ui/icons";
+} from "@mui/icons-material";
 
-import appearance from "../../services/appearance";
+import { ThemeContext } from "../../context/ThemeContext";
 
 class AppearanceTab extends Component {
   constructor(props) {
@@ -35,15 +35,12 @@ class AppearanceTab extends Component {
 
     this.state = {
       performingAction: false,
-      primaryColorLabelWidth: 0,
-      secondaryColorLabelWidth: 0,
     };
-
-    this.primaryColorLabel = React.createRef();
-    this.secondaryColorLabel = React.createRef();
   }
 
   handlePrimaryColorChange = (event) => {
+    const { theme, setTheme } = this.context;
+
     if (!event) {
       return;
     }
@@ -54,8 +51,6 @@ class AppearanceTab extends Component {
       return;
     }
 
-    const { theme } = this.props;
-
     if (!theme) {
       return;
     }
@@ -64,37 +59,33 @@ class AppearanceTab extends Component {
       return;
     }
 
-    this.setState(
-      {
-        performingAction: true,
-      },
-      () => {
-        appearance
-          .changeTheme({
-            primaryColor: primaryColor,
-            secondaryColor: theme.secondaryColor.id,
-            dark: theme.dark,
-          })
-          .catch((reason) => {
-            const code = reason.code;
-            const message = reason.message;
+    this.setState({ performingAction: true }, () => {
+      setTheme({
+        primaryColor: primaryColor,
+        secondaryColor: theme.secondaryColor.id,
+        dark: theme.dark,
+      })
+        .catch((reason) => {
+          const code = reason.code;
+          const message = reason.message;
 
-            switch (code) {
-              default:
-                this.props.openSnackbar(message);
-                return;
-            }
-          })
-          .finally(() => {
-            this.setState({
-              performingAction: false,
-            });
+          switch (code) {
+            default:
+              this.props.openSnackbar(message);
+              return;
+          }
+        })
+        .finally(() => {
+          this.setState({
+            performingAction: false,
           });
-      }
-    );
+        });
+    });
   };
 
   handleSecondaryColorChange = (event) => {
+    const { theme, setTheme } = this.context;
+
     if (!event) {
       return;
     }
@@ -104,8 +95,6 @@ class AppearanceTab extends Component {
     if (!secondaryColor) {
       return;
     }
-
-    const { theme } = this.props;
 
     if (!theme) {
       return;
@@ -120,12 +109,11 @@ class AppearanceTab extends Component {
         performingAction: true,
       },
       () => {
-        appearance
-          .changeTheme({
-            primaryColor: theme.primaryColor.id,
-            secondaryColor: secondaryColor,
-            dark: theme.dark,
-          })
+        setTheme({
+          primaryColor: theme.primaryColor.id,
+          secondaryColor: secondaryColor,
+          dark: theme.dark,
+        })
           .catch((reason) => {
             const code = reason.code;
             const message = reason.message;
@@ -146,13 +134,13 @@ class AppearanceTab extends Component {
   };
 
   handleDarkModeChange = (event) => {
+    const { theme, setTheme } = this.context;
+
     if (!event) {
       return;
     }
 
     const dark = event.target.checked;
-
-    const { theme } = this.props;
 
     if (!theme) {
       return;
@@ -167,12 +155,11 @@ class AppearanceTab extends Component {
         performingAction: true,
       },
       () => {
-        appearance
-          .changeTheme({
-            primaryColor: theme.primaryColor.id,
-            secondaryColor: theme.secondaryColor.id,
-            dark: dark,
-          })
+        setTheme({
+          primaryColor: theme.primaryColor.id,
+          secondaryColor: theme.secondaryColor.id,
+          dark: dark,
+        })
           .catch((reason) => {
             const code = reason.code;
             const message = reason.message;
@@ -193,13 +180,13 @@ class AppearanceTab extends Component {
   };
 
   handleResetThemeClick = () => {
-    const { theme } = this.props;
+    const { theme, isDefaultTheme, resetTheme } = this.context;
 
     if (!theme) {
       return;
     }
 
-    if (appearance.isDefaultTheme(theme)) {
+    if (isDefaultTheme(theme)) {
       return;
     }
 
@@ -208,8 +195,7 @@ class AppearanceTab extends Component {
         performingAction: true,
       },
       () => {
-        appearance
-          .resetTheme()
+        resetTheme()
           .catch((reason) => {
             const code = reason.code;
             const message = reason.message;
@@ -230,27 +216,24 @@ class AppearanceTab extends Component {
   };
 
   render() {
-    // Properties
-    const { theme } = this.props;
+    const { theme, colors, isDefaultTheme } = this.context;
 
     if (!theme) {
       return null;
     }
 
-    const {
-      performingAction,
-      primaryColorLabelWidth,
-      secondaryColorLabelWidth,
-    } = this.state;
+    const { performingAction } = this.state;
 
     return (
       <DialogContent>
         <List disablePadding>
           <Box mb={1}>
             <ListItem>
-              <Hidden xsDown>
+              <Hidden smDown>
                 <ListItemIcon>
-                  <FiberManualRecordIcon color="primary" />
+                  <FiberManualRecordIcon
+                    htmlColor={theme.palette.primary.main}
+                  />
                 </ListItemIcon>
               </Hidden>
 
@@ -259,19 +242,17 @@ class AppearanceTab extends Component {
                 fullWidth
                 variant="outlined"
               >
-                <InputLabel ref={this.primaryColorLabel}>
-                  Primary color
-                </InputLabel>
+                <InputLabel>Primary color</InputLabel>
 
                 <Hidden smUp>
                   <Select
+                    label="Primary color"
                     native
                     value={theme.primaryColor.id}
-                    labelWidth={primaryColorLabelWidth}
                     onChange={this.handlePrimaryColorChange}
                   >
-                    {Object.keys(appearance.colors).map((color) => {
-                      color = appearance.colors[color];
+                    {Object.keys(colors).map((color) => {
+                      color = colors[color];
 
                       return (
                         <option key={color.id} value={color.id}>
@@ -282,14 +263,14 @@ class AppearanceTab extends Component {
                   </Select>
                 </Hidden>
 
-                <Hidden xsDown>
+                <Hidden smDown>
                   <Select
+                    label="Primary color"
                     value={theme.primaryColor.id}
-                    labelWidth={primaryColorLabelWidth}
                     onChange={this.handlePrimaryColorChange}
                   >
-                    {Object.keys(appearance.colors).map((color) => {
-                      color = appearance.colors[color];
+                    {Object.keys(colors).map((color) => {
+                      color = colors[color];
 
                       return (
                         <MenuItem key={color.id} value={color.id}>
@@ -305,9 +286,11 @@ class AppearanceTab extends Component {
 
           <Box mb={1}>
             <ListItem>
-              <Hidden xsDown>
+              <Hidden smDown>
                 <ListItemIcon>
-                  <FiberManualRecordIcon color="secondary" />
+                  <FiberManualRecordIcon
+                    htmlColor={theme.palette.secondary.main}
+                  />
                 </ListItemIcon>
               </Hidden>
 
@@ -316,19 +299,17 @@ class AppearanceTab extends Component {
                 fullWidth
                 variant="outlined"
               >
-                <InputLabel ref={this.secondaryColorLabel}>
-                  Secondary color
-                </InputLabel>
+                <InputLabel>Secondary color</InputLabel>
 
                 <Hidden smUp>
                   <Select
+                    label="Secondary color"
                     native
                     value={theme.secondaryColor.id}
-                    labelWidth={secondaryColorLabelWidth}
                     onChange={this.handleSecondaryColorChange}
                   >
-                    {Object.keys(appearance.colors).map((color) => {
-                      color = appearance.colors[color];
+                    {Object.keys(colors).map((color) => {
+                      color = colors[color];
 
                       return (
                         <option key={color.id} value={color.id}>
@@ -339,14 +320,14 @@ class AppearanceTab extends Component {
                   </Select>
                 </Hidden>
 
-                <Hidden xsDown>
+                <Hidden smDown>
                   <Select
+                    label="Secondary color"
                     value={theme.secondaryColor.id}
-                    labelWidth={secondaryColorLabelWidth}
                     onChange={this.handleSecondaryColorChange}
                   >
-                    {Object.keys(appearance.colors).map((color) => {
-                      color = appearance.colors[color];
+                    {Object.keys(colors).map((color) => {
+                      color = colors[color];
 
                       return (
                         <MenuItem key={color.id} value={color.id}>
@@ -361,7 +342,7 @@ class AppearanceTab extends Component {
           </Box>
 
           <ListItem>
-            <Hidden xsDown>
+            <Hidden smDown>
               <ListItemIcon>
                 <Brightness4Icon />
               </ListItemIcon>
@@ -373,7 +354,7 @@ class AppearanceTab extends Component {
             />
 
             <ListItemSecondaryAction>
-              <Hidden xsDown>
+              <Hidden smDown>
                 <Checkbox
                   color="primary"
                   checked={theme.dark}
@@ -396,7 +377,7 @@ class AppearanceTab extends Component {
           </Box>
 
           <ListItem>
-            <Hidden xsDown>
+            <Hidden smDown>
               <ListItemIcon>
                 <FormatColorResetIcon />
               </ListItemIcon>
@@ -405,7 +386,7 @@ class AppearanceTab extends Component {
             <ListItemText
               primary="Reset theme"
               secondary={
-                appearance.isDefaultTheme(theme)
+                isDefaultTheme(theme)
                   ? "No changes made"
                   : "Changes will be reset"
               }
@@ -414,7 +395,7 @@ class AppearanceTab extends Component {
             <ListItemSecondaryAction>
               <Button
                 color="secondary"
-                disabled={appearance.isDefaultTheme(theme) || performingAction}
+                disabled={isDefaultTheme(theme) || performingAction}
                 variant="contained"
                 onClick={this.handleResetThemeClick}
               >
@@ -426,19 +407,11 @@ class AppearanceTab extends Component {
       </DialogContent>
     );
   }
-
-  componentDidMount() {
-    this.setState({
-      primaryColorLabelWidth: this.primaryColorLabel.current.offsetWidth,
-      secondaryColorLabelWidth: this.secondaryColorLabel.current.offsetWidth,
-    });
-  }
 }
 
-AppearanceTab.propTypes = {
-  // Properties
-  theme: PropTypes.object.isRequired,
+AppearanceTab.contextType = ThemeContext;
 
+AppearanceTab.propTypes = {
   // Functions
   openSnackbar: PropTypes.func.isRequired,
 };

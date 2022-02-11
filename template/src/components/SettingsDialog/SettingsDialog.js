@@ -2,17 +2,16 @@ import React, { Component } from "react";
 
 import PropTypes from "prop-types";
 
-import { withStyles } from "@material-ui/core/styles";
+import withStyles from "@mui/styles/withStyles";
 
 import {
   Dialog,
   DialogTitle,
-  Typography,
   Tooltip,
   IconButton,
   Tabs,
   Tab,
-} from "@material-ui/core";
+} from "@mui/material";
 
 import {
   Close as CloseIcon,
@@ -20,7 +19,7 @@ import {
   Palette as PaletteIcon,
   Link as LinkIcon,
   Security as SecurityIcon,
-} from "@material-ui/icons";
+} from "@mui/icons-material";
 
 import SwipeableViews from "react-swipeable-views";
 
@@ -113,14 +112,19 @@ class SettingsDialog extends Component {
     const { selectedTab } = this.state;
 
     return (
-      <Dialog {...dialogProps} onExited={this.handleExited}>
-        <DialogTitle disableTypography>
-          <Typography variant="h6">Settings</Typography>
-
+      <Dialog
+        {...dialogProps}
+        TransitionProps={{
+          onExited: this.handleExited,
+        }}
+      >
+        <DialogTitle>
+          Settings
           <Tooltip title="Close">
             <IconButton
               className={classes.closeButton}
               onClick={dialogProps.onClose}
+              size="large"
             >
               <CloseIcon />
             </IconButton>
@@ -152,7 +156,7 @@ class SettingsDialog extends Component {
             onDeleteAccountClick={onDeleteAccountClick}
           />
 
-          <AppearanceTab theme={theme} openSnackbar={openSnackbar} />
+          <AppearanceTab openSnackbar={openSnackbar} />
 
           <LinksTab theme={theme} openSnackbar={openSnackbar} />
 

@@ -2,9 +2,9 @@ import React, { Component } from "react";
 
 import PropTypes from "prop-types";
 
-import { withStyles } from "@material-ui/core/styles";
+import withStyles from "@mui/styles/withStyles";
 
-import { Box, ButtonGroup, Button } from "@material-ui/core";
+import { Box, ButtonGroup, Button } from "@mui/material";
 
 import authProviders from "../../data/auth-providers";
 

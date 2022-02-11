@@ -2,14 +2,14 @@ import React, { Component } from "react";
 
 import PropTypes from "prop-types";
 
-import { withStyles } from "@material-ui/core/styles";
+import withStyles from "@mui/styles/withStyles";
 
-import { Avatar, ListItemAvatar } from "@material-ui/core";
+import { Avatar, ListItemAvatar } from "@mui/material";
 
 import {
   AccountCircle as AccountCircleIcon,
   Person as PersonIcon,
-} from "@material-ui/icons";
+} from "@mui/icons-material";
 
 import authentication from "../../services/authentication";
 

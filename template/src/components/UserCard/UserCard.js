@@ -2,7 +2,7 @@ import React from "react";
 
 import PropTypes from "prop-types";
 
-import { Card, CardHeader } from "@material-ui/core";
+import { Card, CardHeader } from "@mui/material";
 
 function UserCard(props) {
   const user = props.user;

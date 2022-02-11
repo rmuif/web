@@ -2,11 +2,11 @@ import React, { useState, useEffect } from "react";
 
 import { useParams, Link } from "react-router-dom";
 
-import { Grid, Fab, Box } from "@material-ui/core";
+import { Grid, Fab } from "@mui/material";
 
-import { makeStyles } from "@material-ui/core/styles";
+import makeStyles from "@mui/styles/makeStyles";
 
-import { Refresh as RefreshIcon, Home as HomeIcon } from "@material-ui/icons";
+import { Refresh as RefreshIcon, Home as HomeIcon } from "@mui/icons-material";
 
 import { firestore } from "../../firebase";
 
@@ -60,9 +60,7 @@ function UserPage() {
             color="primary"
             onClick={() => window.location.reload()}
           >
-            <Box clone mr={1}>
-              <RefreshIcon />
-            </Box>
+            <RefreshIcon sx={{ mr: 1 }} />
             Retry
           </Fab>
         }
@@ -82,9 +80,7 @@ function UserPage() {
         description="The requested user doesn’t exist."
         button={
           <Fab variant="extended" color="primary" component={Link} to="/">
-            <Box clone mr={1}>
-              <HomeIcon />
-            </Box>
+            <HomeIcon sx={{ mr: 1 }} />
             Home
           </Fab>
         }
@@ -96,7 +92,12 @@ function UserPage() {
 
   if (hasProfile) {
     return (
-      <Grid className={classes.grid} container justify="center" spacing={5}>
+      <Grid
+        className={classes.grid}
+        container
+        justifyContent="center"
+        spacing={5}
+      >
         <Grid item xs={4}>
           <UserCard user={user} />
         </Grid>
