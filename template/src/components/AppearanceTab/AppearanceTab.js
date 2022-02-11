@@ -27,7 +27,7 @@ import {
   FormatColorReset as FormatColorResetIcon,
 } from "@mui/icons-material";
 
-import appearance from "../../services/appearance";
+import { ThemeContext } from "../../context/ThemeContext";
 
 class AppearanceTab extends Component {
   constructor(props) {
@@ -39,6 +39,8 @@ class AppearanceTab extends Component {
   }
 
   handlePrimaryColorChange = (event) => {
+    const { theme, setTheme } = this.context;
+
     if (!event) {
       return;
     }
@@ -49,8 +51,6 @@ class AppearanceTab extends Component {
       return;
     }
 
-    const { theme } = this.props;
-
     if (!theme) {
       return;
     }
@@ -60,12 +60,11 @@ class AppearanceTab extends Component {
     }
 
     this.setState({ performingAction: true }, () => {
-      appearance
-        .changeTheme({
-          primaryColor: primaryColor,
-          secondaryColor: theme.secondaryColor.id,
-          dark: theme.dark,
-        })
+      setTheme({
+        primaryColor: primaryColor,
+        secondaryColor: theme.secondaryColor.id,
+        dark: theme.dark,
+      })
         .catch((reason) => {
           const code = reason.code;
           const message = reason.message;
@@ -85,6 +84,8 @@ class AppearanceTab extends Component {
   };
 
   handleSecondaryColorChange = (event) => {
+    const { theme, setTheme } = this.context;
+
     if (!event) {
       return;
     }
@@ -94,8 +95,6 @@ class AppearanceTab extends Component {
     if (!secondaryColor) {
       return;
     }
-
-    const { theme } = this.props;
 
     if (!theme) {
       return;
@@ -110,12 +109,11 @@ class AppearanceTab extends Component {
         performingAction: true,
       },
       () => {
-        appearance
-          .changeTheme({
-            primaryColor: theme.primaryColor.id,
-            secondaryColor: secondaryColor,
-            dark: theme.dark,
-          })
+        setTheme({
+          primaryColor: theme.primaryColor.id,
+          secondaryColor: secondaryColor,
+          dark: theme.dark,
+        })
           .catch((reason) => {
             const code = reason.code;
             const message = reason.message;
@@ -136,13 +134,13 @@ class AppearanceTab extends Component {
   };
 
   handleDarkModeChange = (event) => {
+    const { theme, setTheme } = this.context;
+
     if (!event) {
       return;
     }
 
     const dark = event.target.checked;
-
-    const { theme } = this.props;
 
     if (!theme) {
       return;
@@ -157,12 +155,11 @@ class AppearanceTab extends Component {
         performingAction: true,
       },
       () => {
-        appearance
-          .changeTheme({
-            primaryColor: theme.primaryColor.id,
-            secondaryColor: theme.secondaryColor.id,
-            dark: dark,
-          })
+        setTheme({
+          primaryColor: theme.primaryColor.id,
+          secondaryColor: theme.secondaryColor.id,
+          dark: dark,
+        })
           .catch((reason) => {
             const code = reason.code;
             const message = reason.message;
@@ -183,13 +180,13 @@ class AppearanceTab extends Component {
   };
 
   handleResetThemeClick = () => {
-    const { theme } = this.props;
+    const { theme, isDefaultTheme, resetTheme } = this.context;
 
     if (!theme) {
       return;
     }
 
-    if (appearance.isDefaultTheme(theme)) {
+    if (isDefaultTheme(theme)) {
       return;
     }
 
@@ -198,8 +195,7 @@ class AppearanceTab extends Component {
         performingAction: true,
       },
       () => {
-        appearance
-          .resetTheme()
+        resetTheme()
           .catch((reason) => {
             const code = reason.code;
             const message = reason.message;
@@ -220,8 +216,7 @@ class AppearanceTab extends Component {
   };
 
   render() {
-    // Properties
-    const { theme } = this.props;
+    const { theme, colors, isDefaultTheme } = this.context;
 
     if (!theme) {
       return null;
@@ -236,7 +231,9 @@ class AppearanceTab extends Component {
             <ListItem>
               <Hidden smDown>
                 <ListItemIcon>
-                  <FiberManualRecordIcon color="primary" />
+                  <FiberManualRecordIcon
+                    htmlColor={theme.palette.primary.main}
+                  />
                 </ListItemIcon>
               </Hidden>
 
@@ -254,8 +251,8 @@ class AppearanceTab extends Component {
                     value={theme.primaryColor.id}
                     onChange={this.handlePrimaryColorChange}
                   >
-                    {Object.keys(appearance.colors).map((color) => {
-                      color = appearance.colors[color];
+                    {Object.keys(colors).map((color) => {
+                      color = colors[color];
 
                       return (
                         <option key={color.id} value={color.id}>
@@ -272,8 +269,8 @@ class AppearanceTab extends Component {
                     value={theme.primaryColor.id}
                     onChange={this.handlePrimaryColorChange}
                   >
-                    {Object.keys(appearance.colors).map((color) => {
-                      color = appearance.colors[color];
+                    {Object.keys(colors).map((color) => {
+                      color = colors[color];
 
                       return (
                         <MenuItem key={color.id} value={color.id}>
@@ -291,7 +288,9 @@ class AppearanceTab extends Component {
             <ListItem>
               <Hidden smDown>
                 <ListItemIcon>
-                  <FiberManualRecordIcon color="secondary" />
+                  <FiberManualRecordIcon
+                    htmlColor={theme.palette.secondary.main}
+                  />
                 </ListItemIcon>
               </Hidden>
 
@@ -309,8 +308,8 @@ class AppearanceTab extends Component {
                     value={theme.secondaryColor.id}
                     onChange={this.handleSecondaryColorChange}
                   >
-                    {Object.keys(appearance.colors).map((color) => {
-                      color = appearance.colors[color];
+                    {Object.keys(colors).map((color) => {
+                      color = colors[color];
 
                       return (
                         <option key={color.id} value={color.id}>
@@ -327,8 +326,8 @@ class AppearanceTab extends Component {
                     value={theme.secondaryColor.id}
                     onChange={this.handleSecondaryColorChange}
                   >
-                    {Object.keys(appearance.colors).map((color) => {
-                      color = appearance.colors[color];
+                    {Object.keys(colors).map((color) => {
+                      color = colors[color];
 
                       return (
                         <MenuItem key={color.id} value={color.id}>
@@ -387,7 +386,7 @@ class AppearanceTab extends Component {
             <ListItemText
               primary="Reset theme"
               secondary={
-                appearance.isDefaultTheme(theme)
+                isDefaultTheme(theme)
                   ? "No changes made"
                   : "Changes will be reset"
               }
@@ -396,7 +395,7 @@ class AppearanceTab extends Component {
             <ListItemSecondaryAction>
               <Button
                 color="secondary"
-                disabled={appearance.isDefaultTheme(theme) || performingAction}
+                disabled={isDefaultTheme(theme) || performingAction}
                 variant="contained"
                 onClick={this.handleResetThemeClick}
               >
@@ -410,10 +409,9 @@ class AppearanceTab extends Component {
   }
 }
 
-AppearanceTab.propTypes = {
-  // Properties
-  theme: PropTypes.object.isRequired,
+AppearanceTab.contextType = ThemeContext;
 
+AppearanceTab.propTypes = {
   // Functions
   openSnackbar: PropTypes.func.isRequired,
 };

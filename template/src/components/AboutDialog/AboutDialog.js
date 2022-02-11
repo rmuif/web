@@ -5,7 +5,6 @@ import {
   Dialog,
   DialogTitle,
   DialogContent,
-  Typography,
   Tooltip,
   IconButton,
   List,
@@ -38,10 +37,7 @@ function AboutDialog(props) {
   return (
     <Dialog fullWidth maxWidth="xs" {...dialogProps}>
       <DialogTitle>
-        <Typography variant="h6">
-          About {process.env.REACT_APP_TITLE}
-        </Typography>
-
+        About {process.env.REACT_APP_TITLE}
         <Tooltip title="Close">
           <IconButton
             className={classes.closeButton}

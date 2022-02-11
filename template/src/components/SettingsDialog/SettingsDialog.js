@@ -7,7 +7,6 @@ import withStyles from "@mui/styles/withStyles";
 import {
   Dialog,
   DialogTitle,
-  Typography,
   Tooltip,
   IconButton,
   Tabs,
@@ -120,8 +119,7 @@ class SettingsDialog extends Component {
         }}
       >
         <DialogTitle>
-          <Typography variant="h6">Settings</Typography>
-
+          Settings
           <Tooltip title="Close">
             <IconButton
               className={classes.closeButton}
@@ -158,7 +156,7 @@ class SettingsDialog extends Component {
             onDeleteAccountClick={onDeleteAccountClick}
           />
 
-          <AppearanceTab theme={theme} openSnackbar={openSnackbar} />
+          <AppearanceTab openSnackbar={openSnackbar} />
 
           <LinksTab theme={theme} openSnackbar={openSnackbar} />
 
