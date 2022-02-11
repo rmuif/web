@@ -4,14 +4,11 @@ import PropTypes from "prop-types";
 
 import validate from "validate.js";
 
-import withStyles from "@mui/styles/withStyles";
-
 import {
   Dialog,
   DialogTitle,
   DialogContent,
   DialogActions,
-  Typography,
   Tooltip,
   IconButton,
   Hidden,
@@ -27,26 +24,6 @@ import AuthProviderList from "../AuthProviderList";
 
 import constraints from "../../data/constraints";
 import authentication from "../../services/authentication";
-
-const styles = (theme) => ({
-  closeButton: {
-    position: "absolute",
-    right: theme.spacing(1),
-    top: theme.spacing(1),
-  },
-
-  icon: {
-    marginRight: theme.spacing(0.5),
-  },
-
-  divider: {
-    margin: "auto",
-  },
-
-  grid: {
-    marginBottom: theme.spacing(2),
-  },
-});
 
 const initialState = {
   performingAction: false,
@@ -243,9 +220,6 @@ class SignUpDialog extends Component {
   };
 
   render() {
-    // Styling
-    const { classes } = this.props;
-
     // Dialog Properties
     const { dialogProps } = this.props;
 
@@ -270,14 +244,17 @@ class SignUpDialog extends Component {
         }}
       >
         <DialogTitle>
-          <Typography variant="h6">Sign up for an account</Typography>
-
+          Sign up for an account
           <Tooltip title="Close">
             <IconButton
-              className={classes.closeButton}
               disabled={performingAction}
               onClick={dialogProps.onClose}
               size="large"
+              sx={{
+                position: "absolute",
+                right: (theme) => theme.spacing(1),
+                top: (theme) => theme.spacing(1),
+              }}
             >
               <CloseIcon />
             </IconButton>
@@ -286,7 +263,7 @@ class SignUpDialog extends Component {
 
         <Hidden smDown>
           <DialogContent>
-            <Grid container direction="row">
+            <Grid container direction="row" sx={{ pt: 1 }}>
               <Grid item xs={4}>
                 <AuthProviderList
                   performingAction={performingAction}
@@ -295,7 +272,10 @@ class SignUpDialog extends Component {
               </Grid>
 
               <Grid item xs={1}>
-                <Divider className={classes.divider} orientation="vertical" />
+                <Divider
+                  orientation="vertical"
+                  sx={{ margin: "auto", width: "1px" }}
+                />
               </Grid>
 
               <Grid item xs={7}>
@@ -509,9 +489,6 @@ class SignUpDialog extends Component {
 }
 
 SignUpDialog.propTypes = {
-  // Styling
-  classes: PropTypes.object.isRequired,
-
   // Dialog Properties
   dialogProps: PropTypes.object.isRequired,
 
@@ -519,4 +496,4 @@ SignUpDialog.propTypes = {
   openSnackbar: PropTypes.func.isRequired,
 };
 
-export default withStyles(styles)(SignUpDialog);
+export default SignUpDialog;
