@@ -2,7 +2,7 @@ import React, { Component } from "react";
 
 import PropTypes from "prop-types";
 
-import { Hidden } from "@material-ui/core";
+import { Hidden } from "@mui/material";
 
 import AboutDialog from "../AboutDialog";
 
@@ -53,7 +53,7 @@ class DialogHost extends Component {
           </>
         )}
 
-        <Hidden xsDown>
+        <Hidden smDown>
           {user && (
             <>
               <DeleteAccountDialog
@@ -93,7 +93,7 @@ class DialogHost extends Component {
           )}
         </Hidden>
 
-        <Hidden smDown>
+        <Hidden mdDown>
           {user && (
             <>
               <SettingsDialog

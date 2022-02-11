@@ -1,6 +1,6 @@
 import camelCase from "camelcase";
 
-import { createMuiTheme } from "@material-ui/core/styles";
+import { createTheme, adaptV4Theme } from "@mui/material/styles";
 
 import firebase, { analytics, auth, firestore } from "../firebase";
 
@@ -24,7 +24,7 @@ import {
   brown,
   grey as gray,
   blueGrey as blueGray,
-} from "@material-ui/core/colors";
+} from "@mui/material/colors";
 
 const colors = {
   red: {
@@ -158,17 +158,19 @@ const defaultSecondaryColor = getColor(
 );
 const defaultDark = process.env.REACT_APP_THEME_DARK === "true";
 
-const defaultTheme = createMuiTheme({
-  palette: {
-    primary: defaultPrimaryColor.import,
-    secondary: defaultSecondaryColor.import,
-    type: defaultDark ? "dark" : "light",
-  },
+const defaultTheme = createTheme(
+  adaptV4Theme({
+    palette: {
+      primary: defaultPrimaryColor.import,
+      secondary: defaultSecondaryColor.import,
+      type: defaultDark ? "dark" : "light",
+    },
 
-  primaryColor: defaultPrimaryColor,
-  secondaryColor: defaultSecondaryColor,
-  dark: defaultDark,
-});
+    primaryColor: defaultPrimaryColor,
+    secondaryColor: defaultSecondaryColor,
+    dark: defaultDark,
+  })
+);
 
 const appearance = {};
 
@@ -216,17 +218,19 @@ appearance.createTheme = (theme) => {
     return null;
   }
 
-  theme = createMuiTheme({
-    palette: {
-      primary: primaryColor.import,
-      secondary: secondaryColor.import,
-      type: dark ? "dark" : "light",
-    },
+  theme = createTheme(
+    adaptV4Theme({
+      palette: {
+        primary: primaryColor.import,
+        secondary: secondaryColor.import,
+        type: dark ? "dark" : "light",
+      },
 
-    primaryColor: primaryColor,
-    secondaryColor: secondaryColor,
-    dark: dark,
-  });
+      primaryColor: primaryColor,
+      secondaryColor: secondaryColor,
+      dark: dark,
+    })
+  );
 
   return theme;
 };

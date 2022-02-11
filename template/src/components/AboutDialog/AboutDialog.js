@@ -11,11 +11,11 @@ import {
   List,
   ListItem,
   ListItemText,
-} from "@material-ui/core";
+} from "@mui/material";
 
-import { makeStyles } from "@material-ui/core/styles";
+import makeStyles from "@mui/styles/makeStyles";
 
-import { Close as CloseIcon } from "@material-ui/icons";
+import { Close as CloseIcon } from "@mui/icons-material";
 
 const useStyles = makeStyles((theme) => ({
   closeButton: {
@@ -37,7 +37,7 @@ function AboutDialog(props) {
 
   return (
     <Dialog fullWidth maxWidth="xs" {...dialogProps}>
-      <DialogTitle disableTypography>
+      <DialogTitle>
         <Typography variant="h6">
           About {process.env.REACT_APP_TITLE}
         </Typography>
@@ -46,6 +46,7 @@ function AboutDialog(props) {
           <IconButton
             className={classes.closeButton}
             onClick={dialogProps.onClose}
+            size="large"
           >
             <CloseIcon />
           </IconButton>

@@ -2,7 +2,7 @@ import React, { Component } from "react";
 
 import PropTypes from "prop-types";
 
-import { Dialog, DialogTitle, DialogActions } from "@material-ui/core";
+import { Dialog, DialogTitle, DialogActions } from "@mui/material";
 
 class ConfirmationDialog extends Component {
   render() {

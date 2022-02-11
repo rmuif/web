@@ -19,13 +19,13 @@ import {
   Checkbox,
   Switch,
   Button,
-} from "@material-ui/core";
+} from "@mui/material";
 
 import {
   FiberManualRecord as FiberManualRecordIcon,
   Brightness4 as Brightness4Icon,
   FormatColorReset as FormatColorResetIcon,
-} from "@material-ui/icons";
+} from "@mui/icons-material";
 
 import appearance from "../../services/appearance";
 
@@ -35,12 +35,7 @@ class AppearanceTab extends Component {
 
     this.state = {
       performingAction: false,
-      primaryColorLabelWidth: 0,
-      secondaryColorLabelWidth: 0,
     };
-
-    this.primaryColorLabel = React.createRef();
-    this.secondaryColorLabel = React.createRef();
   }
 
   handlePrimaryColorChange = (event) => {
@@ -64,34 +59,29 @@ class AppearanceTab extends Component {
       return;
     }
 
-    this.setState(
-      {
-        performingAction: true,
-      },
-      () => {
-        appearance
-          .changeTheme({
-            primaryColor: primaryColor,
-            secondaryColor: theme.secondaryColor.id,
-            dark: theme.dark,
-          })
-          .catch((reason) => {
-            const code = reason.code;
-            const message = reason.message;
+    this.setState({ performingAction: true }, () => {
+      appearance
+        .changeTheme({
+          primaryColor: primaryColor,
+          secondaryColor: theme.secondaryColor.id,
+          dark: theme.dark,
+        })
+        .catch((reason) => {
+          const code = reason.code;
+          const message = reason.message;
 
-            switch (code) {
-              default:
-                this.props.openSnackbar(message);
-                return;
-            }
-          })
-          .finally(() => {
-            this.setState({
-              performingAction: false,
-            });
+          switch (code) {
+            default:
+              this.props.openSnackbar(message);
+              return;
+          }
+        })
+        .finally(() => {
+          this.setState({
+            performingAction: false,
           });
-      }
-    );
+        });
+    });
   };
 
   handleSecondaryColorChange = (event) => {
@@ -237,18 +227,14 @@ class AppearanceTab extends Component {
       return null;
     }
 
-    const {
-      performingAction,
-      primaryColorLabelWidth,
-      secondaryColorLabelWidth,
-    } = this.state;
+    const { performingAction } = this.state;
 
     return (
       <DialogContent>
         <List disablePadding>
           <Box mb={1}>
             <ListItem>
-              <Hidden xsDown>
+              <Hidden smDown>
                 <ListItemIcon>
                   <FiberManualRecordIcon color="primary" />
                 </ListItemIcon>
@@ -259,15 +245,13 @@ class AppearanceTab extends Component {
                 fullWidth
                 variant="outlined"
               >
-                <InputLabel ref={this.primaryColorLabel}>
-                  Primary color
-                </InputLabel>
+                <InputLabel>Primary color</InputLabel>
 
                 <Hidden smUp>
                   <Select
+                    label="Primary color"
                     native
                     value={theme.primaryColor.id}
-                    labelWidth={primaryColorLabelWidth}
                     onChange={this.handlePrimaryColorChange}
                   >
                     {Object.keys(appearance.colors).map((color) => {
@@ -282,10 +266,10 @@ class AppearanceTab extends Component {
                   </Select>
                 </Hidden>
 
-                <Hidden xsDown>
+                <Hidden smDown>
                   <Select
+                    label="Primary color"
                     value={theme.primaryColor.id}
-                    labelWidth={primaryColorLabelWidth}
                     onChange={this.handlePrimaryColorChange}
                   >
                     {Object.keys(appearance.colors).map((color) => {
@@ -305,7 +289,7 @@ class AppearanceTab extends Component {
 
           <Box mb={1}>
             <ListItem>
-              <Hidden xsDown>
+              <Hidden smDown>
                 <ListItemIcon>
                   <FiberManualRecordIcon color="secondary" />
                 </ListItemIcon>
@@ -316,15 +300,13 @@ class AppearanceTab extends Component {
                 fullWidth
                 variant="outlined"
               >
-                <InputLabel ref={this.secondaryColorLabel}>
-                  Secondary color
-                </InputLabel>
+                <InputLabel>Secondary color</InputLabel>
 
                 <Hidden smUp>
                   <Select
+                    label="Secondary color"
                     native
                     value={theme.secondaryColor.id}
-                    labelWidth={secondaryColorLabelWidth}
                     onChange={this.handleSecondaryColorChange}
                   >
                     {Object.keys(appearance.colors).map((color) => {
@@ -339,10 +321,10 @@ class AppearanceTab extends Component {
                   </Select>
                 </Hidden>
 
-                <Hidden xsDown>
+                <Hidden smDown>
                   <Select
+                    label="Secondary color"
                     value={theme.secondaryColor.id}
-                    labelWidth={secondaryColorLabelWidth}
                     onChange={this.handleSecondaryColorChange}
                   >
                     {Object.keys(appearance.colors).map((color) => {
@@ -361,7 +343,7 @@ class AppearanceTab extends Component {
           </Box>
 
           <ListItem>
-            <Hidden xsDown>
+            <Hidden smDown>
               <ListItemIcon>
                 <Brightness4Icon />
               </ListItemIcon>
@@ -373,7 +355,7 @@ class AppearanceTab extends Component {
             />
 
             <ListItemSecondaryAction>
-              <Hidden xsDown>
+              <Hidden smDown>
                 <Checkbox
                   color="primary"
                   checked={theme.dark}
@@ -396,7 +378,7 @@ class AppearanceTab extends Component {
           </Box>
 
           <ListItem>
-            <Hidden xsDown>
+            <Hidden smDown>
               <ListItemIcon>
                 <FormatColorResetIcon />
               </ListItemIcon>
@@ -425,13 +407,6 @@ class AppearanceTab extends Component {
         </List>
       </DialogContent>
     );
-  }
-
-  componentDidMount() {
-    this.setState({
-      primaryColorLabelWidth: this.primaryColorLabel.current.offsetWidth,
-      secondaryColorLabelWidth: this.secondaryColorLabel.current.offsetWidth,
-    });
   }
 }
 

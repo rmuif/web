@@ -12,7 +12,7 @@ import {
   Box,
   TextField,
   Button,
-} from "@material-ui/core";
+} from "@mui/material";
 
 const initialState = {
   username: "",
@@ -81,7 +81,9 @@ class DeleteAccountDialog extends Component {
       <Dialog
         {...dialogProps}
         onKeyPress={this.handleKeyPress}
-        onExited={this.handleExited}
+        TransitionProps={{
+          onExited: this.handleExited,
+        }}
       >
         <DialogTitle>Delete account?</DialogTitle>
 
@@ -94,7 +96,7 @@ class DeleteAccountDialog extends Component {
 
             {hasUsername && (
               <DialogContentText>
-                Type your username and <Hidden xsDown>click</Hidden>
+                Type your username and <Hidden smDown>click</Hidden>
                 <Hidden smUp>tap</Hidden> Delete to delete your account. This
                 action is irreversible.
               </DialogContentText>

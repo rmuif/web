@@ -16,7 +16,7 @@ import {
   Menu,
   MenuItem,
   Link,
-} from "@material-ui/core";
+} from "@mui/material";
 
 import UserAvatar from "../UserAvatar";
 
@@ -119,6 +119,7 @@ class Bar extends Component {
                 color="inherit"
                 disabled={performingAction}
                 onClick={this.openMenu}
+                size="large"
               >
                 <UserAvatar user={Object.assign(user, userData)} />
               </IconButton>

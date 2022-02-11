@@ -16,9 +16,9 @@ import {
   TextField,
   Tooltip,
   IconButton,
-} from "@material-ui/core";
+} from "@mui/material";
 
-import { Lock as LockIcon, Edit as EditIcon } from "@material-ui/icons";
+import { Lock as LockIcon, Edit as EditIcon } from "@mui/icons-material";
 
 import constraints from "../../data/constraints";
 import authentication from "../../services/authentication";
@@ -229,7 +229,7 @@ class SecurityTab extends Component {
       <DialogContent>
         <List disablePadding>
           <ListItem>
-            <Hidden xsDown>
+            <Hidden smDown>
               <ListItemIcon>
                 <LockIcon />
               </ListItemIcon>
@@ -288,7 +288,7 @@ class SecurityTab extends Component {
             {showingField !== "password" &&
               showingField !== "password-confirmation" && (
                 <>
-                  <Hidden xsDown>
+                  <Hidden smDown>
                     <ListItemText
                       primary="Password"
                       secondary={
@@ -320,6 +320,7 @@ class SecurityTab extends Component {
                         <IconButton
                           disabled={performingAction}
                           onClick={() => this.showField("password")}
+                          size="large"
                         >
                           <EditIcon />
                         </IconButton>

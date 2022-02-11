@@ -4,7 +4,7 @@ import PropTypes from "prop-types";
 
 import validate from "validate.js";
 
-import { withStyles } from "@material-ui/core/styles";
+import withStyles from "@mui/styles/withStyles";
 
 import {
   Dialog,
@@ -19,9 +19,9 @@ import {
   Button,
   Divider,
   TextField,
-} from "@material-ui/core";
+} from "@mui/material";
 
-import { Close as CloseIcon } from "@material-ui/icons";
+import { Close as CloseIcon } from "@mui/icons-material";
 
 import AuthProviderList from "../AuthProviderList";
 
@@ -262,13 +262,14 @@ class SignUpDialog extends Component {
       <Dialog
         fullWidth
         maxWidth="sm"
-        disableBackdropClick={performingAction}
         disableEscapeKeyDown={performingAction}
         {...dialogProps}
         onKeyPress={this.handleKeyPress}
-        onExited={this.handleExited}
+        TransitionProps={{
+          onExited: this.handleExited,
+        }}
       >
-        <DialogTitle disableTypography>
+        <DialogTitle>
           <Typography variant="h6">Sign up for an account</Typography>
 
           <Tooltip title="Close">
@@ -276,13 +277,14 @@ class SignUpDialog extends Component {
               className={classes.closeButton}
               disabled={performingAction}
               onClick={dialogProps.onClose}
+              size="large"
             >
               <CloseIcon />
             </IconButton>
           </Tooltip>
         </DialogTitle>
 
-        <Hidden xsDown>
+        <Hidden smDown>
           <DialogContent>
             <Grid container direction="row">
               <Grid item xs={4}>

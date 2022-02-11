@@ -1,8 +1,8 @@
 import React from "react";
 
-import { makeStyles } from "@material-ui/core/styles";
+import makeStyles from "@mui/styles/makeStyles";
 
-import { CircularProgress } from "@material-ui/core";
+import { CircularProgress } from "@mui/material";
 
 const useStyles = makeStyles({
   center: {
