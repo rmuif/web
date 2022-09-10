@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { useState, useEffect } from "react";
 
 import PropTypes from "prop-types";
 
@@ -102,14 +102,35 @@ const initialState = {
   errors: null,
 };
 
-class AccountTab extends Component {
-  constructor(props) {
-    super(props);
+function AccountTab() {
 
-    this.state = initialState;
-  }
+  const [initialState, useInitialState] = useState(""); 
 
-  getNameInitialsOrIcon = () => {
+  useEffect(() => {
+    const { user, userData } = this.props;
+
+    this.setState({
+      profileCompletion: authentication.getProfileCompletion({
+        ...user,
+        ...userData,
+      }),
+      securityRating: authentication.getSecurityRating(user, userData),
+    });
+  })
+
+  useEffect(() => {
+    const { avatarUrl } = this.state;
+
+    if (avatarUrl) {
+      URL.revokeObjectURL(avatarUrl);
+
+      this.setState({
+        avatarUrl: "",
+      });
+    }
+  })
+
+  const getNameInitialsOrIcon = () => {
     const { user } = this.props;
 
     if (!user) {
@@ -138,7 +159,7 @@ class AccountTab extends Component {
     return <PersonIcon className={classes.personIcon} />;
   };
 
-  uploadAvatar = () => {
+  const uploadAvatar = () => {
     const { avatar } = this.state;
 
     if (!avatar) {
@@ -185,7 +206,7 @@ class AccountTab extends Component {
     );
   };
 
-  removeAvatar = () => {
+  const removeAvatar = () => {
     const { user } = this.props;
 
     const { avatar, avatarUrl } = this.state;
@@ -244,7 +265,7 @@ class AccountTab extends Component {
     }
   };
 
-  showField = (fieldId) => {
+  const showField = (fieldId) => {
     if (!fieldId) {
       return;
     }
@@ -254,7 +275,7 @@ class AccountTab extends Component {
     });
   };
 
-  hideFields = (callback) => {
+  const hideFields = (callback) => {
     this.setState(
       {
         showingField: "",
@@ -272,7 +293,7 @@ class AccountTab extends Component {
     );
   };
 
-  changeFirstName = () => {
+  const changeFirstName = () => {
     const { firstName } = this.state;
 
     const errors = validate(
@@ -346,7 +367,7 @@ class AccountTab extends Component {
     );
   };
 
-  changeLastName = () => {
+  const changeLastName = () => {
     const { lastName } = this.state;
 
     const errors = validate(
@@ -420,7 +441,7 @@ class AccountTab extends Component {
     );
   };
 
-  changeUsername = () => {
+  const changeUsername = () => {
     const { username } = this.state;
 
     const errors = validate(
@@ -494,7 +515,7 @@ class AccountTab extends Component {
     );
   };
 
-  changeEmailAddress = () => {
+  const changeEmailAddress = () => {
     const { emailAddress } = this.state;
 
     const errors = validate(
@@ -568,7 +589,7 @@ class AccountTab extends Component {
     );
   };
 
-  verifyEmailAddress = () => {
+  const verifyEmailAddress = () => {
     this.setState(
       {
         performingAction: true,
@@ -605,7 +626,7 @@ class AccountTab extends Component {
     );
   };
 
-  changeField = (fieldId) => {
+  const changeField = (fieldId) => {
     switch (fieldId) {
       case "first-name":
         this.changeFirstName();
@@ -628,7 +649,7 @@ class AccountTab extends Component {
     }
   };
 
-  handleKeyDown = (event, fieldId) => {
+  const handleKeyDown = (event, fieldId) => {
     if (!event || !fieldId) {
       return;
     }
@@ -650,7 +671,7 @@ class AccountTab extends Component {
     }
   };
 
-  handleAvatarChange = (event) => {
+  const handleAvatarChange = (event) => {
     if (!event) {
       return;
     }
@@ -683,7 +704,7 @@ class AccountTab extends Component {
     });
   };
 
-  handleFirstNameChange = (event) => {
+  const handleFirstNameChange = (event) => {
     if (!event) {
       return;
     }
@@ -695,7 +716,7 @@ class AccountTab extends Component {
     });
   };
 
-  handleLastNameChange = (event) => {
+  const handleLastNameChange = (event) => {
     if (!event) {
       return;
     }
@@ -707,7 +728,7 @@ class AccountTab extends Component {
     });
   };
 
-  handleUsernameChange = (event) => {
+  const handleUsernameChange = (event) => {
     if (!event) {
       return;
     }
@@ -719,7 +740,7 @@ class AccountTab extends Component {
     });
   };
 
-  handleEmailAddressChange = (event) => {
+  const handleEmailAddressChange = (event) => {
     if (!event) {
       return;
     }
@@ -731,7 +752,6 @@ class AccountTab extends Component {
     });
   };
 
-  render() {
     // Styling
     const { classes } = this.props;
 
@@ -1618,31 +1638,6 @@ class AccountTab extends Component {
         </List>
       </DialogContent>
     );
-  }
-
-  componentDidMount() {
-    const { user, userData } = this.props;
-
-    this.setState({
-      profileCompletion: authentication.getProfileCompletion({
-        ...user,
-        ...userData,
-      }),
-      securityRating: authentication.getSecurityRating(user, userData),
-    });
-  }
-
-  componentWillUnmount() {
-    const { avatarUrl } = this.state;
-
-    if (avatarUrl) {
-      URL.revokeObjectURL(avatarUrl);
-
-      this.setState({
-        avatarUrl: "",
-      });
-    }
-  }
 }
 
 AccountTab.propTypes = {
