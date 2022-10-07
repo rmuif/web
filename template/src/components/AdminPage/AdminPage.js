@@ -1,11 +1,11 @@
-import React, { Component } from "react";
+import React from "react"; 
 
-import EmptyState from "../EmptyState";
+import EmptyState from '../EmptyState'; 
 
-class AdminPage extends Component {
-  render() {
-    return <EmptyState title="Admin" />;
-  }
+function AdminPage() {
+  return (
+    <EmptyState title="Admin" /> 
+  )
 }
 
-export default AdminPage;
+export default AdminPage; 
