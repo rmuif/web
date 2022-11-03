@@ -1,84 +1,75 @@
-import React, { Component } from "react";
+import React, { useState } from "react"; 
 
-import PropTypes from "prop-types";
-
-import {
-  Dialog,
-  DialogTitle,
-  DialogContent,
-  DialogContentText,
-  DialogActions,
-  Hidden,
-  Box,
-  TextField,
-  Button,
-} from "@material-ui/core";
+import { 
+  Dialog, 
+  DialogTitle, 
+  DialogContent, 
+  DialogContentText, 
+  DialogActions, 
+  Hidden, 
+  Box, 
+  TextField, 
+  Button, 
+} from "@material-ui/core"; 
 
 const initialState = {
-  username: "",
-};
+  username: "", 
+} 
 
-class DeleteAccountDialog extends Component {
-  constructor(props) {
-    super(props);
+function DeleteAccountDialog() {
 
-    this.state = initialState;
-  }
+  const [initialState, setInitialState] = useState(""); 
 
-  handleKeyPress = (event) => {
-    const { userData } = this.props;
+  const handleKeyPress = event => {
+    const { userData } = this.props; 
 
     if (userData && userData.username) {
-      const { username } = this.state;
+      const { username } = this.state; 
 
       if (!username) {
-        return;
+        return; 
       }
 
       if (username !== userData.username) {
-        return;
+        return; 
       }
     }
 
-    const key = event.key;
+    const key = event.key; 
 
     if (event.altKey || event.ctrlKey || event.metaKey || event.shiftKey) {
-      return;
-    }
+      return; 
+    } 
 
     if (key === "Enter") {
-      this.props.deleteAccount();
+      this.props.deleteAccount(); 
     }
-  };
+  }
 
-  handleExited = () => {
-    this.setState(initialState);
-  };
+  const handleExited = () => {
+    setInitialState(initialState); 
+  }
 
-  handleUsernameChange = (event) => {
-    const username = event.target.value;
+  const handleUsernameChange = event => {
+    const username = event.target.value; 
 
     this.setState({
-      username: username,
-    });
-  };
+      username: username, 
+    })
+  }
 
-  render() {
-    // Dialog Properties
-    const { dialogProps } = this.props;
+  const { dialogProps } = this.props; 
 
-    // Custom Properties
-    const { performingAction, userData } = this.props;
+  const { performingAction, userData } = this.props; 
 
-    // Custom Functions
-    const { deleteAccount } = this.props;
+  const { deleteAccount } = this.props; 
 
-    const { username } = this.state;
+  const { username } = this.state; 
 
-    const hasUsername = userData && userData.username;
+  const hasUsername = userData && userData.username; 
 
-    return (
-      <Dialog
+  return (
+    <Dialog
         {...dialogProps}
         onKeyPress={this.handleKeyPress}
         onExited={this.handleExited}
@@ -140,20 +131,7 @@ class DeleteAccountDialog extends Component {
           </Button>
         </DialogActions>
       </Dialog>
-    );
-  }
+  )
 }
 
-DeleteAccountDialog.propTypes = {
-  // Dialog Properties
-  dialogProps: PropTypes.object.isRequired,
-
-  // Custom Properties
-  performingAction: PropTypes.bool.isRequired,
-  userData: PropTypes.object,
-
-  // Custom Functions
-  deleteAccount: PropTypes.func.isRequired,
-};
-
-export default DeleteAccountDialog;
+export default DeleteAccountDialog; 
