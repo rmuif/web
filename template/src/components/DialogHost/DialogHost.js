@@ -1,34 +1,30 @@
-import React, { Component } from "react";
+import React from "react"; 
+import PropTypes from "prop-types"; 
+import { Hidden } from "@material-ui/core"; 
+import AboutDialog from "../AboutDialog"; 
 
-import PropTypes from "prop-types";
+import SignUpDialog from "../SignUpDialog"; 
+import SignInDialog from "../SignInDialog"; 
+import SettingsDialog from "../SettingsDialog"; 
+import DeleteAccountDialog from "../DeleteAccountDialog"; 
+import AlertDialog from "../AlertDialog"; 
 
-import { Hidden } from "@material-ui/core";
+function DialogHost() {
+  //Properties 
+  const { performingAction, theme, user, userData, dialogs } = this.props;
 
-import AboutDialog from "../AboutDialog";
+  // Functions
+  const { openSnackbar } = this.props;
 
-import SignUpDialog from "../SignUpDialog";
-import SignInDialog from "../SignInDialog";
-import SettingsDialog from "../SettingsDialog";
-import DeleteAccountDialog from "../DeleteAccountDialog";
-import AlertDialog from "../AlertDialog";
+  const aboutDialog = dialogs.aboutDialog;
+  const signUpDialog = dialogs.signUpDialog;
+  const signInDialog = dialogs.signInDialog;
+  const settingsDialog = dialogs.settingsDialog;
+  const deleteAccountDialog = dialogs.deleteAccountDialog;
+  const signOutDialog = dialogs.signOutDialog;
 
-class DialogHost extends Component {
-  render() {
-    // Properties
-    const { performingAction, theme, user, userData, dialogs } = this.props;
-
-    // Functions
-    const { openSnackbar } = this.props;
-
-    const aboutDialog = dialogs.aboutDialog;
-    const signUpDialog = dialogs.signUpDialog;
-    const signInDialog = dialogs.signInDialog;
-    const settingsDialog = dialogs.settingsDialog;
-    const deleteAccountDialog = dialogs.deleteAccountDialog;
-    const signOutDialog = dialogs.signOutDialog;
-
-    return (
-      <>
+  return (
+    <>
         <AboutDialog
           dialogProps={aboutDialog.dialogProps}
           performingAction={performingAction}
@@ -181,8 +177,7 @@ class DialogHost extends Component {
           )}
         </Hidden>
       </>
-    );
-  }
+  ); 
 }
 
 DialogHost.propTypes = {
@@ -195,6 +190,6 @@ DialogHost.propTypes = {
 
   // Functions
   openSnackbar: PropTypes.func.isRequired,
-};
+}; 
 
-export default DialogHost;
+export default DialogHost; 
