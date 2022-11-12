@@ -1,7 +1,5 @@
-import React, { Component } from "react";
-
-import PropTypes from "prop-types";
-
+import React, { useState } from "react"; 
+import PropTypes from "prop-types"; 
 import {
   DialogContent,
   List,
@@ -13,166 +11,139 @@ import {
   Tooltip,
   IconButton,
 } from "@material-ui/core";
-
 import { Link as LinkIcon, LinkOff as LinkOffIcon } from "@material-ui/icons";
-
 import authProviders from "../../data/auth-providers";
-
 import authentication from "../../services/authentication";
 
-class LinksTab extends Component {
-  constructor(props) {
-    super(props);
+function LinksTab() {
 
-    this.state = {
-      performingAction: false,
-    };
+  const [performingAction, setPerformingAction] = useState(false); 
+
+  const linkAuthProvider = authProvider => {
+    setPerformingAction(true); 
+
+    authentication
+      .linkAuthProvider(authProvider)
+      .then((value) => {
+        this.props.openSnackbar(`${authProvider.name} linked`, 5);
+      })
+      .catch((reason) => {
+        const code = reason.code;
+        const message = reason.message;
+
+        switch (code) {
+          default:
+            this.props.openSnackbar(message);
+            return;
+        }
+      })
+      .finally(() => {
+        setPerformingAction(false); 
+    });
   }
 
-  linkAuthProvider = (authProvider) => {
-    this.setState(
-      {
-        performingAction: true,
-      },
-      () => {
-        authentication
-          .linkAuthProvider(authProvider)
-          .then((value) => {
-            this.props.openSnackbar(`${authProvider.name} linked`, 5);
-          })
-          .catch((reason) => {
-            const code = reason.code;
-            const message = reason.message;
+  const unlinkAuthProvider = authProvider => {
+    setPerformingAction(true); 
 
-            switch (code) {
-              default:
-                this.props.openSnackbar(message);
-                return;
-            }
-          })
-          .finally(() => {
-            this.setState({
-              performingAction: false,
-            });
-          });
-      }
-    );
-  };
+    authentication
+      .unlinkAuthProvider(authProvider.id)
+      .then((value) => {
+        this.props.openSnackbar(`${authProvider.name} unlinked`, 4);
+      })
+      .catch((reason) => {
+        const code = reason.code;
+        const message = reason.message;
 
-  unlinkAuthProvider = (authProvider) => {
-    this.setState(
-      {
-        performingAction: true,
-      },
-      () => {
-        authentication
-          .unlinkAuthProvider(authProvider.id)
-          .then((value) => {
-            this.props.openSnackbar(`${authProvider.name} unlinked`, 4);
-          })
-          .catch((reason) => {
-            const code = reason.code;
-            const message = reason.message;
+        switch (code) {
+          default:
+            this.props.openSnackbar(message);
+            return;
+        }
+      })
+      .finally(() => {
+        setPerformingAction(false); 
+      });
+  }
 
-            switch (code) {
-              default:
-                this.props.openSnackbar(message);
-                return;
-            }
-          })
-          .finally(() => {
-            this.setState({
-              performingAction: false,
-            });
-          });
-      }
-    );
-  };
+  const { theme } = this.props; 
 
-  render() {
-    // Properties
-    const { theme } = this.props;
+  return (
+    <DialogContent>
+      <List disablePadding>
+        {authProviders.map((authProvider) => {
+          const authProviderData = authentication.authProviderData(
+            authProvider.id
+          );
+          let identifier = null;
 
-    const { performingAction } = this.state;
+          if (authProviderData) {
+            const displayName = authProviderData.displayName;
+            const emailAddress = authProviderData.email;
+            const phoneNumber = authProviderData.phoneNumber;
 
-    return (
-      <DialogContent>
-        <List disablePadding>
-          {authProviders.map((authProvider) => {
-            const authProviderData = authentication.authProviderData(
-              authProvider.id
-            );
-            let identifier = null;
+            identifier = displayName || emailAddress || phoneNumber;
+          }
 
-            if (authProviderData) {
-              const displayName = authProviderData.displayName;
-              const emailAddress = authProviderData.email;
-              const phoneNumber = authProviderData.phoneNumber;
+          return (
+            <ListItem key={authProvider.id}>
+              <ListItemIcon>
+                <Box color={theme.dark ? null : authProvider.color}>
+                  {authProvider.icon}
+                </Box>
+              </ListItemIcon>
 
-              identifier = displayName || emailAddress || phoneNumber;
-            }
+              {authProviderData && (
+                <ListItemText
+                  primary={authProvider.name}
+                  secondary={identifier}
+                />
+              )}
 
-            return (
-              <ListItem key={authProvider.id}>
-                <ListItemIcon>
-                  <Box color={theme.dark ? null : authProvider.color}>
-                    {authProvider.icon}
-                  </Box>
-                </ListItemIcon>
+              {!authProviderData && (
+                <ListItemText primary={authProvider.name} />
+              )}
 
+              <ListItemSecondaryAction>
                 {authProviderData && (
-                  <ListItemText
-                    primary={authProvider.name}
-                    secondary={identifier}
-                  />
+                  <Tooltip title="Unlink">
+                    <div>
+                      <IconButton
+                        disabled={performingAction}
+                        onClick={() => this.unlinkAuthProvider(authProvider)}
+                      >
+                        <LinkOffIcon />
+                      </IconButton>
+                    </div>
+                  </Tooltip>
                 )}
 
                 {!authProviderData && (
-                  <ListItemText primary={authProvider.name} />
+                  <Tooltip title="Link">
+                    <div>
+                      <IconButton
+                        disabled={performingAction}
+                        onClick={() => this.linkAuthProvider(authProvider)}
+                      >
+                        <LinkIcon />
+                      </IconButton>
+                    </div>
+                  </Tooltip>
                 )}
-
-                <ListItemSecondaryAction>
-                  {authProviderData && (
-                    <Tooltip title="Unlink">
-                      <div>
-                        <IconButton
-                          disabled={performingAction}
-                          onClick={() => this.unlinkAuthProvider(authProvider)}
-                        >
-                          <LinkOffIcon />
-                        </IconButton>
-                      </div>
-                    </Tooltip>
-                  )}
-
-                  {!authProviderData && (
-                    <Tooltip title="Link">
-                      <div>
-                        <IconButton
-                          disabled={performingAction}
-                          onClick={() => this.linkAuthProvider(authProvider)}
-                        >
-                          <LinkIcon />
-                        </IconButton>
-                      </div>
-                    </Tooltip>
-                  )}
-                </ListItemSecondaryAction>
-              </ListItem>
-            );
-          })}
-        </List>
-      </DialogContent>
-    );
-  }
+              </ListItemSecondaryAction>
+            </ListItem>
+          );
+        })}
+      </List>
+    </DialogContent>
+  )
 }
 
 LinksTab.propTypes = {
-  // Properties
-  theme: PropTypes.object.isRequired,
+  //Properties 
+  theme: PropTypes.object.isRequired, 
 
-  // Functions
-  openSnackbar: PropTypes.func.isRequired,
-};
+  //Functions 
+  openSnackbar: PropTypes.func.isRequired, 
+}; 
 
-export default LinksTab;
+export default LinksTab; 
