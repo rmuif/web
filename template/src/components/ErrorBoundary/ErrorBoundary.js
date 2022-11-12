@@ -1,62 +1,44 @@
-import React, { Component } from "react";
+import React, { useState, useEffect } from "react"; 
+import PropTypes from "prop-types"; 
+import * as Sentry from "@sentry/browser"; 
+import EmptyState from "../EmptyState"; 
+import { ReactComponent as ErrorIllustration } from "../../illustrations/error.svg"; 
 
-import PropTypes from "prop-types";
+function ErrorBoundary() {
 
-import * as Sentry from "@sentry/browser";
+  //useState 
+  const [hasError, setHasError] = useState(false); 
+  const [eventId, setEventId] = useState(null); 
 
-import EmptyState from "../EmptyState";
-
-import { ReactComponent as ErrorIllustration } from "../../illustrations/error.svg";
-
-class ErrorBoundary extends Component {
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      hasError: false,
-      eventId: null,
-    };
-  }
-
-  static getDerivedStateFromError(error) {
-    return { hasError: true };
-  }
-
-  componentDidCatch(error, errorInfo) {
+  useEffect((error, errorInfo) => {
     Sentry.withScope((scope) => {
-      scope.setExtras(errorInfo);
+      scope.setExtras(errorInfo); 
 
-      const eventId = Sentry.captureException(error);
+      const eventId = Sentry.captureException(error); 
 
-      this.setState({
-        eventId: eventId,
-      });
-    });
+      setEventId(eventId); 
+    })
+  }) 
+
+  //Properties 
+  const { children } = this.props; 
+
+  if (hasError) {
+    return (
+      <EmptyState
+        images={<ErrorIllustration />}
+        title="Something went wrong" 
+        description="The app failed to load"
+      /> 
+    ); 
   }
 
-  render() {
-    // Properties
-    const { children } = this.props;
-
-    const { hasError } = this.state;
-
-    if (hasError) {
-      return (
-        <EmptyState
-          image={<ErrorIllustration />}
-          title="Something went wrong"
-          description="The app failed to load"
-        />
-      );
-    }
-
-    return children;
-  }
+  return children; 
 }
 
 ErrorBoundary.propTypes = {
-  // Properties
-  children: PropTypes.array.isRequired,
-};
+  //Properties 
+  children: PropTypes.array.isRequired, 
+}; 
 
-export default ErrorBoundary;
+export default ErrorBoundary; 
